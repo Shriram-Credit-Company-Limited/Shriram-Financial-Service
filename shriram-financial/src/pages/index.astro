@@ -141,20 +141,13 @@ const partners = [
 <BaseLayout title="" description="Shriram Financial Services — Advisory-Led Wealth Curation. Invest across equity, mutual funds, bonds and more with India's most trusted platform.">
 
   <!-- ══ HERO ══ -->
-  <section class="relative xl:min-h-[calc(100vh-88px)] overflow-hidden">
-    <div class="hero-wave" aria-hidden="true"></div>
-    <video id="hero-video"
-      class="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-1000"
-      autoplay muted playsinline aria-hidden="true">
-      <source src="/9150545-hd_1920_1080_24fps.mp4" type="video/mp4" />
-    </video>
-    <div class="absolute inset-0 bg-gradient-to-r from-white/82 via-white/48 to-white/0" aria-hidden="true"></div>
-    <div class="absolute inset-0 bg-gradient-to-b from-black/8 via-transparent to-black/12" aria-hidden="true"></div>
+  <section class="relative xl:min-h-[calc(100vh-88px)] overflow-hidden bg-white">
+    <div class="hero-holo" aria-hidden="true"></div>
 
-    <div class="site-wrap relative z-10 flex items-start gap-8 py-14 sm:py-20 lg:py-24 xl:min-h-[calc(100vh-88px)] xl:items-center xl:gap-12 xl:py-0">
+    <div class="site-wrap relative z-10 flex items-start py-14 sm:py-20 lg:py-24 xl:min-h-[calc(100vh-88px)] xl:items-center xl:py-0">
 
-      <!-- Left text -->
-      <div class="w-full xl:max-w-[580px] xl:shrink-0 reveal reveal-1">
+      <!-- Hero text -->
+      <div class="w-full max-w-[680px] reveal reveal-1">
         <!-- Goal pill -->
         <div class="inline-flex items-center gap-2 rounded-full border border-[var(--color-brand)]/20 bg-[var(--color-brand-pale)] px-4 py-1.5">
           <span class="h-1.5 w-1.5 rounded-full bg-[var(--color-brand)] animate-pulse"></span>
@@ -202,54 +195,6 @@ const partners = [
               <span class="text-[11px] text-[var(--color-muted)]">{s.label}</span>
             </div>
           ))}
-        </div>
-      </div>
-
-      <!-- Right: glassmorphism Open Demat card -->
-      <div class="reveal reveal-2 hidden flex-1 justify-end xl:flex">
-        <div class="glass-form w-full max-w-[540px] rounded-xl p-10">
-          <h2 class="text-[30px] font-semibold text-[var(--color-n900)]" style="font-family:var(--font-display)">
-            Open a Free Demat Account
-          </h2>
-          <div class="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1.5">
-            {['100% Paperless', 'Within 10 Minutes', 'SEBI Regulated'].map((t, i) => (
-              <div class="flex items-center gap-3">
-                {i > 0 && <span class="trust-dot" style="background:#999"></span>}
-                <span class="text-[12px] font-medium text-[var(--color-n700)]">{t}</span>
-              </div>
-            ))}
-          </div>
-          <div class="mt-8">
-            <div class="flex h-[52px] items-center gap-3 rounded-lg border border-[var(--color-n500)] bg-white px-4 shadow-sm">
-              <span class="text-[20px]">🇮🇳</span>
-              <span class="h-5 w-px bg-[var(--color-n400)]"></span>
-              <div class="flex-1">
-                <div class="text-[10px] font-semibold uppercase tracking-wide text-[var(--color-n700)]">Mobile Number</div>
-                <div class="text-[15px] font-medium text-[var(--color-n800)]">+91</div>
-              </div>
-            </div>
-            <p class="mt-2.5 text-[11px] text-[var(--color-n700)]">
-              By continuing, I agree to receive OTP and account updates via SMS/WhatsApp.
-            </p>
-          </div>
-          <div class="mt-6 space-y-3">
-            <a href="/about/open-demat-account/" class="btn-primary w-full justify-center text-[15px]">
-              Get Started — It's Free
-            </a>
-            <p class="text-center text-[13px] text-[var(--color-n900)]">
-              Already a client?{' '}
-              <a href="/about/antara-web-login/" class="font-bold text-[var(--color-link)] hover:underline">Login to Antara</a>
-            </p>
-          </div>
-          <!-- Social proof -->
-          <div class="mt-8 flex items-center gap-3 rounded-lg bg-white/60 px-4 py-3">
-            <div class="flex -space-x-2">
-              {['#3B5', '#47B', '#B73', '#6A3'].map(c => (
-                <div class="h-7 w-7 rounded-full border-2 border-white" style={`background:${c}B`}></div>
-              ))}
-            </div>
-            <p class="text-[12px] text-[var(--color-n800)]">Join <strong>10 lakh+</strong> investors who trust Shriram</p>
-          </div>
         </div>
       </div>
 
@@ -606,30 +551,6 @@ const partners = [
 </BaseLayout>
 
 <script>
-  /* Fade in hero video + seamless manual loop (avoids browser's native loop rebuffer gap) */
-  const heroVideo = document.getElementById('hero-video') as HTMLVideoElement | null;
-  const heroWave  = document.querySelector('.hero-wave') as HTMLElement | null;
-  if (heroVideo) {
-    const showVideo = () => {
-      heroVideo.classList.remove('opacity-0');
-      heroVideo.classList.add('opacity-100');
-      if (heroWave) heroWave.style.opacity = '0';
-    };
-    if (heroVideo.readyState >= 3) showVideo();
-    else heroVideo.addEventListener('canplaythrough', showVideo, { once: true });
-
-    heroVideo.addEventListener('timeupdate', () => {
-      if (heroVideo.duration && heroVideo.currentTime >= heroVideo.duration - 0.08) {
-        heroVideo.currentTime = 0;
-      }
-    });
-
-    heroVideo.addEventListener('ended', () => {
-      heroVideo.currentTime = 0;
-      heroVideo.play();
-    });
-  }
-
   /* Cycling goal text — Groww-style float-up animation */
   const goals = ['Retirement', 'Children', 'Home Purchase', 'Tax Savings', 'Wealth Building', 'Your Family'];
   let gi = 0;
