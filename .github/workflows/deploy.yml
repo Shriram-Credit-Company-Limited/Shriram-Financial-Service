@@ -33,8 +33,8 @@ jobs:
         run: |
           echo "$SSH_KEY" > /tmp/deploy_key
           chmod 600 /tmp/deploy_key
-          cd shriram-financial
-          zip -r /tmp/site.zip dist/
+          cd shriram-financial/dist
+          zip -r /tmp/site.zip .
           scp -i /tmp/deploy_key -o StrictHostKeyChecking=no /tmp/site.zip $SERVER:/tmp/site.zip
           ssh -i /tmp/deploy_key -o StrictHostKeyChecking=no $SERVER \
             "sudo rm -rf /var/www/html/* && sudo unzip -o /tmp/site.zip -d /var/www/html/ && sudo chown -R www-data:www-data /var/www/html/"
