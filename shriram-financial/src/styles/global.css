@@ -138,6 +138,7 @@ h1, h2, h3, h4, h5, .font-display {
 
 /* ── Glassmorphism form card (hero right) ── */
 .glass-form {
+  color: #000000;
   background: linear-gradient(194.97deg, rgba(14, 91, 203, 0.60) 0%, rgba(255,255,255,0.60) 100%);
   backdrop-filter: blur(22px);
   -webkit-backdrop-filter: blur(22px);
