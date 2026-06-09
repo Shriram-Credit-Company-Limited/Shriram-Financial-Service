@@ -1,10 +1,13 @@
 ---
 import { navigation } from '../navigation';
+const currentPath = Astro.url.pathname;
 const products = navigation.find(n => n.label === 'Products')!;
+const research  = navigation.find(n => n.label === 'Research')!;
+const about     = navigation.find(n => n.label === 'About')!;
 ---
 
 <header id="site-header" class="sticky top-0 z-50 h-[88px] border-b border-[var(--color-n400)] bg-white shadow-[0_1px_10px_0_rgba(0,0,0,0.07)]">
-  <div class="site-wrap flex h-full items-center justify-between gap-4">
+  <div class="site-wrap flex h-full items-center justify-between">
 
     <!-- Logo -->
     <a href="/" class="flex shrink-0 items-center" aria-label="Shriram Financial Services">
@@ -13,7 +16,7 @@ const products = navigation.find(n => n.label === 'Products')!;
            style="image-rendering:auto;-webkit-font-smoothing:antialiased;" />
     </a>
 
-    <!-- Desktop Nav -->
+    <!-- Desktop Nav (Figma: Products · Learning Centre · Calculators · Support · Become a Partner) -->
     <nav class="hidden items-center gap-1 lg:flex" aria-label="Primary">
 
       <!-- Products mega -->
@@ -24,19 +27,20 @@ const products = navigation.find(n => n.label === 'Products')!;
         </button>
         <div class="invisible absolute left-1/2 top-full z-50 -translate-x-1/2 pt-3 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
           <div class="w-[720px] overflow-hidden rounded-lg border border-[var(--color-n400)] bg-white shadow-[var(--shadow-heavy)]">
+            <!-- Trade -->
             <div class="grid grid-cols-3 gap-0 border-b border-[var(--color-n100)] bg-[var(--color-n100)] px-6 py-3">
               <span class="text-[11px] font-semibold uppercase tracking-widest text-[var(--color-subtle)]">Trade</span>
               <span class="text-[11px] font-semibold uppercase tracking-widest text-[var(--color-subtle)]">Invest</span>
-              <span class="text-[11px] font-semibold uppercase tracking-widest text-[var(--color-subtle)]">Loans &amp; More</span>
+              <span class="text-[11px] font-semibold uppercase tracking-widest text-[var(--color-subtle)]">More</span>
             </div>
             <div class="grid grid-cols-3 gap-0 p-2">
               <div class="flex flex-col gap-0.5">
                 {[
-                  {label:'Stocks (Equity)', href:'/products/equity/'},
-                  {label:'Derivatives',     href:'/products/derivative/'},
-                  {label:'Commodities',     href:'/products/commodities/'},
-                  {label:'MTF',             href:'/products/mtf/'},
-                  {label:'Currency',        href:'/products/currency/'},
+                  {label:'Equity', href:'/products/equity/'},
+                  {label:'Derivative', href:'/products/derivative/'},
+                  {label:'Commodities', href:'/products/commodities/'},
+                  {label:'MTF', href:'/products/mtf/'},
+                  {label:'Currency', href:'/products/currency/'},
                 ].map(p => (
                   <a href={p.href} class="rounded px-4 py-2.5 text-[13px] text-[var(--color-ink)] hover:bg-[var(--color-brand-pale)] hover:text-[var(--color-brand)]">{p.label}</a>
                 ))}
@@ -44,19 +48,18 @@ const products = navigation.find(n => n.label === 'Products')!;
               <div class="flex flex-col gap-0.5 border-x border-[var(--color-n100)]">
                 {[
                   {label:'Mutual Funds', href:'/products/mutual-funds/'},
-                  {label:'ETF',          href:'/products/etf/'},
-                  {label:'Bonds',        href:'/products/bonds/'},
-                  {label:'NPS',          href:'/products/nps/'},
-                  {label:'NFO',          href:'/products/nfo/'},
-                  {label:'IPO',          href:'/products/ipo/'},
+                  {label:'ETF', href:'/products/etf/'},
+                  {label:'Bonds', href:'/products/bonds/'},
+                  {label:'NPS', href:'/products/nps/'},
+                  {label:'NFO', href:'/products/nfo/'},
+                  {label:'IPO', href:'/products/ipo/'},
                 ].map(p => (
                   <a href={p.href} class="rounded px-4 py-2.5 text-[13px] text-[var(--color-ink)] hover:bg-[var(--color-brand-pale)] hover:text-[var(--color-brand)]">{p.label}</a>
                 ))}
               </div>
               <div class="flex flex-col gap-0.5">
                 {[
-                  {label:'LAMF',             href:'/products/mtf/'},
-                  {label:'Fixed Deposit',    href:'/products/fd/'},
+                  {label:'FD', href:'/products/fd/'},
                   {label:'Global Investing', href:'/products/global-investing/'},
                 ].map(p => (
                   <a href={p.href} class="rounded px-4 py-2.5 text-[13px] text-[var(--color-ink)] hover:bg-[var(--color-brand-pale)] hover:text-[var(--color-brand)]">{p.label}</a>
@@ -64,37 +67,70 @@ const products = navigation.find(n => n.label === 'Products')!;
               </div>
             </div>
             <div class="flex items-center justify-between border-t border-[var(--color-n100)] bg-[var(--color-brand-pale)] px-6 py-3">
-              <span class="text-[12px] text-[var(--color-subtle)]">Trade, invest, and lend — all from one account</span>
+              <span class="text-[12px] text-[var(--color-subtle)]">13 investment products across trade, invest & more</span>
               <a href="/products/" class="text-[12px] font-semibold text-[var(--color-brand)] hover:underline">View all products →</a>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Learning Centre -->
-      <a href="/research/" class="btn-ghost-white text-[14px]">Learning Centre</a>
+      <!-- Research -->
+      <a href="/research/" class="btn-ghost-white text-[14px]">Research</a>
 
       <!-- Calculators -->
       <a href="/product-hub/" class="btn-ghost-white text-[14px]">Calculators</a>
 
+      <!-- About -->
+      <div class="group relative">
+        <button class="btn-ghost-white flex items-center gap-1 text-[14px]" aria-haspopup="true">
+          About
+          <svg class="h-3.5 w-3.5 opacity-50 transition-transform duration-200 group-hover:rotate-180" viewBox="0 0 16 16" fill="currentColor"><path d="M4 6l4 4 4-4H4z"/></svg>
+        </button>
+        <div class="invisible absolute left-0 top-full z-50 pt-3 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
+          <div class="w-52 overflow-hidden rounded-lg border border-[var(--color-n400)] bg-white py-1 shadow-[var(--shadow-heavy)]">
+            {[
+              {label:'About Us',           href:'/about/'},
+              {label:'Open Demat Account', href:'/about/open-demat-account/'},
+              {label:'Become a Partner',   href:'/about/become-a-partner/'},
+              {label:'Support & Help',     href:'/about/support/'},
+              {label:'Regulatory',         href:'/about/regulatory/'},
+              {label:'Antara Login',       href:'/about/antara-web-login/'},
+            ].map(c => (
+              <a href={c.href} class="block px-4 py-2.5 text-[13px] text-[var(--color-ink)] hover:bg-[var(--color-n100)]">{c.label}</a>
+            ))}
+          </div>
+        </div>
+      </div>
+
       <!-- Support -->
-      <a href="/about/support/" class="btn-ghost-white text-[14px]">Support</a>
+      <div class="group relative">
+        <a href="/about/support/" class="btn-ghost-white flex items-center gap-1 text-[14px]">
+          Support
+          <svg class="h-3.5 w-3.5 opacity-50 transition-transform duration-200 group-hover:rotate-180" viewBox="0 0 16 16" fill="currentColor"><path d="M4 6l4 4 4-4H4z"/></svg>
+        </a>
+        <div class="invisible absolute left-0 top-full z-50 pt-3 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
+          <div class="w-52 overflow-hidden rounded-lg border border-[var(--color-n400)] bg-white py-1 shadow-[var(--shadow-heavy)]">
+            {[
+              {label:'Contact & Help',         href:'/about/support/'},
+              {label:'Grievance Redressal',    href:'/about/support/'},
+              {label:'Regulatory & Compliance',href:'/about/regulatory/'},
+            ].map(c => (
+              <a href={c.href} class="block px-4 py-2.5 text-[13px] text-[var(--color-ink)] hover:bg-[var(--color-n100)]">{c.label}</a>
+            ))}
+          </div>
+        </div>
+      </div>
 
       <!-- Become a Partner -->
       <a href="/about/become-a-partner/" class="btn-ghost-white text-[14px]">Become a Partner</a>
     </nav>
 
-    <!-- Right: Search + Login + CTA -->
-    <div class="flex items-center gap-2">
-      <!-- Search for Stocks -->
-      <div class="relative hidden xl:flex items-center">
-        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" class="absolute left-3 h-4 w-4 text-[var(--color-n700)]"><circle cx="8.5" cy="8.5" r="5.5"/><path stroke-linecap="round" d="M15.5 15.5l-2.5-2.5"/></svg>
-        <input
-          type="text"
-          placeholder="Search for Stocks"
-          class="h-9 w-44 rounded-md border border-[var(--color-n400)] bg-[var(--color-n100)] pl-9 pr-3 text-[13px] text-[var(--color-ink)] placeholder:text-[var(--color-subtle)] focus:border-[var(--color-brand)] focus:bg-white focus:outline-none"
-        />
-      </div>
+    <!-- Right CTAs -->
+    <div class="flex items-center gap-3">
+      <!-- Search icon -->
+      <button class="hidden h-9 w-9 items-center justify-center rounded text-[var(--color-n700)] hover:bg-[var(--color-n100)] lg:flex" aria-label="Search">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" class="h-4.5 w-4.5"><circle cx="8.5" cy="8.5" r="5.5"/><path stroke-linecap="round" d="M15.5 15.5l-2.5-2.5"/></svg>
+      </button>
 
       <!-- Login -->
       <div class="group relative hidden lg:block">
@@ -110,9 +146,9 @@ const products = navigation.find(n => n.label === 'Products')!;
         </div>
       </div>
 
-      <!-- Open A Trading Account CTA -->
-      <a href="/about/open-demat-account/" class="hidden rounded bg-[var(--color-brand)] px-5 py-2.5 text-[13px] font-medium text-white transition-colors hover:bg-[var(--color-brand-hover)] sm:block whitespace-nowrap">
-        Open A Trading Account
+      <!-- Open Demat CTA -->
+      <a href="/about/open-demat-account/" class="hidden rounded bg-[var(--color-brand)] px-5 py-2.5 text-[13px] font-medium text-white transition-colors hover:bg-[var(--color-brand-hover)] sm:block">
+        Open Demat Account
       </a>
 
       <!-- Mobile hamburger -->
@@ -126,15 +162,6 @@ const products = navigation.find(n => n.label === 'Products')!;
   <!-- Mobile drawer -->
   <div id="mobile-menu" class="hidden border-t border-[var(--color-n400)] bg-white lg:hidden">
     <div class="max-h-[80vh] overflow-y-auto px-5 py-4">
-      <!-- Mobile search -->
-      <div class="relative mb-3 flex items-center">
-        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" class="absolute left-3 h-4 w-4 text-[var(--color-n700)]"><circle cx="8.5" cy="8.5" r="5.5"/><path stroke-linecap="round" d="M15.5 15.5l-2.5-2.5"/></svg>
-        <input
-          type="text"
-          placeholder="Search for Stocks"
-          class="h-10 w-full rounded-md border border-[var(--color-n400)] bg-[var(--color-n100)] pl-9 pr-3 text-[13px] text-[var(--color-ink)] placeholder:text-[var(--color-subtle)] focus:border-[var(--color-brand)] focus:bg-white focus:outline-none"
-        />
-      </div>
       <details class="group mb-1">
         <summary class="flex cursor-pointer select-none items-center justify-between rounded px-3 py-3 text-[14px] font-semibold text-[var(--color-ink)] hover:bg-[var(--color-n100)]">
           Products
@@ -146,13 +173,24 @@ const products = navigation.find(n => n.label === 'Products')!;
           ))}
         </div>
       </details>
-      <a href="/research/" class="block rounded px-3 py-3 text-[14px] font-semibold text-[var(--color-ink)] hover:bg-[var(--color-n100)]">Learning Centre</a>
+      <a href="/research/" class="block rounded px-3 py-3 text-[14px] font-semibold text-[var(--color-ink)] hover:bg-[var(--color-n100)]">Research</a>
       <a href="/product-hub/" class="block rounded px-3 py-3 text-[14px] font-semibold text-[var(--color-ink)] hover:bg-[var(--color-n100)]">Calculators</a>
       <a href="/about/support/" class="block rounded px-3 py-3 text-[14px] font-semibold text-[var(--color-ink)] hover:bg-[var(--color-n100)]">Support</a>
       <a href="/about/become-a-partner/" class="block rounded px-3 py-3 text-[14px] font-semibold text-[var(--color-ink)] hover:bg-[var(--color-n100)]">Become a Partner</a>
+      <details class="group mb-1">
+        <summary class="flex cursor-pointer select-none items-center justify-between rounded px-3 py-3 text-[14px] font-semibold text-[var(--color-ink)] hover:bg-[var(--color-n100)]">
+          About
+          <svg class="h-4 w-4 opacity-50 transition-transform group-open:rotate-180" viewBox="0 0 16 16" fill="currentColor"><path d="M4 6l4 4 4-4H4z"/></svg>
+        </summary>
+        <div class="ml-3 mt-1 border-l-2 border-[var(--color-n400)] pl-3 pb-2">
+          {about.children.map(c => (
+            <a href={c.href} class="block rounded px-3 py-2 text-[13px] text-[var(--color-muted)] hover:text-[var(--color-brand)]">{c.label}</a>
+          ))}
+        </div>
+      </details>
       <div class="mt-4 flex flex-col gap-3 border-t border-[var(--color-n400)] pt-4">
         <a href="/about/antara-web-login/" class="block rounded border border-[var(--color-n400)] py-3 text-center text-[13px] font-medium text-[var(--color-ink)]">Login</a>
-        <a href="/about/open-demat-account/" class="block rounded bg-[var(--color-brand)] py-3 text-center text-[13px] font-medium text-white">Open A Trading Account</a>
+        <a href="/about/open-demat-account/" class="block rounded bg-[var(--color-brand)] py-3 text-center text-[13px] font-medium text-white">Open Demat Account</a>
       </div>
     </div>
   </div>

@@ -138,8 +138,7 @@ h1, h2, h3, h4, h5, .font-display {
 
 /* ── Glassmorphism form card (hero right) ── */
 .glass-form {
-  color: #000000;
-  background: linear-gradient(194.97deg, rgba(14, 91, 203, 0.60) 0%, rgba(255,255,255,0.60) 100%);
+  background: linear-gradient(194.97deg, rgba(14, 91, 203, 0.28) 0%, rgba(255,255,255,0.28) 100%);
   backdrop-filter: blur(22px);
   -webkit-backdrop-filter: blur(22px);
   border: 1px solid rgba(255,255,255,0.90);
@@ -305,6 +304,18 @@ h1, h2, h3, h4, h5, .font-display {
 }
 .stat-chip:last-child {
   border-right: none;
+}
+
+/* ── Advisory cards hover-dim (Figma Hover V8 interaction) ── */
+.advisory-grid:hover .advisory-card {
+  opacity: 0.3;
+  transition: opacity 0.3s ease;
+}
+.advisory-grid:hover .advisory-card:hover {
+  opacity: 1;
+}
+.advisory-card {
+  transition: opacity 0.3s ease;
 }
 
 /* ── FAQ row ── */
