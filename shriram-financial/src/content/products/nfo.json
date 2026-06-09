@@ -1,0 +1,46 @@
+{
+  "title": "New Fund Offers (NFO)",
+  "tagline": "Be first in. Invest in freshly launched mutual fund schemes at ₹10 NAV before the market prices them in.",
+  "intro": "A New Fund Offer (NFO) is the initial subscription window when an Asset Management Company (AMC) launches a brand-new mutual fund scheme. Investors can subscribe at the launch price — typically ₹10 per unit — before the fund's NAV reflects actual portfolio performance. NFOs allow investors to participate in innovative themes — from AI and technology to infrastructure, ESG, and multi-asset strategies — that may not yet be available as existing funds. At Shriram Financial Services (AMFI ARN: 29483), our investment research team evaluates every active NFO on fund house credibility, fund manager track record, portfolio mandate uniqueness, expense ratio, and the investment case for the theme. We alert you to NFOs worth subscribing to — and equally importantly, the ones to avoid.",
+  "order": 7,
+  "features": [
+    {
+      "title": "Curated NFO Alerts",
+      "body": "We evaluate every active NFO and alert you only to those with genuine investment merit — saving you from marketing-driven hype."
+    },
+    {
+      "title": "Fund House & Manager Analysis",
+      "body": "Our team assesses the AMC's track record, the fund manager's experience, and the uniqueness of the fund mandate before recommending."
+    },
+    {
+      "title": "Thematic & Sectoral Access",
+      "body": "NFOs often introduce access to new themes — EV, AI, global tech, infrastructure — before they are available in existing fund categories."
+    },
+    {
+      "title": "Online NFO Application",
+      "body": "Apply for any open NFO instantly through the Antara platform. No paperwork, no branch visit — application processed in minutes."
+    },
+    {
+      "title": "SIP Option in NFOs",
+      "body": "Post-NFO, start a monthly SIP in the newly launched fund through Antara to benefit from rupee-cost averaging as the fund matures."
+    },
+    {
+      "title": "AMFI-Registered Advisory",
+      "body": "All NFO recommendations come from our AMFI-registered advisors (ARN: 29483) — regulated, accountable advice."
+    }
+  ],
+  "faqs": [
+    {
+      "q": "Is it always better to invest in an NFO at ₹10 NAV?",
+      "a": "Not necessarily. A lower NAV does not mean a cheaper or better fund. What matters is the fund's portfolio quality and future return potential. An existing fund with a NAV of ₹500 but a strong track record is often a better choice than a new NFO at ₹10 with an unproven strategy. Always evaluate the fund's mandate, fund manager, and AMC track record — not just the NAV."
+    },
+    {
+      "q": "What is the NFO subscription period?",
+      "a": "An NFO is typically open for 15–30 days. After the subscription period closes, the fund is listed and begins trading at its NAV (for close-ended funds) or accepts ongoing purchases (for open-ended funds). SIPs can usually be set up post-NFO in open-ended schemes."
+    },
+    {
+      "q": "Are NFOs riskier than existing funds?",
+      "a": "NFOs carry an additional layer of uncertainty because they lack a track record. You are making a bet on the fund manager's ability and the investment theme — without historical performance data to validate. Our research team helps you assess this risk objectively."
+    }
+  ]
+}

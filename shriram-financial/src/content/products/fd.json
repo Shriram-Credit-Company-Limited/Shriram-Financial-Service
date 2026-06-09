@@ -1,0 +1,46 @@
+{
+  "title": "Fixed Deposits",
+  "tagline": "Earn up to 9% p.a. with premium corporate FDs. Capital protection, assured returns, flexible tenures.",
+  "intro": "Fixed Deposits remain India's most trusted savings instrument — and for good reason. They offer guaranteed, predictable returns with no market risk, making them ideal for the stable, low-volatility component of any portfolio. Through Shriram Financial Services, you can access not just traditional bank FDs but also high-yield corporate FDs from AAA-rated and AA-rated companies that offer significantly better rates than bank deposits. Our FD advisory helps you ladder your deposits across tenures — 6 months, 1 year, 3 years — to maintain liquidity while maximising returns. Senior citizens get an additional interest rate benefit on most corporate FDs. With online application, e-signing, and direct bank payout of interest, the entire FD journey is seamless through the Antara platform.",
+  "order": 8,
+  "features": [
+    {
+      "title": "Up to 9% p.a. Interest",
+      "body": "Premium corporate FDs from top-rated companies offer significantly higher interest rates than bank savings accounts and standard bank FDs."
+    },
+    {
+      "title": "Capital Protection",
+      "body": "Your principal is secure and returned in full at maturity. No market risk, no fluctuation — exactly what you invested is what comes back."
+    },
+    {
+      "title": "Flexible Tenures",
+      "body": "Choose tenures from 7 days to 5 years. Ladder your FDs across tenures to balance liquidity needs and return maximisation."
+    },
+    {
+      "title": "Senior Citizen Benefits",
+      "body": "Most corporate FDs offer an additional 0.25–0.50% p.a. interest for senior citizens (60 years and above) over the standard rate."
+    },
+    {
+      "title": "Monthly/Quarterly Payout",
+      "body": "Opt for regular interest payouts to your bank account — ideal for retirees and those seeking a steady monthly income stream."
+    },
+    {
+      "title": "Fully Online Process",
+      "body": "Apply, e-sign, and track your FDs entirely online via Antara. No branch visit, no physical documents — all regulatory compliance handled digitally."
+    }
+  ],
+  "faqs": [
+    {
+      "q": "Is my money safe in corporate FDs?",
+      "a": "Corporate FDs from AAA-rated and AA-rated companies have a strong safety track record. Unlike bank FDs, they are NOT covered by DICGC insurance (which covers bank deposits up to ₹5 lakh). However, AAA-rated corporate FDs from large, reputable companies like Shriram Finance, Bajaj Finance, and HDFC Ltd have minimal default risk. We recommend diversifying across multiple issuers and not concentrating more than 20% of savings in any single corporate FD."
+    },
+    {
+      "q": "How is FD interest taxed?",
+      "a": "FD interest is fully taxable as 'Income from Other Sources' at your applicable income tax slab rate — every year, whether or not you receive it (on an accrual basis). If total interest exceeds ₹40,000 per year (₹50,000 for senior citizens) from a single bank/company, TDS at 10% is deducted. You can avoid TDS by submitting Form 15G (below 60) or Form 15H (senior citizens) if your total income is below the taxable limit."
+    },
+    {
+      "q": "Can I break an FD before maturity?",
+      "a": "Most corporate FDs allow premature withdrawal after a minimum lock-in period (typically 3–6 months) with a penalty of 0.5–1% reduction in interest rate. Bank FDs generally allow premature withdrawal at any time with a 0.5–1% penalty. We recommend building an emergency fund separately so you never need to break your FDs prematurely."
+    }
+  ]
+}

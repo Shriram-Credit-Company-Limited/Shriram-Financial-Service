@@ -1,0 +1,50 @@
+{
+  "title": "Margin Trading Facility (MTF)",
+  "tagline": "Buy more shares with less capital. SEBI-regulated leverage up to 4x on 700+ approved stocks.",
+  "intro": "The Margin Trading Facility (MTF) is a SEBI-regulated product that allows you to purchase stocks by paying only a fraction of the total value upfront — Shriram Financial lends you the rest against your holdings. MTF effectively amplifies your buying power: with ₹1 lakh, you can hold a position worth up to ₹4 lakh in approved securities. This is particularly powerful when you have high conviction in a stock but insufficient free capital, or when you want to take advantage of short-term market opportunities without liquidating existing long-term holdings. Unlike intraday leverage, MTF positions can be carried forward for an extended period (subject to margin maintenance). All stocks eligible for MTF are pre-approved by SEBI. Shriram Financial charges competitive interest rates and provides real-time margin utilisation alerts.",
+  "order": 4,
+  "features": [
+    {
+      "title": "Up to 4x Buying Power",
+      "body": "Fund only 25% of the trade value. Shriram Financial funds the remaining 75% against your pledged securities — amplifying your position."
+    },
+    {
+      "title": "700+ SEBI-Approved Stocks",
+      "body": "MTF is available on all SEBI-approved securities across NSE and BSE — covering large-cap, mid-cap, and select quality small-cap stocks."
+    },
+    {
+      "title": "Carry Forward Beyond Intraday",
+      "body": "Unlike intraday margin, MTF positions can be held for multiple days — giving you time for your investment thesis to play out."
+    },
+    {
+      "title": "Competitive Interest Rates",
+      "body": "Transparent, competitive annualised interest rates on the funded amount. Interest is calculated daily and charged monthly."
+    },
+    {
+      "title": "Real-Time Margin Alerts",
+      "body": "Instant SMS and app notifications when your margin utilisation approaches critical levels — helping you avoid forced square-off."
+    },
+    {
+      "title": "Pledge & Fund Flexibility",
+      "body": "Pledge existing equity holdings as collateral to unlock MTF limits without selling your long-term portfolio — keep your investments, get more buying power."
+    }
+  ],
+  "faqs": [
+    {
+      "q": "What is the minimum margin required for MTF?",
+      "a": "SEBI mandates a minimum margin (VAR + ELM) which varies by stock. Typically, you need to pay 20–50% of the stock's value as initial margin. The remaining amount is funded by Shriram Financial at a disclosed interest rate."
+    },
+    {
+      "q": "What happens if my margin falls below the minimum?",
+      "a": "If the market moves against your MTF position and your margin falls below the minimum required (margin shortfall), Shriram Financial will first alert you via app and SMS. If not rectified within the stipulated time, the position may be partially squared off to restore margin compliance. This protects both you and the firm."
+    },
+    {
+      "q": "What is the interest rate on MTF funding?",
+      "a": "Shriram Financial charges a competitive annualised interest rate on MTF funded amounts, typically in the range of 12–18% per annum. The exact rate depends on the stock and tenure. Detailed rates are available in your MTF agreement and on the Antara platform."
+    },
+    {
+      "q": "Can I pledge mutual funds for MTF?",
+      "a": "Currently, MTF collateral is accepted in the form of approved equity shares held in your Demat account. Mutual fund units can be pledged for certain other margin products. Your RM can guide you on the best collateral strategy for your portfolio."
+    }
+  ]
+}

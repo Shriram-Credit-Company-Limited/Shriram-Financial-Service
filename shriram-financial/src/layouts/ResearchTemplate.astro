@@ -1,0 +1,87 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface ReportCard { title: string; meta: string; summary: string; }
+interface Props {
+  title: string;
+  description?: string;
+  lead: string;
+  reports?: ReportCard[];
+}
+const { title, description, lead, reports = [] } = Astro.props;
+const currentPath = Astro.url.pathname;
+
+const tabs = [
+  { label: 'Technical',     href: '/research/technical/' },
+  { label: 'Fundamental',   href: '/research/fundamental/' },
+  { label: 'Mutual Funds',  href: '/research/mutual-funds/' },
+];
+---
+
+<BaseLayout title={title} description={description}>
+
+  <!-- ── Hero ── -->
+  <section class="bg-[var(--color-dark-800)] relative overflow-hidden">
+    <div class="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-[var(--color-brand)]/20 blur-3xl"></div>
+    <div class="site-wrap relative py-14 sm:py-20 lg:py-28">
+      <p class="reveal reveal-1 text-[11px] font-bold uppercase tracking-widest text-[rgba(255,255,255,0.40)]">Research</p>
+      <h1 class="reveal reveal-2 mt-4 max-w-3xl text-[26px] font-bold leading-tight text-white sm:text-[34px] lg:text-[54px]" style="font-family:var(--font-display)">{title}</h1>
+      <p class="reveal reveal-3 mt-5 max-w-2xl text-[15px] leading-relaxed text-[rgba(255,255,255,0.65)] lg:text-[16px]">{lead}</p>
+
+      <!-- Research type tabs with active state -->
+      <div class="reveal reveal-4 mt-10 flex flex-wrap gap-3">
+        {tabs.map(t => (
+          <a href={t.href}
+             class:list={[
+               'inline-flex h-10 items-center rounded border px-5 text-[13px] font-semibold transition-colors',
+               currentPath === t.href
+                 ? 'border-white bg-white text-[var(--color-brand)]'
+                 : 'border-white/20 text-white hover:bg-white/15'
+             ]}>
+            {t.label}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Report cards ── -->
+  {reports.length > 0 && (
+    <section class="site-wrap py-16 lg:py-20">
+      <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {reports.map(r => (
+          <a href="/about/antara-web-login/" class="product-card-light group flex flex-col p-7">
+            <span class="self-start rounded bg-[var(--color-brand-pale)] px-3 py-1 text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">{r.meta}</span>
+            <h3 class="mt-4 text-[18px] font-semibold text-[var(--color-n900)]" style="font-family:var(--font-display)">{r.title}</h3>
+            <p class="mt-3 flex-1 text-[14px] leading-relaxed text-[var(--color-muted)]">{r.summary}</p>
+            <span class="mt-6 flex items-center gap-1.5 text-[13px] font-semibold text-[var(--color-brand)] transition-transform group-hover:translate-x-1">
+              Read Full Report
+              <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" class="h-3 w-3"><path d="M2 6h8M6 2l4 4-4 4"/></svg>
+            </span>
+          </a>
+        ))}
+      </div>
+      <slot />
+    </section>
+  )}
+
+  {reports.length === 0 && (
+    <section class="site-wrap py-16">
+      <slot />
+    </section>
+  )}
+
+  <!-- ── CTA ── -->
+  <section class="site-wrap pb-16">
+    <div class="rounded-lg border border-[var(--color-brand-pale)] bg-[var(--color-brand-pale)] p-10">
+      <div class="flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
+        <div>
+          <h2 class="text-[22px] font-bold text-[var(--color-n900)]" style="font-family:var(--font-display)">Turn Research Into Returns</h2>
+          <p class="mt-2 text-[14px] text-[var(--color-muted)]">Open a free Demat account to access full research reports and invest with the conviction of SEBI-registered analysis.</p>
+        </div>
+        <a href="/about/open-demat-account/" class="btn-primary shrink-0">Open Demat Account</a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

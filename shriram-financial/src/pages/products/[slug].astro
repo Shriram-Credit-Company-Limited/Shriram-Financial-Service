@@ -1,0 +1,24 @@
+---
+import { getCollection } from 'astro:content';
+import ProductTemplate from '../../layouts/ProductTemplate.astro';
+
+export async function getStaticPaths() {
+  const products = await getCollection('products');
+  return products.map((entry) => ({
+    params: { slug: entry.id },
+    props: { data: entry.data },
+  }));
+}
+
+const { data } = Astro.props;
+const description = data.description ?? `${data.tagline} — Shriram Financial Services`;
+---
+
+<ProductTemplate
+  title={data.title}
+  description={description}
+  tagline={data.tagline}
+  intro={data.intro}
+  features={data.features}
+  faqs={data.faqs}
+/>

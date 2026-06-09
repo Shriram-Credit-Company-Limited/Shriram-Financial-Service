@@ -1,0 +1,41 @@
+---
+import ResearchTemplate from '../../layouts/ResearchTemplate.astro';
+const reports = [
+  {
+    title: 'Daily Market View — Nifty & Bank Nifty',
+    meta: 'Published Pre-Market',
+    summary: 'Every trading day before 8:30 AM: key levels, momentum indicators (RSI, MACD, Supertrend), and 3 intraday/short-term trade ideas with precise entry, stop-loss, and target levels.'
+  },
+  {
+    title: 'Weekly Positional Trade Report',
+    meta: 'Published Every Monday',
+    summary: 'Swing trading setups across 5–8 stocks with 5 to 20-day holding targets. Uses weekly chart patterns, volume analysis, and sector rotation signals to identify strong risk-reward opportunities.'
+  },
+  {
+    title: 'F&O Open Interest Analysis',
+    meta: 'Options & Futures',
+    summary: 'Daily OI buildup, PCR ratio, max pain analysis, and implied volatility rankings — helping derivatives traders understand institutional positioning before placing trades.'
+  },
+  {
+    title: 'Sector & Index Heatmap',
+    meta: 'Market Overview',
+    summary: 'Weekly sector performance heatmap showing which market segments are leading, lagging, and rotating — crucial intelligence for both short-term traders and portfolio rebalancers.'
+  },
+  {
+    title: 'Option Chain Insights',
+    meta: 'Expiry Week Special',
+    summary: 'Expiry-week analysis of Nifty and Bank Nifty option chains — key support/resistance from max OI strikes, unusual activity alerts, and recommended option strategies for expiry week.'
+  },
+  {
+    title: 'Monthly Chart Outlook',
+    meta: 'Long-Term Technical',
+    summary: 'Monthly candlestick analysis of major indices and blue-chip stocks — identifying macro trend direction, major inflection points, and long-term support/resistance for investor decision-making.'
+  },
+];
+---
+<ResearchTemplate
+  title="Technical Research — Trade with Precision"
+  lead="Chart patterns, momentum indicators, and price action signals — all interpreted by our experienced technical analysts to give you clear entry and exit levels across equities and derivatives. No guesswork. Only discipline."
+  reports={reports}
+  description="Shriram Financial Services technical research — daily Nifty and Bank Nifty views, short-term trade ideas, F&O analysis, and chart-based investment signals by SEBI-registered analysts."
+/>

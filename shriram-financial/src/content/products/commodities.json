@@ -1,0 +1,46 @@
+{
+  "title": "Commodities Trading",
+  "tagline": "Trade gold, silver, crude oil and agri commodities on MCX & NCDEX. Diversify beyond equity markets.",
+  "intro": "Commodities are a proven hedge against inflation and equity market volatility. Gold rises when equity markets fall; crude oil tracks global growth. Trading commodities through regulated exchanges like MCX (Multi Commodity Exchange) and NCDEX gives Indian investors direct access to global price movements — without holding physical assets. At Shriram Financial Services, our commodity research desk provides daily trade setups on gold, silver, crude oil, natural gas, copper, zinc, and agricultural commodities like soybean and chana. Whether you want to hedge your gold jewellery exposure, speculate on crude oil ahead of OPEC meetings, or trade the agricultural cycle, our platform and research give you the edge. SEBI-regulated, transparent, and backed by five decades of market expertise.",
+  "order": 3,
+  "features": [
+    {
+      "title": "MCX & NCDEX Access",
+      "body": "Trade all major commodity segments — metals, energy, and agri — from a single Shriram Financial account."
+    },
+    {
+      "title": "Daily Commodity Research",
+      "body": "Gold, silver, crude oil, and agri commodity trade setups published every day by our dedicated commodity research desk."
+    },
+    {
+      "title": "Portfolio Diversification",
+      "body": "Commodities historically show low or negative correlation with equity markets — reducing overall portfolio volatility."
+    },
+    {
+      "title": "Inflation Hedge",
+      "body": "Gold and silver have historically preserved purchasing power during inflationary periods — a natural hedge for any portfolio."
+    },
+    {
+      "title": "Transparent Margin Structure",
+      "body": "Real-time margin calculator on Antara so you know exactly how much capital you need before placing any commodity trade."
+    },
+    {
+      "title": "SGB & Gold ETF Guidance",
+      "body": "Not ready for futures? Our advisors guide you to Sovereign Gold Bonds or Gold ETFs for physical-equivalent gold exposure with no storage risk."
+    }
+  ],
+  "faqs": [
+    {
+      "q": "What commodities can I trade through Shriram Financial?",
+      "a": "You can trade all MCX-listed commodities including gold (100g, 1kg contracts), silver, crude oil, natural gas, copper, zinc, aluminium, and nickel. On NCDEX, you can trade agri-commodities like soybean, chana, castor seed, and mustard seed."
+    },
+    {
+      "q": "Is commodity trading suitable for retail investors?",
+      "a": "Yes, with the right guidance. Commodity futures involve leverage, so proper position sizing and stop-losses are critical. Smaller contract sizes (e.g., Gold Mini: 100g) and Gold ETFs/SGBs make commodities accessible for retail investors without large capital requirements."
+    },
+    {
+      "q": "How is commodity trading taxed in India?",
+      "a": "Commodity derivatives (non-agricultural) are taxed as business income at your applicable slab rate. Agricultural commodity derivatives attract STT and are taxed similarly. Delivery-based commodity trades are taxed as Capital Gains. We recommend consulting a CA for personalised tax planning."
+    }
+  ]
+}

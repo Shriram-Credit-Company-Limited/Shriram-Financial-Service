@@ -1,0 +1,46 @@
+{
+  "title": "Bonds & Fixed Income",
+  "tagline": "Earn 7–11% annually with Government & Corporate Bonds. Fixed income, predictable cash flows, capital safety.",
+  "intro": "Bonds are debt instruments where you lend money to the issuer (government or company) in exchange for regular interest payments (coupon) and return of principal at maturity. They form the stable, predictable income foundation of any well-diversified investment portfolio. In India, bond investors can access Government Securities (G-Secs), State Development Loans (SDLs), PSU Bonds, and Corporate Bonds through regulated exchanges — often at yields significantly higher than bank FDs. At Shriram Financial Services, our fixed income research team curates bond investment opportunities across risk categories — from AAA-rated corporate bonds at 7–8% to high-yield A-rated bonds at 9–11% — helping you build a laddered bond portfolio that matches your income needs and risk tolerance. Bonds are especially valuable for retirees, near-retirees, and anyone seeking predictable cash flows.",
+  "order": 13,
+  "features": [
+    {
+      "title": "7–11% Annual Yield",
+      "body": "Government bonds offer 7–7.5% tax-free (SGBs) to taxable yields. Corporate bonds from AA+ issuers regularly offer 8–11% — beating most bank FD rates."
+    },
+    {
+      "title": "Government Securities Access",
+      "body": "Invest directly in Government of India securities and State Development Loans via the RBI Retail Direct platform or NSE goBID — zero default risk."
+    },
+    {
+      "title": "Sovereign Gold Bonds",
+      "body": "SGBs pay 2.5% p.a. tax-free interest PLUS gold price appreciation — with capital gains exemption if held to 8-year maturity. Better than physical gold in every way."
+    },
+    {
+      "title": "Curated Corporate Bonds",
+      "body": "Our fixed income desk selects corporate bonds from creditworthy issuers — balancing yield and safety across credit ratings."
+    },
+    {
+      "title": "Laddering Strategy",
+      "body": "We design bond ladders — investing across 1, 3, 5, and 10-year maturities — so you always have maturing bonds to reinvest at current rates."
+    },
+    {
+      "title": "Listed & Traded on Exchange",
+      "body": "Many bonds are listed on BSE and NSE — providing liquidity if you need to sell before maturity, unlike lock-in FDs."
+    }
+  ],
+  "faqs": [
+    {
+      "q": "What is the difference between bonds and fixed deposits?",
+      "a": "Both pay fixed interest. Key differences: (1) Bonds are tradable on exchanges — you can sell before maturity if needed. FDs have premature withdrawal penalties. (2) Bond prices fluctuate with interest rates (if you sell before maturity, price may be above or below face value). FDs give exact principal back. (3) Bonds often offer higher yields than FDs for similar credit quality. (4) FD returns up to ₹5 lakh per bank are insured by DICGC; bonds are not insured."
+    },
+    {
+      "q": "Are Government Bonds completely safe?",
+      "a": "Government of India securities (G-Secs) are considered the safest investment in the country — backed by the sovereign guarantee of the Government of India. Default risk is effectively zero. State Development Loans (SDLs) issued by state governments also carry near-sovereign safety. The only risk is interest rate risk: if interest rates rise after you buy, the market price of your bond may fall temporarily — but you still receive full principal at maturity."
+    },
+    {
+      "q": "What are Sovereign Gold Bonds (SGBs) and should I invest?",
+      "a": "SGBs are government-issued bonds denominated in grams of gold. Benefits: (1) 2.5% p.a. interest (taxable), (2) Capital gains completely exempt from tax if held to 8-year maturity, (3) No storage, making charges, or GST unlike physical gold, (4) Returns = gold price appreciation + 2.5% interest. For long-term gold exposure, SGBs are significantly superior to physical gold or Gold ETFs."
+    }
+  ]
+}

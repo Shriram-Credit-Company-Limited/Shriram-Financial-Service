@@ -1,0 +1,46 @@
+{
+  "title": "IPO Investing",
+  "tagline": "Apply for every IPO in seconds. Get research-backed subscription recommendations before you invest.",
+  "intro": "An Initial Public Offering (IPO) is the first time a private company offers its shares to the public on a stock exchange. IPOs have created enormous wealth for informed investors — companies like Infosys, HDFC Bank, TCS, and Zomato made early investors multi-millionaires. But not every IPO is a winner. Overpriced IPOs or businesses with poor fundamentals can erode capital quickly. At Shriram Financial Services, our IPO research team analyses every upcoming IPO — business model, promoter background, financial health, IPO valuation versus industry peers, and listing potential — to give you a clear Subscribe / Avoid recommendation before the IPO opens. We make the application process instant through ASBA (Application Supported by Blocked Amount), so funds are blocked — not debited — until allotment. If not allotted, your money is returned within T+6 days.",
+  "order": 11,
+  "features": [
+    {
+      "title": "Research-Backed IPO Ratings",
+      "body": "Every IPO gets a detailed Subscribe/Neutral/Avoid rating from our analysts — covering business, valuation, financials, and competitive positioning."
+    },
+    {
+      "title": "One-Click ASBA Application",
+      "body": "Apply via ASBA through Antara in under 60 seconds. Funds are blocked in your account (not debited) until allotment — zero risk of idle cash."
+    },
+    {
+      "title": "UPI-Based Applications",
+      "body": "Apply using your UPI ID for instant application and seamless mandate authentication — no netbanking ASBA required."
+    },
+    {
+      "title": "SME IPO Access",
+      "body": "Beyond mainboard IPOs, access SME IPOs on NSE Emerge and BSE SME — early-stage companies with high growth potential and smaller lot sizes."
+    },
+    {
+      "title": "IPO Portfolio Tracking",
+      "body": "Track your applied IPOs, allotment status, and listing performance in your Antara dashboard — all in one place."
+    },
+    {
+      "title": "Grey Market Premium Insights",
+      "body": "Our research covers GMP (Grey Market Premium) trends alongside fundamental analysis — giving you a complete picture before you apply."
+    }
+  ],
+  "faqs": [
+    {
+      "q": "What is ASBA and why does it matter?",
+      "a": "ASBA (Application Supported by Blocked Amount) is the mandatory process for all IPO applications. Instead of transferring money to the company upfront, the application amount is blocked in your bank account until allotment. If you are not allotted shares, the block is released immediately — your money never leaves your account. This eliminates the risk of delayed refunds."
+    },
+    {
+      "q": "How is IPO allotment decided?",
+      "a": "For retail investors (applying up to ₹2 lakh), allotment is done through a lottery if the IPO is oversubscribed. Every retail applicant has an equal probability of allotment regardless of the application size. For HNI (above ₹2 lakh), allotment is on a proportional basis. Applying in multiple categories (retail + HNI) with family members' accounts can improve overall allotment chances."
+    },
+    {
+      "q": "Should I apply for every IPO?",
+      "a": "Absolutely not. Many IPOs are overpriced relative to their actual business quality. Our research team rates every IPO and recommends only those with genuine investment merit. As a rule: invest in IPOs for the business quality and long-term potential — not just listing day gains. A strong business IPO held for 2–3 years typically outperforms a listing-day flip strategy."
+    }
+  ]
+}

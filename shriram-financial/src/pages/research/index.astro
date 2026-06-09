@@ -1,0 +1,41 @@
+---
+import ResearchTemplate from '../../layouts/ResearchTemplate.astro';
+const reports = [
+  {
+    title: 'Daily Technical View',
+    meta: 'Updated Daily',
+    summary: 'Pre-market analysis of Nifty 50 and Bank Nifty with key support/resistance, momentum signals, and 3 actionable trade ideas for the session ahead.'
+  },
+  {
+    title: 'Company Deep Dive',
+    meta: 'Equity Research',
+    summary: 'Initiating coverage reports on quality companies with buy/sell targets backed by DCF and relative valuation — written by SEBI-registered analysts (INH200009624).'
+  },
+  {
+    title: 'Mutual Fund Star Picks',
+    meta: 'Fund Research',
+    summary: 'Our AMFI-certified advisors shortlist the top 3 funds in each category every quarter — based on risk-adjusted returns, fund manager tenure, and portfolio quality.'
+  },
+  {
+    title: 'F&O Strategy Report',
+    meta: 'Derivatives',
+    summary: 'Weekly positional options strategies — straddles, spreads, and directional setups — with defined entry, exit, and max-loss levels for disciplined derivatives traders.'
+  },
+  {
+    title: 'Sector Spotlight',
+    meta: 'Thematic Research',
+    summary: 'In-depth sector reports covering structural tailwinds, key players, valuation frameworks, and stock ideas for investors looking to build thematic positions.'
+  },
+  {
+    title: 'Earnings Result Update',
+    meta: 'Quarterly Earnings',
+    summary: 'Post-result analysis of coverage companies within 24 hours of earnings publication — revised earnings estimates, target price changes, and buy/sell/hold updates.'
+  },
+];
+---
+<ResearchTemplate
+  title="Research That Gives You Conviction"
+  lead="India's capital markets reward informed investors. Our SEBI-registered research team publishes daily, weekly, and quarterly insights across equities, derivatives, and mutual funds — giving you the edge to invest with confidence, not speculation."
+  reports={reports}
+  description="Shriram Financial Services research hub — SEBI-registered equity research, technical analysis, F&O strategies, and mutual fund recommendations for Indian investors."
+/>

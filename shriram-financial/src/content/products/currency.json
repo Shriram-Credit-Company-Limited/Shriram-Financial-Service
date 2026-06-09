@@ -1,0 +1,46 @@
+{
+  "title": "Currency Derivatives",
+  "tagline": "Trade USD-INR, EUR-INR, GBP-INR, and JPY-INR futures and options on NSE & BSE.",
+  "intro": "Currency derivatives are contracts that allow you to buy or sell a specified amount of one currency against another at a fixed price on a future date. In India, NSE and BSE offer exchange-traded currency futures and options on USD-INR, EUR-INR, GBP-INR, and JPY-INR pairs — regulated, transparent, and settlement-guaranteed. Currency trading is valuable for importers and exporters hedging forex exposure, businesses with foreign currency liabilities, and traders seeking to profit from exchange rate movements driven by RBI policy, global central bank decisions, and macro events. At Shriram Financial, our forex research desk tracks RBI interventions, FOMC meetings, US economic data releases, and global risk sentiment to provide actionable currency trade setups.",
+  "order": 5,
+  "features": [
+    {
+      "title": "4 Currency Pairs",
+      "body": "Trade USD-INR, EUR-INR, GBP-INR, and JPY-INR futures and options on NSE and BSE from a single account."
+    },
+    {
+      "title": "Hedge Import/Export Risk",
+      "body": "If your business has USD payables or receivables, currency futures lock in your exchange rate today — eliminating forex uncertainty."
+    },
+    {
+      "title": "Daily Forex Research",
+      "body": "Our analysts track RBI policy, FOMC meetings, US CPI, and global risk events to publish actionable currency trade strategies."
+    },
+    {
+      "title": "Low Margin Requirements",
+      "body": "Currency contracts have lower lot sizes (1,000 USD per lot) and lower margins compared to equity derivatives — making them accessible."
+    },
+    {
+      "title": "RBI-Compliant Framework",
+      "body": "All currency derivative trades are executed within RBI and SEBI-prescribed guidelines. No OTC forex risk — fully exchange-regulated."
+    },
+    {
+      "title": "Options on Currency Pairs",
+      "body": "Use currency options to create defined-risk hedges or speculative strategies with capped downside."
+    }
+  ],
+  "faqs": [
+    {
+      "q": "Who should trade currency derivatives?",
+      "a": "Currency derivatives are suitable for: (1) Importers/exporters who want to hedge forex risk, (2) Businesses with foreign currency loans or revenue, (3) Traders who want to profit from USD-INR or other currency movements, and (4) Investors who want to diversify beyond equity and commodity markets."
+    },
+    {
+      "q": "What are the lot sizes for currency futures?",
+      "a": "The standard lot size for USD-INR futures and options is 1,000 USD per contract. For EUR-INR, it is 1,000 EUR. For GBP-INR, it is 1,000 GBP. For JPY-INR, it is 100,000 JPY. This makes currency derivatives relatively accessible compared to equity F&O."
+    },
+    {
+      "q": "What are the trading hours for currency derivatives?",
+      "a": "Currency derivatives on NSE and BSE trade from 9:00 AM to 5:00 PM (Monday to Friday). This extended session (vs. 3:30 PM for equity) allows traders to react to important global events like US economic data releases and FOMC statements."
+    }
+  ]
+}

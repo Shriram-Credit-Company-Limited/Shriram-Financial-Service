@@ -1,0 +1,41 @@
+---
+import ResearchTemplate from '../../layouts/ResearchTemplate.astro';
+const reports = [
+  {
+    title: 'Initiating Coverage Reports',
+    meta: 'New Coverage',
+    summary: '30–40 page deep dives into companies we initiate coverage on — business model, competitive moat, management quality, financial analysis, valuation (DCF + P/E + EV/EBITDA), and 12-month price target with Buy/Neutral/Sell rating.'
+  },
+  {
+    title: 'Quarterly Earnings Updates',
+    meta: 'Result Season',
+    summary: 'Within 24 hours of every Q1/Q2/Q3/Q4 result announcement for our coverage universe — revenue, EBITDA, PAT vs. estimates, management commentary synthesis, and immediate target price revision if warranted.'
+  },
+  {
+    title: 'Sector Reports',
+    meta: 'Thematic Deep Dives',
+    summary: 'Comprehensive sector-level analysis — regulatory landscape, demand drivers, margin dynamics, competitive intensity, and stock picks across large-cap and mid-cap companies in the sector.'
+  },
+  {
+    title: 'Annual Conviction Picks',
+    meta: 'Best Ideas',
+    summary: 'Our highest-conviction portfolio of 10–12 stocks published at the start of each calendar year — companies with durable moats, strong balance sheets, and compelling 2–3 year growth visibility.'
+  },
+  {
+    title: 'IPO Research Notes',
+    meta: 'IPO Analysis',
+    summary: 'Independent evaluation of every mainboard IPO — business quality assessment, valuation relative to listed peers, promoter background, GMP interpretation, and clear Subscribe/Neutral/Avoid recommendation.'
+  },
+  {
+    title: 'Macro & Economy Views',
+    meta: 'Big Picture',
+    summary: 'Quarterly macroeconomic outlook — RBI policy impact, GDP growth trajectory, inflation trends, FII/DII flows, and implications for equity portfolio positioning by market capitalisation segment.'
+  },
+];
+---
+<ResearchTemplate
+  title="Fundamental Research — Invest with Conviction"
+  lead="Long-term wealth is built by owning great businesses at the right price. Our SEBI-registered fundamental research team (INH200009624) provides deep-dive analysis that separates enduring businesses from market noise — giving you the conviction to hold through volatility."
+  reports={reports}
+  description="Shriram Financial Services fundamental research — SEBI-registered equity research reports, earnings updates, sector analysis, and IPO evaluations for long-term investors."
+/>

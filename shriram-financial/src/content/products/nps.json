@@ -1,0 +1,50 @@
+{
+  "title": "National Pension System (NPS)",
+  "tagline": "Build a ₹1 crore+ retirement corpus. Tax benefits up to ₹2 lakh under 80C & 80CCD(1B).",
+  "intro": "The National Pension System (NPS) is India's government-backed, market-linked retirement savings scheme regulated by the Pension Fund Regulatory and Development Authority (PFRDA). It is one of the most tax-efficient investment vehicles available to Indian taxpayers — offering deductions under Section 80C (up to ₹1.5 lakh), an additional exclusive deduction under Section 80CCD(1B) (up to ₹50,000), and tax exemption on 60% of the corpus at maturity. Unlike traditional pension plans, NPS invests across equity (E), corporate bonds (C), and government securities (G) — giving you market-linked returns with the discipline of long-term savings. Over a 30-year career, NPS contributions compounding at 10–12% can build a substantial retirement corpus. At Shriram Financial Services, our advisors help you choose the right NPS fund manager, asset allocation, and contribution amount to maximise your retirement outcome.",
+  "order": 12,
+  "features": [
+    {
+      "title": "Save ₹2 Lakh in Tax",
+      "body": "Claim up to ₹1.5 lakh under Section 80C plus an additional ₹50,000 exclusively under Section 80CCD(1B) — ₹2 lakh in total tax deductions per year."
+    },
+    {
+      "title": "Market-Linked Growth",
+      "body": "Choose your asset allocation across Equity (up to 75%), Corporate Bonds, and Government Securities — higher equity allocation for younger investors maximises long-term corpus."
+    },
+    {
+      "title": "Lowest Fund Management Charges",
+      "body": "NPS has among the lowest fund management charges of any investment product in India — as low as 0.01% p.a. — preserving more of your returns."
+    },
+    {
+      "title": "60% Tax-Free at Maturity",
+      "body": "At age 60, you can withdraw 60% of your NPS corpus completely tax-free. The remaining 40% is used to purchase an annuity providing regular pension income."
+    },
+    {
+      "title": "Partial Withdrawal Allowed",
+      "body": "After 3 years, partial withdrawals (up to 25% of contributions) are allowed for specific needs: higher education, marriage, home purchase, critical illness."
+    },
+    {
+      "title": "Choice of 7 Fund Managers",
+      "body": "Select from 7 PFRDA-regulated fund managers including SBI, LIC, HDFC, ICICI Prudential, Kotak, UTI, and Aditya Birla — or auto-select based on performance."
+    }
+  ],
+  "faqs": [
+    {
+      "q": "What is the minimum contribution to NPS?",
+      "a": "The minimum annual contribution for NPS Tier I (pension account) is ₹1,000 per year. There is no maximum limit on contributions, but the tax deduction benefit is capped at ₹1.5 lakh (80C) + ₹50,000 (80CCD(1B)). You can contribute any amount above the minimum to build a larger corpus."
+    },
+    {
+      "q": "Can I withdraw from NPS before age 60?",
+      "a": "Early exit from NPS before 60 is allowed after 3 years with conditions: only 20% of the corpus can be withdrawn as lump sum (taxable), and 80% must be used to purchase an annuity. However, partial withdrawals (up to 25% of your own contributions) are allowed after 3 years for specific purposes — home purchase, higher education, medical treatment."
+    },
+    {
+      "q": "Which NPS fund manager should I choose?",
+      "a": "Performance of NPS fund managers varies by asset class. For equity funds, look at 5–10 year returns. Top-performing equity fund managers have historically been SBI Pension, HDFC Pension, and UTI Retirement Solutions. Our advisors can help you choose the right combination based on your risk profile and expected retirement date."
+    },
+    {
+      "q": "Is NPS better than EPF for retirement savings?",
+      "a": "NPS and EPF serve different purposes. EPF is mandatory for salaried employees and offers guaranteed returns (currently 8.15%). NPS is voluntary, market-linked, and offers higher potential returns but with market risk. NPS also has a superior additional tax benefit (₹50,000 under 80CCD(1B)). Ideally, contribute to both — EPF for guaranteed stability, NPS for market-linked growth and additional tax savings."
+    }
+  ]
+}

@@ -1,0 +1,177 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-[var(--color-dark-900)] text-[rgba(255,255,255,0.65)]">
+
+  <!-- ── Main footer grid ── -->
+  <div class="site-wrap py-14 lg:py-16">
+    <div class="grid gap-10 lg:grid-cols-[300px_1fr_1fr_1fr]">
+
+      <!-- Col 1: Brand + Contact -->
+      <div>
+        <a href="/" class="flex items-center" aria-label="Shriram Financial Services">
+          <img src="/shriram-logo.png" alt="Shriram Financial Services" width="180" height="54"
+               class="h-12 w-auto object-contain" />
+        </a>
+
+        <address class="mt-6 not-italic space-y-3 text-[13px] leading-relaxed">
+          <div class="flex items-start gap-2.5">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" class="mt-0.5 h-4 w-4 shrink-0 text-[rgba(255,255,255,0.35)]">
+              <path d="M8 1.5a5 5 0 0 1 5 5c0 3.5-5 8-5 8S3 10 3 6.5a5 5 0 0 1 5-5z"/>
+              <circle cx="8" cy="6.5" r="1.5"/>
+            </svg>
+            <span>Shriram House, No. 4, Burkit Road,<br>T.Nagar, Chennai – 600 017</span>
+          </div>
+          <div class="flex items-center gap-2.5">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" class="h-4 w-4 shrink-0 text-[rgba(255,255,255,0.35)]">
+              <path d="M2 3.5h3l1.5 3.5-1.5 1a9 9 0 0 0 3.5 3.5l1-1.5 3.5 1.5v3C9 14.5 2 7.5 2 3.5z"/>
+            </svg>
+            <a href="tel:18001031212" class="hover:text-white transition-colors">1800 103 1212</a>
+          </div>
+          <div class="flex items-center gap-2.5">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" class="h-4 w-4 shrink-0 text-[rgba(255,255,255,0.35)]">
+              <rect x="2" y="4" width="12" height="9" rx="1.5"/>
+              <path d="M2 5l6 4.5L14 5"/>
+            </svg>
+            <a href="mailto:support@shriramsecurities.com" class="hover:text-white transition-colors">support@shriramsecurities.com</a>
+          </div>
+        </address>
+
+        <div class="mt-6 flex items-center gap-2.5">
+          {[
+            { label:'Twitter/X', path:'M1 1l14 14M1 15L15 1' },
+            { label:'Facebook',  path:'M10 1H8a3 3 0 0 0-3 3v2H3v3h2v6h3V9h2l.5-3H8V4c0-.6.4-1 1-1h1V1z' },
+            { label:'LinkedIn',  path:'M2 2h2v2H2V2zm0 4h2v8H2V6zM6 6h2v1.2C8.4 6.4 9.4 6 10 6a3 3 0 0 1 3 3v5h-2V9.5c0-1-.5-1.5-1.3-1.5S8.2 8.5 8 9.5V14H6V6z' },
+            { label:'YouTube',   path:'M14 4.5S13.8 3 13 2.2c-.8-.9-1.7-.9-2.1-.9C9.2 1.2 8 1.2 8 1.2S6.8 1.2 5.1 1.3C4.7 1.3 3.8 1.3 3 2.2 2.2 3 2 4.5 2 4.5S1.8 6.3 1.8 8.1v1.7c0 1.8.2 3.6.2 3.6s.2 1.5 1 2.3c.8.9 1.9.8 2.4.9 1.7.2 7.3.2 7.3.2s1.2 0 2.9-.1c.4 0 1.3-.1 2.1-1 .8-.8 1-2.3 1-2.3s.2-1.8.2-3.6V8.1c0-1.8-.2-3.6-.2-3.6zm-8.5 7V5.5l5 3.1-5 2.9z' },
+          ].map(s => (
+            <a href="#" aria-label={s.label} onclick="event.preventDefault()"
+               class="grid h-8 w-8 place-items-center rounded-full border border-[rgba(255,255,255,0.12)] text-[rgba(255,255,255,0.50)] transition-all hover:border-white/30 hover:bg-white/10 hover:text-white">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" class="h-3.5 w-3.5">
+                <path d={s.path}/>
+              </svg>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Col 2: Company / Resources / Legal (3 sub-cols) -->
+      <div class="grid grid-cols-1 gap-8 sm:grid-cols-3 lg:col-span-2 lg:grid-cols-3">
+        <div>
+          <h3 class="text-[10px] font-bold uppercase tracking-widest text-[rgba(255,255,255,0.30)]">Company</h3>
+          <ul class="mt-4 space-y-3">
+            {[
+              { label:'About Us',          href:'/about/' },
+              { label:'Become a Partner',  href:'/about/become-a-partner/' },
+              { label:'Open Demat Account',href:'/about/open-demat-account/' },
+              { label:'Regulatory',        href:'/about/regulatory/' },
+              { label:'Antara Platform',   href:'/about/antara-web-login/' },
+              { label:'Sitemap',           href:'/about/sitemap/' },
+            ].map(l => (
+              <li><a href={l.href} class="text-[13px] transition-colors hover:text-white">{l.label}</a></li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-[10px] font-bold uppercase tracking-widest text-[rgba(255,255,255,0.30)]">Research</h3>
+          <ul class="mt-4 space-y-3">
+            {[
+              { label:'Research Overview',    href:'/research/' },
+              { label:'Technical Analysis',   href:'/research/technical/' },
+              { label:'Fundamental Research', href:'/research/fundamental/' },
+              { label:'Mutual Fund Picks',    href:'/research/mutual-funds/' },
+              { label:'Calculators',          href:'/product-hub/' },
+              { label:'Support',              href:'/about/support/' },
+            ].map(l => (
+              <li><a href={l.href} class="text-[13px] transition-colors hover:text-white">{l.label}</a></li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-[10px] font-bold uppercase tracking-widest text-[rgba(255,255,255,0.30)]">Legal</h3>
+          <ul class="mt-4 space-y-3">
+            {[
+              { label:'Regulatory & Compliance', href:'/about/regulatory/' },
+              { label:'Investor Charter',        href:'/about/regulatory/' },
+              { label:'Risk Disclosures',        href:'/about/regulatory/' },
+              { label:'Grievance Redressal',     href:'/about/support/' },
+              { label:'SEBI SCORES',             href:'https://scores.sebi.gov.in' },
+              { label:'Contact Us',              href:'/about/support/' },
+            ].map(l => (
+              <li><a href={l.href} class="text-[13px] transition-colors hover:text-white" target={l.href.startsWith('http') ? '_blank' : undefined} rel={l.href.startsWith('http') ? 'noopener noreferrer' : undefined}>{l.label}</a></li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <!-- Col 4: Products -->
+      <div>
+        <h3 class="text-[10px] font-bold uppercase tracking-widest text-[rgba(255,255,255,0.30)]">Products</h3>
+        <div class="mt-4 grid grid-cols-2 gap-x-4 gap-y-2.5">
+          {[
+            { label:'Equity',           href:'/products/equity/' },
+            { label:'Derivative',       href:'/products/derivative/' },
+            { label:'Commodities',      href:'/products/commodities/' },
+            { label:'MTF',              href:'/products/mtf/' },
+            { label:'Currency',         href:'/products/currency/' },
+            { label:'Mutual Funds',     href:'/products/mutual-funds/' },
+            { label:'ETF',              href:'/products/etf/' },
+            { label:'Bonds',            href:'/products/bonds/' },
+            { label:'NPS',              href:'/products/nps/' },
+            { label:'NFO',              href:'/products/nfo/' },
+            { label:'IPO',              href:'/products/ipo/' },
+            { label:'Fixed Deposit',    href:'/products/fd/' },
+            { label:'Global Investing', href:'/products/global-investing/' },
+          ].map(l => (
+            <a href={l.href} class="text-[13px] transition-colors hover:text-white">{l.label}</a>
+          ))}
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── Regulatory text ── -->
+  <div class="border-t border-[rgba(255,255,255,0.07)]">
+    <div class="site-wrap py-8">
+      <p class="mb-2 text-[10px] font-bold uppercase tracking-widest text-[rgba(255,255,255,0.25)]">Regulatory Information</p>
+      <p class="text-[11px] leading-[1.9] text-[rgba(255,255,255,0.38)]">
+        Shriram Securities Ltd., a member of NSE &amp; BSE.
+        SEBI Registration Nos: NSE-CM: INB231103833 | NSE-FO: INF231103833 | NSE-CDS: INE231103833 |
+        BSE-CM: INB011103839 | BSE-FO: INF011103839 | BSE-CDS: INE011103839 |
+        CDSL DP: IN-DP-194-2016.
+        AMFI ARN: 29483. IRDAI Registration No. CA0165. SEBI Research Analyst: INH200009624.
+      </p>
+      <p class="mt-3 text-[11px] leading-[1.9] text-[rgba(255,255,255,0.38)]">
+        <strong class="font-medium text-[rgba(255,255,255,0.52)]">Attention Investors:</strong>{' '}
+        Prevent Unauthorised Transactions in your Trading / Demat account. Update your Mobile Number and Email Id
+        with your Stock Broker / Depository Participant. Receive information of your transactions directly from
+        NSE, BSE, CDSL on your email and mobile.
+        KYC is one time exercise while dealing in securities markets. Once KYC is done through a SEBI registered
+        intermediary, you need not undergo the same process again when you approach another intermediary.
+        No need to issue cheques by investors while subscribing to IPO. Just write the bank account number and
+        sign in the application form to authorise your bank to make payment in case of allotment.{' '}
+        <strong class="font-medium text-[rgba(255,255,255,0.52)]">
+          Investments in securities market are subject to market risks. Read all the related documents carefully before investing.
+        </strong>
+      </p>
+    </div>
+  </div>
+
+  <!-- ── Copyright bar ── -->
+  <div class="border-t border-[rgba(255,255,255,0.05)]">
+    <div class="site-wrap flex flex-col items-center justify-between gap-3 py-4 text-[11px] text-[rgba(255,255,255,0.30)] sm:flex-row">
+      <span>© {year} Shriram Securities Limited. All rights reserved.</span>
+      <div class="flex items-center gap-4">
+        <a href="/about/" class="hover:text-white transition-colors">Privacy</a>
+        <span aria-hidden="true">·</span>
+        <a href="/about/" class="hover:text-white transition-colors">Terms</a>
+        <span aria-hidden="true">·</span>
+        <a href="/about/support/" class="hover:text-white transition-colors">Grievance</a>
+        <span aria-hidden="true">·</span>
+        <a href="/about/sitemap/" class="hover:text-white transition-colors">Sitemap</a>
+      </div>
+    </div>
+  </div>
+
+</footer>

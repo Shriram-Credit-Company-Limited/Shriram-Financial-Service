@@ -1,0 +1,46 @@
+{
+  "title": "Exchange Traded Funds (ETF)",
+  "tagline": "Low-cost index investing. Diversify across Nifty 50, Gold, and Debt with the simplicity of buying a single stock.",
+  "intro": "Exchange Traded Funds (ETFs) combine the diversification of mutual funds with the tradability of stocks. An ETF tracks an underlying index (like Nifty 50, Sensex, or Gold) and can be bought or sold on the exchange at any time during market hours — just like a share. ETFs have revolutionised retail investing globally because they offer instant diversification at very low cost (expense ratios as low as 0.02%). Instead of picking 50 individual stocks, a Nifty 50 ETF gives you exposure to all 50 in one trade. At Shriram Financial Services, we guide investors to build core portfolio positions using ETFs — whether equity index ETFs for long-term wealth, Gold ETFs as an inflation hedge, or Debt ETFs for stable income — creating a robust, low-cost foundation for their wealth.",
+  "order": 9,
+  "features": [
+    {
+      "title": "Ultra-Low Expense Ratios",
+      "body": "ETFs charge as little as 0.02–0.05% p.a. — compared to 1–2% for actively managed funds. Over 20 years, this difference compounds to lakhs."
+    },
+    {
+      "title": "Real-Time Trading",
+      "body": "Unlike mutual funds (priced once daily), ETFs can be bought and sold any time during market hours at live market prices."
+    },
+    {
+      "title": "Instant Diversification",
+      "body": "A single Nifty 50 ETF unit gives you exposure to India's 50 largest companies across 13 sectors — hedging individual stock risk."
+    },
+    {
+      "title": "Gold ETF Access",
+      "body": "Buy 1 gram of gold exposure digitally through Gold ETFs — no storage risk, no making charges, fully transparent pricing linked to LBMA gold price."
+    },
+    {
+      "title": "Debt ETF Stability",
+      "body": "Debt ETFs tracking government securities or corporate bond indices provide stable, predictable returns for the low-risk portion of your portfolio."
+    },
+    {
+      "title": "SIP in ETFs",
+      "body": "Set up a monthly SIP in your preferred ETF through Antara — combining low-cost passive investing with the discipline of systematic investing."
+    }
+  ],
+  "faqs": [
+    {
+      "q": "What is the difference between an ETF and a mutual fund?",
+      "a": "Both pool investor money and invest in a diversified portfolio. The key differences: (1) ETFs trade on exchanges like stocks — you buy/sell at live market prices any time during trading hours. Mutual funds are bought/redeemed at end-of-day NAV. (2) ETFs generally have lower expense ratios than actively managed mutual funds. (3) Most ETFs track an index passively — no fund manager picking stocks. Some mutual funds are actively managed."
+    },
+    {
+      "q": "Which ETF should a first-time investor buy?",
+      "a": "For most first-time investors, a Nifty 50 ETF or Nifty Next 50 ETF is the ideal starting point. These give exposure to India's largest, most liquid companies with proven long-term track records. Add a Gold ETF (5–10% of portfolio) as an inflation hedge. Our advisors can design a personalised ETF portfolio based on your goals and risk appetite."
+    },
+    {
+      "q": "Is there a minimum investment amount for ETFs?",
+      "a": "ETFs can be purchased from as little as 1 unit — which for most Nifty 50 ETFs is priced around ₹200–₹250 per unit. This makes ETFs incredibly accessible. Gold ETFs typically represent 1/100th of a gram of gold (approximately ₹55–₹70 per unit)."
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const products = (await getCollection('products')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout title="All Investment Products" description="Explore all 13 investment products from Shriram Financial Services — equity, F&O, mutual funds, bonds, IPOs, and more.">
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden bg-[var(--color-dark-800)]">
+    <div class="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-[var(--color-brand)]/25 blur-3xl"></div>
+    <div class="pointer-events-none absolute -bottom-20 left-0 h-64 w-64 rounded-full bg-[var(--color-gold)]/10 blur-3xl"></div>
+    <div class="site-wrap relative py-20 lg:py-28">
+      <p class="reveal reveal-1 text-[11px] font-bold uppercase tracking-widest text-[rgba(255,255,255,0.40)]">Investment Products</p>
+      <h1 class="reveal reveal-2 mt-4 max-w-3xl text-[40px] font-bold leading-tight text-white lg:text-[54px]" style="font-family:var(--font-display)">Every Tool to Grow Your Wealth</h1>
+      <p class="reveal reveal-3 mt-5 max-w-2xl text-[16px] leading-relaxed text-white/65">
+        From zero-brokerage equity delivery to SIP mutual funds, IPO applications, global investing, and fixed income — all 13 products in one digital platform.
+      </p>
+    </div>
+  </section>
+
+  <!-- Product Grid -->
+  <section class="site-wrap py-16 lg:py-20">
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {products.map((p) => (
+        <a href={`/products/${p.id}/`} class="product-card-light group flex flex-col p-7">
+          <h2 class="text-[20px] font-semibold text-[var(--color-n900)]" style="font-family:var(--font-display)">{p.data.title}</h2>
+          <p class="mt-3 flex-1 text-[14px] leading-relaxed text-[var(--color-muted)]">{p.data.tagline}</p>
+          <span class="mt-5 flex items-center gap-1.5 text-[13px] font-semibold text-[var(--color-brand)] transition-transform group-hover:translate-x-1">
+            Learn more
+            <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" class="h-3 w-3"><path d="M2 6h8M6 2l4 4-4 4"/></svg>
+          </span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA Band -->
+  <section class="site-wrap pb-20">
+    <div class="rounded-lg bg-[var(--color-brand)] p-10 text-white">
+      <div class="flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
+        <div>
+          <h2 class="text-[24px] font-bold" style="font-family:var(--font-display)">Ready to Invest Across All Products?</h2>
+          <p class="mt-2 text-[15px] text-white/75">Open a free Demat account. One account, every product, zero delivery brokerage.</p>
+        </div>
+        <a href="/about/open-demat-account/" class="shrink-0 rounded bg-white px-6 py-3 text-[14px] font-semibold text-[var(--color-brand)] transition-colors hover:bg-[var(--color-brand-pale)]">
+          Open Free Demat Account
+        </a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

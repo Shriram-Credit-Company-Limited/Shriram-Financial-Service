@@ -1,0 +1,46 @@
+{
+  "title": "Global Investing",
+  "tagline": "Own Apple, Tesla, Microsoft, and 4,000+ US stocks. Diversify globally under RBI's LRS limit.",
+  "intro": "The Indian economy represents just 3.5% of global GDP. By limiting your portfolio to Indian stocks, you miss out on 96.5% of the world's investment opportunities. Global investing — particularly in US equities — lets you participate in the growth of the world's largest economy and its most innovative companies: Apple, Microsoft, Amazon, NVIDIA, Tesla, Google, and thousands more. At Shriram Financial Services, we facilitate global investing through the RBI's Liberalised Remittance Scheme (LRS), which allows Indian residents to invest up to USD 250,000 per year in foreign stocks and funds. Our international investment advisors help you build a global portfolio that complements your India-focused holdings — reducing concentration risk, adding USD-denominated assets, and capitalising on global tech and growth megatrends.",
+  "order": 10,
+  "features": [
+    {
+      "title": "4,000+ US Stocks & ETFs",
+      "body": "Access all NYSE and NASDAQ-listed stocks and ETFs — including Apple, Tesla, Microsoft, Google, Amazon, NVIDIA, and thousands more."
+    },
+    {
+      "title": "Invest Under RBI's LRS",
+      "body": "Legally invest up to USD 250,000 (~₹2 crore) per year through the Liberalised Remittance Scheme — fully compliant with RBI and FEMA regulations."
+    },
+    {
+      "title": "USD-Denominated Returns",
+      "body": "Earn returns in USD — protecting a portion of your wealth from INR depreciation, which has historically averaged 3–4% per year against the dollar."
+    },
+    {
+      "title": "Fractional Share Investing",
+      "body": "Own a fraction of high-priced stocks like Amazon (USD 180+) or Google (USD 170+) from as little as USD 1 — making premium stocks accessible."
+    },
+    {
+      "title": "Global ETF Access",
+      "body": "Invest in S&P 500 index ETFs (like VOO, SPY), QQQ (Nasdaq 100), and thematic ETFs for AI, clean energy, healthcare, and more."
+    },
+    {
+      "title": "Expert International Advisory",
+      "body": "Our global markets research team tracks US earnings seasons, Federal Reserve policy, and global macro trends to guide your international portfolio."
+    }
+  ],
+  "faqs": [
+    {
+      "q": "How do I invest in US stocks from India?",
+      "a": "You can invest in US stocks through Shriram Financial Services using the RBI's Liberalised Remittance Scheme (LRS). The process involves completing your KYC, submitting Form A2 for foreign remittance, and funding your international account. The entire process can be done online through Antara. Annual limit: USD 250,000 per individual."
+    },
+    {
+      "q": "How are US stock investments taxed in India?",
+      "a": "Gains from US stocks are taxed in India as capital gains: Short-term (held < 24 months): taxed at your income tax slab rate. Long-term (held > 24 months): taxed at 20% with indexation benefit. Dividends from US stocks are taxed at your slab rate (with potential TDS in the US at 25%, creditable against Indian tax). India-US DTAA (Double Taxation Avoidance Agreement) prevents you from being taxed twice."
+    },
+    {
+      "q": "Is global investing safe? What are the risks?",
+      "a": "Global investing carries: Currency risk (USD-INR fluctuation — which can work in your favour or against), Market risk (US markets can be volatile), Regulatory risk (LRS limits may change), and Tax compliance complexity. We strongly recommend working with our advisors to size your global allocation appropriately — typically 10–20% of total portfolio for most investors."
+    }
+  ]
+}

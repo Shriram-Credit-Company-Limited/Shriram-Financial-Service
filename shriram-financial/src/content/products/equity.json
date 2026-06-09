@@ -1,0 +1,21 @@
+{
+  "title": "Equity Trading",
+  "tagline": "Own India's best companies. Build generational wealth with SEBI-registered advisory and zero delivery brokerage.",
+  "intro": "Equity investing is the single most powerful tool for long-term wealth creation in India. When you buy shares of a company, you become a part-owner — participating in its profits, growth, and compounding over time. At Shriram Financial Services, we go beyond order execution. Our SEBI-registered research analysts provide high-conviction stock recommendations backed by deep fundamental and technical analysis. Whether you are a first-time investor starting an SIP in direct equities or a seasoned trader looking for intraday opportunities, our platform gives you the research clarity, the speed, and the dedicated relationship manager to execute with confidence. With over five decades of trust and a nationwide presence, Shriram Financial is where informed investors invest.",
+  "order": 1,
+  "features": [
+    { "title": "₹0 Delivery Brokerage", "body": "Buy and hold quality stocks absolutely free. Zero brokerage on delivery trades means every rupee of return stays in your pocket." },
+    { "title": "SEBI-Registered Research Desk", "body": "Our in-house analysts publish actionable buy/sell calls backed by rigorous fundamental and technical research — not third-party tips." },
+    { "title": "Real-Time Market Data", "body": "Live streaming quotes, Level 2 market depth, and instant order execution via our Antara platform — web and mobile." },
+    { "title": "Dedicated Relationship Manager", "body": "Every client gets a named RM who understands your portfolio, risk appetite, and financial goals — not just a chatbot." },
+    { "title": "NSE & BSE Access", "body": "Trade across both exchanges from a single unified account. Access every listed company in India seamlessly." },
+    { "title": "Portfolio Tracking & Reports", "body": "Real-time P&L, holdings summary, and tax computation reports (FIFO-based) available at all times in your dashboard." }
+  ],
+  "faqs": [
+    { "q": "What is a Demat account and do I need one for equity investing?", "a": "A Demat (Dematerialised) account is a digital account that holds your shares in electronic form, replacing physical share certificates. Yes, a Demat account linked with a trading account is mandatory for buying and selling shares on Indian stock exchanges. Shriram Financial Services helps you open both in under 10 minutes — completely paperless." },
+    { "q": "What is the brokerage for equity delivery trades?", "a": "Shriram Financial charges ₹0 (zero) brokerage for equity delivery trades. For intraday equity trading, a flat fee of ₹20 per executed order applies. This transparent, low-cost structure means you keep more of your returns." },
+    { "q": "Can I invest in equity through SIP (Systematic Investment Plan)?", "a": "Yes. You can set up a monthly SIP in direct equities on the Antara platform by choosing specific stocks or a curated equity basket recommended by our research team. This helps you benefit from rupee-cost averaging and compounding over time." },
+    { "q": "What is the minimum amount needed to start equity investing?", "a": "There is no regulatory minimum. You can start with as little as ₹1 (for shares priced below ₹1) or buy a single share of any company. Many quality blue-chip stocks are available for under ₹500, making equity investing accessible to everyone." },
+    { "q": "How does Shriram Financial protect my investments?", "a": "Your shares are held in your Demat account with CDSL — a government-regulated depository. Shriram Financial is a SEBI-registered stockbroker (NSE & BSE member). Your funds are segregated in separate client accounts and never commingled with company funds. All trades are settlement-guaranteed through the exchanges." }
+  ]
+}

@@ -1,0 +1,41 @@
+---
+import ResearchTemplate from '../../layouts/ResearchTemplate.astro';
+const reports = [
+  {
+    title: 'Top Fund Picks — Quarterly Review',
+    meta: 'Every Quarter',
+    summary: 'Our AMFI-certified advisors shortlist the top 3 performing funds in each SEBI category — large-cap, mid-cap, small-cap, flexi-cap, ELSS, hybrid, liquid — ranked by risk-adjusted returns, consistency, and fund manager tenure.'
+  },
+  {
+    title: 'SIP Portfolios for Every Goal',
+    meta: 'Goal-Based',
+    summary: "Ready-made SIP portfolios designed for specific goals: Retirement (20+ year horizon), Children's Education (10-year), Wealth Building (7-year), and Emergency Corpus (liquid/ultra-short term)."
+  },
+  {
+    title: 'NFO Analysis — Subscribe or Avoid?',
+    meta: 'New Fund Offers',
+    summary: 'Every new fund offer analysed before the subscription window closes — fund house track record, manager credentials, mandate uniqueness vs. existing funds, and a clear Subscribe/Neutral/Avoid call.'
+  },
+  {
+    title: 'Debt Fund Yield Compass',
+    meta: 'Fixed Income',
+    summary: 'Monthly analysis of the debt fund landscape — current yield-to-maturity across categories, duration risk assessment, credit quality review, and recommended funds for each risk-return profile.'
+  },
+  {
+    title: 'Fund Manager Watch',
+    meta: 'People Behind Funds',
+    summary: 'Quarterly profiles of key fund managers whose moves matter — performance attribution, portfolio changes, and how fund manager transitions affect your existing investments.'
+  },
+  {
+    title: 'Category Review — When to Switch?',
+    meta: 'Portfolio Health',
+    summary: 'Identifies underperforming funds in your portfolio against category peers and benchmarks — with specific switch recommendations to better-performing alternatives in the same category.'
+  },
+];
+---
+<ResearchTemplate
+  title="Mutual Fund Research — Expert-Curated Selections"
+  lead="With over 1,500 funds and 45+ SEBI categories, choosing the right mutual fund is overwhelming without expert guidance. Our AMFI-certified research team cuts through the noise — recommending funds that have earned their returns, not just marketed them."
+  reports={reports}
+  description="Shriram Financial Services mutual fund research — AMFI-certified fund recommendations, SIP portfolio suggestions, NFO analysis, and category reviews for systematic investors."
+/>

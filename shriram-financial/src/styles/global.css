@@ -1,0 +1,354 @@
+@import "tailwindcss";
+
+@theme {
+  /* ── Shriram Brand Blue (exact from Figma) ── */
+  --color-brand:        #0E52CB;
+  --color-brand-hover:  #0A3EA8;
+  --color-brand-deep:   #0A2E80;
+  --color-brand-light:  #EEF4FF;
+  --color-brand-pale:   #F4F8FF;
+  --color-link:         #2F7EF4;
+
+  /* ── Figma Neutral Tokens (exact) ── */
+  --color-n900: #333333;
+  --color-n800: #666666;
+  --color-n700: #8A8A8A;
+  --color-n500: #CCCCCC;
+  --color-n400: #DDDDDD;
+  --color-n100: #F7F7F7;
+  --color-white: #FFFFFF;
+
+  /* ── Dark section backgrounds ── */
+  --color-dark-900: #070D1A;
+  --color-dark-800: #0D1525;
+  --color-dark-700: #131F35;
+  --color-dark-600: #1A2A46;
+
+  /* ── Gold accent (left border in "Where Do We Differ") ── */
+  --color-gold: #C9A227;
+
+  /* ── Semantics ── */
+  --color-ink:     #333333;
+  --color-muted:   #666666;
+  --color-subtle:  #8A8A8A;
+  --color-border:  #DDDDDD;
+  --color-surface: #F7F7F7;
+  --color-paper:   #FFFFFF;
+
+  /* ── Typography (Figma: Gilmer→Plus Jakarta Sans, Outfit) ── */
+  --font-display: "Plus Jakarta Sans", "DM Sans", system-ui, sans-serif;
+  --font-body:    "Outfit", "Inter", system-ui, sans-serif;
+
+  /* ── Radius (Figma uses 4px for buttons, 8px for inputs, 4px for cards) ── */
+  --radius-btn:  4px;
+  --radius-input:8px;
+  --radius-card: 4px;
+  --radius-card-lg: 8px;
+  --radius-pill: 9999px;
+
+  /* ── Shadows ── */
+  --shadow-card:  0 2px 12px 0 rgba(0, 0, 0, 0.06);
+  --shadow-form:  8px 5px 34.8px 0px rgba(0, 0, 0, 0.05);
+  --shadow-lift:  0 8px 32px 0 rgba(14, 82, 203, 0.15);
+  --shadow-heavy: 0 20px 60px 0 rgba(0, 0, 0, 0.20);
+}
+
+/* ── Responsive page container ─────────────────────────────────────────────
+   padding scales with viewport: 20px on mobile → 144px at 1800px+
+   No max-width cap so content fills the screen on any monitor.             */
+.site-wrap {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left:  clamp(1.25rem, 8vw, 9rem);
+  padding-right: clamp(1.25rem, 8vw, 9rem);
+}
+
+/* ── Hero animated wave background (CSS fallback while video loads) ─────── */
+.hero-wave {
+  position: absolute;
+  inset: 0;
+  background-color: #cdd9eb;
+  overflow: hidden;
+}
+.hero-wave::before {
+  content: '';
+  position: absolute;
+  inset: -30%;
+  width: 160%;
+  height: 160%;
+  background:
+    radial-gradient(ellipse 90% 55% at 15% 50%, rgba(170,200,235,0.85) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 75% at 80% 25%, rgba(210,225,248,0.70) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 55% at 55% 85%, rgba(190,215,242,0.55) 0%, transparent 55%),
+    linear-gradient(140deg, #c4d6ee 0%, #dce8f6 50%, #c8d8f0 100%);
+  animation: heroBlob1 14s ease-in-out infinite alternate;
+}
+.hero-wave::after {
+  content: '';
+  position: absolute;
+  inset: -20%;
+  width: 140%;
+  height: 140%;
+  background:
+    radial-gradient(ellipse 55% 45% at 72% 38%, rgba(220,232,250,0.75) 0%, transparent 55%),
+    radial-gradient(ellipse 45% 65% at 28% 65%, rgba(200,220,244,0.55) 0%, transparent 50%);
+  animation: heroBlob2 9s ease-in-out infinite alternate-reverse;
+}
+@keyframes heroBlob1 {
+  0%   { transform: translate(0%,0%) rotate(0deg) scale(1); }
+  50%  { transform: translate(3%,-2%) rotate(5deg) scale(1.06); }
+  100% { transform: translate(-2%,3%) rotate(-3deg) scale(1.04); }
+}
+@keyframes heroBlob2 {
+  0%   { transform: translate(0%,0%) rotate(0deg) scale(1.1); }
+  50%  { transform: translate(-4%,2%) rotate(-6deg) scale(1.16); }
+  100% { transform: translate(3%,-3%) rotate(4deg) scale(1.09); }
+}
+
+/* ── Base ── */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-ink);
+  background: var(--color-white);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, .font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+}
+
+/* .hero-silver removed — replaced by .hero-wave animated background */
+
+/* ── Dark section backgrounds ── */
+.bg-dark {
+  background-color: var(--color-dark-800);
+}
+.bg-dark-900 {
+  background-color: var(--color-dark-900);
+}
+
+/* ── Glassmorphism form card (hero right) ── */
+.glass-form {
+  background: linear-gradient(194.97deg, rgba(14, 91, 203, 0.28) 0%, rgba(255,255,255,0.28) 100%);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  border: 1px solid rgba(255,255,255,0.90);
+  box-shadow: var(--shadow-form);
+}
+
+/* ── Primary button (Figma exact) ── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 48px;
+  padding: 0 20px;
+  background-color: var(--color-brand);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: var(--radius-btn);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.15s, transform 0.15s;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn-primary:hover {
+  background-color: var(--color-brand-hover);
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 48px;
+  padding: 0 20px;
+  background-color: transparent;
+  color: var(--color-brand);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: var(--radius-btn);
+  border: 1.5px solid var(--color-brand);
+  cursor: pointer;
+  transition: background-color 0.15s, transform 0.15s;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn-outline:hover {
+  background-color: var(--color-brand-light);
+  transform: translateY(-1px);
+}
+
+.btn-ghost-white {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 40px;
+  padding: 0 16px;
+  background-color: transparent;
+  color: var(--color-n800);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: var(--radius-btn);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.15s;
+  text-decoration: none;
+}
+.btn-ghost-white:hover {
+  background-color: var(--color-n100);
+}
+
+/* ── Trust badge dots ── */
+.trust-dot {
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: #aaa;
+  flex-shrink: 0;
+}
+
+/* ── Gold left-border block ── */
+.border-gold-left {
+  border-left: 6px solid var(--color-gold);
+  padding-left: 24px;
+}
+
+/* ── Section accordion ── */
+.accord-item {
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  transition: background 0.2s;
+}
+.accord-item.active,
+.accord-item:hover {
+  background-color: rgba(255,255,255,0.04);
+}
+.accord-item summary {
+  list-style: none;
+}
+.accord-item summary::-webkit-details-marker {
+  display: none;
+}
+
+/* ── Product card (dark section) ── */
+.product-card-dark {
+  background-color: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: var(--radius-card-lg);
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+.product-card-dark:hover {
+  background-color: rgba(255,255,255,0.10);
+  border-color: rgba(255,255,255,0.20);
+  transform: translateY(-2px);
+}
+
+/* ── Product card (light section) ── */
+.product-card-light {
+  background-color: #fff;
+  border: 1px solid var(--color-n400);
+  border-radius: var(--radius-card-lg);
+  box-shadow: var(--shadow-card);
+  transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+}
+.product-card-light:hover {
+  box-shadow: var(--shadow-lift);
+  border-color: rgba(14, 82, 203, 0.25);
+  transform: translateY(-2px);
+}
+
+/* ── Input field (Figma style) ── */
+.field {
+  width: 100%;
+  height: 48px;
+  padding: 0 14px;
+  border: 1px solid var(--color-n500);
+  border-radius: var(--radius-input);
+  background: #fff;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--color-ink);
+  outline: none;
+  transition: border-color 0.15s;
+}
+.field:focus {
+  border-color: var(--color-brand);
+}
+
+/* ── Stat chip ── */
+.stat-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 16px 24px;
+  border-right: 1px solid rgba(255,255,255,0.12);
+}
+.stat-chip:last-child {
+  border-right: none;
+}
+
+/* ── FAQ row ── */
+.faq-row {
+  border-bottom: 1px solid var(--color-n400);
+  transition: background 0.15s;
+}
+.faq-row:hover {
+  background: var(--color-n100);
+}
+.faq-row summary {
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+}
+.faq-row summary::-webkit-details-marker { display: none; }
+
+/* ── Reveal animation ── */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.reveal   { animation: rise 0.75s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.reveal-1 { animation-delay: 0.05s; }
+.reveal-2 { animation-delay: 0.15s; }
+.reveal-3 { animation-delay: 0.28s; }
+.reveal-4 { animation-delay: 0.42s; }
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar          { width: 5px; }
+::-webkit-scrollbar-track    { background: transparent; }
+::-webkit-scrollbar-thumb    { background: var(--color-n400); border-radius: 3px; }
+
+/* ── Focus ── */
+:focus-visible { outline: 2px solid var(--color-brand); outline-offset: 3px; border-radius: 3px; }
+
+/* ── Prose (legal/about pages) ── */
+.prose-shriram p          { line-height: 1.8; color: var(--color-muted); margin-bottom: 1rem; }
+.prose-shriram h2         { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--color-ink); margin-top: 2rem; margin-bottom: 0.5rem; }
+.prose-shriram ul         { list-style: none; padding: 0; }
+.prose-shriram ul li      { padding-left: 1.25rem; position: relative; margin-bottom: 0.4rem; color: var(--color-muted); }
+.prose-shriram ul li::before { content: ''; position: absolute; left: 0; top: 0.6em; width: 5px; height: 5px; border-radius: 50%; background: var(--color-brand); }
+.prose-shriram a          { color: var(--color-link); text-decoration: underline; text-underline-offset: 2px; }
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .reveal { animation: none; }
+  html { scroll-behavior: auto; }
+}

@@ -1,0 +1,50 @@
+{
+  "title": "Derivatives Trading — Futures & Options",
+  "tagline": "Trade F&O with precision. Research-backed strategies, live Greeks, flat ₹20 brokerage per executed order.",
+  "intro": "Derivatives — Futures and Options — are powerful instruments that let you hedge portfolios, speculate on market direction, or generate income through options writing. India's F&O market is among the largest in the world, offering deep liquidity across indices and stocks. At Shriram Financial Services, our SEBI-registered technical research desk publishes daily F&O strategies with defined entry, target, and stop-loss levels. The Antara platform gives you live option chain data, implied volatility charts, real-time Greeks (Delta, Gamma, Theta, Vega), and an options strategy builder — tools previously available only to institutional desks. Our dedicated relationship managers help you understand position sizing, risk management, and how to use derivatives to protect your existing equity portfolio rather than gamble with it.",
+  "order": 2,
+  "features": [
+    {
+      "title": "Flat ₹20 Per Executed Order",
+      "body": "One transparent fee across all F&O trades — no percentage brokerage that erodes profits on large positions."
+    },
+    {
+      "title": "Daily F&O Research Strategies",
+      "body": "SEBI-registered analysts publish intraday and positional F&O trade setups every morning with clear entry, target, and stop-loss."
+    },
+    {
+      "title": "Live Option Chain & Greeks",
+      "body": "Real-time option chain with OI, PCR, IV percentile, and live Delta/Gamma/Theta/Vega displayed on Antara's intuitive dashboard."
+    },
+    {
+      "title": "Options Strategy Builder",
+      "body": "Visualise Bull Call Spreads, Iron Condors, Straddles, and more before placing a single order — see payoff diagrams instantly."
+    },
+    {
+      "title": "Margin Alerts & Risk Controls",
+      "body": "Real-time margin utilisation alerts via app and SMS so you are never caught off-guard by a margin shortfall."
+    },
+    {
+      "title": "NSE & BSE Derivatives Segments",
+      "body": "Trade Nifty 50, Bank Nifty, FinNifty, Sensex, and 200+ stock F&O from a single, unified trading account."
+    }
+  ],
+  "faqs": [
+    {
+      "q": "What is the difference between Futures and Options?",
+      "a": "A Futures contract is a binding agreement — both buyer and seller must fulfil it at expiry. An Options contract gives the buyer the RIGHT (not obligation) to buy (Call) or sell (Put) at a fixed price. Options cap your downside to the premium paid; Futures carry unlimited risk on both sides."
+    },
+    {
+      "q": "How much capital do I need to trade F&O?",
+      "a": "Nifty futures typically require ₹1–1.5 lakh in SPAN + exposure margin. Buying options requires only the premium (often ₹5,000–₹25,000 per lot). We recommend starting with at least ₹1 lakh and strict stop-losses."
+    },
+    {
+      "q": "Does Shriram Financial provide F&O research calls?",
+      "a": "Yes. Our SEBI-registered research analysts (INH200009624) publish daily F&O strategies, weekly positional setups, and monthly expiry analysis — free for all active clients on the Antara platform."
+    },
+    {
+      "q": "What are the tax implications of F&O trading?",
+      "a": "F&O profits are treated as Business Income (not Capital Gains) and taxed at your applicable income tax slab. You can claim expenses like brokerage, internet, and advisory fees as deductions. F&O losses can be set off against other business income and carried forward for 8 years."
+    }
+  ]
+}
