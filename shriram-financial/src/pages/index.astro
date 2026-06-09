@@ -5,43 +5,43 @@ const differItems = [
   {
     num: 'I.',
     title: 'Research-Backed Insights',
-    sub: 'SEBI-registered analysis — not third-party tips or unverified calls',
+    sub: 'Investment and portfolio insights powered by comprehensive market research',
     points: [
-      'Access high-conviction equity, F&O, and mutual fund research published by SEBI-registered analysts (INH200009624) — every call is legally accountable.',
-      'Daily technical views, quarterly company deep-dives, and macro reports give you the edge to invest with confidence, not speculation.',
+      'Access high-conviction, SEBI-registered technical and fundamental research to capture sharp market movements.',
+      'Trade and invest with confidence using deep-dive macroeconomic reports and real-time data analytics.',
     ],
     cta: 'Explore Research',
     href: '/research/',
   },
   {
     num: 'II.',
-    title: 'A Human-Led Advisory Experience',
-    sub: 'Dedicated relationship managers who know your name, not just your portfolio',
+    title: 'A Relationship-Led Human Experience',
+    sub: 'Premium investing experience with dedicated relationship management',
     points: [
-      'Every Shriram client is mapped to a named Relationship Manager who understands your risk appetite, financial milestones, and goals.',
-      'Get personalised portfolio reviews over a call or in person — no chatbots, no automated responses, no generic advice.',
+      'Get mapped with experienced domain experts who understand your risk appetite and financial milestones.',
+      'Experience seamless, personalized portfolio reviews over a call or in person, moving past automated chatbots.',
     ],
     cta: 'Meet Your Advisor',
     href: '/about/',
   },
   {
     num: 'III.',
-    title: '50 Years of Trust',
-    sub: 'The Shriram Group has been India\'s financial backbone since 1974',
+    title: 'Partner Network',
+    sub: 'Access to a dense nationwide network of trusted partners',
     points: [
-      'Founded in Chennai in 1974, the Shriram Group has navigated every market cycle — the dot-com crash, 2008 GFC, COVID-19 — and emerged stronger each time.',
-      'Associated with Sanlam Group (Africa\'s largest diversified financial services group), Shriram brings global standards of wealth management to Indian investors.',
+      'Leverage trusted collaborations with leading financial institutions, asset managers, and tech platforms.',
+      'Gain premium access to structured products, unique PMS strategies, and highly curated investment avenues.',
     ],
     cta: 'Our Story',
     href: '/about/',
   },
   {
     num: 'IV.',
-    title: 'Antara — One Platform, Every Product',
-    sub: 'Trade, invest, track, and plan from a single unified platform',
+    title: 'Personalized Notifications',
+    sub: 'Personalized nudges for critical actionables and market opportunities',
     points: [
-      'Live Level 2 market depth, option chain with Greeks, 1,500+ mutual funds, IPO applications, FD bookings — all under one login.',
-      'Real-time P&L, XIRR portfolio tracking, and tax computation reports ensure you always know exactly where you stand.',
+      'Receive instant, actionable alerts tailored to your active watchlist, technical breakouts, and entry/exit zones.',
+      'Stay updated with automated, relevant news and rebalancing alerts without information overload.',
     ],
     cta: 'Explore Antara',
     href: '/about/antara-web-login/',
@@ -49,92 +49,144 @@ const differItems = [
 ];
 
 const advisoryCards = [
-  { icon: `<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 24l6-6 5 5 7-9 6-4"/><path d="M28 4v6h-6"/></svg>`, title: 'Equity Advisory', body: 'High-conviction stock picks backed by in-house SEBI-registered fundamental and technical analysts — not tips from unaccountable sources.', cta: 'Explore Research', href: '/research/' },
-  { icon: `<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="12"/><path d="M10 16l3 3 9-9"/></svg>`, title: 'Mutual Fund Advisory', body: 'AMFI-certified fund selection (ARN: 29483) — curated portfolios aligned to your goals, risk appetite, and investment horizon.', cta: 'Explore Funds', href: '/products/mutual-funds/' },
-  { icon: `<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="24" height="18" rx="2"/><path d="M4 13h24M10 8V6M22 8V6"/></svg>`, title: 'Goal-Based Planning', body: 'SIP plans, retirement corpus mapping, education fund projections — all mapped to real timelines and amounts with quarterly reviews.', cta: 'Set Your Goals', href: '/products/' },
-  { icon: `<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="10" r="6"/><path d="M4 28c0-6.627 5.373-12 12-12s12 5.373 12 12"/></svg>`, title: 'Dedicated RM', body: 'A Relationship Manager who is reachable when markets move — not a ticket queue. Your goals, your portfolio, your dedicated advisor.', cta: 'Connect With An Advisor', href: '/about/support/' },
-];
-
-const stats = [
-  { val: '₹2.3 L Cr+', label: 'Group Assets Under Management' },
-  { val: '50+',         label: 'Years of Trust & Experience' },
-  { val: '10 L+',      label: 'Investors & Families Served' },
-  { val: '3,000+',     label: 'Branches Across India' },
-];
-
-const goals = [
-  { icon: `<svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4C8.48 4 4 8.48 4 14s4.48 10 10 10 10-4.48 10-10S19.52 4 14 4z"/><path d="M14 4v10l7 4"/></svg>`, title: 'Retirement Planning', body: 'Build a ₹1 Cr+ corpus through disciplined NPS and equity SIPs. Retire on your terms — not your employer\'s.', href: '/products/nps/' },
-  { icon: `<svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22l4-4 16-10M14 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/><path d="M4 18h20"/></svg>`, title: "Children's Education", body: 'Start a ₹500/month SIP today. In 15 years, fund any dream — IIT, MBA, or international university.', href: '/products/mutual-funds/' },
-  { icon: `<svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14l11-9 11 9M6 12v10h16V12"/><path d="M10 22v-5h8v5"/></svg>`, title: 'Home Purchase', body: 'Plan your down payment with goal-based mutual fund SIPs. Reach your target faster with disciplined investing.', href: '/products/mutual-funds/' },
-  { icon: `<svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg>`, title: 'Tax Saving (ELSS)', body: 'Save up to ₹46,800 in tax under Section 80C with ELSS funds. 3-year lock-in, equity-class long-term returns.', href: '/products/mutual-funds/' },
-  { icon: `<svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3,20 9,13 13,17 22,7"/><polyline points="18,7 22,7 22,11"/></svg>`, title: 'Wealth Building', body: 'Compound your capital across equity, bonds, and global funds. Build multi-generational wealth with expert guidance.', href: '/products/equity/' },
-  { icon: `<svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4v8l5 3"/><circle cx="14" cy="14" r="10"/></svg>`, title: 'Emergency Corpus', body: 'Park 3–6 months of expenses in liquid funds. Earn better than a savings account and withdraw within 24 hours.', href: '/products/mutual-funds/' },
-];
-
-const testimonials = [
-  { name: 'Rajesh Kumar', city: 'Bengaluru', tag: 'Equity Investor', stars: 5, quote: 'The research team at Shriram is exceptional. Their daily technical calls have made me a far more disciplined trader. What truly stands out is my RM — available on call and genuinely invested in my success.' },
-  { name: 'Priya Menon', city: 'Chennai', tag: 'SIP Investor', stars: 5, quote: 'I started my first SIP through Shriram two years ago with ₹3,000/month. My advisor helped me choose the right funds for my daughter\'s education goal and I\'ve already seen 18% XIRR. Couldn\'t be happier.' },
-  { name: 'Arun Sharma', city: 'Mumbai', tag: 'F&O Trader', stars: 5, quote: 'Flat ₹20 brokerage and live option chain with Greeks on Antara is exactly what an F&O trader needs. The daily F&O research with defined entry/exit is miles ahead of what I got at my previous broker.' },
+  {
+    icon: `<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 24l6-6 5 5 7-9 6-4"/><path d="M28 4v6h-6"/></svg>`,
+    title: 'Expert Research Calls',
+    body: 'Daily SEBI-registered market research and insights.',
+    cta: 'Start Learning',
+    href: '/research/',
+  },
+  {
+    icon: `<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="4,20 12,12 18,18 28,6"/><polyline points="22,6 28,6 28,12"/></svg>`,
+    title: 'Trade Indian Equities',
+    body: 'Access & execute seamless trades across the NSE and BSE.',
+    cta: 'Explore Market',
+    href: '/products/equity/',
+  },
+  {
+    icon: `<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="12" r="5"/><path d="M8 28c0-4.4 3.6-8 8-8s8 3.6 8 8"/><path d="M24 8l4-4M28 12l-4-4"/></svg>`,
+    title: "Today's Trading Ideas",
+    body: 'Learn proven techniques from seasoned traders.',
+    cta: 'Discover Trading Ideas',
+    href: '/research/technical/',
+  },
+  {
+    icon: `<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="10" r="6"/><path d="M4 28c0-6.627 5.373-12 12-12s12 5.373 12 12"/></svg>`,
+    title: 'Get Expert Advice',
+    body: 'Stay aware and informed with real-time market analysis.',
+    cta: 'Connect With An Advisor',
+    href: '/about/support/',
+  },
 ];
 
 const allProducts = [
-  { label: 'Equity',           href: '/products/equity/',           sub: 'Trade NSE & BSE stocks with zero delivery brokerage and expert in-house research.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="3,17 8,11 12,15 19,7"/><polyline points="15,7 19,7 19,11"/></svg>` },
-  { label: 'Derivative',       href: '/products/derivative/',       sub: 'Trade futures & options with live Greeks and flat ₹20 per executed order.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M7 17V7m0 0L4 10m3-3 3 3M17 7v10m0 0 3-3m-3 3-3-3"/></svg>` },
-  { label: 'Commodities',      href: '/products/commodities/',      sub: 'Trade gold, silver, crude oil, and agri commodities on MCX & NCDEX.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 3 21 8v8l-9 5-9-5V8z"/></svg>` },
-  { label: 'MTF',              href: '/products/mtf/',              sub: 'Margin Trading Facility — trade up to 4× your capital with smart leverage.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><ellipse cx="12" cy="7" rx="7" ry="2.5"/><path d="M5 7v5c0 1.4 3.1 2.5 7 2.5S19 13.4 19 12V7"/><path d="M5 12v3c0 1.4 3.1 2.5 7 2.5"/><path d="M17 18l2-2 2 2M19 16v4"/></svg>` },
-  { label: 'Currency',         href: '/products/currency/',         sub: 'Trade USD, EUR, GBP, JPY currency futures on NSE with deep liquidity.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="5"/><circle cx="16" cy="16" r="5"/><path d="M13 4l7 7"/></svg>` },
-  { label: 'Mutual Funds',     href: '/products/mutual-funds/',     sub: 'SIPs, lumpsum & direct funds — 1,500+ schemes from top-rated AMCs in minutes.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 3a9 9 0 0 1 9 9H12V3z"/><circle cx="12" cy="12" r="9"/></svg>` },
-  { label: 'NFO',              href: '/products/nfo/',              sub: 'Apply for New Fund Offers as they launch — stay ahead of the market.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 3v3M12 18v3M4.2 6.2l2 2M17.8 17.8l2 2M3 12h3M18 12h3M4.2 17.8l2-2M17.8 6.2l2-2"/></svg>` },
-  { label: 'Fixed Deposit',    href: '/products/fd/',               sub: 'Book FDs from trusted partners at competitive rates — fully digital and paperless.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 2 21 7v8l-9 5-9-5V7z"/></svg>` },
-  { label: 'ETF',              href: '/products/etf/',              sub: 'Low-cost index ETFs for diversified exposure to Nifty, Sensex, and global indices.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>` },
-  { label: 'Global Investing', href: '/products/global-investing/', sub: 'Invest in US stocks and global ETFs directly from India — in one account.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 4 9 14 14 0 0 1-4 9 14 14 0 0 1-4-9 14 14 0 0 1 4-9z"/></svg>` },
-  { label: 'IPO',              href: '/products/ipo/',              sub: 'Apply for upcoming IPOs digitally via ASBA — fast, paperless, and secure.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4.5 17.5c-1.5 1.2-1.5 4-1.5 4s2.8-.3 4-1.5a1.8 1.8 0 0 0-2.5-2.5z"/><path d="M12 15.5 10 13A19 19 0 0 1 11.5 10 11 11 0 0 1 20 3c0 2-.5 6.5-5.5 10a19 19 0 0 1-2.5 2.5z"/></svg>` },
-  { label: 'NPS',              href: '/products/nps/',              sub: 'National Pension System — disciplined retirement savings with tax benefits under 80C.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20 12A8 8 0 1 0 4 12h16Z"/><path d="M15 16a3 3 0 0 1-6 0v-4"/></svg>` },
-  { label: 'Bonds',            href: '/products/bonds/',            sub: 'Government and corporate bonds for stable, predictable fixed-income returns.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7 .5l3-3a5 5 0 0 0-7-7L11 5"/><path d="M14 11a5 5 0 0 0-7-.5l-3 3a5 5 0 0 0 7 7l1.5-1.5"/></svg>` },
+  {
+    label: 'Equities',
+    href: '/products/equity/',
+    sub: 'Trade in NSE & BSE Equity with zero delay and in-depth research support.',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="3,17 8,11 12,15 19,7"/><polyline points="15,7 19,7 19,11"/></svg>`,
+  },
+  {
+    label: 'Margin Trading Facility (MTF)',
+    href: '/products/mtf/',
+    sub: 'Trade with leverage and increase your buying power with flexible margin options.',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><ellipse cx="12" cy="7" rx="7" ry="2.5"/><path d="M5 7v5c0 1.4 3.1 2.5 7 2.5S19 13.4 19 12V7"/><path d="M5 12v3c0 1.4 3.1 2.5 7 2.5"/></svg>`,
+  },
+  {
+    label: 'Derivatives',
+    href: '/products/derivative/',
+    sub: 'Trade Futures & Options to hedge your portfolio or maximise returns.',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M7 17V7m0 0L4 10m3-3 3 3M17 7v10m0 0 3-3m-3 3-3-3"/></svg>`,
+  },
+  {
+    label: 'Mutual Funds',
+    href: '/products/mutual-funds/',
+    sub: 'Compare 3,000+ Funds across categories and invest in direct plans at zero commission.',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 3a9 9 0 0 1 9 9H12V3z"/><circle cx="12" cy="12" r="9"/></svg>`,
+  },
+  {
+    label: 'Loan Against Mutual Funds (LAMF)',
+    href: '/products/mtf/',
+    sub: 'Get instant loans against your mutual fund holdings at competitive interest rates.',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 2 21 7v8l-9 5-9-5V7z"/><path d="M9 12l2 2 4-4"/></svg>`,
+  },
+  {
+    label: 'Initial Public Offering (IPO)',
+    href: '/products/ipo/',
+    sub: 'Apply for upcoming IPOs seamlessly. Explore SME & Mainboard news.',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4.5 17.5c-1.5 1.2-1.5 4-1.5 4s2.8-.3 4-1.5a1.8 1.8 0 0 0-2.5-2.5z"/><path d="M12 15.5 10 13A19 19 0 0 1 11.5 10 11 11 0 0 1 20 3c0 2-.5 6.5-5.5 10a19 19 0 0 1-2.5 2.5z"/></svg>`,
+  },
+  {
+    label: 'Exchange Traded Funds (ETF)',
+    href: '/products/etf/',
+    sub: 'Diversify your portfolio with ETFs tracking indices, sectors, and commodities.',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>`,
+  },
+  {
+    label: 'National Pension Scheme (NPS)',
+    href: '/products/nps/',
+    sub: 'Tailored strategies for high net-worth investors by SEBI registered experts.',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20 12A8 8 0 1 0 4 12h16Z"/><path d="M15 16a3 3 0 0 1-6 0v-4"/></svg>`,
+  },
 ];
 
 const startSteps = [
-  { title: 'Basic Information',  desc: 'Enter your name, email, PAN and basic KYC details — takes less than 2 minutes.' },
-  { title: 'E-KYC / Aadhaar',   desc: 'Instant, paperless Aadhaar OTP verification. No physical document submission.' },
-  { title: 'Bank Linkage',       desc: 'Link your savings account for seamless fund additions and withdrawals.' },
-  { title: 'E-Signature',        desc: 'Sign your account opening agreement digitally — no courier, no branch visit.' },
-  { title: 'Start Investing',    desc: 'Your Antara account is live. Place your first trade or start a SIP immediately.' },
+  {
+    title: 'Basic Information',
+    desc: 'Name, mobile number, PAN — takes under two minutes.',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>`,
+  },
+  {
+    title: 'Complete eKYC via Aadhaar',
+    desc: 'OTP-based verification — no physical forms or branch visits.',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M9 7h6M9 11h6M9 15h4"/></svg>`,
+  },
+  {
+    title: 'Upload Documents',
+    desc: "Bank proof and a live photograph from your phone's camera.",
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>`,
+  },
+  {
+    title: 'Digital eSign',
+    desc: 'Aadhaar-based e-sign replaces physical signature on all forms.',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>`,
+  },
+  {
+    title: 'Account Activation',
+    desc: 'Credentials delivered to your registered email. Start investing.',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>`,
+  },
 ];
 
 const faqs = [
   {
-    q: 'How do I open a Demat & Trading account with Shriram?',
-    a: 'Opening is 100% digital and takes under 10 minutes. Enter your name, PAN, and mobile number → complete Aadhaar OTP e-KYC → link your bank account → e-sign your agreement digitally. Your Antara platform access is activated immediately after approval. No branch visit, no physical documents, no courier required.'
+    q: 'What is a Demat Account?',
+    a: 'A Demat (Dematerialised) account holds your shares, bonds, mutual funds, and ETFs in electronic form — eliminating physical certificates. It is mandatory for trading on Indian stock exchanges (NSE and BSE). With Shriram, opening a Demat account is 100% digital and takes under 10 minutes.',
   },
   {
-    q: 'What are the brokerage charges at Shriram Financial?',
-    a: 'Equity delivery trades: ₹0 (zero brokerage — you keep 100% of your returns). Intraday equity, F&O, and currency trades: flat ₹20 per executed order, regardless of trade size. Mutual fund investments: ₹0 commission. This transparent pricing means a ₹5,000 options trade and a ₹5 lakh options trade cost exactly the same ₹20.'
+    q: 'What are the benefits of a Demat Account?',
+    a: 'A Demat account eliminates risks associated with physical certificates (theft, forgery, damage). You get instant transfer of securities, easy monitoring of all holdings in one place, automatic credit of bonuses and splits, and seamless participation in IPOs, buybacks, and rights issues.',
   },
   {
-    q: 'Can I invest in Mutual Funds without a Demat account?',
-    a: 'Yes. Mutual fund investments through Shriram Financial Services (AMFI ARN: 29483) do not require a Demat account — a basic KYC is sufficient to start a SIP from ₹500/month. However, opening a Demat account lets you manage all your investments — equity, mutual funds, IPOs, bonds, and FDs — from a single Antara platform login.'
+    q: 'What are the brokerage charges for options trading with Shriram Securities?',
+    a: 'Brokerage charges for options trading are structured to be competitive and straightforward. Shriram Securities charges a flat fee of ₹20 per executed order for options trading. To further understand and calculate the total costs, including brokerage, taxes, and other fees, you can use the Brokerage Calculator. This tool helps you estimate the net profit or loss on your trades by accounting for all applicable charges.',
   },
   {
-    q: 'What makes Shriram\'s research different from free tips online?',
-    a: 'Our research is published by SEBI-registered analysts (Registration: INH200009624) — we are legally accountable for every recommendation. Free Telegram or YouTube tips are typically from unregistered, unaccountable sources often linked to pump-and-dump activity. Shriram research includes full fundamental analysis, DCF valuations, defined entry/exit/stop-loss levels, and post-result updates. We stake our SEBI license on every call we publish.'
+    q: 'Are there any charges associated with the Demat Account?',
+    a: 'Account opening and Annual Maintenance Charges (AMC) are ₹0 for both Trading and Demat Accounts. Standard SEBI and exchange-mandated statutory charges (STT, exchange transaction charges, GST, SEBI fees) apply to all trades as per regulations.',
   },
   {
-    q: 'What is Antara and how is it different from other trading apps?',
-    a: 'Antara is Shriram\'s proprietary wealth platform available on web and mobile. It integrates equity trading, mutual fund SIPs, IPO applications, bond investments, and FD bookings under one login. Key differentiators: live Level 2 market depth, full option chain with Greeks (Delta, Gamma, Theta, Vega), SEBI-registered research alerts pushed directly to your dashboard, and portfolio P&L with XIRR and tax computation reports.'
+    q: 'What is Intraday brokerage and Option brokerage?',
+    a: 'Intraday equity trades are charged at a flat ₹20 per executed order. Options trades are also charged at a flat ₹20 per executed order, regardless of the premium value or lot size. Equity delivery is ₹0 — no brokerage.',
   },
   {
-    q: 'Is my money and portfolio safe with Shriram Financial Services?',
-    a: 'Yes. Shriram Financial Services is SEBI-regulated as a stockbroker, research analyst, and MF distributor — a member of both NSE and BSE. Your shares are held in your own CDSL Demat account, not with Shriram. Your funds are held in SEBI-mandated client bank accounts, fully segregated from company funds. Shriram Securities has operated for 50+ years with a clean regulatory record.'
+    q: 'Can I have multiple Demat Accounts?',
+    a: 'Yes, SEBI permits investors to hold multiple Demat accounts across different depository participants (DPs). However, each account has its own AMC and charges. With Shriram, your Demat account is linked to your Trading account on the Antara platform for seamless management.',
   },
   {
     q: 'Is a Demat Account mandatory for applying for an IPO?',
-    a: 'Yes. SEBI mandates that all IPO applications — whether through UPI ASBA or net banking — require a valid Demat account for share allotment. If allotted, shares are credited directly to your Demat account within T+6 days of the IPO closing date. Without a Demat account, you cannot receive IPO allotments or trade shares on any Indian stock exchange.'
+    a: 'Yes. SEBI mandates that all IPO applications — whether through UPI ASBA or net banking — require a valid Demat account for share allotment. If allotted, shares are credited directly to your Demat account within T+6 days of the IPO closing date.',
   },
-];
-
-const partners = [
-  'SEBI Registered', 'NSE Member', 'BSE Member', 'MCX Member',
-  'NCDEX Member', 'CDSL DP', 'AMFI ARN 29483', 'PFRDA NPS POP',
 ];
 ---
 
@@ -154,27 +206,18 @@ const partners = [
     <div class="site-wrap relative z-10 flex items-start gap-8 py-14 sm:py-20 lg:py-24 xl:min-h-[calc(100vh-88px)] xl:items-center xl:gap-12 xl:py-0">
 
       <!-- Left text -->
-      <div class="w-full xl:max-w-[580px] xl:shrink-0 reveal reveal-1">
-        <!-- Goal pill -->
-        <div class="inline-flex items-center gap-2 rounded-full border border-[var(--color-brand)]/20 bg-[var(--color-brand-pale)] px-4 py-1.5">
-          <span class="h-1.5 w-1.5 rounded-full bg-[var(--color-brand)] animate-pulse"></span>
-          <span class="text-[12px] font-semibold text-[var(--color-brand)]">India's Most Trusted Wealth Platform</span>
-        </div>
-
-        <h1 class="mt-5 text-[24px] font-normal leading-[1.40] text-[var(--color-n900)] sm:text-[32px] lg:text-[52px]" style="font-family:var(--font-display)">
-          Invest with Clarity<br>
-          <span class="inline-block whitespace-nowrap">
-            <span class="font-bold text-[var(--color-brand)]">Invest for</span>{' '}
-            <span id="goal-text" class="font-bold text-[var(--color-brand)]">Retirement</span>
-          </span>
+      <div class="w-full xl:max-w-[560px] xl:shrink-0 reveal reveal-1">
+        <h1 class="text-[28px] font-normal leading-[1.30] text-[var(--color-n900)] sm:text-[36px] lg:text-[54px]" style="font-family:var(--font-display)">
+          Beyond Portfolios;<br>
+          <span class="font-bold text-[var(--color-brand)]">Advisory-Led</span> Wealth Curation
         </h1>
         <p class="mt-5 text-[15px] leading-relaxed text-[var(--color-n800)] lg:text-[17px]">
-          Expert advisory, SEBI-registered research, and a dedicated Relationship Manager — everything you need to grow wealth intelligently.
+          Don't just trade; grow your wealth with India's most trusted advisors.
         </p>
 
         <!-- Trust badges -->
         <div class="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1.5">
-          {['10 L+ Investors', 'SEBI Registered', '50+ Years of Trust'].map((t, i) => (
+          {['Trusted By 10L+ Investors', 'In-House Analyst Team', 'Pan-India Presence'].map((t, i) => (
             <div class="flex items-center gap-3">
               {i > 0 && <span class="trust-dot"></span>}
               <span class="text-[13px] font-medium text-[var(--color-n800)]">{t}</span>
@@ -182,37 +225,19 @@ const partners = [
           ))}
         </div>
 
-        <div class="mt-8 flex flex-wrap gap-3">
-          <a href="/about/open-demat-account/" class="btn-primary">Start Investing Today</a>
-          <a href="/about/antara-web-login/"
-             class="inline-flex h-12 items-center rounded border border-[var(--color-brand)] px-6 text-[14px] font-medium text-[var(--color-brand)] transition-colors hover:bg-[var(--color-brand-pale)]">
-            Explore Antara
-          </a>
-        </div>
-
-        <!-- Mini stats row -->
-        <div class="mt-10 flex flex-wrap gap-6">
-          {[
-            { val: '₹0', label: 'Delivery Brokerage' },
-            { val: '₹20', label: 'Flat F&O Brokerage' },
-            { val: '10 min', label: 'Account Opening' },
-          ].map(s => (
-            <div class="flex flex-col gap-0.5">
-              <span class="text-[18px] font-bold text-[var(--color-brand)] sm:text-[22px]" style="font-family:var(--font-display)">{s.val}</span>
-              <span class="text-[11px] text-[var(--color-muted)]">{s.label}</span>
-            </div>
-          ))}
+        <div class="mt-8">
+          <a href="/about/antara-web-login/" class="btn-primary">Explore Antara</a>
         </div>
       </div>
 
       <!-- Right: glassmorphism Open Demat card -->
       <div class="reveal reveal-2 hidden flex-1 justify-end xl:flex">
-        <div class="glass-form w-full max-w-[540px] rounded-xl p-10">
-          <h2 class="text-[30px] font-semibold text-[var(--color-n900)]" style="font-family:var(--font-display)">
-            Open a Free Demat Account
+        <div class="glass-form w-full max-w-[480px] rounded-xl p-10">
+          <h2 class="text-[28px] font-semibold text-[var(--color-n900)]" style="font-family:var(--font-display)">
+            Open a Demat Account
           </h2>
           <div class="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1.5">
-            {['100% Paperless', 'Within 10 Minutes', 'SEBI Regulated'].map((t, i) => (
+            {['100% Paperless', 'Open A/c Without Branch Visit', 'SEBI Regulated'].map((t, i) => (
               <div class="flex items-center gap-3">
                 {i > 0 && <span class="trust-dot" style="background:#999"></span>}
                 <span class="text-[12px] font-medium text-[var(--color-n700)]">{t}</span>
@@ -229,162 +254,36 @@ const partners = [
               </div>
             </div>
             <p class="mt-2.5 text-[11px] text-[var(--color-n700)]">
-              By continuing, I agree to receive OTP and account updates via SMS/WhatsApp.
+              By continuing, I agree to receive the OTP and updates via SMS/WhatsApp.
             </p>
           </div>
           <div class="mt-6 space-y-3">
             <a href="/about/open-demat-account/" class="btn-primary w-full justify-center text-[15px]">
-              Get Started — It's Free
+              Get Started
             </a>
             <p class="text-center text-[13px] text-[var(--color-n900)]">
-              Already a client?{' '}
-              <a href="/about/antara-web-login/" class="font-bold text-[var(--color-link)] hover:underline">Login to Antara</a>
+              Already a part of us?{' '}
+              <a href="/about/antara-web-login/" class="font-bold text-[var(--color-link)] hover:underline">Login Here</a>
             </p>
           </div>
-          <!-- Social proof -->
-          <div class="mt-8 flex items-center gap-3 rounded-lg bg-white/60 px-4 py-3">
-            <div class="flex -space-x-2">
-              {['#3B5', '#47B', '#B73', '#6A3'].map(c => (
-                <div class="h-7 w-7 rounded-full border-2 border-white" style={`background:${c}B`}></div>
-              ))}
-            </div>
-            <p class="text-[12px] text-[var(--color-n800)]">Join <strong>10 lakh+</strong> investors who trust Shriram</p>
-          </div>
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- ══ STATS BAR ══ -->
-  <section class="border-y border-[var(--color-n400)] bg-white">
-    <div class="site-wrap">
-      <div class="grid grid-cols-2 lg:grid-cols-4">
-        {stats.map((s, i) => (
-          <div class:list={['flex flex-col items-center gap-1.5 px-6 py-8 text-center reveal border-[var(--color-n400)]', i % 2 === 0 ? 'border-r lg:border-r-0' : '', i < 2 ? 'border-b lg:border-b-0' : '', i > 0 ? 'lg:border-l' : '']} style={`animation-delay:${i * 0.08}s`}>
-            <span class="text-[24px] font-bold text-[var(--color-brand)] sm:text-[28px] lg:text-[36px]" style="font-family:var(--font-display)">{s.val}</span>
-            <span class="text-[12px] font-medium text-[var(--color-muted)]">{s.label}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ INVEST FOR YOUR LIFE GOALS ══ -->
-  <section class="bg-[var(--color-n100)]">
-    <div class="site-wrap py-16 lg:py-20">
-      <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Goal-Based Investing</p>
-      <h2 class="mt-3 text-[22px] font-bold text-[var(--color-n900)] sm:text-[28px] lg:text-[38px]" style="font-family:var(--font-display)">
-        Every Goal Has a Plan
-      </h2>
-      <p class="mt-3 max-w-3xl text-[15px] text-[var(--color-muted)]">
-        Every rupee you invest should serve a purpose. Tell us your goal — we'll map the right products, timeline, and SIP amount to get you there.
-      </p>
-      <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {goals.map(g => (
-          <a href={g.href} class="product-card-light group flex flex-col gap-4 p-6 hover:border-[var(--color-brand)]/25">
-            <span class="grid h-12 w-12 place-items-center rounded-lg bg-[var(--color-brand-pale)] text-[var(--color-brand)] transition-colors group-hover:bg-[var(--color-brand)] group-hover:text-white">
-              <span class="h-6 w-6" set:html={g.icon}/>
-            </span>
-            <div class="flex-1">
-              <h3 class="text-[17px] font-semibold text-[var(--color-n900)]" style="font-family:var(--font-display)">{g.title}</h3>
-              <p class="mt-2 text-[13px] leading-relaxed text-[var(--color-muted)]">{g.body}</p>
-            </div>
-            <span class="flex items-center gap-1.5 text-[13px] font-semibold text-[var(--color-brand)] transition-transform group-hover:translate-x-1">
-              Start Planning
-              <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" class="h-3 w-3"><path d="M2 6h8M6 2l4 4-4 4"/></svg>
-            </span>
-          </a>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ PRODUCTS ══ -->
-  <section class="relative overflow-hidden bg-[var(--color-dark-900)]">
-    <div class="pointer-events-none absolute inset-0 opacity-[0.03]"
-         style="background-image:repeating-linear-gradient(-45deg,#fff 0,#fff 1px,transparent 0,transparent 50%);background-size:20px 20px;"></div>
+  <!-- ══ HOW ARE WE DIFFERENT? ══ -->
+  <section class="bg-[var(--color-dark-800)] relative overflow-hidden">
+    <div class="pointer-events-none absolute inset-0 opacity-[0.04]"
+         style="background-image:repeating-linear-gradient(-45deg,#fff 0,#fff 1px,transparent 0,transparent 50%);background-size:24px 24px;"></div>
     <div class="site-wrap relative py-16 lg:py-20">
-      <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <p class="text-[11px] font-bold uppercase tracking-widest text-[rgba(255,255,255,0.40)]">13 Products</p>
-          <h2 class="mt-2 text-[22px] font-bold leading-tight text-white sm:text-[28px] lg:text-[38px]" style="font-family:var(--font-display)">
-            Trade, Invest & Grow.<br class="hidden sm:block"> All At One Place.
-          </h2>
-          <p class="mt-2 text-[15px] text-[rgba(255,255,255,0.60)]">
-            One account. Every asset class. From equity delivery to global investing.
-          </p>
-        </div>
-        <a href="/products/" class="shrink-0 text-[13px] font-semibold text-[var(--color-brand-light)] hover:text-white">
-          View All Products →
-        </a>
-      </div>
-      <div class="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-        {allProducts.map(p => (
-          <a href={p.href}
-             class="group relative flex h-[284px] flex-col overflow-hidden rounded-[4px] bg-[var(--color-brand)] p-8 transition-transform hover:-translate-y-1">
-            <div class="pointer-events-none absolute -right-6 -top-6 h-24 w-24 rounded-full bg-white/10" aria-hidden="true"></div>
-            <span class="block h-12 w-12 shrink-0 text-white/80" set:html={p.icon}/>
-            <div class="mt-auto flex flex-col gap-3">
-              <h3 class="text-[16px] font-bold text-[#629bff]" style="font-family:var(--font-display)">{p.label}</h3>
-              <p class="text-[13px] leading-[1.5] text-white/80">{p.sub}</p>
-            </div>
-            <span class="absolute bottom-[-48px] left-0 flex h-12 w-full items-center justify-center gap-2 bg-[var(--color-brand-hover)] text-[12px] font-medium text-white transition-all duration-300 group-hover:bottom-0">
-              View More
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 shrink-0"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </span>
-          </a>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ STRATEGIC ADVISORY ══ -->
-  <section class="bg-white">
-    <div class="site-wrap py-16 lg:py-20">
-      <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Advisory Services</p>
-      <h2 class="mt-3 text-[22px] font-bold text-[var(--color-n900)] sm:text-[28px] lg:text-[38px]" style="font-family:var(--font-display)">
-        Expert Advisory for Every Investor
-      </h2>
-      <p class="mt-3 max-w-3xl text-[15px] text-[var(--color-muted)]">
-        From your first SIP to a managed equity portfolio, our Relationship Managers collaborate with you so every investment decision is backed by professional insight — not guesswork.
-      </p>
-      <div class="advisory-grid mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {advisoryCards.map(c => (
-          <div class="advisory-card group relative flex min-h-[322px] flex-col overflow-hidden rounded-[4px] bg-white px-6 py-10 shadow-[0px_4px_20.5px_-8px_rgba(0,0,0,0.1)]">
-            <span set:html={c.icon} class="h-[52px] w-[52px] shrink-0 block text-[var(--color-brand)]"/>
-            <div class="mt-8 flex flex-col gap-4">
-              <h3 class="text-[16px] font-bold uppercase tracking-[1.2px] text-[var(--color-n900)]">{c.title}</h3>
-              <p class="text-[14px] leading-[1.3] text-[var(--color-n800)]">{c.body}</p>
-            </div>
-            <a href={c.href}
-               class="absolute bottom-[-56px] left-0 flex h-14 w-full items-center justify-center gap-3 bg-[var(--color-brand)] text-[14px] font-medium text-white transition-all duration-300 group-hover:bottom-0">
-              {c.cta}
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 shrink-0"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-          </div>
-        ))}
-      </div>
-      <div class="mt-10 flex flex-col items-start justify-between gap-4 rounded-lg border border-[var(--color-brand-pale)] bg-[var(--color-brand-pale)] px-8 py-6 sm:flex-row sm:items-center">
-        <div>
-          <p class="text-[16px] font-semibold text-[var(--color-n900)]">Want to invest smarter with a dedicated advisor?</p>
-          <p class="mt-1 text-[13px] text-[var(--color-muted)]">Book a free 30-minute discovery call — available for all new clients, no obligation.</p>
-        </div>
-        <a href="/about/support/" class="btn-primary shrink-0">Schedule a Free Call</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ THE SHRIRAM ADVANTAGE ══ -->
-  <section class="bg-[var(--color-dark-800)]">
-    <div class="site-wrap py-16 lg:py-20">
       <div class="grid gap-12 lg:grid-cols-2 lg:gap-20">
-        <div class="border-gold-left self-start lg:sticky lg:top-28">
-          <h2 class="text-[24px] font-bold leading-tight text-white sm:text-[30px] lg:text-[42px]" style="font-family:var(--font-display)">
-            The Shriram Advantage
+        <div class="self-start lg:sticky lg:top-28">
+          <h2 class="text-[28px] font-bold leading-tight text-white sm:text-[34px] lg:text-[48px]" style="font-family:var(--font-display)">
+            How Are We <span class="text-[var(--color-brand-light)]">Different?</span>
           </h2>
-          <p class="mt-4 text-[15px] leading-relaxed text-[rgba(255,255,255,0.65)]">
-            We go beyond execution-only by fusing 50 years of trust, human-led advisory, SEBI-registered research, and technology that delivers better investing outcomes — building long-term wealth, not just portfolios.
+          <p class="mt-5 text-[15px] leading-relaxed text-[rgba(255,255,255,0.60)]">
+            We go beyond execution-only; by fusing together Historical Insights, Human Engagement and Tech that delivers better investing experiences to build long term customer relationships.
           </p>
         </div>
         <div class="space-y-0" id="differ-accord">
@@ -393,17 +292,17 @@ const partners = [
               <summary class="flex cursor-pointer select-none items-start justify-between gap-4 px-6 py-7">
                 <div class="flex-1">
                   <div class="flex items-baseline gap-3">
-                    <span class="text-[13px] font-bold text-[rgba(255,255,255,0.40)]">{item.num}</span>
-                    <h3 class="text-[20px] font-semibold text-white" style="font-family:var(--font-display)">{item.title}</h3>
+                    <span class="text-[13px] font-bold text-[rgba(255,255,255,0.35)]">{item.num}</span>
+                    <h3 class="text-[19px] font-semibold text-white" style="font-family:var(--font-display)">{item.title}</h3>
                   </div>
-                  <p class="mt-1 text-[13px] text-[rgba(255,255,255,0.50)]">{item.sub}</p>
+                  <p class="mt-1 pl-7 text-[13px] text-[rgba(255,255,255,0.45)]">{item.sub}</p>
                 </div>
                 <span class="mt-1 shrink-0 text-[rgba(255,255,255,0.40)] transition-transform group-open:rotate-90">
                   <svg viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4"><path d="M6 4l4 4-4 4V4z"/></svg>
                 </span>
               </summary>
               <div class="px-6 pb-7">
-                <ul class="space-y-2.5">
+                <ul class="space-y-2.5 pl-7">
                   {item.points.map(p => (
                     <li class="flex items-start gap-2.5 text-[14px] text-[rgba(255,255,255,0.65)]">
                       <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-gold)]"></span>
@@ -411,7 +310,7 @@ const partners = [
                     </li>
                   ))}
                 </ul>
-                <a href={item.href} class="mt-6 inline-flex items-center gap-2 rounded border border-[rgba(255,255,255,0.25)] px-5 py-2.5 text-[13px] font-medium text-white transition-colors hover:border-white hover:bg-white/10">
+                <a href={item.href} class="mt-6 inline-flex items-center gap-2 rounded border border-[rgba(255,255,255,0.25)] px-5 py-2.5 text-[13px] font-medium text-white transition-colors hover:border-white hover:bg-white/10 ml-7">
                   {item.cta}
                   <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" class="h-3 w-3"><path d="M2 6h8M6 2l4 4-4 4"/></svg>
                 </a>
@@ -423,84 +322,147 @@ const partners = [
     </div>
   </section>
 
-  <!-- ══ HOW SOON CAN I START? ══ -->
+  <!-- ══ STRATEGIC ADVISORY ══ -->
   <section class="bg-white">
     <div class="site-wrap py-16 lg:py-20">
-      <div class="grid gap-12 lg:grid-cols-2 lg:gap-16">
-        <div>
-          <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Account Opening</p>
-          <h2 class="mt-3 text-[22px] font-bold text-[var(--color-n900)] sm:text-[28px] lg:text-[38px]" style="font-family:var(--font-display)">
-            Start Investing in Under 10 Minutes
-          </h2>
-          <p class="mt-3 text-[15px] leading-relaxed text-[var(--color-muted)]">
-            100% digital, paperless onboarding. Our guided flow gets you from sign-up to first investment in minutes — no branch visit, no courier, no waiting period.
-          </p>
-          <a href="/about/open-demat-account/" class="btn-primary mt-8 inline-flex">Open Free Demat Account</a>
-          <div class="mt-10 grid grid-cols-3 divide-x divide-[var(--color-n400)] rounded-lg border border-[var(--color-n400)] bg-[var(--color-n100)]">
-            {[
-              { val: '₹0', label: 'Account Opening' },
-              { val: '₹0', label: 'Delivery Brokerage' },
-              { val: '₹20', label: 'Flat F&O Brokerage' },
-            ].map(s => (
-              <div class="flex flex-col items-center gap-1 px-4 py-5 text-center">
-                <span class="text-[24px] font-bold text-[var(--color-brand)]" style="font-family:var(--font-display)">{s.val}</span>
-                <span class="text-[11px] text-[var(--color-subtle)]">{s.label}</span>
-              </div>
-            ))}
+      <h2 class="text-[22px] font-bold text-[var(--color-n900)] sm:text-[28px] lg:text-[42px]" style="font-family:var(--font-display)">
+        Strategic Advisory For <span class="text-[var(--color-brand)]">Every Investor</span>
+      </h2>
+      <p class="mt-4 max-w-4xl text-[15px] text-[var(--color-muted)]">
+        From initial concepts to managed portfolios, our personal managers collaborate with you to ensure every transaction is backed by professional insight.
+      </p>
+
+      <div class="advisory-grid mt-10 grid gap-0 sm:grid-cols-2 lg:grid-cols-4 border border-[var(--color-n400)] rounded-[4px] overflow-hidden">
+        {advisoryCards.map((c, i) => (
+          <div class={`advisory-card group relative flex min-h-[322px] flex-col overflow-hidden bg-white px-6 py-10 ${i < 3 ? 'lg:border-r border-[var(--color-n400)]' : ''} ${i < 2 ? 'sm:border-b lg:border-b-0 border-[var(--color-n400)]' : ''}`}>
+            <span set:html={c.icon} class="h-[52px] w-[52px] shrink-0 block text-[var(--color-brand)]"/>
+            <div class="mt-8 flex flex-col gap-4">
+              <h3 class="text-[16px] font-bold uppercase tracking-[1.2px] text-[var(--color-n900)]">{c.title}</h3>
+              <p class="text-[14px] leading-[1.5] text-[var(--color-n800)]">{c.body}</p>
+            </div>
+            <a href={c.href}
+               class="absolute bottom-[-56px] left-0 flex h-14 w-full items-center justify-center gap-3 bg-[var(--color-brand)] text-[14px] font-medium text-white transition-all duration-300 group-hover:bottom-0">
+              {c.cta}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 shrink-0"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        ))}
+      </div>
+
+      <!-- Nudge CTA -->
+      <div class="mt-6 flex flex-col items-start justify-between gap-5 overflow-hidden rounded-[4px] border border-[var(--color-n400)] bg-[var(--color-n100)] px-8 py-6 sm:flex-row sm:items-center">
+        <div class="flex items-start gap-5">
+          <div class="hidden h-16 w-16 shrink-0 items-center justify-center rounded-full bg-[var(--color-brand-pale)] sm:flex">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="h-8 w-8 text-[var(--color-brand)]"><circle cx="16" cy="10" r="6"/><path d="M4 28c0-6.627 5.373-12 12-12s12 5.373 12 12"/><path d="M22 20l3 3 5-5"/></svg>
+          </div>
+          <div>
+            <p class="text-[16px] font-semibold text-[var(--color-n900)]">
+              Unsure on where to begin? <span class="text-[var(--color-brand)]">We've got you.</span>
+            </p>
+            <p class="mt-1 text-[13px] leading-relaxed text-[var(--color-muted)]">
+              Our dedicated specialists evaluate your initial concepts, followed by a personal manager who will collaborate with you to architect a comprehensive financial roadmap.
+            </p>
           </div>
         </div>
-        <div class="space-y-3">
-          {startSteps.map((s, i) => (
-            <div class="flex items-start gap-4 rounded-lg border border-[var(--color-n400)] bg-white px-5 py-4 shadow-[var(--shadow-card)]">
-              <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[var(--color-brand-pale)] text-[14px] font-bold text-[var(--color-brand)]">{i+1}</span>
-              <div>
-                <div class="text-[15px] font-semibold text-[var(--color-n900)]">{s.title}</div>
-                <div class="mt-0.5 text-[13px] text-[var(--color-muted)]">{s.desc}</div>
-              </div>
-            </div>
-          ))}
-        </div>
+        <a href="/about/support/" class="btn-primary shrink-0">Schedule a Call</a>
       </div>
     </div>
   </section>
 
-  <!-- ══ TESTIMONIALS ══ -->
+  <!-- ══ PRODUCTS ══ -->
+  <section class="relative overflow-hidden bg-[var(--color-dark-900)]">
+    <div class="pointer-events-none absolute inset-0 opacity-[0.03]"
+         style="background-image:repeating-linear-gradient(-45deg,#fff 0,#fff 1px,transparent 0,transparent 50%);background-size:20px 20px;"></div>
+    <div class="site-wrap relative py-16 lg:py-20">
+      <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <h2 class="text-[26px] font-bold leading-tight text-white sm:text-[32px] lg:text-[44px]" style="font-family:var(--font-display)">
+            Trade, Invest Or Lend.<br class="hidden sm:block"> <span class="text-[var(--color-brand-light)]">All At One Place.</span>
+          </h2>
+          <p class="mt-3 text-[15px] text-[rgba(255,255,255,0.55)]">
+            From personalized insights to instant transactions, everything you need is now in one place.
+          </p>
+        </div>
+        <a href="/products/" class="shrink-0 text-[13px] font-semibold text-[var(--color-brand-light)] hover:text-white">
+          View All Our Products →
+        </a>
+      </div>
+      <div class="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-4">
+        {allProducts.map(p => (
+          <a href={p.href}
+             class="group relative flex h-[284px] flex-col overflow-hidden rounded-[4px] bg-[var(--color-brand)] p-8 transition-transform hover:-translate-y-1">
+            <div class="pointer-events-none absolute -right-6 -top-6 h-24 w-24 rounded-full bg-white/10" aria-hidden="true"></div>
+            <span class="block h-12 w-12 shrink-0 text-white/80" set:html={p.icon}/>
+            <div class="mt-auto flex flex-col gap-2">
+              <h3 class="text-[15px] font-bold leading-snug text-[#629bff]" style="font-family:var(--font-display)">{p.label}</h3>
+              <p class="text-[12px] leading-[1.5] text-white/70">{p.sub}</p>
+            </div>
+            <span class="absolute bottom-[-48px] left-0 flex h-12 w-full items-center justify-center gap-2 bg-[var(--color-brand-hover)] text-[12px] font-medium text-white transition-all duration-300 group-hover:bottom-0">
+              View More
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 shrink-0"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ HOW SOON CAN I START? ══ -->
   <section class="bg-[var(--color-n100)]">
     <div class="site-wrap py-16 lg:py-20">
-      <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Client Stories</p>
-      <h2 class="mt-3 text-[22px] font-bold text-[var(--color-n900)] sm:text-[28px] lg:text-[38px]" style="font-family:var(--font-display)">
-        What Our Investors Say
-      </h2>
-      <p class="mt-3 max-w-2xl text-[15px] text-[var(--color-muted)]">
-        Over 10 lakh investors trust Shriram Financial Services with their wealth. Here's what some of them have to say.
-      </p>
-      <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {testimonials.map(t => (
-          <div class="product-card-light flex flex-col gap-5 p-7">
-            <!-- Stars -->
-            <div class="flex gap-0.5">
-              {Array(t.stars).fill(0).map(() => (
-                <svg viewBox="0 0 16 16" class="h-4 w-4 fill-[var(--color-gold)]"><path d="M8 1l1.8 3.6L14 5.3l-3 2.9.7 4.1L8 10.4l-3.7 1.9.7-4.1-3-2.9 4.2-.7z"/></svg>
-              ))}
+      <!-- Top: text left + illustration right -->
+      <div class="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-16">
+        <div class="lg:max-w-[480px]">
+          <h2 class="text-[26px] font-bold text-[var(--color-n900)] sm:text-[32px] lg:text-[44px]" style="font-family:var(--font-display)">
+            How Soon Can I <span class="text-[var(--color-brand)]">Start?</span>
+          </h2>
+          <p class="mt-4 text-[15px] leading-relaxed text-[var(--color-muted)]">
+            Within <strong class="text-[var(--color-n900)]">minutes</strong>. You can create a Trading Account swiftly in a five-stage online process that can be completed on any of your devices.
+          </p>
+          <a href="/about/open-demat-account/" class="btn-primary mt-8 inline-flex">Open a Demat Account</a>
+        </div>
+        <!-- Rocket illustration (CSS-drawn) -->
+        <div class="flex flex-1 items-center justify-center lg:justify-end">
+          <div class="relative flex h-48 w-64 items-end justify-center lg:h-64 lg:w-80">
+            <!-- Clouds -->
+            <div class="absolute bottom-0 left-0 right-0 flex justify-center gap-3">
+              <div class="h-10 w-24 rounded-full bg-[var(--color-n400)]/60"></div>
+              <div class="h-8 w-16 rounded-full bg-[var(--color-n400)]/40"></div>
+              <div class="h-10 w-20 rounded-full bg-[var(--color-n400)]/50"></div>
             </div>
-            <!-- Quote -->
-            <p class="flex-1 text-[14px] leading-relaxed text-[var(--color-muted)]">"{t.quote}"</p>
-            <!-- Attribution -->
-            <div class="flex items-center gap-3 border-t border-[var(--color-n400)] pt-5">
-              <div class="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[var(--color-brand)] text-[15px] font-bold text-white">
-                {t.name[0]}
+            <!-- Rocket body -->
+            <div class="relative mb-6 flex flex-col items-center">
+              <div class="h-20 w-10 rounded-t-full bg-[var(--color-brand)] flex items-start justify-center pt-3">
+                <div class="h-6 w-6 rounded-full bg-white/30"></div>
               </div>
-              <div>
-                <div class="text-[14px] font-semibold text-[var(--color-n900)]">{t.name}</div>
-                <div class="flex items-center gap-1.5 text-[12px] text-[var(--color-muted)]">
-                  <span>{t.city}</span>
-                  <span class="trust-dot"></span>
-                  <span class="text-[var(--color-brand)]">{t.tag}</span>
-                </div>
-              </div>
+              <div class="h-5 w-14 bg-[var(--color-brand)]/80 clip-trapezoid"></div>
+              <!-- Fins -->
+              <div class="absolute bottom-0 -left-3 h-5 w-4 rounded-b-sm bg-[var(--color-brand-hover)] skew-x-[-6deg]"></div>
+              <div class="absolute bottom-0 -right-3 h-5 w-4 rounded-b-sm bg-[var(--color-brand-hover)] skew-x-[6deg]"></div>
+              <!-- Flame -->
+              <div class="mt-0.5 h-6 w-4 rounded-b-full bg-gradient-to-b from-yellow-400 to-orange-500 opacity-90 animate-pulse"></div>
             </div>
           </div>
-        ))}
+        </div>
+      </div>
+
+      <!-- Bottom: 5 horizontal steps -->
+      <div class="mt-14 relative">
+        <!-- connecting line -->
+        <div class="absolute left-[10%] right-[10%] top-8 hidden h-px bg-[var(--color-n400)] lg:block" aria-hidden="true"></div>
+        <div class="grid grid-cols-1 gap-8 sm:grid-cols-3 lg:grid-cols-5">
+          {startSteps.map((s, i) => (
+            <div class="relative flex flex-col items-center gap-4 text-center">
+              <div class="relative z-10 grid h-16 w-16 place-items-center rounded-[8px] border-2 border-[var(--color-n400)] bg-white shadow-sm">
+                <span class="h-6 w-6 text-[var(--color-brand)]" set:html={s.icon}/>
+              </div>
+              <div>
+                <div class="text-[14px] font-bold text-[var(--color-n900)]">{s.title}</div>
+                <div class="mt-1 text-[12px] leading-relaxed text-[var(--color-muted)]">{s.desc}</div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   </section>
@@ -513,31 +475,30 @@ const partners = [
       <div class="grid gap-12 lg:grid-cols-2 lg:gap-20">
         <div>
           <p class="text-[11px] font-bold uppercase tracking-widest text-[rgba(255,255,255,0.40)]">Trading Platform</p>
-          <h2 class="mt-3 text-[26px] font-bold text-[var(--color-gold)] sm:text-[32px] lg:text-[44px]" style="font-family:var(--font-display)">Meet Antara.</h2>
+          <h2 class="mt-3 text-[34px] font-bold text-[var(--color-gold)] sm:text-[42px] lg:text-[56px]" style="font-family:var(--font-display)">Meet <span class="italic">Antara.</span></h2>
           <p class="mt-5 text-[15px] leading-relaxed text-[rgba(255,255,255,0.65)]">
-            Your complete wealth management platform — trade equities, invest in mutual funds, track your portfolio, apply for IPOs, and access SEBI-registered research. One login. Every product.
+            Our Mobile and Web Application; targeted on assisting you into the right turns of your investment management journey. We are built on a foundation to evolve as and when the market demands it.
           </p>
-          <!-- Feature list -->
-          <ul class="mt-8 space-y-3">
+          <!-- Pricing stats -->
+          <div class="mt-10 grid grid-cols-3 divide-x divide-[rgba(255,255,255,0.12)] rounded-lg border border-[rgba(255,255,255,0.12)] bg-white/5">
             {[
-              'Live Level 2 market depth & real-time streaming quotes',
-              'Option chain with live Greeks — Delta, Gamma, Theta, Vega',
-              '1,500+ mutual funds with one-click SIP & switch',
-              'Portfolio P&L, XIRR, and tax computation reports',
-              'SEBI-registered research alerts pushed to your dashboard',
-            ].map(f => (
-              <li class="flex items-start gap-2.5 text-[14px] text-[rgba(255,255,255,0.70)]">
-                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" class="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-gold)]"><path d="M2 8l4 4 8-8"/></svg>
-                {f}
-              </li>
+              { val: '₹0',   label: 'Account Opening Charges',   sub: 'For Trading and Demat Accounts' },
+              { val: '₹0',   label: 'Annual Maintenance Charges', sub: 'For Trading and Demat Accounts' },
+              { val: '0.5%', label: 'For Buy And Sell Transactions', sub: 'For Trading and Demat Accounts' },
+            ].map(s => (
+              <div class="flex flex-col gap-1 px-5 py-6 text-center">
+                <span class="text-[32px] font-bold text-white lg:text-[40px]" style="font-family:var(--font-display)">{s.val}</span>
+                <span class="text-[12px] font-semibold text-[rgba(255,255,255,0.70)]">{s.label}</span>
+                <span class="text-[11px] text-[rgba(255,255,255,0.35)]">{s.sub}</span>
+              </div>
             ))}
-          </ul>
+          </div>
           <div class="mt-8 flex flex-wrap gap-4">
             <a href="/about/antara-web-login/" class="btn-primary">Open Web App</a>
             <a href="/about/antara-web-login/" class="inline-flex h-12 items-center rounded border border-white/25 px-6 text-[14px] font-medium text-white transition-colors hover:bg-white/10">Download Mobile App</a>
           </div>
         </div>
-        <!-- App QR / download -->
+        <!-- QR code -->
         <div class="flex items-center justify-center lg:justify-end">
           <div class="rounded-xl border border-white/15 bg-white/5 p-8 text-center backdrop-blur-sm">
             <div class="grid h-48 w-48 place-items-center rounded-xl bg-white">
@@ -547,7 +508,7 @@ const partners = [
                 ))}
               </div>
             </div>
-            <p class="mt-4 text-[13px] font-medium text-white/70">Scan to Download Antara</p>
+            <p class="mt-4 text-[13px] font-medium text-white/70">Download Now on Android or iOS</p>
             <div class="mt-3 flex justify-center gap-2">
               <span class="rounded border border-white/20 px-3 py-1.5 text-[11px] font-medium text-white/60">App Store</span>
               <span class="rounded border border-white/20 px-3 py-1.5 text-[11px] font-medium text-white/60">Google Play</span>
@@ -558,58 +519,46 @@ const partners = [
     </div>
   </section>
 
-  <!-- ══ REGISTERED & TRUSTED BY ══ -->
-  <section class="border-y border-[var(--color-n400)] bg-white">
-    <div class="site-wrap py-10">
-      <p class="text-center text-[11px] font-bold uppercase tracking-widest text-[var(--color-subtle)]">Registered, Regulated & Recognised By</p>
-      <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
-        {partners.map(p => (
-          <span class="rounded-full border border-[var(--color-n400)] bg-[var(--color-n100)] px-5 py-2 text-[12px] font-semibold text-[var(--color-n800)]">
-            {p}
-          </span>
-        ))}
-      </div>
-      <p class="mt-5 text-center text-[11px] leading-relaxed text-[var(--color-subtle)]">
-        Investments in securities markets are subject to market risks. Read all related documents carefully before investing. Past performance is not indicative of future returns.
-      </p>
-    </div>
-  </section>
-
   <!-- ══ GENERAL QUESTIONS ══ -->
   <section class="bg-white">
     <div class="site-wrap py-16 lg:py-20">
-      <div class="grid gap-12 lg:grid-cols-[380px_1fr]">
+      <div class="grid gap-12 lg:grid-cols-[1fr_360px]">
+        <!-- FAQ list -->
         <div>
-          <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">FAQ</p>
-          <h2 class="mt-3 text-[22px] font-bold text-[var(--color-n900)] sm:text-[28px] lg:text-[36px]" style="font-family:var(--font-display)">Common Questions</h2>
-          <p class="mt-3 text-[14px] leading-relaxed text-[var(--color-muted)]">
-            Everything you need to know before opening your account. Can't find the answer you're looking for?
-          </p>
-          <div class="mt-8 rounded-lg bg-[var(--color-brand)] p-8 text-white">
-            <div class="grid h-14 w-14 place-items-center rounded-full bg-white/20 text-[28px]">💬</div>
-            <h3 class="mt-5 text-[20px] font-semibold" style="font-family:var(--font-display)">Talk to an Advisor</h3>
-            <p class="mt-2 text-[13px] leading-relaxed text-white/80">
-              Book a free 30-minute discovery call. We'll understand your goals and show you exactly how to get started.
-            </p>
-            <a href="/about/support/" class="mt-6 inline-flex items-center gap-2 rounded border border-white/30 bg-white/10 px-5 py-2.5 text-[13px] font-medium text-white transition-colors hover:bg-white/20">
-              Schedule a Call →
-            </a>
+          <h2 class="text-[22px] font-bold text-[var(--color-n900)] sm:text-[28px] lg:text-[38px]" style="font-family:var(--font-display)">
+            General <span class="text-[var(--color-brand)]">Questions</span>
+          </h2>
+          <div class="mt-8 divide-y divide-[var(--color-n400)] rounded-lg border border-[var(--color-n400)]">
+            {faqs.map((item) => (
+              <details class="faq-row group">
+                <summary class="flex items-center justify-between gap-4 px-6 py-5">
+                  <span class="text-[15px] font-medium text-[var(--color-n900)]">{item.q}</span>
+                  <span class="grid h-6 w-6 shrink-0 place-items-center rounded-full border border-[var(--color-n400)] text-[var(--color-n700)] transition-transform group-open:rotate-45">
+                    <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" class="h-3 w-3"><path d="M6 2v8M2 6h8"/></svg>
+                  </span>
+                </summary>
+                <div class="border-t border-[var(--color-n400)] bg-[var(--color-n100)] px-6 py-4">
+                  <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">{item.a}</p>
+                </div>
+              </details>
+            ))}
           </div>
         </div>
-        <div class="divide-y divide-[var(--color-n400)] rounded-lg border border-[var(--color-n400)]">
-          {faqs.map((item) => (
-            <details class="faq-row group">
-              <summary class="flex items-center justify-between gap-4 px-6 py-5">
-                <span class="text-[15px] font-medium text-[var(--color-n900)]">{item.q}</span>
-                <span class="grid h-6 w-6 shrink-0 place-items-center rounded-full border border-[var(--color-n400)] text-[var(--color-n700)] transition-transform group-open:rotate-45">
-                  <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" class="h-3 w-3"><path d="M6 2v8M2 6h8"/></svg>
-                </span>
-              </summary>
-              <div class="border-t border-[var(--color-n400)] bg-[var(--color-n100)] px-6 py-4">
-                <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">{item.a}</p>
-              </div>
-            </details>
-          ))}
+
+        <!-- Blue CTA card -->
+        <div class="flex flex-col justify-between">
+          <div class="rounded-xl bg-[var(--color-brand)] p-8 text-white">
+            <div class="grid h-20 w-20 place-items-center rounded-full bg-white/15 mx-auto">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="h-12 w-12 text-white/80"><circle cx="24" cy="16" r="9"/><path d="M6 42c0-9.94 8.06-18 18-18s18 8.06 18 18"/></svg>
+            </div>
+            <h3 class="mt-6 text-[22px] font-bold text-center" style="font-family:var(--font-display)">Need A Clearer Direction?</h3>
+            <p class="mt-3 text-[13px] leading-relaxed text-white/80 text-center">
+              Let's get in touch on a 15-minute call where we would be able to answer any questions you may have. Our Advisor will additionally help map your wealth mix and demonstrate what a dedicated advisor would do differently.
+            </p>
+            <a href="/about/support/" class="mt-6 flex items-center justify-center rounded border border-white/30 bg-white px-6 py-3 text-[14px] font-semibold text-[var(--color-brand)] transition-colors hover:bg-white/90">
+              Book A Discovery Call
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -618,7 +567,7 @@ const partners = [
 </BaseLayout>
 
 <script>
-  /* Fade in hero video + seamless manual loop (avoids browser's native loop rebuffer gap) */
+  /* Fade in hero video */
   const heroVideo = document.getElementById('hero-video') as HTMLVideoElement | null;
   const heroWave  = document.querySelector('.hero-wave') as HTMLElement | null;
   if (heroVideo) {
@@ -635,47 +584,7 @@ const partners = [
         heroVideo.currentTime = 0;
       }
     });
-
-    heroVideo.addEventListener('ended', () => {
-      heroVideo.currentTime = 0;
-      heroVideo.play();
-    });
-  }
-
-  /* Cycling goal text — Groww-style float-up animation */
-  const goals = ['Retirement', 'Children', 'Home Purchase', 'Tax Savings', 'Wealth Building', 'Your Family'];
-  let gi = 0;
-  const gt = document.getElementById('goal-text') as HTMLElement | null;
-  if (gt) {
-    gt.style.display = 'inline-block';
-    gt.style.opacity = '1';
-    gt.style.transform = 'translateY(0)';
-
-    const cycle = () => {
-      // Float current word up and fade out
-      gt.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
-      gt.style.opacity = '0';
-      gt.style.transform = 'translateY(-20px)';
-
-      setTimeout(() => {
-        // Swap word and snap to below (invisible)
-        gi = (gi + 1) % goals.length;
-        gt.textContent = goals[gi];
-        gt.style.transition = 'none';
-        gt.style.opacity = '0';
-        gt.style.transform = 'translateY(20px)';
-
-        // Trigger reflow so the snap registers before animating in
-        void gt.offsetHeight;
-
-        // Float new word up into place and fade in
-        gt.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
-        gt.style.opacity = '1';
-        gt.style.transform = 'translateY(0)';
-      }, 380);
-    };
-
-    setInterval(cycle, 3200);
+    heroVideo.addEventListener('ended', () => { heroVideo.currentTime = 0; heroVideo.play(); });
   }
 
   /* Accordion — one open at a time */
