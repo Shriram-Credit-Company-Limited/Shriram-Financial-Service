@@ -136,13 +136,13 @@ h1, h2, h3, h4, h5, .font-display {
   background-color: var(--color-dark-900);
 }
 
-/* ── Glassmorphism form card (hero right) — Figma exact ── */
+/* ── Glassmorphism form card (hero right) — silver/grey frosted glass ── */
 .glass-form {
-  background: linear-gradient(194.97deg, rgba(14, 91, 203, 0.30) 126.01%, rgba(255, 255, 255, 0.30) 29.60%);
-  backdrop-filter: blur(22px);
-  -webkit-backdrop-filter: blur(22px);
-  border: 1px solid rgba(255, 255, 255, 1);
-  box-shadow: 8px 5px 34.8px 0px rgba(0, 0, 0, 0.05);
+  background: rgba(242, 243, 246, 0.78);
+  backdrop-filter: blur(32px) saturate(1.4);
+  -webkit-backdrop-filter: blur(32px) saturate(1.4);
+  border: 1px solid rgba(255, 255, 255, 0.90);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 1);
 }
 
 /* ── Primary button (Figma exact) ── */
