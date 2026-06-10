@@ -50,28 +50,28 @@ const differItems = [
 
 const advisoryCards = [
   {
-    img: '/advisory/research-calls.png',
+    img: '/advisory/icon-1.png',
     title: 'Expert Research Calls',
     body: 'Daily SEBI-registered market research and insights.',
     cta: 'Start Learning',
     href: '/research/',
   },
   {
-    img: '/advisory/trade-equities.png',
+    img: '/advisory/icon-2.png',
     title: 'Trade Indian Equities',
     body: 'Access & execute seamless trades across the NSE and BSE.',
     cta: 'Explore Market',
     href: '/products/equity/',
   },
   {
-    img: '/advisory/trading-ideas.png',
+    img: '/advisory/icon-3.png',
     title: "Today's Trading Ideas",
     body: 'Learn proven techniques from seasoned traders.',
     cta: 'Discover Trading Ideas',
     href: '/research/technical/',
   },
   {
-    img: '/advisory/expert-advice.png',
+    img: '/advisory/icon-4.png',
     title: 'Get Expert Advice',
     body: 'Stay aware and informed with real-time market analysis.',
     cta: 'Connect With An Advisor',
@@ -337,18 +337,18 @@ const faqs = [
         From initial concepts to managed portfolios, our personal managers collaborate with you to ensure every transaction is backed by professional insight.
       </p>
 
-      <div class="advisory-grid mt-10 grid gap-0 sm:grid-cols-2 lg:grid-cols-4 border border-[var(--color-n400)] rounded-[4px] overflow-hidden">
-        {advisoryCards.map((c, i) => (
-          <div class={`advisory-card group relative flex min-h-[322px] flex-col overflow-hidden bg-white px-6 py-10 ${i < 3 ? 'lg:border-r border-[var(--color-n400)]' : ''} ${i < 2 ? 'sm:border-b lg:border-b-0 border-[var(--color-n400)]' : ''}`}>
+      <div class="advisory-grid mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {advisoryCards.map((c) => (
+          <div class="advisory-card group relative flex h-[322px] flex-col overflow-hidden rounded-[4px] bg-white px-6 py-10 shadow-[0px_4px_20.5px_-8px_rgba(0,0,0,0.1)]">
             <img src={c.img} alt="" class="h-[80px] w-[100px] shrink-0 object-contain object-left" />
-            <div class="mt-8 flex flex-col gap-4">
+            <div class="mt-8 flex flex-col gap-3">
               <h3 class="text-[16px] font-bold uppercase tracking-[1.2px] text-[var(--color-n900)]">{c.title}</h3>
               <p class="text-[14px] leading-[1.5] text-[var(--color-n800)]">{c.body}</p>
             </div>
             <a href={c.href}
                class="absolute bottom-[-56px] left-0 flex h-14 w-full items-center justify-center gap-3 bg-[var(--color-brand)] text-[14px] font-medium text-white transition-all duration-300 group-hover:bottom-0">
               {c.cta}
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 shrink-0"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              <img src="/advisory/advisory-icon.svg" alt="" class="h-4 w-4 shrink-0 brightness-0 invert" />
             </a>
           </div>
         ))}
@@ -359,7 +359,7 @@ const faqs = [
         <!-- Figma illustration — clip to show only the left character/icon area -->
         <div class="relative hidden h-[170px] w-[220px] shrink-0 overflow-hidden sm:block">
           <img src="/advisory/nudge-illustration.png" alt=""
-               style="position:absolute;left:0;top:50%;transform:translateY(-50%);height:326px;width:auto;max-width:none;" />
+               style="position:absolute;left:0;top:50%;transform:translateY(-50%);height:326px;width:auto;max-width:none;mix-blend-mode:multiply;" />
         </div>
         <div class="flex flex-1 items-center justify-between gap-6 px-8 py-6">
           <div>
