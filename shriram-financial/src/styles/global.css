@@ -138,11 +138,11 @@ h1, h2, h3, h4, h5, .font-display {
 
 /* ── Glassmorphism form card (hero right) ── */
 .glass-form {
-  background: linear-gradient(194.97deg, rgba(14, 91, 203, 0.28) 0%, rgba(255,255,255,0.28) 100%);
-  backdrop-filter: blur(22px);
-  -webkit-backdrop-filter: blur(22px);
-  border: 1px solid rgba(255,255,255,0.90);
-  box-shadow: var(--shadow-form);
+  background: rgba(255, 255, 255, 0.70);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid rgba(255, 255, 255, 0.88);
+  box-shadow: 0 8px 40px 0 rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.95);
 }
 
 /* ── Primary button (Figma exact) ── */
