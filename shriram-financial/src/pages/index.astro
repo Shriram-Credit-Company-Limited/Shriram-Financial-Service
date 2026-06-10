@@ -396,11 +396,13 @@ const faqs = [
         {allProducts.map(p => (
           <a href={p.href}
              class="group relative flex h-[284px] flex-col overflow-hidden rounded-[4px] border border-white/10 bg-[var(--color-dark-800)] p-7 transition-all duration-300 hover:z-10 hover:-translate-y-1 hover:scale-[1.04] hover:border-[var(--color-brand)] hover:bg-[var(--color-brand)]">
-            <!-- Yellow arrow circle — scales in on hover -->
-            <div class="absolute right-5 top-5 flex h-[52px] w-[52px] scale-0 items-center justify-center rounded-full bg-[#FFD600] transition-transform duration-300 ease-out group-hover:scale-100">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5">
-                <path d="M7 17L17 7M17 7H7M17 7v10"/>
-              </svg>
+            <!-- Yellow overlay: full box on hover entry → shrinks to circle -->
+            <div class="product-card-overlay pointer-events-none absolute inset-0 bg-[#FFD600]">
+              <div class="absolute right-5 top-5 flex h-[52px] w-[52px] items-center justify-center">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5">
+                  <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                </svg>
+              </div>
             </div>
             <span class="block h-11 w-11 shrink-0 text-white/60 transition-colors duration-300 group-hover:text-white/90" set:html={p.icon}/>
             <div class="mt-auto flex flex-col gap-2">
