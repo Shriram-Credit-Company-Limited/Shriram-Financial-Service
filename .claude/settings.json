@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "cd \"C:/Users/kiddo/Downloads/shriram-financial\" && git add . && (git diff --staged --quiet || (git commit -m \"Auto: $(date '+%Y-%m-%d %H:%M:%S')\" && git push origin main))",
+            "command": "cd \"/home/user/Shriram-Financial-Service\" && git add . && (git diff --staged --quiet || (git commit -m \"Auto: $(date '+%Y-%m-%d %H:%M:%S')\" && git push origin main))",
             "shell": "bash",
             "timeout": 60,
             "statusMessage": "Saving and pushing changes to GitHub..."
