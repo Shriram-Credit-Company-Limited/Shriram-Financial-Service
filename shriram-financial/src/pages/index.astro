@@ -139,11 +139,11 @@ const faqs = [
 
       <!-- Left text -->
       <div class="w-full xl:max-w-[560px] xl:shrink-0 reveal reveal-1">
-        <h1 class="text-[28px] font-normal leading-[1.30] text-[var(--color-n900)] sm:text-[36px] lg:text-[54px]" style="font-family:var(--font-display)">
+        <h1 class="text-[28px] font-normal leading-[1.30] text-[#2e3914] sm:text-[36px] lg:text-[54px]" style="font-family:var(--font-display)">
           Beyond Portfolios;<br>
           <span class="font-bold text-[var(--color-brand)]">Advisory-Led</span> Wealth Curation
         </h1>
-        <p class="mt-5 text-[15px] leading-relaxed text-[var(--color-n800)] lg:text-[17px]">
+        <p class="mt-5 text-[15px] leading-relaxed text-[#2e3914] lg:text-[17px]">
           Don't just trade; grow your wealth with India's most trusted advisory.
         </p>
 
@@ -152,30 +152,30 @@ const faqs = [
           {['Trusted By 10L+ Investors', 'In-House Analyst Team', 'Pan-India Presence'].map((t, i) => (
             <div class="flex items-center gap-3">
               {i > 0 && <span class="trust-dot"></span>}
-              <span class="text-[14px] font-medium text-[var(--color-n900)]">{t}</span>
+              <span class="text-[14px] font-medium text-[#2e3914]">{t}</span>
             </div>
           ))}
         </div>
 
         <div class="mt-8">
-          <a href="/about/antara-web-login/" class="btn-primary" style="width:220px">Explore Antara</a>
+          <a href="/about/antara-web-login/" class="inline-flex items-center justify-center gap-1.5 h-[48px] px-6 rounded-[4px] bg-[#2e3914] text-white text-[14px] font-medium hover:bg-[#1a2010] transition-colors" style="width:220px">Explore Antara</a>
         </div>
       </div>
 
-      <!-- Right: glassmorphism Open Demat card -->
+      <!-- Right: warm-cream Open Demat card -->
       <div class="reveal reveal-2 hidden flex-1 justify-end xl:flex">
-        <div class="glass-form w-full max-w-[520px] rounded-[4px] p-[56px]">
+        <div class="warm-form w-full max-w-[520px] p-[56px]">
 
           <!-- Title + badges (gap-[16px] per Figma) -->
           <div class="flex flex-col gap-4">
-            <h2 class="text-[32px] font-medium leading-tight text-[var(--color-n900)]">
+            <h2 class="text-[32px] font-medium leading-tight text-[#4f583b]">
               Open a Demat Account
             </h2>
             <div class="flex flex-wrap items-center gap-x-3 gap-y-1.5">
               {['100% Paperless', 'Open Within Minutes', 'SEBI Regulated'].map((t, i) => (
                 <div class="flex items-center gap-3">
-                  {i > 0 && <span class="trust-dot" style="background:#ccc"></span>}
-                  <span class="text-[12px] font-medium text-[var(--color-n800)]">{t}</span>
+                  {i > 0 && <span class="trust-dot"></span>}
+                  <span class="text-[12px] font-medium text-[#4f583b]">{t}</span>
                 </div>
               ))}
             </div>
@@ -220,50 +220,52 @@ const faqs = [
   </section>
 
   <!-- ══ HOW ARE WE DIFFERENT? ══ -->
-  <section class="bg-[var(--color-dark-800)] relative overflow-hidden">
-    <div class="pointer-events-none absolute inset-0 opacity-[0.04]"
-         style="background-image:repeating-linear-gradient(-45deg,#fff 0,#fff 1px,transparent 0,transparent 50%);background-size:24px 24px;"></div>
-    <div class="site-wrap relative py-16 lg:py-20">
-      <div class="grid gap-12 lg:grid-cols-2 lg:gap-20">
-        <div class="self-start lg:sticky lg:top-28">
-          <h2 class="text-[28px] font-bold leading-tight text-white sm:text-[34px] lg:text-[48px]" style="font-family:var(--font-display)">
-            How Are We <span class="text-[var(--color-brand-light)]">Different?</span>
-          </h2>
-          <p class="mt-5 text-[15px] leading-relaxed text-[rgba(255,255,255,0.60)]">
-            We go beyond execution-only; by fusing together Historical Insights, Human Engagement and Tech that delivers better investing experiences to build long term customer relationships.
-          </p>
-        </div>
-        <div class="space-y-0" id="differ-accord">
-          {differItems.map((item, i) => (
-            <details class="accord-item group" open={i === 0}>
-              <summary class="flex cursor-pointer select-none items-start justify-between gap-4 px-6 py-7">
-                <div class="flex-1">
-                  <div class="flex items-baseline gap-3">
-                    <span class="text-[13px] font-bold text-[rgba(255,255,255,0.35)]">{item.num}</span>
-                    <h3 class="text-[19px] font-semibold text-white" style="font-family:var(--font-display)">{item.title}</h3>
-                  </div>
-                  <p class="mt-1 pl-7 text-[13px] text-[rgba(255,255,255,0.45)]">{item.sub}</p>
+  <section class="bg-white py-8">
+    <div class="site-wrap">
+      <div class="relative overflow-hidden rounded-[24px]" style="background:radial-gradient(ellipse at 40% 50%,#4F583B 0%,#363A2C 45%,#1d1d1d 100%);">
+        <!-- subtle warm grid texture -->
+        <div class="pointer-events-none absolute inset-0 opacity-[0.04]"
+             style="background-image:repeating-linear-gradient(0deg,#e8d090 0,#e8d090 1px,transparent 0,transparent 20px),repeating-linear-gradient(90deg,#e8d090 0,#e8d090 1px,transparent 0,transparent 20px);background-size:20px 20px;"></div>
+
+        <div class="relative z-10 flex flex-col gap-10 p-8 lg:grid lg:grid-cols-[45%_55%] lg:gap-12 lg:p-14">
+
+          <!-- Left: heading + subtitle -->
+          <div class="self-center">
+            <h2 class="text-[28px] font-bold leading-tight text-white sm:text-[34px] lg:text-[48px]" style="font-family:var(--font-display)">
+              How Are We <span class="text-[#f3b83f]">Different?</span>
+            </h2>
+            <p class="mt-5 text-[15px] leading-relaxed text-[rgba(248,244,232,0.70)]">
+              We go beyond execution-only; by fusing together Historical Insights, Human Engagement and Tech that delivers better investing experiences to build long term customer relationships.
+            </p>
+          </div>
+
+          <!-- Right: scrollable glassmorphism card panel -->
+          <div class="flex max-h-[440px] flex-col gap-4 overflow-y-auto pr-2"
+               style="scrollbar-width:thin;scrollbar-color:rgba(243,184,63,0.4) transparent;">
+            {differItems.map((item) => (
+              <div class="rounded-[12px] border-b-2 border-[#f3b83f] p-6"
+                   style="background:rgba(116,116,116,0.12);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);">
+                <div class="flex items-baseline gap-3">
+                  <span class="text-[13px] font-bold text-[rgba(243,184,63,0.60)]">{item.num}</span>
+                  <h3 class="text-[19px] font-semibold text-[#f8f4e8]" style="font-family:var(--font-display)">{item.title}</h3>
                 </div>
-                <span class="mt-1 shrink-0 text-[rgba(255,255,255,0.40)] transition-transform group-open:rotate-90">
-                  <svg viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4"><path d="M6 4l4 4-4 4V4z"/></svg>
-                </span>
-              </summary>
-              <div class="px-6 pb-7">
-                <ul class="space-y-2.5 pl-7">
+                <p class="mt-1.5 pl-7 text-[13px] text-[rgba(248,244,232,0.60)]">{item.sub}</p>
+                <ul class="mt-4 space-y-2 pl-7">
                   {item.points.map(p => (
-                    <li class="flex items-start gap-2.5 text-[14px] text-[rgba(255,255,255,0.65)]">
-                      <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-gold)]"></span>
+                    <li class="flex items-start gap-2.5 text-[14px] text-[rgba(248,244,232,0.70)]">
+                      <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#f3b83f]"></span>
                       {p}
                     </li>
                   ))}
                 </ul>
-                <a href={item.href} class="mt-6 inline-flex items-center gap-2 rounded border border-[rgba(255,255,255,0.25)] px-5 py-2.5 text-[13px] font-medium text-white transition-colors hover:border-white hover:bg-white/10 ml-7">
+                <a href={item.href} class="mt-5 ml-7 inline-flex items-center gap-2 rounded border border-[rgba(243,184,63,0.35)] px-5 py-2.5 text-[13px] font-medium text-[#f8f4e8] transition-colors hover:border-[#f3b83f] hover:bg-[rgba(243,184,63,0.10)]">
                   {item.cta}
                   <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" class="h-3 w-3"><path d="M2 6h8M6 2l4 4-4 4"/></svg>
                 </a>
               </div>
-            </details>
-          ))}
+            ))}
+          </div>
+
         </div>
       </div>
     </div>
@@ -288,9 +290,9 @@ const faqs = [
               <p class="text-[14px] leading-[1.5] text-[var(--color-n800)]">{c.body}</p>
             </div>
             <a href={c.href}
-               class="absolute bottom-[-56px] left-0 flex h-14 w-full items-center justify-center gap-3 bg-[var(--color-brand)] text-[14px] font-medium text-white transition-all duration-300 group-hover:bottom-0">
+               class="absolute bottom-[-56px] left-0 flex h-14 w-full items-center justify-center gap-3 bg-[var(--color-brand)] text-[14px] font-medium text-[#202318] transition-all duration-300 group-hover:bottom-0">
               {c.cta}
-              <img src="/advisory/advisory-icon.svg" alt="" class="h-4 w-4 shrink-0 brightness-0 invert" />
+              <img src="/advisory/advisory-icon.svg" alt="" class="h-4 w-4 shrink-0 brightness-0" />
             </a>
           </div>
         ))}
@@ -325,7 +327,7 @@ const faqs = [
       <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <h2 class="text-[26px] font-bold leading-tight text-white sm:text-[32px] lg:text-[44px]" style="font-family:var(--font-display)">
-            Trade, Invest Or Lend. <span class="text-[#FFD600]">All At One Place.</span>
+            Trade, Invest Or Lend. <span class="text-[#f3b83f]">All At One Place.</span>
           </h2>
           <p class="mt-3 text-[15px] text-[rgba(255,255,255,0.55)]">
             From personalized insights to instant transactions, everything you need is now in one place.
@@ -339,8 +341,8 @@ const faqs = [
         {allProducts.map(p => (
           <a href={p.href}
              class="group relative flex h-[284px] flex-col overflow-hidden rounded-[4px] border border-white/10 bg-[var(--color-dark-800)] p-7 transition-all duration-300 hover:z-10 hover:-translate-y-1 hover:scale-[1.04] hover:border-[var(--color-brand)] hover:bg-[var(--color-brand)]">
-            <!-- Yellow overlay: full box on hover entry → shrinks to circle -->
-            <div class="product-card-overlay pointer-events-none absolute inset-0 bg-[#FFD600]">
+            <!-- Citrus overlay: full box on hover entry → shrinks to circle -->
+            <div class="product-card-overlay pointer-events-none absolute inset-0 bg-[#f3b83f]">
               <div class="absolute right-5 top-5 flex h-[52px] w-[52px] items-center justify-center">
                 <svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5">
                   <path d="M7 17L17 7M17 7H7M17 7v10"/>
@@ -349,10 +351,10 @@ const faqs = [
             </div>
             <img src={p.img} alt="" class="h-[44px] w-[44px] shrink-0 object-contain opacity-70 transition-opacity duration-300 group-hover:opacity-90" />
             <div class="mt-auto flex flex-col gap-2">
-              <h3 class="text-[15px] font-bold leading-snug text-[#629bff] transition-colors duration-300 group-hover:text-white" style="font-family:var(--font-display)">{p.label}</h3>
-              <p class="text-[12px] leading-[1.6] text-white/55 transition-colors duration-300 group-hover:text-white/80">{p.sub}</p>
+              <h3 class="text-[15px] font-bold leading-snug text-[#f3b83f] transition-colors duration-300 group-hover:text-[#202318]" style="font-family:var(--font-display)">{p.label}</h3>
+              <p class="text-[12px] leading-[1.6] text-white/55 transition-colors duration-300 group-hover:text-[#202318]/70">{p.sub}</p>
             </div>
-            <span class="mt-4 text-[12px] font-medium text-transparent transition-colors duration-300 group-hover:text-white/70">View More</span>
+            <span class="mt-4 text-[12px] font-medium text-transparent transition-colors duration-300 group-hover:text-[#202318]/60">View More</span>
           </a>
         ))}
       </div>
@@ -377,7 +379,7 @@ const faqs = [
             </p>
           </div>
           <a href="/about/open-demat-account/"
-             class="flex h-[40px] w-[220px] items-center justify-center rounded-[4px] bg-[var(--color-brand)] text-[12px] font-medium text-white transition-colors hover:bg-[var(--color-brand-hover)]">
+             class="flex h-[40px] w-[220px] items-center justify-center rounded-[4px] bg-[var(--color-brand)] text-[12px] font-medium text-[#202318] transition-colors hover:bg-[var(--color-brand-hover)]">
             Open a Demat Account
           </a>
         </div>
@@ -418,9 +420,9 @@ const faqs = [
   </section>
 
   <!-- ══ MEET ANTARA ══ -->
-  <section class="relative overflow-hidden bg-[var(--color-dark-800)]">
-    <div class="pointer-events-none absolute -left-48 -top-48 h-[500px] w-[500px] rounded-full bg-[var(--color-brand)]/15 blur-3xl"></div>
-    <div class="pointer-events-none absolute -bottom-48 right-0 h-[400px] w-[400px] rounded-full bg-[var(--color-brand)]/10 blur-3xl"></div>
+  <section class="relative overflow-hidden" style="background:radial-gradient(ellipse at top left,#4F583B 0%,#3B4228 25%,#282C1E 50%,#0A0B07 100%);">
+    <div class="pointer-events-none absolute -left-48 -top-48 h-[500px] w-[500px] rounded-full bg-[#f3b83f]/10 blur-3xl"></div>
+    <div class="pointer-events-none absolute -bottom-48 right-0 h-[400px] w-[400px] rounded-full bg-[#f3b83f]/8 blur-3xl"></div>
     <div class="site-wrap relative py-16 lg:py-20">
       <div class="grid gap-12 lg:grid-cols-2 lg:gap-20">
         <div>
@@ -450,7 +452,7 @@ const faqs = [
         </div>
         <!-- QR code -->
         <div class="flex items-center justify-center lg:justify-end">
-          <div class="rounded-xl border border-white/15 bg-white/5 p-8 text-center backdrop-blur-sm">
+          <div class="rounded-xl border border-[#4f583b] bg-white/5 p-8 text-center backdrop-blur-sm">
             <div class="grid h-48 w-48 place-items-center rounded-xl bg-white">
               <div class="grid h-40 w-40 grid-cols-5 grid-rows-5 gap-1 p-2">
                 {Array(25).fill(0).map((_, i) => (
@@ -470,13 +472,13 @@ const faqs = [
   </section>
 
   <!-- ══ GENERAL QUESTIONS ══ -->
-  <section class="bg-white">
+  <section style="background:linear-gradient(84.55deg,#EEEEEE 2.5%,#F2F6FF 133.24%);">
     <div class="site-wrap py-16 lg:py-20">
       <div class="grid gap-12 lg:grid-cols-[1fr_360px]">
         <!-- FAQ list -->
         <div>
           <h2 class="text-[22px] font-bold text-[var(--color-n900)] sm:text-[28px] lg:text-[38px]" style="font-family:var(--font-display)">
-            General <span class="text-[var(--color-brand)]">Questions</span>
+            General <span class="text-[#4f583b]">Questions</span>
           </h2>
           <div class="mt-8 divide-y divide-[var(--color-n400)] rounded-lg border border-[var(--color-n400)]">
             {faqs.map((item) => (
@@ -495,9 +497,9 @@ const faqs = [
           </div>
         </div>
 
-        <!-- Blue CTA card -->
+        <!-- Olive CTA card -->
         <div class="flex h-full flex-col">
-          <div class="flex flex-1 flex-col rounded-xl bg-[var(--color-brand)] p-8 text-white">
+          <div class="flex flex-1 flex-col rounded-xl bg-[#4f583b] p-8 text-white">
             <div class="grid h-20 w-20 place-items-center rounded-full bg-white/15 mx-auto">
               <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="h-12 w-12 text-white/80"><circle cx="24" cy="16" r="9"/><path d="M6 42c0-9.94 8.06-18 18-18s18 8.06 18 18"/></svg>
             </div>
@@ -505,7 +507,7 @@ const faqs = [
             <p class="mt-3 text-[13px] leading-relaxed text-white/80 text-center">
               Let's get in touch on a 15-minute call where we would be able to answer any questions you may have. Our Advisor will additionally help map your wealth mix and demonstrate what a dedicated advisor would do differently.
             </p>
-            <a href="/about/support/" class="mt-auto pt-6 flex items-center justify-center rounded border border-white/30 bg-white px-6 py-3 text-[14px] font-semibold text-[var(--color-brand)] transition-colors hover:bg-white/90">
+            <a href="/about/support/" class="mt-auto pt-6 flex items-center justify-center rounded border border-white/30 bg-white px-6 py-3 text-[14px] font-semibold text-[#4f583b] transition-colors hover:bg-white/90">
               Book A Discovery Call
             </a>
           </div>

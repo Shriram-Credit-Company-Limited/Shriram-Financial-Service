@@ -1,13 +1,19 @@
 @import "tailwindcss";
 
 @theme {
-  /* ── Shriram Brand Blue (exact from Figma) ── */
-  --color-brand:        #0E52CB;
-  --color-brand-hover:  #0A3EA8;
-  --color-brand-deep:   #0A2E80;
-  --color-brand-light:  #EEF4FF;
-  --color-brand-pale:   #F4F8FF;
+  /* ── Shriram Brand — Citrus & Olive (Figma V4 "After SEO Edit") ── */
+  --color-brand:        #f3b83f;
+  --color-brand-hover:  #d4982a;
+  --color-brand-deep:   #b07e1a;
+  --color-brand-light:  #fdf4dc;
+  --color-brand-pale:   #fefaf0;
   --color-link:         #2F7EF4;
+
+  /* ── Olive accent tokens ── */
+  --color-olive:       #4F583B;
+  --color-dark-olive:  #2e3914;
+  --color-warm-paper:  #f8f4e8;
+  --color-warm-border: #e1dbc6;
 
   /* ── Figma Neutral Tokens (exact) ── */
   --color-n900: #333333;
@@ -18,14 +24,14 @@
   --color-n100: #F7F7F7;
   --color-white: #FFFFFF;
 
-  /* ── Dark section backgrounds ── */
-  --color-dark-900: #070D1A;
-  --color-dark-800: #0D1525;
-  --color-dark-700: #131F35;
-  --color-dark-600: #1A2A46;
+  /* ── Dark section backgrounds — olive family ── */
+  --color-dark-900: #0A0B07;
+  --color-dark-800: #1a2010;
+  --color-dark-700: #282C1E;
+  --color-dark-600: #363A2C;
 
-  /* ── Gold accent (left border in "Where Do We Differ") ── */
-  --color-gold: #C9A227;
+  /* ── Citrus accent (hero form CTA, card accents, "Antara." text) ── */
+  --color-gold: #f3b83f;
 
   /* ── Semantics ── */
   --color-ink:     #333333;
@@ -49,7 +55,7 @@
   /* ── Shadows ── */
   --shadow-card:  0 2px 12px 0 rgba(0, 0, 0, 0.06);
   --shadow-form:  8px 5px 34.8px 0px rgba(0, 0, 0, 0.05);
-  --shadow-lift:  0 8px 32px 0 rgba(14, 82, 203, 0.15);
+  --shadow-lift:  0 8px 32px 0 rgba(243, 184, 63, 0.20);
   --shadow-heavy: 0 20px 60px 0 rgba(0, 0, 0, 0.20);
 }
 
@@ -64,11 +70,11 @@
   padding-right: clamp(1rem, 6vw, 8rem);
 }
 
-/* ── Hero background — silver/grey fallback matching Figma ───────────────── */
+/* ── Hero background — warm cream fallback matching Figma V4 ─────────────── */
 .hero-wave {
   position: absolute;
   inset: 0;
-  background-color: #ebebed;
+  background-color: #f0ede4;
   overflow: hidden;
 }
 .hero-wave::before {
@@ -78,10 +84,10 @@
   width: 140%;
   height: 140%;
   background:
-    radial-gradient(ellipse 70% 60% at 80% 40%, rgba(210,210,218,0.80) 0%, transparent 55%),
-    radial-gradient(ellipse 50% 70% at 65% 80%, rgba(200,202,212,0.60) 0%, transparent 50%),
-    radial-gradient(ellipse 80% 40% at 90% 15%, rgba(220,220,228,0.55) 0%, transparent 55%),
-    linear-gradient(135deg, #f8f8fa 0%, #eaeaee 40%, #dcdce4 100%);
+    radial-gradient(ellipse 70% 60% at 80% 40%, rgba(240,237,228,0.80) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 70% at 65% 80%, rgba(232,228,210,0.60) 0%, transparent 50%),
+    radial-gradient(ellipse 80% 40% at 90% 15%, rgba(243,236,215,0.55) 0%, transparent 55%),
+    linear-gradient(135deg, #faf7ef 0%, #f0ede4 40%, #e8e2d0 100%);
   animation: heroSilver1 18s ease-in-out infinite alternate;
 }
 .hero-wave::after {
@@ -91,8 +97,8 @@
   width: 120%;
   height: 120%;
   background:
-    radial-gradient(ellipse 40% 55% at 75% 55%, rgba(195,197,210,0.45) 0%, transparent 50%),
-    radial-gradient(ellipse 60% 35% at 85% 20%, rgba(215,215,225,0.35) 0%, transparent 45%);
+    radial-gradient(ellipse 40% 55% at 75% 55%, rgba(225,219,198,0.45) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 35% at 85% 20%, rgba(243,236,215,0.35) 0%, transparent 45%);
   animation: heroSilver2 12s ease-in-out infinite alternate-reverse;
 }
 @keyframes heroSilver1 {
@@ -145,6 +151,14 @@ h1, h2, h3, h4, h5, .font-display {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 1);
 }
 
+/* ── Warm cream form card (hero right — Figma V4) ── */
+.warm-form {
+  background: #f8f4e8;
+  border: 1px solid #e1dbc6;
+  border-radius: 24px;
+  box-shadow: var(--shadow-card);
+}
+
 /* ── Primary button (Figma exact) ── */
 .btn-primary {
   display: inline-flex;
@@ -154,7 +168,7 @@ h1, h2, h3, h4, h5, .font-display {
   height: 48px;
   padding: 0 20px;
   background-color: var(--color-brand);
-  color: #fff;
+  color: #202318;
   font-family: var(--font-body);
   font-size: 14px;
   font-weight: 500;
@@ -222,7 +236,7 @@ h1, h2, h3, h4, h5, .font-display {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background-color: #aaa;
+  background-color: rgba(46, 57, 20, 0.4);
   flex-shrink: 0;
 }
 
@@ -239,7 +253,7 @@ h1, h2, h3, h4, h5, .font-display {
 }
 .accord-item.active,
 .accord-item:hover {
-  background-color: rgba(255,255,255,0.04);
+  background-color: rgba(243,184,63,0.05);
 }
 .accord-item summary {
   list-style: none;
@@ -271,7 +285,7 @@ h1, h2, h3, h4, h5, .font-display {
 }
 .product-card-light:hover {
   box-shadow: var(--shadow-lift);
-  border-color: rgba(14, 82, 203, 0.25);
+  border-color: rgba(243, 184, 63, 0.25);
   transform: translateY(-2px);
 }
 
