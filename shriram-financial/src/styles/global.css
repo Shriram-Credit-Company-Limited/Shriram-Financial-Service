@@ -234,12 +234,12 @@ h1, h2, h3, h4, h5, .font-display {
 
 /* ── Section accordion ── */
 .accord-item {
-  border-bottom: 1px solid rgba(243,184,63,0.15);
+  border-bottom: 1px solid rgba(255,255,255,0.12);
   transition: background 0.2s;
 }
 .accord-item.active,
 .accord-item:hover {
-  background-color: rgba(79,88,59,0.25);
+  background-color: rgba(255,255,255,0.04);
 }
 .accord-item summary {
   list-style: none;
