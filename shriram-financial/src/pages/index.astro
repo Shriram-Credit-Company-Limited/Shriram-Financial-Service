@@ -240,8 +240,7 @@ const faqs = [
           </div>
 
           <!-- Right: scrollable glassmorphism card panel -->
-          <div id="differ-scroll" class="flex max-h-[440px] flex-col gap-4 overflow-y-auto pr-2"
-               style="scrollbar-width:thin;scrollbar-color:rgba(243,184,63,0.4) transparent;">
+          <div id="differ-scroll" class="no-scrollbar flex max-h-[440px] flex-col gap-4 overflow-y-auto pr-2">
             {differItems.map((item) => (
               <div class="rounded-[12px] border-b-2 border-[#f3b83f] p-6"
                    style="background:rgba(116,116,116,0.12);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);">
@@ -451,22 +450,11 @@ const faqs = [
             <a href="/about/antara-web-login/" class="inline-flex h-12 items-center rounded border border-white/25 px-6 text-[14px] font-medium text-white transition-colors hover:bg-white/10">Download Mobile App</a>
           </div>
         </div>
-        <!-- QR code -->
+        <!-- App illustration -->
         <div class="flex items-center justify-center lg:justify-end">
-          <div class="rounded-xl border border-[#4f583b] bg-white/5 p-8 text-center backdrop-blur-sm">
-            <div class="grid h-48 w-48 place-items-center rounded-xl bg-white">
-              <div class="grid h-40 w-40 grid-cols-5 grid-rows-5 gap-1 p-2">
-                {Array(25).fill(0).map((_, i) => (
-                  <div class:list={['rounded-[2px]', ([0,1,3,5,9,10,12,15,19,21,23,24].includes(i)) ? 'bg-[var(--color-brand)]' : 'bg-[var(--color-n400)]']}></div>
-                ))}
-              </div>
-            </div>
-            <p class="mt-4 text-[13px] font-medium text-white/70">Download Now on Android or iOS</p>
-            <div class="mt-3 flex justify-center gap-2">
-              <span class="rounded border border-white/20 px-3 py-1.5 text-[11px] font-medium text-white/60">App Store</span>
-              <span class="rounded border border-white/20 px-3 py-1.5 text-[11px] font-medium text-white/60">Google Play</span>
-            </div>
-          </div>
+          <img src="/antara-app-illustration.png" alt="Antara app illustration"
+               width="786" height="655"
+               class="w-full max-w-[520px] object-contain drop-shadow-xl" />
         </div>
       </div>
     </div>
@@ -525,19 +513,30 @@ const faqs = [
   const heroWave  = document.querySelector('.hero-wave') as HTMLElement | null;
   if (heroVideo) {
     const showVideo = () => {
-      heroVideo.classList.remove('opacity-0');
-      heroVideo.classList.add('opacity-100');
+      heroVideo.style.opacity = '1';
       if (heroWave) heroWave.style.opacity = '0';
     };
-    if (heroVideo.readyState >= 3) showVideo();
-    else heroVideo.addEventListener('canplaythrough', showVideo, { once: true });
+
+    const tryPlay = () => {
+      heroVideo.play().catch(() => {});
+    };
+
+    if (heroVideo.readyState >= 3) {
+      showVideo();
+      tryPlay();
+    } else {
+      heroVideo.addEventListener('canplay', () => { showVideo(); tryPlay(); }, { once: true });
+      heroVideo.addEventListener('loadeddata', () => { showVideo(); tryPlay(); }, { once: true });
+      // Fallback: show after 1.5s regardless
+      setTimeout(() => { showVideo(); tryPlay(); }, 1500);
+    }
 
     heroVideo.addEventListener('timeupdate', () => {
       if (heroVideo.duration && heroVideo.currentTime >= heroVideo.duration - 0.08) {
         heroVideo.currentTime = 0;
       }
     });
-    heroVideo.addEventListener('ended', () => { heroVideo.currentTime = 0; heroVideo.play(); });
+    heroVideo.addEventListener('ended', () => { heroVideo.currentTime = 0; heroVideo.play().catch(() => {}); });
   }
 
   /* "How Are We Different?" — auto-scroll the card panel */

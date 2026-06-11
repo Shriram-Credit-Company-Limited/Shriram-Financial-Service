@@ -59,6 +59,10 @@
   --shadow-heavy: 0 20px 60px 0 rgba(0, 0, 0, 0.20);
 }
 
+/* ── Hide scrollbar utility ─────────────────────────────────────────────── */
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
 /* ── Responsive page container ─────────────────────────────────────────────
    padding scales with viewport: 20px on mobile → 144px at 1800px+
    No max-width cap so content fills the screen on any monitor.             */
