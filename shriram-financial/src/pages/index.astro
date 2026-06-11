@@ -129,7 +129,7 @@ const faqs = [
     <div class="hero-wave" aria-hidden="true"></div>
     <video id="hero-video"
       class="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-1000"
-      autoplay muted playsinline aria-hidden="true">
+      autoplay muted playsinline loop preload="auto" aria-hidden="true">
       <source src="/BG.mp4" type="video/mp4" />
     </video>
     <div class="absolute inset-0 bg-gradient-to-r from-white/82 via-white/48 to-white/0" aria-hidden="true"></div>
@@ -538,12 +538,6 @@ const faqs = [
       setTimeout(() => { showVideo(); tryPlay(); }, 1500);
     }
 
-    heroVideo.addEventListener('timeupdate', () => {
-      if (heroVideo.duration && heroVideo.currentTime >= heroVideo.duration - 0.08) {
-        heroVideo.currentTime = 0;
-      }
-    });
-    heroVideo.addEventListener('ended', () => { heroVideo.currentTime = 0; heroVideo.play().catch(() => {}); });
   }
 
   /* "How Are We Different?" — auto-scroll the card panel */
