@@ -340,21 +340,19 @@ const faqs = [
       <div class="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-4">
         {allProducts.map(p => (
           <a href={p.href}
-             class="group relative flex h-[284px] flex-col overflow-hidden rounded-[4px] border border-white/10 bg-[var(--color-dark-800)] p-7 transition-all duration-300 hover:z-10 hover:-translate-y-1 hover:scale-[1.04] hover:border-[var(--color-brand)] hover:bg-[var(--color-brand)]">
-            <!-- Citrus overlay: full box on hover entry → shrinks to circle -->
-            <div class="product-card-overlay pointer-events-none absolute inset-0 bg-[#f3b83f]">
-              <div class="absolute right-5 top-5 flex h-[52px] w-[52px] items-center justify-center">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5">
-                  <path d="M7 17L17 7M17 7H7M17 7v10"/>
-                </svg>
-              </div>
+             class="group relative flex h-[284px] flex-col overflow-hidden rounded-[24px] border border-white/10 bg-[#2e3914] p-8 transition-all duration-300 hover:z-10 hover:-translate-y-1 hover:scale-[1.02] hover:border-[rgba(243,184,63,0.25)]">
+            <!-- Citrus circle grows in top-right corner on hover -->
+            <div class="product-card-circle pointer-events-none absolute right-5 top-5">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#202318" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 shrink-0">
+                <path d="M7 17L17 7M17 7H7M17 7v10"/>
+              </svg>
             </div>
-            <img src={p.img} alt="" class="h-[44px] w-[44px] shrink-0 object-contain opacity-70 transition-opacity duration-300 group-hover:opacity-90" />
+            <img src={p.img} alt="" class="h-[44px] w-[44px] shrink-0 object-contain opacity-70 transition-opacity duration-300 group-hover:opacity-100" />
             <div class="mt-auto flex flex-col gap-2">
-              <h3 class="text-[15px] font-bold leading-snug text-[#f3b83f] transition-colors duration-300 group-hover:text-[#202318]" style="font-family:var(--font-display)">{p.label}</h3>
-              <p class="text-[12px] leading-[1.6] text-white/55 transition-colors duration-300 group-hover:text-[#202318]/70">{p.sub}</p>
+              <h3 class="text-[15px] font-bold leading-snug text-[#f3b83f]" style="font-family:var(--font-display)">{p.label}</h3>
+              <p class="text-[12px] leading-[1.6] text-white/55">{p.sub}</p>
             </div>
-            <span class="mt-4 text-[12px] font-medium text-transparent transition-colors duration-300 group-hover:text-[#202318]/60">View More</span>
+            <span class="mt-4 translate-y-1 text-[12px] font-medium text-transparent opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:text-white/60 group-hover:opacity-100">View More</span>
           </a>
         ))}
       </div>
@@ -388,7 +386,8 @@ const faqs = [
         <div class="hidden flex-1 items-center justify-end lg:flex">
           <img src="/how-soon-rocket.png" alt="Rocket launch illustration"
                width="725" height="340"
-               class="w-full max-w-[600px] object-contain" />
+               class="w-full max-w-[600px] object-contain"
+               style="filter: hue-rotate(195deg) saturate(1.3) brightness(1.05);" />
         </div>
       </div>
 

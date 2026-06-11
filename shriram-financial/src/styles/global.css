@@ -366,17 +366,22 @@ h1, h2, h3, h4, h5, .font-display {
   100%   { transform: translateY(-168px); } /* duplicate Stocks — loop restarts invisibly */
 }
 
-/* ── Product card: yellow box → shrinks to circle on hover ─────────────── */
-/* Circle center: right:20px top:20px, radius 26px → at calc(100%-46px) 46px */
-.product-card-overlay {
-  clip-path: circle(0px at calc(100% - 46px) 46px);
+/* ── Product card: citrus circle grows in top-right on hover ─────────────── */
+.product-card-circle {
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: #f3b83f;
+  transition: width 0.32s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              height 0.32s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
-.group:hover .product-card-overlay {
-  animation: boxToCircle 0.28s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-}
-@keyframes boxToCircle {
-  from { clip-path: circle(150% at calc(100% - 46px) 46px); }
-  to   { clip-path: circle(26px at calc(100% - 46px) 46px); }
+.group:hover .product-card-circle {
+  width: 80px;
+  height: 80px;
 }
 
 /* ── Advisory cards hover-dim (Figma Hover V8 interaction) ── */
