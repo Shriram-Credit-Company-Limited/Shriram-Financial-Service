@@ -337,10 +337,12 @@ const faqs = [
           View All Our Products →
         </a>
       </div>
-      <div class="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-4">
-        {allProducts.map(p => (
+      <div class="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-4" id="products-grid">
+        {allProducts.map((p, i) => (
           <a href={p.href}
-             class="group relative flex h-[284px] flex-col overflow-hidden rounded-[24px] border border-white/10 bg-[#2e3914] p-8 transition-all duration-300 hover:z-10 hover:-translate-y-1 hover:scale-[1.02] hover:border-[rgba(243,184,63,0.25)]">
+             class="product-card-reveal group relative flex h-[284px] flex-col overflow-hidden rounded-[24px] border border-white/10 bg-[#2e3914] p-8 hover:z-10 hover:-translate-y-1 hover:scale-[1.02] hover:border-[rgba(243,184,63,0.25)]"
+             data-row={i < 4 ? '1' : '2'}
+             style={`transition-delay:${(i % 4) * 90}ms`}>
             <!-- Citrus circle grows in top-right corner on hover -->
             <div class="product-card-circle pointer-events-none absolute right-5 top-5">
               <svg viewBox="0 0 24 24" fill="none" stroke="#202318" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 shrink-0">
@@ -535,6 +537,23 @@ const faqs = [
       }
     });
     heroVideo.addEventListener('ended', () => { heroVideo.currentTime = 0; heroVideo.play(); });
+  }
+
+  /* Product cards — inward scroll-reveal */
+  const productCards = document.querySelectorAll<HTMLElement>('.product-card-reveal');
+  if (productCards.length) {
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            (entry.target as HTMLElement).classList.add('revealed');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+    productCards.forEach(card => revealObserver.observe(card));
   }
 
   /* Accordion — one open at a time */

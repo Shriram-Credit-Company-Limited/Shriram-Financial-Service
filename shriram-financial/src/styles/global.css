@@ -384,6 +384,15 @@ h1, h2, h3, h4, h5, .font-display {
   height: 80px;
 }
 
+/* ── Product card inward scroll-reveal animation ── */
+.product-card-reveal {
+  opacity: 0;
+  transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.product-card-reveal[data-row="1"] { transform: translateY(-48px); }
+.product-card-reveal[data-row="2"] { transform: translateY(48px); }
+.product-card-reveal.revealed       { opacity: 1; transform: translateY(0); }
+
 /* ── Advisory cards hover-dim (Figma Hover V8 interaction) ── */
 .advisory-grid:hover .advisory-card {
   opacity: 0.3;
