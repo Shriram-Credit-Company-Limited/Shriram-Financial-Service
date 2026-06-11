@@ -2,12 +2,12 @@
 
 @theme {
   /* ── Shriram Brand Blue (exact from Figma) ── */
-  --color-brand:        #0E52CB;
-  --color-brand-hover:  #0A3EA8;
-  --color-brand-deep:   #0A2E80;
-  --color-brand-light:  #EEF4FF;
-  --color-brand-pale:   #F4F8FF;
-  --color-link:         #2F7EF4;
+  --color-brand:        #4F583B;
+  --color-brand-hover:  #3D4430;
+  --color-brand-deep:   #2C3224;
+  --color-brand-light:  #EAEDE0;
+  --color-brand-pale:   #F4F6EE;
+  --color-link:         #4F583B;
 
   /* ── Figma Neutral Tokens (exact) ── */
   --color-n900: #333333;
@@ -49,7 +49,7 @@
   /* ── Shadows ── */
   --shadow-card:  0 2px 12px 0 rgba(0, 0, 0, 0.06);
   --shadow-form:  8px 5px 34.8px 0px rgba(0, 0, 0, 0.05);
-  --shadow-lift:  0 8px 32px 0 rgba(14, 82, 203, 0.15);
+  --shadow-lift:  0 8px 32px 0 rgba(79, 88, 59, 0.15);
   --shadow-heavy: 0 20px 60px 0 rgba(0, 0, 0, 0.20);
 }
 
@@ -271,7 +271,7 @@ h1, h2, h3, h4, h5, .font-display {
 }
 .product-card-light:hover {
   box-shadow: var(--shadow-lift);
-  border-color: rgba(14, 82, 203, 0.25);
+  border-color: rgba(79, 88, 59, 0.25);
   transform: translateY(-2px);
 }
 
