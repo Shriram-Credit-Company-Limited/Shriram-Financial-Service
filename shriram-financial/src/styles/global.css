@@ -355,6 +355,15 @@ h1, h2, h3, h4, h5, .font-display {
               opacity 0.08s ease;
 }
 
+/* ── Differ collage: slow automatic upward drift (independent of scroll) ─── */
+.differ-collage-drift {
+  animation: differCollageDrift 45s ease-in-out infinite alternate;
+}
+@keyframes differCollageDrift {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-23%); }
+}
+
 /* ── Differ panel: full-height rail, centered card, glassy edge fades ────── */
 @media (min-width: 1024px) {
   /* Center the active 410px card within the full-height rail */
