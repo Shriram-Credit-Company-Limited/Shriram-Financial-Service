@@ -219,9 +219,13 @@ const faqs = [
     </div>
   </section>
 
-  <!-- ══ HOW ARE WE DIFFERENT? ══ -->
-  <section class="bg-white py-8">
-    <div class="site-wrap">
+  <!-- ══ HOW ARE WE DIFFERENT? ══
+       Tall runway wrapper + sticky inner block: page scroll is mapped to the
+       card panel while the section is pinned; after the 4th card the page
+       scrolls on normally. -->
+  <section class="bg-white" id="differ-pin-wrap" style="height:280vh">
+    <div class="sticky top-0 flex h-screen items-center">
+    <div class="site-wrap w-full py-8">
       <div class="relative overflow-hidden rounded-[24px]" style="background:radial-gradient(ellipse at 40% 50%,#4F583B 0%,#363A2C 45%,#1d1d1d 100%);">
         <!-- subtle warm grid texture -->
         <div class="pointer-events-none absolute inset-0 opacity-[0.04]"
@@ -239,8 +243,8 @@ const faqs = [
             </p>
           </div>
 
-          <!-- Right: scrollable glassmorphism card panel -->
-          <div id="differ-scroll" class="no-scrollbar flex max-h-[440px] flex-col gap-4 overflow-y-auto pr-2">
+          <!-- Right: glassmorphism card panel — scroll driven by page scroll while pinned -->
+          <div id="differ-scroll" class="no-scrollbar flex max-h-[440px] flex-col gap-4 overflow-hidden pr-2">
             {differItems.map((item) => (
               <div class="rounded-[12px] border-b-2 border-[#f3b83f] p-6"
                    style="background:rgba(116,116,116,0.12);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);">
@@ -267,6 +271,7 @@ const faqs = [
 
         </div>
       </div>
+    </div>
     </div>
   </section>
 
@@ -540,30 +545,22 @@ const faqs = [
 
   }
 
-  /* "How Are We Different?" — auto-scroll the card panel */
-  const differScroll = document.getElementById('differ-scroll');
-  if (differScroll) {
-    let paused = false;
-    let raf: number;
-    const SPEED = 0.6; // px per frame
-
-    const tick = () => {
-      if (!paused) {
-        differScroll.scrollTop += SPEED;
-        // loop back to top when end reached
-        if (differScroll.scrollTop + differScroll.clientHeight >= differScroll.scrollHeight - 2) {
-          setTimeout(() => { differScroll.scrollTop = 0; }, 800);
-        }
-      }
-      raf = requestAnimationFrame(tick);
+  /* "How Are We Different?" — pinned section: page scroll drives the card
+     panel while the sticky block is held; after the last card the page
+     scrolls on normally. */
+  const differPinWrap = document.getElementById('differ-pin-wrap');
+  const differScroll  = document.getElementById('differ-scroll');
+  if (differPinWrap && differScroll) {
+    const onScroll = () => {
+      const rect   = differPinWrap.getBoundingClientRect();
+      const runway = differPinWrap.offsetHeight - window.innerHeight;
+      if (runway <= 0) return;
+      const progress = Math.min(1, Math.max(0, -rect.top / runway));
+      differScroll.scrollTop = progress * (differScroll.scrollHeight - differScroll.clientHeight);
     };
-
-    differScroll.addEventListener('mouseenter', () => { paused = true; });
-    differScroll.addEventListener('mouseleave', () => { paused = false; });
-    differScroll.addEventListener('touchstart',  () => { paused = true;  }, { passive: true });
-    differScroll.addEventListener('touchend',    () => { paused = false; }, { passive: true });
-
-    raf = requestAnimationFrame(tick);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    onScroll();
   }
 
   /* Product cards — inward scroll-reveal */
