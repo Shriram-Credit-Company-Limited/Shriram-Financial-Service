@@ -226,45 +226,43 @@ const faqs = [
   <section class="bg-white" id="differ-pin-wrap" style="height:280vh">
     <div class="sticky top-0 flex h-screen items-center">
     <div class="site-wrap w-full py-8">
-      <div class="relative overflow-hidden rounded-[24px]" style="background:radial-gradient(ellipse at 40% 50%,#4F583B 0%,#363A2C 45%,#1d1d1d 100%);">
+      <div class="relative overflow-hidden rounded-[24px] lg:h-[min(923px,calc(100vh-96px))]" style="background:radial-gradient(ellipse at 40% 50%,#4F583B 0%,#363A2C 45%,#1d1d1d 100%);">
         <!-- subtle warm grid texture -->
         <div class="pointer-events-none absolute inset-0 opacity-[0.04]"
              style="background-image:repeating-linear-gradient(0deg,#e8d090 0,#e8d090 1px,transparent 0,transparent 20px),repeating-linear-gradient(90deg,#e8d090 0,#e8d090 1px,transparent 0,transparent 20px);background-size:20px 20px;"></div>
 
-        <div class="relative z-10 flex flex-col gap-10 p-8 lg:grid lg:grid-cols-[45%_55%] lg:gap-12 lg:p-14">
+        <!-- Figma 154:2584 — content centered, 88px column gap, 112px block padding -->
+        <div class="relative z-10 flex h-full flex-col gap-10 p-8 lg:flex-row lg:items-center lg:justify-center lg:gap-[88px] lg:p-[112px]">
 
-          <!-- Left: heading + subtitle -->
-          <div class="self-center">
-            <h2 class="text-[28px] font-bold leading-tight text-white sm:text-[34px] lg:text-[48px]" style="font-family:var(--font-display)">
-              How Are We <span class="text-[#f3b83f]">Different?</span>
+          <!-- Left: heading + subtitle (Figma: 648px col, 40px/18px type, 16px gap) -->
+          <div class="self-center drop-shadow-[0px_3px_3.4px_rgba(0,0,0,0.45)] lg:w-[648px] lg:shrink-0">
+            <h2 class="text-[28px] font-normal leading-[1.4] text-white sm:text-[34px] lg:text-[40px]" style="font-family:var(--font-display)">
+              How Are We <span class="font-semibold text-[#f3b83f]">Different?</span>
             </h2>
-            <p class="mt-5 text-[15px] leading-relaxed text-[rgba(248,244,232,0.70)]">
+            <p class="mt-4 text-[15px] leading-[1.5] text-white lg:text-[18px]">
               We go beyond execution-only; by fusing together Historical Insights, Human Engagement and Tech that delivers better investing experiences to build long term customer relationships.
             </p>
           </div>
 
-          <!-- Right: glassmorphism card panel — scroll driven by page scroll while pinned -->
-          <div id="differ-scroll" class="no-scrollbar flex max-h-[440px] flex-col gap-4 overflow-hidden pr-2">
+          <!-- Right: card panel, exactly one 625×410 card visible; 96px gap between cards -->
+          <div id="differ-scroll" class="no-scrollbar flex h-[410px] w-full flex-col gap-[96px] overflow-hidden lg:w-[625px] lg:shrink-0">
             {differItems.map((item) => (
-              <div class="rounded-[12px] border-b-2 border-[#f3b83f] p-6"
-                   style="background:rgba(116,116,116,0.12);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);">
-                <div class="flex items-baseline gap-3">
-                  <span class="text-[13px] font-bold text-[rgba(243,184,63,0.60)]">{item.num}</span>
-                  <h3 class="text-[19px] font-semibold text-[#f8f4e8]" style="font-family:var(--font-display)">{item.title}</h3>
+              <div class="flex h-[410px] w-full shrink-0 items-center overflow-hidden rounded-[24px] border-2 border-[rgba(255,255,255,0.27)] border-b-[#f3b83f] px-8 py-10 lg:px-[56px] lg:py-[88px]"
+                   style="background:rgba(116,116,116,0.10);backdrop-filter:blur(27.55px);-webkit-backdrop-filter:blur(27.55px);">
+                <div class="flex h-full w-full flex-col justify-end gap-6 text-[#f8f4e8] lg:gap-[40px]">
+                  <div class="flex flex-col gap-2">
+                    <h3 class="text-[22px] font-medium leading-[1.5] lg:text-[32px]" style="font-family:var(--font-body)">{item.num} {item.title}</h3>
+                    <p class="text-[14px] leading-[1.3] lg:text-[16px]">{item.sub}</p>
+                  </div>
+                  <ul class="flex flex-col gap-4">
+                    {item.points.map(p => (
+                      <li class="flex items-start gap-2.5 text-[14px] leading-[1.4]">
+                        <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#f8f4e8]"></span>
+                        {p}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <p class="mt-1.5 pl-7 text-[13px] text-[rgba(248,244,232,0.60)]">{item.sub}</p>
-                <ul class="mt-4 space-y-2 pl-7">
-                  {item.points.map(p => (
-                    <li class="flex items-start gap-2.5 text-[14px] text-[rgba(248,244,232,0.70)]">
-                      <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#f3b83f]"></span>
-                      {p}
-                    </li>
-                  ))}
-                </ul>
-                <a href={item.href} class="mt-5 ml-7 inline-flex items-center gap-2 rounded border border-[rgba(243,184,63,0.35)] px-5 py-2.5 text-[13px] font-medium text-[#f8f4e8] transition-colors hover:border-[#f3b83f] hover:bg-[rgba(243,184,63,0.10)]">
-                  {item.cta}
-                  <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" class="h-3 w-3"><path d="M2 6h8M6 2l4 4-4 4"/></svg>
-                </a>
               </div>
             ))}
           </div>
