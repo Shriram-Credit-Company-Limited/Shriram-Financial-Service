@@ -46,7 +46,7 @@
   --font-body:    "Outfit", "Inter", system-ui, sans-serif;
 
   /* ── Radius (4px buttons, 8px inputs, 24px for all card/box containers) ── */
-  --radius-btn:  4px;
+  --radius-btn:  6px;
   --radius-input:8px;
   --radius-card: 24px;
   --radius-card-lg: 24px;
