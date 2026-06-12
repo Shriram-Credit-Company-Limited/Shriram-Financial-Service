@@ -370,32 +370,43 @@ h1, h2, h3, h4, h5, .font-display {
   100%   { transform: translateY(-168px); } /* duplicate Stocks — loop restarts invisibly */
 }
 
-/* ── Product card: citrus circle shrinks from full-card size into the corner ─ */
-/* Matches recording: on hover the yellow appears huge (covering the card,     */
-/* clipped by overflow-hidden) and SHRINKS down into the small 80px corner     */
-/* circle. On exit it expands back out while fading away.                      */
+/* ── Product card: citrus BOX morphs into corner circle on hover ──────────── */
+/* On hover the yellow starts as the full card box, then its size and          */
+/* border-radius animate so it shrinks and rounds into the 80px circle at the  */
+/* top-right. On exit it grows back into the box while fading out.             */
 .product-card-circle {
   position: absolute;
-  right: 20px;
-  top: 20px;
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 24px;
   background: #f3b83f;
   pointer-events: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  transform: scale(8);
   opacity: 0;
-  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-              opacity 0.22s ease 0.18s;
+  transition: width 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+              height 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+              top 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+              right 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+              border-radius 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.20s ease 0.20s;
 }
 .group:hover .product-card-circle {
-  transform: scale(1);
+  top: 20px;
+  right: 20px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
   opacity: 1;
-  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-              opacity 0.10s ease;
+  transition: width 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+              height 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+              top 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+              right 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+              border-radius 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.08s ease;
 }
 
 /* ── Product card inward scroll-reveal animation ── */
