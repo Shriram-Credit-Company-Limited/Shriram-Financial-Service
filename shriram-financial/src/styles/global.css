@@ -412,6 +412,8 @@ h1, h2, h3, h4, h5, .font-display {
 
 /* ── Focus ── */
 :focus-visible { outline: 2px solid var(--color-brand); outline-offset: 3px; border-radius: 3px; }
+/* Text fields show their own caret — no brand outline on focus */
+input:focus-visible, textarea:focus-visible, select:focus-visible { outline: none; }
 
 /* ── Prose (legal/about pages) ── */
 .prose-shriram p          { line-height: 1.8; color: var(--color-muted); margin-bottom: 1rem; }
