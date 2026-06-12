@@ -339,10 +339,10 @@ const faqs = [
       <div class="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-4" id="products-grid">
         {allProducts.map((p, i) => (
           <a href={p.href}
-             class="product-card-reveal group relative flex h-[284px] flex-col overflow-hidden rounded-[24px] border border-white/10 bg-[#2e3914] p-8 hover:z-10 hover:border-[rgba(243,184,63,0.25)]"
+             class="product-card-reveal group relative flex h-[284px] flex-col overflow-hidden rounded-[24px] border border-white/10 bg-[#282C1E] p-8 hover:z-10 hover:bg-[#2e3914]"
              data-row={i < 4 ? '1' : '2'}
              style={`transition-delay:${(i % 4) * 90}ms`}>
-            <!-- Citrus circle grows from 0 → 80px in top-right on hover, with arrow inside -->
+            <!-- Giant citrus circle shrinks into the 80px top-right circle on hover -->
             <div class="product-card-circle">
               <svg viewBox="0 0 24 24" fill="none" stroke="#202318" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 shrink-0">
                 <path d="M7 17L17 7M17 7H7M17 7v10"/>
@@ -352,6 +352,7 @@ const faqs = [
             <div class="mt-auto flex flex-col gap-2">
               <h3 class="text-[15px] font-bold leading-snug text-[#f3b83f]" style="font-family:var(--font-display)">{p.label}</h3>
               <p class="text-[12px] leading-[1.6] text-white/55">{p.sub}</p>
+              <span class="mt-2 text-[12px] font-medium text-white/70 opacity-0 transition-opacity duration-300 group-hover:opacity-100">View More</span>
             </div>
           </a>
         ))}
@@ -572,8 +573,12 @@ const faqs = [
       (entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            (entry.target as HTMLElement).classList.add('revealed');
-            revealObserver.unobserve(entry.target);
+            const card = entry.target as HTMLElement;
+            card.classList.add('revealed');
+            revealObserver.unobserve(card);
+            // Clear the stagger delay once the reveal finishes so the
+            // hover background transition isn't delayed by it.
+            setTimeout(() => { card.style.transitionDelay = '0ms'; }, 950);
           }
         });
       },
