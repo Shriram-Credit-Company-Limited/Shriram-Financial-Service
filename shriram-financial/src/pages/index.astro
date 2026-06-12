@@ -442,45 +442,37 @@ const faqs = [
     <div class="pointer-events-none absolute -left-48 -top-48 h-[500px] w-[500px] rounded-full bg-[#f3b83f]/10 blur-3xl"></div>
     <div class="pointer-events-none absolute -bottom-48 right-0 h-[400px] w-[400px] rounded-full bg-[#f3b83f]/8 blur-3xl"></div>
     <div class="site-wrap relative py-16 lg:py-20">
-      <div class="grid gap-12 lg:grid-cols-2 lg:gap-20">
+      <!-- Top: text left, QR card right (Figma 185:3710) -->
+      <div class="grid items-center gap-12 lg:grid-cols-[1fr_auto] lg:gap-20">
         <div>
-          <p class="text-[11px] font-bold uppercase tracking-widest text-[rgba(255,255,255,0.40)]">Trading Platform</p>
-          <h2 class="mt-3 text-[34px] font-bold text-[var(--color-gold)] sm:text-[42px] lg:text-[56px]" style="font-family:var(--font-display)">Meet <span class="italic">Antara.</span></h2>
-          <p class="mt-5 text-[15px] leading-relaxed text-[rgba(255,255,255,0.65)]">
-            Our Mobile and Web Application; targeted on assisting you into the right turns of your investment management journey. We are built on a foundation to evolve as and when the market demands it.
+          <h2 class="text-[34px] font-normal text-white sm:text-[40px]" style="font-family:var(--font-display)">Meet <span class="font-semibold text-[#f3b83f]">Antara.</span></h2>
+          <p class="mt-5 max-w-[730px] text-[15px] leading-relaxed text-[rgba(255,255,255,0.85)] lg:text-[16px]">
+            Our <strong class="font-bold text-white">Mobile</strong> and <strong class="font-bold text-white">Web Application;</strong> targeted on assisting you into the right turns of your investment management journey. We are built on a foundation to evolve as and when the market demands it.
           </p>
-          <!-- Pricing stats -->
-          <div class="mt-10 grid grid-cols-3 divide-x divide-[rgba(255,255,255,0.12)] overflow-hidden rounded-[24px] border border-[rgba(255,255,255,0.12)] bg-white/5">
-            {[
-              { val: '₹0',   label: 'Account Opening Charges',   sub: 'For Trading and Demat Accounts' },
-              { val: '₹0',   label: 'Annual Maintenance Charges', sub: 'For Trading and Demat Accounts' },
-              { val: '0.5%', label: 'For Buy And Sell Transactions', sub: 'For Trading and Demat Accounts' },
-            ].map(s => (
-              <div class="flex flex-col gap-1 px-5 py-6 text-center">
-                <span class="text-[32px] font-bold text-white lg:text-[40px]" style="font-family:var(--font-display)">{s.val}</span>
-                <span class="text-[12px] font-semibold text-[rgba(255,255,255,0.70)]">{s.label}</span>
-                <span class="text-[11px] text-[rgba(255,255,255,0.35)]">{s.sub}</span>
-              </div>
-            ))}
-          </div>
-          <div class="mt-8 flex flex-wrap gap-4">
-            <a href="/about/antara-web-login/" class="btn-primary">Open Web App</a>
-            <a href="/about/antara-web-login/" class="inline-flex h-12 items-center rounded border border-white/25 px-6 text-[14px] font-medium text-white transition-colors hover:bg-white/10">Download Mobile App</a>
+        </div>
+        <!-- QR card — cream QR directly on the dark card -->
+        <div class="flex items-center justify-center lg:justify-self-end">
+          <div class="rounded-[24px] border border-white/10 bg-black/20 p-8 text-center backdrop-blur-sm">
+            <img src="/antara-qr.jpeg" alt="Antara app QR code"
+                 class="mx-auto h-52 w-52 object-contain mix-blend-screen"
+                 style="filter:invert(1) sepia(0.30) brightness(1.05);" />
+            <p class="mt-5 text-[14px] font-medium text-white">Download Now on Android or iOS</p>
           </div>
         </div>
-        <!-- QR code card -->
-        <div class="flex items-center justify-center lg:justify-end">
-          <div class="rounded-[24px] border border-[#4f583b] bg-white/5 p-8 text-center backdrop-blur-sm">
-            <div class="grid h-52 w-52 place-items-center rounded-[24px] bg-white p-3">
-              <img src="/antara-qr.jpeg" alt="Antara app QR code" class="h-full w-full object-contain" />
-            </div>
-            <p class="mt-4 text-[13px] font-medium text-white/70">Download Now on Android or iOS</p>
-            <div class="mt-3 flex justify-center gap-2">
-              <span class="rounded border border-white/20 px-3 py-1.5 text-[11px] font-medium text-white/60">App Store</span>
-              <span class="rounded border border-white/20 px-3 py-1.5 text-[11px] font-medium text-white/60">Google Play</span>
-            </div>
+      </div>
+      <!-- Bottom: full-width pricing stats bar -->
+      <div class="mt-16 grid grid-cols-1 divide-y divide-[rgba(255,255,255,0.10)] overflow-hidden rounded-[24px] border border-[rgba(255,255,255,0.10)] bg-white/[0.03] sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+        {[
+          { val: '₹0',   label: 'Account Opening Charges',      sub: 'For Trading and Demat Accounts' },
+          { val: '₹0',   label: 'Annual Maintenance Charges',   sub: 'For Trading and Demat Accounts' },
+          { val: '0.5%', label: 'For Buy And Sell Transactions', sub: 'For Trading and Demat Accounts' },
+        ].map(s => (
+          <div class="flex flex-col gap-2 px-6 py-10 text-center">
+            <span class="text-[30px] font-bold text-white lg:text-[34px]" style="font-family:var(--font-display)">{s.val}</span>
+            <span class="text-[15px] font-medium text-white">{s.label}</span>
+            <span class="text-[11px] uppercase tracking-[0.08em] text-[rgba(255,255,255,0.40)]">{s.sub}</span>
           </div>
-        </div>
+        ))}
       </div>
     </div>
     </div>
