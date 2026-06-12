@@ -355,6 +355,40 @@ h1, h2, h3, h4, h5, .font-display {
               opacity 0.08s ease;
 }
 
+/* ── Differ panel: full-height rail, centered card, glassy edge fades ────── */
+@media (min-width: 1024px) {
+  /* Center the active 410px card within the full-height rail */
+  #differ-scroll {
+    padding-top:    calc((min(923px, 100vh - 96px) - 410px) / 2);
+    padding-bottom: calc((min(923px, 100vh - 96px) - 410px) / 2);
+  }
+}
+.differ-fade {
+  display: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 200px;
+  pointer-events: none;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+@media (min-width: 1024px) {
+  .differ-fade { display: block; }
+}
+.differ-fade-top {
+  top: 0;
+  background: linear-gradient(to bottom, rgba(33,36,25,0.85) 0%, rgba(33,36,25,0.35) 55%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, transparent 100%);
+}
+.differ-fade-bottom {
+  bottom: 0;
+  background: linear-gradient(to top, rgba(33,36,25,0.85) 0%, rgba(33,36,25,0.35) 55%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to top, #000 0%, transparent 100%);
+  mask-image: linear-gradient(to top, #000 0%, transparent 100%);
+}
+
 /* ── Product card inward scroll-reveal animation ── */
 /* background-color included so the hover bg change animates too; the inline
    stagger transition-delay is cleared by JS after the reveal completes.      */

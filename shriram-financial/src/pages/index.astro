@@ -239,8 +239,8 @@ const faqs = [
         <div class="pointer-events-none absolute inset-0 opacity-[0.04]"
              style="background-image:repeating-linear-gradient(0deg,#e8d090 0,#e8d090 1px,transparent 0,transparent 20px),repeating-linear-gradient(90deg,#e8d090 0,#e8d090 1px,transparent 0,transparent 20px);background-size:20px 20px;"></div>
 
-        <!-- Figma 154:2584 — content centered, 88px column gap, 112px block padding -->
-        <div class="relative z-10 flex h-full flex-col gap-10 p-8 lg:flex-row lg:items-center lg:justify-center lg:gap-[88px] lg:p-[112px]">
+        <!-- Text left-shifted; right rail spans the entire section height -->
+        <div class="relative z-10 flex h-full flex-col gap-10 p-8 lg:flex-row lg:items-center lg:justify-between lg:gap-[64px] lg:px-[64px] lg:py-0">
 
           <!-- Left: heading + subtitle (Figma: 648px col, 40px/18px type, 16px gap) -->
           <div class="self-center drop-shadow-[0px_3px_3.4px_rgba(0,0,0,0.45)] lg:w-[648px] lg:shrink-0">
@@ -252,8 +252,9 @@ const faqs = [
             </p>
           </div>
 
-          <!-- Right: card panel, exactly one 625×410 card visible; 96px gap between cards -->
-          <div id="differ-scroll" class="no-scrollbar flex h-[410px] w-full flex-col gap-[96px] overflow-hidden lg:w-[625px] lg:shrink-0">
+          <!-- Right: full-height card rail with glassy top/bottom edge fades -->
+          <div class="relative w-full lg:h-full lg:w-[625px] lg:shrink-0 lg:self-stretch">
+          <div id="differ-scroll" class="no-scrollbar flex h-[410px] w-full flex-col gap-[96px] overflow-hidden lg:h-full">
             {differItems.map((item) => (
               <div class="flex h-[410px] w-full shrink-0 items-center overflow-hidden rounded-[24px] border-2 border-[rgba(255,255,255,0.27)] border-b-[#f3b83f] px-8 py-10 lg:px-[56px] lg:py-[88px]"
                    style="background:rgba(116,116,116,0.10);backdrop-filter:blur(27.55px);-webkit-backdrop-filter:blur(27.55px);">
@@ -273,6 +274,9 @@ const faqs = [
                 </div>
               </div>
             ))}
+          </div>
+          <div class="differ-fade differ-fade-top" aria-hidden="true"></div>
+          <div class="differ-fade differ-fade-bottom" aria-hidden="true"></div>
           </div>
 
         </div>
