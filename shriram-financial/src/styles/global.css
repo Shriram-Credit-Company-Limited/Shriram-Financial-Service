@@ -411,6 +411,19 @@ h1, h2, h3, h4, h5, .font-display {
   transition: opacity 0.3s ease;
 }
 
+/* ── FAQ accordion open/close — 300ms slow ease ── */
+#faq-accord details {
+  interpolate-size: allow-keywords;
+}
+#faq-accord details::details-content {
+  block-size: 0;
+  overflow: clip;
+  transition: block-size 300ms ease-in-out, content-visibility 300ms allow-discrete;
+}
+#faq-accord details[open]::details-content {
+  block-size: auto;
+}
+
 /* ── FAQ row ── */
 .faq-row {
   border-bottom: 1px solid var(--color-n400);
