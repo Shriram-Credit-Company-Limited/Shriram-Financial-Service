@@ -183,32 +183,39 @@ const faqs = [
 
           <!-- Form fields (gap-[48px] from title block, gap-[24px] between fields) -->
           <div class="mt-12 flex flex-col gap-6">
-            <!-- Mobile input -->
-            <div class="flex h-[48px] items-center rounded-[8px] border border-[var(--color-n500)] bg-white px-4">
-              <span class="shrink-0 text-[13px] font-semibold text-[var(--color-n900)]">IN</span>
-              <span class="mx-3 h-5 w-px shrink-0 bg-[var(--color-n400)]"></span>
-              <span class="shrink-0 text-[13px] font-medium text-[var(--color-n800)]">+91</span>
-              <span class="mx-3 h-5 w-px shrink-0 bg-[var(--color-n400)]"></span>
-              <input
-                type="tel"
-                placeholder="Enter mobile number"
-                class="min-w-0 flex-1 border-none bg-transparent text-[14px] text-[var(--color-ink)] outline-none placeholder:text-[var(--color-n500)]"
-              />
+            <!-- Mobile input (Figma 163:4267 — flag circle, divider, stacked label + number) -->
+            <div class="flex h-[72px] items-center gap-4 rounded-[16px] border border-[var(--color-n500)] bg-white px-5 shadow-[var(--shadow-form)]">
+              <span class="h-10 w-10 shrink-0 overflow-hidden rounded-full">
+                <img src="/india-flag.png" alt="India" class="h-full w-full object-cover" />
+              </span>
+              <span class="h-9 w-px shrink-0 bg-[var(--color-n400)]"></span>
+              <div class="flex min-w-0 flex-1 flex-col justify-center">
+                <label for="hero-mobile" class="text-[12px] font-medium text-[var(--color-n700)]">Mobile Number</label>
+                <div class="flex items-center gap-1.5">
+                  <span class="text-[17px] font-semibold text-[var(--color-ink)]">+91</span>
+                  <input
+                    id="hero-mobile"
+                    type="tel"
+                    placeholder="92528 78274"
+                    class="min-w-0 flex-1 border-none bg-transparent text-[17px] font-semibold text-[var(--color-ink)] outline-none placeholder:font-normal placeholder:text-[var(--color-n500)]"
+                  />
+                </div>
+              </div>
             </div>
 
             <!-- Consent text -->
-            <p class="text-[12px] leading-relaxed text-[var(--color-n700)]">
+            <p class="text-[13px] font-medium leading-relaxed text-[#3a3a3a]">
               By continuing, I agree to receive the OTP and updates via SMS/WhatsApp.
             </p>
 
             <!-- Buttons (gap-[16px]) -->
-            <div class="flex flex-col gap-4">
-              <a href="/about/open-demat-account/" class="inline-flex h-[48px] w-full items-center justify-center rounded-[4px] bg-[#f3b83f] text-[14px] font-medium text-[#202318] transition-colors hover:bg-[#d4982a]">
+            <div class="flex flex-col gap-5">
+              <a href="/about/open-demat-account/" class="inline-flex h-[64px] w-full items-center justify-center rounded-[16px] bg-[#f3b83f] text-[16px] font-semibold text-[#202318] transition-colors hover:bg-[#d4982a]">
                 Get Started
               </a>
-              <p class="text-center text-[12px] text-[var(--color-n900)]">
+              <p class="text-[16px] font-medium text-[#3a3a3a]">
                 Already a part of us?{' '}
-                <a href="/about/antara-web-login/" class="font-bold text-[#f3b83f] hover:underline">Login Here.</a>
+                <a href="/about/antara-web-login/" class="font-semibold text-[#2f7ef4] hover:underline">Login Here.</a>
               </p>
             </div>
           </div>
