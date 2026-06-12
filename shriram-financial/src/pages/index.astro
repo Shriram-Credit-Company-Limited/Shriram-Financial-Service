@@ -359,11 +359,12 @@ const faqs = [
                 <path d="M7 17L17 7M17 7H7M17 7v10"/>
               </svg>
             </div>
-            <img src={p.img} alt="" class="h-[44px] w-[44px] shrink-0 object-contain opacity-70 transition-opacity duration-300 group-hover:opacity-100" />
-            <div class="mt-auto flex flex-col gap-2">
-              <h3 class="text-[15px] font-bold leading-snug text-[#f3b83f]" style="font-family:var(--font-display)">{p.label}</h3>
-              <p class="text-[12px] leading-[1.6] text-white/55">{p.sub}</p>
-              <span class="mt-2 text-[12px] font-medium text-white/70 opacity-0 transition-opacity duration-300 group-hover:opacity-100">View More</span>
+            <!-- Content centered; slides up on hover as View More reveals (per 8-card video) -->
+            <div class="relative z-10 flex h-full flex-col justify-center">
+              <img src={p.img} alt="" class="h-[44px] w-[44px] shrink-0 object-contain" />
+              <h3 class="mt-6 text-[16px] font-bold leading-snug text-white" style="font-family:var(--font-display)">{p.label}</h3>
+              <p class="mt-2 text-[13px] leading-[1.6] text-white/70">{p.sub}</p>
+              <span class="block max-h-0 overflow-hidden text-[12px] font-medium text-white/80 opacity-0 transition-all duration-300 group-hover:mt-5 group-hover:max-h-[24px] group-hover:opacity-100">View More</span>
             </div>
           </a>
         ))}
