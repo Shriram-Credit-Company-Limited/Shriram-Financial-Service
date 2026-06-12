@@ -370,24 +370,26 @@ h1, h2, h3, h4, h5, .font-display {
   100%   { transform: translateY(-168px); } /* duplicate Stocks — loop restarts invisibly */
 }
 
-/* ── Product card: large citrus fill shrinks to corner circle on hover ────── */
+/* ── Product card: citrus circle grows from 0 → 80px in top-right on hover ── */
 .product-card-circle {
   position: absolute;
-  right: 0;
-  top: 0;
-  width: 500px;
-  height: 500px;
+  right: 20px;
+  top: 20px;
+  width: 0;
+  height: 0;
   border-radius: 50%;
-  background: rgba(243, 184, 63, 0.18);
+  background: #f3b83f;
   pointer-events: none;
-  transition: width  0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              height 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              background 0.45s ease;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: width  0.32s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              height 0.32s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 .group:hover .product-card-circle {
   width: 80px;
   height: 80px;
-  background: #f3b83f;
 }
 
 /* ── Product card inward scroll-reveal animation ── */
