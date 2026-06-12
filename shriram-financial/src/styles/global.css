@@ -370,7 +370,10 @@ h1, h2, h3, h4, h5, .font-display {
   100%   { transform: translateY(-168px); } /* duplicate Stocks — loop restarts invisibly */
 }
 
-/* ── Product card: citrus circle pops outward from top-right corner on hover ─ */
+/* ── Product card: citrus circle bursts from card corner outward on hover ──── */
+/* Circle sits 20px inset from top-right. Transform-origin is anchored at the  */
+/* card's actual corner (20px past the element's right, 20px above its top),   */
+/* so scale(0→1) makes it emerge from the corner point into the card.          */
 .product-card-circle {
   position: absolute;
   right: 20px;
@@ -384,8 +387,8 @@ h1, h2, h3, h4, h5, .font-display {
   align-items: center;
   justify-content: center;
   transform: scale(0);
-  transform-origin: top right;
-  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-origin: calc(100% + 20px) -20px;
+  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .group:hover .product-card-circle {
   transform: scale(1);
