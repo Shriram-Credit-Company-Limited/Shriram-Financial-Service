@@ -242,6 +242,9 @@ const faqs = [
           <img id="differ-collage" src="/differ-collage.png" alt=""
                class="differ-collage-drift h-[130%] w-full object-cover object-top will-change-transform" />
         </div>
+        <!-- Same gradient painted ON TOP, fading in left->right to bury the photo edge -->
+        <div class="pointer-events-none absolute inset-0"
+             style="background:radial-gradient(ellipse 66% 156% at 117% -4%,#4F583B 0%,#363A2C 50%,#1d1d1d 100%);-webkit-mask-image:linear-gradient(to right,transparent 25%,#000 58%);mask-image:linear-gradient(to right,transparent 25%,#000 58%);"></div>
 
         <!-- Centered columns (Figma placement); right rail spans the entire section height -->
         <div class="relative z-10 flex h-full flex-col gap-10 p-8 lg:flex-row lg:items-center lg:justify-center lg:gap-[88px] lg:px-[112px] lg:py-0">
