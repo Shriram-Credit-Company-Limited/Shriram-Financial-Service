@@ -379,8 +379,6 @@ h1, h2, h3, h4, h5, .font-display {
   right: 0;
   height: 200px;
   pointer-events: none;
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
 }
 @media (min-width: 1024px) {
   .differ-fade { display: block; }
