@@ -53,7 +53,7 @@ const advisoryCards = [
     img: '/advisory/icon-1.png',
     title: 'Expert Research Calls',
     body: 'Daily SEBI-registered market research and insights.',
-    cta: 'Start Learning',
+    cta: 'Explore Now',
     href: '/research/',
   },
   {
@@ -293,16 +293,20 @@ const faqs = [
 
       <div class="advisory-grid mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {advisoryCards.map((c) => (
-          <div class="advisory-card group relative flex h-[322px] flex-col overflow-hidden rounded-[24px] bg-[#f8f4e8] px-6 py-10 shadow-[0px_4px_20.5px_-8px_rgba(0,0,0,0.1)]">
-            <img src={c.img} alt="" class="h-[80px] w-[100px] shrink-0 object-contain object-left" />
-            <div class="mt-8 flex flex-col gap-3">
-              <h3 class="text-[16px] font-bold uppercase tracking-[1.2px] text-[var(--color-n900)]">{c.title}</h3>
-              <p class="text-[14px] leading-[1.5] text-[var(--color-n800)]">{c.body}</p>
+          <div class="advisory-card group relative flex h-[322px] flex-col justify-center overflow-hidden rounded-[24px] bg-[#f8f4e8] px-6 py-10 shadow-[0px_4px_20.5px_-8px_rgba(0,0,0,0.1)]">
+            <!-- Content + icon slide up on hover (per 4-card video) -->
+            <div class="flex flex-col transition-transform duration-300 group-hover:-translate-y-7">
+              <img src={c.img} alt="" class="h-[80px] w-[100px] shrink-0 object-contain object-left" />
+              <div class="mt-8 flex flex-col gap-3">
+                <h3 class="text-[16px] font-bold uppercase tracking-[1.2px] text-[#2e3914]">{c.title}</h3>
+                <p class="text-[14px] leading-[1.5] text-[#4f583b]">{c.body}</p>
+              </div>
             </div>
+            <!-- Citrus pill CTA slides up from below -->
             <a href={c.href}
-               class="absolute bottom-[-56px] left-0 flex h-14 w-full items-center justify-center gap-3 bg-[var(--color-brand)] text-[14px] font-medium text-[#202318] transition-all duration-300 group-hover:bottom-0">
+               class="absolute bottom-4 left-4 right-4 flex h-[52px] translate-y-[84px] items-center justify-center gap-3 rounded-full bg-[#f3b83f] text-[14px] font-medium text-[#2e3914] opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
               {c.cta}
-              <img src="/advisory/advisory-icon.svg" alt="" class="h-4 w-4 shrink-0 brightness-0" />
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 shrink-0"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
             </a>
           </div>
         ))}
