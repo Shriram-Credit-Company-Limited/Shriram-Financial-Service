@@ -403,24 +403,25 @@ const faqs = [
         </div>
       </div>
 
-      <!-- Steps row — 5 steps connected by a horizontal dashed line -->
+      <!-- Steps row — Figma 185:3609: #FFF0D7 pills + dashed connector (#EBDEC6, 2px, 7-7) -->
       <div class="relative mt-32">
-        <div class="absolute left-[24px] right-[24px] top-[32px] border-t border-dashed border-[#e6e6e6]"></div>
-        <div class="relative grid grid-cols-2 gap-y-12 sm:grid-cols-5">
+        <div class="absolute left-0 right-0 top-[31px] h-[2px]"
+             style="background-image:repeating-linear-gradient(90deg,#EBDEC6 0 7px,transparent 7px 14px);"></div>
+        <div class="relative grid grid-cols-2 gap-x-6 gap-y-12 sm:grid-cols-5">
           {[
-            { img: '/step-1.png', title: 'Basic Information',        desc: 'Name, mobile number, PAN — takes under two minutes.' },
-            { img: '/step-2.png', title: 'Complete eKYC via Aadhaar', desc: 'OTP-based verification — no physical forms or branch visits.' },
-            { img: '/step-3.png', title: 'Upload Documents',          desc: "Bank proof and a live photograph from your phone's camera." },
-            { img: '/step-4.png', title: 'Digital eSign',             desc: 'Aadhaar-based e-sign replaces physical signature on all forms.' },
-            { img: '/step-5.png', title: 'Account Activation',        desc: 'Credentials delivered to your registered email. Start investing.' },
+            { img: '/step-icon-1.svg', title: 'Basic Information',        desc: 'Name, mobile number, PAN — takes under two minutes.' },
+            { img: '/step-icon-2.svg', title: 'Complete eKYC via Aadhaar', desc: 'OTP-based verification — no physical forms or branch visits.' },
+            { img: '/step-icon-3.svg', title: 'Upload Documents',          desc: "Bank proof and a live photograph from your phone's camera." },
+            { img: '/step-icon-4.svg', title: 'Digital eSign',             desc: 'Aadhaar-based e-sign replaces physical signature on all forms.' },
+            { img: '/step-icon-5.svg', title: 'Account Activation',        desc: 'Credentials delivered to your registered email. Start investing.' },
           ].map((step) => (
-            <div class="flex flex-col items-center gap-6 px-4 text-center">
-              <div class="relative z-10 flex h-[64px] w-[48px] shrink-0 items-center justify-center rounded-[8px] border border-[#e6e6e6] bg-white">
-                <img src={step.img} alt="" class="h-full w-full object-contain" style="filter:hue-rotate(180deg) saturate(1.4) brightness(1.05);" />
+            <div class="flex flex-col items-center gap-6 text-center">
+              <div class="relative z-10 flex h-[64px] shrink-0 items-center justify-center rounded-[24px] bg-[#FFF0D7] px-8">
+                <img src={step.img} alt="" class="h-[26px] w-[26px] object-contain" />
               </div>
               <div class="flex flex-col gap-3">
-                <p class="text-[18px] font-medium leading-snug text-[#121212]">{step.title}</p>
-                <p class="text-[14px] leading-relaxed text-[#121212] opacity-70">{step.desc}</p>
+                <p class="text-[20px] font-medium leading-[1.5] text-[#2e3914]">{step.title}</p>
+                <p class="mx-auto max-w-[234px] text-[14px] leading-[1.5] text-[#4f583b]">{step.desc}</p>
               </div>
             </div>
           ))}
