@@ -5,8 +5,10 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  // Change this to your real domain before deploying.
   site: 'https://www.shriramfinancialservices.com',
+  // Static assets live outside the project in /assets (images + videos).
+  // Astro copies this folder to dist/ as-is, preserving the same URL paths.
+  publicDir: '../assets',
   integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()],

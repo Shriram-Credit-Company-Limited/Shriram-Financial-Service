@@ -38,28 +38,28 @@ const differItems = [
 
 const advisoryCards = [
   {
-    img: '/advisory/icon-1.png',
+    img: '/images/advisory/icon-1.png',
     title: 'Daily Expert Stock Picks',
     body: 'Get daily, SEBI-registered stock recommendations and market trends before you start your trading day.',
     cta: 'Explore Now',
     href: '/research/',
   },
   {
-    img: '/advisory/icon-2.png',
+    img: '/images/advisory/icon-2.png',
     title: 'Share Market Trading',
     body: 'Buy and sell shares seamlessly on the NSE and BSE with a secure platform.',
     cta: 'Explore Market',
     href: '/products/equity/',
   },
   {
-    img: '/advisory/icon-3.png',
+    img: '/images/advisory/icon-3.png',
     title: "Today's Trading Ideas",
     body: 'Learn proven techniques from seasoned traders.',
     cta: 'Discover Trading Ideas',
     href: '/research/technical/',
   },
   {
-    img: '/advisory/icon-4.png',
+    img: '/images/advisory/icon-4.png',
     title: 'Market Guidance',
     body: 'Stay aware and updated with real-time analysis and clear, human advice.',
     cta: 'Connect With An Advisor',
@@ -68,14 +68,14 @@ const advisoryCards = [
 ];
 
 const allProducts = [
-  { label: 'Stocks / Shares',               href: '/products/equity/',        sub: 'Buy and sell shares across NSE & BSE with expert stock recommendations, real-time market data, and zero brokerage on delivery trades.',  img: '/products/icon-equity.svg' },
-  { label: 'Margin Trading Facility (MTF)', href: '/products/mtf/',           sub: 'Trade with leverage and increase your buying power with flexible margin options.',       img: '/products/icon-mtf.svg' },
-  { label: 'Derivatives',                   href: '/products/derivative/',    sub: 'Trade Futures & Options on NSE & BSE. Hedge your portfolio or capitalise on short-term opportunities.',                                   img: '/products/icon-derivatives.svg' },
-  { label: 'Mutual Funds',                  href: '/products/mutual-funds/',  sub: 'Compare 3,000+ Mutual funds and invest in Direct Plans with 0% commission.',           img: '/products/icon-mf.svg' },
-  { label: 'Loan Against Mutual Funds (LAMF)', href: '/products/mtf/',        sub: 'Get instant loans against your mutual fund holdings at competitive interest rates.',    img: '/products/icon-lamf.svg' },
-  { label: 'Initial Public Offering (IPO)', href: '/products/ipo/',           sub: 'Stay updated and apply for IPO across NSE & BSE—follow companies as they debut on the stock market.',                                    img: '/products/icon-ipo.svg' },
-  { label: 'Exchange Traded Funds (ETF)',    href: '/products/etf/',           sub: 'Diversify your portfolio with ETFs tracking indices, sectors, and commodities.',        img: '/products/icon-etf.svg' },
-  { label: 'National Pension Scheme (NPS)', href: '/products/nps/',           sub: 'Build a tax-efficient retirement corpus with government-backed National Pension Scheme.',                                                  img: '/products/icon-nps.svg' },
+  { label: 'Stocks / Shares',               href: '/products/equity/',        sub: 'Buy and sell shares across NSE & BSE with expert stock recommendations, real-time market data, and zero brokerage on delivery trades.',  img: '/images/products/icon-equity.svg' },
+  { label: 'Margin Trading Facility (MTF)', href: '/products/mtf/',           sub: 'Trade with leverage and increase your buying power with flexible margin options.',       img: '/images/products/icon-mtf.svg' },
+  { label: 'Derivatives',                   href: '/products/derivative/',    sub: 'Trade Futures & Options on NSE & BSE. Hedge your portfolio or capitalise on short-term opportunities.',                                   img: '/images/products/icon-derivatives.svg' },
+  { label: 'Mutual Funds',                  href: '/products/mutual-funds/',  sub: 'Compare 3,000+ Mutual funds and invest in Direct Plans with 0% commission.',           img: '/images/products/icon-mf.svg' },
+  { label: 'Loan Against Mutual Funds (LAMF)', href: '/products/mtf/',        sub: 'Get instant loans against your mutual fund holdings at competitive interest rates.',    img: '/images/products/icon-lamf.svg' },
+  { label: 'Initial Public Offering (IPO)', href: '/products/ipo/',           sub: 'Stay updated and apply for IPO across NSE & BSE—follow companies as they debut on the stock market.',                                    img: '/images/products/icon-ipo.svg' },
+  { label: 'Exchange Traded Funds (ETF)',    href: '/products/etf/',           sub: 'Diversify your portfolio with ETFs tracking indices, sectors, and commodities.',        img: '/images/products/icon-etf.svg' },
+  { label: 'National Pension Scheme (NPS)', href: '/products/nps/',           sub: 'Build a tax-efficient retirement corpus with government-backed National Pension Scheme.',                                                  img: '/images/products/icon-nps.svg' },
 ];
 
 const faqs = [
@@ -118,7 +118,7 @@ const faqs = [
     <video id="hero-video"
       class="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-1000"
       autoplay muted playsinline loop preload="auto" aria-hidden="true">
-      <source src="/BG.mp4" type="video/mp4" />
+      <source src="/videos/BG.mp4" type="video/mp4" />
     </video>
     <div class="absolute inset-0 bg-gradient-to-r from-white/82 via-white/48 to-white/0" aria-hidden="true"></div>
     <div class="absolute inset-0 bg-gradient-to-b from-black/8 via-transparent to-black/12" aria-hidden="true"></div>
@@ -174,7 +174,7 @@ const faqs = [
             <!-- Mobile input (Figma 163:3230 — 48px, 18px flag circle, 10px label, 14px number) -->
             <div class="flex h-[48px] items-center gap-3 rounded-[8px] border border-[var(--color-n500)] bg-white py-3 pl-4 pr-3.5">
               <span class="h-[18px] w-[18px] shrink-0 overflow-hidden rounded-full">
-                <img src="/india-flag.png" alt="India" class="h-full w-full object-cover" />
+                <img src="/images/india-flag.png" alt="India" class="h-full w-full object-cover" />
               </span>
               <span class="h-6 w-px shrink-0 bg-[var(--color-n400)]"></span>
               <div class="flex min-w-0 flex-1 flex-col justify-center gap-[2px]">
@@ -227,7 +227,7 @@ const faqs = [
              drifts slowly upward with scroll progress -->
         <div class="pointer-events-none absolute inset-y-0 left-0 w-full overflow-hidden opacity-10 lg:w-[64%]"
              style="-webkit-mask-image:linear-gradient(to right,#000 55%,transparent 95%);mask-image:linear-gradient(to right,#000 55%,transparent 95%);">
-          <img id="differ-collage" src="/differ-collage.png" alt=""
+          <img id="differ-collage" src="/images/differ-collage.png" alt=""
                class="h-[130%] w-full object-cover object-top will-change-transform" />
         </div>
         <!-- Same gradient painted ON TOP, fading in left->right to bury the photo edge -->
@@ -314,7 +314,7 @@ const faqs = [
       <!-- Nudge CTA (Figma: #FFF0D7 bar with illustration) -->
       <div class="mt-6 flex flex-col items-center justify-between overflow-hidden rounded-[24px] bg-[#FFF0D7] sm:flex-row">
         <div class="ml-8 hidden h-[141px] w-[170px] shrink-0 items-center justify-center py-2 sm:flex">
-          <img src="/advisory/nudge-illustration.svg" alt="" width="170" height="141" class="h-full w-auto object-contain" />
+          <img src="/images/advisory/nudge-illustration.svg" alt="" width="170" height="141" class="h-full w-auto object-contain" />
         </div>
         <div class="flex flex-1 items-center justify-between gap-6 px-8 py-6">
           <div>
@@ -399,7 +399,7 @@ const faqs = [
 
         <!-- Right: rocket illustration — flush to the right section edge -->
         <div class="hidden flex-1 items-center lg:flex" style="margin-right: calc(-1 * clamp(1rem, 6vw, 8rem))">
-          <img src="/how-soon-illustration.svg" alt="Rocket launch illustration"
+          <img src="/images/how-soon-illustration.svg" alt="Rocket launch illustration"
                width="777" height="340"
                class="h-auto w-full max-h-[360px] object-contain object-right" />
         </div>
@@ -411,11 +411,11 @@ const faqs = [
              style="background-image:repeating-linear-gradient(90deg,#EBDEC6 0 7px,transparent 7px 14px);"></div>
         <div class="relative grid grid-cols-2 gap-x-6 gap-y-12 sm:grid-cols-5">
           {[
-            { img: '/step-icon-1.svg', title: 'Profile and Bank Setup',             desc: 'Enter basic profile details. Verify your mobile number with a quick OTP. Add your bank account number you want to link for Trading.' },
-            { img: '/step-icon-2.svg', title: 'Complete eKYC via Aadhaar',          desc: 'Upload your PAN card to confirm your identity. Upload a Passport, Voter ID, or use Aadhaar online for address proof.' },
-            { img: '/step-icon-3.svg', title: 'Upload Documents',                   desc: 'Upload a cancelled cheque or recent bank statement to link your account. (Optional) Share a 6-month bank statement if you want to trade F&O.' },
-            { img: '/step-icon-4.svg', title: 'Video Verification & Digital eSign', desc: 'Record a brief, live video of your face using your camera to confirm identity. Digitally sign the official form using a secure mobile OTP.' },
-            { img: '/step-icon-5.svg', title: 'Review & Account Activation',        desc: 'Our team will verify your digital application documents. Receive your secure login details via email within 1–2 business days.' },
+            { img: '/images/step-icon-1.svg', title: 'Profile and Bank Setup',             desc: 'Enter basic profile details. Verify your mobile number with a quick OTP. Add your bank account number you want to link for Trading.' },
+            { img: '/images/step-icon-2.svg', title: 'Complete eKYC via Aadhaar',          desc: 'Upload your PAN card to confirm your identity. Upload a Passport, Voter ID, or use Aadhaar online for address proof.' },
+            { img: '/images/step-icon-3.svg', title: 'Upload Documents',                   desc: 'Upload a cancelled cheque or recent bank statement to link your account. (Optional) Share a 6-month bank statement if you want to trade F&O.' },
+            { img: '/images/step-icon-4.svg', title: 'Video Verification & Digital eSign', desc: 'Record a brief, live video of your face using your camera to confirm identity. Digitally sign the official form using a secure mobile OTP.' },
+            { img: '/images/step-icon-5.svg', title: 'Review & Account Activation',        desc: 'Our team will verify your digital application documents. Receive your secure login details via email within 1–2 business days.' },
           ].map((step) => (
             <div class="flex flex-col items-center gap-6 text-center">
               <div class="relative z-10 flex h-[64px] shrink-0 items-center justify-center rounded-[24px] bg-[#FFF0D7] px-8">
@@ -450,7 +450,7 @@ const faqs = [
         <!-- QR card — cream QR directly on the dark card -->
         <div class="flex items-center justify-center lg:justify-self-end">
           <div class="rounded-[24px] border border-white/10 bg-black/20 p-8 text-center backdrop-blur-sm">
-            <img src="/antara-qr.jpeg" alt="Antara app QR code"
+            <img src="/images/antara-qr.jpeg" alt="Antara app QR code"
                  class="mx-auto h-52 w-52 object-contain mix-blend-screen"
                  style="filter:invert(1) sepia(0.30) brightness(1.05);" />
             <p class="mt-5 text-[14px] font-medium text-white">Download Now on Android or iOS</p>
@@ -507,7 +507,7 @@ const faqs = [
         <div class="flex h-full flex-col">
           <!-- Figma 185:3782 — olive #4f583b card, person outline top-left, bottom-aligned text -->
           <div class="flex flex-1 flex-col rounded-[24px] bg-[#4f583b] p-8 text-white">
-            <img src="/advisor-avatar.png" alt="" width="140" height="140" class="h-[140px] w-[140px] shrink-0 object-contain" />
+            <img src="/images/advisor-avatar.png" alt="" width="140" height="140" class="h-[140px] w-[140px] shrink-0 object-contain" />
             <h3 class="mt-auto pt-10 text-[20px] font-medium" style="font-family:var(--font-display)">Still Have Questions?</h3>
             <p class="mt-3 text-[14px] leading-relaxed text-white/80">
               Book a free 15-minute discovery call with a friendly wealth expert. We will answer your doubts, help you understand your risk comfort, and show you how a dedicated advisor can fast-track your wealth creation.
