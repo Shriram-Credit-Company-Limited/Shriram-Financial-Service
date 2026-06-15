@@ -409,11 +409,11 @@ const faqs = [
           </a>
         </div>
 
-        <!-- Right: rocket illustration (Figma SVG, 777×340) -->
-        <div class="hidden flex-1 items-center justify-end lg:flex">
+        <!-- Right: rocket illustration — flush to the right section edge -->
+        <div class="hidden flex-1 items-center lg:flex" style="margin-right: calc(-1 * clamp(1rem, 6vw, 8rem))">
           <img src="/how-soon-illustration.svg" alt="Rocket launch illustration"
                width="777" height="340"
-               class="w-full max-w-[700px] object-contain" />
+               class="h-auto w-full max-h-[360px] object-contain object-right" />
         </div>
       </div>
 
