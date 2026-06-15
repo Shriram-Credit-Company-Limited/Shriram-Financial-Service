@@ -1,20 +1,27 @@
+# Videos — only the hero background is needed
 *.mp4
 !shriram-financial/public/BG.mp4
+
+# Design source files
 *.fig
 *.pem
+*.zip
+
+# Images — tracked explicitly per file; all others ignored
 *.png
-!shriram-financial/public/advisory/*.png
-!shriram-financial/public/advisory/nudge-char.png
-!shriram-financial/public/step-*.png
-!shriram-financial/public/how-soon-rocket.png
-!shriram-financial/public/antara-app-illustration.png
-!shriram-financial/public/products/*.png
-!shriram-financial/public/shriram-logo-wide.png
-!shriram-financial/public/shriram-logo-282.png
-!shriram-financial/public/logo_v1.png
+*.jpeg
+!shriram-financial/public/favicon.png
 !shriram-financial/public/india-flag.png
+!shriram-financial/public/logo-component6.png
 !shriram-financial/public/advisor-avatar.png
 !shriram-financial/public/differ-collage.png
-!shriram-financial/public/logo-component6.png
-*.zip
+!shriram-financial/public/antara-qr.jpeg
+!shriram-financial/public/advisory/icon-1.png
+!shriram-financial/public/advisory/icon-2.png
+!shriram-financial/public/advisory/icon-3.png
+!shriram-financial/public/advisory/icon-4.png
+!shriram-financial/public/advisory/nudge-illustration.png
+!shriram-financial/public/products/*.png
+
+# Misc
 screenshots/

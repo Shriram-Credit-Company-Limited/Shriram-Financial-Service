@@ -1,5 +1,5 @@
 ---
-import { navigation } from '../navigation';
+import { navigation } from '../../config/navigation';
 const currentPath = Astro.url.pathname;
 const products = navigation.find(n => n.label === 'Products')!;
 const research  = navigation.find(n => n.label === 'Research')!;
