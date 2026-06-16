@@ -19,59 +19,17 @@ const about     = navigation.find(n => n.label === 'About')!;
       <!-- Desktop Nav -->
       <nav class="hidden items-center gap-2 lg:flex 2xl:gap-6" aria-label="Primary">
 
-        <!-- Products mega -->
-        <div class="group relative">
-          <button class="flex items-center gap-1 rounded-[10px] px-3 py-1 text-[16px] font-medium text-[#333] transition-colors hover:bg-[var(--color-n100)]" aria-haspopup="true">
-            Products
-            <svg class="h-4 w-4 transition-transform duration-200 group-hover:rotate-180" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
-          </button>
-          <div class="invisible absolute left-0 top-full z-50 pt-3 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
-            <div class="w-[720px] overflow-hidden rounded-lg border border-[var(--color-n400)] bg-white shadow-[var(--shadow-heavy)]">
-              <div class="grid grid-cols-3 gap-0 border-b border-[var(--color-n100)] bg-[var(--color-n100)] px-6 py-3">
-                <span class="text-[11px] font-semibold uppercase tracking-widest text-[var(--color-subtle)]">Trade</span>
-                <span class="text-[11px] font-semibold uppercase tracking-widest text-[var(--color-subtle)]">Invest</span>
-                <span class="text-[11px] font-semibold uppercase tracking-widest text-[var(--color-subtle)]">More</span>
-              </div>
-              <div class="grid grid-cols-3 gap-0 p-2">
-                <div class="flex flex-col gap-0.5">
-                  {[
-                    {label:'Equity', href:'/products/equity/'},
-                    {label:'Derivative', href:'/products/derivative/'},
-                    {label:'Commodities', href:'/products/commodities/'},
-                    {label:'MTF', href:'/products/mtf/'},
-                    {label:'Currency', href:'/products/currency/'},
-                  ].map(p => (
-                    <a href={p.href} class="rounded px-4 py-2.5 text-[13px] text-[var(--color-ink)] hover:bg-[var(--color-brand-pale)] hover:text-[var(--color-brand)]">{p.label}</a>
-                  ))}
-                </div>
-                <div class="flex flex-col gap-0.5 border-x border-[var(--color-n100)]">
-                  {[
-                    {label:'Mutual Funds', href:'/products/mutual-funds/'},
-                    {label:'ETF', href:'/products/etf/'},
-                    {label:'Bonds', href:'/products/bonds/'},
-                    {label:'NPS', href:'/products/nps/'},
-                    {label:'NFO', href:'/products/nfo/'},
-                    {label:'IPO', href:'/products/ipo/'},
-                  ].map(p => (
-                    <a href={p.href} class="rounded px-4 py-2.5 text-[13px] text-[var(--color-ink)] hover:bg-[var(--color-brand-pale)] hover:text-[var(--color-brand)]">{p.label}</a>
-                  ))}
-                </div>
-                <div class="flex flex-col gap-0.5">
-                  {[
-                    {label:'FD', href:'/products/fd/'},
-                    {label:'Global Investing', href:'/products/global-investing/'},
-                  ].map(p => (
-                    <a href={p.href} class="rounded px-4 py-2.5 text-[13px] text-[var(--color-ink)] hover:bg-[var(--color-brand-pale)] hover:text-[var(--color-brand)]">{p.label}</a>
-                  ))}
-                </div>
-              </div>
-              <div class="flex items-center justify-between border-t border-[var(--color-n100)] bg-[var(--color-brand-pale)] px-6 py-3">
-                <span class="text-[12px] text-[var(--color-subtle)]">13 investment products across trade, invest & more</span>
-                <a href="/products/" class="text-[12px] font-semibold text-[var(--color-brand)] hover:underline">View all products →</a>
-              </div>
-            </div>
-          </div>
-        </div>
+        <!-- Products — click triggers full-page panel -->
+        <button
+          id="products-btn"
+          class="flex items-center gap-1 rounded-[10px] px-3 py-1 text-[16px] font-medium text-[#333] transition-colors hover:bg-[var(--color-n100)]"
+          aria-haspopup="dialog"
+          aria-expanded="false"
+          aria-controls="products-panel"
+        >
+          Products
+          <svg id="products-chevron" class="h-4 w-4 transition-transform duration-300" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+        </button>
 
         <!-- Learning Centre -->
         <div class="group relative">
@@ -135,11 +93,10 @@ const about     = navigation.find(n => n.label === 'About')!;
       </nav>
     </div>
 
-    <!-- Right: Search + Auth -->
+    <!-- Right: Login + CTA + Hamburger -->
     <div class="flex min-w-0 items-center gap-6 2xl:gap-16">
-
-      <!-- Login + CTA -->
       <div class="flex items-center gap-4 lg:gap-6">
+
         <!-- Login -->
         <div class="group relative hidden lg:block">
           <button class="flex shrink-0 items-center gap-1.5 whitespace-nowrap text-[16px] font-semibold text-[#2f7ef4] transition-opacity hover:opacity-80">
@@ -205,16 +162,332 @@ const about     = navigation.find(n => n.label === 'About')!;
   </div>
 </header>
 
+<!-- ── Products Full-Page Panel ────────────────────────────────────── -->
+<div
+  id="products-panel"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Products navigation"
+>
+  <!-- Left sidebar: dark olive gradient, logo + nav -->
+  <div id="products-sidebar">
+    <div class="products-logo">
+      <img src="/images/logo-component6.png" alt="Shriram Financial Services" width="113" height="48" />
+    </div>
+    <nav class="products-nav" aria-label="Products panel navigation">
+      <span class="products-nav-active">Products</span>
+      <a href="/research/" class="products-nav-link">Learning Centre</a>
+      <a href="/product-hub/" class="products-nav-link">Calculators</a>
+      <a href="/about/support/" class="products-nav-link">Support</a>
+      <a href="/about/become-a-partner/" class="products-nav-link">Become a Partner</a>
+    </nav>
+  </div>
+
+  <!-- Right content: cream/white, 3-column products grid -->
+  <div id="products-content">
+
+    <!-- Close button -->
+    <button id="products-close" aria-label="Close products menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+
+    <h2 class="products-heading">Products</h2>
+
+    <div class="products-grid">
+
+      <!-- Trade -->
+      <div class="products-col">
+        <p class="products-col-title">Trade</p>
+        <div class="products-col-items">
+          <a href="/products/equity/">Equity</a>
+          <a href="/products/currency/">Currency</a>
+          <a href="/products/commodities/">Commodities</a>
+          <a href="/products/mtf/">Margin Trading Facility (MTF)</a>
+          <a href="/products/derivative/">Derivatives</a>
+        </div>
+      </div>
+
+      <div class="products-divider" aria-hidden="true"></div>
+
+      <!-- Invest -->
+      <div class="products-col">
+        <p class="products-col-title">Invest</p>
+        <div class="products-col-items">
+          <a href="/products/mutual-funds/">Mutual Funds</a>
+          <a href="/products/etf/">ETFs</a>
+          <a href="/products/bonds/">Bonds</a>
+          <a href="/products/nps/">National Pension Scheme (NPS)</a>
+          <a href="/products/nfo/">NFO</a>
+          <a href="/products/ipo/">IPO</a>
+        </div>
+      </div>
+
+      <div class="products-divider" aria-hidden="true"></div>
+
+      <!-- Featured -->
+      <div class="products-col">
+        <p class="products-col-title">Featured</p>
+        <div class="products-col-items">
+          <a href="/products/loan-against-mf/">Personal Loan Against Mutual Funds</a>
+          <a href="/products/loan-against-stocks/">Personal Loan Against Stocks</a>
+          <a href="/products/loans/">Other Loans</a>
+          <a href="/products/insurance/">Insurances</a>
+          <a href="/products/fd/">Fixed Deposit</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<style>
+  /* ── Products panel: base state (hidden) ──────────────────────── */
+  #products-panel {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    display: flex;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Open state */
+  #products-panel[data-open] {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* ── Left sidebar ─────────────────────────────────────────────── */
+  #products-sidebar {
+    position: relative;
+    width: clamp(240px, 27vw, 400px);
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    padding: clamp(40px, 6vw, 96px) clamp(28px, 4.5vw, 72px);
+    border-radius: 0 40px 40px 0;
+    /* Figma radial gradient: dark olive → near-black */
+    background: radial-gradient(ellipse at top left, #4f583b 0%, #363a2c 50%, #1d1d1d 100%);
+    transform: translateX(-36px);
+    transition: transform 0.48s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+  }
+
+  #products-panel[data-open] #products-sidebar {
+    transform: translateX(0);
+  }
+
+  .products-logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border-radius: 4px;
+    padding: 10px 12px;
+    margin-bottom: clamp(36px, 5.5vw, 80px);
+    align-self: flex-start;
+  }
+  .products-logo img {
+    height: 48px;
+    width: auto;
+    display: block;
+    object-fit: contain;
+  }
+
+  .products-nav {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(28px, 4vw, 56px);
+  }
+  .products-nav-active {
+    font-size: clamp(18px, 2.2vw, 28px);
+    font-weight: 600;
+    color: #f3b83f;
+    line-height: 1;
+    font-family: 'Outfit', sans-serif;
+  }
+  .products-nav-link {
+    font-size: clamp(16px, 2vw, 28px);
+    font-weight: 300;
+    color: #bcaf99;
+    line-height: 1;
+    text-decoration: none;
+    font-family: 'Outfit', sans-serif;
+    transition: color 0.2s ease;
+  }
+  .products-nav-link:hover {
+    color: #fff;
+  }
+
+  /* ── Right content ────────────────────────────────────────────── */
+  #products-content {
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: clamp(72px, 9vw, 144px) clamp(36px, 5vw, 80px) clamp(36px, 5vw, 72px);
+    /* Figma warm cream radial gradient */
+    background: radial-gradient(ellipse at top right, #ebdec6 0%, #ffffff 58%);
+    transform: translateX(24px);
+    opacity: 0;
+    /* 60ms stagger after sidebar */
+    transition:
+      transform 0.48s cubic-bezier(0.4, 0, 0.2, 1) 0.06s,
+      opacity   0.48s ease                           0.06s;
+    overflow-y: auto;
+  }
+
+  #products-panel[data-open] #products-content {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  /* Close button */
+  #products-close {
+    position: absolute;
+    top: clamp(72px, 8vw, 128px);
+    right: clamp(24px, 3vw, 48px);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(18, 18, 18, 0.05);
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    color: #333;
+    transition: background 0.2s ease;
+  }
+  #products-close:hover {
+    background: rgba(18, 18, 18, 0.12);
+  }
+  #products-close svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Products heading */
+  .products-heading {
+    font-size: clamp(20px, 2.2vw, 32px);
+    font-weight: 500;
+    color: #3a3c39;
+    line-height: 1;
+    margin-bottom: clamp(28px, 3.5vw, 48px);
+    font-family: 'Outfit', sans-serif;
+  }
+
+  /* 3-column grid */
+  .products-grid {
+    display: flex;
+    gap: 0;
+    align-items: flex-start;
+    flex: 1;
+  }
+  .products-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2.5vw, 32px);
+    padding: 0 clamp(16px, 2.5vw, 40px);
+  }
+  .products-col:first-child {
+    padding-left: 0;
+  }
+  .products-col:last-child {
+    padding-right: 0;
+  }
+  .products-col-title {
+    font-size: clamp(14px, 1.3vw, 20px);
+    font-weight: 500;
+    color: #3a3c39;
+    text-transform: capitalize;
+    font-family: 'Outfit', sans-serif;
+    line-height: 1.2;
+  }
+  .products-col-items {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(14px, 1.8vw, 24px);
+  }
+  .products-col-items a {
+    font-size: clamp(12px, 1.05vw, 16px);
+    color: #333;
+    text-decoration: none;
+    font-family: 'Outfit', sans-serif;
+    line-height: 1.4;
+    transition: color 0.2s ease;
+  }
+  .products-col-items a:hover {
+    color: var(--color-brand, #f3b83f);
+  }
+  .products-divider {
+    width: 1px;
+    align-self: stretch;
+    background: #e0ddd8;
+    flex-shrink: 0;
+    margin-top: calc(clamp(18px, 2.5vw, 32px) + clamp(14px, 1.3vw, 20px));
+  }
+
+  /* Chevron rotation reflects panel state */
+  #products-btn[aria-expanded="true"] #products-chevron {
+    transform: rotate(180deg);
+  }
+</style>
+
 <script>
+  // ── Mobile drawer ──────────────────────────────────────────────
   const toggle    = document.getElementById('menu-toggle')!;
   const menu      = document.getElementById('mobile-menu')!;
   const iconOpen  = document.getElementById('icon-open')!;
   const iconClose = document.getElementById('icon-close')!;
+
   toggle.addEventListener('click', () => {
     const isOpen = !menu.classList.contains('hidden');
     menu.classList.toggle('hidden', isOpen);
     iconOpen.classList.toggle('hidden', !isOpen);
     iconClose.classList.toggle('hidden', isOpen);
     toggle.setAttribute('aria-expanded', String(!isOpen));
+  });
+
+  // ── Products full-page panel ───────────────────────────────────
+  const productsBtn   = document.getElementById('products-btn')!;
+  const productsPanel = document.getElementById('products-panel')!;
+  const productsClose = document.getElementById('products-close')!;
+
+  function openProductsPanel() {
+    productsPanel.setAttribute('data-open', '');
+    productsBtn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+    productsClose.focus();
+  }
+
+  function closeProductsPanel() {
+    productsPanel.removeAttribute('data-open');
+    productsBtn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+    productsBtn.focus();
+  }
+
+  productsBtn.addEventListener('click', () => {
+    productsPanel.hasAttribute('data-open') ? closeProductsPanel() : openProductsPanel();
+  });
+
+  productsClose.addEventListener('click', closeProductsPanel);
+
+  // Close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && productsPanel.hasAttribute('data-open')) {
+      closeProductsPanel();
+    }
+  });
+
+  // Close when a product link is followed
+  productsPanel.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeProductsPanel);
   });
 </script>
