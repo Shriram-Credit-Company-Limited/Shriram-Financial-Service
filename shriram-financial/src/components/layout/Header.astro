@@ -304,6 +304,8 @@ const about     = navigation.find(n => n.label === 'About')!;
     inset: 0;
     z-index: 60;
     display: flex;
+    align-items: stretch;
+    background: #fff;
     pointer-events: none;
     opacity: 0;
     transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
@@ -316,7 +318,9 @@ const about     = navigation.find(n => n.label === 'About')!;
   /* ── Left sidebar ─────────────────────────────────────────────── */
   #nps-sidebar {
     width: clamp(240px, 27vw, 400px);
+    min-height: 100%;
     flex-shrink: 0;
+    align-self: stretch;
     display: flex;
     flex-direction: column;
     padding: clamp(40px, 6vw, 96px) clamp(28px, 4.5vw, 72px);
