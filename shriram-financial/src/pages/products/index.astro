@@ -1,54 +1,280 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
 
-const products = (await getCollection('products')).sort((a, b) => a.data.order - b.data.order);
+const trade = [
+  { title: 'Equity', desc: 'Trade in NSE & BSE stocks with zero-delay execution and in-depth SEBI-registered research support.', href: '/products/equity/' },
+  { title: 'Derivatives', desc: 'Trade futures and options with advanced risk management tools and real-time analytics.', href: '/products/derivative/' },
+  { title: 'Commodities', desc: 'Diversify your portfolio with gold, silver, crude oil, and agricultural commodity products.', href: '/products/commodities/' },
+  { title: 'Currency', desc: 'Trade forex pairs with competitive spreads and real-time market insights across major currencies.', href: '/products/currency/' },
+  { title: 'Offer for Sale (OFS)', desc: 'Participate in institutional block deals and OFS at competitive prices with seamless online access.', href: '/products/ipo/' },
+];
+
+const invest = [
+  { title: 'Mutual Funds', desc: 'Invest in expertly managed funds with zero commission and easy SIP options across 3,000+ schemes.', href: '/products/mutual-funds/' },
+  { title: 'Initial Public Offering (IPO)', desc: 'Apply for upcoming IPOs with seamless online applications and timely allotment updates.', href: '/products/ipo/' },
+  { title: 'Global Investing', desc: 'Access international markets and invest in top US stocks and global ETFs from one account.', href: '/products/global-investing/' },
+  { title: 'Fixed Deposits', desc: 'Secure guaranteed returns with fixed deposits from trusted financial institutions.', href: '/products/fd/' },
+  { title: 'National Pension Scheme (NPS)', desc: 'Plan your retirement with tax-efficient NPS investments and flexible contribution options.', href: '/products/nps/' },
+  { title: 'Exchange Traded Fund (ETF)', desc: 'Trade diversified ETFs with low expense ratios, instant liquidity, and real-time pricing.', href: '/products/etf/' },
+];
+
+const other = [
+  { title: 'Loans', desc: 'Access instant personal and business loans at competitive interest rates with minimal paperwork.', href: '/products/loans/' },
+  { title: 'Insurances', desc: 'Protect yourself and your family with comprehensive life and health insurance plans.', href: '/products/insurance/' },
+];
+
+const faqs = [
+  {
+    q: 'What is a Demat Account?',
+    a: 'A Demat Account holds your financial shares, mutual funds, and bonds safely in an electronic format. It is mandatory for trading in the Indian stock market.',
+  },
+  {
+    q: 'What are the benefits of a Demat Account?',
+    a: 'A Demat account completely eliminates the risk of theft, loss, or damage to physical paper certificates. It enables instant, one-click online buying and selling of shares, reduces paperwork, and ensures all your investments are visible in one secure place.',
+  },
+  {
+    q: 'What are the brokerage charges for options trading with Shriram Securities?',
+    a: 'Brokerage charges for options trading are structured to be competitive and straightforward. Shriram Securities charges a flat fee of ₹20 per executed order for options trading. To further understand and calculate the total costs, including brokerage, taxes, and other fees, you can use the Brokerage Calculator. This tool helps you estimate the net profit or loss on your trades by accounting for all applicable charges.',
+  },
+  {
+    q: 'Are there any charges associated with the Demat Account?',
+    a: 'Account opening and Annual Maintenance Charges (AMC) are ₹0 for both Trading and Demat Accounts. Standard SEBI and exchange-mandated statutory charges (STT, exchange transaction charges, GST, SEBI fees) apply to all trades as per regulations.',
+  },
+  {
+    q: 'What is Intraday brokerage and Option brokerage?',
+    a: 'Intraday brokerage is the small fee charged when you buy and sell a stock on the exact same day. Option brokerage is a fixed flat fee (like our standard ₹20 per order) charged for trading in options contracts, regardless of how big or small the transaction volume is.',
+  },
+  {
+    q: 'Can I have multiple Demat Accounts?',
+    a: 'Yes, absolutely! Legally, you can open more than one Demat account in India, provided they are opened with different stockbrokers. However, you can only link one Demat account to your primary trading account at a time.',
+  },
+  {
+    q: 'Is a Demat Account mandatory for applying for an IPO?',
+    a: 'Yes. When a new company lists on the share market, its digital shares must be deposited directly into an electronic account. Therefore, you must have an active Demat account to apply for and receive shares in an IPO.',
+  },
+];
 ---
 
-<BaseLayout title="All Investment Products" description="Explore all 13 investment products from Shriram Financial Services — equity, F&O, mutual funds, bonds, IPOs, and more.">
+<BaseLayout
+  title="Product Suite — Trade, Invest & Borrow | Shriram Financial Services"
+  description="Explore all investment and trading products from Shriram Financial Services — equity, derivatives, mutual funds, IPO, NPS, ETF, loans, and more."
+>
 
-  <!-- Hero -->
+  <!-- ── Hero ──────────────────────────────────────────────────── -->
   <section class="relative overflow-hidden bg-[var(--color-dark-800)]">
-    <div class="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-[var(--color-brand)]/25 blur-3xl"></div>
-    <div class="pointer-events-none absolute -bottom-20 left-0 h-64 w-64 rounded-full bg-[var(--color-gold)]/10 blur-3xl"></div>
-    <div class="site-wrap relative py-20 lg:py-28">
-      <p class="reveal reveal-1 text-[11px] font-bold uppercase tracking-widest text-[rgba(255,255,255,0.40)]">Investment Products</p>
-      <h1 class="reveal reveal-2 mt-4 max-w-3xl text-[40px] font-bold leading-tight text-white lg:text-[54px]" style="font-family:var(--font-display)">Every Tool to Grow Your Wealth</h1>
-      <p class="reveal reveal-3 mt-5 max-w-2xl text-[16px] leading-relaxed text-white/65">
-        From zero-brokerage equity delivery to SIP mutual funds, IPO applications, global investing, and fixed income — all 13 products in one digital platform.
+    <div class="pointer-events-none absolute -right-40 -top-40 h-[500px] w-[500px] rounded-full bg-[var(--color-brand)]/10 blur-3xl"></div>
+    <div class="pointer-events-none absolute -bottom-20 left-0 h-64 w-64 rounded-full bg-[var(--color-brand)]/5 blur-3xl"></div>
+
+    <div class="site-wrap relative py-16 lg:py-24">
+      <!-- Breadcrumb -->
+      <nav class="mb-6 flex items-center gap-2 text-[12px] text-white/40" aria-label="Breadcrumb">
+        <a href="/" class="transition-colors hover:text-white/70">Home</a>
+        <span aria-hidden="true">›</span>
+        <span class="text-white/60">Product Suite</span>
+      </nav>
+
+      <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Product Suite</p>
+      <h1 class="mt-3 max-w-3xl text-[36px] font-bold uppercase leading-tight text-white lg:text-[56px]" style="font-family:var(--font-display)">
+        Product Suite
+      </h1>
+      <p class="mt-4 max-w-xl text-[15px] leading-relaxed text-white/60 lg:text-[17px]">
+        Trade, Invest and Borrow — explore our comprehensive list of financial products and services.
       </p>
-    </div>
-  </section>
 
-  <!-- Product Grid -->
-  <section class="site-wrap py-16 lg:py-20">
-    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-      {products.map((p) => (
-        <a href={`/products/${p.id}/`} class="product-card-light group flex flex-col p-7">
-          <h2 class="text-[20px] font-semibold text-[var(--color-n900)]" style="font-family:var(--font-display)">{p.data.title}</h2>
-          <p class="mt-3 flex-1 text-[14px] leading-relaxed text-[var(--color-muted)]">{p.data.tagline}</p>
-          <span class="mt-5 flex items-center gap-1.5 text-[13px] font-semibold text-[var(--color-brand)] transition-transform group-hover:translate-x-1">
-            Learn more
-            <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" class="h-3 w-3"><path d="M2 6h8M6 2l4 4-4 4"/></svg>
-          </span>
-        </a>
-      ))}
-    </div>
-  </section>
-
-  <!-- CTA Band -->
-  <section class="site-wrap pb-20">
-    <div class="rounded-[24px] bg-[var(--color-brand)] p-10 text-[#202318]">
-      <div class="flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
-        <div>
-          <h2 class="text-[24px] font-bold" style="font-family:var(--font-display)">Ready to Invest Across All Products?</h2>
-          <p class="mt-2 text-[15px] text-[#202318]/70">Open a free Demat account. One account, every product, zero delivery brokerage.</p>
-        </div>
-        <a href="/about/open-demat-account/" class="inline-flex h-12 w-[220px] shrink-0 items-center justify-center rounded-[6px] bg-[#202318] text-[14px] font-semibold text-white transition-colors hover:bg-black">
-          Open Free Demat Account
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="/about/open-demat-account/" class="btn-primary">Open Free Demat Account</a>
+        <a href="/product-hub/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] border border-white/20 text-[14px] font-medium text-white transition-colors hover:bg-white/10">
+          Try Calculators
         </a>
       </div>
     </div>
   </section>
 
+  <!-- ── Products & Services ───────────────────────────────────── -->
+  <section class="bg-[#f8f6f1] py-16 lg:py-24">
+    <div class="site-wrap">
+      <h2 class="text-[28px] font-semibold text-[var(--color-ink)] lg:text-[36px]" style="font-family:var(--font-display)">
+        Our Products And Services
+      </h2>
+
+      <!-- TRADE -->
+      <div class="mt-12 lg:mt-16">
+        <div class="mb-6 border-b border-[var(--color-warm-border)] pb-4">
+          <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Trade</p>
+          <h3 class="mt-1 text-[22px] font-bold text-[var(--color-dark-olive)] lg:text-[26px]" style="font-family:var(--font-display)">TRADE</h3>
+          <p class="mt-1 text-[14px] text-[var(--color-muted)]">Access diverse markets with advanced tools and real-time execution.</p>
+        </div>
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {trade.map(p => (
+            <a href={p.href} class="product-suite-card group">
+              <h4 class="product-suite-title">{p.title}</h4>
+              <p class="product-suite-desc">{p.desc}</p>
+              <span class="product-suite-arrow">→</span>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- INVESTMENTS -->
+      <div class="mt-14 lg:mt-20">
+        <div class="mb-6 border-b border-[var(--color-warm-border)] pb-4">
+          <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Invest</p>
+          <h3 class="mt-1 text-[22px] font-bold text-[var(--color-dark-olive)] lg:text-[26px]" style="font-family:var(--font-display)">INVESTMENTS</h3>
+          <p class="mt-1 text-[14px] text-[var(--color-muted)]">Build long-term wealth with diversified investment solutions.</p>
+        </div>
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {invest.map(p => (
+            <a href={p.href} class="product-suite-card group">
+              <h4 class="product-suite-title">{p.title}</h4>
+              <p class="product-suite-desc">{p.desc}</p>
+              <span class="product-suite-arrow">→</span>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- OTHER OFFERING -->
+      <div class="mt-14 lg:mt-20">
+        <div class="mb-6 border-b border-[var(--color-warm-border)] pb-4">
+          <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Other</p>
+          <h3 class="mt-1 text-[22px] font-bold text-[var(--color-dark-olive)] lg:text-[26px]" style="font-family:var(--font-display)">OTHER OFFERING</h3>
+          <p class="mt-1 text-[14px] text-[var(--color-muted)]">Comprehensive financial solutions to secure your future.</p>
+        </div>
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {other.map(p => (
+            <a href={p.href} class="product-suite-card group">
+              <h4 class="product-suite-title">{p.title}</h4>
+              <p class="product-suite-desc">{p.desc}</p>
+              <span class="product-suite-arrow">→</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FAQ ──────────────────────────────────────────────────── -->
+  <section class="bg-white py-16 lg:py-24">
+    <div class="site-wrap">
+      <h2 class="text-[28px] font-semibold text-[var(--color-ink)] lg:text-[36px]" style="font-family:var(--font-display)">
+        Frequently Asked <span class="text-[var(--color-brand)]">Questions</span>
+      </h2>
+
+      <div class="mt-10 grid gap-8 lg:grid-cols-[1fr_1.4fr] lg:gap-12">
+
+        <!-- Left: CTA card -->
+        <div class="flex flex-col justify-between rounded-[24px] bg-[var(--color-dark-olive)] p-8 lg:p-10">
+          <div class="h-32 w-32 rounded-full border border-white/10 opacity-20 lg:h-48 lg:w-48"></div>
+          <div class="mt-8">
+            <h3 class="text-[22px] font-semibold leading-snug text-white lg:text-[26px]" style="font-family:var(--font-display)">
+              Still Have Questions?
+            </h3>
+            <p class="mt-3 text-[14px] leading-relaxed text-white/60">
+              Book a free 15-minute discovery call with a friendly wealth expert. We will answer your doubts, help you understand your risk comfort, and show you how a dedicated advisor can fast-track your wealth creation.
+            </p>
+            <a href="/about/support/" class="mt-6 inline-flex h-11 w-[220px] items-center justify-center rounded-[6px] bg-[var(--color-brand)] text-[13px] font-semibold text-[#202318] transition-colors hover:bg-[var(--color-brand-hover)]">
+              Book a Discovery Call
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: accordion -->
+        <div class="flex flex-col gap-2" id="ps-faq-accord">
+          {faqs.map((item) => (
+            <details class="faq-row group overflow-hidden rounded-[12px] border border-[var(--color-n400)] bg-white">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 lg:px-6 lg:py-5">
+                <span class="text-[14px] font-medium text-[var(--color-n900)] lg:text-[15px]">{item.q}</span>
+                <span class="grid h-6 w-6 shrink-0 place-items-center rounded-full border border-[var(--color-n400)] text-[var(--color-n700)] transition-transform group-open:rotate-45">
+                  <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" class="h-3 w-3"><path d="M6 2v8M2 6h8"/></svg>
+                </span>
+              </summary>
+              <div class="border-t border-[var(--color-n400)] bg-[var(--color-n100)] px-5 py-4 lg:px-6">
+                <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">{item.a}</p>
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA Band ──────────────────────────────────────────────── -->
+  <section class="site-wrap pb-20">
+    <div class="relative overflow-hidden rounded-[24px] bg-[var(--color-brand)] p-10 lg:p-14">
+      <div class="pointer-events-none absolute right-0 top-0 h-64 w-64 translate-x-16 -translate-y-16 rounded-full bg-white/10 blur-2xl"></div>
+      <div class="relative flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
+        <div>
+          <h2 class="text-[26px] font-bold text-[#202318] lg:text-[32px]" style="font-family:var(--font-display)">Ready to Start Investing?</h2>
+          <p class="mt-2 max-w-md text-[14px] text-[#202318]/70">Open a free Demat account in under 10 minutes — zero delivery brokerage, SEBI-registered research, and a dedicated advisor.</p>
+        </div>
+        <div class="flex shrink-0 flex-wrap gap-3">
+          <a href="/about/open-demat-account/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] bg-[#202318] text-[14px] font-semibold text-white transition-all hover:bg-black">Open Free Demat Account</a>
+          <a href="/product-hub/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] border border-[#202318]/30 text-[14px] font-medium text-[#202318] transition-all hover:bg-[#202318]/10">Try Calculators</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </BaseLayout>
+
+<style>
+  .product-suite-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 24px;
+    background: #fff;
+    border: 1px solid var(--color-warm-border);
+    border-radius: 16px;
+    text-decoration: none;
+    transition: background 0.22s ease, border-color 0.22s ease, transform 0.22s ease;
+  }
+  .product-suite-card:hover {
+    background: var(--color-dark-olive);
+    border-color: var(--color-dark-olive);
+    transform: translateY(-2px);
+  }
+
+  .product-suite-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-ink);
+    font-family: var(--font-display);
+    line-height: 1.3;
+    transition: color 0.22s ease;
+  }
+  .product-suite-card:hover .product-suite-title {
+    color: var(--color-brand);
+  }
+
+  .product-suite-desc {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--color-muted);
+    flex: 1;
+    transition: color 0.22s ease;
+  }
+  .product-suite-card:hover .product-suite-desc {
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  .product-suite-arrow {
+    font-size: 16px;
+    color: var(--color-brand);
+    margin-top: 4px;
+    display: block;
+    transition: transform 0.22s ease;
+  }
+  .product-suite-card:hover .product-suite-arrow {
+    transform: translateX(4px);
+  }
+</style>
+
+<script>
+  const accord = document.getElementById('ps-faq-accord');
+  accord?.querySelectorAll('details').forEach(d => {
+    d.addEventListener('toggle', () => {
+      if (d.open) accord.querySelectorAll<HTMLDetailsElement>('details').forEach(o => { if (o !== d) o.removeAttribute('open'); });
+    });
+  });
+</script>
