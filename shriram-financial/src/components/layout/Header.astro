@@ -123,6 +123,12 @@ const about     = navigation.find(n => n.label === 'About')!;
 
   <!-- Left sidebar: dark olive gradient + logo + all nav items -->
   <div id="nps-sidebar">
+    <button id="nps-go-back" aria-label="Go back to main navigation">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M15 18l-6-6 6-6"/>
+      </svg>
+      Go Back
+    </button>
     <div class="nps-logo">
       <img src="/images/logo-component6.png" alt="Shriram Financial Services" width="113" height="48" />
     </div>
@@ -148,26 +154,25 @@ const about     = navigation.find(n => n.label === 'About')!;
     <div class="nps-section" data-section="products">
       <h2 class="nps-heading">Products</h2>
       <div class="nps-grid">
-        <div class="nps-col">
+        <!-- Trade And Invest: single header spanning two sub-columns -->
+        <div class="nps-trade-block">
           <p class="nps-col-title">Trade And Invest</p>
-          <div class="nps-col-items">
-            <a href="/products/equity/">Equity</a>
-            <a href="/products/currency/">Currency</a>
-            <a href="/products/commodities/">Commodities</a>
-            <a href="/products/mtf/">Margin Trading Facility (MTF)</a>
-            <a href="/products/derivative/">Derivatives</a>
-            <a href="/products/bonds/">Bonds</a>
-          </div>
-        </div>
-        <div class="nps-divider" aria-hidden="true"></div>
-        <div class="nps-col">
-          <p class="nps-col-title" aria-hidden="true" style="visibility:hidden">Trade And Invest</p>
-          <div class="nps-col-items">
-            <a href="/products/mutual-funds/">Mutual Funds</a>
-            <a href="/products/etf/">ETFs</a>
-            <a href="/products/nps/">National Pension Scheme (NPS)</a>
-            <a href="/products/nfo/">NFO</a>
-            <a href="/products/ipo/">IPO</a>
+          <div class="nps-trade-cols">
+            <div class="nps-col-items">
+              <a href="/products/equity/">Equity</a>
+              <a href="/products/currency/">Currency</a>
+              <a href="/products/commodities/">Commodities</a>
+              <a href="/products/mtf/">Margin Trading Facility (MTF)</a>
+              <a href="/products/derivative/">Derivatives</a>
+              <a href="/products/bonds/">Bonds</a>
+            </div>
+            <div class="nps-col-items">
+              <a href="/products/mutual-funds/">Mutual Funds</a>
+              <a href="/products/etf/">ETFs</a>
+              <a href="/products/nps/">National Pension Scheme (NPS)</a>
+              <a href="/products/nfo/">NFO</a>
+              <a href="/products/ipo/">IPO</a>
+            </div>
           </div>
         </div>
         <div class="nps-divider" aria-hidden="true"></div>
@@ -185,6 +190,15 @@ const about     = navigation.find(n => n.label === 'About')!;
       </div>
       <div class="nps-view-all">
         <a href="/products/">View All Products</a>
+      </div>
+      <div class="nps-bottom-card">
+        <div class="nps-bottom-inner">
+          <div>
+            <p class="nps-bottom-eyebrow">New to Investing?</p>
+            <p class="nps-bottom-title">Open a Demat Account in Minutes</p>
+          </div>
+          <a href="/about/open-demat-account/" class="nps-bottom-cta">Get Started →</a>
+        </div>
       </div>
     </div>
 
@@ -223,6 +237,15 @@ const about     = navigation.find(n => n.label === 'About')!;
             <a href="/research/">Delivery Trading</a>
             <a href="/research/">Commodity Trading</a>
           </div>
+        </div>
+      </div>
+      <div class="nps-bottom-card">
+        <div class="nps-bottom-inner">
+          <div>
+            <p class="nps-bottom-eyebrow">Level Up Your Knowledge</p>
+            <p class="nps-bottom-title">Learn Investing at Your Own Pace</p>
+          </div>
+          <a href="/research/" class="nps-bottom-cta">Explore Articles →</a>
         </div>
       </div>
     </div>
@@ -265,6 +288,15 @@ const about     = navigation.find(n => n.label === 'About')!;
           </div>
         </div>
       </div>
+      <div class="nps-bottom-card">
+        <div class="nps-bottom-inner">
+          <div>
+            <p class="nps-bottom-eyebrow">Plan Smarter</p>
+            <p class="nps-bottom-title">Calculate Your SIP, EMI and Returns</p>
+          </div>
+          <a href="/product-hub/" class="nps-bottom-cta">View All Calculators →</a>
+        </div>
+      </div>
     </div>
 
     <!-- ── Support ── -->
@@ -278,6 +310,15 @@ const about     = navigation.find(n => n.label === 'About')!;
             <a href="/about/support/">Grievance Redressal</a>
             <a href="/about/regulatory/">Regulatory &amp; Compliance</a>
           </div>
+        </div>
+      </div>
+      <div class="nps-bottom-card">
+        <div class="nps-bottom-inner">
+          <div>
+            <p class="nps-bottom-eyebrow">We're Here for You</p>
+            <p class="nps-bottom-title">Have a Question? Our Team is Ready</p>
+          </div>
+          <a href="/about/support/" class="nps-bottom-cta">Contact Us →</a>
         </div>
       </div>
     </div>
@@ -294,6 +335,15 @@ const about     = navigation.find(n => n.label === 'About')!;
             <a href="/about/become-a-partner/">Authorised Person</a>
             <a href="/about/become-a-partner/">Channel Partner</a>
           </div>
+        </div>
+      </div>
+      <div class="nps-bottom-card">
+        <div class="nps-bottom-inner">
+          <div>
+            <p class="nps-bottom-eyebrow">Grow With Us</p>
+            <p class="nps-bottom-title">Join India's Growing Partner Network</p>
+          </div>
+          <a href="/about/become-a-partner/" class="nps-bottom-cta">Apply Now →</a>
         </div>
       </div>
     </div>
@@ -487,6 +537,92 @@ const about     = navigation.find(n => n.label === 'About')!;
     margin-top: calc(clamp(18px, 2.5vw, 32px) + clamp(14px, 1.3vw, 20px));
   }
 
+  /* ── Go Back button in sidebar ────────────────────────────────── */
+  #nps-go-back {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: clamp(20px, 3vw, 40px);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px 0;
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(12px, 0.85vw, 14px);
+    font-weight: 400;
+    color: rgba(255,255,255,0.70);
+    letter-spacing: 0.01em;
+    line-height: 1;
+    transition: color 0.2s ease;
+  }
+  #nps-go-back:hover { color: #fff; }
+  #nps-go-back svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+  /* ── Trade And Invest two-column block ────────────────────────── */
+  .nps-trade-block {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2.5vw, 32px);
+    padding-right: clamp(16px, 2.5vw, 40px);
+  }
+  .nps-trade-cols {
+    display: flex;
+    gap: clamp(20px, 3vw, 48px);
+  }
+  .nps-trade-cols .nps-col-items { flex: 1; padding: 0; }
+
+  /* ── Bottom CTA banner card ────────────────────────────────────── */
+  .nps-bottom-card {
+    margin-top: auto;
+    padding-top: clamp(28px, 4vw, 56px);
+    flex-shrink: 0;
+  }
+  .nps-bottom-inner {
+    background: #d9d9d9;
+    border-radius: 24px;
+    min-height: clamp(100px, 12vw, 160px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(16px, 2vw, 28px);
+    padding: clamp(20px, 2.5vw, 32px) clamp(24px, 3vw, 40px);
+  }
+  .nps-bottom-eyebrow {
+    font-size: clamp(9px, 0.7vw, 12px);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #666;
+    margin-bottom: 6px;
+    font-family: 'Outfit', sans-serif;
+  }
+  .nps-bottom-title {
+    font-size: clamp(13px, 1.2vw, 18px);
+    font-weight: 600;
+    color: #1a2010;
+    font-family: 'Outfit', sans-serif;
+    line-height: 1.3;
+  }
+  .nps-bottom-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: clamp(36px, 3.5vw, 44px);
+    padding: 0 clamp(14px, 1.8vw, 24px);
+    background: #f3b83f;
+    border-radius: 6px;
+    font-size: clamp(11px, 0.85vw, 14px);
+    font-weight: 600;
+    font-family: 'Outfit', sans-serif;
+    color: #1a2010;
+    text-decoration: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: background 0.2s ease, transform 0.15s ease;
+  }
+  .nps-bottom-cta:hover { background: #e5a82a; transform: translateY(-1px); }
+
   /* View All Products button in Products panel */
   .nps-view-all {
     margin-top: clamp(28px, 4vw, 56px);
@@ -571,6 +707,7 @@ const about     = navigation.find(n => n.label === 'About')!;
   });
 
   closeBtn.addEventListener('click', closePanel);
+  document.getElementById('nps-go-back')?.addEventListener('click', closePanel);
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && navPanel.hasAttribute('data-open')) closePanel(); });
   navPanel.querySelectorAll('a').forEach(a => a.addEventListener('click', closePanel));
 </script>
