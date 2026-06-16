@@ -248,13 +248,15 @@ const faqs = [
       <div class="mt-12 grid gap-5 sm:grid-cols-3">
         {research.map((r, i) => (
           <a href={r.href}
-             class="equity-reveal group relative flex flex-col overflow-hidden rounded-[24px] border border-white/10 bg-[#2b2c2b] p-8 text-left hover:z-10 hover:bg-[#2e3914]"
+             class="equity-reveal group relative flex h-[300px] flex-col overflow-hidden rounded-[24px] border border-white/10 bg-[#2b2c2b] p-8 text-left hover:z-10 hover:bg-[#2e3914]"
              style={`animation-delay:${i * 80}ms`}>
             <!-- Same citrus-circle animation as home page product cards -->
             <div class="product-card-circle" set:html={r.icon} />
-            <h3 class="mt-auto text-[20px] font-bold text-white" style="font-family:var(--font-display)">{r.title}</h3>
+            <!-- Spacer pushes content below the circle (top-right 80×80px) -->
+            <div class="flex-1"></div>
+            <h3 class="text-[20px] font-bold text-white" style="font-family:var(--font-display)">{r.title}</h3>
             <p class="mt-3 text-[13px] leading-relaxed text-white/55">{r.desc}</p>
-            <span class="mt-6 flex items-center gap-2 text-[13px] font-semibold text-[var(--color-brand)] transition-transform group-hover:translate-x-1">
+            <span class="mt-5 flex items-center gap-2 text-[13px] font-semibold text-[var(--color-brand)] transition-transform group-hover:translate-x-1">
               Explore
               <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" class="h-3 w-3"><path d="M2 6h8M6 2l4 4-4 4"/></svg>
             </span>
