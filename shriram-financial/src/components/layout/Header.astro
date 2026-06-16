@@ -149,22 +149,22 @@ const about     = navigation.find(n => n.label === 'About')!;
       <h2 class="nps-heading">Products</h2>
       <div class="nps-grid">
         <div class="nps-col">
-          <p class="nps-col-title">Trade</p>
+          <p class="nps-col-title">Trade And Invest</p>
           <div class="nps-col-items">
             <a href="/products/equity/">Equity</a>
             <a href="/products/currency/">Currency</a>
             <a href="/products/commodities/">Commodities</a>
             <a href="/products/mtf/">Margin Trading Facility (MTF)</a>
             <a href="/products/derivative/">Derivatives</a>
+            <a href="/products/bonds/">Bonds</a>
           </div>
         </div>
         <div class="nps-divider" aria-hidden="true"></div>
         <div class="nps-col">
-          <p class="nps-col-title">Invest</p>
+          <p class="nps-col-title" aria-hidden="true" style="visibility:hidden">Trade And Invest</p>
           <div class="nps-col-items">
             <a href="/products/mutual-funds/">Mutual Funds</a>
             <a href="/products/etf/">ETFs</a>
-            <a href="/products/bonds/">Bonds</a>
             <a href="/products/nps/">National Pension Scheme (NPS)</a>
             <a href="/products/nfo/">NFO</a>
             <a href="/products/ipo/">IPO</a>
@@ -179,8 +179,12 @@ const about     = navigation.find(n => n.label === 'About')!;
             <a href="/products/loans/">Other Loans</a>
             <a href="/products/insurance/">Insurances</a>
             <a href="/products/fd/">Fixed Deposit</a>
+            <a href="/products/loan-against-mf/">Loan Against Mutual Funds</a>
           </div>
         </div>
+      </div>
+      <div class="nps-view-all">
+        <a href="/products/">View All Products</a>
       </div>
     </div>
 
@@ -481,6 +485,30 @@ const about     = navigation.find(n => n.label === 'About')!;
     background: #e0ddd8;
     flex-shrink: 0;
     margin-top: calc(clamp(18px, 2.5vw, 32px) + clamp(14px, 1.3vw, 20px));
+  }
+
+  /* View All Products button in Products panel */
+  .nps-view-all {
+    margin-top: clamp(28px, 4vw, 56px);
+  }
+  .nps-view-all a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    padding: 0 28px;
+    border: 1.5px solid #3a3c39;
+    border-radius: 6px;
+    font-size: clamp(12px, 1vw, 15px);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+    color: #3a3c39;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .nps-view-all a:hover {
+    background: #3a3c39;
+    color: #fff;
   }
 
   /* Chevron rotates when panel is open */

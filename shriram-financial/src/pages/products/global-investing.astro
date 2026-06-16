@@ -1,0 +1,142 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const markets = [
+  { region: 'United States', indices: 'S&P 500, Nasdaq 100, Dow Jones', desc: 'Home to Apple, Microsoft, Amazon, Google, Tesla, and thousands of global category leaders. The US market is the world\'s largest and most liquid, with deep research coverage.', icon: '🇺🇸' },
+  { region: 'Europe', indices: 'FTSE 100, DAX, CAC 40, STOXX 50', desc: 'Access established European multinationals in luxury goods, automotive, pharmaceuticals, and banking. Diversification across EUR, GBP, and CHF currencies.', icon: '🇪🇺' },
+  { region: 'Asia Pacific', indices: 'Hang Seng, Nikkei 225, MSCI Asia', desc: 'Exposure to Chinese technology, Japanese precision manufacturing, and South Korean electronics and semiconductors — high-growth markets with distinct economic cycles.', icon: '🌏' },
+];
+
+const howItWorks = [
+  { label: 'LRS (Liberalised Remittance Scheme)', desc: 'FEMA allows Indian residents to remit up to USD 250,000 per financial year for investments abroad under the LRS. Funds are sent to your overseas brokerage account or through India-based fund-of-funds.' },
+  { label: 'India-Listed Global Funds', desc: 'The easiest route — invest in international ETFs and mutual funds listed on Indian exchanges (Nasdaq 100 ETF, S&P 500 Index Fund). No LRS needed; buy like any domestic fund.' },
+  { label: 'Direct Foreign Stock Platform', desc: 'Some platforms allow direct purchase of US stocks in fractional shares. Funds are remitted via LRS. Great for stock-picking in companies like Apple, NVIDIA, or Berkshire Hathaway.' },
+];
+
+const steps = [
+  { n: '01', title: 'Choose Your Route', desc: 'Decide between India-listed international ETFs/funds (no LRS, simplest) or a direct foreign stock account (LRS required, more flexibility).' },
+  { n: '02', title: 'Complete KYC & Currency Exchange', desc: 'For LRS-based investing, submit Form A2 to your bank and complete FEMA compliance. For India-listed funds, standard KYC through Shriram is sufficient.' },
+  { n: '03', title: 'Select Markets & Instruments', desc: 'Choose geographic markets, index funds, ETFs, or specific stocks. Our research desk provides guidance on US and international market opportunities.' },
+  { n: '04', title: 'Monitor Global Portfolio', desc: 'Track your international positions alongside domestic holdings on the Antara app. Set FX rate alerts and portfolio rebalancing reminders.' },
+];
+
+const risks = [
+  { label: 'Currency Risk', desc: 'International returns in USD or EUR must be converted back to INR. If INR strengthens, your foreign investment returns in INR terms will be lower — even if the underlying stock rose.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>` },
+  { label: 'Regulatory Risk', desc: 'SEBI and RBI periodically revise LRS limits and fund-of-fund structures. A sudden regulatory change can affect your ability to invest or remit capital overseas.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>` },
+  { label: 'Market & Geopolitical Risk', desc: 'International markets are influenced by their local political landscape, trade wars, sanctions, and central bank policy — factors outside the control of the Indian investor.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="m3 3 18 18M3 12c0 5 3.6 9 9 9s9-4 9-9"/><path d="M12 3a9 9 0 0 1 9 9"/></svg>` },
+  { label: 'TCS on Remittance', desc: 'Under Section 206C(1G), remittances above ₹7 lakh per year under LRS attract Tax Collected at Source (TCS) at 20%. While refundable via ITR, it creates temporary cash flow impact.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 1 0 0 7h5a3.5 3.5 0 1 1 0 7H6"/></svg>` },
+];
+
+const faqs = [
+  { q: 'Can Indian residents invest in US stocks?', a: 'Yes. Indian residents can invest in US stocks through two routes: (1) India-listed international ETFs and mutual funds — no LRS needed, simplest and cheapest route; (2) Direct investment in US stocks via a foreign brokerage integrated with an LRS-compliant Indian bank — allows fractional share buying and direct exposure.' },
+  { q: 'What is the LRS limit for investing abroad?', a: 'Under FEMA\'s Liberalised Remittance Scheme (LRS), Indian residents can remit up to USD 250,000 (approximately ₹2.08 crore) per financial year for approved purposes including overseas investment. Note: remittances above ₹7 lakh attract 20% TCS (refundable via ITR).' },
+  { q: 'How are international investment returns taxed in India?', a: 'Capital gains from international stocks and funds held directly (via LRS) are taxed as per Indian tax slabs for short-term gains (held < 2 years) or at 12.5% for long-term gains (held > 2 years) — no indexation benefit, and no ₹1.25 lakh exemption. International ETFs listed in India are taxed as debt funds (per slab, for both short and long term as of April 2023).' },
+  { q: 'Is investing in international markets risky for Indian investors?', a: 'International investing adds diversification — US and Indian markets have historically shown low correlation, meaning they don\'t always move together. However, currency risk, geopolitical risk, and regulatory complexity add layers of risk not present in domestic investing. For most retail investors, 10–20% international exposure through India-listed international ETFs is a balanced approach.' },
+];
+---
+
+<BaseLayout
+  title="Global Investing — US Stocks, International ETFs | Shriram Financial Services"
+  description="Invest in US stocks, global ETFs, and international funds through Shriram Financial Services. Access S&P 500, Nasdaq 100, and global markets from your Indian account."
+>
+
+  <section class="relative overflow-hidden bg-[var(--color-dark-800)]">
+    <div class="pointer-events-none absolute -right-40 -top-40 h-[560px] w-[560px] rounded-full bg-[var(--color-brand)]/10 blur-3xl"></div>
+    <div class="site-wrap relative py-16 lg:py-28">
+      <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Global Investing</p>
+      <h1 class="mt-4 max-w-3xl text-[32px] font-bold leading-tight text-white sm:text-[40px] lg:text-[56px]" style="font-family:var(--font-display)">
+        Invest in US Stocks &amp; Global<br class="hidden sm:block"> Markets from India
+      </h1>
+      <p class="mt-5 max-w-2xl text-[15px] leading-relaxed text-white/60 lg:text-[17px]">
+        Diversify beyond India. Access S&P 500, Nasdaq 100, and global leaders like Apple, NVIDIA, and Microsoft — with expert guidance and LRS-compliant processes from Shriram Financial Services.
+      </p>
+      <div class="mt-7 grid grid-cols-2 gap-x-6 gap-y-3 sm:flex sm:gap-8">
+        {[['USD 250,000 LRS limit'],['No LRS for India-listed ETFs'],['Expert global research'],['Currency & FX guidance']].map(([l]) => (<div class="flex items-center gap-2 text-[13px] font-medium text-white/70"><span class="h-1.5 w-1.5 rounded-full bg-[var(--color-brand)]"></span>{l}</div>))}
+      </div>
+      <div class="mt-9 flex flex-wrap gap-3">
+        <a href="/about/open-demat-account/" class="btn-primary">Start Global Investing</a>
+        <a href="/about/support/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] border border-white/25 text-[14px] font-medium text-white transition-colors hover:bg-white/10">Talk to RM</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="equity-reveal">
+        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Global Markets</p>
+        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Markets You Can Access</h2>
+      </div>
+      <div class="mt-10 grid gap-5 sm:grid-cols-3">
+        {markets.map((m, i) => (<div class="equity-reveal product-card-light flex flex-col gap-4 p-7" style={`animation-delay:${i*80}ms`}><div class="flex items-center gap-3"><span class="text-[32px]">{m.icon}</span><div><h3 class="text-[17px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{m.region}</h3><p class="text-[12px] font-medium text-[var(--color-brand-deep)]">{m.indices}</p></div></div><p class="text-[13px] leading-relaxed text-[var(--color-muted)]">{m.desc}</p></div>))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[#f8f6f1] py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="equity-reveal">
+        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">How It Works</p>
+        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Ways to Invest Internationally from India</h2>
+      </div>
+      <div class="equity-reveal mt-10 space-y-4">
+        {howItWorks.map((h, i) => (<div class="flex items-start gap-5 rounded-[20px] border border-[var(--color-warm-border)] bg-white p-7"><span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--color-dark-olive)] text-[12px] font-bold text-[var(--color-brand)]">{i+1}</span><div><h3 class="text-[16px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{h.label}</h3><p class="mt-2 text-[13px] leading-relaxed text-[var(--color-muted)]">{h.desc}</p></div></div>))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="equity-reveal text-center">
+        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Getting Started</p>
+        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">How to Start Global Investing</h2>
+      </div>
+      <div class="equity-reveal mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {steps.map((s, i) => (<div class="relative rounded-[20px] border border-[var(--color-warm-border)] bg-[#f8f6f1] p-7" style={`animation-delay:${i*60}ms`}><span class="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-dark-olive)] text-[13px] font-bold text-[var(--color-brand)]">{s.n}</span>{i < steps.length - 1 && <span class="absolute -right-3 top-9 hidden lg:flex"><svg viewBox="0 0 12 12" fill="none" stroke="var(--color-brand)" stroke-width="2" class="h-3 w-3"><path d="M2 6h8M6 2l4 4-4 4"/></svg></span>}<h3 class="mt-4 text-[15px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{s.title}</h3><p class="mt-2 text-[13px] leading-relaxed text-[var(--color-muted)]">{s.desc}</p></div>))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[#f8f6f1] py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="equity-reveal"><p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Know Before You Invest</p><h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Risks of Global Investing</h2></div>
+      <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {risks.map((r, i) => (<div class="equity-reveal product-card-light flex flex-col gap-4 p-7" style={`animation-delay:${i*60}ms`}><div class="flex h-12 w-12 items-center justify-center rounded-[12px] bg-[#fef4e6] text-[var(--color-brand-deep)]" set:html={r.icon} /><h3 class="text-[16px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{r.label}</h3><p class="text-[13px] leading-relaxed text-[var(--color-muted)]">{r.desc}</p></div>))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="equity-reveal"><p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">FAQ</p><h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Frequently Asked Questions</h2></div>
+      <div class="equity-reveal mt-10 divide-y divide-[var(--color-n400)] overflow-hidden rounded-[24px] border border-[var(--color-n400)] bg-white">
+        {faqs.map(item => (<details class="eq-faq group"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 hover:bg-[var(--color-n100)]"><span class="text-[15px] font-medium text-[var(--color-ink)]">{item.q}</span><span class="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-[var(--color-n400)] transition-transform group-open:rotate-45"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" class="h-3 w-3"><path d="M6 2v8M2 6h8"/></svg></span></summary><div class="border-t border-[var(--color-n400)] bg-[var(--color-n100)] px-6 py-5"><p class="text-[14px] leading-relaxed text-[var(--color-muted)]">{item.a}</p></div></details>))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[var(--color-dark-800)] py-16 lg:py-20">
+    <div class="site-wrap">
+      <div class="equity-reveal flex flex-col items-center gap-6 text-center lg:flex-row lg:items-center lg:justify-between lg:text-left">
+        <div>
+          <h2 class="text-[28px] font-bold text-white lg:text-[36px]" style="font-family:var(--font-display)">Go Global with Shriram Financial Services</h2>
+          <p class="mt-3 max-w-lg text-[15px] text-white/55">Access US stocks, global ETFs, and international funds — expert-guided, FEMA-compliant, and fully digital.</p>
+        </div>
+        <div class="flex shrink-0 flex-col gap-3 sm:flex-row">
+          <a href="/about/open-demat-account/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] bg-[var(--color-brand)] text-[14px] font-semibold text-[#202318] hover:bg-[var(--color-brand-hover)]">Start Investing →</a>
+          <a href="/about/support/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] border border-white/20 text-[14px] font-medium text-white hover:bg-white/10">Talk to an RM</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .equity-reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1), transform 0.65s cubic-bezier(0.22,1,0.36,1); }
+  .equity-reveal.in-view { opacity: 1; transform: translateY(0); }
+</style>
+<script>
+  const obs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { const el = e.target as HTMLElement; setTimeout(() => el.classList.add('in-view'), parseInt(el.style.animationDelay)||0); obs.unobserve(el); } }); }, { threshold: 0.10 });
+  document.querySelectorAll('.equity-reveal').forEach(el => obs.observe(el));
+  document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(d => { d.addEventListener('toggle', () => { if (d.open) document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(o => { if (o !== d) o.removeAttribute('open'); }); }); });
+</script>

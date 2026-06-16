@@ -1,0 +1,159 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const fdTypes = [
+  { label: 'Regular Fixed Deposit', desc: 'The standard FD — invest a lump sum for a fixed tenure and earn guaranteed interest. Available in cumulative (interest paid at maturity) and non-cumulative (monthly/quarterly interest payout) variants.', tag: 'Most Popular' },
+  { label: 'Tax-Saving FD (ELSS FD)', desc: 'A 5-year lock-in FD that qualifies for ₹1.5 lakh deduction under Section 80C. Interest is taxable. Cannot be withdrawn prematurely or used as loan collateral during the lock-in period.', tag: '80C Eligible' },
+  { label: 'Senior Citizen FD', desc: 'Special FD for investors aged 60+. Banks and NBFCs offer an additional 0.25%–0.50% interest rate over the standard rate. Ideal for regular income post-retirement.', tag: 'Age 60+' },
+  { label: 'Corporate FD', desc: 'FDs issued by NBFCs and corporates (like Shriram Finance). Typically offer higher interest rates than bank FDs — 0.5%–1.5% above bank rates. Assessed by credit rating agencies.', tag: 'Higher Yields' },
+];
+
+const rateRows = [
+  { tenure: '7 – 45 days', general: '3.50%', senior: '4.00%' },
+  { tenure: '46 – 179 days', general: '5.50%', senior: '6.00%' },
+  { tenure: '180 – 364 days', general: '6.25%', senior: '6.75%' },
+  { tenure: '1 – 2 years', general: '7.00%', senior: '7.50%' },
+  { tenure: '2 – 3 years', general: '7.15%', senior: '7.65%' },
+  { tenure: '3 – 5 years', general: '7.25%', senior: '7.75%' },
+  { tenure: 'Above 5 years', general: '7.00%', senior: '7.50%' },
+];
+
+const vsRows = [
+  { feature: 'Returns', fd: '6.5%–8% p.a. (guaranteed)', equity: '10%–15% (historical, not guaranteed)', mf: '7%–12% (varies by fund type)' },
+  { feature: 'Risk', fd: 'Very low (guaranteed capital)', equity: 'High (market-linked)', mf: 'Low to High (depends on fund)' },
+  { feature: 'Liquidity', fd: 'Low (premature withdrawal penalty)', equity: 'High (same-day)', mf: 'Medium (T+1 to T+3)' },
+  { feature: 'Tax Efficiency', fd: 'Low (TDS on interest)', equity: '12.5% LTCG after ₹1.25L', mf: 'Varies by fund type' },
+  { feature: 'Best For', fd: 'Capital protection, regular income', equity: 'Long-term wealth creation', mf: 'Goal-based diversified investing' },
+];
+
+const steps = [
+  { n: '01', title: 'Choose FD Type & Issuer', desc: 'Select between bank FD, NBFC FD, or corporate FD based on your risk tolerance, tenure, and required interest rate.' },
+  { n: '02', title: 'Select Tenure & Payout', desc: 'Choose tenure from 7 days to 10 years. Select cumulative (interest at maturity) or non-cumulative (monthly/quarterly payouts).' },
+  { n: '03', title: 'Submit KYC & Apply', desc: 'Submit PAN, Aadhaar, and bank details digitally on the Shriram platform. Application is reviewed and approved in 1–2 days.' },
+  { n: '04', title: 'Receive FD Certificate', desc: 'Your FD receipt is issued digitally. Track maturity dates, interest accrual, and renewal options from the Antara app.' },
+];
+
+const faqs = [
+  { q: 'Is FD interest taxable?', a: 'Yes. FD interest is taxable as per your income tax slab. TDS at 10% is deducted if interest exceeds ₹40,000 per year (₹50,000 for senior citizens). If your income is below the taxable limit, submit Form 15G (general) or Form 15H (senior citizens) to avoid TDS deduction.' },
+  { q: 'Can I withdraw my FD before maturity?', a: 'Most FDs allow premature withdrawal with a penalty — typically 0.5%–1% lower interest than the applicable rate for the actual holding period. Tax-saving FDs (5-year 80C FDs) cannot be withdrawn before the 5-year lock-in period. Some FDs offer a loan against FD as an alternative to premature withdrawal.' },
+  { q: 'Is a corporate FD safer than a bank FD?', a: 'Bank FDs are insured by DICGC up to ₹5 lakh per depositor per bank. Corporate/NBFC FDs are not covered by this insurance but offer higher returns. Reputed NBFCs rated AAA or AA+ by CRISIL/ICRA have strong track records. Shriram Finance FDs have consistently held high credit ratings since 1974.' },
+  { q: 'What is the difference between cumulative and non-cumulative FD?', a: 'Cumulative FDs compound interest and pay the entire amount (principal + interest) at maturity — best for wealth accumulation. Non-cumulative FDs pay interest periodically (monthly, quarterly, or annually) — ideal for those seeking regular income, such as retirees.' },
+  { q: 'Can I take a loan against my FD?', a: 'Yes. Most banks and NBFCs offer loans of up to 70–90% of the FD value at an interest rate typically 1–2% above the FD rate. This is a smart alternative to premature withdrawal — your FD continues to earn interest while you access liquidity at a low cost.' },
+];
+---
+
+<BaseLayout
+  title="Fixed Deposits — Guaranteed Returns with High Interest Rates | Shriram Financial Services"
+  description="Invest in Fixed Deposits with guaranteed returns, high interest rates, and flexible tenures from Shriram Financial Services. Special senior citizen rates available."
+>
+
+  <section class="relative overflow-hidden bg-[var(--color-dark-800)]">
+    <div class="pointer-events-none absolute -right-40 -top-40 h-[560px] w-[560px] rounded-full bg-[var(--color-brand)]/10 blur-3xl"></div>
+    <div class="site-wrap relative py-16 lg:py-28">
+      <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Fixed Deposits</p>
+      <h1 class="mt-4 max-w-3xl text-[32px] font-bold leading-tight text-white sm:text-[40px] lg:text-[56px]" style="font-family:var(--font-display)">
+        Earn Guaranteed Returns<br class="hidden sm:block"> with Fixed Deposits
+      </h1>
+      <p class="mt-5 max-w-2xl text-[15px] leading-relaxed text-white/60 lg:text-[17px]">
+        Invest in Fixed Deposits and earn up to 8.5% p.a. guaranteed interest. Safe, predictable, and flexible — with special rates for senior citizens and 80C tax-saving options.
+      </p>
+      <div class="mt-7 grid grid-cols-2 gap-x-6 gap-y-3 sm:flex sm:gap-8">
+        {[['Up to 8.5% p.a.'],['Capital guaranteed'],['Senior citizen extra rate'],['80C eligible FD']].map(([l]) => (<div class="flex items-center gap-2 text-[13px] font-medium text-white/70"><span class="h-1.5 w-1.5 rounded-full bg-[var(--color-brand)]"></span>{l}</div>))}
+      </div>
+      <div class="mt-9 flex flex-wrap gap-3">
+        <a href="/about/open-demat-account/" class="btn-primary">Book a Fixed Deposit</a>
+        <a href="/about/support/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] border border-white/25 text-[14px] font-medium text-white transition-colors hover:bg-white/10">Talk to RM</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="equity-reveal">
+        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Types</p>
+        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Types of Fixed Deposits</h2>
+      </div>
+      <div class="mt-10 grid gap-5 sm:grid-cols-2">
+        {fdTypes.map((t, i) => (<div class="equity-reveal product-card-light flex flex-col gap-3 p-7" style={`animation-delay:${i*60}ms`}><span class="inline-flex w-fit rounded-full bg-[var(--color-brand)]/15 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-[var(--color-brand-deep)]">{t.tag}</span><h3 class="text-[17px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{t.label}</h3><p class="text-[13px] leading-relaxed text-[var(--color-muted)]">{t.desc}</p></div>))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[#f8f6f1] py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="equity-reveal">
+        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Interest Rates</p>
+        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">FD Interest Rate Structure</h2>
+        <p class="mt-3 max-w-2xl text-[15px] text-[var(--color-muted)]">Indicative rates (p.a.). Actual rates may vary. Senior citizens receive an additional 0.50% on all tenures.</p>
+      </div>
+      <div class="equity-reveal mt-10 overflow-hidden rounded-[20px] border border-[var(--color-n400)]">
+        <div class="overflow-x-auto"><table class="w-full text-[14px]">
+          <thead><tr class="bg-[var(--color-dark-olive)]"><th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-white/70">Tenure</th><th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-[var(--color-brand)]">General Investors</th><th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-[var(--color-brand)]">Senior Citizens</th></tr></thead>
+          <tbody class="divide-y divide-[var(--color-n400)]">{rateRows.map((r,i) => (<tr class={i%2===0?'bg-white':'bg-[#f8f6f1]'}><td class="px-6 py-4 font-semibold text-[var(--color-ink)]">{r.tenure}</td><td class="px-6 py-4 text-[var(--color-muted)]">{r.general}</td><td class="px-6 py-4 font-medium text-[var(--color-dark-olive)]">{r.senior}</td></tr>))}</tbody>
+        </table></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="equity-reveal text-center">
+        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Getting Started</p>
+        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">How to Open a Fixed Deposit</h2>
+      </div>
+      <div class="equity-reveal mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {steps.map((s, i) => (<div class="relative rounded-[20px] border border-[var(--color-warm-border)] bg-[#f8f6f1] p-7" style={`animation-delay:${i*60}ms`}><span class="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-dark-olive)] text-[13px] font-bold text-[var(--color-brand)]">{s.n}</span>{i < steps.length - 1 && <span class="absolute -right-3 top-9 hidden lg:flex"><svg viewBox="0 0 12 12" fill="none" stroke="var(--color-brand)" stroke-width="2" class="h-3 w-3"><path d="M2 6h8M6 2l4 4-4 4"/></svg></span>}<h3 class="mt-4 text-[15px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{s.title}</h3><p class="mt-2 text-[13px] leading-relaxed text-[var(--color-muted)]">{s.desc}</p></div>))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[#f8f6f1] py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="equity-reveal">
+        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Comparison</p>
+        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">FD vs Equity vs Mutual Funds</h2>
+      </div>
+      <div class="equity-reveal mt-10 overflow-hidden rounded-[20px] border border-[var(--color-n400)]">
+        <div class="overflow-x-auto"><table class="w-full text-[14px]">
+          <thead><tr class="bg-[var(--color-dark-olive)]"><th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-white/70">Feature</th><th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-[var(--color-brand)]">Fixed Deposit</th><th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-[var(--color-brand)]">Equity</th><th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-[var(--color-brand)]">Mutual Funds</th></tr></thead>
+          <tbody class="divide-y divide-[var(--color-n400)]">{vsRows.map((r,i) => (<tr class={i%2===0?'bg-white':'bg-[#f8f6f1]'}><td class="px-6 py-4 font-semibold text-[var(--color-ink)]">{r.feature}</td><td class="px-6 py-4 text-[var(--color-muted)]">{r.fd}</td><td class="px-6 py-4 text-[var(--color-muted)]">{r.equity}</td><td class="px-6 py-4 text-[var(--color-muted)]">{r.mf}</td></tr>))}</tbody>
+        </table></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="equity-reveal"><p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">FAQ</p><h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Frequently Asked Questions</h2></div>
+      <div class="equity-reveal mt-10 divide-y divide-[var(--color-n400)] overflow-hidden rounded-[24px] border border-[var(--color-n400)] bg-white">
+        {faqs.map(item => (<details class="eq-faq group"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 hover:bg-[var(--color-n100)]"><span class="text-[15px] font-medium text-[var(--color-ink)]">{item.q}</span><span class="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-[var(--color-n400)] transition-transform group-open:rotate-45"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" class="h-3 w-3"><path d="M6 2v8M2 6h8"/></svg></span></summary><div class="border-t border-[var(--color-n400)] bg-[var(--color-n100)] px-6 py-5"><p class="text-[14px] leading-relaxed text-[var(--color-muted)]">{item.a}</p></div></details>))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[var(--color-dark-800)] py-16 lg:py-20">
+    <div class="site-wrap">
+      <div class="equity-reveal flex flex-col items-center gap-6 text-center lg:flex-row lg:items-center lg:justify-between lg:text-left">
+        <div>
+          <h2 class="text-[28px] font-bold text-white lg:text-[36px]" style="font-family:var(--font-display)">Secure Your Savings with a Fixed Deposit</h2>
+          <p class="mt-3 max-w-lg text-[15px] text-white/55">Book an FD with Shriram Financial Services — up to 8.5% p.a., fully digital, and with special rates for senior citizens.</p>
+        </div>
+        <div class="flex shrink-0 flex-col gap-3 sm:flex-row">
+          <a href="/about/open-demat-account/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] bg-[var(--color-brand)] text-[14px] font-semibold text-[#202318] hover:bg-[var(--color-brand-hover)]">Book FD Now →</a>
+          <a href="/about/support/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] border border-white/20 text-[14px] font-medium text-white hover:bg-white/10">Talk to an RM</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .equity-reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1), transform 0.65s cubic-bezier(0.22,1,0.36,1); }
+  .equity-reveal.in-view { opacity: 1; transform: translateY(0); }
+</style>
+<script>
+  const obs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { const el = e.target as HTMLElement; setTimeout(() => el.classList.add('in-view'), parseInt(el.style.animationDelay)||0); obs.unobserve(el); } }); }, { threshold: 0.10 });
+  document.querySelectorAll('.equity-reveal').forEach(el => obs.observe(el));
+  document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(d => { d.addEventListener('toggle', () => { if (d.open) document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(o => { if (o !== d) o.removeAttribute('open'); }); }); });
+</script>

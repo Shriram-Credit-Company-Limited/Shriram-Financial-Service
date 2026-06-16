@@ -1,0 +1,146 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const loanTypes = [
+  { label: 'Personal Loan', desc: 'Unsecured loan for personal needs — medical emergencies, travel, weddings, home renovation, or debt consolidation. Fast digital approval with minimal documentation.', rate: '11%–24% p.a.', amount: 'Up to ₹40 Lakhs', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>` },
+  { label: 'Loan Against Mutual Funds', desc: 'Pledge your mutual fund units as collateral and access up to 50–80% of their value as a loan. Your SIPs continue; units remain in your portfolio earning returns.', rate: '9.5%–14% p.a.', amount: 'Up to ₹1 Crore', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M3 3v18h18"/><path d="m7 12 4-4 4 4 4-4"/></svg>` },
+  { label: 'Loan Against Stocks', desc: 'Use your equity portfolio as collateral. Get instant liquidity without selling your shares — earn dividends and participate in appreciation while your shares are pledged.', rate: '10.5%–15% p.a.', amount: 'Up to ₹5 Crore', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M3 3v18h18"/><path d="m7 16 4-4 4 4 4-4"/></svg>` },
+  { label: 'Business Loan', desc: 'Unsecured business loans for working capital, equipment purchase, expansion, or inventory financing. Fast processing for MSMEs, self-employed professionals, and growing businesses.', rate: '13%–22% p.a.', amount: 'Up to ₹50 Lakhs', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3H8L2 7h20l-6-4z"/></svg>` },
+];
+
+const eligibility = [
+  'Indian resident aged 21–65 years (personal) or 21–70 years (business)',
+  'Minimum monthly income: ₹20,000 (salaried) or ₹25,000 (self-employed)',
+  'Credit score (CIBIL) of 700+ recommended for best rates',
+  'Stable employment of 6+ months (salaried) or 2+ years in business',
+  'Active bank account with regular transaction history',
+];
+
+const documents = [
+  'PAN Card and Aadhaar Card',
+  'Address Proof — Aadhaar / Passport / Utility Bill',
+  'Income Proof — last 3 months salary slips or ITR (2 years)',
+  'Bank statements (last 6 months)',
+  'Business proof (for business loans) — GST certificate, trade licence',
+];
+
+const steps = [
+  { n: '01', title: 'Check Eligibility', desc: 'Use the online eligibility calculator. Enter your income, existing EMIs, and loan amount needed to see your options instantly.' },
+  { n: '02', title: 'Submit Application', desc: 'Fill the digital application form on the Shriram platform. Upload documents via the app — no branch visit needed.' },
+  { n: '03', title: 'Credit Assessment', desc: 'Our team verifies income, credit history, and repayment capacity. Approval decision is typically communicated within 24–48 hours.' },
+  { n: '04', title: 'Disbursal', desc: 'Loan amount credited directly to your bank account. For secured loans (against MF/stocks), pledge is registered digitally before disbursal.' },
+];
+
+const faqs = [
+  { q: 'What is the difference between Loan Against MF and Loan Against Stocks?', a: 'Both are secured loans against your investments. Loan Against Mutual Funds (LAMF) allows you to pledge mutual fund units (equity and debt funds) and get up to 50–80% of NAV as credit. Loan Against Shares (LAS) allows you to pledge listed equity shares and get up to 50% of market value. Both let your investments continue earning while you access liquidity.' },
+  { q: 'Does a personal loan from Shriram require a salary slip?', a: 'For salaried individuals, the last 3 months\' salary slips and bank statements are the primary income proof. Self-employed individuals can use 2 years\' ITR and 6-month bank statements. We also have programs for individuals with informal income — contact your nearest Shriram branch for alternative documentation options.' },
+  { q: 'What happens if I miss an EMI?', a: 'Missing an EMI results in a late payment charge and a negative entry on your CIBIL credit report. For secured loans (LAMF, LAS), if the loan-to-value ratio exceeds the threshold due to market falls, Shriram may issue a margin call requiring additional collateral or partial repayment. Persistent defaults can lead to pledged securities being sold.' },
+  { q: 'Can I prepay my loan before the tenure ends?', a: 'Yes. Personal loans and business loans can be prepaid after the lock-in period (typically 6–12 months). Foreclosure charges of 2–5% on the outstanding principal may apply depending on the loan type and tenure elapsed. For secured loans against MF/stocks, prepayment is free after 3 months.' },
+  { q: 'How is interest calculated on a Loan Against Securities?', a: 'Loans Against Mutual Funds and Stocks use an overdraft-style interest calculation — interest is charged only on the amount drawn, not on the entire approved limit. This is more cost-effective than a term loan when you don\'t need the full sanctioned amount immediately.' },
+];
+---
+
+<BaseLayout
+  title="Loans — Personal, Business & Loan Against Investments | Shriram Financial Services"
+  description="Get personal loans, business loans, and loans against mutual funds or stocks from Shriram Financial Services. Fast approval, competitive rates, and minimal documentation."
+>
+
+  <section class="relative overflow-hidden bg-[var(--color-dark-800)]">
+    <div class="pointer-events-none absolute -right-40 -top-40 h-[560px] w-[560px] rounded-full bg-[var(--color-brand)]/10 blur-3xl"></div>
+    <div class="site-wrap relative py-16 lg:py-28">
+      <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Loans</p>
+      <h1 class="mt-4 max-w-3xl text-[32px] font-bold leading-tight text-white sm:text-[40px] lg:text-[56px]" style="font-family:var(--font-display)">
+        Access Instant Funds<br class="hidden sm:block"> Without Selling Your Investments
+      </h1>
+      <p class="mt-5 max-w-2xl text-[15px] leading-relaxed text-white/60 lg:text-[17px]">
+        From personal loans to loans against your portfolio — get liquidity when you need it, at competitive rates, with minimal paperwork from Shriram Financial Services.
+      </p>
+      <div class="mt-7 grid grid-cols-2 gap-x-6 gap-y-3 sm:flex sm:gap-8">
+        {[['Approval in 24–48 hours'],['No collateral (personal)'],['Portfolio stays invested'],['Competitive rates']].map(([l]) => (<div class="flex items-center gap-2 text-[13px] font-medium text-white/70"><span class="h-1.5 w-1.5 rounded-full bg-[var(--color-brand)]"></span>{l}</div>))}
+      </div>
+      <div class="mt-9 flex flex-wrap gap-3">
+        <a href="/about/open-demat-account/" class="btn-primary">Apply for a Loan</a>
+        <a href="/about/support/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] border border-white/25 text-[14px] font-medium text-white transition-colors hover:bg-white/10">Talk to RM</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="equity-reveal">
+        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Our Loan Products</p>
+        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Loan Solutions for Every Need</h2>
+        <p class="mt-4 max-w-3xl text-[15px] text-[var(--color-muted)]">Whether you need liquidity for personal use, business growth, or want to unlock value from your investment portfolio — Shriram has a loan product for you.</p>
+      </div>
+      <div class="mt-10 grid gap-5 sm:grid-cols-2">
+        {loanTypes.map((l, i) => (<div class="equity-reveal product-card-light flex flex-col gap-4 p-7" style={`animation-delay:${i*60}ms`}><div class="flex h-12 w-12 items-center justify-center rounded-[12px] bg-[var(--color-dark-olive)] text-[var(--color-brand)]" set:html={l.icon} /><h3 class="text-[17px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{l.label}</h3><p class="text-[13px] leading-relaxed text-[var(--color-muted)]">{l.desc}</p><div class="mt-auto flex gap-6 border-t border-[var(--color-n400)] pt-4 text-[12px]"><div><span class="font-semibold text-[var(--color-ink)]">Rate: </span><span class="text-[var(--color-muted)]">{l.rate}</span></div><div><span class="font-semibold text-[var(--color-ink)]">Amount: </span><span class="text-[var(--color-muted)]">{l.amount}</span></div></div></div>))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[#f8f6f1] py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="equity-reveal">
+        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Requirements</p>
+        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Eligibility &amp; Documents Required</h2>
+      </div>
+      <div class="equity-reveal mt-10 grid gap-6 sm:grid-cols-2">
+        <div class="rounded-[20px] border border-[var(--color-warm-border)] bg-white p-8">
+          <h3 class="mb-5 text-[17px] font-bold text-[var(--color-ink)]">Eligibility Criteria</h3>
+          <ul class="space-y-3">{eligibility.map(item => (<li class="flex items-start gap-3"><span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--color-brand)]/20"><svg viewBox="0 0 12 12" fill="none" stroke="var(--color-brand-deep)" stroke-width="2" class="h-3 w-3"><path d="M2 6l3 3 5-5"/></svg></span><span class="text-[13px] leading-snug text-[var(--color-ink)]">{item}</span></li>))}</ul>
+        </div>
+        <div class="rounded-[20px] border border-[var(--color-warm-border)] bg-white p-8">
+          <h3 class="mb-5 text-[17px] font-bold text-[var(--color-ink)]">Documents Required</h3>
+          <ul class="space-y-3">{documents.map(item => (<li class="flex items-start gap-3"><span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--color-brand)]/20"><svg viewBox="0 0 12 12" fill="none" stroke="var(--color-brand-deep)" stroke-width="2" class="h-3 w-3"><path d="M2 6l3 3 5-5"/></svg></span><span class="text-[13px] leading-snug text-[var(--color-ink)]">{item}</span></li>))}</ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="equity-reveal text-center">
+        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Getting Started</p>
+        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">How to Apply for a Loan</h2>
+      </div>
+      <div class="equity-reveal mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {steps.map((s, i) => (<div class="relative rounded-[20px] border border-[var(--color-warm-border)] bg-[#f8f6f1] p-7" style={`animation-delay:${i*60}ms`}><span class="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-dark-olive)] text-[13px] font-bold text-[var(--color-brand)]">{s.n}</span>{i < steps.length - 1 && <span class="absolute -right-3 top-9 hidden lg:flex"><svg viewBox="0 0 12 12" fill="none" stroke="var(--color-brand)" stroke-width="2" class="h-3 w-3"><path d="M2 6h8M6 2l4 4-4 4"/></svg></span>}<h3 class="mt-4 text-[15px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{s.title}</h3><p class="mt-2 text-[13px] leading-relaxed text-[var(--color-muted)]">{s.desc}</p></div>))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[#f8f6f1] py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="equity-reveal"><p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">FAQ</p><h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Frequently Asked Questions</h2></div>
+      <div class="equity-reveal mt-10 divide-y divide-[var(--color-n400)] overflow-hidden rounded-[24px] border border-[var(--color-n400)] bg-white">
+        {faqs.map(item => (<details class="eq-faq group"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 hover:bg-[var(--color-n100)]"><span class="text-[15px] font-medium text-[var(--color-ink)]">{item.q}</span><span class="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-[var(--color-n400)] transition-transform group-open:rotate-45"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" class="h-3 w-3"><path d="M6 2v8M2 6h8"/></svg></span></summary><div class="border-t border-[var(--color-n400)] bg-[var(--color-n100)] px-6 py-5"><p class="text-[14px] leading-relaxed text-[var(--color-muted)]">{item.a}</p></div></details>))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[var(--color-dark-800)] py-16 lg:py-20">
+    <div class="site-wrap">
+      <div class="equity-reveal flex flex-col items-center gap-6 text-center lg:flex-row lg:items-center lg:justify-between lg:text-left">
+        <div>
+          <h2 class="text-[28px] font-bold text-white lg:text-[36px]" style="font-family:var(--font-display)">Get the Funds You Need — Fast</h2>
+          <p class="mt-3 max-w-lg text-[15px] text-white/55">Apply for a personal loan, business loan, or unlock value from your portfolio — all fully digital with 24-hour approval.</p>
+        </div>
+        <div class="flex shrink-0 flex-col gap-3 sm:flex-row">
+          <a href="/about/open-demat-account/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] bg-[var(--color-brand)] text-[14px] font-semibold text-[#202318] hover:bg-[var(--color-brand-hover)]">Apply Now →</a>
+          <a href="/about/support/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] border border-white/20 text-[14px] font-medium text-white hover:bg-white/10">Talk to an RM</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .equity-reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1), transform 0.65s cubic-bezier(0.22,1,0.36,1); }
+  .equity-reveal.in-view { opacity: 1; transform: translateY(0); }
+</style>
+<script>
+  const obs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { const el = e.target as HTMLElement; setTimeout(() => el.classList.add('in-view'), parseInt(el.style.animationDelay)||0); obs.unobserve(el); } }); }, { threshold: 0.10 });
+  document.querySelectorAll('.equity-reveal').forEach(el => obs.observe(el));
+  document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(d => { d.addEventListener('toggle', () => { if (d.open) document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(o => { if (o !== d) o.removeAttribute('open'); }); }); });
+</script>

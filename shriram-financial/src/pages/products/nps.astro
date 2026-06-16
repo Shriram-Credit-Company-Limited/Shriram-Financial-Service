@@ -1,0 +1,174 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const accounts = [
+  { label: 'Tier 1 Account', desc: 'The primary NPS pension account. Contributions are tax-deductible. Withdrawals are restricted until age 60 — designed for retirement savings. Minimum contribution: ₹500/year.', tag: 'Tax-Exempt' },
+  { label: 'Tier 2 Account', desc: 'A voluntary savings account linked to Tier 1. No tax benefit (except for government employees). Fully liquid — withdraw anytime. Minimum contribution: ₹250/year.', tag: 'Flexible' },
+];
+
+const assetClasses = [
+  { code: 'E', label: 'Equity (Class E)', desc: 'Invests in equity and equity-related instruments. Maximum allocation: 75% (up to age 50, then tapers). Highest growth potential, highest volatility.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M3 3v18h18"/><path d="m7 12 4-4 4 4 4-4"/></svg>` },
+  { code: 'C', label: 'Corporate Bonds (Class C)', desc: 'Invests in high-rated corporate debt instruments (AA or above). Moderate risk and moderate returns. Good for stability and predictable income.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 9h8M8 13h5"/></svg>` },
+  { code: 'G', label: 'Government Securities (Class G)', desc: 'Invests in central and state government bonds. Lowest risk class. Suitable for conservative investors approaching retirement.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M3 22V12l9-9 9 9v10M9 22v-6h6v6"/></svg>` },
+  { code: 'A', label: 'Alternative Investments (Class A)', desc: 'REITs, InvITs, and other alternative assets. Maximum 5% allocation. Offers diversification beyond traditional asset classes.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><circle cx="12" cy="12" r="9"/><path d="M12 3v9l6 3"/></svg>` },
+];
+
+const taxRows = [
+  { section: '80CCD(1)', limit: '₹1,50,000 per year', category: 'Employee / Self-employed', note: 'Part of overall 80C limit of ₹1.5 lakh' },
+  { section: '80CCD(1B)', limit: '₹50,000 per year (additional)', category: 'All NPS subscribers', note: 'Over and above the 80C limit — exclusive to NPS' },
+  { section: '80CCD(2)', limit: 'Up to 10% of Basic + DA', category: 'Salaried (employer contribution)', note: 'No upper limit; employer\'s contribution is deductible' },
+];
+
+const vsRows = [
+  { feature: 'Purpose', nps: 'Market-linked retirement savings', epf: 'Retirement corpus for salaried', ppf: 'Tax-free long-term savings' },
+  { feature: 'Returns', nps: 'Market-linked (8–12% historically)', epf: '8.25% (FY2024, declared by EPFO)', ppf: '7.1% (current, reviewed quarterly)' },
+  { feature: 'Lock-in', nps: 'Until age 60', epf: 'Until retirement (partial withdrawal allowed)', ppf: '15 years (partial withdrawal from year 7)' },
+  { feature: 'Tax on Maturity', nps: '60% tax-free, 40% annuity (taxable)', epf: 'Tax-free (if 5+ years)', ppf: 'Fully tax-free' },
+  { feature: 'Employer Contribution', nps: '10% of Basic+DA (govt), 14% for govt employee', epf: '12% of Basic+DA (mandatory)', ppf: 'No employer contribution' },
+  { feature: 'SEBI/PFRDA Regulated', nps: 'PFRDA', epf: 'EPFO', ppf: 'Ministry of Finance' },
+];
+
+const steps = [
+  { n: '01', title: 'Choose PRAN Account Type', desc: 'Select Tier 1 (pension) or Tier 1 + Tier 2 (pension + savings). Choose your Pension Fund Manager (HDFC, SBI, Kotak, etc.).' },
+  { n: '02', title: 'Submit KYC & Documents', desc: 'Complete Aadhaar-based e-KYC on the Shriram platform. Submit PAN, address proof, and nominee details digitally.' },
+  { n: '03', title: 'Choose Asset Allocation', desc: 'Select Active Choice (you control the E/C/G split) or Auto Choice (age-based automatic rebalancing) — or the aggressive/moderate/conservative lifecycle fund.' },
+  { n: '04', title: 'Start Contributing', desc: 'Make your first contribution (minimum ₹500 for Tier 1, ₹250 for Tier 2). Set up auto-debit for regular contributions and track your corpus in real time.' },
+];
+
+const faqs = [
+  { q: 'Can I withdraw from NPS before retirement?', a: 'Partial withdrawals from NPS Tier 1 are allowed after 3 years for specific reasons: children\'s higher education or marriage, purchase/construction of a residential house, treatment of critical illness, or setting up a new business. Up to 25% of your own contributions can be withdrawn; you can make up to 3 withdrawals in your lifetime.' },
+  { q: 'What happens to NPS at retirement (age 60)?', a: 'At age 60, you can withdraw up to 60% of the corpus as a lump sum — tax-free. The remaining 40% must be used to purchase an annuity from a PFRDA-registered insurance company, which pays you a monthly pension. You can defer withdrawal until age 75 if you choose.' },
+  { q: 'Is NPS better than PPF for tax saving?', a: 'NPS offers a higher potential tax deduction (₹2 lakh total via 80C + 80CCD(1B) exclusively) vs PPF\'s ₹1.5 lakh under 80C. However, PPF maturity is fully tax-free while NPS corpus is partially taxable (annuity income is taxed as per slab). NPS also offers higher return potential through equity exposure. Most advisors recommend both.' },
+  { q: 'What is the minimum annual contribution for NPS?', a: 'For Tier 1 NPS: minimum ₹500 per contribution and ₹1,000 per financial year. For Tier 2 NPS: minimum ₹250 per contribution with no annual minimum. If you fail to contribute the minimum in Tier 1, your PRAN becomes inactive and a penalty of ₹100 per year of inactivity applies.' },
+  { q: 'Can self-employed individuals invest in NPS?', a: 'Yes. NPS is available to all Indian citizens aged 18–70, including self-employed individuals, freelancers, and non-salaried professionals. Self-employed subscribers can claim deductions under Section 80CCD(1) up to 20% of gross income (within the 80C limit of ₹1.5 lakh) plus the additional ₹50,000 under 80CCD(1B).' },
+];
+---
+
+<BaseLayout
+  title="National Pension Scheme (NPS) — Tax-Efficient Retirement Planning | Shriram Financial Services"
+  description="Join NPS through Shriram Financial Services and build a tax-efficient retirement corpus. Save up to ₹2 lakh in tax deductions annually with market-linked returns."
+>
+
+  <section class="relative overflow-hidden bg-[var(--color-dark-800)]">
+    <div class="pointer-events-none absolute -right-40 -top-40 h-[560px] w-[560px] rounded-full bg-[var(--color-brand)]/10 blur-3xl"></div>
+    <div class="site-wrap relative py-16 lg:py-28">
+      <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">National Pension Scheme</p>
+      <h1 class="mt-4 max-w-3xl text-[32px] font-bold leading-tight text-white sm:text-[40px] lg:text-[56px]" style="font-family:var(--font-display)">
+        Retire Rich with NPS —<br class="hidden sm:block"> Tax-Efficient &amp; Market-Linked
+      </h1>
+      <p class="mt-5 max-w-2xl text-[15px] leading-relaxed text-white/60 lg:text-[17px]">
+        The National Pension Scheme (NPS) offers up to ₹2 lakh in tax deductions annually, market-linked returns, and a guaranteed retirement income — all in one PFRDA-regulated account.
+      </p>
+      <div class="mt-7 grid grid-cols-2 gap-x-6 gap-y-3 sm:flex sm:gap-8">
+        {[['Up to ₹2L tax saving'],['PFRDA regulated'],['Market-linked returns'],['Flexible fund choice']].map(([l]) => (<div class="flex items-center gap-2 text-[13px] font-medium text-white/70"><span class="h-1.5 w-1.5 rounded-full bg-[var(--color-brand)]"></span>{l}</div>))}
+      </div>
+      <div class="mt-9 flex flex-wrap gap-3">
+        <a href="/about/open-demat-account/" class="btn-primary">Open NPS Account</a>
+        <a href="/about/support/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] border border-white/25 text-[14px] font-medium text-white transition-colors hover:bg-white/10">Talk to RM</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="equity-reveal">
+        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Account Types</p>
+        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">NPS Account Types — Tier 1 &amp; Tier 2</h2>
+        <p class="mt-4 max-w-3xl text-[15px] text-[var(--color-muted)]">NPS operates through two types of accounts designed for different financial needs — mandatory pension savings and flexible voluntary savings.</p>
+      </div>
+      <div class="equity-reveal mt-10 grid gap-5 sm:grid-cols-2">
+        {accounts.map((a, i) => (<div class="product-card-light p-8" style={`animation-delay:${i*80}ms`}><span class="inline-flex w-fit rounded-full bg-[var(--color-brand)]/15 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-[var(--color-brand-deep)]">{a.tag}</span><h3 class="mt-4 text-[18px] font-bold text-[var(--color-dark-olive)]" style="font-family:var(--font-display)">{a.label}</h3><p class="mt-3 text-[14px] leading-relaxed text-[var(--color-muted)]">{a.desc}</p></div>))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[#f8f6f1] py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="equity-reveal">
+        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Asset Classes</p>
+        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">NPS Asset Classes — Where Your Money is Invested</h2>
+      </div>
+      <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {assetClasses.map((a, i) => (<div class="equity-reveal product-card-light flex flex-col gap-3 p-6" style={`animation-delay:${i*60}ms`}><div class="flex items-center gap-3"><div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] bg-[var(--color-dark-olive)] text-[13px] font-bold text-[var(--color-brand)]">Class {a.code}</div></div><h3 class="text-[15px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{a.label}</h3><p class="text-[13px] leading-relaxed text-[var(--color-muted)]">{a.desc}</p></div>))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="equity-reveal">
+        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Tax Benefits</p>
+        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Tax Savings with NPS</h2>
+        <p class="mt-3 max-w-2xl text-[15px] text-[var(--color-muted)]">NPS offers the highest combined tax deduction among all Section 80 instruments — up to ₹2 lakh per year with the right combination.</p>
+      </div>
+      <div class="equity-reveal mt-10 overflow-hidden rounded-[20px] border border-[var(--color-n400)]">
+        <div class="overflow-x-auto"><table class="w-full text-[14px]">
+          <thead><tr class="bg-[var(--color-dark-olive)]"><th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-white/70">Section</th><th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-[var(--color-brand)]">Deduction Limit</th><th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-[var(--color-brand)]">Eligible For</th><th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-[var(--color-brand)]">Note</th></tr></thead>
+          <tbody class="divide-y divide-[var(--color-n400)]">{taxRows.map((r,i) => (<tr class={i%2===0?'bg-white':'bg-[#f8f6f1]'}><td class="px-6 py-4 font-semibold text-[var(--color-brand-deep)]">{r.section}</td><td class="px-6 py-4 font-medium text-[var(--color-ink)]">{r.limit}</td><td class="px-6 py-4 text-[var(--color-muted)]">{r.category}</td><td class="px-6 py-4 text-[var(--color-muted)] text-[12px]">{r.note}</td></tr>))}</tbody>
+        </table></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[#f8f6f1] py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="equity-reveal text-center">
+        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Getting Started</p>
+        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">How to Join NPS</h2>
+      </div>
+      <div class="equity-reveal mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {steps.map((s, i) => (<div class="relative rounded-[20px] border border-[var(--color-warm-border)] bg-white p-7" style={`animation-delay:${i*60}ms`}><span class="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-dark-olive)] text-[13px] font-bold text-[var(--color-brand)]">{s.n}</span>{i < steps.length - 1 && <span class="absolute -right-3 top-9 hidden lg:flex"><svg viewBox="0 0 12 12" fill="none" stroke="var(--color-brand)" stroke-width="2" class="h-3 w-3"><path d="M2 6h8M6 2l4 4-4 4"/></svg></span>}<h3 class="mt-4 text-[15px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{s.title}</h3><p class="mt-2 text-[13px] leading-relaxed text-[var(--color-muted)]">{s.desc}</p></div>))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="equity-reveal">
+        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Comparison</p>
+        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">NPS vs EPF vs PPF</h2>
+      </div>
+      <div class="equity-reveal mt-10 overflow-hidden rounded-[20px] border border-[var(--color-n400)]">
+        <div class="overflow-x-auto"><table class="w-full text-[14px]">
+          <thead><tr class="bg-[var(--color-dark-olive)]"><th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-white/70">Feature</th><th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-[var(--color-brand)]">NPS</th><th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-[var(--color-brand)]">EPF</th><th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-[var(--color-brand)]">PPF</th></tr></thead>
+          <tbody class="divide-y divide-[var(--color-n400)]">{vsRows.map((r,i) => (<tr class={i%2===0?'bg-white':'bg-[#f8f6f1]'}><td class="px-6 py-4 font-semibold text-[var(--color-ink)]">{r.feature}</td><td class="px-6 py-4 text-[var(--color-muted)]">{r.nps}</td><td class="px-6 py-4 text-[var(--color-muted)]">{r.epf}</td><td class="px-6 py-4 text-[var(--color-muted)]">{r.ppf}</td></tr>))}</tbody>
+        </table></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[#f8f6f1] py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="equity-reveal"><p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">FAQ</p><h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Frequently Asked Questions</h2></div>
+      <div class="equity-reveal mt-10 divide-y divide-[var(--color-n400)] overflow-hidden rounded-[24px] border border-[var(--color-n400)] bg-white">
+        {faqs.map(item => (<details class="eq-faq group"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 hover:bg-[var(--color-n100)]"><span class="text-[15px] font-medium text-[var(--color-ink)]">{item.q}</span><span class="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-[var(--color-n400)] transition-transform group-open:rotate-45"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" class="h-3 w-3"><path d="M6 2v8M2 6h8"/></svg></span></summary><div class="border-t border-[var(--color-n400)] bg-[var(--color-n100)] px-6 py-5"><p class="text-[14px] leading-relaxed text-[var(--color-muted)]">{item.a}</p></div></details>))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[var(--color-dark-800)] py-16 lg:py-20">
+    <div class="site-wrap">
+      <div class="equity-reveal flex flex-col items-center gap-6 text-center lg:flex-row lg:items-center lg:justify-between lg:text-left">
+        <div>
+          <h2 class="text-[28px] font-bold text-white lg:text-[36px]" style="font-family:var(--font-display)">Secure Your Retirement with NPS Today</h2>
+          <p class="mt-3 max-w-lg text-[15px] text-white/55">Open your NPS PRAN account with Shriram Financial Services. Save tax, grow wealth, and ensure a guaranteed monthly pension.</p>
+        </div>
+        <div class="flex shrink-0 flex-col gap-3 sm:flex-row">
+          <a href="/about/open-demat-account/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] bg-[var(--color-brand)] text-[14px] font-semibold text-[#202318] hover:bg-[var(--color-brand-hover)]">Open NPS Account →</a>
+          <a href="/about/support/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] border border-white/20 text-[14px] font-medium text-white hover:bg-white/10">Talk to an RM</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .equity-reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1), transform 0.65s cubic-bezier(0.22,1,0.36,1); }
+  .equity-reveal.in-view { opacity: 1; transform: translateY(0); }
+</style>
+<script>
+  const obs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { const el = e.target as HTMLElement; setTimeout(() => el.classList.add('in-view'), parseInt(el.style.animationDelay)||0); obs.unobserve(el); } }); }, { threshold: 0.10 });
+  document.querySelectorAll('.equity-reveal').forEach(el => obs.observe(el));
+  document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(d => { d.addEventListener('toggle', () => { if (d.open) document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(o => { if (o !== d) o.removeAttribute('open'); }); }); });
+</script>

@@ -1,0 +1,161 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const ipoTypes = [
+  { label: 'Mainboard IPO', desc: 'Large companies with ₹10 crore minimum paid-up capital list on NSE/BSE main board. Subject to full SEBI disclosure norms and are typically well-covered by analysts and institutions.', tag: 'Large Cap' },
+  { label: 'SME IPO', desc: 'Small and Medium Enterprises with paid-up capital between ₹1–25 crore list on NSE Emerge or BSE SME. Higher growth potential but require thorough due diligence.', tag: 'High Growth' },
+  { label: 'Offer for Sale (OFS)', desc: 'Existing shareholders (promoters or PE investors) sell their stake through the OFS route. No new capital is raised by the company; shares are transferred from seller to buyer.', tag: 'Secondary' },
+];
+
+const steps = [
+  { n: '01', title: 'Check Upcoming IPOs', desc: 'Browse all live and upcoming IPOs on the Shriram platform. Read the DRHP, review financials, and check GMP and subscription trends.' },
+  { n: '02', title: 'Enter Bid Details', desc: 'Choose the price band, lot size, and bid quantity. You can bid at the cut-off price or a specific price within the band.' },
+  { n: '03', title: 'ASBA / UPI Mandate', desc: 'Funds are blocked in your bank account via ASBA or UPI mandate — no outflow until allotment. Blocked amounts earn interest.' },
+  { n: '04', title: 'Allotment & Listing', desc: 'Allotment is done by lottery (if oversubscribed). Shares are credited to your Demat before listing day. Non-allotment amounts are unblocked immediately.' },
+];
+
+const timeline = [
+  { label: 'IPO Open Date', desc: 'Issue opens for bidding — typically 3 days. Price band and lot size are fixed.' },
+  { label: 'IPO Close Date', desc: 'Last day to place bids. Revisions or cancellations must be done before close time (typically 5 PM).' },
+  { label: 'Basis of Allotment', desc: 'Published 6 days after close. Check allotment status on BSE/NSE or Shriram platform.' },
+  { label: 'Refund / Unblocking', desc: 'Non-allotted UPI mandates are released within T+1 day of allotment. ASBA amounts are also unblocked.' },
+  { label: 'Demat Credit', desc: 'Shares credited to your Demat account one day before listing, typically T+5 or T+6 from close date.' },
+  { label: 'Listing Day', desc: 'Stock begins trading on NSE/BSE. You can hold for the long term or book profits on listing day.' },
+];
+
+const risks = [
+  { label: 'Overvaluation Risk', desc: 'IPOs are priced by investment bankers with company interest in mind. Some IPOs list at or below issue price — thorough due diligence is essential before applying.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M3 3v18h18"/><path d="m7 14 4-5 4 3 4-6"/></svg>` },
+  { label: 'Non-Allotment Risk', desc: 'In oversubscribed IPOs (especially retail categories), allotment is by computerised lottery. You may not receive shares even after bidding — funds are simply returned.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>` },
+  { label: 'Listing Volatility', desc: 'Stocks often see extreme price swings on listing day. A stock may list high and fall sharply, or list below issue price. Market sentiment plays a huge role on day one.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>` },
+  { label: 'Lock-In Risk', desc: 'Anchor investor and promoter shares are locked in for 30–90 days post-listing. Their selling activity after lock-in expiry can pressure the share price significantly.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>` },
+];
+
+const faqs = [
+  { q: 'What is ASBA in an IPO application?', a: 'ASBA (Application Supported by Blocked Amount) is the standard IPO application method. Instead of transferring funds to the company, your bid amount is blocked in your bank account. Interest continues to accrue. The amount is only debited on allotment; non-allotted amounts are unblocked immediately.' },
+  { q: 'Can I apply for IPO through Shriram Financial Services?', a: 'Yes. Shriram Financial Services provides a seamless online IPO application platform through the Antara app and web portal. You can view upcoming IPOs, apply via UPI or ASBA, track allotment status, and receive Demat credit — all in one place.' },
+  { q: 'What is the minimum lot size for IPO applications?', a: 'SEBI mandates that retail investors apply for a minimum of 1 lot (typically 10–200 shares depending on the issue price). The minimum application value is set so that a single lot is approximately ₹10,000–₹15,000. HNI/Non-Institutional Investors bid for a minimum of ₹2 lakh.' },
+  { q: 'Is there a GMP (Grey Market Premium) and should I trust it?', a: 'GMP is the premium at which shares trade in the unofficial grey market before listing. While GMP can indicate demand sentiment, it is unofficial, unregulated, and not always accurate. Do not base your IPO investment decision solely on GMP — analyse the fundamentals of the company first.' },
+  { q: 'How many IPO applications can I submit?', a: 'You can submit only one IPO application per PAN card in the Retail Individual Investor (RII) category. Submitting multiple applications using the same PAN results in rejection of all bids. Family members with separate PAN cards can each submit individual applications.' },
+];
+---
+
+<BaseLayout
+  title="IPO Application — Apply for Upcoming IPOs Online | Shriram Financial Services"
+  description="Apply for upcoming IPOs online through Shriram Financial Services. Seamless ASBA and UPI applications, allotment tracking, and Demat credit — all in one platform."
+>
+
+  <section class="relative overflow-hidden bg-[var(--color-dark-800)]">
+    <div class="pointer-events-none absolute -right-40 -top-40 h-[560px] w-[560px] rounded-full bg-[var(--color-brand)]/10 blur-3xl"></div>
+    <div class="site-wrap relative py-16 lg:py-28">
+      <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Initial Public Offering</p>
+      <h1 class="mt-4 max-w-3xl text-[32px] font-bold leading-tight text-white sm:text-[40px] lg:text-[56px]" style="font-family:var(--font-display)">
+        Apply for IPOs Before<br class="hidden sm:block"> They Hit the Market
+      </h1>
+      <p class="mt-5 max-w-2xl text-[15px] leading-relaxed text-white/60 lg:text-[17px]">
+        Access all upcoming Mainboard and SME IPOs through the Shriram platform. Apply via UPI or ASBA, track allotment, and receive shares directly to your Demat.
+      </p>
+      <div class="mt-7 grid grid-cols-2 gap-x-6 gap-y-3 sm:flex sm:gap-8">
+        {[['Zero brokerage on application'],['UPI & ASBA support'],['Real-time allotment tracking'],['Demat credit T+5/T+6']].map(([l]) => (<div class="flex items-center gap-2 text-[13px] font-medium text-white/70"><span class="h-1.5 w-1.5 rounded-full bg-[var(--color-brand)]"></span>{l}</div>))}
+      </div>
+      <div class="mt-9 flex flex-wrap gap-3">
+        <a href="/about/open-demat-account/" class="btn-primary">Apply for IPO Now</a>
+        <a href="/about/support/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] border border-white/25 text-[14px] font-medium text-white transition-colors hover:bg-white/10">Talk to RM</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="equity-reveal">
+        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Types</p>
+        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Types of IPO &amp; Offer for Sale</h2>
+        <p class="mt-4 max-w-3xl text-[15px] text-[var(--color-muted)]">Not all public offerings are the same. Understanding the type helps you evaluate risk, pricing, and post-listing behaviour.</p>
+      </div>
+      <div class="equity-reveal mt-10 grid gap-5 sm:grid-cols-3">
+        {ipoTypes.map((t, i) => (
+          <div class="product-card-light flex flex-col gap-4 p-7" style={`animation-delay:${i*60}ms`}>
+            <span class="inline-flex w-fit rounded-full bg-[var(--color-brand)]/15 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-[var(--color-brand-deep)]">{t.tag}</span>
+            <h3 class="text-[17px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{t.label}</h3>
+            <p class="text-[13px] leading-relaxed text-[var(--color-muted)]">{t.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[#f8f6f1] py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="equity-reveal text-center">
+        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Getting Started</p>
+        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">How to Apply for an IPO</h2>
+      </div>
+      <div class="equity-reveal mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {steps.map((s, i) => (<div class="relative rounded-[20px] border border-[var(--color-warm-border)] bg-white p-7" style={`animation-delay:${i*60}ms`}><span class="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-dark-olive)] text-[13px] font-bold text-[var(--color-brand)]">{s.n}</span>{i < steps.length - 1 && <span class="absolute -right-3 top-9 hidden lg:flex"><svg viewBox="0 0 12 12" fill="none" stroke="var(--color-brand)" stroke-width="2" class="h-3 w-3"><path d="M2 6h8M6 2l4 4-4 4"/></svg></span>}<h3 class="mt-4 text-[15px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{s.title}</h3><p class="mt-2 text-[13px] leading-relaxed text-[var(--color-muted)]">{s.desc}</p></div>))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="equity-reveal">
+        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Timeline</p>
+        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">IPO Timeline — From Application to Listing</h2>
+      </div>
+      <div class="equity-reveal mt-10 space-y-3">
+        {timeline.map((t, i) => (
+          <div class="flex items-start gap-5 rounded-[16px] border border-[var(--color-n400)] bg-[#f8f6f1] p-5" style={`animation-delay:${i*40}ms`}>
+            <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[var(--color-dark-olive)] text-[11px] font-bold text-[var(--color-brand)]">{i+1}</span>
+            <div>
+              <h3 class="text-[14px] font-semibold text-[var(--color-ink)]">{t.label}</h3>
+              <p class="mt-1 text-[13px] text-[var(--color-muted)]">{t.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[#f8f6f1] py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="equity-reveal"><p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Know Before You Invest</p><h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Risks of IPO Investing</h2></div>
+      <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {risks.map((r, i) => (<div class="equity-reveal product-card-light flex flex-col gap-4 p-7" style={`animation-delay:${i*60}ms`}><div class="flex h-12 w-12 items-center justify-center rounded-[12px] bg-[#fef4e6] text-[var(--color-brand-deep)]" set:html={r.icon} /><h3 class="text-[16px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{r.label}</h3><p class="text-[13px] leading-relaxed text-[var(--color-muted)]">{r.desc}</p></div>))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="equity-reveal"><p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">FAQ</p><h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Frequently Asked Questions</h2></div>
+      <div class="equity-reveal mt-10 divide-y divide-[var(--color-n400)] overflow-hidden rounded-[24px] border border-[var(--color-n400)] bg-white">
+        {faqs.map(item => (<details class="eq-faq group"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 hover:bg-[var(--color-n100)]"><span class="text-[15px] font-medium text-[var(--color-ink)]">{item.q}</span><span class="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-[var(--color-n400)] transition-transform group-open:rotate-45"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" class="h-3 w-3"><path d="M6 2v8M2 6h8"/></svg></span></summary><div class="border-t border-[var(--color-n400)] bg-[var(--color-n100)] px-6 py-5"><p class="text-[14px] leading-relaxed text-[var(--color-muted)]">{item.a}</p></div></details>))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[var(--color-dark-800)] py-16 lg:py-20">
+    <div class="site-wrap">
+      <div class="equity-reveal flex flex-col items-center gap-6 text-center lg:flex-row lg:items-center lg:justify-between lg:text-left">
+        <div>
+          <h2 class="text-[28px] font-bold text-white lg:text-[36px]" style="font-family:var(--font-display)">Don't Miss the Next Big IPO</h2>
+          <p class="mt-3 max-w-lg text-[15px] text-white/55">Open your Demat account and be ready for every upcoming IPO. Zero commission. Instant UPI application. Fast allotment tracking.</p>
+        </div>
+        <div class="flex shrink-0 flex-col gap-3 sm:flex-row">
+          <a href="/about/open-demat-account/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] bg-[var(--color-brand)] text-[14px] font-semibold text-[#202318] hover:bg-[var(--color-brand-hover)]">Open Demat Account →</a>
+          <a href="/about/support/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] border border-white/20 text-[14px] font-medium text-white hover:bg-white/10">Talk to an RM</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .equity-reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1), transform 0.65s cubic-bezier(0.22,1,0.36,1); }
+  .equity-reveal.in-view { opacity: 1; transform: translateY(0); }
+</style>
+<script>
+  const obs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { const el = e.target as HTMLElement; setTimeout(() => el.classList.add('in-view'), parseInt(el.style.animationDelay)||0); obs.unobserve(el); } }); }, { threshold: 0.10 });
+  document.querySelectorAll('.equity-reveal').forEach(el => obs.observe(el));
+  document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(d => { d.addEventListener('toggle', () => { if (d.open) document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(o => { if (o !== d) o.removeAttribute('open'); }); }); });
+</script>

@@ -1,0 +1,185 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const pairs = [
+  { pair: 'USD/INR', full: 'US Dollar / Indian Rupee', desc: 'The most liquid currency pair in India. Directly affected by RBI interventions, US Fed rate decisions, and trade balance data.', lot: '1,000 USD', tick: '0.25 paise' },
+  { pair: 'EUR/INR', full: 'Euro / Indian Rupee', desc: 'Influenced by ECB monetary policy, Eurozone economic data, and the EUR/USD cross rate. Second most traded pair on NSE.', lot: '1,000 EUR', tick: '0.25 paise' },
+  { pair: 'GBP/INR', full: 'British Pound / Indian Rupee', desc: 'Sensitive to Bank of England decisions and UK economic indicators. Also reacts to Brexit-related policy developments.', lot: '1,000 GBP', tick: '0.25 paise' },
+  { pair: 'JPY/INR', full: 'Japanese Yen / Indian Rupee', desc: 'Cross-pair driven by Bank of Japan policy, risk-on/risk-off sentiment, and Japan\'s trade surplus. Priced per 100 JPY.', lot: '1,00,000 JPY', tick: '0.25 paise' },
+];
+
+const steps = [
+  { n: '01', title: 'Enable Currency Segment', desc: 'Add the currency derivatives segment to your Shriram trading account — fully digital, no branch visit required.' },
+  { n: '02', title: 'Add Trading Margin', desc: 'Transfer the required SPAN + Exposure margin. Currency futures require relatively low margins compared to equity F&O.' },
+  { n: '03', title: 'Choose Pair & Expiry', desc: 'Select your currency pair (USD/INR, EUR/INR, etc.) and the contract expiry — monthly contracts settling on the last business day.' },
+  { n: '04', title: 'Trade & Hedge', desc: 'Place orders, monitor your P&L in real time, and use the position to either speculate or hedge your forex exposure.' },
+];
+
+const chargeRows = [
+  { label: 'Brokerage', value: '₹20 per executed order' },
+  { label: 'STT', value: 'Nil (not applicable on currency derivatives)' },
+  { label: 'GST', value: '18% on brokerage + exchange charges' },
+  { label: 'Exchange Charges (NSE Currency)', value: '0.00035%' },
+  { label: 'SEBI Turnover Fee', value: '₹1 per crore' },
+];
+
+const vsRows = [
+  { feature: 'Purpose', currency: 'Hedge forex risk or speculate on exchange rates', equity: 'Invest in company ownership' },
+  { feature: 'Underlying', currency: 'Currency pair (USD/INR, EUR/INR, etc.)', equity: 'Stocks, indices' },
+  { feature: 'Lot Size', currency: '1,000 units of foreign currency', equity: 'Varies per contract' },
+  { feature: 'Settlement', currency: 'Cash settlement in INR at RBI reference rate', equity: 'Physical or cash settlement' },
+  { feature: 'Margin Required', currency: 'Low (2–4% of contract value)', equity: 'Higher (5–15%)' },
+  { feature: 'Trading Hours', currency: '9:00 AM – 5:00 PM (Mon–Fri)', equity: '9:15 AM – 3:30 PM' },
+];
+
+const risks = [
+  { label: 'Exchange Rate Risk', desc: 'Currency prices are highly sensitive to central bank policy, macroeconomic data releases, and geopolitical events — causing sudden, large moves.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>` },
+  { label: 'RBI Intervention Risk', desc: 'The Reserve Bank of India actively intervenes in the INR market to curb excess volatility — creating sharp, unpredictable counter-trend moves.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>` },
+  { label: 'Leverage Risk', desc: 'Currency futures are leveraged instruments. A small adverse rate movement can result in margin calls and losses exceeding your initial deposit.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>` },
+  { label: 'Liquidity Risk', desc: 'EUR/INR, GBP/INR, and JPY/INR pairs have significantly lower liquidity than USD/INR — making it harder to exit large positions at fair prices.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M3 3v18h18"/><path d="m7 14 4-5 4 3 4-6"/></svg>` },
+];
+
+const faqs = [
+  { q: 'Who should trade currency derivatives in India?', a: 'Currency derivatives are used by exporters and importers to hedge forex receivables/payables, portfolio investors holding foreign assets, and traders who want to speculate on exchange rate movements. Retail traders with macroeconomic knowledge and risk tolerance can also participate.' },
+  { q: 'Is RBI approval required for currency trading?', a: 'No special RBI approval is needed for residents trading currency derivatives on NSE or BSE. However, you must have an underlying forex exposure to trade in USD/INR positions exceeding $100 million. For speculative positions up to this limit, no underlying exposure is required.' },
+  { q: 'How is currency futures settlement done?', a: 'Currency futures are cash-settled. On expiry (the last business day of the month), the final settlement price is the RBI reference rate published at 12:30 PM. There is no physical delivery of foreign currency.' },
+  { q: 'What is the USDINR lot size?', a: 'The standard USD/INR lot size on NSE is 1,000 USD per contract. So a single lot has a notional value of approximately ₹83,000–₹85,000 (at current rates). The maximum permitted position is 6 million USD for non-bank entities.' },
+  { q: 'Can NRIs trade currency derivatives in India?', a: 'NRIs are currently not permitted to trade currency derivatives on Indian exchanges as per RBI/SEBI guidelines. Only persons resident in India (as defined by FEMA) are eligible to participate in the Indian currency futures and options market.' },
+];
+---
+
+<BaseLayout
+  title="Currency Trading — Forex Derivatives on NSE | Shriram Financial Services"
+  description="Trade USD/INR, EUR/INR, GBP/INR and JPY/INR currency futures and options on NSE with expert advisory and flat ₹20 brokerage from Shriram Financial Services."
+>
+
+  <section class="relative overflow-hidden bg-[var(--color-dark-800)]">
+    <div class="pointer-events-none absolute -right-40 -top-40 h-[560px] w-[560px] rounded-full bg-[var(--color-brand)]/10 blur-3xl"></div>
+    <div class="site-wrap relative py-16 lg:py-28">
+      <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Currency</p>
+      <h1 class="mt-4 max-w-3xl text-[32px] font-bold leading-tight text-white sm:text-[40px] lg:text-[56px]" style="font-family:var(--font-display)">
+        Trade Currency Futures<br class="hidden sm:block"> &amp; Hedge Forex Risk
+      </h1>
+      <p class="mt-5 max-w-2xl text-[15px] leading-relaxed text-white/60 lg:text-[17px]">
+        Access all four INR currency pairs — USD, EUR, GBP, and JPY — with live pricing, low margin requirements, and expert guidance from Shriram Financial Services.
+      </p>
+      <div class="mt-9 flex flex-wrap gap-3">
+        <a href="/about/open-demat-account/" class="btn-primary">Enable Currency Trading</a>
+        <a href="/about/support/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] border border-white/25 text-[14px] font-medium text-white transition-colors hover:bg-white/10">Talk to RM</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="equity-reveal">
+        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Currency Pairs</p>
+        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Currency Pairs Available on NSE</h2>
+        <p class="mt-4 max-w-3xl text-[15px] leading-relaxed text-[var(--color-muted)]">India's NSE offers futures and options on four INR-based currency pairs. All are cash-settled in INR at the RBI reference rate on expiry.</p>
+      </div>
+      <div class="mt-10 grid gap-5 sm:grid-cols-2">
+        {pairs.map((p, i) => (
+          <div class="equity-reveal product-card-light p-7" style={`animation-delay:${i*60}ms`}>
+            <div class="mb-4 flex items-center gap-3">
+              <div class="flex h-11 w-auto min-w-[60px] items-center justify-center rounded-[10px] bg-[var(--color-dark-olive)] px-3">
+                <span class="text-[13px] font-bold text-[var(--color-brand)]">{p.pair}</span>
+              </div>
+            </div>
+            <h3 class="text-[15px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{p.full}</h3>
+            <p class="mt-2 text-[13px] leading-relaxed text-[var(--color-muted)]">{p.desc}</p>
+            <div class="mt-4 flex gap-6 text-[12px]">
+              <div><span class="font-semibold text-[var(--color-ink)]">Lot: </span><span class="text-[var(--color-muted)]">{p.lot}</span></div>
+              <div><span class="font-semibold text-[var(--color-ink)]">Tick: </span><span class="text-[var(--color-muted)]">{p.tick}</span></div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[#f8f6f1] py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="equity-reveal text-center">
+        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Getting Started</p>
+        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">How to Start Currency Trading</h2>
+      </div>
+      <div class="equity-reveal mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {steps.map((s, i) => (<div class="relative rounded-[20px] border border-[var(--color-warm-border)] bg-white p-7" style={`animation-delay:${i*60}ms`}><span class="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-dark-olive)] text-[13px] font-bold text-[var(--color-brand)]">{s.n}</span>{i < steps.length - 1 && <span class="absolute -right-3 top-9 hidden lg:flex"><svg viewBox="0 0 12 12" fill="none" stroke="var(--color-brand)" stroke-width="2" class="h-3 w-3"><path d="M2 6h8M6 2l4 4-4 4"/></svg></span>}<h3 class="mt-4 text-[15px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{s.title}</h3><p class="mt-2 text-[13px] leading-relaxed text-[var(--color-muted)]">{s.desc}</p></div>))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="equity-reveal">
+        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Costs</p>
+        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Brokerage &amp; Charges</h2>
+      </div>
+      <div class="equity-reveal mt-10 overflow-hidden rounded-[20px] border border-[var(--color-n400)]">
+        <div class="overflow-x-auto"><table class="w-full text-[14px]">
+          <thead><tr class="bg-[var(--color-dark-olive)]"><th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-white/70">Charge Type</th><th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-[var(--color-brand)]">Amount / Rate</th></tr></thead>
+          <tbody class="divide-y divide-[var(--color-n400)]">{chargeRows.map((r,i) => (<tr class={i%2===0?'bg-white':'bg-[#f8f6f1]'}><td class="px-6 py-4 font-semibold text-[var(--color-ink)]">{r.label}</td><td class="px-6 py-4 text-[var(--color-muted)]">{r.value}</td></tr>))}</tbody>
+        </table></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[#f8f6f1] py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="equity-reveal">
+        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Comparison</p>
+        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Currency Derivatives vs Equity Derivatives</h2>
+      </div>
+      <div class="equity-reveal mt-10 overflow-hidden rounded-[20px] border border-[var(--color-n400)]">
+        <div class="overflow-x-auto"><table class="w-full text-[14px]">
+          <thead><tr class="bg-[var(--color-dark-olive)]"><th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-white/70">Feature</th><th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-[var(--color-brand)]">Currency Derivatives</th><th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-[var(--color-brand)]">Equity Derivatives</th></tr></thead>
+          <tbody class="divide-y divide-[var(--color-n400)]">{vsRows.map((r,i) => (<tr class={i%2===0?'bg-white':'bg-[#f8f6f1]'}><td class="px-6 py-4 font-semibold text-[var(--color-ink)]">{r.feature}</td><td class="px-6 py-4 text-[var(--color-muted)]">{r.currency}</td><td class="px-6 py-4 text-[var(--color-muted)]">{r.equity}</td></tr>))}</tbody>
+        </table></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="equity-reveal"><p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Know Before You Trade</p><h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Risks of Currency Trading</h2></div>
+      <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {risks.map((r, i) => (<div class="equity-reveal product-card-light flex flex-col gap-4 p-7" style={`animation-delay:${i*60}ms`}><div class="flex h-12 w-12 items-center justify-center rounded-[12px] bg-[#fef4e6] text-[var(--color-brand-deep)]" set:html={r.icon} /><h3 class="text-[16px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{r.label}</h3><p class="text-[13px] leading-relaxed text-[var(--color-muted)]">{r.desc}</p></div>))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[#f8f6f1] py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="equity-reveal"><p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">FAQ</p><h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Frequently Asked Questions</h2></div>
+      <div class="equity-reveal mt-10 divide-y divide-[var(--color-n400)] overflow-hidden rounded-[24px] border border-[var(--color-n400)] bg-white">
+        {faqs.map(item => (<details class="eq-faq group"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 hover:bg-[var(--color-n100)]"><span class="text-[15px] font-medium text-[var(--color-ink)]">{item.q}</span><span class="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-[var(--color-n400)] transition-transform group-open:rotate-45"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" class="h-3 w-3"><path d="M6 2v8M2 6h8"/></svg></span></summary><div class="border-t border-[var(--color-n400)] bg-[var(--color-n100)] px-6 py-5"><p class="text-[14px] leading-relaxed text-[var(--color-muted)]">{item.a}</p></div></details>))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[var(--color-dark-800)] py-16 lg:py-20">
+    <div class="site-wrap">
+      <div class="equity-reveal flex flex-col items-center gap-6 text-center lg:flex-row lg:items-center lg:justify-between lg:text-left">
+        <div>
+          <h2 class="text-[28px] font-bold text-white lg:text-[36px]" style="font-family:var(--font-display)">Trade Currency Derivatives Today</h2>
+          <p class="mt-3 max-w-lg text-[15px] text-white/55">Hedge your forex exposure or speculate on exchange rates. Flat ₹20 brokerage, live pricing, and expert support.</p>
+        </div>
+        <div class="flex shrink-0 flex-col gap-3 sm:flex-row">
+          <a href="/about/open-demat-account/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] bg-[var(--color-brand)] text-[14px] font-semibold text-[#202318] hover:bg-[var(--color-brand-hover)]">Get Started →</a>
+          <a href="/about/support/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] border border-white/20 text-[14px] font-medium text-white hover:bg-white/10">Talk to an RM</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .equity-reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1), transform 0.65s cubic-bezier(0.22,1,0.36,1); }
+  .equity-reveal.in-view { opacity: 1; transform: translateY(0); }
+</style>
+<script>
+  const obs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { const el = e.target as HTMLElement; setTimeout(() => el.classList.add('in-view'), parseInt(el.style.animationDelay)||0); obs.unobserve(el); } }); }, { threshold: 0.10 });
+  document.querySelectorAll('.equity-reveal').forEach(el => obs.observe(el));
+  document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(d => { d.addEventListener('toggle', () => { if (d.open) document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(o => { if (o !== d) o.removeAttribute('open'); }); }); });
+</script>

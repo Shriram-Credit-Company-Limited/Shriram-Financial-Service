@@ -1,0 +1,226 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const categories = [
+  { label: 'Precious Metals', items: 'Gold (GOLD), Silver (SILVER), Platinum', desc: 'Safe-haven assets that tend to appreciate in times of market uncertainty, inflation, or currency depreciation.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><circle cx="12" cy="12" r="9"/><path d="M9 9.5h1.5a1.5 1.5 0 0 1 0 3H9v3m3-6v6"/></svg>` },
+  { label: 'Energy', items: 'Crude Oil (CRUDEOIL), Natural Gas (NATURALGAS)', desc: 'Linked to global supply-demand cycles, geopolitical events, and OPEC policy. Highly liquid with wide participation.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>` },
+  { label: 'Agricultural', items: 'Cotton, Chana, Castor Seed, Jeera, Guar', desc: 'Seasonally driven by monsoon patterns, production cycles, and export demand. Traded on NCDEX with physical delivery.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M12 22V12M12 12C12 12 7 10 4 6c3.5 1 6 2.5 8 6zM12 12c0 0 5-2 8-6-3.5 1-6 2.5-8 6z"/></svg>` },
+  { label: 'Base Metals', items: 'Copper, Aluminium, Zinc, Nickel, Lead', desc: 'Tied to industrial activity and infrastructure demand. Often used as indicators of economic growth and global trade.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>` },
+];
+
+const exchanges = [
+  { code: 'MCX', name: 'Multi Commodity Exchange', desc: 'India\'s largest commodity exchange, accounting for over 90% of commodity futures trading. Focuses on metals and energy. MCX also offers commodity options on Gold, Silver, and Crude Oil.' },
+  { code: 'NCDEX', name: 'National Commodity & Derivatives Exchange', desc: 'India\'s premier agricultural commodity exchange. Provides futures and options on key agri commodities like chana, castor seed, guar, and cotton — with physical delivery settlement.' },
+];
+
+const eligibility = [
+  'Indian resident individual, HUF, or corporate entity',
+  'Valid PAN Card (mandatory)',
+  'Active trading account with commodity segment enabled',
+  'Bank account for fund settlement',
+  'For physical delivery: warehouse receipt and delivery centre access',
+];
+
+const documents = [
+  'PAN Card (mandatory)',
+  'Address Proof — Aadhaar / Passport / Utility Bill',
+  'Bank Account Details — cancelled cheque or bank statement',
+  'Photograph (passport-size, JPEG format)',
+];
+
+const steps = [
+  { n: '01', title: 'Enable Commodity Segment', desc: 'Add MCX/NCDEX commodity trading segment to your existing Shriram trading account — no new account needed.' },
+  { n: '02', title: 'Add Margin Funds', desc: 'Transfer margin funds for the contracts you wish to trade. Commodity futures require SPAN + Exposure margin.' },
+  { n: '03', title: 'Choose Commodity & Contract', desc: 'Select the commodity, lot size, and expiry month. Check live commodity prices and research before entering.' },
+  { n: '04', title: 'Trade & Monitor', desc: 'Place buy or sell orders through the Antara platform. Monitor live spot prices, basis, and roll costs.' },
+];
+
+const chargeRows = [
+  { label: 'Brokerage', value: '₹20 per executed order' },
+  { label: 'CTT (Commodity Transaction Tax)', value: '0.01% on sell side (non-agri); Nil on agri futures' },
+  { label: 'GST', value: '18% on brokerage + exchange charges' },
+  { label: 'Exchange Charges (MCX)', value: '0.0026% (metals); 0.00035% (energy)' },
+  { label: 'SEBI Turnover Fee', value: '₹10 per crore' },
+];
+
+const risks = [
+  { label: 'Price Volatility', desc: 'Commodity prices are influenced by global macroeconomic factors, weather events, and geopolitical tensions — causing sudden, large price swings.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>` },
+  { label: 'Delivery Risk', desc: 'If a futures position is not squared off before expiry, it may result in compulsory physical delivery — requiring warehouse receipts and logistics.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-4 0v2M8 7V5a2 2 0 0 0-4 0v2"/></svg>` },
+  { label: 'Basis Risk', desc: 'The difference between spot price and futures price (basis) can widen unexpectedly, reducing hedge effectiveness and increasing unexpected mark-to-market losses.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M3 3v18h18"/><path d="m7 12 4-4 4 4 4-4"/></svg>` },
+  { label: 'Leverage Risk', desc: 'Commodity futures are traded on margin. A small adverse price movement can result in losses much larger than the initial margin deposited.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>` },
+];
+
+const faqs = [
+  { q: 'What is the minimum investment to start commodity trading in India?', a: 'There is no regulatory minimum, but you need sufficient margin to cover a single commodity contract. For example, a 1 lot of GOLD Mini (100 grams) typically requires ₹20,000–₹40,000 as margin. Crude Oil (100 barrels) requires ₹15,000–₹30,000 depending on volatility.' },
+  { q: 'What are the trading hours for commodities on MCX?', a: 'MCX trades Monday to Friday. Day session: 9:00 AM to 5:00 PM. Evening session: 5:00 PM to 11:30 PM (or 11:55 PM during US daylight saving). Agricultural commodities on NCDEX trade from 9:00 AM to 5:00 PM only.' },
+  { q: 'Is physical delivery mandatory for commodity futures?', a: 'Physical delivery applies only if you hold your position until the contract\'s tender period (typically the last few days before expiry). Most retail traders close positions before this window. Shriram\'s platform alerts you as expiry approaches so you can decide to roll or exit.' },
+  { q: 'How are commodity trades settled?', a: 'Commodity futures are marked-to-market daily — gains and losses are credited/debited to your account every day. At expiry, contracts are settled either through physical delivery (compulsory for commodities with delivery mandates) or cash settlement based on the daily settlement price.' },
+  { q: 'Can I hedge my business exposure using commodity futures?', a: 'Yes. Commodity futures are an excellent hedging tool for businesses exposed to raw material price risk. Jewellers, refiners, oil distributors, and agri traders can lock in prices using MCX or NCDEX futures to offset input cost volatility. Shriram\'s research team provides hedging advisory to qualified clients.' },
+];
+---
+
+<BaseLayout
+  title="Commodity Trading — Gold, Silver, Crude Oil & More | Shriram Financial Services"
+  description="Trade commodities including gold, silver, crude oil, and agri products on MCX and NCDEX with research-backed advisory and flat ₹20 brokerage from Shriram Financial Services."
+>
+
+  <section class="relative overflow-hidden bg-[var(--color-dark-800)]">
+    <div class="pointer-events-none absolute -right-40 -top-40 h-[560px] w-[560px] rounded-full bg-[var(--color-brand)]/10 blur-3xl"></div>
+    <div class="pointer-events-none absolute -bottom-32 left-0 h-80 w-80 rounded-full bg-[var(--color-brand)]/5 blur-3xl"></div>
+    <div class="site-wrap relative py-16 lg:py-28">
+      <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Commodities</p>
+      <h1 class="mt-4 max-w-3xl text-[32px] font-bold leading-tight text-white sm:text-[40px] lg:text-[56px]" style="font-family:var(--font-display)">
+        Trade Gold, Crude Oil<br class="hidden sm:block"> &amp; Agricultural Commodities
+      </h1>
+      <p class="mt-5 max-w-2xl text-[15px] leading-relaxed text-white/60 lg:text-[17px]">
+        Diversify your portfolio with commodity futures and options on MCX and NCDEX. Hedge against inflation, trade energy cycles, and capitalise on agri seasonality.
+      </p>
+      <div class="mt-7 grid grid-cols-2 gap-x-6 gap-y-3 sm:flex sm:gap-8">
+        {[['MCX & NCDEX Access'],['Flat ₹20/order'],['Research-backed'],['Physical delivery support']].map(([l]) => (
+          <div class="flex items-center gap-2 text-[13px] font-medium text-white/70">
+            <span class="h-1.5 w-1.5 rounded-full bg-[var(--color-brand)]"></span>{l}
+          </div>
+        ))}
+      </div>
+      <div class="mt-9 flex flex-wrap gap-3">
+        <a href="/about/open-demat-account/" class="btn-primary">Start Commodity Trading</a>
+        <a href="/about/support/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] border border-white/25 text-[14px] font-medium text-white transition-colors hover:bg-white/10">Talk to RM</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="equity-reveal">
+        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Asset Classes</p>
+        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Types of Commodities You Can Trade</h2>
+        <p class="mt-4 max-w-3xl text-[15px] leading-relaxed text-[var(--color-muted)]">Commodities are broadly split into four categories. Each behaves differently and is driven by distinct supply-demand dynamics.</p>
+      </div>
+      <div class="mt-10 grid gap-5 sm:grid-cols-2">
+        {categories.map((c, i) => (
+          <div class="equity-reveal product-card-light flex flex-col gap-4 p-7" style={`animation-delay:${i*60}ms`}>
+            <div class="flex h-12 w-12 items-center justify-center rounded-[12px] bg-[var(--color-dark-olive)] text-[var(--color-brand)]" set:html={c.icon} />
+            <div>
+              <h3 class="text-[17px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{c.label}</h3>
+              <p class="mt-1 text-[12px] font-medium text-[var(--color-brand-deep)]">{c.items}</p>
+            </div>
+            <p class="text-[13px] leading-relaxed text-[var(--color-muted)]">{c.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[#f8f6f1] py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="equity-reveal">
+        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Exchanges</p>
+        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">How the Commodity Market Works in India</h2>
+      </div>
+      <div class="equity-reveal mt-10 grid gap-5 sm:grid-cols-2">
+        {exchanges.map(e => (
+          <div class="product-card-light p-8">
+            <div class="mb-4 flex h-11 w-11 items-center justify-center rounded-[10px] bg-[var(--color-dark-olive)]">
+              <span class="text-[11px] font-bold text-[var(--color-brand)]">{e.code}</span>
+            </div>
+            <h3 class="text-[17px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{e.name}</h3>
+            <p class="mt-3 text-[14px] leading-relaxed text-[var(--color-muted)]">{e.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="equity-reveal">
+        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Requirements</p>
+        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Eligibility &amp; Documents Required</h2>
+      </div>
+      <div class="equity-reveal mt-10 grid gap-6 sm:grid-cols-2">
+        <div class="rounded-[20px] border border-[var(--color-warm-border)] bg-[#f8f6f1] p-8">
+          <h3 class="mb-5 text-[17px] font-bold text-[var(--color-ink)]">Eligibility Criteria</h3>
+          <ul class="space-y-3">{eligibility.map(item => (<li class="flex items-start gap-3"><span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--color-brand)]/20"><svg viewBox="0 0 12 12" fill="none" stroke="var(--color-brand-deep)" stroke-width="2" class="h-3 w-3"><path d="M2 6l3 3 5-5"/></svg></span><span class="text-[13px] leading-snug text-[var(--color-ink)]">{item}</span></li>))}</ul>
+        </div>
+        <div class="rounded-[20px] border border-[var(--color-warm-border)] bg-[#f8f6f1] p-8">
+          <h3 class="mb-5 text-[17px] font-bold text-[var(--color-ink)]">Documents Required</h3>
+          <ul class="space-y-3">{documents.map(item => (<li class="flex items-start gap-3"><span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--color-brand)]/20"><svg viewBox="0 0 12 12" fill="none" stroke="var(--color-brand-deep)" stroke-width="2" class="h-3 w-3"><path d="M2 6l3 3 5-5"/></svg></span><span class="text-[13px] leading-snug text-[var(--color-ink)]">{item}</span></li>))}</ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[#f8f6f1] py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="equity-reveal text-center">
+        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Getting Started</p>
+        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">How to Start Trading Commodities</h2>
+      </div>
+      <div class="equity-reveal mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {steps.map((s, i) => (<div class="relative rounded-[20px] border border-[var(--color-warm-border)] bg-white p-7" style={`animation-delay:${i*60}ms`}><span class="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-dark-olive)] text-[13px] font-bold text-[var(--color-brand)]">{s.n}</span>{i < steps.length - 1 && <span class="absolute -right-3 top-9 hidden lg:flex"><svg viewBox="0 0 12 12" fill="none" stroke="var(--color-brand)" stroke-width="2" class="h-3 w-3"><path d="M2 6h8M6 2l4 4-4 4"/></svg></span>}<h3 class="mt-4 text-[15px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{s.title}</h3><p class="mt-2 text-[13px] leading-relaxed text-[var(--color-muted)]">{s.desc}</p></div>))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="equity-reveal">
+        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Costs</p>
+        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Brokerage &amp; Charges</h2>
+      </div>
+      <div class="equity-reveal mt-10 overflow-hidden rounded-[20px] border border-[var(--color-n400)]">
+        <div class="overflow-x-auto"><table class="w-full text-[14px]">
+          <thead><tr class="bg-[var(--color-dark-olive)]"><th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-white/70">Charge Type</th><th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-[var(--color-brand)]">Amount / Rate</th></tr></thead>
+          <tbody class="divide-y divide-[var(--color-n400)]">{chargeRows.map((r,i) => (<tr class={i%2===0?'bg-white':'bg-[#f8f6f1]'}><td class="px-6 py-4 font-semibold text-[var(--color-ink)]">{r.label}</td><td class="px-6 py-4 text-[var(--color-muted)]">{r.value}</td></tr>))}</tbody>
+        </table></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[#f8f6f1] py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="equity-reveal">
+        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Know Before You Trade</p>
+        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Risks of Commodity Trading</h2>
+      </div>
+      <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {risks.map((r, i) => (<div class="equity-reveal product-card-light flex flex-col gap-4 p-7" style={`animation-delay:${i*60}ms`}><div class="flex h-12 w-12 items-center justify-center rounded-[12px] bg-[#fef4e6] text-[var(--color-brand-deep)]" set:html={r.icon} /><h3 class="text-[16px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{r.label}</h3><p class="text-[13px] leading-relaxed text-[var(--color-muted)]">{r.desc}</p></div>))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="equity-reveal"><p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">FAQ</p><h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Frequently Asked Questions</h2></div>
+      <div class="equity-reveal mt-10 divide-y divide-[var(--color-n400)] overflow-hidden rounded-[24px] border border-[var(--color-n400)] bg-white">
+        {faqs.map(item => (<details class="eq-faq group"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 hover:bg-[var(--color-n100)]"><span class="text-[15px] font-medium text-[var(--color-ink)]">{item.q}</span><span class="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-[var(--color-n400)] transition-transform group-open:rotate-45"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" class="h-3 w-3"><path d="M6 2v8M2 6h8"/></svg></span></summary><div class="border-t border-[var(--color-n400)] bg-[var(--color-n100)] px-6 py-5"><p class="text-[14px] leading-relaxed text-[var(--color-muted)]">{item.a}</p></div></details>))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[var(--color-dark-800)] py-16 lg:py-20">
+    <div class="site-wrap">
+      <div class="equity-reveal flex flex-col items-center gap-6 text-center lg:flex-row lg:items-center lg:justify-between lg:text-left">
+        <div>
+          <h2 class="text-[28px] font-bold text-white lg:text-[36px]" style="font-family:var(--font-display)">Start Commodity Trading Today</h2>
+          <p class="mt-3 max-w-lg text-[15px] text-white/55">Access MCX and NCDEX with a single account. Flat ₹20 brokerage, live prices, and expert research support.</p>
+        </div>
+        <div class="flex shrink-0 flex-col gap-3 sm:flex-row">
+          <a href="/about/open-demat-account/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] bg-[var(--color-brand)] text-[14px] font-semibold text-[#202318] hover:bg-[var(--color-brand-hover)]">Get Started →</a>
+          <a href="/about/support/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] border border-white/20 text-[14px] font-medium text-white hover:bg-white/10">Talk to an RM</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .equity-reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1), transform 0.65s cubic-bezier(0.22,1,0.36,1); }
+  .equity-reveal.in-view { opacity: 1; transform: translateY(0); }
+</style>
+<script>
+  const obs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { const el = e.target as HTMLElement; setTimeout(() => el.classList.add('in-view'), parseInt(el.style.animationDelay)||0); obs.unobserve(el); } }); }, { threshold: 0.10 });
+  document.querySelectorAll('.equity-reveal').forEach(el => obs.observe(el));
+  document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(d => { d.addEventListener('toggle', () => { if (d.open) document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(o => { if (o !== d) o.removeAttribute('open'); }); }); });
+</script>

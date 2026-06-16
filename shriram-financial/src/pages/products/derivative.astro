@@ -1,0 +1,282 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const types = [
+  { label: 'Futures Contracts', desc: 'A binding agreement to buy or sell an asset at a predetermined price on a specified future date. Both buyer and seller are obligated to fulfil the contract at expiry.' },
+  { label: 'Options Contracts', desc: 'A right (not an obligation) to buy or sell an asset at a strike price before or on the expiry date. Options provide limited downside with flexible upside for the buyer.' },
+];
+
+const eligibility = [
+  'Indian resident individual or entity (HUF, firm, company)',
+  'Valid PAN Card and active trading + Demat account',
+  'F&O segment activation on your trading account (SEBI mandate)',
+  'Bank account with sufficient margin balance',
+  'For NRI: RBI-approved broker and NRE/NRO bank account',
+];
+
+const documents = [
+  'PAN Card (mandatory for all account types)',
+  'Address Proof — Aadhaar / Passport / Utility Bill',
+  'Bank Account Proof — cancelled cheque or statement',
+  'Income proof — 6-month bank statement or ITR (for F&O segment activation)',
+];
+
+const steps = [
+  { n: '01', title: 'Open & Activate Trading Account', desc: 'Open a Demat + trading account and request F&O segment activation. Shriram enables this 100% digitally.' },
+  { n: '02', title: 'Add Margin to Your Account', desc: 'Transfer funds to meet the SPAN + Exposure margin requirement. F&O requires upfront margin collateral.' },
+  { n: '03', title: 'Select Underlying & Expiry', desc: 'Choose your index (NIFTY, BANKNIFTY) or stock, select the expiry date (weekly or monthly), and strike price.' },
+  { n: '04', title: 'Place Your F&O Order', desc: 'Buy or write (sell) futures or options contracts through our platform and monitor P&L in real time.' },
+];
+
+const chargeRows = [
+  { label: 'Brokerage', futures: '₹20 per executed order', options: '₹20 per executed order' },
+  { label: 'STT', futures: '0.0125% on sell side (contracts)', options: '0.125% on sell side (premium)' },
+  { label: 'GST', futures: '18% on brokerage + charges', options: '18% on brokerage + charges' },
+  { label: 'Exchange Charges', futures: '0.00235% (NSE)', options: '0.053% (NSE)' },
+  { label: 'SEBI Turnover Fee', futures: '₹10 per crore', options: '₹10 per crore' },
+];
+
+const strategies = [
+  { label: 'Long Call', desc: 'Buy a call option when you expect the price to rise. Maximum loss is limited to the premium paid.', type: 'Bullish' },
+  { label: 'Bull Put Spread', desc: 'Sell a higher-strike put, buy a lower-strike put. Profit if the underlying stays above the sold strike.', type: 'Bullish' },
+  { label: 'Long Put', desc: 'Buy a put option when you expect the price to fall. Ideal for hedging an existing long position.', type: 'Bearish' },
+  { label: 'Iron Condor', desc: 'Sell an OTM call spread and OTM put spread simultaneously. Profits in a low-volatility, range-bound market.', type: 'Neutral' },
+];
+
+const risks = [
+  { label: 'Leverage Risk', desc: 'F&O positions are leveraged — a small adverse move in the underlying can result in losses far exceeding the initial margin deposited.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M3 3v18h18"/><path d="m7 14 4-5 4 3 4-6"/></svg>` },
+  { label: 'Expiry Risk', desc: 'Options lose time value rapidly as they approach expiry (theta decay). Positions left unmanaged near expiry can expire worthless.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>` },
+  { label: 'Volatility Risk', desc: 'Sharp, unexpected volatility events (gap openings, news events) can trigger margin calls or cause large overnight losses in open futures positions.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>` },
+  { label: 'Liquidity Risk', desc: 'Out-of-the-money contracts, particularly in individual stocks, may have very low open interest — making it difficult to exit at a fair price.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>` },
+];
+
+const faqs = [
+  { q: 'What is the difference between Futures and Options?', a: 'A futures contract obligates both buyer and seller to transact at expiry at the agreed price. An options contract gives the buyer the right — but not the obligation — to buy (call) or sell (put) at the strike price. Options buyers risk only the premium paid; futures traders risk margin losses.' },
+  { q: 'How much capital do I need to start F&O trading?', a: 'SEBI mandates a minimum margin for each contract. For index options (NIFTY/BANKNIFTY), buying a single lot requires approximately ₹5,000–₹20,000 as premium. For futures, the SPAN + Exposure margin can range from ₹50,000 to ₹2,00,000 per lot depending on the underlying.' },
+  { q: 'Is F&O income taxed differently from equity?', a: 'Yes. F&O profits and losses are treated as business income (non-speculative) under the Income Tax Act, not as capital gains. You file ITR-3, can offset F&O losses against other business income, and carry forward losses for 8 years.' },
+  { q: 'What is "writing" an option?', a: 'Writing (or selling) an option means you receive the premium upfront and take on the obligation to fulfil the contract if the buyer exercises. Option writers profit when the option expires worthless, but face potentially unlimited risk (for naked calls) or large downside risk.' },
+  { q: 'How does margin work in F&O?', a: 'SEBI mandates upfront margin (SPAN + Exposure) for all F&O positions. SPAN margin covers worst-case one-day losses, while Exposure margin provides an additional buffer. If your account falls below the required margin, you receive a margin call and must top up or your broker may square off positions.' },
+  { q: 'Can I trade F&O on any stock?', a: 'No. SEBI maintains a list of approved securities for F&O trading — currently around 180+ stocks. The stock must meet SEBI\'s liquidity, market cap, and volatility criteria. Index derivatives (NIFTY, BANKNIFTY, FINNIFTY, MIDCPNIFTY) are the most liquid and widely traded.' },
+];
+---
+
+<BaseLayout
+  title="Derivatives — Futures & Options Trading | Shriram Financial Services"
+  description="Trade Futures and Options on NSE & BSE with expert advisory, margin calculators, and real-time analytics. SEBI-registered research and dedicated RM support."
+>
+
+  <!-- ══ 1. HERO ═══════════════════════════════════════════════════ -->
+  <section class="relative overflow-hidden bg-[var(--color-dark-800)]">
+    <div class="pointer-events-none absolute -right-40 -top-40 h-[560px] w-[560px] rounded-full bg-[var(--color-brand)]/10 blur-3xl"></div>
+    <div class="pointer-events-none absolute -bottom-32 left-0 h-80 w-80 rounded-full bg-[var(--color-brand)]/5 blur-3xl"></div>
+    <div class="site-wrap relative py-16 lg:py-28">
+      <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Derivatives</p>
+      <h1 class="mt-4 max-w-3xl text-[32px] font-bold leading-tight text-white sm:text-[40px] lg:text-[56px]" style="font-family:var(--font-display)">
+        Trade Smarter with<br class="hidden sm:block"> Futures &amp; Options
+      </h1>
+      <p class="mt-5 max-w-2xl text-[15px] leading-relaxed text-white/60 lg:text-[17px]">
+        Access NSE and BSE derivative markets with advanced analytics, SEBI-registered research, and dedicated risk management support from Shriram Financial Services.
+      </p>
+      <div class="mt-7 grid grid-cols-2 gap-x-6 gap-y-3 sm:flex sm:gap-8">
+        {[['SEBI-registered'],['Flat ₹20/order'],['Real-time analytics'],['Expert RM support']].map(([l]) => (
+          <div class="flex items-center gap-2 text-[13px] font-medium text-white/70">
+            <span class="h-1.5 w-1.5 rounded-full bg-[var(--color-brand)]"></span>{l}
+          </div>
+        ))}
+      </div>
+      <div class="mt-9 flex flex-wrap gap-3">
+        <a href="/about/open-demat-account/" class="btn-primary">Activate F&O Segment</a>
+        <a href="/about/support/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] border border-white/25 text-[14px] font-medium text-white transition-colors hover:bg-white/10">Talk to RM</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 2. WHAT ARE DERIVATIVES ════════════════════════════════════ -->
+  <section class="bg-white py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="equity-reveal">
+        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">The Basics</p>
+        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">What Are Derivatives</h2>
+        <p class="mt-4 max-w-3xl text-[15px] leading-relaxed text-[var(--color-muted)]">A derivative is a financial contract whose value is derived from an underlying asset — such as stocks, indices, commodities, or currencies. In India, derivatives are traded on NSE and BSE and are regulated by SEBI.</p>
+      </div>
+      <div class="equity-reveal mt-10 grid gap-5 sm:grid-cols-2">
+        {types.map(t => (
+          <div class="product-card-light p-7">
+            <h3 class="text-[17px] font-bold text-[var(--color-dark-olive)]" style="font-family:var(--font-display)">{t.label}</h3>
+            <p class="mt-3 text-[14px] leading-relaxed text-[var(--color-muted)]">{t.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 3. ELIGIBILITY & DOCUMENTS ════════════════════════════════ -->
+  <section class="bg-[#f8f6f1] py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="equity-reveal">
+        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Requirements</p>
+        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Eligibility &amp; Documents Required</h2>
+      </div>
+      <div class="equity-reveal mt-10 grid gap-6 sm:grid-cols-2">
+        <div class="rounded-[20px] border border-[var(--color-warm-border)] bg-white p-8">
+          <h3 class="mb-5 text-[17px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">Eligibility Criteria</h3>
+          <ul class="space-y-3">{eligibility.map(item => (
+            <li class="flex items-start gap-3">
+              <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--color-brand)]/20"><svg viewBox="0 0 12 12" fill="none" stroke="var(--color-brand-deep)" stroke-width="2" class="h-3 w-3"><path d="M2 6l3 3 5-5"/></svg></span>
+              <span class="text-[13px] leading-snug text-[var(--color-ink)]">{item}</span>
+            </li>
+          ))}</ul>
+        </div>
+        <div class="rounded-[20px] border border-[var(--color-warm-border)] bg-white p-8">
+          <h3 class="mb-5 text-[17px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">Documents Required</h3>
+          <ul class="space-y-3">{documents.map(item => (
+            <li class="flex items-start gap-3">
+              <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--color-brand)]/20"><svg viewBox="0 0 12 12" fill="none" stroke="var(--color-brand-deep)" stroke-width="2" class="h-3 w-3"><path d="M2 6l3 3 5-5"/></svg></span>
+              <span class="text-[13px] leading-snug text-[var(--color-ink)]">{item}</span>
+            </li>
+          ))}</ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 4. HOW TO START ════════════════════════════════════════════ -->
+  <section class="bg-white py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="equity-reveal text-center">
+        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Getting Started</p>
+        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">How to Start Trading F&amp;O</h2>
+      </div>
+      <div class="equity-reveal mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {steps.map((s, i) => (
+          <div class="relative rounded-[20px] border border-[var(--color-warm-border)] bg-[#f8f6f1] p-7" style={`animation-delay:${i*60}ms`}>
+            <span class="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-dark-olive)] text-[13px] font-bold text-[var(--color-brand)]">{s.n}</span>
+            {i < steps.length - 1 && <span class="absolute -right-3 top-9 hidden lg:flex"><svg viewBox="0 0 12 12" fill="none" stroke="var(--color-brand)" stroke-width="2" class="h-3 w-3"><path d="M2 6h8M6 2l4 4-4 4"/></svg></span>}
+            <h3 class="mt-4 text-[15px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{s.title}</h3>
+            <p class="mt-2 text-[13px] leading-relaxed text-[var(--color-muted)]">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 5. CHARGES ════════════════════════════════════════════════ -->
+  <section class="bg-[#f8f6f1] py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="equity-reveal">
+        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Costs</p>
+        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Brokerage &amp; Charges</h2>
+      </div>
+      <div class="equity-reveal mt-10 overflow-hidden rounded-[20px] border border-[var(--color-n400)]">
+        <div class="overflow-x-auto">
+          <table class="w-full text-[14px]">
+            <thead><tr class="bg-[var(--color-dark-olive)]">
+              <th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-white/70">Charge Type</th>
+              <th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-[var(--color-brand)]">Futures</th>
+              <th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-[var(--color-brand)]">Options</th>
+            </tr></thead>
+            <tbody class="divide-y divide-[var(--color-n400)]">
+              {chargeRows.map((r, i) => (
+                <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[#f8f6f1]'}>
+                  <td class="px-6 py-4 font-semibold text-[var(--color-ink)]">{r.label}</td>
+                  <td class="px-6 py-4 text-[var(--color-muted)]">{r.futures}</td>
+                  <td class="px-6 py-4 text-[var(--color-muted)]">{r.options}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 6. STRATEGIES ══════════════════════════════════════════════ -->
+  <section class="bg-white py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="equity-reveal">
+        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Strategy</p>
+        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Popular F&amp;O Strategies for Indian Traders</h2>
+      </div>
+      <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {strategies.map((s, i) => (
+          <div class="equity-reveal product-card-light flex flex-col gap-3 p-7" style={`animation-delay:${i*60}ms`}>
+            <span class="inline-flex w-fit rounded-full bg-[var(--color-brand)]/15 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-[var(--color-brand-deep)]">{s.type}</span>
+            <h3 class="text-[16px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{s.label}</h3>
+            <p class="text-[13px] leading-relaxed text-[var(--color-muted)]">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 7. RISKS ════════════════════════════════════════════════════ -->
+  <section class="bg-[#f8f6f1] py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="equity-reveal">
+        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Know Before You Trade</p>
+        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Risks of Trading Derivatives</h2>
+      </div>
+      <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {risks.map((r, i) => (
+          <div class="equity-reveal product-card-light flex flex-col gap-4 p-7" style={`animation-delay:${i*60}ms`}>
+            <div class="flex h-12 w-12 items-center justify-center rounded-[12px] bg-[#fef4e6] text-[var(--color-brand-deep)]" set:html={r.icon} />
+            <h3 class="text-[16px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{r.label}</h3>
+            <p class="text-[13px] leading-relaxed text-[var(--color-muted)]">{r.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 8. FAQ ══════════════════════════════════════════════════════ -->
+  <section class="bg-white py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="equity-reveal">
+        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">FAQ</p>
+        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Frequently Asked Questions</h2>
+      </div>
+      <div class="equity-reveal mt-10 divide-y divide-[var(--color-n400)] overflow-hidden rounded-[24px] border border-[var(--color-n400)] bg-white">
+        {faqs.map(item => (
+          <details class="eq-faq group">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 hover:bg-[var(--color-n100)]">
+              <span class="text-[15px] font-medium text-[var(--color-ink)]">{item.q}</span>
+              <span class="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-[var(--color-n400)] text-[var(--color-muted)] transition-transform group-open:rotate-45">
+                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" class="h-3 w-3"><path d="M6 2v8M2 6h8"/></svg>
+              </span>
+            </summary>
+            <div class="border-t border-[var(--color-n400)] bg-[var(--color-n100)] px-6 py-5">
+              <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">{item.a}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 9. CTA BANNER ══════════════════════════════════════════════ -->
+  <section class="bg-[var(--color-dark-800)] py-16 lg:py-20">
+    <div class="site-wrap">
+      <div class="equity-reveal flex flex-col items-center gap-6 text-center lg:flex-row lg:items-center lg:justify-between lg:text-left">
+        <div>
+          <h2 class="text-[28px] font-bold text-white lg:text-[36px]" style="font-family:var(--font-display)">Start Trading Futures &amp; Options Today</h2>
+          <p class="mt-3 max-w-lg text-[15px] text-white/55">Activate F&O on your Shriram account in minutes. Access research-backed recommendations and trade with confidence.</p>
+        </div>
+        <div class="flex shrink-0 flex-col gap-3 sm:flex-row">
+          <a href="/about/open-demat-account/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] bg-[var(--color-brand)] text-[14px] font-semibold text-[#202318] hover:bg-[var(--color-brand-hover)]">Activate F&O →</a>
+          <a href="/about/support/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] border border-white/20 text-[14px] font-medium text-white hover:bg-white/10">Talk to an RM</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .equity-reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1), transform 0.65s cubic-bezier(0.22,1,0.36,1); }
+  .equity-reveal.in-view { opacity: 1; transform: translateY(0); }
+</style>
+<script>
+  const obs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { const el = e.target as HTMLElement; setTimeout(() => el.classList.add('in-view'), parseInt(el.style.animationDelay)||0); obs.unobserve(el); } }); }, { threshold: 0.10 });
+  document.querySelectorAll('.equity-reveal').forEach(el => obs.observe(el));
+  document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(d => { d.addEventListener('toggle', () => { if (d.open) document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(o => { if (o !== d) o.removeAttribute('open'); }); }); });
+</script>
