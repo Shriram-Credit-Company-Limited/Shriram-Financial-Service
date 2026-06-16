@@ -47,19 +47,19 @@ const research = [
     title: 'Fundamental Research',
     desc: 'In-depth company analysis, financial modelling, and valuation reports to help you pick stocks with strong long-term potential.',
     href: '/research/',
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><path d="M3 3v18h18"/><path d="m7 16 4-4 4 4 4-4"/></svg>`,
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#202318" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 shrink-0"><path d="M3 3v18h18"/><path d="m7 16 4-4 4 4 4-4"/></svg>`,
   },
   {
     title: 'Technical Research',
     desc: 'Chart patterns, price action, and technical indicators to identify optimal entry and exit points for your trades.',
     href: '/research/',
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><rect x="3" y="3" width="4" height="18"/><rect x="10" y="8" width="4" height="13"/><rect x="17" y="5" width="4" height="16"/></svg>`,
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#202318" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 shrink-0"><rect x="3" y="3" width="4" height="18"/><rect x="10" y="8" width="4" height="13"/><rect x="17" y="5" width="4" height="16"/></svg>`,
   },
   {
     title: 'Daily Research',
     desc: 'Daily stock recommendations for the previous day\'s performance — curated by our in-house analysts every morning before market open.',
     href: '/research/',
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg>`,
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#202318" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 shrink-0"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg>`,
   },
 ];
 
@@ -247,10 +247,13 @@ const faqs = [
 
       <div class="mt-12 grid gap-5 sm:grid-cols-3">
         {research.map((r, i) => (
-          <a href={r.href} class="equity-reveal group flex flex-col rounded-[20px] border border-white/10 bg-white/5 p-8 text-left transition-all duration-300 hover:-translate-y-1 hover:border-[var(--color-brand)]/30 hover:bg-white/10" style={`animation-delay:${i * 80}ms`}>
-            <div class="mb-5 flex h-14 w-14 items-center justify-center rounded-[14px] bg-[var(--color-brand)]/15 text-[var(--color-brand)]" set:html={r.icon} />
-            <h3 class="text-[18px] font-bold text-white" style="font-family:var(--font-display)">{r.title}</h3>
-            <p class="mt-3 flex-1 text-[13px] leading-relaxed text-white/55">{r.desc}</p>
+          <a href={r.href}
+             class="equity-reveal group relative flex flex-col overflow-hidden rounded-[24px] border border-white/10 bg-[#2b2c2b] p-8 text-left hover:z-10 hover:bg-[#2e3914]"
+             style={`animation-delay:${i * 80}ms`}>
+            <!-- Same citrus-circle animation as home page product cards -->
+            <div class="product-card-circle" set:html={r.icon} />
+            <h3 class="mt-auto text-[20px] font-bold text-white" style="font-family:var(--font-display)">{r.title}</h3>
+            <p class="mt-3 text-[13px] leading-relaxed text-white/55">{r.desc}</p>
             <span class="mt-6 flex items-center gap-2 text-[13px] font-semibold text-[var(--color-brand)] transition-transform group-hover:translate-x-1">
               Explore
               <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" class="h-3 w-3"><path d="M2 6h8M6 2l4 4-4 4"/></svg>
