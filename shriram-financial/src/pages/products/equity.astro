@@ -286,7 +286,7 @@ const faqs = [
         <div class="p-8">
           <!-- Trade type tabs -->
           <div class="mb-6 flex gap-2">
-            {['Delivery Equity', 'Intraday', 'F&O'].map((t, i) => (
+            {['Delivery Equity', 'Intraday'].map((t, i) => (
               <button class={`calc-tab rounded-[6px] px-4 py-2 text-[13px] font-semibold transition-colors ${i === 0 ? 'bg-[var(--color-dark-olive)] text-white' : 'border border-[var(--color-n400)] text-[var(--color-muted)] hover:border-[var(--color-dark-olive)] hover:text-[var(--color-ink)]'}`} data-brokerage={i === 0 ? '0' : '20'}>
                 {t}
               </button>
