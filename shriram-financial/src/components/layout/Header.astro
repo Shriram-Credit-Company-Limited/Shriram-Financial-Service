@@ -2,7 +2,6 @@
 import { navigation } from '../../config/navigation';
 const currentPath = Astro.url.pathname;
 const products = navigation.find(n => n.label === 'Products')!;
-const research  = navigation.find(n => n.label === 'Research')!;
 const about     = navigation.find(n => n.label === 'About')!;
 ---
 
@@ -16,80 +15,37 @@ const about     = navigation.find(n => n.label === 'About')!;
              class="h-[52px] w-auto rounded-[4px] object-contain" />
       </a>
 
-      <!-- Desktop Nav -->
+      <!-- Desktop Nav — every item opens the full-page panel -->
       <nav class="hidden items-center gap-2 lg:flex 2xl:gap-6" aria-label="Primary">
 
-        <!-- Products — click triggers full-page panel -->
-        <button
-          id="products-btn"
-          class="flex items-center gap-1 rounded-[10px] px-3 py-1 text-[16px] font-medium text-[#333] transition-colors hover:bg-[var(--color-n100)]"
-          aria-haspopup="dialog"
-          aria-expanded="false"
-          aria-controls="products-panel"
-        >
+        <button class="nav-trigger flex items-center gap-1 rounded-[10px] px-3 py-1 text-[16px] font-medium text-[#333] transition-colors hover:bg-[var(--color-n100)]"
+                data-panel="products" aria-haspopup="dialog" aria-expanded="false">
           Products
-          <svg id="products-chevron" class="h-4 w-4 transition-transform duration-300" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+          <svg class="nav-chevron h-4 w-4 transition-transform duration-300" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
         </button>
 
-        <!-- Learning Centre -->
-        <div class="group relative">
-          <button class="flex items-center gap-1 rounded-[10px] px-3 py-1 text-[16px] font-medium text-[#333] transition-colors hover:bg-[var(--color-n100)]" aria-haspopup="true">
-            Learning Centre
-            <svg class="h-4 w-4 transition-transform duration-200 group-hover:rotate-180" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
-          </button>
-          <div class="invisible absolute left-0 top-full z-50 pt-3 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
-            <div class="w-52 overflow-hidden rounded-lg border border-[var(--color-n400)] bg-white py-1 shadow-[var(--shadow-heavy)]">
-              {[
-                {label:'Research & Insights', href:'/research/'},
-                {label:'Technical Analysis',  href:'/research/technical/'},
-                {label:'Market News',          href:'/research/'},
-              ].map(c => (
-                <a href={c.href} class="block px-4 py-2.5 text-[13px] text-[var(--color-ink)] hover:bg-[var(--color-n100)]">{c.label}</a>
-              ))}
-            </div>
-          </div>
-        </div>
+        <button class="nav-trigger flex items-center gap-1 rounded-[10px] px-3 py-1 text-[16px] font-medium text-[#333] transition-colors hover:bg-[var(--color-n100)]"
+                data-panel="learning-centre" aria-haspopup="dialog" aria-expanded="false">
+          Learning Centre
+          <svg class="nav-chevron h-4 w-4 transition-transform duration-300" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+        </button>
 
-        <!-- Calculators -->
-        <div class="group relative">
-          <button class="flex items-center gap-1 rounded-[10px] px-3 py-1 text-[16px] font-medium text-[#333] transition-colors hover:bg-[var(--color-n100)]" aria-haspopup="true">
-            Calculators
-            <svg class="h-4 w-4 transition-transform duration-200 group-hover:rotate-180" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
-          </button>
-          <div class="invisible absolute left-0 top-full z-50 pt-3 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
-            <div class="w-52 overflow-hidden rounded-lg border border-[var(--color-n400)] bg-white py-1 shadow-[var(--shadow-heavy)]">
-              {[
-                {label:'SIP Calculator',      href:'/product-hub/'},
-                {label:'Returns Calculator',  href:'/product-hub/'},
-                {label:'EMI Calculator',      href:'/product-hub/'},
-              ].map(c => (
-                <a href={c.href} class="block px-4 py-2.5 text-[13px] text-[var(--color-ink)] hover:bg-[var(--color-n100)]">{c.label}</a>
-              ))}
-            </div>
-          </div>
-        </div>
+        <button class="nav-trigger flex items-center gap-1 rounded-[10px] px-3 py-1 text-[16px] font-medium text-[#333] transition-colors hover:bg-[var(--color-n100)]"
+                data-panel="calculators" aria-haspopup="dialog" aria-expanded="false">
+          Calculators
+          <svg class="nav-chevron h-4 w-4 transition-transform duration-300" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+        </button>
 
-        <!-- Support -->
-        <div class="group relative">
-          <button class="flex items-center gap-1 rounded-[10px] px-3 py-1 text-[16px] font-medium text-[#333] transition-colors hover:bg-[var(--color-n100)]" aria-haspopup="true">
-            Support
-            <svg class="h-4 w-4 transition-transform duration-200 group-hover:rotate-180" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
-          </button>
-          <div class="invisible absolute left-0 top-full z-50 pt-3 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
-            <div class="w-52 overflow-hidden rounded-lg border border-[var(--color-n400)] bg-white py-1 shadow-[var(--shadow-heavy)]">
-              {[
-                {label:'Contact & Help',          href:'/about/support/'},
-                {label:'Grievance Redressal',     href:'/about/support/'},
-                {label:'Regulatory & Compliance', href:'/about/regulatory/'},
-              ].map(c => (
-                <a href={c.href} class="block px-4 py-2.5 text-[13px] text-[var(--color-ink)] hover:bg-[var(--color-n100)]">{c.label}</a>
-              ))}
-            </div>
-          </div>
-        </div>
+        <button class="nav-trigger flex items-center gap-1 rounded-[10px] px-3 py-1 text-[16px] font-medium text-[#333] transition-colors hover:bg-[var(--color-n100)]"
+                data-panel="support" aria-haspopup="dialog" aria-expanded="false">
+          Support
+          <svg class="nav-chevron h-4 w-4 transition-transform duration-300" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+        </button>
 
-        <!-- Become a Partner -->
-        <a href="/about/become-a-partner/" class="rounded-[10px] px-3 py-1 text-[16px] font-medium text-[#333] transition-colors hover:bg-[var(--color-n100)]">Become a Partner</a>
+        <button class="nav-trigger rounded-[10px] px-3 py-1 text-[16px] font-medium text-[#333] transition-colors hover:bg-[var(--color-n100)]"
+                data-panel="partner" aria-haspopup="dialog" aria-expanded="false">
+          Become a Partner
+        </button>
       </nav>
     </div>
 
@@ -162,90 +118,188 @@ const about     = navigation.find(n => n.label === 'About')!;
   </div>
 </header>
 
-<!-- ── Products Full-Page Panel ────────────────────────────────────── -->
-<div
-  id="products-panel"
-  role="dialog"
-  aria-modal="true"
-  aria-label="Products navigation"
->
-  <!-- Left sidebar: dark olive gradient, logo + nav -->
-  <div id="products-sidebar">
-    <div class="products-logo">
+<!-- ══ Unified Full-Page Navigation Panel ══════════════════════════ -->
+<div id="nav-panel" role="dialog" aria-modal="true" aria-label="Site navigation">
+
+  <!-- Left sidebar: dark olive gradient + logo + all nav items -->
+  <div id="nps-sidebar">
+    <div class="nps-logo">
       <img src="/images/logo-component6.png" alt="Shriram Financial Services" width="113" height="48" />
     </div>
-    <nav class="products-nav" aria-label="Products panel navigation">
-      <span class="products-nav-active">Products</span>
-      <a href="/research/" class="products-nav-link">Learning Centre</a>
-      <a href="/product-hub/" class="products-nav-link">Calculators</a>
-      <a href="/about/support/" class="products-nav-link">Support</a>
-      <a href="/about/become-a-partner/" class="products-nav-link">Become a Partner</a>
+    <nav class="nps-nav" aria-label="Panel navigation">
+      <button class="nps-item" data-for="products">Products</button>
+      <button class="nps-item" data-for="learning-centre">Learning Centre</button>
+      <button class="nps-item" data-for="calculators">Calculators</button>
+      <button class="nps-item" data-for="support">Support</button>
+      <button class="nps-item" data-for="partner">Become a Partner</button>
     </nav>
   </div>
 
-  <!-- Right content: cream/white, 3-column products grid -->
-  <div id="products-content">
-
-    <!-- Close button -->
-    <button id="products-close" aria-label="Close products menu">
+  <!-- Right content: cream/white, section-specific -->
+  <div id="nps-content">
+    <button id="nps-close" aria-label="Close navigation panel">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
         <line x1="18" y1="6" x2="6" y2="18"/>
         <line x1="6" y1="6" x2="18" y2="18"/>
       </svg>
     </button>
 
-    <h2 class="products-heading">Products</h2>
-
-    <div class="products-grid">
-
-      <!-- Trade -->
-      <div class="products-col">
-        <p class="products-col-title">Trade</p>
-        <div class="products-col-items">
-          <a href="/products/equity/">Equity</a>
-          <a href="/products/currency/">Currency</a>
-          <a href="/products/commodities/">Commodities</a>
-          <a href="/products/mtf/">Margin Trading Facility (MTF)</a>
-          <a href="/products/derivative/">Derivatives</a>
+    <!-- ── Products ── -->
+    <div class="nps-section" data-section="products">
+      <h2 class="nps-heading">Products</h2>
+      <div class="nps-grid">
+        <div class="nps-col">
+          <p class="nps-col-title">Trade</p>
+          <div class="nps-col-items">
+            <a href="/products/equity/">Equity</a>
+            <a href="/products/currency/">Currency</a>
+            <a href="/products/commodities/">Commodities</a>
+            <a href="/products/mtf/">Margin Trading Facility (MTF)</a>
+            <a href="/products/derivative/">Derivatives</a>
+          </div>
+        </div>
+        <div class="nps-divider" aria-hidden="true"></div>
+        <div class="nps-col">
+          <p class="nps-col-title">Invest</p>
+          <div class="nps-col-items">
+            <a href="/products/mutual-funds/">Mutual Funds</a>
+            <a href="/products/etf/">ETFs</a>
+            <a href="/products/bonds/">Bonds</a>
+            <a href="/products/nps/">National Pension Scheme (NPS)</a>
+            <a href="/products/nfo/">NFO</a>
+            <a href="/products/ipo/">IPO</a>
+          </div>
+        </div>
+        <div class="nps-divider" aria-hidden="true"></div>
+        <div class="nps-col">
+          <p class="nps-col-title">Featured</p>
+          <div class="nps-col-items">
+            <a href="/products/loan-against-mf/">Personal Loan Against Mutual Funds</a>
+            <a href="/products/loan-against-stocks/">Personal Loan Against Stocks</a>
+            <a href="/products/loans/">Other Loans</a>
+            <a href="/products/insurance/">Insurances</a>
+            <a href="/products/fd/">Fixed Deposit</a>
+          </div>
         </div>
       </div>
-
-      <div class="products-divider" aria-hidden="true"></div>
-
-      <!-- Invest -->
-      <div class="products-col">
-        <p class="products-col-title">Invest</p>
-        <div class="products-col-items">
-          <a href="/products/mutual-funds/">Mutual Funds</a>
-          <a href="/products/etf/">ETFs</a>
-          <a href="/products/bonds/">Bonds</a>
-          <a href="/products/nps/">National Pension Scheme (NPS)</a>
-          <a href="/products/nfo/">NFO</a>
-          <a href="/products/ipo/">IPO</a>
-        </div>
-      </div>
-
-      <div class="products-divider" aria-hidden="true"></div>
-
-      <!-- Featured -->
-      <div class="products-col">
-        <p class="products-col-title">Featured</p>
-        <div class="products-col-items">
-          <a href="/products/loan-against-mf/">Personal Loan Against Mutual Funds</a>
-          <a href="/products/loan-against-stocks/">Personal Loan Against Stocks</a>
-          <a href="/products/loans/">Other Loans</a>
-          <a href="/products/insurance/">Insurances</a>
-          <a href="/products/fd/">Fixed Deposit</a>
-        </div>
-      </div>
-
     </div>
+
+    <!-- ── Learning Centre ── -->
+    <div class="nps-section" data-section="learning-centre">
+      <h2 class="nps-heading">Learning Centre</h2>
+      <div class="nps-grid">
+        <div class="nps-col">
+          <p class="nps-col-title">Beginner Trader</p>
+          <div class="nps-col-items">
+            <a href="/research/">Research</a>
+            <a href="/research/">Featured Articles</a>
+            <a href="/research/">Knowledge Base &amp; Awareness</a>
+            <a href="/research/">Financial News Hub</a>
+            <a href="/research/">Personal Finance</a>
+          </div>
+        </div>
+        <div class="nps-divider" aria-hidden="true"></div>
+        <div class="nps-col">
+          <p class="nps-col-title">Occasional Trader</p>
+          <div class="nps-col-items">
+            <a href="/research/">Stock Market</a>
+            <a href="/research/">Mutual Fund</a>
+            <a href="/research/">F&amp;O</a>
+            <a href="/research/">IPO</a>
+            <a href="/research/">Bonds</a>
+          </div>
+        </div>
+        <div class="nps-divider" aria-hidden="true"></div>
+        <div class="nps-col">
+          <p class="nps-col-title">Seasoned Traders</p>
+          <div class="nps-col-items">
+            <a href="/research/">Demat Account</a>
+            <a href="/research/">Trading Account</a>
+            <a href="/research/">Intraday Trading</a>
+            <a href="/research/">Delivery Trading</a>
+            <a href="/research/">Commodity Trading</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Calculators ── -->
+    <div class="nps-section" data-section="calculators">
+      <h2 class="nps-heading">Calculators</h2>
+      <div class="nps-grid">
+        <div class="nps-col nps-col-wide">
+          <p class="nps-col-title">Investment Calculators</p>
+          <div class="nps-col-items nps-2col">
+            <div class="nps-sub">
+              <a href="/product-hub/">Gratuity Calculator</a>
+              <a href="/product-hub/">Recurring Deposit Calculator</a>
+              <a href="/product-hub/">Public Provident Fund Calculator</a>
+              <a href="/product-hub/">Employee Provident Fund Calculator</a>
+              <a href="/product-hub/">Pension Calculator</a>
+              <a href="/product-hub/">SIP Calculator</a>
+            </div>
+            <div class="nps-sub">
+              <a href="/product-hub/">Retirement Planning Calculator</a>
+              <a href="/product-hub/">STP Calculator</a>
+              <a href="/product-hub/">Fixed Deposit Calculator</a>
+              <a href="/product-hub/">Risk Analyser Calculator</a>
+              <a href="/product-hub/">Inflation Rate Calculator</a>
+              <a href="/product-hub/">Returns Calculator</a>
+            </div>
+          </div>
+        </div>
+        <div class="nps-divider" aria-hidden="true"></div>
+        <div class="nps-col">
+          <p class="nps-col-title">Loan Calculators</p>
+          <div class="nps-col-items">
+            <a href="/product-hub/">EMI Calculator</a>
+            <a href="/product-hub/">Home Loan Calculator</a>
+            <a href="/product-hub/">Personal Loan Calculator</a>
+            <a href="/product-hub/">Education Loan Calculator</a>
+            <a href="/product-hub/">Home Loan Eligibility Calculator</a>
+            <a href="/product-hub/">Education Loan Repayment Calculator</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Support ── -->
+    <div class="nps-section" data-section="support">
+      <h2 class="nps-heading">Support</h2>
+      <div class="nps-grid">
+        <div class="nps-col">
+          <p class="nps-col-title">Get Help</p>
+          <div class="nps-col-items">
+            <a href="/about/support/">Contact &amp; Help</a>
+            <a href="/about/support/">Grievance Redressal</a>
+            <a href="/about/regulatory/">Regulatory &amp; Compliance</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Become a Partner ── -->
+    <div class="nps-section" data-section="partner">
+      <h2 class="nps-heading">Become a Partner</h2>
+      <div class="nps-grid">
+        <div class="nps-col">
+          <p class="nps-col-title">Partner Programme</p>
+          <div class="nps-col-items">
+            <a href="/about/become-a-partner/">Join as Sub-Broker</a>
+            <a href="/about/become-a-partner/">Refer &amp; Earn</a>
+            <a href="/about/become-a-partner/">Authorised Person</a>
+            <a href="/about/become-a-partner/">Channel Partner</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
 <style>
-  /* ── Products panel: base state (hidden) ──────────────────────── */
-  #products-panel {
+  /* ── Panel base (hidden) ─────────────────────────────────────── */
+  #nav-panel {
     position: fixed;
     inset: 0;
     z-index: 60;
@@ -254,34 +308,27 @@ const about     = navigation.find(n => n.label === 'About')!;
     opacity: 0;
     transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   }
-
-  /* Open state */
-  #products-panel[data-open] {
+  #nav-panel[data-open] {
     opacity: 1;
     pointer-events: auto;
   }
 
   /* ── Left sidebar ─────────────────────────────────────────────── */
-  #products-sidebar {
-    position: relative;
+  #nps-sidebar {
     width: clamp(240px, 27vw, 400px);
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
     padding: clamp(40px, 6vw, 96px) clamp(28px, 4.5vw, 72px);
     border-radius: 0 40px 40px 0;
-    /* Figma radial gradient: dark olive → near-black */
     background: radial-gradient(ellipse at top left, #4f583b 0%, #363a2c 50%, #1d1d1d 100%);
     transform: translateX(-36px);
     transition: transform 0.48s cubic-bezier(0.4, 0, 0.2, 1);
     overflow: hidden;
   }
+  #nav-panel[data-open] #nps-sidebar { transform: translateX(0); }
 
-  #products-panel[data-open] #products-sidebar {
-    transform: translateX(0);
-  }
-
-  .products-logo {
+  .nps-logo {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -291,88 +338,80 @@ const about     = navigation.find(n => n.label === 'About')!;
     margin-bottom: clamp(36px, 5.5vw, 80px);
     align-self: flex-start;
   }
-  .products-logo img {
-    height: 48px;
-    width: auto;
-    display: block;
-    object-fit: contain;
-  }
+  .nps-logo img { height: 48px; width: auto; display: block; object-fit: contain; }
 
-  .products-nav {
-    display: flex;
-    flex-direction: column;
-    gap: clamp(28px, 4vw, 56px);
-  }
-  .products-nav-active {
-    font-size: clamp(18px, 2.2vw, 28px);
-    font-weight: 600;
-    color: #f3b83f;
-    line-height: 1;
-    font-family: 'Outfit', sans-serif;
-  }
-  .products-nav-link {
+  .nps-nav { display: flex; flex-direction: column; gap: clamp(24px, 3.5vw, 48px); }
+
+  .nps-item {
     font-size: clamp(16px, 2vw, 28px);
     font-weight: 300;
     color: #bcaf99;
     line-height: 1;
-    text-decoration: none;
     font-family: 'Outfit', sans-serif;
     transition: color 0.2s ease;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    padding: 0;
   }
-  .products-nav-link:hover {
-    color: #fff;
+  .nps-item:hover { color: #fff; }
+
+  /* Active sidebar item per open section */
+  #nav-panel[data-panel="products"]        .nps-item[data-for="products"],
+  #nav-panel[data-panel="learning-centre"] .nps-item[data-for="learning-centre"],
+  #nav-panel[data-panel="calculators"]     .nps-item[data-for="calculators"],
+  #nav-panel[data-panel="support"]         .nps-item[data-for="support"],
+  #nav-panel[data-panel="partner"]         .nps-item[data-for="partner"] {
+    color: #f3b83f;
+    font-weight: 600;
   }
 
-  /* ── Right content ────────────────────────────────────────────── */
-  #products-content {
+  /* ── Right content ─────────────────────────────────────────────── */
+  #nps-content {
     position: relative;
     flex: 1;
     display: flex;
     flex-direction: column;
     padding: clamp(72px, 9vw, 144px) clamp(36px, 5vw, 80px) clamp(36px, 5vw, 72px);
-    /* Figma warm cream radial gradient */
     background: radial-gradient(ellipse at top right, #ebdec6 0%, #ffffff 58%);
     transform: translateX(24px);
     opacity: 0;
-    /* 60ms stagger after sidebar */
     transition:
       transform 0.48s cubic-bezier(0.4, 0, 0.2, 1) 0.06s,
       opacity   0.48s ease                           0.06s;
     overflow-y: auto;
   }
-
-  #products-panel[data-open] #products-content {
-    transform: translateX(0);
-    opacity: 1;
-  }
+  #nav-panel[data-open] #nps-content { transform: translateX(0); opacity: 1; }
 
   /* Close button */
-  #products-close {
+  #nps-close {
     position: absolute;
     top: clamp(72px, 8vw, 128px);
     right: clamp(24px, 3vw, 48px);
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(18, 18, 18, 0.05);
+    width: 40px; height: 40px;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(18,18,18,0.05);
     border-radius: 50%;
-    border: none;
-    cursor: pointer;
-    color: #333;
+    border: none; cursor: pointer; color: #333;
     transition: background 0.2s ease;
   }
-  #products-close:hover {
-    background: rgba(18, 18, 18, 0.12);
-  }
-  #products-close svg {
-    width: 18px;
-    height: 18px;
+  #nps-close:hover { background: rgba(18,18,18,0.12); }
+  #nps-close svg { width: 18px; height: 18px; }
+
+  /* Sections: only the active one visible */
+  .nps-section { display: none; flex-direction: column; flex: 1; }
+
+  #nav-panel[data-panel="products"]        .nps-section[data-section="products"],
+  #nav-panel[data-panel="learning-centre"] .nps-section[data-section="learning-centre"],
+  #nav-panel[data-panel="calculators"]     .nps-section[data-section="calculators"],
+  #nav-panel[data-panel="support"]         .nps-section[data-section="support"],
+  #nav-panel[data-panel="partner"]         .nps-section[data-section="partner"] {
+    display: flex;
   }
 
-  /* Products heading */
-  .products-heading {
+  /* Heading */
+  .nps-heading {
     font-size: clamp(20px, 2.2vw, 32px);
     font-weight: 500;
     color: #3a3c39;
@@ -381,27 +420,21 @@ const about     = navigation.find(n => n.label === 'About')!;
     font-family: 'Outfit', sans-serif;
   }
 
-  /* 3-column grid */
-  .products-grid {
-    display: flex;
-    gap: 0;
-    align-items: flex-start;
-    flex: 1;
-  }
-  .products-col {
+  /* Grid + columns */
+  .nps-grid { display: flex; align-items: flex-start; flex: 1; }
+
+  .nps-col {
     flex: 1;
     display: flex;
     flex-direction: column;
     gap: clamp(18px, 2.5vw, 32px);
     padding: 0 clamp(16px, 2.5vw, 40px);
   }
-  .products-col:first-child {
-    padding-left: 0;
-  }
-  .products-col:last-child {
-    padding-right: 0;
-  }
-  .products-col-title {
+  .nps-col:first-child { padding-left: 0; }
+  .nps-col:last-child  { padding-right: 0; }
+  .nps-col-wide { flex: 2; }
+
+  .nps-col-title {
     font-size: clamp(14px, 1.3vw, 20px);
     font-weight: 500;
     color: #3a3c39;
@@ -409,12 +442,25 @@ const about     = navigation.find(n => n.label === 'About')!;
     font-family: 'Outfit', sans-serif;
     line-height: 1.2;
   }
-  .products-col-items {
+
+  .nps-col-items {
     display: flex;
     flex-direction: column;
     gap: clamp(14px, 1.8vw, 24px);
   }
-  .products-col-items a {
+  .nps-2col {
+    flex-direction: row;
+    gap: clamp(20px, 3vw, 40px);
+  }
+  .nps-sub {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(14px, 1.8vw, 24px);
+  }
+
+  .nps-col-items a,
+  .nps-sub a {
     font-size: clamp(12px, 1.05vw, 16px);
     color: #333;
     text-decoration: none;
@@ -422,10 +468,10 @@ const about     = navigation.find(n => n.label === 'About')!;
     line-height: 1.4;
     transition: color 0.2s ease;
   }
-  .products-col-items a:hover {
-    color: var(--color-brand, #f3b83f);
-  }
-  .products-divider {
+  .nps-col-items a:hover,
+  .nps-sub a:hover { color: var(--color-brand, #f3b83f); }
+
+  .nps-divider {
     width: 1px;
     align-self: stretch;
     background: #e0ddd8;
@@ -433,10 +479,8 @@ const about     = navigation.find(n => n.label === 'About')!;
     margin-top: calc(clamp(18px, 2.5vw, 32px) + clamp(14px, 1.3vw, 20px));
   }
 
-  /* Chevron rotation reflects panel state */
-  #products-btn[aria-expanded="true"] #products-chevron {
-    transform: rotate(180deg);
-  }
+  /* Chevron rotates when panel is open */
+  .nav-trigger[aria-expanded="true"] .nav-chevron { transform: rotate(180deg); }
 </style>
 
 <script>
@@ -445,7 +489,6 @@ const about     = navigation.find(n => n.label === 'About')!;
   const menu      = document.getElementById('mobile-menu')!;
   const iconOpen  = document.getElementById('icon-open')!;
   const iconClose = document.getElementById('icon-close')!;
-
   toggle.addEventListener('click', () => {
     const isOpen = !menu.classList.contains('hidden');
     menu.classList.toggle('hidden', isOpen);
@@ -454,40 +497,48 @@ const about     = navigation.find(n => n.label === 'About')!;
     toggle.setAttribute('aria-expanded', String(!isOpen));
   });
 
-  // ── Products full-page panel ───────────────────────────────────
-  const productsBtn   = document.getElementById('products-btn')!;
-  const productsPanel = document.getElementById('products-panel')!;
-  const productsClose = document.getElementById('products-close')!;
+  // ── Full-page nav panels ──────────────────────────────────────
+  const navPanel = document.getElementById('nav-panel')!;
+  const closeBtn = document.getElementById('nps-close')!;
+  let activeBtn: HTMLElement | null = null;
 
-  function openProductsPanel() {
-    productsPanel.setAttribute('data-open', '');
-    productsBtn.setAttribute('aria-expanded', 'true');
+  function openPanel(section: string, btn: HTMLElement) {
+    navPanel.setAttribute('data-open', '');
+    navPanel.setAttribute('data-panel', section);
+    if (activeBtn && activeBtn !== btn) activeBtn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-expanded', 'true');
+    activeBtn = btn;
     document.body.style.overflow = 'hidden';
-    productsClose.focus();
+    closeBtn.focus();
   }
 
-  function closeProductsPanel() {
-    productsPanel.removeAttribute('data-open');
-    productsBtn.setAttribute('aria-expanded', 'false');
+  function closePanel() {
+    navPanel.removeAttribute('data-open');
+    navPanel.removeAttribute('data-panel');
     document.body.style.overflow = '';
-    productsBtn.focus();
+    if (activeBtn) { activeBtn.setAttribute('aria-expanded', 'false'); activeBtn.focus(); activeBtn = null; }
   }
 
-  productsBtn.addEventListener('click', () => {
-    productsPanel.hasAttribute('data-open') ? closeProductsPanel() : openProductsPanel();
+  // Header nav buttons
+  document.querySelectorAll<HTMLElement>('.nav-trigger').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const p = btn.dataset.panel!;
+      (navPanel.hasAttribute('data-open') && navPanel.dataset.panel === p) ? closePanel() : openPanel(p, btn);
+    });
   });
 
-  productsClose.addEventListener('click', closeProductsPanel);
-
-  // Close on Escape
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && productsPanel.hasAttribute('data-open')) {
-      closeProductsPanel();
-    }
+  // Sidebar buttons switch the right-side section (stay in panel)
+  navPanel.querySelectorAll<HTMLElement>('.nps-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const p = item.dataset.for!;
+      navPanel.setAttribute('data-panel', p);
+      if (activeBtn) activeBtn.setAttribute('aria-expanded', 'false');
+      const hBtn = document.querySelector<HTMLElement>(`.nav-trigger[data-panel="${p}"]`);
+      if (hBtn) { hBtn.setAttribute('aria-expanded', 'true'); activeBtn = hBtn; }
+    });
   });
 
-  // Close when a product link is followed
-  productsPanel.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', closeProductsPanel);
-  });
+  closeBtn.addEventListener('click', closePanel);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && navPanel.hasAttribute('data-open')) closePanel(); });
+  navPanel.querySelectorAll('a').forEach(a => a.addEventListener('click', closePanel));
 </script>
