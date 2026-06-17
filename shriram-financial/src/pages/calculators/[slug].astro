@@ -1,7 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-const calcData: Record<string, any> = {
+export function getStaticPaths() {
+  const calcData: Record<string, any> = {
   sip: {
     title: 'SIP Calculator',
     subtitle: 'Calculate the returns on your monthly Systematic Investment Plan and plan your wealth goals.',
@@ -147,15 +148,17 @@ const calcData: Record<string, any> = {
   },
 };
 
-export function getStaticPaths() {
   return Object.entries(calcData).map(([slug, data]) => ({
     params: { slug },
-    props: { slug, ...data },
+    props: {
+      slug,
+      ...data,
+      relatedCalcs: (data.related as string[]).map((s: string) => ({ slug: s, title: calcData[s].title })),
+    },
   }));
 }
 
-const { slug, title, subtitle, inputs, whatIs, howHelps, howWorks, advantages, faqs, related } = Astro.props;
-const relatedCalcs = (related as string[]).map(s => ({ slug: s, title: calcData[s].title }));
+const { slug, title, subtitle, inputs, whatIs, howHelps, howWorks, advantages, faqs, relatedCalcs } = Astro.props;
 ---
 
 <BaseLayout
