@@ -1,0 +1,179 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const benefits = [
+  { title: 'No Need to Sell Shares', desc: 'Pledge your stock holdings as collateral and borrow against them. Your shares remain in your demat account, continuing to earn dividends and bonus shares.' },
+  { title: 'High Loan Amount', desc: 'Borrow up to 50–60% of the market value of your pledged shares. Large portfolios unlock significant liquidity without asset liquidation.' },
+  { title: 'Flexible Overdraft', desc: 'LAS works like a revolving credit line. Draw funds when needed, repay when you have surplus, and re-draw again — pay interest only on outstanding amount.' },
+  { title: 'Low Interest Rates', desc: 'LAS rates (10%–15% p.a.) are far lower than unsecured personal loans and credit cards, because your shares act as security for the lender.' },
+  { title: 'Continue Earning Benefits', desc: 'Pledged shares remain in your demat account. You continue receiving dividends, bonus shares, and rights issues even during the loan period.' },
+  { title: 'Digital Pledge Process', desc: 'Pledge creation is fully online. No physical share certificates, no branch visits. CDSL/NSDL registers the pledge mark digitally within minutes.' },
+];
+
+const eligibleSecurities = [
+  { type: 'BSE/NSE Listed Shares', ltv: '50–60%', example: 'NIFTY 50, NIFTY 100, large-cap stocks' },
+  { type: 'Mid-cap Stocks', ltv: '40–50%', example: 'NIFTY Midcap 150 constituents (lender-approved list)' },
+  { type: 'ETFs (Equity)', ltv: '50–60%', example: 'Nifty BeES, SBI ETF Nifty 50' },
+  { type: 'Sovereign Gold Bonds', ltv: '60–70%', example: 'RBI-issued SGBs held in demat form' },
+];
+
+const steps = [
+  { n: '01', title: 'Submit Pledge Request', desc: 'Select the stocks you want to pledge from your demat account. Shriram initiates a pledge request to CDSL/NSDL on your behalf.' },
+  { n: '02', title: 'Authorise via CDSL/NSDL', desc: 'You receive a TPIN-based authorisation request on your registered mobile and email. One-time approval authorises the pledge.' },
+  { n: '03', title: 'Pledge Confirmed & Limit Set', desc: 'Once CDSL/NSDL confirms the pledge mark, your loan limit is activated based on the LTV of pledged shares.' },
+  { n: '04', title: 'Withdraw & Repay Anytime', desc: 'Draw funds to your bank account. Repay whenever convenient. The pledge is released when the loan is fully repaid.' },
+];
+
+const faqs = [
+  { q: 'What is Loan Against Stocks (LAS)?', a: 'LAS is a secured overdraft facility where you pledge your equity shares or ETFs held in a demat account as collateral. The lender marks a lien on your pledged securities via CDSL/NSDL. You retain ownership and continue earning dividends, but the shares cannot be sold until the lien is removed after loan repayment.' },
+  { q: 'Which stocks are eligible for pledging?', a: 'Eligibility depends on the lender\'s approved security list, which typically includes NIFTY 50 and NIFTY 100 constituents, other exchange-listed large-cap and mid-cap shares, and ETFs. Penny stocks, illiquid shares, and stocks under special surveillance are generally not eligible. Shriram provides an updated approved list for reference.' },
+  { q: 'Do I still receive dividends on pledged shares?', a: 'Yes. Pledging transfers a lien on the shares, not ownership. Dividends, bonus shares, rights entitlements, and stock splits declared on pledged securities continue to be credited to your demat account during the loan period. Bonus shares received may even increase your pledged collateral value.' },
+  { q: 'What happens if the share price falls sharply?', a: 'If the market value of pledged shares falls and the outstanding loan exceeds the permissible LTV (typically 50–60%), the lender may issue a margin call. This requires you to pledge additional shares, deposit cash, or repay part of the loan to restore the LTV ratio. Shriram\'s system monitors LTV continuously and alerts you well before a forced action becomes necessary.' },
+  { q: 'How is LAS different from Margin Trading Facility (MTF)?', a: 'Both LAS and MTF allow borrowing against shares, but they differ in purpose. MTF is specifically for buying additional securities on margin within the trading account — the purchased shares serve as collateral. LAS is a general-purpose loan against existing demat holdings, with funds disbursed directly to your bank account for any use (business, personal, etc.). LAS typically offers longer tenors and lower rates.' },
+];
+---
+
+<BaseLayout
+  title="Loan Against Stocks (LAS) — Borrow Against Your Portfolio | Shriram Financial Services"
+  description="Pledge your equity shares and get instant liquidity through Loan Against Stocks with Shriram Financial Services. Flexible overdraft, low rates, shares continue earning."
+>
+
+  <!-- ── Hero ── -->
+  <section class="relative overflow-hidden bg-[var(--color-dark-800)]">
+    <div class="pointer-events-none absolute -right-40 -top-40 h-[560px] w-[560px] rounded-full bg-[var(--color-brand)]/10 blur-3xl"></div>
+    <div class="pointer-events-none absolute -bottom-32 left-0 h-80 w-80 rounded-full bg-[var(--color-brand)]/5 blur-3xl"></div>
+    <div class="site-wrap relative py-16 lg:py-28">
+      <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Loan Against Stocks</p>
+      <h1 class="mt-4 max-w-3xl text-[32px] font-bold leading-tight text-white lg:text-[40px]" style="font-family:var(--font-display)">
+        Borrow Against Your Share<br class="hidden sm:block"> Portfolio Instantly
+      </h1>
+      <p class="mt-5 max-w-2xl text-[15px] leading-relaxed text-white/60 lg:text-[17px]">
+        Pledge your equity holdings and unlock a flexible credit line — without selling a single share. Your stocks stay, your dividends continue, and you get the funds you need.
+      </p>
+      <div class="mt-7 grid grid-cols-2 gap-x-6 gap-y-3 sm:flex sm:gap-8">
+        {[['No Share Sale'], ['Keep Dividends'], ['Flexible Overdraft'], ['Low Interest Rates']].map(([l]) => (
+          <div class="flex items-center gap-2 text-[13px] font-medium text-white/70">
+            <span class="h-1.5 w-1.5 rounded-full bg-[var(--color-brand)]"></span>{l}
+          </div>
+        ))}
+      </div>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="/about/open-demat-account/" class="btn-primary">Get Started</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Benefits ── -->
+  <section class="bg-[#f8f6f1] py-16 lg:py-24">
+    <div class="site-wrap">
+      <h2 class="text-[22px] font-semibold text-[var(--color-ink)] lg:text-[28px]" style="font-family:var(--font-display)">
+        Why Choose LAS?
+      </h2>
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {benefits.map(b => (
+          <div class="rounded-[16px] border border-[var(--color-warm-border)] bg-white p-6">
+            <h3 class="text-[16px] font-semibold text-[var(--color-ink)]" style="font-family:var(--font-display)">{b.title}</h3>
+            <p class="mt-2 text-[14px] leading-relaxed text-[var(--color-muted)]">{b.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Eligible Securities ── -->
+  <section class="bg-white py-16 lg:py-20">
+    <div class="site-wrap">
+      <h2 class="text-[22px] font-semibold text-[var(--color-ink)] lg:text-[28px]" style="font-family:var(--font-display)">
+        Eligible Securities & LTV Ratios
+      </h2>
+      <p class="mt-3 text-[15px] text-[var(--color-muted)]">Loan limits depend on the type and market value of securities pledged. Only exchange-listed, lender-approved shares qualify.</p>
+      <div class="mt-8 overflow-x-auto">
+        <table class="w-full border-collapse text-[14px]">
+          <thead>
+            <tr class="border-b-2 border-[var(--color-warm-border)]">
+              <th class="py-3 pr-6 text-left font-semibold text-[var(--color-ink)]">Security Type</th>
+              <th class="py-3 pr-6 text-left font-semibold text-[var(--color-ink)]">LTV Ratio</th>
+              <th class="py-3 text-left font-semibold text-[var(--color-ink)]">Examples</th>
+            </tr>
+          </thead>
+          <tbody>
+            {eligibleSecurities.map(row => (
+              <tr class="border-b border-[var(--color-n400)]">
+                <td class="py-4 pr-6 font-medium text-[var(--color-n900)]">{row.type}</td>
+                <td class="py-4 pr-6 font-semibold text-[var(--color-brand)]">{row.ltv}</td>
+                <td class="py-4 text-[var(--color-muted)]">{row.example}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── How It Works ── -->
+  <section class="bg-[#f8f6f1] py-16 lg:py-20">
+    <div class="site-wrap">
+      <h2 class="text-[22px] font-semibold text-[var(--color-ink)] lg:text-[28px]" style="font-family:var(--font-display)">
+        How to Get a Loan Against Stocks
+      </h2>
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {steps.map(s => (
+          <div class="relative flex flex-col gap-3">
+            <span class="text-[32px] font-bold text-[var(--color-dark-olive)]/20">{s.n}</span>
+            <h3 class="text-[16px] font-semibold text-[var(--color-ink)]" style="font-family:var(--font-display)">{s.title}</h3>
+            <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FAQ ── -->
+  <section class="bg-white py-16 lg:py-24">
+    <div class="site-wrap max-w-3xl">
+      <h2 class="text-[22px] font-semibold text-[var(--color-ink)] lg:text-[28px]" style="font-family:var(--font-display)">
+        Frequently Asked <span class="text-[var(--color-brand)]">Questions</span>
+      </h2>
+      <div class="mt-8 flex flex-col gap-2" id="las-faq">
+        {faqs.map(item => (
+          <details class="group overflow-hidden rounded-[12px] border border-[var(--color-n400)] bg-white">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 lg:px-6 lg:py-5">
+              <span class="text-[14px] font-medium text-[var(--color-n900)] lg:text-[15px]">{item.q}</span>
+              <span class="grid h-6 w-6 shrink-0 place-items-center rounded-full border border-[var(--color-n400)] transition-transform group-open:rotate-45">
+                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" class="h-3 w-3"><path d="M6 2v8M2 6h8"/></svg>
+              </span>
+            </summary>
+            <div class="border-t border-[var(--color-n400)] bg-[var(--color-n100)] px-5 py-4 lg:px-6">
+              <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">{item.a}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ── -->
+  <section class="site-wrap pb-20">
+    <div class="relative overflow-hidden rounded-[24px] bg-[var(--color-dark-olive)] p-10 lg:p-14">
+      <div class="relative flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
+        <div>
+          <h2 class="text-[22px] font-bold text-white lg:text-[28px]" style="font-family:var(--font-display)">Make Your Portfolio Work Harder</h2>
+          <p class="mt-2 max-w-md text-[14px] text-white/65">Access funds without selling your shares. Keep your portfolio intact and growing.</p>
+        </div>
+        <a href="/about/open-demat-account/" class="inline-flex h-12 shrink-0 items-center justify-center rounded-[6px] bg-[var(--color-brand)] px-8 text-[13px] font-semibold text-[#202318] transition-all hover:bg-[var(--color-brand-hover)]">
+          Apply Now
+        </a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<script>
+  const accord = document.getElementById('las-faq');
+  accord?.querySelectorAll('details').forEach(d => {
+    d.addEventListener('toggle', () => {
+      if (d.open) accord.querySelectorAll('details').forEach(o => { if (o !== d) o.removeAttribute('open'); });
+    });
+  });
+</script>

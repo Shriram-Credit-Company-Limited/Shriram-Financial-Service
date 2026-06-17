@@ -1,0 +1,179 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const benefits = [
+  { title: 'No Redemption Needed', desc: 'Keep your SIPs and investments running. Pledge your mutual fund units as collateral without selling them — your NAV growth continues.' },
+  { title: 'Instant Liquidity', desc: 'Get funds credited to your bank account within 24–48 hours of pledge creation. No lengthy bank approvals or paperwork queues.' },
+  { title: 'Low Interest Rates', desc: 'LAMF interest rates (9.5%–14% p.a.) are significantly lower than personal loans or credit cards — because your mutual funds secure the loan.' },
+  { title: 'Overdraft Facility', desc: 'Draw funds as needed and pay interest only on the amount withdrawn, not the total sanctioned limit. Repay and redraw anytime.' },
+  { title: 'SIPs Continue Running', desc: 'Even after pledging units, your SIP deductions continue and new units are added monthly. Your long-term corpus keeps compounding.' },
+  { title: 'No Prepayment Charges', desc: 'Repay the loan partially or fully whenever you have surplus funds — no foreclosure penalty after the initial lock-in period.' },
+];
+
+const eligibleFunds = [
+  { type: 'Equity Mutual Funds', ltv: '50–60%', example: 'Large-cap, mid-cap, flexi-cap, ELSS funds' },
+  { type: 'Debt Mutual Funds', ltv: '70–80%', example: 'Liquid funds, short-term bond funds, gilt funds' },
+  { type: 'Hybrid / Balanced Funds', ltv: '55–65%', example: 'Balanced advantage, aggressive hybrid funds' },
+  { type: 'Index Funds / ETFs', ltv: '50–60%', example: 'NIFTY 50 index funds, SENSEX ETFs' },
+];
+
+const steps = [
+  { n: '01', title: 'Link Your Mutual Fund Holdings', desc: 'Connect your existing mutual fund portfolio to your Shriram account. Folios held across AMCs are visible in one dashboard.' },
+  { n: '02', title: 'Select Units to Pledge', desc: 'Choose the fund(s) you want to pledge. The system calculates your eligible loan amount (LTV) based on current NAV.' },
+  { n: '03', title: 'Submit Pledge Request', desc: 'Submit the pledge digitally — the AMC registers the lien on your units with the RTA. No physical forms required.' },
+  { n: '04', title: 'Receive Loan in Your Account', desc: 'Once the pledge is confirmed, funds are credited to your linked bank account. Draw as little or as much as you need.' },
+];
+
+const faqs = [
+  { q: 'What is Loan Against Mutual Funds (LAMF)?', a: 'LAMF is a secured loan where you pledge your mutual fund units as collateral to borrow money. The lender places a lien on your units via the RTA (Registrar and Transfer Agent). You retain ownership of the units — they continue earning returns — but cannot redeem them until the lien is released after loan repayment.' },
+  { q: 'How much loan can I get against my mutual funds?', a: 'The loan amount depends on the Loan-to-Value (LTV) ratio of the pledged funds. Typically: Equity funds — 50–60% of NAV; Debt funds — 70–80% of NAV; Hybrid funds — 55–65% of NAV. For example, if you pledge equity funds worth ₹10 lakh, you can get a loan of ₹5–6 lakh.' },
+  { q: 'Do my SIPs continue during the loan period?', a: 'Yes. Pledging units does not stop your running SIPs. New units added through SIP each month are not automatically pledged — only the specific units you selected at the time of pledge are locked. Your SIP corpus continues to grow alongside the pledged holdings.' },
+  { q: 'What happens if the NAV falls below the loan value?', a: 'If the NAV of pledged units falls significantly and the outstanding loan exceeds the permissible LTV, the lender may issue a margin call — requesting additional collateral (more units) or partial loan repayment to restore the LTV ratio. Shriram monitors LTV in real time and alerts you before a margin call becomes mandatory.' },
+  { q: 'Can I repay the LAMF loan early?', a: 'Yes. LAMF is structured as an overdraft facility, so you can repay any amount at any time without penalty (after the initial lock-in period of 3 months, if any). Once the loan is fully repaid, the pledge lien is removed and your mutual fund units become freely redeemable again.' },
+];
+---
+
+<BaseLayout
+  title="Loan Against Mutual Funds (LAMF) — Instant Liquidity | Shriram Financial Services"
+  description="Get instant liquidity by pledging your mutual fund units as collateral with Shriram Financial Services. No redemption, low interest rates, SIPs continue."
+>
+
+  <!-- ── Hero ── -->
+  <section class="relative overflow-hidden bg-[var(--color-dark-800)]">
+    <div class="pointer-events-none absolute -right-40 -top-40 h-[560px] w-[560px] rounded-full bg-[var(--color-brand)]/10 blur-3xl"></div>
+    <div class="pointer-events-none absolute -bottom-32 left-0 h-80 w-80 rounded-full bg-[var(--color-brand)]/5 blur-3xl"></div>
+    <div class="site-wrap relative py-16 lg:py-28">
+      <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Loan Against Mutual Funds</p>
+      <h1 class="mt-4 max-w-3xl text-[32px] font-bold leading-tight text-white lg:text-[40px]" style="font-family:var(--font-display)">
+        Unlock Cash from Your<br class="hidden sm:block"> Mutual Fund Portfolio
+      </h1>
+      <p class="mt-5 max-w-2xl text-[15px] leading-relaxed text-white/60 lg:text-[17px]">
+        Need funds urgently? Pledge your mutual fund units and get instant liquidity — without selling your investments or stopping your SIPs.
+      </p>
+      <div class="mt-7 grid grid-cols-2 gap-x-6 gap-y-3 sm:flex sm:gap-8">
+        {[['No Redemption'], ['Low Interest Rates'], ['SIPs Continue'], ['Overdraft Facility']].map(([l]) => (
+          <div class="flex items-center gap-2 text-[13px] font-medium text-white/70">
+            <span class="h-1.5 w-1.5 rounded-full bg-[var(--color-brand)]"></span>{l}
+          </div>
+        ))}
+      </div>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="/about/open-demat-account/" class="btn-primary">Get Started</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Benefits ── -->
+  <section class="bg-[#f8f6f1] py-16 lg:py-24">
+    <div class="site-wrap">
+      <h2 class="text-[22px] font-semibold text-[var(--color-ink)] lg:text-[28px]" style="font-family:var(--font-display)">
+        Why Choose LAMF?
+      </h2>
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {benefits.map(b => (
+          <div class="rounded-[16px] border border-[var(--color-warm-border)] bg-white p-6">
+            <h3 class="text-[16px] font-semibold text-[var(--color-ink)]" style="font-family:var(--font-display)">{b.title}</h3>
+            <p class="mt-2 text-[14px] leading-relaxed text-[var(--color-muted)]">{b.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Eligible Funds ── -->
+  <section class="bg-white py-16 lg:py-20">
+    <div class="site-wrap">
+      <h2 class="text-[22px] font-semibold text-[var(--color-ink)] lg:text-[28px]" style="font-family:var(--font-display)">
+        Eligible Fund Types & LTV Ratios
+      </h2>
+      <p class="mt-3 text-[15px] text-[var(--color-muted)]">The loan amount you receive depends on the Loan-to-Value ratio of the mutual funds you pledge.</p>
+      <div class="mt-8 overflow-x-auto">
+        <table class="w-full border-collapse text-[14px]">
+          <thead>
+            <tr class="border-b-2 border-[var(--color-warm-border)]">
+              <th class="py-3 pr-6 text-left font-semibold text-[var(--color-ink)]">Fund Type</th>
+              <th class="py-3 pr-6 text-left font-semibold text-[var(--color-ink)]">LTV Ratio</th>
+              <th class="py-3 text-left font-semibold text-[var(--color-ink)]">Examples</th>
+            </tr>
+          </thead>
+          <tbody>
+            {eligibleFunds.map(row => (
+              <tr class="border-b border-[var(--color-n400)]">
+                <td class="py-4 pr-6 font-medium text-[var(--color-n900)]">{row.type}</td>
+                <td class="py-4 pr-6 font-semibold text-[var(--color-brand)]">{row.ltv}</td>
+                <td class="py-4 text-[var(--color-muted)]">{row.example}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── How It Works ── -->
+  <section class="bg-[#f8f6f1] py-16 lg:py-20">
+    <div class="site-wrap">
+      <h2 class="text-[22px] font-semibold text-[var(--color-ink)] lg:text-[28px]" style="font-family:var(--font-display)">
+        How to Get a Loan Against Mutual Funds
+      </h2>
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {steps.map(s => (
+          <div class="relative flex flex-col gap-3">
+            <span class="text-[32px] font-bold text-[var(--color-dark-olive)]/20">{s.n}</span>
+            <h3 class="text-[16px] font-semibold text-[var(--color-ink)]" style="font-family:var(--font-display)">{s.title}</h3>
+            <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FAQ ── -->
+  <section class="bg-white py-16 lg:py-24">
+    <div class="site-wrap max-w-3xl">
+      <h2 class="text-[22px] font-semibold text-[var(--color-ink)] lg:text-[28px]" style="font-family:var(--font-display)">
+        Frequently Asked <span class="text-[var(--color-brand)]">Questions</span>
+      </h2>
+      <div class="mt-8 flex flex-col gap-2" id="lamf-faq">
+        {faqs.map(item => (
+          <details class="group overflow-hidden rounded-[12px] border border-[var(--color-n400)] bg-white">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 lg:px-6 lg:py-5">
+              <span class="text-[14px] font-medium text-[var(--color-n900)] lg:text-[15px]">{item.q}</span>
+              <span class="grid h-6 w-6 shrink-0 place-items-center rounded-full border border-[var(--color-n400)] transition-transform group-open:rotate-45">
+                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" class="h-3 w-3"><path d="M6 2v8M2 6h8"/></svg>
+              </span>
+            </summary>
+            <div class="border-t border-[var(--color-n400)] bg-[var(--color-n100)] px-5 py-4 lg:px-6">
+              <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">{item.a}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ── -->
+  <section class="site-wrap pb-20">
+    <div class="relative overflow-hidden rounded-[24px] bg-[var(--color-dark-olive)] p-10 lg:p-14">
+      <div class="relative flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
+        <div>
+          <h2 class="text-[22px] font-bold text-white lg:text-[28px]" style="font-family:var(--font-display)">Ready to Unlock Your Portfolio's Value?</h2>
+          <p class="mt-2 max-w-md text-[14px] text-white/65">Get instant liquidity at low interest rates without disrupting your investments.</p>
+        </div>
+        <a href="/about/open-demat-account/" class="inline-flex h-12 shrink-0 items-center justify-center rounded-[6px] bg-[var(--color-brand)] px-8 text-[13px] font-semibold text-[#202318] transition-all hover:bg-[var(--color-brand-hover)]">
+          Apply Now
+        </a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<script>
+  const accord = document.getElementById('lamf-faq');
+  accord?.querySelectorAll('details').forEach(d => {
+    d.addEventListener('toggle', () => {
+      if (d.open) accord.querySelectorAll('details').forEach(o => { if (o !== d) o.removeAttribute('open'); });
+    });
+  });
+</script>
