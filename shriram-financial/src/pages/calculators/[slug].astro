@@ -1,0 +1,515 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const calcData: Record<string, any> = {
+  sip: {
+    title: 'SIP Calculator',
+    subtitle: 'Calculate the returns on your monthly Systematic Investment Plan and plan your wealth goals.',
+    inputs: [
+      { id: 'sip-amount', label: 'Monthly Investment', min: 500, max: 100000, step: 500, value: 10000, prefix: '₹' },
+      { id: 'sip-rate',   label: 'Expected Return (% p.a.)', min: 1, max: 30, step: 0.5, value: 12, suffix: '%' },
+      { id: 'sip-years',  label: 'Investment Period', min: 1, max: 40, step: 1, value: 10, suffix: ' yrs' },
+    ],
+    whatIs: 'A SIP (Systematic Investment Plan) calculator is a free online tool that estimates how much wealth you can build by investing a fixed sum every month in a mutual fund. It applies the power of compounding to show how even small, regular investments can grow into a significant corpus over time.',
+    howHelps: {
+      body: 'Whether you are saving for retirement, a home, or your child\'s education, a SIP calculator helps you make informed decisions about how much to invest every month.',
+      points: [
+        'Set realistic investment goals and timelines before committing to a SIP',
+        'Compare how different monthly amounts and time periods affect your final corpus',
+        'Understand the real impact of compounding on your long-term wealth',
+        'Decide which SIP amount fits comfortably within your monthly budget',
+      ],
+    },
+    howWorks: 'The SIP calculator uses the future value of a recurring investment formula: FV = P × [(1 + r)^n − 1] / r × (1 + r), where P is your monthly investment, r is the monthly rate of return (annual rate ÷ 12), and n is the total number of months. Each month\'s investment earns returns from the point it is made, creating a compounding effect that accelerates wealth creation over time.',
+    advantages: {
+      body: 'Using a SIP calculator before you start investing ensures you go in with a clear picture of what your money can do for you.',
+      points: [
+        'Completely free to use — no sign-up or login required',
+        'Instant results as you adjust your monthly amount, rate, or tenure',
+        'Helps you stay committed to your SIP by showing the long-term payoff',
+        'Lets you reverse-calculate the monthly amount needed to reach a specific goal',
+      ],
+    },
+    faqs: [
+      { q: 'Is SIP return guaranteed?', a: 'No, SIP returns are not guaranteed. The expected return rate in the calculator is an estimate. Mutual fund investments are subject to market risk. Historical average returns have ranged from 10%–15% p.a. for equity mutual funds over long periods, but actual returns vary.' },
+      { q: 'Can I change my SIP amount after starting?', a: 'Yes. Most mutual funds allow you to increase, decrease, pause, or stop your SIP at any time. Using this calculator, you can estimate how increasing your SIP by even ₹1,000/month can significantly impact your final corpus over time.' },
+      { q: 'What is the minimum SIP amount with Shriram Financial Services?', a: 'You can start a SIP with as little as ₹500 per month through Shriram Financial Services. Open a free Demat account to get started with your SIP today.' },
+    ],
+    related: ['lumpsum', 'fd', 'swp'],
+  },
+
+  lumpsum: {
+    title: 'Lumpsum Calculator',
+    subtitle: 'Estimate the future value of a one-time investment and plan your wealth milestones.',
+    inputs: [
+      { id: 'ls-amount', label: 'One-Time Investment', min: 1000, max: 10000000, step: 1000, value: 100000, prefix: '₹' },
+      { id: 'ls-rate',   label: 'Expected Return (% p.a.)', min: 1, max: 30, step: 0.5, value: 12, suffix: '%' },
+      { id: 'ls-years',  label: 'Investment Period', min: 1, max: 40, step: 1, value: 10, suffix: ' yrs' },
+    ],
+    whatIs: 'A Lumpsum Calculator helps you estimate how much a one-time investment will grow over a chosen period at an expected rate of return. It is ideal for investors who have a large sum available — such as a bonus, sale proceeds, or inheritance — and want to understand how that capital can compound into wealth.',
+    howHelps: {
+      body: 'Before parking a large sum in any investment, it helps to visualise what that money could become. The lumpsum calculator gives you an instant projection.',
+      points: [
+        'Estimate the future value of any one-time investment at different return rates',
+        'Compare short-term vs. long-term investment horizons and their impact',
+        'Decide between investing a lumpsum now versus spreading it as a SIP',
+        'Plan for specific financial milestones like a child\'s education or home purchase',
+      ],
+    },
+    howWorks: 'The lumpsum calculator applies the compound interest formula: FV = P × (1 + r)^n, where P is your principal (initial investment), r is the annual rate of return, and n is the number of years. Unlike SIP where investments happen monthly, lumpsum investing means the entire principal compounds from day one, which can result in significant growth over longer periods.',
+    advantages: {
+      body: 'A lumpsum calculator removes guesswork and helps you invest with clarity and confidence.',
+      points: [
+        'Instant calculation — no sign-up or app download needed',
+        'Understand how time horizon affects your final corpus',
+        'Compare lumpsum vs. SIP strategies before deciding',
+        'Helps you pick the right mutual fund category based on your goals and tenure',
+      ],
+    },
+    faqs: [
+      { q: 'Is lumpsum investing better than SIP?', a: 'Neither is universally better — it depends on your situation. Lumpsum investing works well when you have a large sum and markets are at attractive valuations. SIP is better for regular income earners and for averaging out market volatility. Many investors combine both strategies.' },
+      { q: 'What is a good expected return rate for lumpsum calculations?', a: 'For equity mutual funds, a conservative estimate is 10%–12% p.a. over the long term. For debt funds, 6%–8% p.a. is reasonable. These are estimates — actual returns will differ based on market conditions and the specific fund.' },
+      { q: 'How do I start a lumpsum investment with Shriram?', a: 'Open a free Demat account with Shriram Financial Services and access 3,000+ mutual fund schemes with Direct Plan options, zero commission, and SEBI-registered research to guide your fund selection.' },
+    ],
+    related: ['sip', 'fd', 'swp'],
+  },
+
+  fd: {
+    title: 'Fixed Deposit Calculator',
+    subtitle: 'Calculate the maturity value of your Fixed Deposit and estimate your interest income.',
+    inputs: [
+      { id: 'fd-amount', label: 'Principal Amount', min: 1000, max: 10000000, step: 1000, value: 100000, prefix: '₹' },
+      { id: 'fd-rate',   label: 'Interest Rate (% p.a.)', min: 1, max: 15, step: 0.25, value: 7.5, suffix: '%' },
+      { id: 'fd-years',  label: 'Tenure', min: 1, max: 10, step: 1, value: 3, suffix: ' yrs' },
+    ],
+    whatIs: 'A Fixed Deposit (FD) Calculator helps you determine the exact maturity amount you will receive at the end of your FD tenure. It takes into account your principal, the offered interest rate, the compounding frequency (quarterly for most Indian bank FDs), and the tenure to give you an accurate projection of your interest income and final value.',
+    howHelps: {
+      body: 'Before booking a Fixed Deposit, it is essential to compare offers and understand what your money will actually earn. The FD calculator makes this instant.',
+      points: [
+        'Know the exact maturity amount before you book the FD with any bank',
+        'Compare FD rates from different banks and NBFCs in seconds',
+        'Plan your FD ladder strategy by estimating returns at different tenures',
+        'Estimate interest income for tax planning (interest above ₹40,000 is taxable)',
+      ],
+    },
+    howWorks: 'Most Indian bank FDs use quarterly compounding. The formula is: FV = P × (1 + r/4)^(4 × n), where P is the principal amount, r is the annual interest rate as a decimal, and n is the tenure in years. Quarterly compounding means interest is calculated and added to your principal every 3 months, and subsequent interest is earned on the growing total.',
+    advantages: {
+      body: 'An FD calculator is the simplest way to make an informed decision before locking in your money.',
+      points: [
+        'Accurate maturity value using the industry-standard quarterly compounding method',
+        'Free and instant — no bank account or login required',
+        'Compare returns on multiple FD options to find the best rate',
+        'Helps you decide between cumulative (reinvested) and non-cumulative (pay-out) FDs',
+      ],
+    },
+    faqs: [
+      { q: 'Is FD interest taxable in India?', a: 'Yes. FD interest is fully taxable as "Income from Other Sources" at your applicable income tax slab rate. Banks deduct TDS at 10% if interest exceeds ₹40,000 in a financial year (₹50,000 for senior citizens). You can submit Form 15G/15H to avoid TDS if your total income is below the taxable limit.' },
+      { q: 'What happens to FD interest if I withdraw early?', a: 'Premature withdrawal of an FD typically incurs a penalty of 0.5%–1% on the applicable interest rate for the period the deposit was held. The maturity amount shown in this calculator is for a full-tenure FD — early withdrawal will result in a lower return.' },
+      { q: 'Can I also invest in FDs through Shriram Financial Services?', a: 'Yes. Shriram Financial Services offers high-interest Fixed Deposits from trusted NBFCs alongside market-linked products. Our relationship managers can help you pick the right mix of FDs and investment products for your portfolio.' },
+    ],
+    related: ['sip', 'lumpsum', 'swp'],
+  },
+
+  swp: {
+    title: 'SWP Calculator',
+    subtitle: 'Estimate how long your investment corpus will last with a Systematic Withdrawal Plan.',
+    inputs: [
+      { id: 'swp-corpus',     label: 'Initial Corpus', min: 10000, max: 100000000, step: 10000, value: 2000000, prefix: '₹' },
+      { id: 'swp-withdrawal', label: 'Monthly Withdrawal', min: 1000, max: 500000, step: 1000, value: 20000, prefix: '₹' },
+      { id: 'swp-rate',       label: 'Expected Return (% p.a.)', min: 1, max: 20, step: 0.5, value: 8, suffix: '%' },
+    ],
+    whatIs: 'A Systematic Withdrawal Plan (SWP) Calculator helps you estimate how long a lump-sum corpus will last when you withdraw a fixed amount every month. It is widely used by retirees, senior citizens, and investors who want a steady, predictable monthly income from their mutual fund investments without fully depleting their corpus.',
+    howHelps: {
+      body: 'Retirement planning is as much about managing withdrawals as it is about building a corpus. The SWP calculator helps you find the right balance.',
+      points: [
+        'Estimate how many years your retirement corpus will sustain your lifestyle',
+        'Find the optimal monthly withdrawal amount that extends your corpus the longest',
+        'Understand how the return rate on remaining funds affects how long money lasts',
+        'Compare different corpus sizes and withdrawal amounts before retirement',
+      ],
+    },
+    howWorks: 'Each month, the remaining corpus earns the expected monthly return (annual rate ÷ 12), and then your chosen withdrawal amount is subtracted. The calculator repeats this monthly cycle — grow, then withdraw — until the corpus is exhausted or the cap of 50 years is reached. The key insight is that if your corpus earns more than you withdraw each month, it can potentially last indefinitely.',
+    advantages: {
+      body: 'The SWP calculator helps you retire with confidence, knowing exactly how long your savings will last.',
+      points: [
+        'Plan a sustainable monthly income from your retirement corpus',
+        'Experiment with withdrawal amounts to find your ideal retirement budget',
+        'Completely free — no sign-up or personal information required',
+        'Helps you avoid the risk of outliving your savings with careful planning',
+      ],
+    },
+    faqs: [
+      { q: 'Is SWP better than bank FD for retirement income?', a: 'For most retirees, SWP from a balanced or debt mutual fund can provide better post-tax income than a bank FD, especially if you are in a higher tax bracket. FD interest is fully taxable, while long-term capital gains from debt funds (held over 3 years) are taxed at 20% with indexation benefits.' },
+      { q: 'What happens if the corpus earns more than I withdraw?', a: 'If the monthly returns on your corpus exceed your monthly withdrawal, the corpus actually grows over time — meaning your SWP can last indefinitely. The SWP calculator shows "50+ yrs" in this scenario, which is an excellent outcome for retirement planning.' },
+      { q: 'Can I set up an SWP with Shriram Financial Services?', a: 'Yes. You can set up an automated SWP from any mutual fund in your Shriram portfolio. Our relationship managers can help you choose the right fund type — debt, balanced, or hybrid — to optimise your SWP income with minimal tax impact.' },
+    ],
+    related: ['sip', 'lumpsum', 'fd'],
+  },
+};
+
+export function getStaticPaths() {
+  return Object.entries(calcData).map(([slug, data]) => ({
+    params: { slug },
+    props: { slug, ...data },
+  }));
+}
+
+const { slug, title, subtitle, inputs, whatIs, howHelps, howWorks, advantages, faqs, related } = Astro.props;
+const relatedCalcs = (related as string[]).map(s => ({ slug: s, title: calcData[s].title }));
+---
+
+<BaseLayout
+  title={`${title} — Free Online Calculator | Shriram Financial Services`}
+  description={subtitle}
+>
+
+  <!-- ══ 1. HERO + CALCULATOR ═══════════════════════════════════════ -->
+  <section class="border-b border-[var(--color-n400)] bg-[#faf8f4] py-12 lg:py-16">
+    <div class="site-wrap">
+
+      <h1 class="reveal reveal-1 mb-8 text-[28px] font-bold text-[var(--color-ink)] sm:text-[34px]" style="font-family:var(--font-display)">
+        {title}
+      </h1>
+
+      <div class="grid gap-6 lg:grid-cols-[1fr_280px]">
+
+        <!-- Calculator panel -->
+        <div class="rounded-[20px] border border-[var(--color-n400)] bg-white p-6 shadow-sm lg:p-8">
+          <div class="grid gap-8 md:grid-cols-[1fr_260px]">
+
+            <!-- Inputs -->
+            <div class="space-y-7">
+              {inputs.map((inp: any) => (
+                <div>
+                  <div class="mb-2 flex items-center justify-between">
+                    <label for={inp.id} class="text-[13px] font-semibold text-[var(--color-ink)]">{inp.label}</label>
+                    <span id={`${inp.id}-display`} class="text-[14px] font-bold text-[var(--color-dark-olive)]">
+                      {inp.prefix ?? ''}{inp.value.toLocaleString('en-IN')}{inp.suffix ?? ''}
+                    </span>
+                  </div>
+                  <input
+                    type="range"
+                    id={inp.id}
+                    min={inp.min}
+                    max={inp.max}
+                    step={inp.step}
+                    value={inp.value}
+                    class="calc-slider w-full"
+                    data-prefix={inp.prefix ?? ''}
+                    data-suffix={inp.suffix ?? ''}
+                  />
+                  <div class="mt-1 flex justify-between text-[11px] text-[var(--color-subtle)]">
+                    <span>{inp.prefix ?? ''}{inp.min.toLocaleString('en-IN')}{inp.suffix ?? ''}</span>
+                    <span>{inp.prefix ?? ''}{inp.max.toLocaleString('en-IN')}{inp.suffix ?? ''}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <!-- Results -->
+            <div class="flex flex-col gap-4">
+              <div class="flex flex-1 items-center justify-center">
+                <div class="relative h-40 w-40">
+                  <svg viewBox="0 0 120 120" class="h-full w-full -rotate-90">
+                    <circle cx="60" cy="60" r="50" fill="none" stroke="var(--color-n400)" stroke-width="12"/>
+                    <circle id="donut-returns" cx="60" cy="60" r="50" fill="none" stroke="var(--color-brand)" stroke-width="12" stroke-dasharray="314 314" stroke-dashoffset="157" stroke-linecap="round"/>
+                  </svg>
+                  <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+                    <div class="text-[10px] text-[var(--color-muted)]">Total Value</div>
+                    <div id="calc-total" class="text-[16px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">₹0</div>
+                  </div>
+                </div>
+              </div>
+              <div class="space-y-2.5">
+                <div class="flex items-center justify-between rounded-xl bg-[var(--color-n100)] px-4 py-3">
+                  <div class="flex items-center gap-2 text-[12px] text-[var(--color-muted)]">
+                    <span class="h-2.5 w-2.5 rounded-full bg-[var(--color-n400)]"></span>
+                    <span id="calc-invested-label">Invested Amount</span>
+                  </div>
+                  <span id="calc-invested" class="text-[13px] font-bold text-[var(--color-ink)]">₹0</span>
+                </div>
+                <div class="flex items-center justify-between rounded-xl bg-[var(--color-brand-light)] px-4 py-3">
+                  <div class="flex items-center gap-2 text-[12px] text-[var(--color-muted)]">
+                    <span class="h-2.5 w-2.5 rounded-full bg-[var(--color-brand)]"></span>
+                    <span id="calc-gains-label">Estimated Returns</span>
+                  </div>
+                  <span id="calc-gains" class="text-[13px] font-bold text-[var(--color-brand-deep)]">₹0</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- CTA card -->
+        <div class="flex flex-col justify-between rounded-[20px] bg-[var(--color-dark-800)] p-6 lg:p-8">
+          <div>
+            <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Get Started</p>
+            <h2 class="mt-3 text-[20px] font-bold leading-snug text-white lg:text-[22px]" style="font-family:var(--font-display)">
+              Ready to build your future?
+            </h2>
+            <p class="mt-3 text-[13px] leading-relaxed text-white/60">
+              Open a free Demat account and start investing in minutes — completely paperless.
+            </p>
+          </div>
+          <a
+            href="/about/open-demat-account/"
+            class="mt-8 flex h-11 w-full items-center justify-center rounded-[6px] bg-[var(--color-brand)] text-[13px] font-bold text-[var(--color-dark-800)] transition-colors hover:bg-[var(--color-brand-hover)]"
+          >
+            Open Demat Account
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 2. WHAT IS ════════════════════════════════════════════════ -->
+  <section class="bg-white py-14 lg:py-20">
+    <div class="site-wrap max-w-4xl">
+      <h2 class="text-center text-[24px] font-bold text-[var(--color-ink)] lg:text-[32px]" style="font-family:var(--font-display)">
+        What is {title}
+      </h2>
+      <p class="mt-6 text-[15px] leading-relaxed text-[var(--color-muted)] lg:text-[16px]">{whatIs}</p>
+    </div>
+  </section>
+
+  <!-- ══ 3. HOW IT HELPS ══════════════════════════════════════════ -->
+  <section class="bg-[#f5f5f5] py-14 lg:py-20">
+    <div class="site-wrap max-w-4xl">
+      <h2 class="text-center text-[24px] font-bold text-[var(--color-ink)] lg:text-[32px]" style="font-family:var(--font-display)">
+        How Can {title} Help You
+      </h2>
+      <p class="mt-6 text-[15px] leading-relaxed text-[var(--color-muted)] lg:text-[16px]">{howHelps.body}</p>
+      <ul class="mt-5 space-y-3">
+        {howHelps.points.map((p: string) => (
+          <li class="flex items-start gap-3 text-[15px] text-[var(--color-muted)]">
+            <span class="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-[var(--color-brand)]"></span>
+            {p}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ══ 4. HOW IT WORKS ══════════════════════════════════════════ -->
+  <section class="bg-white py-14 lg:py-20">
+    <div class="site-wrap max-w-4xl">
+      <h2 class="text-center text-[24px] font-bold text-[var(--color-ink)] lg:text-[32px]" style="font-family:var(--font-display)">
+        How Does {title} Work
+      </h2>
+      <p class="mt-6 text-[15px] leading-relaxed text-[var(--color-muted)] lg:text-[16px]">{howWorks}</p>
+    </div>
+  </section>
+
+  <!-- ══ 5. ADVANTAGES ════════════════════════════════════════════ -->
+  <section class="bg-[#f5f5f5] py-14 lg:py-20">
+    <div class="site-wrap max-w-4xl">
+      <h2 class="text-center text-[24px] font-bold text-[var(--color-ink)] lg:text-[32px]" style="font-family:var(--font-display)">
+        Advantages of {title}
+      </h2>
+      <p class="mt-6 text-[15px] leading-relaxed text-[var(--color-muted)] lg:text-[16px]">{advantages.body}</p>
+      <ul class="mt-5 space-y-3">
+        {advantages.points.map((p: string) => (
+          <li class="flex items-start gap-3 text-[15px] text-[var(--color-muted)]">
+            <span class="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-[var(--color-brand)]"></span>
+            {p}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ══ 6. EXPLORE MORE ══════════════════════════════════════════ -->
+  <section class="bg-[#f5f5f5] py-14 lg:py-20">
+    <div class="site-wrap">
+      <h2 class="mb-10 text-center text-[24px] font-bold text-[var(--color-ink)] lg:text-[32px]" style="font-family:var(--font-display)">
+        Explore More
+      </h2>
+      <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+        {relatedCalcs.map((c: any) => (
+          <a
+            href={`/calculators/${c.slug}/`}
+            class="group flex flex-col items-start justify-between rounded-[16px] border border-[var(--color-n400)] bg-white p-5 transition-all hover:-translate-y-1 hover:border-[var(--color-brand)]/30 hover:shadow-md"
+            style="min-height: 120px;"
+          >
+            <h3 class="text-[15px] font-bold text-[var(--color-ink)] group-hover:text-[var(--color-dark-olive)]" style="font-family:var(--font-display)">{c.title}</h3>
+            <span class="mt-4 text-[12px] font-semibold text-[var(--color-brand)]">Calculate →</span>
+          </a>
+        ))}
+        <a
+          href="/product-hub/"
+          class="group flex flex-col items-start justify-between rounded-[16px] border border-dashed border-[var(--color-n400)] bg-white/50 p-5 transition-all hover:-translate-y-1"
+          style="min-height: 120px;"
+        >
+          <h3 class="text-[15px] font-bold text-[var(--color-muted)]">All Calculators</h3>
+          <span class="mt-4 text-[12px] font-semibold text-[var(--color-muted)]">View Hub →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 7. FAQ ════════════════════════════════════════════════════ -->
+  <section class="bg-white py-14 lg:py-20">
+    <div class="site-wrap max-w-3xl">
+      <h2 class="text-center text-[24px] font-bold text-[var(--color-ink)] lg:text-[32px]" style="font-family:var(--font-display)">
+        Frequently Asked Questions
+      </h2>
+      <p class="mt-2 text-center text-[14px] text-[var(--color-brand)]">Got Questions?</p>
+      <div class="mt-8 rounded-[16px] border border-[var(--color-n400)] bg-white" id="faq-block">
+        {faqs.map((faq: any, i: number) => (
+          <details class={`faq-row group px-6 ${i < faqs.length - 1 ? 'border-b border-[var(--color-n400)]' : ''}`}>
+            <summary class="flex cursor-pointer items-center justify-between py-5 text-[15px] font-semibold text-[var(--color-ink)]">
+              {faq.q}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="h-4 w-4 flex-shrink-0 text-[var(--color-muted)] transition-transform group-open:rotate-180">
+                <path d="M6 9l6 6 6-6"/>
+              </svg>
+            </summary>
+            <p class="pb-5 text-[14px] leading-relaxed text-[var(--color-muted)]">{faq.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .calc-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+  }
+  .calc-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--color-brand);
+    cursor: pointer;
+    border: 2px solid #fff;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.18);
+  }
+  .calc-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--color-brand);
+    cursor: pointer;
+    border: 2px solid #fff;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.18);
+  }
+</style>
+
+<script>
+  const fmt    = (n: number) => '₹' + Math.round(n).toLocaleString('en-IN');
+  const fmtRaw = (v: number, prefix: string, suffix: string) =>
+    `${prefix}${v.toLocaleString('en-IN')}${suffix}`;
+
+  /* ── Slider fill + display sync ── */
+  function syncSlider(input: HTMLInputElement) {
+    const min = +input.min, max = +input.max, val = +input.value;
+    const pct = ((val - min) / (max - min)) * 100;
+    input.style.background = `linear-gradient(to right, var(--color-brand) ${pct}%, var(--color-n400) ${pct}%)`;
+    const display = document.getElementById(`${input.id}-display`);
+    if (display) {
+      const prefix = input.dataset.prefix ?? '';
+      const suffix = input.dataset.suffix ?? '';
+      display.textContent = fmtRaw(val, prefix, suffix);
+    }
+  }
+
+  document.querySelectorAll<HTMLInputElement>('.calc-slider').forEach(slider => {
+    syncSlider(slider);
+    slider.addEventListener('input', () => { syncSlider(slider); calc(); });
+  });
+
+  /* ── Donut chart ── */
+  function updateDonut(invested: number, total: number) {
+    const arc = document.getElementById('donut-returns');
+    if (!arc) return;
+    const circumference = 2 * Math.PI * 50;
+    const gainFraction = total > 0 ? (total - invested) / total : 0;
+    const offset = circumference * (1 - gainFraction);
+    arc.style.strokeDashoffset = String(offset);
+  }
+
+  /* ── Calculator logic — detect which page we're on by available inputs ── */
+  function calc() {
+    const get = (id: string) => {
+      const el = document.getElementById(id) as HTMLInputElement | null;
+      return el ? parseFloat(el.value) || 0 : null;
+    };
+
+    /* SIP */
+    const sipAmount = get('sip-amount'), sipRate = get('sip-rate'), sipYears = get('sip-years');
+    if (sipAmount !== null && sipRate !== null && sipYears !== null) {
+      const r = sipRate / 100 / 12, n = sipYears * 12;
+      const fv = r === 0 ? sipAmount * n : sipAmount * ((Math.pow(1 + r, n) - 1) / r) * (1 + r);
+      const invested = sipAmount * n;
+      const gains = fv - invested;
+      setResults(invested, gains, fv, 'Invested Amount', 'Est. Returns');
+      return;
+    }
+
+    /* Lumpsum */
+    const lsAmount = get('ls-amount'), lsRate = get('ls-rate'), lsYears = get('ls-years');
+    if (lsAmount !== null && lsRate !== null && lsYears !== null) {
+      const fv = lsAmount * Math.pow(1 + lsRate / 100, lsYears);
+      setResults(lsAmount, fv - lsAmount, fv, 'Amount Invested', 'Est. Returns');
+      return;
+    }
+
+    /* FD */
+    const fdAmount = get('fd-amount'), fdRate = get('fd-rate'), fdYears = get('fd-years');
+    if (fdAmount !== null && fdRate !== null && fdYears !== null) {
+      const fv = fdAmount * Math.pow(1 + fdRate / 100 / 4, 4 * fdYears);
+      setResults(fdAmount, fv - fdAmount, fv, 'Principal', 'Interest Earned');
+      return;
+    }
+
+    /* SWP */
+    const corpus = get('swp-corpus'), monthly = get('swp-withdrawal'), swpRate = get('swp-rate');
+    if (corpus !== null && monthly !== null && swpRate !== null) {
+      const r = swpRate / 100 / 12;
+      let bal = corpus, months = 0;
+      while (bal > 0 && months < 600) { bal = bal * (1 + r) - monthly; months++; }
+      const totalWithdrawn = monthly * months;
+      const remaining = Math.max(0, bal);
+      const label = months >= 600 ? '50+ yrs' : `${(months / 12).toFixed(1)} yrs`;
+      const totalEl = document.getElementById('calc-total');
+      const investedEl = document.getElementById('calc-invested');
+      const gainsEl = document.getElementById('calc-gains');
+      const investedLabelEl = document.getElementById('calc-invested-label');
+      const gainsLabelEl = document.getElementById('calc-gains-label');
+      if (totalEl) totalEl.textContent = label;
+      if (investedEl) investedEl.textContent = fmt(totalWithdrawn);
+      if (gainsEl) gainsEl.textContent = fmt(remaining);
+      if (investedLabelEl) investedLabelEl.textContent = 'Total Withdrawn';
+      if (gainsLabelEl) gainsLabelEl.textContent = 'Remaining Corpus';
+      updateDonut(totalWithdrawn, totalWithdrawn + remaining);
+      return;
+    }
+  }
+
+  function setResults(invested: number, gains: number, total: number, investedLabel: string, gainsLabel: string) {
+    const totalEl = document.getElementById('calc-total');
+    const investedEl = document.getElementById('calc-invested');
+    const gainsEl = document.getElementById('calc-gains');
+    const investedLabelEl = document.getElementById('calc-invested-label');
+    const gainsLabelEl = document.getElementById('calc-gains-label');
+    if (totalEl) totalEl.textContent = fmt(total);
+    if (investedEl) investedEl.textContent = fmt(invested);
+    if (gainsEl) gainsEl.textContent = fmt(gains);
+    if (investedLabelEl) investedLabelEl.textContent = investedLabel;
+    if (gainsLabelEl) gainsLabelEl.textContent = gainsLabel;
+    updateDonut(invested, total);
+  }
+
+  calc();
+</script>

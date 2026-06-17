@@ -121,9 +121,9 @@ const cards = [
         <!-- Row 1 + Row 2: 2-column grid -->
         <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
           {cards.filter(c => !c.soon).map(c => (
-            <div
-              data-calc-tab={c.tab}
-              class="group relative flex cursor-pointer flex-col justify-between rounded-[20px] border border-[var(--color-n400)] bg-[var(--color-n100)] p-7 transition-all duration-200 hover:-translate-y-1 hover:border-[var(--color-brand)]/30 hover:shadow-lg"
+            <a
+              href={`/calculators/${c.tab}/`}
+              class="group relative flex flex-col justify-between rounded-[20px] border border-[var(--color-n400)] bg-[var(--color-n100)] p-7 transition-all duration-200 hover:-translate-y-1 hover:border-[var(--color-brand)]/30 hover:shadow-lg"
               style="min-height: 200px;"
             >
               <!-- Background icon -->
@@ -143,7 +143,7 @@ const cards = [
                   Calculate Now →
                 </span>
               </div>
-            </div>
+            </a>
           ))}
         </div>
 
@@ -394,13 +394,4 @@ const cards = [
   activateTab('sip');
   tabs.forEach(tab => tab.addEventListener('click', () => { if (tab.dataset.tab) activateTab(tab.dataset.tab); }));
 
-  /* ── Card clicks → scroll + activate tab ── */
-  document.querySelectorAll<HTMLElement>('[data-calc-tab]').forEach(card => {
-    const tab = card.dataset.calcTab;
-    if (!tab || tab === 'nps') return;
-    card.addEventListener('click', () => {
-      document.getElementById('calculators')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      setTimeout(() => activateTab(tab), 400);
-    });
-  });
 </script>
