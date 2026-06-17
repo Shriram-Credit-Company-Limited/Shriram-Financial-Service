@@ -33,7 +33,7 @@ jobs:
         run: |
           echo "$SSH_KEY" > /tmp/deploy_key
           chmod 600 /tmp/deploy_key
-          cd shriram-financial/dist
+          cd shriram-financial/dist/client
           zip -r /tmp/site.zip .
           scp -i /tmp/deploy_key -o StrictHostKeyChecking=no /tmp/site.zip $SERVER:/tmp/site.zip
           ssh -i /tmp/deploy_key -o StrictHostKeyChecking=no $SERVER \
