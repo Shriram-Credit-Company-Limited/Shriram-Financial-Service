@@ -591,8 +591,7 @@ const about     = navigation.find(n => n.label === 'About')!;
     });
   });
 
-  closeBtn.addEventListener('click', closePanel);
-  document.getElementById('nps-go-back')?.addEventListener('click', closePanel);
+  document.getElementById('nps-go-back')?.addEventListener('click', () => { window.location.href = '/'; });
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && navPanel.hasAttribute('data-open')) closePanel(); });
   navPanel.querySelectorAll('a').forEach(a => a.addEventListener('click', closePanel));
 </script>
