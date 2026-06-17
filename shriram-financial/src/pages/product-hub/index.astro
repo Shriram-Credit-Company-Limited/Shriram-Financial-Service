@@ -1,194 +1,176 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-const investmentCalcs = [
+const cards = [
   {
     title: 'SIP Calculator',
-    desc: 'Estimate the future value of your monthly SIP investment over any time horizon.',
+    desc: 'Estimate the future value of your monthly SIP investment.',
     tab: 'sip',
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><path d="M3 3v18h18"/><path d="m7 16 4-4 4 4 4-4"/></svg>`,
+    icon: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="h-12 w-12 opacity-20"><path d="M6 6v36h36"/><path d="m12 30 8-8 8 8 10-10"/></svg>`,
   },
   {
     title: 'Lumpsum Calculator',
-    desc: 'Forecast the future value of a one-time investment at a given rate of return.',
+    desc: 'Forecast returns on a one-time investment over any horizon.',
     tab: 'lumpsum',
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 1 0 0 7h5a3.5 3.5 0 1 1 0 7H6"/></svg>`,
-  },
-  {
-    title: 'FD Calculator',
-    desc: 'Compute the maturity value of your Fixed Deposit with quarterly compounding.',
-    tab: 'fd',
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V5a2 2 0 0 1 4 0v2"/><path d="M12 12v4"/><path d="M10 14h4"/></svg>`,
+    icon: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="h-12 w-12 opacity-20"><path d="M24 4v40M34 10H19a7 7 0 0 0 0 14h10a7 7 0 0 1 0 14H12"/></svg>`,
   },
   {
     title: 'SWP Calculator',
-    desc: 'See how long your corpus lasts with systematic monthly withdrawals.',
+    desc: 'See how long your corpus lasts with monthly withdrawals.',
     tab: 'swp',
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>`,
+    icon: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="h-12 w-12 opacity-20"><path d="M38 24H10M24 10l-14 14 14 14"/></svg>`,
   },
   {
-    title: 'PPF Calculator',
-    desc: 'Project your Public Provident Fund returns over the 15-year lock-in period.',
-    soon: true,
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+    title: 'Fixed Deposit Calculator',
+    desc: 'Compute FD maturity value with quarterly compounding.',
+    tab: 'fd',
+    icon: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="h-12 w-12 opacity-20"><rect x="6" y="14" width="36" height="28" rx="4"/><path d="M16 14V10a4 4 0 0 1 8 0v4"/><path d="M24 24v8"/><path d="M20 28h8"/></svg>`,
   },
   {
     title: 'NPS Calculator',
-    desc: 'Estimate your pension corpus and monthly pension amount at retirement.',
+    desc: 'Estimate your pension corpus and monthly pension at retirement.',
+    tab: 'nps',
     soon: true,
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>`,
-  },
-  {
-    title: 'EPF Calculator',
-    desc: 'Calculate Employee Provident Fund accumulation over your working career.',
-    soon: true,
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3H8L2 7h20l-6-4z"/></svg>`,
-  },
-  {
-    title: 'Retirement Planner',
-    desc: 'Find out how much you need to save monthly for a comfortable retirement.',
-    soon: true,
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 3"/></svg>`,
-  },
-  {
-    title: 'Pension Calculator',
-    desc: 'Estimate monthly pension income from your savings and expected return rate.',
-    soon: true,
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`,
-  },
-  {
-    title: 'Gratuity Calculator',
-    desc: 'Compute your gratuity payout based on last salary and years of service.',
-    soon: true,
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>`,
-  },
-  {
-    title: 'STP Calculator',
-    desc: 'Plan systematic transfers between funds to optimise your return profile.',
-    soon: true,
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><path d="m17 1 4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="m7 23-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>`,
-  },
-  {
-    title: 'Returns Calculator',
-    desc: 'Calculate absolute and annualised returns on any investment over any period.',
-    soon: true,
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>`,
-  },
-];
-
-const loanCalcs = [
-  {
-    title: 'EMI Calculator',
-    desc: 'Calculate your monthly loan instalment for any loan amount, tenure, and rate.',
-    soon: true,
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>`,
-  },
-  {
-    title: 'Home Loan Calculator',
-    desc: 'Estimate home loan EMI, total interest payable, and full repayment schedule.',
-    soon: true,
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`,
-  },
-  {
-    title: 'Personal Loan Calculator',
-    desc: 'Instantly calculate personal loan EMI and the total cost of borrowing.',
-    soon: true,
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>`,
-  },
-  {
-    title: 'Education Loan Calculator',
-    desc: 'Estimate your education loan EMI and total repayment over the loan tenure.',
-    soon: true,
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>`,
-  },
-  {
-    title: 'Home Loan Eligibility',
-    desc: 'Check the maximum home loan amount you are eligible for based on your income.',
-    soon: true,
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><circle cx="12" cy="12" r="9"/><path d="M5 8l2 2 4-4"/></svg>`,
-  },
-  {
-    title: 'Education Loan Repayment',
-    desc: 'Calculate your repayment schedule with moratorium period factored in.',
-    soon: true,
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>`,
+    icon: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="h-12 w-12 opacity-20"><circle cx="24" cy="16" r="8"/><path d="M8 40c0-8 7.2-14 16-14s16 6 16 14"/></svg>`,
   },
 ];
 ---
 
 <BaseLayout
   title="Calculator Hub — All Financial Calculators | Shriram Financial Services"
-  description="Free online financial calculators — SIP, Lumpsum, FD, SWP, EMI, and more. Plan investments, estimate returns, and map your retirement — all in one place."
+  description="Free online financial calculators — SIP, Lumpsum, FD, SWP, NPS and more. Plan investments, estimate returns, and map your retirement — all in one place."
 >
 
   <!-- ══ 1. HERO ═══════════════════════════════════════════════════ -->
-  <section class="relative overflow-hidden bg-[var(--color-dark-800)]">
-    <div class="pointer-events-none absolute -right-40 -top-40 h-[560px] w-[560px] rounded-full bg-[var(--color-brand)]/10 blur-3xl"></div>
-    <div class="pointer-events-none absolute -bottom-32 left-0 h-80 w-80 rounded-full bg-[var(--color-brand)]/5 blur-3xl"></div>
-    <div class="site-wrap relative py-16 lg:py-28">
-      <p class="reveal reveal-1 text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Financial Planning Tools</p>
-      <h1
-        class="reveal reveal-2 mt-4 max-w-3xl text-[32px] font-bold leading-tight text-white sm:text-[40px] lg:text-[56px]"
-        style="font-family:var(--font-display)"
-      >
-        All the Calculators You Need,<br class="hidden sm:block" /> All in One Place.
-      </h1>
-      <p class="reveal reveal-3 mt-5 max-w-2xl text-[15px] leading-relaxed text-white/60 lg:text-[17px]">
-        Plan investments, estimate EMIs, optimise taxes, and map your retirement — all the financial tools you need, free and instant.
-      </p>
-      <div class="reveal reveal-3 mt-7 flex flex-wrap gap-7">
-        {[
-          { label: 'Free & Instant' },
-          { label: 'No Sign-up Needed' },
-          { label: 'SEBI-Regulated Platform' },
-        ].map(b => (
-          <div class="flex items-center gap-2 text-[13px] font-medium text-white/70">
-            <span class="h-1.5 w-1.5 rounded-full bg-[var(--color-brand)] flex-shrink-0"></span>
-            {b.label}
+  <section class="border-b border-[var(--color-n400)] bg-[#faf8f4]">
+    <div class="site-wrap py-14 lg:py-20">
+      <div class="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+
+        <!-- Left: text -->
+        <div>
+          <h1
+            class="reveal reveal-1 text-[28px] font-bold leading-tight text-[var(--color-ink)] sm:text-[36px] lg:text-[44px]"
+            style="font-family:var(--font-display)"
+          >
+            All the Calculators You Need,<br />All in One Place.
+          </h1>
+          <p class="reveal reveal-2 mt-5 max-w-lg text-[15px] leading-relaxed text-[var(--color-muted)] lg:text-[16px]">
+            Plan investments, estimate EMIs, optimise taxes, and map your retirement — all the financial tools you need, free and instant.
+          </p>
+          <div class="reveal reveal-3 mt-8 flex flex-wrap gap-5">
+            {[
+              { label: 'Free & Instant' },
+              { label: 'No Sign-up Needed' },
+              { label: 'SEBI-Regulated Platform' },
+            ].map(b => (
+              <div class="flex items-center gap-2 text-[13px] font-medium text-[var(--color-muted)]">
+                <span class="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[var(--color-brand)]"></span>
+                {b.label}
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
+
+        <!-- Right: visual -->
+        <div class="reveal reveal-2 hidden lg:block">
+          <div class="aspect-[4/3] overflow-hidden rounded-[20px] bg-[var(--color-dark-800)] p-8 shadow-xl">
+            <!-- Mini dashboard illustration -->
+            <div class="flex h-full flex-col justify-between">
+              <div class="flex items-center justify-between">
+                <div class="space-y-1.5">
+                  <div class="h-2 w-24 rounded-full bg-white/10"></div>
+                  <div class="h-2 w-16 rounded-full bg-white/10"></div>
+                </div>
+                <div class="rounded-lg bg-[var(--color-brand)] px-3 py-1.5 text-[11px] font-bold text-[var(--color-dark-800)]">LIVE</div>
+              </div>
+              <div class="space-y-3">
+                <div class="text-[11px] font-medium text-white/40 uppercase tracking-wider">Estimated Returns</div>
+                <div class="text-[38px] font-bold text-white" style="font-family:var(--font-display)">₹48.7L</div>
+                <div class="flex items-end gap-1.5 h-16">
+                  {[3,5,4,7,6,8,7,10,9,12,11,14].map((h, i) => (
+                    <div
+                      class="flex-1 rounded-t-sm"
+                      style={`height:${h * 7}%; background: ${i === 11 ? 'var(--color-brand)' : 'rgba(255,255,255,0.12)'}`}
+                    ></div>
+                  ))}
+                </div>
+              </div>
+              <div class="grid grid-cols-2 gap-3">
+                <div class="rounded-xl bg-white/5 px-4 py-3">
+                  <div class="text-[10px] text-white/40">Invested</div>
+                  <div class="mt-1 text-[15px] font-semibold text-white">₹12.0L</div>
+                </div>
+                <div class="rounded-xl bg-white/5 px-4 py-3">
+                  <div class="text-[10px] text-white/40">Returns</div>
+                  <div class="mt-1 text-[15px] font-semibold text-[var(--color-brand)]">₹36.7L</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- ══ 2. INVESTMENT CALCULATOR CARDS ═════════════════════════════ -->
+  <!-- ══ 2. CALCULATOR CARDS (2-2-1 grid) ══════════════════════════ -->
   <section class="bg-white py-16 lg:py-24">
     <div class="site-wrap">
-      <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Plan Your Wealth</p>
-      <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">
-        Investment Calculators
-      </h2>
-      <p class="mt-3 max-w-2xl text-[15px] leading-relaxed text-[var(--color-muted)]">
-        Estimate returns on SIP, Lumpsum, FD, SWP, and more. Compare scenarios before you commit capital.
-      </p>
+      <div class="mx-auto max-w-[900px]">
 
-      <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {investmentCalcs.map(calc => (
-          <div
-            data-calc-tab={calc.tab ?? null}
-            class={`product-card-light group relative flex flex-col p-7 ${calc.soon ? 'opacity-75' : 'cursor-pointer'}`}
-          >
-            {calc.soon && (
-              <span class="absolute right-5 top-5 rounded-full bg-[var(--color-n100)] px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-[var(--color-subtle)]">
-                Coming Soon
-              </span>
-            )}
+        <!-- Row 1 + Row 2: 2-column grid -->
+        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+          {cards.filter(c => !c.soon).map(c => (
             <div
-              class={`mb-5 flex h-11 w-11 items-center justify-center rounded-[10px] ${calc.soon ? 'bg-[var(--color-n100)] text-[var(--color-n700)]' : 'bg-[var(--color-dark-olive)] text-[var(--color-brand)]'}`}
-              set:html={calc.icon}
-            />
-            <h3 class="text-[16px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{calc.title}</h3>
-            <p class="mt-2 flex-1 text-[13px] leading-relaxed text-[var(--color-muted)]">{calc.desc}</p>
-            {!calc.soon && (
-              <div class="mt-5 flex items-center gap-1.5 text-[13px] font-semibold text-[var(--color-brand)]">
-                Calculate Now
-                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-3.5 w-3.5 transition-transform group-hover:translate-x-1">
-                  <path d="M3 8h10M9 4l4 4-4 4"/>
-                </svg>
+              data-calc-tab={c.tab}
+              class="group relative flex cursor-pointer flex-col justify-between rounded-[20px] border border-[var(--color-n400)] bg-[var(--color-n100)] p-7 transition-all duration-200 hover:-translate-y-1 hover:border-[var(--color-brand)]/30 hover:shadow-lg"
+              style="min-height: 200px;"
+            >
+              <!-- Background icon -->
+              <div class="absolute bottom-5 right-5 text-[var(--color-ink)]" set:html={c.icon} />
+
+              <!-- Title -->
+              <h3
+                class="text-[20px] font-bold text-[var(--color-ink)] lg:text-[22px]"
+                style="font-family:var(--font-display)"
+              >
+                {c.title}
+              </h3>
+
+              <!-- CTA -->
+              <div class="mt-6">
+                <span class="text-[15px] italic text-[var(--color-brand)] group-hover:underline">
+                  Calculate Now →
+                </span>
               </div>
-            )}
+            </div>
+          ))}
+        </div>
+
+        <!-- Row 3: NPS (centered, half-width) -->
+        {cards.filter(c => c.soon).map(c => (
+          <div class="mx-auto mt-5 w-full sm:w-1/2">
+            <div
+              class="group relative flex flex-col justify-between rounded-[20px] border border-[var(--color-n400)] bg-[var(--color-n100)] p-7 transition-all duration-200"
+              style="min-height: 200px;"
+            >
+              <div class="absolute right-4 top-4 rounded-full bg-[var(--color-brand-light)] px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-[var(--color-brand-deep)]">
+                Coming Soon
+              </div>
+              <div class="absolute bottom-5 right-5 text-[var(--color-ink)]" set:html={c.icon} />
+              <h3
+                class="text-[20px] font-bold text-[var(--color-ink)] lg:text-[22px]"
+                style="font-family:var(--font-display)"
+              >
+                {c.title}
+              </h3>
+              <div class="mt-6">
+                <span class="text-[15px] italic text-[var(--color-muted)]">Calculate Now →</span>
+              </div>
+            </div>
           </div>
         ))}
+
       </div>
     </div>
   </section>
@@ -200,12 +182,9 @@ const loanCalcs = [
       <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">
         Free Interactive Calculators
       </h2>
-      <p class="mt-3 max-w-2xl text-[15px] leading-relaxed text-[var(--color-muted)]">
-        No sign-up required. Adjust the sliders and see your results instantly.
-      </p>
 
       <!-- Tab bar -->
-      <div class="mt-10 mb-8 flex flex-wrap gap-2 rounded-xl border border-[var(--color-n400)] bg-white p-1.5 shadow-sm">
+      <div class="mt-8 mb-8 flex flex-wrap gap-2 rounded-xl border border-[var(--color-n400)] bg-white p-1.5 shadow-sm">
         {[
           { id: 'sip',     label: 'SIP Calculator' },
           { id: 'lumpsum', label: 'Lumpsum' },
@@ -228,18 +207,9 @@ const loanCalcs = [
             <h2 class="text-[24px] font-semibold text-[var(--color-n900)]" style="font-family:var(--font-display)">SIP Calculator</h2>
             <p class="mt-2 text-[14px] text-[var(--color-muted)]">Estimate the future value of a monthly Systematic Investment Plan.</p>
             <div class="mt-8 space-y-6">
-              <label class="block">
-                <span class="text-[13px] font-semibold text-[var(--color-ink)]">Monthly investment (₹)</span>
-                <input id="sip-amount" type="number" value="10000" min="500" step="500" class="field mt-2 text-[16px] font-semibold" />
-              </label>
-              <label class="block">
-                <span class="text-[13px] font-semibold text-[var(--color-ink)]">Expected return (% p.a.)</span>
-                <input id="sip-rate" type="number" value="12" min="1" max="30" step="0.5" class="field mt-2 text-[16px] font-semibold" />
-              </label>
-              <label class="block">
-                <span class="text-[13px] font-semibold text-[var(--color-ink)]">Time period (years)</span>
-                <input id="sip-years" type="number" value="10" min="1" max="40" step="1" class="field mt-2 text-[16px] font-semibold" />
-              </label>
+              <label class="block"><span class="text-[13px] font-semibold text-[var(--color-ink)]">Monthly investment (₹)</span><input id="sip-amount" type="number" value="10000" min="500" step="500" class="field mt-2 text-[16px] font-semibold" /></label>
+              <label class="block"><span class="text-[13px] font-semibold text-[var(--color-ink)]">Expected return (% p.a.)</span><input id="sip-rate" type="number" value="12" min="1" max="30" step="0.5" class="field mt-2 text-[16px] font-semibold" /></label>
+              <label class="block"><span class="text-[13px] font-semibold text-[var(--color-ink)]">Time period (years)</span><input id="sip-years" type="number" value="10" min="1" max="40" step="1" class="field mt-2 text-[16px] font-semibold" /></label>
             </div>
           </div>
           <div class="flex flex-col gap-6">
@@ -251,7 +221,7 @@ const loanCalcs = [
                 <div class="flex justify-between py-3"><span class="text-white/60">Estimated returns</span><span id="sip-gains" class="font-semibold text-[var(--color-gold)]">₹0</span></div>
               </div>
             </div>
-            <p class="text-[11px] text-[var(--color-subtle)]">Illustrative only. Past performance does not guarantee future returns. Mutual Fund investments are subject to market risk.</p>
+            <p class="text-[11px] text-[var(--color-subtle)]">Illustrative only. Mutual Fund investments are subject to market risk.</p>
           </div>
         </div>
       </div>
@@ -263,18 +233,9 @@ const loanCalcs = [
             <h2 class="text-[24px] font-semibold text-[var(--color-n900)]" style="font-family:var(--font-display)">Lumpsum Calculator</h2>
             <p class="mt-2 text-[14px] text-[var(--color-muted)]">Estimate returns on a one-time investment over your chosen horizon.</p>
             <div class="mt-8 space-y-6">
-              <label class="block">
-                <span class="text-[13px] font-semibold text-[var(--color-ink)]">One-time investment (₹)</span>
-                <input id="ls-amount" type="number" value="100000" min="1000" step="1000" class="field mt-2 text-[16px] font-semibold" />
-              </label>
-              <label class="block">
-                <span class="text-[13px] font-semibold text-[var(--color-ink)]">Expected return (% p.a.)</span>
-                <input id="ls-rate" type="number" value="12" min="1" max="30" step="0.5" class="field mt-2 text-[16px] font-semibold" />
-              </label>
-              <label class="block">
-                <span class="text-[13px] font-semibold text-[var(--color-ink)]">Time period (years)</span>
-                <input id="ls-years" type="number" value="10" min="1" max="40" step="1" class="field mt-2 text-[16px] font-semibold" />
-              </label>
+              <label class="block"><span class="text-[13px] font-semibold text-[var(--color-ink)]">One-time investment (₹)</span><input id="ls-amount" type="number" value="100000" min="1000" step="1000" class="field mt-2 text-[16px] font-semibold" /></label>
+              <label class="block"><span class="text-[13px] font-semibold text-[var(--color-ink)]">Expected return (% p.a.)</span><input id="ls-rate" type="number" value="12" min="1" max="30" step="0.5" class="field mt-2 text-[16px] font-semibold" /></label>
+              <label class="block"><span class="text-[13px] font-semibold text-[var(--color-ink)]">Time period (years)</span><input id="ls-years" type="number" value="10" min="1" max="40" step="1" class="field mt-2 text-[16px] font-semibold" /></label>
             </div>
           </div>
           <div class="flex flex-col gap-6">
@@ -298,18 +259,9 @@ const loanCalcs = [
             <h2 class="text-[24px] font-semibold text-[var(--color-n900)]" style="font-family:var(--font-display)">FD Calculator</h2>
             <p class="mt-2 text-[14px] text-[var(--color-muted)]">Estimate the maturity value of your Fixed Deposit with quarterly compounding.</p>
             <div class="mt-8 space-y-6">
-              <label class="block">
-                <span class="text-[13px] font-semibold text-[var(--color-ink)]">Principal amount (₹)</span>
-                <input id="fd-amount" type="number" value="100000" min="1000" step="1000" class="field mt-2 text-[16px] font-semibold" />
-              </label>
-              <label class="block">
-                <span class="text-[13px] font-semibold text-[var(--color-ink)]">Interest rate (% p.a.)</span>
-                <input id="fd-rate" type="number" value="7.5" min="1" max="15" step="0.25" class="field mt-2 text-[16px] font-semibold" />
-              </label>
-              <label class="block">
-                <span class="text-[13px] font-semibold text-[var(--color-ink)]">Tenure (years)</span>
-                <input id="fd-years" type="number" value="3" min="1" max="10" step="1" class="field mt-2 text-[16px] font-semibold" />
-              </label>
+              <label class="block"><span class="text-[13px] font-semibold text-[var(--color-ink)]">Principal amount (₹)</span><input id="fd-amount" type="number" value="100000" min="1000" step="1000" class="field mt-2 text-[16px] font-semibold" /></label>
+              <label class="block"><span class="text-[13px] font-semibold text-[var(--color-ink)]">Interest rate (% p.a.)</span><input id="fd-rate" type="number" value="7.5" min="1" max="15" step="0.25" class="field mt-2 text-[16px] font-semibold" /></label>
+              <label class="block"><span class="text-[13px] font-semibold text-[var(--color-ink)]">Tenure (years)</span><input id="fd-years" type="number" value="3" min="1" max="10" step="1" class="field mt-2 text-[16px] font-semibold" /></label>
             </div>
           </div>
           <div class="flex flex-col gap-6">
@@ -321,7 +273,7 @@ const loanCalcs = [
                 <div class="flex justify-between py-3"><span class="text-white/60">Interest earned</span><span id="fd-interest" class="font-semibold text-[var(--color-gold)]">₹0</span></div>
               </div>
             </div>
-            <p class="text-[11px] text-[var(--color-subtle)]">Assumes quarterly compounding. Actual rates and terms may vary by institution.</p>
+            <p class="text-[11px] text-[var(--color-subtle)]">Assumes quarterly compounding. Actual rates may vary by institution.</p>
           </div>
         </div>
       </div>
@@ -333,18 +285,9 @@ const loanCalcs = [
             <h2 class="text-[24px] font-semibold text-[var(--color-n900)]" style="font-family:var(--font-display)">SWP Calculator</h2>
             <p class="mt-2 text-[14px] text-[var(--color-muted)]">Estimate how long your retirement corpus lasts with monthly withdrawals.</p>
             <div class="mt-8 space-y-6">
-              <label class="block">
-                <span class="text-[13px] font-semibold text-[var(--color-ink)]">Initial corpus (₹)</span>
-                <input id="swp-corpus" type="number" value="2000000" min="10000" step="10000" class="field mt-2 text-[16px] font-semibold" />
-              </label>
-              <label class="block">
-                <span class="text-[13px] font-semibold text-[var(--color-ink)]">Monthly withdrawal (₹)</span>
-                <input id="swp-withdrawal" type="number" value="20000" min="1000" step="1000" class="field mt-2 text-[16px] font-semibold" />
-              </label>
-              <label class="block">
-                <span class="text-[13px] font-semibold text-[var(--color-ink)]">Expected return (% p.a.)</span>
-                <input id="swp-rate" type="number" value="8" min="1" max="20" step="0.5" class="field mt-2 text-[16px] font-semibold" />
-              </label>
+              <label class="block"><span class="text-[13px] font-semibold text-[var(--color-ink)]">Initial corpus (₹)</span><input id="swp-corpus" type="number" value="2000000" min="10000" step="10000" class="field mt-2 text-[16px] font-semibold" /></label>
+              <label class="block"><span class="text-[13px] font-semibold text-[var(--color-ink)]">Monthly withdrawal (₹)</span><input id="swp-withdrawal" type="number" value="20000" min="1000" step="1000" class="field mt-2 text-[16px] font-semibold" /></label>
+              <label class="block"><span class="text-[13px] font-semibold text-[var(--color-ink)]">Expected return (% p.a.)</span><input id="swp-rate" type="number" value="8" min="1" max="20" step="0.5" class="field mt-2 text-[16px] font-semibold" /></label>
             </div>
           </div>
           <div class="flex flex-col gap-6">
@@ -356,7 +299,7 @@ const loanCalcs = [
                 <div class="flex justify-between py-3"><span class="text-white/60">Remaining corpus</span><span id="swp-remaining" class="font-semibold text-[var(--color-gold)]">₹0</span></div>
               </div>
             </div>
-            <p class="text-[11px] text-[var(--color-subtle)]">Illustrative only. Returns and withdrawals may vary. Not a guarantee of income.</p>
+            <p class="text-[11px] text-[var(--color-subtle)]">Illustrative only. Not a guarantee of income.</p>
           </div>
         </div>
       </div>
@@ -364,50 +307,22 @@ const loanCalcs = [
     </div>
   </section>
 
-  <!-- ══ 4. LOAN CALCULATOR CARDS ══════════════════════════════════ -->
-  <section class="bg-white py-16 lg:py-24">
+  <!-- ══ 4. CTA BANNER ═════════════════════════════════════════════ -->
+  <section class="bg-[var(--color-dark-olive)] py-12 lg:py-16">
     <div class="site-wrap">
-      <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Borrow Smart</p>
-      <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">
-        Loan Calculators
-      </h2>
-      <p class="mt-3 max-w-2xl text-[15px] leading-relaxed text-[var(--color-muted)]">
-        Know your EMI before you apply. These calculators help you borrow the right amount at the right terms.
-      </p>
-
-      <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {loanCalcs.map(calc => (
-          <div class="product-card-light relative flex flex-col p-7 opacity-75">
-            <span class="absolute right-5 top-5 rounded-full bg-[var(--color-n100)] px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-[var(--color-subtle)]">
-              Coming Soon
-            </span>
-            <div
-              class="mb-5 flex h-11 w-11 items-center justify-center rounded-[10px] bg-[var(--color-n100)] text-[var(--color-n700)]"
-              set:html={calc.icon}
-            />
-            <h3 class="text-[16px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{calc.title}</h3>
-            <p class="mt-2 flex-1 text-[13px] leading-relaxed text-[var(--color-muted)]">{calc.desc}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ 5. CTA BANNER ═════════════════════════════════════════════ -->
-  <section class="bg-[var(--color-dark-800)] py-14 lg:py-20">
-    <div class="site-wrap">
-      <div class="flex flex-col items-start justify-between gap-8 rounded-[24px] bg-[var(--color-dark-600)] p-8 md:flex-row md:items-center md:p-10 lg:p-14">
+      <div class="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
         <div>
-          <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Get Started Today</p>
-          <h2 class="mt-3 text-[24px] font-bold text-white lg:text-[32px]" style="font-family:var(--font-display)">
-            Happy with the Numbers?<br />Open a Demat Account in Minutes.
+          <h2 class="text-[24px] font-bold text-white lg:text-[30px]" style="font-family:var(--font-display)">
+            Open Demat Account
           </h2>
-          <p class="mt-3 text-[15px] text-white/60">Put your calculations into action — start investing today, completely paperless.</p>
+          <p class="mt-1.5 text-[14px] text-white/60">In less than 5 minutes</p>
         </div>
-        <div class="flex flex-shrink-0 flex-col gap-3 sm:flex-row">
-          <a href="/about/open-demat-account/" class="btn-primary whitespace-nowrap">Open Demat Account</a>
-          <a href="/about/support/" class="inline-flex h-12 items-center justify-center rounded-[6px] border border-white/25 px-6 text-[14px] font-medium text-white transition-colors hover:bg-white/10 whitespace-nowrap">Talk to an RM</a>
-        </div>
+        <a
+          href="/about/open-demat-account/"
+          class="flex-shrink-0 inline-flex h-12 items-center justify-center rounded-[6px] bg-[var(--color-brand)] px-8 text-[14px] font-bold text-[var(--color-dark-800)] transition-colors hover:bg-[var(--color-brand-hover)]"
+        >
+          Open Demat Account
+        </a>
       </div>
     </div>
   </section>
@@ -419,7 +334,6 @@ const loanCalcs = [
   const el  = (id: string) => document.getElementById(id) as HTMLElement;
   const val = (id: string) => parseFloat((document.getElementById(id) as HTMLInputElement).value) || 0;
 
-  /* ── SIP ── */
   function calcSip() {
     const P = val('sip-amount'), r = val('sip-rate') / 100 / 12, n = val('sip-years') * 12;
     const fv = r === 0 ? P * n : P * ((Math.pow(1 + r, n) - 1) / r) * (1 + r);
@@ -431,7 +345,6 @@ const loanCalcs = [
   ['sip-amount','sip-rate','sip-years'].forEach(id => document.getElementById(id)?.addEventListener('input', calcSip));
   calcSip();
 
-  /* ── Lumpsum ── */
   function calcLs() {
     const P = val('ls-amount'), r = val('ls-rate') / 100, n = val('ls-years');
     const fv = P * Math.pow(1 + r, n);
@@ -442,7 +355,6 @@ const loanCalcs = [
   ['ls-amount','ls-rate','ls-years'].forEach(id => document.getElementById(id)?.addEventListener('input', calcLs));
   calcLs();
 
-  /* ── FD (quarterly compounding) ── */
   function calcFd() {
     const P = val('fd-amount'), r = val('fd-rate') / 100, n = val('fd-years');
     const fv = P * Math.pow(1 + r / 4, 4 * n);
@@ -453,15 +365,13 @@ const loanCalcs = [
   ['fd-amount','fd-rate','fd-years'].forEach(id => document.getElementById(id)?.addEventListener('input', calcFd));
   calcFd();
 
-  /* ── SWP ── */
   function calcSwp() {
     const corpus = val('swp-corpus'), monthly = val('swp-withdrawal'), r = val('swp-rate') / 100 / 12;
     let bal = corpus, months = 0;
     while (bal > 0 && months < 600) { bal = bal * (1 + r) - monthly; months++; }
-    const remaining = Math.max(0, bal);
     el('swp-result').textContent    = months >= 600 ? '50+ yrs' : `${(months / 12).toFixed(1)} yrs`;
     el('swp-total').textContent     = fmt(monthly * months);
-    el('swp-remaining').textContent = fmt(remaining);
+    el('swp-remaining').textContent = fmt(Math.max(0, bal));
   }
   ['swp-corpus','swp-withdrawal','swp-rate'].forEach(id => document.getElementById(id)?.addEventListener('input', calcSwp));
   calcSwp();
@@ -482,17 +392,14 @@ const loanCalcs = [
     panels.forEach(p => p.classList.toggle('hidden', p.id !== `panel-${target}`));
   }
   activateTab('sip');
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => { if (tab.dataset.tab) activateTab(tab.dataset.tab); });
-  });
+  tabs.forEach(tab => tab.addEventListener('click', () => { if (tab.dataset.tab) activateTab(tab.dataset.tab); }));
 
-  /* ── Calculator cards → scroll to interactive section ── */
+  /* ── Card clicks → scroll + activate tab ── */
   document.querySelectorAll<HTMLElement>('[data-calc-tab]').forEach(card => {
     const tab = card.dataset.calcTab;
-    if (!tab) return;
+    if (!tab || tab === 'nps') return;
     card.addEventListener('click', () => {
-      const section = document.getElementById('calculators');
-      if (section) { section.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      document.getElementById('calculators')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       setTimeout(() => activateTab(tab), 400);
     });
   });
