@@ -331,7 +331,6 @@ const faqs = [
     const cx = L / 2, cy = L / 2;
     const OR = L * 0.41;
     const IR = L * 0.25;
-    const SR = L * 0.108;
     const DEG = Math.PI / 180;
 
     // 3D tilt: orbital plane elevation angle (view from above)
@@ -403,42 +402,6 @@ const faqs = [
 
       // Orbit rings (3D ellipses)
       [OR, IR].forEach(r => drawRing(r));
-
-      // ── Sun ──────────────────────────────────────────────────────
-      const pulse = 0.5 + 0.5 * Math.sin(frame * 0.028);
-
-      // Volumetric glow layers
-      [[5.0,0.014],[3.2,0.032],[2.1,0.065],[1.4,0.120]].forEach(([s,a]) => {
-        const rr = SR * s, aa = a + pulse * a * 0.55;
-        const g = ctx.createRadialGradient(cx,cy,0,cx,cy,rr);
-        g.addColorStop(0, `rgba(255,210,80,${aa*2.8})`);
-        g.addColorStop(0.35,`rgba(243,184,63,${aa*1.4})`);
-        g.addColorStop(0.7, `rgba(200,140,20,${aa})`);
-        g.addColorStop(1,   'rgba(243,184,63,0)');
-        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(cx,cy,rr,0,Math.PI*2); ctx.fill();
-      });
-
-      // Sun sphere — off-center highlight for 3D sphere look
-      const sg = ctx.createRadialGradient(
-        cx - SR*0.30, cy - SR*0.30, SR*0.04,
-        cx, cy, SR
-      );
-      sg.addColorStop(0,   `rgba(255,235,130,${0.75+pulse*0.15})`);
-      sg.addColorStop(0.3, `rgba(248,195,70,${0.55+pulse*0.10})`);
-      sg.addColorStop(0.7, `rgba(200,135,20,${0.30})`);
-      sg.addColorStop(1,   `rgba(140,85,5,0.08)`);
-      ctx.beginPath(); ctx.arc(cx,cy,SR,0,Math.PI*2);
-      ctx.fillStyle = sg; ctx.fill();
-      ctx.strokeStyle = `rgba(243,184,63,${0.30+pulse*0.22})`; ctx.lineWidth = 1.5; ctx.stroke();
-      // Corona ring
-      ctx.beginPath(); ctx.arc(cx,cy,SR*0.62,0,Math.PI*2);
-      ctx.strokeStyle = `rgba(255,210,80,${0.14+pulse*0.12})`; ctx.lineWidth = 0.8; ctx.stroke();
-      // Text
-      ctx.fillStyle = 'rgba(255,255,255,0.92)';
-      ctx.font = '600 15px Inter,system-ui,sans-serif';
-      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-      ctx.fillText('Your',   cx, cy - 9);
-      ctx.fillText('Wealth', cx, cy + 9);
 
       // ── Planets (depth-sorted back→front) ────────────────────────
       planets.forEach(p => { p.a += p.spd; });
