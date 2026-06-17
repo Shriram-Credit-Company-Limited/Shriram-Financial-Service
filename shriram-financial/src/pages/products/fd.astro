@@ -2,10 +2,10 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const fdTypes = [
-  { label: 'Regular Fixed Deposit', desc: 'The standard FD — invest a lump sum for a fixed tenure and earn guaranteed interest. Available in cumulative (interest paid at maturity) and non-cumulative (monthly/quarterly interest payout) variants.', tag: 'Most Popular' },
-  { label: 'Tax-Saving FD (ELSS FD)', desc: 'A 5-year lock-in FD that qualifies for ₹1.5 lakh deduction under Section 80C. Interest is taxable. Cannot be withdrawn prematurely or used as loan collateral during the lock-in period.', tag: '80C Eligible' },
-  { label: 'Senior Citizen FD', desc: 'Special FD for investors aged 60+. Banks and NBFCs offer an additional 0.25%–0.50% interest rate over the standard rate. Ideal for regular income post-retirement.', tag: 'Age 60+' },
-  { label: 'Corporate FD', desc: 'FDs issued by NBFCs and corporates (like Shriram Finance). Typically offer higher interest rates than bank FDs — 0.5%–1.5% above bank rates. Assessed by credit rating agencies.', tag: 'Higher Yields' },
+  { label: 'Regular Fixed Deposit', desc: 'Guaranteed interest on a lump-sum investment for a fixed tenure. Choose cumulative (interest at maturity) or non-cumulative (monthly/quarterly payouts).', tag: 'Most Popular' },
+  { label: 'Tax-Saving FD (ELSS FD)', desc: '5-year lock-in FD eligible for ₹1.5 lakh deduction under Section 80C. Interest is taxable; no premature withdrawal allowed during the lock-in.', tag: '80C Eligible' },
+  { label: 'Senior Citizen FD', desc: 'Extra 0.25%–0.50% interest rate for investors aged 60+. Ideal for generating regular post-retirement income.', tag: 'Age 60+' },
+  { label: 'Corporate FD', desc: 'NBFCs like Shriram Finance offer 0.5%–1.5% higher rates than bank FDs. Rated by CRISIL/ICRA — higher yield with assessed credit quality.', tag: 'Higher Yields' },
 ];
 
 const rateRows = [
@@ -34,17 +34,17 @@ const steps = [
 ];
 
 const faqs = [
-  { q: 'Is FD interest taxable?', a: 'Yes. FD interest is taxable as per your income tax slab. TDS at 10% is deducted if interest exceeds ₹40,000 per year (₹50,000 for senior citizens). If your income is below the taxable limit, submit Form 15G (general) or Form 15H (senior citizens) to avoid TDS deduction.' },
-  { q: 'Can I withdraw my FD before maturity?', a: 'Most FDs allow premature withdrawal with a penalty — typically 0.5%–1% lower interest than the applicable rate for the actual holding period. Tax-saving FDs (5-year 80C FDs) cannot be withdrawn before the 5-year lock-in period. Some FDs offer a loan against FD as an alternative to premature withdrawal.' },
-  { q: 'Is a corporate FD safer than a bank FD?', a: 'Bank FDs are insured by DICGC up to ₹5 lakh per depositor per bank. Corporate/NBFC FDs are not covered by this insurance but offer higher returns. Reputed NBFCs rated AAA or AA+ by CRISIL/ICRA have strong track records. Shriram Finance FDs have consistently held high credit ratings since 1974.' },
-  { q: 'What is the difference between cumulative and non-cumulative FD?', a: 'Cumulative FDs compound interest and pay the entire amount (principal + interest) at maturity — best for wealth accumulation. Non-cumulative FDs pay interest periodically (monthly, quarterly, or annually) — ideal for those seeking regular income, such as retirees.' },
-  { q: 'Can I take a loan against my FD?', a: 'Yes. Most banks and NBFCs offer loans of up to 70–90% of the FD value at an interest rate typically 1–2% above the FD rate. This is a smart alternative to premature withdrawal — your FD continues to earn interest while you access liquidity at a low cost.' },
+  { q: 'Is FD interest taxable?', a: 'Yes. Interest is taxed per your slab. TDS at 10% is deducted if annual interest exceeds ₹40,000 (₹50,000 for senior citizens). Submit Form 15G or 15H if your income is below the taxable threshold to avoid TDS.' },
+  { q: 'Can I withdraw my FD before maturity?', a: 'Most FDs allow premature withdrawal with a 0.5%–1% interest penalty. Tax-saving (80C) FDs cannot be broken before the 5-year lock-in. Consider a loan against FD as a penalty-free alternative.' },
+  { q: 'Is a corporate FD safer than a bank FD?', a: 'Bank FDs are DICGC-insured up to ₹5 lakh. Corporate FDs aren\'t covered but offer higher rates. AAA/AA+ rated NBFCs like Shriram Finance have strong track records — assess the rating before investing.' },
+  { q: 'What is the difference between cumulative and non-cumulative FD?', a: 'Cumulative FDs reinvest interest and pay principal + interest at maturity — ideal for wealth building. Non-cumulative FDs pay interest monthly or quarterly — best for regular income seekers like retirees.' },
+  { q: 'Can I take a loan against my FD?', a: 'Yes. Borrow up to 70–90% of FD value at 1–2% above the FD rate. Your FD keeps earning interest while you access liquidity — smarter than premature withdrawal.' },
 ];
 ---
 
 <BaseLayout
-  title="Fixed Deposits — Guaranteed Returns with High Interest Rates | Shriram Financial Services"
-  description="Invest in Fixed Deposits with guaranteed returns, high interest rates, and flexible tenures from Shriram Financial Services. Special senior citizen rates available."
+  title="Fixed Deposit Online India — Best FD Rates 2025 | Shriram"
+  description="Book a fixed deposit online with up to 8.5% p.a. guaranteed interest. Special senior citizen rates, 80C eligible FD, and flexible tenures. Apply with Shriram today."
 >
 
   <section class="relative overflow-hidden bg-[var(--color-dark-800)]">

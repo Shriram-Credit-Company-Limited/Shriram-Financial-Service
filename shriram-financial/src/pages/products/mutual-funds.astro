@@ -36,24 +36,24 @@ const steps = [
 ];
 
 const risks = [
-  { label: 'Market Risk', desc: 'Equity mutual funds are subject to market risk. NAVs can fall when the broader market declines, especially in the short term.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="m3 3 18 18M3 12c0 5 3.6 9 9 9s9-4 9-9"/><path d="M12 3a9 9 0 0 1 9 9"/></svg>` },
-  { label: 'Fund Manager Risk', desc: 'Actively managed funds depend on fund manager decisions. A change in fund manager or strategy can impact returns unpredictably.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>` },
-  { label: 'Concentration Risk', desc: 'Sectoral and thematic funds with concentrated exposures can significantly underperform if that sector or theme falls out of favour.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>` },
-  { label: 'Expense Ratio', desc: 'Annual fund management fees (TER) reduce your net returns. Direct plans have lower TERs than regular plans. Always compare expense ratios before investing.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 1 0 0 7h5a3.5 3.5 0 1 1 0 7H6"/></svg>` },
+  { label: 'Market Risk', desc: 'Equity fund NAVs fall when markets decline. Short-term volatility is normal; stay invested for 5+ years to ride it out.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="m3 3 18 18M3 12c0 5 3.6 9 9 9s9-4 9-9"/><path d="M12 3a9 9 0 0 1 9 9"/></svg>` },
+  { label: 'Fund Manager Risk', desc: 'Active funds depend on the fund manager\'s decisions. A change in manager or strategy can shift the fund\'s risk-return profile unexpectedly.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>` },
+  { label: 'Concentration Risk', desc: 'Sectoral and thematic funds can sharply underperform if their focused sector falls out of favour. Diversify across categories to manage this.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>` },
+  { label: 'Expense Ratio', desc: 'Annual fund fees (TER) reduce net returns. Direct plans have lower TERs than regular plans — always compare before investing.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 1 0 0 7h5a3.5 3.5 0 1 1 0 7H6"/></svg>` },
 ];
 
 const faqs = [
-  { q: 'What is the difference between Direct and Regular mutual fund plans?', a: 'Direct plans are bought directly from the AMC (no distributor). Regular plans are bought through a distributor/agent who earns a commission from the AMC — this is embedded in the expense ratio. Direct plans have lower expense ratios and therefore higher returns over time. Shriram Financial Services offers Direct Plans with zero commission.' },
-  { q: 'Can I start a SIP with ₹500 per month?', a: 'Yes. Most mutual funds allow SIPs starting from ₹500 per month. Some funds like small-cap and international funds may have higher minimums. With Shriram\'s platform, you can set up auto-debit SIPs across any fund with a few taps on the Antara app.' },
-  { q: 'How is mutual fund NAV calculated?', a: 'NAV (Net Asset Value) is calculated daily after market close: NAV = (Total Assets - Liabilities) / Number of Units Outstanding. When you buy a mutual fund at NAV ₹50 and sell when NAV is ₹75, your return is 50% (excluding exit load and taxes).' },
-  { q: 'What is an exit load in mutual funds?', a: 'Exit load is a fee charged when you redeem units before a specified holding period. Most equity funds charge 1% exit load if redeemed within 1 year of purchase. Liquid funds have a graded exit load for the first 7 days. ELSS funds have no exit load (3-year mandatory lock-in instead).' },
-  { q: 'Is mutual fund investment safe compared to fixed deposits?', a: 'Mutual funds (especially equity funds) carry market risk and are not capital-guaranteed like bank FDs. However, over 5–10 year periods, equity mutual funds have historically delivered significantly higher inflation-adjusted returns than FDs. Debt mutual funds carry lower risk than equity funds but still have interest rate and credit risk.' },
+  { q: 'What is the difference between Direct and Regular mutual fund plans?', a: 'Direct plans are bought from the AMC without a distributor, so the expense ratio is lower and returns are higher over time. Shriram Financial Services offers Direct Plans at zero commission.' },
+  { q: 'Can I start a SIP with ₹500 per month?', a: 'Yes. Most funds allow SIPs from ₹500/month. Set up auto-debit SIPs across any fund in minutes on the Antara app.' },
+  { q: 'How is mutual fund NAV calculated?', a: 'NAV = (Total Assets − Liabilities) ÷ Units Outstanding, calculated daily after market close. If you buy at ₹50 NAV and sell at ₹75, your gross return is 50% (before exit load and taxes).' },
+  { q: 'What is an exit load in mutual funds?', a: 'Exit load is a redemption fee charged if you exit before the specified holding period — typically 1% for equity funds within 1 year. ELSS funds have no exit load; the 3-year lock-in applies instead.' },
+  { q: 'Is mutual fund investment safe compared to fixed deposits?', a: 'Equity mutual funds carry market risk and are not capital-guaranteed like FDs. Over 5–10 years, they have historically delivered far higher inflation-adjusted returns. Debt funds carry lower risk but still have interest rate and credit risk.' },
 ];
 ---
 
 <BaseLayout
-  title="Mutual Funds — Invest in Direct Plans with Zero Commission | Shriram Financial Services"
-  description="Invest in 3,000+ direct mutual fund schemes with zero commission, SIP starting ₹500, and expert research from Shriram Financial Services."
+  title="Invest Mutual Funds Online — 0% Commission Direct Plans | Shriram"
+  description="Invest in 3,000+ direct mutual fund schemes online with 0% commission and SIP from ₹500. Expert research, instant KYC. Start mutual fund investment today."
 >
 
   <section class="relative overflow-hidden bg-[var(--color-dark-800)]">

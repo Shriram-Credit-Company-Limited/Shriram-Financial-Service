@@ -2,15 +2,15 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const accounts = [
-  { label: 'Tier 1 Account', desc: 'The primary NPS pension account. Contributions are tax-deductible. Withdrawals are restricted until age 60 — designed for retirement savings. Minimum contribution: ₹500/year.', tag: 'Tax-Exempt' },
-  { label: 'Tier 2 Account', desc: 'A voluntary savings account linked to Tier 1. No tax benefit (except for government employees). Fully liquid — withdraw anytime. Minimum contribution: ₹250/year.', tag: 'Flexible' },
+  { label: 'Tier 1 Account', desc: 'The primary NPS pension account with tax-deductible contributions. Locked until age 60 — purpose-built for retirement. Minimum: ₹500/year.', tag: 'Tax-Exempt' },
+  { label: 'Tier 2 Account', desc: 'A voluntary, fully liquid savings account linked to Tier 1. No tax benefit (except for government employees). Minimum: ₹250/year, withdraw anytime.', tag: 'Flexible' },
 ];
 
 const assetClasses = [
-  { code: 'E', label: 'Equity (Class E)', desc: 'Invests in equity and equity-related instruments. Maximum allocation: 75% (up to age 50, then tapers). Highest growth potential, highest volatility.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M3 3v18h18"/><path d="m7 12 4-4 4 4 4-4"/></svg>` },
-  { code: 'C', label: 'Corporate Bonds (Class C)', desc: 'Invests in high-rated corporate debt instruments (AA or above). Moderate risk and moderate returns. Good for stability and predictable income.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 9h8M8 13h5"/></svg>` },
-  { code: 'G', label: 'Government Securities (Class G)', desc: 'Invests in central and state government bonds. Lowest risk class. Suitable for conservative investors approaching retirement.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M3 22V12l9-9 9 9v10M9 22v-6h6v6"/></svg>` },
-  { code: 'A', label: 'Alternative Investments (Class A)', desc: 'REITs, InvITs, and other alternative assets. Maximum 5% allocation. Offers diversification beyond traditional asset classes.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><circle cx="12" cy="12" r="9"/><path d="M12 3v9l6 3"/></svg>` },
+  { code: 'E', label: 'Equity (Class E)', desc: 'Equity and equity-related instruments. Up to 75% allocation (tapers after age 50). Highest growth potential and highest volatility.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M3 3v18h18"/><path d="m7 12 4-4 4 4 4-4"/></svg>` },
+  { code: 'C', label: 'Corporate Bonds (Class C)', desc: 'High-rated corporate debt (AA and above). Moderate risk with stable, predictable returns — good for core stability in your NPS mix.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 9h8M8 13h5"/></svg>` },
+  { code: 'G', label: 'Government Securities (Class G)', desc: 'Central and state government bonds — the lowest-risk NPS class. Suitable for conservative investors nearing retirement.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M3 22V12l9-9 9 9v10M9 22v-6h6v6"/></svg>` },
+  { code: 'A', label: 'Alternative Investments (Class A)', desc: 'REITs, InvITs, and alternative assets. Capped at 5% allocation — adds diversification beyond traditional debt and equity.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><circle cx="12" cy="12" r="9"/><path d="M12 3v9l6 3"/></svg>` },
 ];
 
 const taxRows = [
@@ -36,17 +36,17 @@ const steps = [
 ];
 
 const faqs = [
-  { q: 'Can I withdraw from NPS before retirement?', a: 'Partial withdrawals from NPS Tier 1 are allowed after 3 years for specific reasons: children\'s higher education or marriage, purchase/construction of a residential house, treatment of critical illness, or setting up a new business. Up to 25% of your own contributions can be withdrawn; you can make up to 3 withdrawals in your lifetime.' },
-  { q: 'What happens to NPS at retirement (age 60)?', a: 'At age 60, you can withdraw up to 60% of the corpus as a lump sum — tax-free. The remaining 40% must be used to purchase an annuity from a PFRDA-registered insurance company, which pays you a monthly pension. You can defer withdrawal until age 75 if you choose.' },
-  { q: 'Is NPS better than PPF for tax saving?', a: 'NPS offers a higher potential tax deduction (₹2 lakh total via 80C + 80CCD(1B) exclusively) vs PPF\'s ₹1.5 lakh under 80C. However, PPF maturity is fully tax-free while NPS corpus is partially taxable (annuity income is taxed as per slab). NPS also offers higher return potential through equity exposure. Most advisors recommend both.' },
-  { q: 'What is the minimum annual contribution for NPS?', a: 'For Tier 1 NPS: minimum ₹500 per contribution and ₹1,000 per financial year. For Tier 2 NPS: minimum ₹250 per contribution with no annual minimum. If you fail to contribute the minimum in Tier 1, your PRAN becomes inactive and a penalty of ₹100 per year of inactivity applies.' },
-  { q: 'Can self-employed individuals invest in NPS?', a: 'Yes. NPS is available to all Indian citizens aged 18–70, including self-employed individuals, freelancers, and non-salaried professionals. Self-employed subscribers can claim deductions under Section 80CCD(1) up to 20% of gross income (within the 80C limit of ₹1.5 lakh) plus the additional ₹50,000 under 80CCD(1B).' },
+  { q: 'Can I withdraw from NPS before retirement?', a: 'Yes — after 3 years, you can withdraw up to 25% of your own contributions for specific reasons: child\'s education/marriage, home purchase, critical illness, or business setup. A maximum of 3 withdrawals are allowed in a lifetime.' },
+  { q: 'What happens to NPS at retirement (age 60)?', a: 'At 60, withdraw up to 60% of the corpus tax-free. The remaining 40% must purchase a PFRDA-registered annuity, which pays a monthly pension. You can defer withdrawal until age 75.' },
+  { q: 'Is NPS better than PPF for tax saving?', a: 'NPS allows up to ₹2 lakh deduction (80C + 80CCD(1B)), vs PPF\'s ₹1.5 lakh under 80C. PPF maturity is fully tax-free; NPS annuity income is taxable. Most advisors recommend both for maximum tax efficiency.' },
+  { q: 'What is the minimum annual contribution for NPS?', a: 'Tier 1: ₹500 per contribution, ₹1,000 per year minimum. Tier 2: ₹250 per contribution, no annual minimum. Missing Tier 1\'s annual minimum makes your PRAN inactive with a ₹100/year penalty.' },
+  { q: 'Can self-employed individuals invest in NPS?', a: 'Yes. All Indian citizens aged 18–70 can open NPS. Self-employed subscribers claim 80CCD(1) up to 20% of gross income (within ₹1.5 lakh 80C limit), plus the exclusive ₹50,000 under 80CCD(1B).' },
 ];
 ---
 
 <BaseLayout
-  title="National Pension Scheme (NPS) — Tax-Efficient Retirement Planning | Shriram Financial Services"
-  description="Join NPS through Shriram Financial Services and build a tax-efficient retirement corpus. Save up to ₹2 lakh in tax deductions annually with market-linked returns."
+  title="NPS Investment India — Tax Saving National Pension Scheme | Shriram"
+  description="Invest in NPS online and save up to ₹2 lakh in tax deductions annually. Market-linked retirement corpus, PFRDA regulated, flexible fund choice. Open NPS account today."
 >
 
   <section class="relative overflow-hidden bg-[var(--color-dark-800)]">

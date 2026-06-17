@@ -28,24 +28,24 @@ const steps = [
 ];
 
 const risks = [
-  { label: 'Tracking Error', desc: 'ETFs are designed to replicate an index, but small differences between the ETF\'s performance and the index (tracking error) can erode returns over time.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>` },
-  { label: 'Liquidity Risk', desc: 'Some ETFs (especially sectoral or debt ETFs) have low trading volumes. The bid-ask spread can be wide, making it expensive to buy or sell large quantities quickly.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M3 3v18h18"/><path d="m7 14 4-5 4 3 4-6"/></svg>` },
-  { label: 'Market Risk', desc: 'ETFs are as volatile as the underlying index or assets they track. An equity ETF will fall when the market falls — there is no active downside protection.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="m3 3 18 18M3 12c0 5 3.6 9 9 9s9-4 9-9"/><path d="M12 3a9 9 0 0 1 9 9"/></svg>` },
-  { label: 'Currency Risk', desc: 'International ETFs carry implicit currency risk. If the INR strengthens against USD, your returns from a US-based ETF will be lower despite the index rising.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>` },
+  { label: 'Tracking Error', desc: 'Small gaps between the ETF\'s return and the index it tracks can erode performance over time. Lower tracking error = better index replication.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>` },
+  { label: 'Liquidity Risk', desc: 'Sectoral and debt ETFs can have thin trading volumes and wide bid-ask spreads, making large trades expensive. Stick to high-volume ETFs for easier entry and exit.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M3 3v18h18"/><path d="m7 14 4-5 4 3 4-6"/></svg>` },
+  { label: 'Market Risk', desc: 'Equity ETFs fall when the market falls — there is no active downside buffer. Use debt or hybrid ETFs to balance overall portfolio risk.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="m3 3 18 18M3 12c0 5 3.6 9 9 9s9-4 9-9"/><path d="M12 3a9 9 0 0 1 9 9"/></svg>` },
+  { label: 'Currency Risk', desc: 'International ETFs embed currency risk. If the INR appreciates against USD, your INR-denominated returns from a US ETF drop even if the underlying index rose.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>` },
 ];
 
 const faqs = [
-  { q: 'What is the difference between ETF and index mutual fund?', a: 'Both track the same index, but ETFs are traded intraday on stock exchanges (like a stock) while index mutual funds can only be bought/sold once per day at NAV. ETFs have lower expense ratios but require a Demat account and incur brokerage. Index funds are simpler for SIP-based investing without needing to time the market.' },
-  { q: 'Is a Demat account required to buy ETFs?', a: 'Yes. ETFs are listed on NSE and BSE and are bought through a trading account just like buying a share. You need an active Demat account to hold the ETF units. Shriram Financial Services provides a seamless platform to buy, sell, and hold ETFs alongside your equity portfolio.' },
-  { q: 'What is tracking error in ETFs?', a: 'Tracking error measures how closely an ETF replicates its benchmark index. A tracking error of 0.1% means the ETF returned 0.1% less than the index over the period. Lower tracking error means better index replication. For NIFTY 50 ETFs, the best funds maintain tracking errors below 0.05% per year.' },
-  { q: 'Can I start a SIP in an ETF?', a: 'Not directly in the traditional sense (ETFs don\'t support auto-debit SIPs like mutual funds). However, you can set calendar reminders to manually buy ETF units every month. Some brokers, including Shriram, are introducing systematic ETF investment options through periodic automated purchase features.' },
-  { q: 'How are ETF dividends handled?', a: 'ETF dividends depend on the dividend policy of the specific fund. Some ETFs pay dividends to investors when the underlying index components pay dividends. Others accumulate dividends within the NAV (growth option). Gold ETFs and most NIFTY 50 ETFs in India typically reinvest dividends and reflect them in the NAV.' },
+  { q: 'What is the difference between ETF and index mutual fund?', a: 'ETFs trade intraday on exchanges like stocks; index mutual funds can only be bought/sold once per day at NAV. ETFs have lower expense ratios but require a Demat account and incur brokerage. Index funds are simpler for SIP-based investors.' },
+  { q: 'Is a Demat account required to buy ETFs?', a: 'Yes. ETFs trade on NSE and BSE just like shares — you need an active Demat + trading account. Open one with Shriram and access all ETF categories alongside your equity portfolio.' },
+  { q: 'What is tracking error in ETFs?', a: 'Tracking error is the gap between the ETF\'s return and its benchmark index. Lower is better — the best NIFTY 50 ETFs maintain tracking errors below 0.05% per year.' },
+  { q: 'Can I start a SIP in an ETF?', a: 'ETFs don\'t support traditional auto-debit SIPs like mutual funds. You can manually buy units monthly, or use Shriram\'s systematic ETF purchase features where available.' },
+  { q: 'How are ETF dividends handled?', a: 'Most NIFTY 50 and Gold ETFs in India reinvest dividends into the NAV (growth option). Some ETFs pay dividends directly to investors when underlying holdings declare them.' },
 ];
 ---
 
 <BaseLayout
-  title="ETF Trading — Exchange Traded Funds on NSE & BSE | Shriram Financial Services"
-  description="Trade Index ETFs, Gold ETFs, sectoral ETFs, and international ETFs on NSE & BSE. Low expense ratios, real-time pricing, and expert guidance from Shriram Financial Services."
+  title="ETF Investment India — Buy Index Gold ETF NSE BSE | Shriram"
+  description="Buy Index ETFs, Gold ETFs, and international ETFs on NSE & BSE. Ultra-low expense ratios, real-time pricing, and flat ₹20 brokerage. Start ETF investing today."
 >
 
   <section class="relative overflow-hidden bg-[var(--color-dark-800)]">

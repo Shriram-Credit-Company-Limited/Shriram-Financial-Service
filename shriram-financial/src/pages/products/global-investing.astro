@@ -2,15 +2,15 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const markets = [
-  { region: 'United States', indices: 'S&P 500, Nasdaq 100, Dow Jones', desc: 'Home to Apple, Microsoft, Amazon, Google, Tesla, and thousands of global category leaders. The US market is the world\'s largest and most liquid, with deep research coverage.', icon: '🇺🇸' },
-  { region: 'Europe', indices: 'FTSE 100, DAX, CAC 40, STOXX 50', desc: 'Access established European multinationals in luxury goods, automotive, pharmaceuticals, and banking. Diversification across EUR, GBP, and CHF currencies.', icon: '🇪🇺' },
-  { region: 'Asia Pacific', indices: 'Hang Seng, Nikkei 225, MSCI Asia', desc: 'Exposure to Chinese technology, Japanese precision manufacturing, and South Korean electronics and semiconductors — high-growth markets with distinct economic cycles.', icon: '🌏' },
+  { region: 'United States', indices: 'S&P 500, Nasdaq 100, Dow Jones', desc: 'The world\'s largest and most liquid market. Access Apple, Microsoft, Amazon, NVIDIA, and thousands of global category leaders with deep research coverage.', icon: '🇺🇸' },
+  { region: 'Europe', indices: 'FTSE 100, DAX, CAC 40, STOXX 50', desc: 'Established multinationals in luxury, automotive, pharma, and banking. Built-in currency diversification across EUR, GBP, and CHF.', icon: '🇪🇺' },
+  { region: 'Asia Pacific', indices: 'Hang Seng, Nikkei 225, MSCI Asia', desc: 'Chinese tech, Japanese precision manufacturing, and South Korean semiconductors — high-growth markets with distinct economic cycles from India.', icon: '🌏' },
 ];
 
 const howItWorks = [
-  { label: 'LRS (Liberalised Remittance Scheme)', desc: 'FEMA allows Indian residents to remit up to USD 250,000 per financial year for investments abroad under the LRS. Funds are sent to your overseas brokerage account or through India-based fund-of-funds.' },
-  { label: 'India-Listed Global Funds', desc: 'The easiest route — invest in international ETFs and mutual funds listed on Indian exchanges (Nasdaq 100 ETF, S&P 500 Index Fund). No LRS needed; buy like any domestic fund.' },
-  { label: 'Direct Foreign Stock Platform', desc: 'Some platforms allow direct purchase of US stocks in fractional shares. Funds are remitted via LRS. Great for stock-picking in companies like Apple, NVIDIA, or Berkshire Hathaway.' },
+  { label: 'LRS (Liberalised Remittance Scheme)', desc: 'Remit up to USD 250,000 per financial year for overseas investment under FEMA\'s LRS. Funds go to your foreign brokerage account or via India-based fund-of-funds.' },
+  { label: 'India-Listed Global Funds', desc: 'The simplest route — buy Nasdaq 100 ETFs or S&P 500 index funds listed on Indian exchanges. No LRS needed; invest like any domestic mutual fund.' },
+  { label: 'Direct Foreign Stock Platform', desc: 'Buy fractional US shares (Apple, NVIDIA, Berkshire) directly via LRS-linked platforms. More flexibility for individual stock-pickers.' },
 ];
 
 const steps = [
@@ -21,23 +21,23 @@ const steps = [
 ];
 
 const risks = [
-  { label: 'Currency Risk', desc: 'International returns in USD or EUR must be converted back to INR. If INR strengthens, your foreign investment returns in INR terms will be lower — even if the underlying stock rose.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>` },
-  { label: 'Regulatory Risk', desc: 'SEBI and RBI periodically revise LRS limits and fund-of-fund structures. A sudden regulatory change can affect your ability to invest or remit capital overseas.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>` },
-  { label: 'Market & Geopolitical Risk', desc: 'International markets are influenced by their local political landscape, trade wars, sanctions, and central bank policy — factors outside the control of the Indian investor.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="m3 3 18 18M3 12c0 5 3.6 9 9 9s9-4 9-9"/><path d="M12 3a9 9 0 0 1 9 9"/></svg>` },
-  { label: 'TCS on Remittance', desc: 'Under Section 206C(1G), remittances above ₹7 lakh per year under LRS attract Tax Collected at Source (TCS) at 20%. While refundable via ITR, it creates temporary cash flow impact.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 1 0 0 7h5a3.5 3.5 0 1 1 0 7H6"/></svg>` },
+  { label: 'Currency Risk', desc: 'Returns in USD or EUR convert to INR on exit. If INR strengthens, your rupee returns fall even if the underlying stock rose.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>` },
+  { label: 'Regulatory Risk', desc: 'RBI and SEBI periodically revise LRS limits and fund-of-fund structures. A regulatory change can restrict overseas investment or affect existing holdings.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>` },
+  { label: 'Market & Geopolitical Risk', desc: 'Trade wars, sanctions, and foreign central bank policy drive international markets — factors outside India-based investors\' control.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="m3 3 18 18M3 12c0 5 3.6 9 9 9s9-4 9-9"/><path d="M12 3a9 9 0 0 1 9 9"/></svg>` },
+  { label: 'TCS on Remittance', desc: 'LRS remittances above ₹7 lakh/year attract 20% TCS under Section 206C(1G). It\'s refundable via ITR, but creates temporary cash flow drag.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 1 0 0 7h5a3.5 3.5 0 1 1 0 7H6"/></svg>` },
 ];
 
 const faqs = [
-  { q: 'Can Indian residents invest in US stocks?', a: 'Yes. Indian residents can invest in US stocks through two routes: (1) India-listed international ETFs and mutual funds — no LRS needed, simplest and cheapest route; (2) Direct investment in US stocks via a foreign brokerage integrated with an LRS-compliant Indian bank — allows fractional share buying and direct exposure.' },
-  { q: 'What is the LRS limit for investing abroad?', a: 'Under FEMA\'s Liberalised Remittance Scheme (LRS), Indian residents can remit up to USD 250,000 (approximately ₹2.08 crore) per financial year for approved purposes including overseas investment. Note: remittances above ₹7 lakh attract 20% TCS (refundable via ITR).' },
-  { q: 'How are international investment returns taxed in India?', a: 'Capital gains from international stocks and funds held directly (via LRS) are taxed as per Indian tax slabs for short-term gains (held < 2 years) or at 12.5% for long-term gains (held > 2 years) — no indexation benefit, and no ₹1.25 lakh exemption. International ETFs listed in India are taxed as debt funds (per slab, for both short and long term as of April 2023).' },
-  { q: 'Is investing in international markets risky for Indian investors?', a: 'International investing adds diversification — US and Indian markets have historically shown low correlation, meaning they don\'t always move together. However, currency risk, geopolitical risk, and regulatory complexity add layers of risk not present in domestic investing. For most retail investors, 10–20% international exposure through India-listed international ETFs is a balanced approach.' },
+  { q: 'Can Indian residents invest in US stocks?', a: 'Yes — two routes: (1) India-listed international ETFs/funds, no LRS needed; (2) Direct US stock investment via a foreign brokerage linked to an LRS-compliant Indian bank, allowing fractional shares.' },
+  { q: 'What is the LRS limit for investing abroad?', a: 'Under FEMA\'s LRS, Indian residents can remit up to USD 250,000 (~₹2.08 crore) per financial year for overseas investment. Remittances above ₹7 lakh attract 20% TCS, refundable via ITR.' },
+  { q: 'How are international investment returns taxed in India?', a: 'Direct LRS holdings: short-term gains (under 2 years) taxed per slab; long-term gains (2+ years) at 12.5%. India-listed international ETFs are taxed as debt funds — per slab for both short and long term (from April 2023).' },
+  { q: 'Is investing in international markets risky for Indian investors?', a: 'Global diversification reduces overall portfolio correlation — US and Indian markets don\'t always move together. Currency, geopolitical, and regulatory risks are additional. A 10–20% allocation via India-listed international ETFs suits most retail investors.' },
 ];
 ---
 
 <BaseLayout
-  title="Global Investing — US Stocks, International ETFs | Shriram Financial Services"
-  description="Invest in US stocks, global ETFs, and international funds through Shriram Financial Services. Access S&P 500, Nasdaq 100, and global markets from your Indian account."
+  title="Invest US Stocks from India — S&P 500 International ETFs | Shriram"
+  description="Invest in US stocks, S&P 500, and Nasdaq 100 from India via LRS or India-listed international ETFs. FEMA-compliant, expert-guided global investing. Start today."
 >
 
   <section class="relative overflow-hidden bg-[var(--color-dark-800)]">

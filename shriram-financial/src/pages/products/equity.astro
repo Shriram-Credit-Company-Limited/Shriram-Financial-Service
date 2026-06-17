@@ -4,11 +4,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 const equityTypes = [
   {
     label: 'Common Equity Shares',
-    desc: 'These are the most widely traded shares. Investors receive voting rights and participate in profits through dividends and price appreciation. Value stocks focus on capital appreciation. Blue-chip stocks represent large, stable companies. Penny stocks are low-priced, high-risk shares.',
+    desc: 'Buy voting rights and profit participation in a company. Trade on NSE or BSE — includes blue-chip, growth, value, and penny stock variants.',
   },
   {
     label: 'Preferred Equity Shares',
-    desc: 'Preferred shareholders receive preference in dividend payments over common shareholders. However, these shares generally carry limited voting rights and trade at lower volatility.',
+    desc: 'Priority dividend payouts over common shareholders with lower volatility. Limited voting rights; preferred for income-focused investors.',
   },
 ];
 
@@ -95,25 +95,25 @@ const vsRows = [
 ];
 
 const risks = [
-  { label: 'Market Risk', desc: 'Broad market downturns due to economic events, interest rate changes, or geopolitical developments can affect all stocks regardless of company performance.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="m3 3 18 18M3 12c0 5 3.6 9 9 9s9-4 9-9"/><path d="M12 3a9 9 0 0 1 9 9"/></svg>` },
-  { label: 'Volatility', desc: 'Stock prices can swing sharply in the short term, creating paper losses even for sound investments. Emotional decision-making during dips can crystallise losses.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>` },
-  { label: 'Stock-Specific Risk', desc: 'Individual companies can face fraud, management issues, regulatory action, or business model failure. Concentration in a single stock amplifies this risk significantly.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>` },
-  { label: 'Behavioural Risk', desc: 'FOMO buying at peaks, panic selling at lows, and overtrading due to news noise are among the most common causes of poor equity returns for retail investors.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>` },
+  { label: 'Market Risk', desc: 'Economic events, rate changes, or geopolitical shocks can push all stocks lower regardless of company fundamentals.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="m3 3 18 18M3 12c0 5 3.6 9 9 9s9-4 9-9"/><path d="M12 3a9 9 0 0 1 9 9"/></svg>` },
+  { label: 'Volatility', desc: 'Short-term price swings create paper losses even in quality stocks. Reacting emotionally during dips often crystallises permanent losses.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>` },
+  { label: 'Stock-Specific Risk', desc: 'Fraud, management failure, or regulatory action can devastate individual stocks. Diversify — never over-concentrate in a single name.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>` },
+  { label: 'Behavioural Risk', desc: 'FOMO buying at peaks and panic selling at lows destroy returns. Discipline and a plan beat market timing every time.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>` },
 ];
 
 const faqs = [
-  { q: 'What is the difference between large cap, mid cap, and small cap stocks?', a: 'Large cap stocks are the top 100 companies by market capitalisation — stable and lower risk. Mid cap stocks (rank 101–250) offer a balance of growth and stability. Small cap stocks (rank 251+) are smaller companies with higher growth potential but also higher volatility and risk.' },
-  { q: 'What is the safest platform to invest in equity?', a: 'SEBI-registered brokers are the safest option. Shriram Financial Services is a SEBI-registered stockbroker (member of NSE & BSE). Your shares are held in your Demat account with CDSL — a government-regulated depository — and your funds are kept in a segregated client account, never commingled with company funds.' },
-  { q: 'Should I invest in equity or mutual funds?', a: 'It depends on your expertise, time availability, and risk appetite. If you want control and can research stocks yourself (or have access to expert advisory like Shriram\'s SEBI-registered research desk), direct equity can deliver higher returns. Mutual funds are better for passive investors who prefer professional fund management with diversification built in.' },
-  { q: 'How do I calculate a full breakdown of equity investment returns?', a: 'Your net return = (Sell Value − Buy Value) − (Brokerage + STT + GST + DP Charges + Exchange Charges) − Tax (STCG at 20% or LTCG at 12.5% depending on holding period). Use our Brokerage Calculator on this page for an instant estimate before placing any order.' },
-  { q: 'What is a Demat account and do I need one for equity investing?', a: 'A Demat (Dematerialised) account is a digital account that holds your shares in electronic form, replacing physical share certificates. Yes, a Demat account linked with a trading account is mandatory for buying and selling shares on Indian stock exchanges. Shriram Financial Services helps you open both in under 10 minutes, completely paperless.' },
-  { q: 'What is the minimum amount needed to start equity investing?', a: 'There is no regulatory minimum. You can start with as little as the price of a single share — many quality blue-chip stocks are available for under ₹500. Shriram Financial Services offers zero delivery brokerage, so there are no additional costs for buy-and-hold investing.' },
+  { q: 'What is the difference between large cap, mid cap, and small cap stocks?', a: 'Large cap stocks are the top 100 companies by market cap — stable and lower risk. Mid caps (rank 101–250) balance growth and stability. Small caps (rank 251+) carry higher growth potential with higher volatility.' },
+  { q: 'What is the safest platform to invest in equity?', a: 'Choose a SEBI-registered stockbroker — Shriram Financial Services is a member of NSE & BSE. Your shares are held in a CDSL demat account and funds are kept in a segregated client account, never mixed with company funds.' },
+  { q: 'Should I invest in equity or mutual funds?', a: 'Direct equity suits investors who can research stocks or access advisory like Shriram\'s SEBI-registered research desk. Mutual funds are better for passive investors who prefer diversification without stock-picking.' },
+  { q: 'How do I calculate a full breakdown of equity investment returns?', a: 'Net return = (Sell − Buy) − (Brokerage + STT + GST + DP Charges + Exchange Charges) − Tax (STCG 20% or LTCG 12.5%). Use our Brokerage Calculator on this page for an instant estimate.' },
+  { q: 'What is a Demat account and do I need one for equity investing?', a: 'A Demat account holds shares in electronic form. Yes, a Demat + trading account is mandatory to buy and sell shares on NSE or BSE. Open both with Shriram in under 10 minutes, fully paperless.' },
+  { q: 'What is the minimum amount needed to start equity investing?', a: 'No regulatory minimum exists. You can start with the price of one share — many blue-chips trade under ₹500. Zero delivery brokerage at Shriram means no extra cost for buy-and-hold investors.' },
 ];
 ---
 
 <BaseLayout
-  title="Equity Trading — Build Wealth Through Stocks | Shriram Financial Services"
-  description="Buy and invest in equity stocks in India with zero delivery brokerage, live market data, SEBI-registered research, and expert-backed advisory from Shriram Financial Services."
+  title="Buy Shares NSE BSE — Zero Brokerage Equity Trading | Shriram"
+  description="Buy equity stocks on NSE & BSE with zero delivery brokerage, SEBI-registered research, and live market data. Start equity investing today with Shriram Financial Services."
 >
 
   <!-- ══ 1. HERO ═══════════════════════════════════════════════════ -->

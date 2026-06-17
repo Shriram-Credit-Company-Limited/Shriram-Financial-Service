@@ -2,8 +2,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const types = [
-  { label: 'Futures Contracts', desc: 'A binding agreement to buy or sell an asset at a predetermined price on a specified future date. Both buyer and seller are obligated to fulfil the contract at expiry.' },
-  { label: 'Options Contracts', desc: 'A right (not an obligation) to buy or sell an asset at a strike price before or on the expiry date. Options provide limited downside with flexible upside for the buyer.' },
+  { label: 'Futures Contracts', desc: 'A binding agreement to buy or sell an asset at a set price on a future date. Both parties are obligated to fulfil the contract at expiry.' },
+  { label: 'Options Contracts', desc: 'The right — not the obligation — to buy or sell at a strike price before expiry. Buyers risk only the premium paid; upside is unlimited for calls.' },
 ];
 
 const eligibility = [
@@ -51,18 +51,18 @@ const risks = [
 ];
 
 const faqs = [
-  { q: 'What is the difference between Futures and Options?', a: 'A futures contract obligates both buyer and seller to transact at expiry at the agreed price. An options contract gives the buyer the right — but not the obligation — to buy (call) or sell (put) at the strike price. Options buyers risk only the premium paid; futures traders risk margin losses.' },
-  { q: 'How much capital do I need to start F&O trading?', a: 'SEBI mandates a minimum margin for each contract. For index options (NIFTY/BANKNIFTY), buying a single lot requires approximately ₹5,000–₹20,000 as premium. For futures, the SPAN + Exposure margin can range from ₹50,000 to ₹2,00,000 per lot depending on the underlying.' },
-  { q: 'Is F&O income taxed differently from equity?', a: 'Yes. F&O profits and losses are treated as business income (non-speculative) under the Income Tax Act, not as capital gains. You file ITR-3, can offset F&O losses against other business income, and carry forward losses for 8 years.' },
-  { q: 'What is "writing" an option?', a: 'Writing (or selling) an option means you receive the premium upfront and take on the obligation to fulfil the contract if the buyer exercises. Option writers profit when the option expires worthless, but face potentially unlimited risk (for naked calls) or large downside risk.' },
-  { q: 'How does margin work in F&O?', a: 'SEBI mandates upfront margin (SPAN + Exposure) for all F&O positions. SPAN margin covers worst-case one-day losses, while Exposure margin provides an additional buffer. If your account falls below the required margin, you receive a margin call and must top up or your broker may square off positions.' },
-  { q: 'Can I trade F&O on any stock?', a: 'No. SEBI maintains a list of approved securities for F&O trading — currently around 180+ stocks. The stock must meet SEBI\'s liquidity, market cap, and volatility criteria. Index derivatives (NIFTY, BANKNIFTY, FINNIFTY, MIDCPNIFTY) are the most liquid and widely traded.' },
+  { q: 'What is the difference between Futures and Options?', a: 'Futures obligate both buyer and seller to transact at expiry. Options give the buyer the right — not the obligation — to buy (call) or sell (put). Options buyers risk only the premium; futures traders risk margin losses.' },
+  { q: 'How much capital do I need to start F&O trading?', a: 'Buying a NIFTY/BANKNIFTY options lot needs ₹5,000–₹20,000 in premium. Futures require ₹50,000–₹2,00,000 in SPAN + Exposure margin per lot, depending on the underlying.' },
+  { q: 'Is F&O income taxed differently from equity?', a: 'Yes — F&O P&L is business income (non-speculative), not capital gains. File ITR-3, offset losses against other business income, and carry forward losses for 8 years.' },
+  { q: 'What is "writing" an option?', a: 'Writing (selling) an option earns you the premium upfront but creates an obligation to fulfil the contract if exercised. Writers profit when the option expires worthless; naked call writers face unlimited downside.' },
+  { q: 'How does margin work in F&O?', a: 'SEBI requires SPAN + Exposure margin upfront. SPAN covers worst-case one-day losses; Exposure adds a buffer. Fall below the required margin and your broker may square off positions.' },
+  { q: 'Can I trade F&O on any stock?', a: 'No. SEBI approves roughly 180+ stocks for F&O trading based on liquidity, market cap, and volatility. Index derivatives (NIFTY, BANKNIFTY, FINNIFTY) are the most liquid instruments available.' },
 ];
 ---
 
 <BaseLayout
-  title="Derivatives — Futures & Options Trading | Shriram Financial Services"
-  description="Trade Futures and Options on NSE & BSE with expert advisory, margin calculators, and real-time analytics. SEBI-registered research and dedicated RM support."
+  title="F&O Trading India — Futures Options NSE | Shriram Financial"
+  description="Trade futures and options on NSE with expert advisory, margin calculators, and real-time analytics. SEBI-registered. Flat ₹20/order. Activate F&O segment today."
 >
 
   <!-- ══ 1. HERO ═══════════════════════════════════════════════════ -->

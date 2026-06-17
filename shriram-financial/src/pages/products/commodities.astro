@@ -2,15 +2,15 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const categories = [
-  { label: 'Precious Metals', items: 'Gold (GOLD), Silver (SILVER), Platinum', desc: 'Safe-haven assets that tend to appreciate in times of market uncertainty, inflation, or currency depreciation.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><circle cx="12" cy="12" r="9"/><path d="M9 9.5h1.5a1.5 1.5 0 0 1 0 3H9v3m3-6v6"/></svg>` },
-  { label: 'Energy', items: 'Crude Oil (CRUDEOIL), Natural Gas (NATURALGAS)', desc: 'Linked to global supply-demand cycles, geopolitical events, and OPEC policy. Highly liquid with wide participation.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>` },
-  { label: 'Agricultural', items: 'Cotton, Chana, Castor Seed, Jeera, Guar', desc: 'Seasonally driven by monsoon patterns, production cycles, and export demand. Traded on NCDEX with physical delivery.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M12 22V12M12 12C12 12 7 10 4 6c3.5 1 6 2.5 8 6zM12 12c0 0 5-2 8-6-3.5 1-6 2.5-8 6z"/></svg>` },
-  { label: 'Base Metals', items: 'Copper, Aluminium, Zinc, Nickel, Lead', desc: 'Tied to industrial activity and infrastructure demand. Often used as indicators of economic growth and global trade.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>` },
+  { label: 'Precious Metals', items: 'Gold (GOLD), Silver (SILVER), Platinum', desc: 'Safe-haven assets that appreciate during inflation, currency weakness, or market uncertainty.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><circle cx="12" cy="12" r="9"/><path d="M9 9.5h1.5a1.5 1.5 0 0 1 0 3H9v3m3-6v6"/></svg>` },
+  { label: 'Energy', items: 'Crude Oil (CRUDEOIL), Natural Gas (NATURALGAS)', desc: 'Driven by global supply-demand, OPEC policy, and geopolitical events. Highly liquid with active participation.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>` },
+  { label: 'Agricultural', items: 'Cotton, Chana, Castor Seed, Jeera, Guar', desc: 'Seasonally influenced by monsoon, production cycles, and export demand. Traded on NCDEX with physical delivery.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M12 22V12M12 12C12 12 7 10 4 6c3.5 1 6 2.5 8 6zM12 12c0 0 5-2 8-6-3.5 1-6 2.5-8 6z"/></svg>` },
+  { label: 'Base Metals', items: 'Copper, Aluminium, Zinc, Nickel, Lead', desc: 'Tied to industrial output and infrastructure demand. Widely used as leading indicators of global economic growth.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>` },
 ];
 
 const exchanges = [
-  { code: 'MCX', name: 'Multi Commodity Exchange', desc: 'India\'s largest commodity exchange, accounting for over 90% of commodity futures trading. Focuses on metals and energy. MCX also offers commodity options on Gold, Silver, and Crude Oil.' },
-  { code: 'NCDEX', name: 'National Commodity & Derivatives Exchange', desc: 'India\'s premier agricultural commodity exchange. Provides futures and options on key agri commodities like chana, castor seed, guar, and cotton — with physical delivery settlement.' },
+  { code: 'MCX', name: 'Multi Commodity Exchange', desc: 'India\'s largest commodity exchange with 90%+ market share. Focuses on metals and energy. Also offers options on Gold, Silver, and Crude Oil.' },
+  { code: 'NCDEX', name: 'National Commodity & Derivatives Exchange', desc: 'India\'s premier agri commodity exchange. Futures and options on chana, castor seed, guar, and cotton — with physical delivery settlement.' },
 ];
 
 const eligibility = [
@@ -51,17 +51,17 @@ const risks = [
 ];
 
 const faqs = [
-  { q: 'What is the minimum investment to start commodity trading in India?', a: 'There is no regulatory minimum, but you need sufficient margin to cover a single commodity contract. For example, a 1 lot of GOLD Mini (100 grams) typically requires ₹20,000–₹40,000 as margin. Crude Oil (100 barrels) requires ₹15,000–₹30,000 depending on volatility.' },
-  { q: 'What are the trading hours for commodities on MCX?', a: 'MCX trades Monday to Friday. Day session: 9:00 AM to 5:00 PM. Evening session: 5:00 PM to 11:30 PM (or 11:55 PM during US daylight saving). Agricultural commodities on NCDEX trade from 9:00 AM to 5:00 PM only.' },
-  { q: 'Is physical delivery mandatory for commodity futures?', a: 'Physical delivery applies only if you hold your position until the contract\'s tender period (typically the last few days before expiry). Most retail traders close positions before this window. Shriram\'s platform alerts you as expiry approaches so you can decide to roll or exit.' },
-  { q: 'How are commodity trades settled?', a: 'Commodity futures are marked-to-market daily — gains and losses are credited/debited to your account every day. At expiry, contracts are settled either through physical delivery (compulsory for commodities with delivery mandates) or cash settlement based on the daily settlement price.' },
-  { q: 'Can I hedge my business exposure using commodity futures?', a: 'Yes. Commodity futures are an excellent hedging tool for businesses exposed to raw material price risk. Jewellers, refiners, oil distributors, and agri traders can lock in prices using MCX or NCDEX futures to offset input cost volatility. Shriram\'s research team provides hedging advisory to qualified clients.' },
+  { q: 'What is the minimum investment to start commodity trading in India?', a: 'No regulatory minimum, but you need margin to cover one contract. GOLD Mini (100g) requires ₹20,000–₹40,000; Crude Oil (100 barrels) requires ₹15,000–₹30,000 depending on volatility.' },
+  { q: 'What are the trading hours for commodities on MCX?', a: 'MCX trades Mon–Fri: day session 9:00 AM–5:00 PM; evening session 5:00 PM–11:30 PM (11:55 PM during US daylight saving). NCDEX agri commodities trade 9:00 AM–5:00 PM only.' },
+  { q: 'Is physical delivery mandatory for commodity futures?', a: 'Only if you hold through the tender period (last few days before expiry). Most retail traders exit before this window. Shriram\'s platform alerts you as expiry nears so you can roll or close.' },
+  { q: 'How are commodity trades settled?', a: 'Futures are marked-to-market daily — P&L is credited/debited each day. At expiry, settlement is either physical delivery or cash settlement at the daily settlement price.' },
+  { q: 'Can I hedge my business exposure using commodity futures?', a: 'Yes. MCX and NCDEX futures let jewellers, oil distributors, and agri traders lock in input prices. Shriram\'s research team provides hedging advisory to eligible clients.' },
 ];
 ---
 
 <BaseLayout
-  title="Commodity Trading — Gold, Silver, Crude Oil & More | Shriram Financial Services"
-  description="Trade commodities including gold, silver, crude oil, and agri products on MCX and NCDEX with research-backed advisory and flat ₹20 brokerage from Shriram Financial Services."
+  title="Commodity Trading India — MCX Gold Silver Crude Oil | Shriram"
+  description="Trade gold, silver, crude oil, and agricultural commodities on MCX and NCDEX. Flat ₹20 brokerage, research-backed advisory, and physical delivery support. Start today."
 >
 
   <section class="relative overflow-hidden bg-[var(--color-dark-800)]">

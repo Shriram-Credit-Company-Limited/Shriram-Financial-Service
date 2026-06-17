@@ -2,9 +2,9 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const ipoTypes = [
-  { label: 'Mainboard IPO', desc: 'Large companies with ₹10 crore minimum paid-up capital list on NSE/BSE main board. Subject to full SEBI disclosure norms and are typically well-covered by analysts and institutions.', tag: 'Large Cap' },
-  { label: 'SME IPO', desc: 'Small and Medium Enterprises with paid-up capital between ₹1–25 crore list on NSE Emerge or BSE SME. Higher growth potential but require thorough due diligence.', tag: 'High Growth' },
-  { label: 'Offer for Sale (OFS)', desc: 'Existing shareholders (promoters or PE investors) sell their stake through the OFS route. No new capital is raised by the company; shares are transferred from seller to buyer.', tag: 'Secondary' },
+  { label: 'Mainboard IPO', desc: 'Large companies (₹10 crore+ paid-up capital) listing on NSE/BSE under full SEBI disclosure norms, typically well-covered by analysts.', tag: 'Large Cap' },
+  { label: 'SME IPO', desc: 'SMEs with ₹1–25 crore paid-up capital list on NSE Emerge or BSE SME. Higher growth potential — requires thorough due diligence.', tag: 'High Growth' },
+  { label: 'Offer for Sale (OFS)', desc: 'Promoters or PE investors sell existing stakes — no new capital raised by the company. Shares transfer directly from seller to buyer.', tag: 'Secondary' },
 ];
 
 const steps = [
@@ -24,24 +24,24 @@ const timeline = [
 ];
 
 const risks = [
-  { label: 'Overvaluation Risk', desc: 'IPOs are priced by investment bankers with company interest in mind. Some IPOs list at or below issue price — thorough due diligence is essential before applying.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M3 3v18h18"/><path d="m7 14 4-5 4 3 4-6"/></svg>` },
-  { label: 'Non-Allotment Risk', desc: 'In oversubscribed IPOs (especially retail categories), allotment is by computerised lottery. You may not receive shares even after bidding — funds are simply returned.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>` },
-  { label: 'Listing Volatility', desc: 'Stocks often see extreme price swings on listing day. A stock may list high and fall sharply, or list below issue price. Market sentiment plays a huge role on day one.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>` },
-  { label: 'Lock-In Risk', desc: 'Anchor investor and promoter shares are locked in for 30–90 days post-listing. Their selling activity after lock-in expiry can pressure the share price significantly.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>` },
+  { label: 'Overvaluation Risk', desc: 'IPO prices are set by investment bankers favouring the issuer. Some IPOs list at or below issue price — always analyse fundamentals before applying.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M3 3v18h18"/><path d="m7 14 4-5 4 3 4-6"/></svg>` },
+  { label: 'Non-Allotment Risk', desc: 'Oversubscribed IPOs allocate by lottery in the retail category. You may bid and receive nothing — your funds are simply unblocked.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>` },
+  { label: 'Listing Volatility', desc: 'Stocks can swing wildly on listing day — listing high then crashing, or opening below issue price. Market sentiment dominates day-one price action.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>` },
+  { label: 'Lock-In Risk', desc: 'Anchor and promoter shares are locked for 30–90 days. Selling pressure after lock-in expiry can sharply depress the post-listing price.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>` },
 ];
 
 const faqs = [
-  { q: 'What is ASBA in an IPO application?', a: 'ASBA (Application Supported by Blocked Amount) is the standard IPO application method. Instead of transferring funds to the company, your bid amount is blocked in your bank account. Interest continues to accrue. The amount is only debited on allotment; non-allotted amounts are unblocked immediately.' },
-  { q: 'Can I apply for IPO through Shriram Financial Services?', a: 'Yes. Shriram Financial Services provides a seamless online IPO application platform through the Antara app and web portal. You can view upcoming IPOs, apply via UPI or ASBA, track allotment status, and receive Demat credit — all in one place.' },
-  { q: 'What is the minimum lot size for IPO applications?', a: 'SEBI mandates that retail investors apply for a minimum of 1 lot (typically 10–200 shares depending on the issue price). The minimum application value is set so that a single lot is approximately ₹10,000–₹15,000. HNI/Non-Institutional Investors bid for a minimum of ₹2 lakh.' },
-  { q: 'Is there a GMP (Grey Market Premium) and should I trust it?', a: 'GMP is the premium at which shares trade in the unofficial grey market before listing. While GMP can indicate demand sentiment, it is unofficial, unregulated, and not always accurate. Do not base your IPO investment decision solely on GMP — analyse the fundamentals of the company first.' },
-  { q: 'How many IPO applications can I submit?', a: 'You can submit only one IPO application per PAN card in the Retail Individual Investor (RII) category. Submitting multiple applications using the same PAN results in rejection of all bids. Family members with separate PAN cards can each submit individual applications.' },
+  { q: 'What is ASBA in an IPO application?', a: 'ASBA (Application Supported by Blocked Amount) blocks your bid amount in your bank account instead of transferring it. Interest keeps accruing; the amount is debited only on allotment and immediately unblocked if you don\'t get shares.' },
+  { q: 'Can I apply for IPO through Shriram Financial Services?', a: 'Yes. Apply via the Antara app or web portal using UPI or ASBA. View upcoming IPOs, track allotment status, and receive Demat credit — all in one place.' },
+  { q: 'What is the minimum lot size for IPO applications?', a: 'SEBI sets 1 lot as the retail minimum — typically ₹10,000–₹15,000 per lot (10–200 shares). HNI/Non-Institutional Investors must bid a minimum of ₹2 lakh.' },
+  { q: 'Is there a GMP (Grey Market Premium) and should I trust it?', a: 'GMP reflects unofficial pre-listing demand but is unregulated and unreliable. Use it as one data point only — always analyse the company\'s fundamentals before applying.' },
+  { q: 'How many IPO applications can I submit?', a: 'One application per PAN card in the Retail category. Duplicate PAN applications are rejected entirely. Family members with separate PANs can each apply independently.' },
 ];
 ---
 
 <BaseLayout
-  title="IPO Application — Apply for Upcoming IPOs Online | Shriram Financial Services"
-  description="Apply for upcoming IPOs online through Shriram Financial Services. Seamless ASBA and UPI applications, allotment tracking, and Demat credit — all in one platform."
+  title="Apply IPO Online India — ASBA UPI Upcoming IPOs 2025 | Shriram"
+  description="Apply for upcoming IPOs online via ASBA or UPI on Shriram Financial Services. Track allotment, get Demat credit T+5/T+6, and zero brokerage on application. Start today."
 >
 
   <section class="relative overflow-hidden bg-[var(--color-dark-800)]">

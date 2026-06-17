@@ -2,17 +2,17 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const insuranceTypes = [
-  { label: 'Term Life Insurance', desc: 'Pure life cover for a fixed term. If the insured dies during the term, the nominee receives the sum assured. No maturity benefit — but the lowest premium for the highest cover.', highlight: 'Highest cover at lowest premium', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>` },
-  { label: 'Health Insurance', desc: 'Covers hospitalization, surgery, ICU, daycare, and pre/post-hospitalization expenses. Protects your savings from large, unexpected medical bills.', highlight: 'Cashless treatment at 10,000+ hospitals', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M9 12h6M12 9v6"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg>` },
-  { label: 'Motor Insurance', desc: 'Mandatory for all vehicles in India. Third-party cover is legally required; comprehensive cover adds own-damage protection, theft, and natural calamity cover.', highlight: 'Mandatory by law (third-party)', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><rect x="2" y="7" width="20" height="13" rx="2"/><path d="M16 3H8L2 7h20l-6-4z"/><circle cx="7" cy="20" r="1"/><circle cx="17" cy="20" r="1"/></svg>` },
-  { label: 'ULIP', desc: 'Unit Linked Insurance Plan combines life insurance with investment in equity/debt funds. Part of premium goes towards insurance; the remainder is invested in market-linked funds.', highlight: 'Insurance + investment in one', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M3 3v18h18"/><path d="m7 12 4-4 4 4 4-4"/></svg>` },
+  { label: 'Term Life Insurance', desc: 'Pure life cover for a fixed term — nominee receives sum assured on death. No maturity benefit, but the highest cover at the lowest premium.', highlight: 'Highest cover at lowest premium', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>` },
+  { label: 'Health Insurance', desc: 'Covers hospitalisation, surgery, ICU, daycare, and pre/post-hospitalisation costs. Shields your savings from catastrophic medical bills.', highlight: 'Cashless treatment at 10,000+ hospitals', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M9 12h6M12 9v6"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg>` },
+  { label: 'Motor Insurance', desc: 'Mandatory third-party cover for all vehicles in India. Comprehensive plans add own-damage, theft, and natural calamity protection.', highlight: 'Mandatory by law (third-party)', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><rect x="2" y="7" width="20" height="13" rx="2"/><path d="M16 3H8L2 7h20l-6-4z"/><circle cx="7" cy="20" r="1"/><circle cx="17" cy="20" r="1"/></svg>` },
+  { label: 'ULIP', desc: 'Unit Linked Insurance Plan — part of the premium provides life cover, and the remainder invests in market-linked equity/debt funds.', highlight: 'Insurance + investment in one', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M3 3v18h18"/><path d="m7 12 4-4 4 4 4-4"/></svg>` },
 ];
 
 const whyInsure = [
-  { label: 'Protect Your Family', desc: 'Your life cover ensures your family can maintain their standard of living, repay home loans, and fund children\'s education — even in your absence.' },
-  { label: 'Shield Against Medical Costs', desc: 'A single hospitalisation can cost ₹2–10 lakh. Health insurance protects your savings and investments from being wiped out by medical emergencies.' },
-  { label: 'Save on Tax', desc: 'Life insurance premiums qualify for deduction under Section 80C (up to ₹1.5 lakh). Health insurance premiums qualify under Section 80D (up to ₹50,000 for senior citizens).' },
-  { label: 'Mandatory Compliance', desc: 'Motor third-party insurance is legally required for all vehicles on Indian roads. Lapsing motor insurance can result in fines and legal liability in case of accidents.' },
+  { label: 'Protect Your Family', desc: 'Life cover ensures your family can maintain their lifestyle, repay home loans, and fund children\'s education — even in your absence.' },
+  { label: 'Shield Against Medical Costs', desc: 'One hospitalisation can cost ₹2–10 lakh. Health insurance prevents a medical emergency from wiping out your savings and investments.' },
+  { label: 'Save on Tax', desc: 'Life insurance premiums get ₹1.5 lakh deduction under 80C. Health premiums get up to ₹50,000 under 80D for senior citizens.' },
+  { label: 'Mandatory Compliance', desc: 'Motor third-party insurance is legally required for every vehicle. Lapsed cover means fines and personal liability in accidents.' },
 ];
 
 const steps = [
@@ -23,17 +23,17 @@ const steps = [
 ];
 
 const faqs = [
-  { q: 'How much life insurance cover do I need?', a: 'A common rule of thumb is 10–15 times your annual income. For example, if you earn ₹10 lakh per year, consider a sum assured of ₹1–1.5 crore. Also factor in outstanding home loans, children\'s education costs, and spouse\'s income gap. Use Shriram\'s HLV (Human Life Value) calculator for a precise estimate.' },
-  { q: 'What is the difference between a cashless and reimbursement health claim?', a: 'In a cashless claim, your insurer directly settles the hospital bill with the network hospital — you only pay non-covered items. In a reimbursement claim, you pay the bill first and then apply for reimbursement from your insurer. Cashless is faster; reimbursement is used for non-network hospitals.' },
-  { q: 'Does health insurance cover pre-existing diseases?', a: 'Most health insurance policies have a waiting period of 2–4 years for pre-existing diseases (PEDs). After the waiting period, PEDs are covered. Some senior citizen plans may have permanent exclusions. Always disclose pre-existing conditions accurately at the time of application — non-disclosure can lead to claim rejection.' },
-  { q: 'Is it better to buy a term plan or an endowment plan?', a: 'For most investors, a pure term plan is recommended for life cover — lower premium, higher cover. An endowment or ULIP combines insurance with investment, but returns are often lower than getting a term plan + separate investment in mutual funds. Financial advisors typically recommend the "buy term, invest the rest" approach.' },
-  { q: 'What is the claim settlement ratio (CSR) and why does it matter?', a: 'The Claim Settlement Ratio (CSR) is the percentage of total claims settled by an insurer out of claims received in a year. IRDAI publishes CSR data annually. A higher CSR (above 97%) indicates a more reliable insurer. Shriram recommends insurance partners with strong CSR track records to protect your beneficiaries\' interests.' },
+  { q: 'How much life insurance cover do I need?', a: 'A standard benchmark is 10–15x your annual income. Factor in home loan balances, children\'s education costs, and spouse\'s income gap. Use Shriram\'s HLV calculator for a precise figure.' },
+  { q: 'What is the difference between a cashless and reimbursement health claim?', a: 'Cashless claims are settled directly between your insurer and a network hospital — you pay nothing upfront. Reimbursement claims require you to pay the bill first and apply for refund; used for non-network hospitals.' },
+  { q: 'Does health insurance cover pre-existing diseases?', a: 'Most plans have a 2–4 year waiting period for pre-existing diseases. After the waiting period, they\'re covered. Always disclose PEDs accurately — non-disclosure leads to claim rejection.' },
+  { q: 'Is it better to buy a term plan or an endowment plan?', a: 'Term plans deliver more cover per rupee. Endowment and ULIP returns often trail a term plan + mutual fund combination. Most advisors recommend "buy term, invest the rest" for optimal outcomes.' },
+  { q: 'What is the claim settlement ratio (CSR) and why does it matter?', a: 'CSR is the % of claims settled by an insurer in a year. IRDAI publishes CSR annually. Above 97% signals reliability — Shriram recommends only partners with strong CSR track records.' },
 ];
 ---
 
 <BaseLayout
-  title="Insurance — Life, Health & Motor Insurance | Shriram Financial Services"
-  description="Protect yourself and your family with life, health, motor, and ULIP insurance through Shriram Financial Services. Compare plans and get expert advisory."
+  title="Term Health Insurance Online India — Compare Plans | Shriram"
+  description="Compare term life, health, motor, and ULIP insurance plans from India's top IRDAI-regulated insurers. Expert advisory, fast digital application. Get covered today."
 >
 
   <section class="relative overflow-hidden bg-[var(--color-dark-800)]">

@@ -2,10 +2,10 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const pairs = [
-  { pair: 'USD/INR', full: 'US Dollar / Indian Rupee', desc: 'The most liquid currency pair in India. Directly affected by RBI interventions, US Fed rate decisions, and trade balance data.', lot: '1,000 USD', tick: '0.25 paise' },
-  { pair: 'EUR/INR', full: 'Euro / Indian Rupee', desc: 'Influenced by ECB monetary policy, Eurozone economic data, and the EUR/USD cross rate. Second most traded pair on NSE.', lot: '1,000 EUR', tick: '0.25 paise' },
-  { pair: 'GBP/INR', full: 'British Pound / Indian Rupee', desc: 'Sensitive to Bank of England decisions and UK economic indicators. Also reacts to Brexit-related policy developments.', lot: '1,000 GBP', tick: '0.25 paise' },
-  { pair: 'JPY/INR', full: 'Japanese Yen / Indian Rupee', desc: 'Cross-pair driven by Bank of Japan policy, risk-on/risk-off sentiment, and Japan\'s trade surplus. Priced per 100 JPY.', lot: '1,00,000 JPY', tick: '0.25 paise' },
+  { pair: 'USD/INR', full: 'US Dollar / Indian Rupee', desc: 'India\'s most liquid currency pair. Moves on RBI interventions, US Fed policy, and India\'s trade balance data.', lot: '1,000 USD', tick: '0.25 paise' },
+  { pair: 'EUR/INR', full: 'Euro / Indian Rupee', desc: 'Driven by ECB policy and Eurozone data. Second most traded INR pair on NSE.', lot: '1,000 EUR', tick: '0.25 paise' },
+  { pair: 'GBP/INR', full: 'British Pound / Indian Rupee', desc: 'Reacts to Bank of England decisions and UK economic indicators.', lot: '1,000 GBP', tick: '0.25 paise' },
+  { pair: 'JPY/INR', full: 'Japanese Yen / Indian Rupee', desc: 'Driven by Bank of Japan policy and risk-on/risk-off flows. Priced per 100 JPY.', lot: '1,00,000 JPY', tick: '0.25 paise' },
 ];
 
 const steps = [
@@ -40,17 +40,17 @@ const risks = [
 ];
 
 const faqs = [
-  { q: 'Who should trade currency derivatives in India?', a: 'Currency derivatives are used by exporters and importers to hedge forex receivables/payables, portfolio investors holding foreign assets, and traders who want to speculate on exchange rate movements. Retail traders with macroeconomic knowledge and risk tolerance can also participate.' },
-  { q: 'Is RBI approval required for currency trading?', a: 'No special RBI approval is needed for residents trading currency derivatives on NSE or BSE. However, you must have an underlying forex exposure to trade in USD/INR positions exceeding $100 million. For speculative positions up to this limit, no underlying exposure is required.' },
-  { q: 'How is currency futures settlement done?', a: 'Currency futures are cash-settled. On expiry (the last business day of the month), the final settlement price is the RBI reference rate published at 12:30 PM. There is no physical delivery of foreign currency.' },
-  { q: 'What is the USDINR lot size?', a: 'The standard USD/INR lot size on NSE is 1,000 USD per contract. So a single lot has a notional value of approximately ₹83,000–₹85,000 (at current rates). The maximum permitted position is 6 million USD for non-bank entities.' },
-  { q: 'Can NRIs trade currency derivatives in India?', a: 'NRIs are currently not permitted to trade currency derivatives on Indian exchanges as per RBI/SEBI guidelines. Only persons resident in India (as defined by FEMA) are eligible to participate in the Indian currency futures and options market.' },
+  { q: 'Who should trade currency derivatives in India?', a: 'Exporters and importers hedge forex receivables/payables. Portfolio investors hedge foreign asset exposure. Retail traders with macro knowledge can speculate on exchange rate movements.' },
+  { q: 'Is RBI approval required for currency trading?', a: 'No special approval is needed for residents trading on NSE/BSE. For speculative USD/INR positions up to $100 million, no underlying forex exposure is required.' },
+  { q: 'How is currency futures settlement done?', a: 'Currency futures are cash-settled in INR. On expiry (last business day of the month), settlement uses the RBI reference rate published at 12:30 PM. No physical forex delivery occurs.' },
+  { q: 'What is the USDINR lot size?', a: 'One USD/INR lot = 1,000 USD, with a notional value of ~₹83,000–₹85,000 at current rates. Non-bank entities can hold up to 6 million USD in open positions.' },
+  { q: 'Can NRIs trade currency derivatives in India?', a: 'No. Only persons resident in India as defined by FEMA are eligible. NRIs are currently not permitted to participate in Indian currency futures and options markets.' },
 ];
 ---
 
 <BaseLayout
-  title="Currency Trading — Forex Derivatives on NSE | Shriram Financial Services"
-  description="Trade USD/INR, EUR/INR, GBP/INR and JPY/INR currency futures and options on NSE with expert advisory and flat ₹20 brokerage from Shriram Financial Services."
+  title="Currency Trading India — USD INR Forex Futures NSE | Shriram"
+  description="Trade USD/INR, EUR/INR, GBP/INR, and JPY/INR currency futures on NSE. Flat ₹20 brokerage, low margin, expert guidance. Enable forex trading with Shriram today."
 >
 
   <section class="relative overflow-hidden bg-[var(--color-dark-800)]">

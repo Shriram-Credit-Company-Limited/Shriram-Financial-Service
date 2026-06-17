@@ -2,12 +2,12 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const benefits = [
-  { title: 'No Redemption Needed', desc: 'Keep your SIPs and investments running. Pledge your mutual fund units as collateral without selling them — your NAV growth continues.' },
-  { title: 'Instant Liquidity', desc: 'Get funds credited to your bank account within 24–48 hours of pledge creation. No lengthy bank approvals or paperwork queues.' },
-  { title: 'Low Interest Rates', desc: 'LAMF interest rates (9.5%–14% p.a.) are significantly lower than personal loans or credit cards — because your mutual funds secure the loan.' },
-  { title: 'Overdraft Facility', desc: 'Draw funds as needed and pay interest only on the amount withdrawn, not the total sanctioned limit. Repay and redraw anytime.' },
-  { title: 'SIPs Continue Running', desc: 'Even after pledging units, your SIP deductions continue and new units are added monthly. Your long-term corpus keeps compounding.' },
-  { title: 'No Prepayment Charges', desc: 'Repay the loan partially or fully whenever you have surplus funds — no foreclosure penalty after the initial lock-in period.' },
+  { title: 'No Redemption Needed', desc: 'Pledge your mutual fund units as collateral without selling them. NAV growth continues on all pledged holdings.' },
+  { title: 'Instant Liquidity', desc: 'Funds credited to your bank within 24–48 hours of pledge creation — no branch visits, no paper queues.' },
+  { title: 'Low Interest Rates', desc: 'LAMF rates start at 9.5% p.a. — far cheaper than personal loans or credit cards because your funds secure the loan.' },
+  { title: 'Overdraft Facility', desc: 'Draw what you need and pay interest only on the amount withdrawn. Repay and redraw anytime within your limit.' },
+  { title: 'SIPs Continue Running', desc: 'Your SIP deductions and new unit additions continue after pledging. Long-term compounding stays on track.' },
+  { title: 'No Prepayment Charges', desc: 'Repay partially or fully whenever you have surplus — no foreclosure penalty after the initial lock-in period.' },
 ];
 
 const eligibleFunds = [
@@ -25,17 +25,17 @@ const steps = [
 ];
 
 const faqs = [
-  { q: 'What is Loan Against Mutual Funds (LAMF)?', a: 'LAMF is a secured loan where you pledge your mutual fund units as collateral to borrow money. The lender places a lien on your units via the RTA (Registrar and Transfer Agent). You retain ownership of the units — they continue earning returns — but cannot redeem them until the lien is released after loan repayment.' },
-  { q: 'How much loan can I get against my mutual funds?', a: 'The loan amount depends on the Loan-to-Value (LTV) ratio of the pledged funds. Typically: Equity funds — 50–60% of NAV; Debt funds — 70–80% of NAV; Hybrid funds — 55–65% of NAV. For example, if you pledge equity funds worth ₹10 lakh, you can get a loan of ₹5–6 lakh.' },
-  { q: 'Do my SIPs continue during the loan period?', a: 'Yes. Pledging units does not stop your running SIPs. New units added through SIP each month are not automatically pledged — only the specific units you selected at the time of pledge are locked. Your SIP corpus continues to grow alongside the pledged holdings.' },
-  { q: 'What happens if the NAV falls below the loan value?', a: 'If the NAV of pledged units falls significantly and the outstanding loan exceeds the permissible LTV, the lender may issue a margin call — requesting additional collateral (more units) or partial loan repayment to restore the LTV ratio. Shriram monitors LTV in real time and alerts you before a margin call becomes mandatory.' },
-  { q: 'Can I repay the LAMF loan early?', a: 'Yes. LAMF is structured as an overdraft facility, so you can repay any amount at any time without penalty (after the initial lock-in period of 3 months, if any). Once the loan is fully repaid, the pledge lien is removed and your mutual fund units become freely redeemable again.' },
+  { q: 'What is Loan Against Mutual Funds (LAMF)?', a: 'LAMF is a secured loan where you pledge MF units as collateral. The lender places a lien via the RTA — you retain ownership and units keep earning returns, but cannot be redeemed until the lien is released on repayment.' },
+  { q: 'How much loan can I get against my mutual funds?', a: 'LTV varies by fund type: equity funds 50–60%, debt funds 70–80%, hybrid funds 55–65%. Pledge equity funds worth ₹10 lakh and receive ₹5–6 lakh in credit.' },
+  { q: 'Do my SIPs continue during the loan period?', a: 'Yes. Only the specific units pledged are locked. New SIP units added each month are not auto-pledged — your SIP corpus keeps growing alongside the pledged holdings.' },
+  { q: 'What happens if the NAV falls below the loan value?', a: 'If NAV drops and the loan exceeds the permissible LTV, Shriram issues a margin call asking for more collateral or partial repayment. Real-time LTV monitoring alerts you before forced action is needed.' },
+  { q: 'Can I repay the LAMF loan early?', a: 'Yes — LAMF is an overdraft facility. Repay any amount at any time without penalty after the initial lock-in (typically 3 months). Full repayment releases the pledge lien immediately.' },
 ];
 ---
 
 <BaseLayout
-  title="Loan Against Mutual Funds (LAMF) — Instant Liquidity | Shriram Financial Services"
-  description="Get instant liquidity by pledging your mutual fund units as collateral with Shriram Financial Services. No redemption, low interest rates, SIPs continue."
+  title="Loan Against Mutual Funds India — LAMF Pledge MF | Shriram"
+  description="Get instant cash by pledging mutual fund units as collateral. No redemption required, SIPs keep running, low interest rates from 9.5% p.a. Apply for LAMF today."
 >
 
   <!-- ── Hero ── -->

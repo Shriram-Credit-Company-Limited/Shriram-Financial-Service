@@ -2,10 +2,10 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const loanTypes = [
-  { label: 'Personal Loan', desc: 'Unsecured loan for personal needs — medical emergencies, travel, weddings, home renovation, or debt consolidation. Fast digital approval with minimal documentation.', rate: '11%–24% p.a.', amount: 'Up to ₹40 Lakhs', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>` },
-  { label: 'Loan Against Mutual Funds', desc: 'Pledge your mutual fund units as collateral and access up to 50–80% of their value as a loan. Your SIPs continue; units remain in your portfolio earning returns.', rate: '9.5%–14% p.a.', amount: 'Up to ₹1 Crore', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M3 3v18h18"/><path d="m7 12 4-4 4 4 4-4"/></svg>` },
-  { label: 'Loan Against Stocks', desc: 'Use your equity portfolio as collateral. Get instant liquidity without selling your shares — earn dividends and participate in appreciation while your shares are pledged.', rate: '10.5%–15% p.a.', amount: 'Up to ₹5 Crore', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M3 3v18h18"/><path d="m7 16 4-4 4 4 4-4"/></svg>` },
-  { label: 'Business Loan', desc: 'Unsecured business loans for working capital, equipment purchase, expansion, or inventory financing. Fast processing for MSMEs, self-employed professionals, and growing businesses.', rate: '13%–22% p.a.', amount: 'Up to ₹50 Lakhs', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3H8L2 7h20l-6-4z"/></svg>` },
+  { label: 'Personal Loan', desc: 'Unsecured loan for medical emergencies, travel, home renovation, or debt consolidation. Fast digital approval with minimal paperwork.', rate: '11%–24% p.a.', amount: 'Up to ₹40 Lakhs', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>` },
+  { label: 'Loan Against Mutual Funds', desc: 'Pledge mutual fund units as collateral — access up to 50–80% of NAV as a loan. SIPs keep running and units stay invested.', rate: '9.5%–14% p.a.', amount: 'Up to ₹1 Crore', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M3 3v18h18"/><path d="m7 12 4-4 4 4 4-4"/></svg>` },
+  { label: 'Loan Against Stocks', desc: 'Pledge your equity portfolio for instant liquidity — without selling a single share. Dividends and appreciation continue while shares are pledged.', rate: '10.5%–15% p.a.', amount: 'Up to ₹5 Crore', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M3 3v18h18"/><path d="m7 16 4-4 4 4 4-4"/></svg>` },
+  { label: 'Business Loan', desc: 'Unsecured MSME loans for working capital, equipment, or expansion. Fast processing for self-employed professionals and growing businesses.', rate: '13%–22% p.a.', amount: 'Up to ₹50 Lakhs', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3H8L2 7h20l-6-4z"/></svg>` },
 ];
 
 const eligibility = [
@@ -32,17 +32,17 @@ const steps = [
 ];
 
 const faqs = [
-  { q: 'What is the difference between Loan Against MF and Loan Against Stocks?', a: 'Both are secured loans against your investments. Loan Against Mutual Funds (LAMF) allows you to pledge mutual fund units (equity and debt funds) and get up to 50–80% of NAV as credit. Loan Against Shares (LAS) allows you to pledge listed equity shares and get up to 50% of market value. Both let your investments continue earning while you access liquidity.' },
-  { q: 'Does a personal loan from Shriram require a salary slip?', a: 'For salaried individuals, the last 3 months\' salary slips and bank statements are the primary income proof. Self-employed individuals can use 2 years\' ITR and 6-month bank statements. We also have programs for individuals with informal income — contact your nearest Shriram branch for alternative documentation options.' },
-  { q: 'What happens if I miss an EMI?', a: 'Missing an EMI results in a late payment charge and a negative entry on your CIBIL credit report. For secured loans (LAMF, LAS), if the loan-to-value ratio exceeds the threshold due to market falls, Shriram may issue a margin call requiring additional collateral or partial repayment. Persistent defaults can lead to pledged securities being sold.' },
-  { q: 'Can I prepay my loan before the tenure ends?', a: 'Yes. Personal loans and business loans can be prepaid after the lock-in period (typically 6–12 months). Foreclosure charges of 2–5% on the outstanding principal may apply depending on the loan type and tenure elapsed. For secured loans against MF/stocks, prepayment is free after 3 months.' },
-  { q: 'How is interest calculated on a Loan Against Securities?', a: 'Loans Against Mutual Funds and Stocks use an overdraft-style interest calculation — interest is charged only on the amount drawn, not on the entire approved limit. This is more cost-effective than a term loan when you don\'t need the full sanctioned amount immediately.' },
+  { q: 'What is the difference between Loan Against MF and Loan Against Stocks?', a: 'LAMF lets you pledge mutual fund units for up to 50–80% of NAV. LAS lets you pledge listed equity shares for up to 50% of market value. Both keep your investments earning returns while you access liquidity.' },
+  { q: 'Does a personal loan from Shriram require a salary slip?', a: 'Salaried applicants need the last 3 months\' salary slips and bank statements. Self-employed applicants can use 2 years\' ITR and 6-month bank statements. Informal income programs are also available — contact your Shriram branch.' },
+  { q: 'What happens if I miss an EMI?', a: 'Missing an EMI triggers a late charge and a negative CIBIL entry. For LAMF/LAS, if the LTV breaches the threshold, Shriram may issue a margin call. Persistent default can result in pledged securities being sold.' },
+  { q: 'Can I prepay my loan before the tenure ends?', a: 'Yes. Personal and business loans can be prepaid after 6–12 months lock-in, with 2–5% foreclosure charges. Secured loans against MF/stocks can be repaid free after 3 months.' },
+  { q: 'How is interest calculated on a Loan Against Securities?', a: 'LAMF and LAS use overdraft-style interest — you pay only on the amount drawn, not the total approved limit. This makes it far cheaper than a term loan when you need partial access.' },
 ];
 ---
 
 <BaseLayout
-  title="Loans — Personal, Business & Loan Against Investments | Shriram Financial Services"
-  description="Get personal loans, business loans, and loans against mutual funds or stocks from Shriram Financial Services. Fast approval, competitive rates, and minimal documentation."
+  title="Personal Loan Online India — Fast Approval Loan Against Securities | Shriram"
+  description="Apply for personal loans, business loans, and loans against mutual funds or stocks online. Approval in 24 hours, competitive rates, minimal paperwork. Apply with Shriram."
 >
 
   <section class="relative overflow-hidden bg-[var(--color-dark-800)]">

@@ -2,12 +2,12 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const benefits = [
-  { title: 'No Need to Sell Shares', desc: 'Pledge your stock holdings as collateral and borrow against them. Your shares remain in your demat account, continuing to earn dividends and bonus shares.' },
-  { title: 'High Loan Amount', desc: 'Borrow up to 50–60% of the market value of your pledged shares. Large portfolios unlock significant liquidity without asset liquidation.' },
-  { title: 'Flexible Overdraft', desc: 'LAS works like a revolving credit line. Draw funds when needed, repay when you have surplus, and re-draw again — pay interest only on outstanding amount.' },
-  { title: 'Low Interest Rates', desc: 'LAS rates (10%–15% p.a.) are far lower than unsecured personal loans and credit cards, because your shares act as security for the lender.' },
-  { title: 'Continue Earning Benefits', desc: 'Pledged shares remain in your demat account. You continue receiving dividends, bonus shares, and rights issues even during the loan period.' },
-  { title: 'Digital Pledge Process', desc: 'Pledge creation is fully online. No physical share certificates, no branch visits. CDSL/NSDL registers the pledge mark digitally within minutes.' },
+  { title: 'No Need to Sell Shares', desc: 'Pledge stocks as collateral without selling — shares stay in your demat account, earning dividends and bonus shares throughout the loan.' },
+  { title: 'High Loan Amount', desc: 'Borrow up to 50–60% of pledged share value. Large portfolios unlock significant liquidity without any asset liquidation.' },
+  { title: 'Flexible Overdraft', desc: 'Draw funds when needed, repay when convenient, and redraw again — pay interest only on the outstanding amount, not the total limit.' },
+  { title: 'Low Interest Rates', desc: 'LAS rates start at 10% p.a. — far below unsecured personal loans and credit cards, because your shares secure the lender.' },
+  { title: 'Continue Earning Benefits', desc: 'Dividends, bonus shares, and rights issues on pledged stocks are all credited to your demat account during the loan period.' },
+  { title: 'Digital Pledge Process', desc: 'Pledge creation is 100% online via CDSL/NSDL. No physical certificates or branch visits — done within minutes.' },
 ];
 
 const eligibleSecurities = [
@@ -25,17 +25,17 @@ const steps = [
 ];
 
 const faqs = [
-  { q: 'What is Loan Against Stocks (LAS)?', a: 'LAS is a secured overdraft facility where you pledge your equity shares or ETFs held in a demat account as collateral. The lender marks a lien on your pledged securities via CDSL/NSDL. You retain ownership and continue earning dividends, but the shares cannot be sold until the lien is removed after loan repayment.' },
-  { q: 'Which stocks are eligible for pledging?', a: 'Eligibility depends on the lender\'s approved security list, which typically includes NIFTY 50 and NIFTY 100 constituents, other exchange-listed large-cap and mid-cap shares, and ETFs. Penny stocks, illiquid shares, and stocks under special surveillance are generally not eligible. Shriram provides an updated approved list for reference.' },
-  { q: 'Do I still receive dividends on pledged shares?', a: 'Yes. Pledging transfers a lien on the shares, not ownership. Dividends, bonus shares, rights entitlements, and stock splits declared on pledged securities continue to be credited to your demat account during the loan period. Bonus shares received may even increase your pledged collateral value.' },
-  { q: 'What happens if the share price falls sharply?', a: 'If the market value of pledged shares falls and the outstanding loan exceeds the permissible LTV (typically 50–60%), the lender may issue a margin call. This requires you to pledge additional shares, deposit cash, or repay part of the loan to restore the LTV ratio. Shriram\'s system monitors LTV continuously and alerts you well before a forced action becomes necessary.' },
-  { q: 'How is LAS different from Margin Trading Facility (MTF)?', a: 'Both LAS and MTF allow borrowing against shares, but they differ in purpose. MTF is specifically for buying additional securities on margin within the trading account — the purchased shares serve as collateral. LAS is a general-purpose loan against existing demat holdings, with funds disbursed directly to your bank account for any use (business, personal, etc.). LAS typically offers longer tenors and lower rates.' },
+  { q: 'What is Loan Against Stocks (LAS)?', a: 'LAS is a secured overdraft where you pledge equity shares or ETFs in your demat account. CDSL/NSDL marks a lien on the pledged securities — you retain ownership and dividends, but cannot sell until the lien is lifted on full repayment.' },
+  { q: 'Which stocks are eligible for pledging?', a: 'Lenders accept NIFTY 50/100 constituents, large-cap and mid-cap exchange-listed shares, and ETFs from their approved list. Penny stocks, illiquid shares, and stocks under special surveillance are ineligible.' },
+  { q: 'Do I still receive dividends on pledged shares?', a: 'Yes — pledging transfers only a lien, not ownership. Dividends, bonus shares, rights, and stock splits are credited to your demat account throughout the loan period.' },
+  { q: 'What happens if the share price falls sharply?', a: 'If pledged value drops and the loan exceeds the LTV (typically 50–60%), Shriram issues a margin call. You must pledge more shares, deposit cash, or repay part of the loan. The system alerts you well before forced action is triggered.' },
+  { q: 'How is LAS different from Margin Trading Facility (MTF)?', a: 'MTF is specifically for buying more securities on margin in your trading account — the bought shares serve as collateral. LAS is a general-purpose credit line against existing demat holdings, disbursed to your bank account for any use, typically at lower rates and longer tenors.' },
 ];
 ---
 
 <BaseLayout
-  title="Loan Against Stocks (LAS) — Borrow Against Your Portfolio | Shriram Financial Services"
-  description="Pledge your equity shares and get instant liquidity through Loan Against Stocks with Shriram Financial Services. Flexible overdraft, low rates, shares continue earning."
+  title="Loan Against Shares India — Pledge Stocks for Loan LAS | Shriram"
+  description="Pledge your equity shares for instant liquidity without selling. Low rates from 10.5% p.a., flexible overdraft, dividends continue. Apply for LAS with Shriram today."
 >
 
   <!-- ── Hero ── -->
