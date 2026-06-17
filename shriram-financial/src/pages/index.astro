@@ -113,7 +113,7 @@ const faqs = [
 <BaseLayout title="" description="Shriram Financial Services — Advisory-Led Wealth Curation. Invest across equity, mutual funds, bonds and more with India's most trusted platform.">
 
   <!-- ══ HERO ══ -->
-  <section class="relative xl:min-h-[calc(100vh-80px)] overflow-hidden">
+  <section class="relative lg:min-h-[calc(100vh-80px)] overflow-hidden">
     <div class="hero-wave" aria-hidden="true"></div>
     <video id="hero-video"
       class="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-1000"
@@ -123,10 +123,10 @@ const faqs = [
     <div class="absolute inset-0 bg-gradient-to-r from-white/82 via-white/48 to-white/0" aria-hidden="true"></div>
     <div class="absolute inset-0 bg-gradient-to-b from-black/8 via-transparent to-black/12" aria-hidden="true"></div>
 
-    <div class="site-wrap relative z-10 flex items-start gap-8 py-14 sm:py-20 lg:py-24 xl:min-h-[calc(100vh-80px)] xl:items-center xl:gap-12 xl:py-0">
+    <div class="site-wrap relative z-10 flex items-start gap-8 py-14 sm:py-20 lg:min-h-[calc(100vh-80px)] lg:items-center lg:gap-12 lg:py-0">
 
       <!-- Left text -->
-      <div class="w-full xl:max-w-[690px] xl:shrink-0 reveal reveal-1">
+      <div class="w-full lg:max-w-[44%] xl:max-w-[690px] lg:shrink-0 reveal reveal-1">
         <h1 class="text-[28px] font-normal leading-[1.30] text-[#2e3914] sm:text-[36px] lg:text-[clamp(36px,2.5vw,48px)]" style="font-family:var(--font-display)">
           Smart Investing Made Simple.<br>
           <span class="lg:whitespace-nowrap"><span class="font-bold text-[var(--color-brand)]">Guided</span> by Experts.</span>
@@ -151,8 +151,8 @@ const faqs = [
       </div>
 
       <!-- Right: glass Open Demat card -->
-      <div class="reveal reveal-2 hidden flex-1 justify-end xl:flex xl:pr-[4%]">
-        <div class="warm-form w-full max-w-[660px] p-10 xl:p-[64px]">
+      <div class="reveal reveal-2 hidden flex-1 justify-end lg:flex lg:pr-[4%]">
+        <div class="warm-form w-full max-w-[560px] p-8 xl:p-10">
 
           <!-- Title + badges (gap-[16px] per Figma) -->
           <div class="flex flex-col gap-4">
@@ -235,20 +235,20 @@ const faqs = [
              style="background:radial-gradient(ellipse 132% 312% at 117% -4%,#4F583B 0%,#3F4733 14%,#363A2C 25%,#2a2d23 38%,#1d1d1d 55%,#1d1d1d 100%);-webkit-mask-image:linear-gradient(to right,transparent 25%,#000 58%);mask-image:linear-gradient(to right,transparent 25%,#000 58%);"></div>
 
         <!-- Centered columns (Figma placement); right rail spans the entire section height -->
-        <div class="relative z-10 flex h-full flex-col gap-10 p-8 lg:flex-row lg:items-center lg:justify-center lg:gap-[88px] lg:px-[112px] lg:py-0">
+        <div class="relative z-10 flex h-full flex-col gap-10 p-8 lg:flex-row lg:items-center lg:justify-center lg:gap-10 xl:gap-[88px] lg:px-10 xl:px-[112px] lg:py-0">
 
           <!-- Left: heading + subtitle (Figma: 648px col, 40px/18px type, 16px gap) -->
-          <div class="self-center drop-shadow-[0px_3px_3.4px_rgba(0,0,0,0.45)] lg:w-[648px] lg:shrink-0">
-            <h2 class="text-[28px] font-normal leading-[1.4] text-white sm:text-[34px] lg:text-[40px]" style="font-family:var(--font-display)">
+          <div class="self-center drop-shadow-[0px_3px_3.4px_rgba(0,0,0,0.45)] lg:min-w-0 lg:flex-1 xl:max-w-[648px]">
+            <h2 class="text-[28px] font-normal leading-[1.4] text-white sm:text-[34px] lg:text-[30px] xl:text-[40px]" style="font-family:var(--font-display)">
               Why Shriram Financial <span class="font-semibold text-[#f3b83f]">Services?</span>
             </h2>
-            <p class="mt-4 text-[15px] leading-[1.5] text-white lg:text-[18px]">
+            <p class="mt-4 text-[15px] leading-[1.5] text-white lg:text-[15px] xl:text-[18px]">
               Real Humans | Smart Tech | Better Returns. Because Your Money Deserves Personal Attention, we combine easy-to-use technology with real human experts and data-backed research to help you build lasting, long-term wealth.
             </p>
           </div>
 
           <!-- Right: full-height card rail with glassy top/bottom edge fades -->
-          <div class="relative w-full lg:h-full lg:w-[625px] lg:shrink-0 lg:self-stretch">
+          <div class="relative w-full lg:h-full lg:w-[min(48%,560px)] lg:shrink-0 lg:self-stretch xl:w-[580px]">
           <div id="differ-scroll" class="no-scrollbar flex h-[410px] w-full flex-col gap-[96px] overflow-hidden lg:h-full">
             {differItems.map((item) => (
               <div class="flex h-[410px] w-full shrink-0 items-center overflow-hidden rounded-[24px] border-2 border-[rgba(255,255,255,0.27)] border-b-[#f3b83f] px-8 py-10 lg:px-[56px] lg:py-[88px]"
@@ -376,7 +376,7 @@ const faqs = [
 
   <!-- ══ HOW SOON CAN I START? ══ -->
   <section class="bg-[#FFFCF3]">
-    <div class="site-wrap py-36">
+    <div class="site-wrap py-16 lg:py-24 xl:py-36">
 
       <!-- Top row: text left + rocket right -->
       <div class="relative flex items-start justify-between gap-12">
@@ -384,7 +384,7 @@ const faqs = [
         <!-- Left: heading + subtitle + CTA -->
         <div class="flex max-w-[600px] flex-col gap-12">
           <div class="flex flex-col gap-4">
-            <h2 class="whitespace-nowrap text-[40px] font-normal leading-[1.4] text-[var(--color-n900)]" style="font-family:var(--font-body)">
+            <h2 class="text-[26px] sm:text-[32px] xl:text-[40px] font-normal leading-[1.4] text-[var(--color-n900)]" style="font-family:var(--font-body)">
               How to Open your Demat Account?
             </h2>
             <p class="text-[18px] leading-relaxed tracking-[0.36px] text-[var(--color-n900)]" style="font-family:var(--font-body)">
@@ -406,7 +406,7 @@ const faqs = [
       </div>
 
       <!-- Steps row — Figma 185:3609: #FFF0D7 pills + dashed connector (#EBDEC6, 2px, 7-7) -->
-      <div class="relative mt-32">
+      <div class="relative mt-16 lg:mt-20 xl:mt-32">
         <div class="absolute top-[31px] hidden h-[2px] sm:left-[10%] sm:right-[10%] sm:block"
              style="background-image:repeating-linear-gradient(90deg,#EBDEC6 0 7px,transparent 7px 14px);"></div>
         <div class="relative grid grid-cols-2 gap-x-6 gap-y-12 sm:grid-cols-5">
