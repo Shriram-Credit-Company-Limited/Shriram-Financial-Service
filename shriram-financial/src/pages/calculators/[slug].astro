@@ -146,6 +146,46 @@ export function getStaticPaths() {
     ],
     related: ['sip', 'lumpsum', 'fd'],
   },
+
+  nps: {
+    title: 'NPS Calculator',
+    subtitle: 'Estimate your NPS retirement corpus, tax-free lump sum, and monthly pension with industry-standard calculations.',
+    inputs: [
+      { id: 'nps-age',          label: 'Current Age',                min: 18,  max: 59,      step: 1,   value: 30,    suffix: ' yrs' },
+      { id: 'nps-retire',       label: 'Retirement Age',             min: 40,  max: 70,      step: 1,   value: 60,    suffix: ' yrs' },
+      { id: 'nps-amount',       label: 'Monthly Contribution',       min: 500, max: 100000,  step: 500, value: 5000,  prefix: '₹' },
+      { id: 'nps-rate',         label: 'Expected Return (% p.a.)',   min: 4,   max: 15,      step: 0.5, value: 10,    suffix: '%' },
+      { id: 'nps-annuity-pct',  label: 'Annuity Purchase (%)',       min: 40,  max: 100,     step: 5,   value: 40,    suffix: '%' },
+      { id: 'nps-annuity-rate', label: 'Annuity Rate (% p.a.)',      min: 4,   max: 10,      step: 0.5, value: 6,     suffix: '%' },
+    ],
+    whatIs: 'The National Pension System (NPS) Calculator is a free online tool that estimates the retirement corpus you can build and the monthly pension you will receive by contributing to NPS regularly. It accounts for your current age, retirement age, monthly contribution, expected rate of return, and the annuity purchase percentage to give you a complete retirement projection — including the tax-free lump sum withdrawal and the monthly pension income.',
+    howHelps: {
+      body: 'NPS is one of India\'s most powerful retirement tools, but its dual-output nature (lump sum + pension) makes planning complex. This calculator makes it simple.',
+      points: [
+        'Project your total NPS corpus at retirement based on your current age and contribution',
+        'See your tax-free lump sum withdrawal amount (up to 60% of corpus)',
+        'Calculate your estimated monthly pension from the annuity portion',
+        'Understand how increasing your monthly contribution impacts retirement income',
+        'Plan how many years of contribution are needed to reach your target corpus',
+      ],
+    },
+    howWorks: 'Your monthly NPS contributions earn compounded returns until your retirement age (max 70 years). At retirement, PFRDA mandates that at least 40% of the corpus must be used to purchase an annuity from a PFRDA-registered insurance company — this generates your monthly pension. The remaining amount (up to 60%) is withdrawn as a completely tax-free lump sum. Monthly pension = (Annuity Corpus × Annuity Rate) ÷ 12. The annuity rate is the annual percentage offered by insurers on the annuity corpus, typically 5%–8% p.a.',
+    advantages: {
+      body: 'NPS is one of the most tax-efficient retirement vehicles in India, and this calculator helps you unlock its full potential.',
+      points: [
+        'Tax deduction up to ₹1.5L under Section 80C and additional ₹50,000 under Section 80CCD(1B)',
+        'Market-linked returns with flexible allocation between equity (max 75%) and debt',
+        'PFRDA-regulated scheme — safe, transparent, and government-backed',
+        'The 60% lump sum at retirement is completely tax-free — a significant benefit',
+      ],
+    },
+    faqs: [
+      { q: 'What is the minimum NPS contribution per year?', a: 'For a Tier I NPS account (the pension account with tax benefits), the minimum annual contribution is ₹1,000. There is no maximum limit. For the best tax benefit, contribute at least ₹2 lakh per year (₹1.5L under 80C + ₹50,000 under 80CCD(1B)).' },
+      { q: 'What happens to my NPS if I exit before 60?', a: 'If you exit NPS before age 60 (premature exit), you must use at least 80% of the corpus to purchase an annuity, and only 20% can be withdrawn as a lump sum. The lump sum portion is taxable. This is a strong incentive to stay invested till retirement age for the full tax-free 60% withdrawal benefit.' },
+      { q: 'Can I increase my NPS contribution over time?', a: 'Yes. You can increase, decrease, or change the frequency of NPS contributions at any time. Many investors start with a small monthly amount and increase it by 10%–15% each year (known as a step-up contribution), which dramatically compounds the final corpus. Use our SIP calculator alongside this to model step-up scenarios.' },
+    ],
+    related: ['sip', 'swp', 'lumpsum'],
+  },
 };
 
   return Object.entries(calcData).map(([slug, data]) => ({
@@ -496,6 +536,33 @@ const { slug, title, subtitle, inputs, whatIs, howHelps, howWorks, advantages, f
       if (investedLabelEl) investedLabelEl.textContent = 'Total Withdrawn';
       if (gainsLabelEl) gainsLabelEl.textContent = 'Remaining Corpus';
       updateDonut(totalWithdrawn, totalWithdrawn + remaining);
+      return;
+    }
+
+    /* NPS */
+    const npsAge = get('nps-age'), npsRetire = get('nps-retire'), npsAmount = get('nps-amount');
+    const npsRate = get('nps-rate'), npsAnnuityPct = get('nps-annuity-pct'), npsAnnuityRate = get('nps-annuity-rate');
+    if (npsAge !== null && npsRetire !== null && npsAmount !== null) {
+      const years = Math.max(0, (npsRetire ?? 60) - (npsAge ?? 30));
+      const n = years * 12;
+      const r = (npsRate ?? 10) / 100 / 12;
+      const corpus = r === 0 ? (npsAmount ?? 0) * n : (npsAmount ?? 0) * ((Math.pow(1 + r, n) - 1) / r) * (1 + r);
+      const totalInvested = (npsAmount ?? 0) * n;
+      const annuityFrac = (npsAnnuityPct ?? 40) / 100;
+      const lumpSum = corpus * (1 - annuityFrac);
+      const annuityCorpus = corpus * annuityFrac;
+      const monthlyPension = annuityCorpus * ((npsAnnuityRate ?? 6) / 100) / 12;
+      const totalEl = document.getElementById('calc-total');
+      const investedEl = document.getElementById('calc-invested');
+      const gainsEl = document.getElementById('calc-gains');
+      const investedLabelEl = document.getElementById('calc-invested-label');
+      const gainsLabelEl = document.getElementById('calc-gains-label');
+      if (totalEl) totalEl.textContent = fmt(corpus);
+      if (investedEl) investedEl.textContent = fmt(lumpSum);
+      if (gainsEl) gainsEl.textContent = '₹' + Math.round(monthlyPension).toLocaleString('en-IN') + '/mo';
+      if (investedLabelEl) investedLabelEl.textContent = 'Lump Sum (Tax-Free)';
+      if (gainsLabelEl) gainsLabelEl.textContent = 'Monthly Pension';
+      updateDonut(totalInvested, corpus);
       return;
     }
   }
