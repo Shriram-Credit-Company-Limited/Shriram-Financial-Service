@@ -140,13 +140,6 @@ const about     = navigation.find(n => n.label === 'About')!;
 
   <!-- Right content: cream/white, section-specific -->
   <div id="nps-content">
-    <button id="nps-close" aria-label="Close navigation panel">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-        <line x1="18" y1="6" x2="6" y2="18"/>
-        <line x1="6" y1="6" x2="18" y2="18"/>
-      </svg>
-    </button>
-
     <!-- Scrollable upper area: all nav sections live here -->
     <div id="nps-scroll-area">
 
@@ -229,16 +222,19 @@ const about     = navigation.find(n => n.label === 'About')!;
             </div>
           </div>
         </div>
+        <div class="nps-view-all">
+          <a href="/research/">View All Resources</a>
+        </div>
       </div>
 
       <!-- ── Calculators ── -->
       <div class="nps-section" data-section="calculators">
         <h2 class="nps-heading">Calculators</h2>
         <div class="nps-grid">
-          <div class="nps-col nps-col-wide">
+          <div class="nps-trade-block">
             <p class="nps-col-title">Investment Calculators</p>
-            <div class="nps-col-items nps-2col">
-              <div class="nps-sub">
+            <div class="nps-trade-cols">
+              <div class="nps-col-items">
                 <a href="/product-hub/">Gratuity Calculator</a>
                 <a href="/product-hub/">Recurring Deposit Calculator</a>
                 <a href="/product-hub/">Public Provident Fund Calculator</a>
@@ -246,7 +242,7 @@ const about     = navigation.find(n => n.label === 'About')!;
                 <a href="/product-hub/">Pension Calculator</a>
                 <a href="/product-hub/">SIP Calculator</a>
               </div>
-              <div class="nps-sub">
+              <div class="nps-col-items">
                 <a href="/product-hub/">Retirement Planning Calculator</a>
                 <a href="/product-hub/">STP Calculator</a>
                 <a href="/product-hub/">Fixed Deposit Calculator</a>
@@ -269,6 +265,9 @@ const about     = navigation.find(n => n.label === 'About')!;
             </div>
           </div>
         </div>
+        <div class="nps-view-all">
+          <a href="/product-hub/">View All Calculators</a>
+        </div>
       </div>
 
       <!-- ── Support ── -->
@@ -283,6 +282,9 @@ const about     = navigation.find(n => n.label === 'About')!;
               <a href="/about/regulatory/">Regulatory &amp; Compliance</a>
             </div>
           </div>
+        </div>
+        <div class="nps-view-all">
+          <a href="/about/support/">View All Support</a>
         </div>
       </div>
 
@@ -299,6 +301,9 @@ const about     = navigation.find(n => n.label === 'About')!;
               <a href="/about/become-a-partner/">Channel Partner</a>
             </div>
           </div>
+        </div>
+        <div class="nps-view-all">
+          <a href="/about/become-a-partner/">View All Partner Programmes</a>
         </div>
       </div>
 
@@ -403,21 +408,6 @@ const about     = navigation.find(n => n.label === 'About')!;
     padding: clamp(72px, 9vw, 144px) clamp(36px, 5vw, 80px) clamp(24px, 3vw, 40px);
   }
 
-  /* Close button — positioned relative to #nps-content (which has no padding now) */
-  #nps-close {
-    position: absolute;
-    top: clamp(28px, 4.5vw, 72px);
-    right: clamp(24px, 3vw, 48px);
-    width: 40px; height: 40px;
-    display: flex; align-items: center; justify-content: center;
-    background: rgba(18,18,18,0.05);
-    border-radius: 50%;
-    border: none; cursor: pointer; color: #333;
-    transition: background 0.2s ease;
-  }
-  #nps-close:hover { background: rgba(18,18,18,0.12); }
-  #nps-close svg { width: 18px; height: 18px; }
-
   /* Sections: only the active one visible */
   .nps-section { display: none; flex-direction: column; flex: 1; }
 
@@ -451,7 +441,6 @@ const about     = navigation.find(n => n.label === 'About')!;
   }
   .nps-col:first-child { padding-left: 0; }
   .nps-col:last-child  { padding-right: 0; }
-  .nps-col-wide { flex: 2; }
 
   .nps-col-title {
     font-size: clamp(14px, 1.3vw, 20px);
@@ -467,19 +456,8 @@ const about     = navigation.find(n => n.label === 'About')!;
     flex-direction: column;
     gap: clamp(14px, 1.8vw, 24px);
   }
-  .nps-2col {
-    flex-direction: row;
-    gap: clamp(20px, 3vw, 40px);
-  }
-  .nps-sub {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: clamp(14px, 1.8vw, 24px);
-  }
 
-  .nps-col-items a,
-  .nps-sub a {
+  .nps-col-items a {
     font-size: clamp(12px, 1.05vw, 16px);
     color: #333;
     text-decoration: none;
@@ -487,8 +465,7 @@ const about     = navigation.find(n => n.label === 'About')!;
     line-height: 1.4;
     transition: color 0.2s ease;
   }
-  .nps-col-items a:hover,
-  .nps-sub a:hover { color: var(--color-brand, #f3b83f); }
+  .nps-col-items a:hover { color: var(--color-brand, #f3b83f); }
 
   .nps-divider {
     width: 1px;
@@ -577,7 +554,6 @@ const about     = navigation.find(n => n.label === 'About')!;
 
   // ── Full-page nav panels ──────────────────────────────────────
   const navPanel = document.getElementById('nav-panel')!;
-  const closeBtn = document.getElementById('nps-close')!;
   let activeBtn: HTMLElement | null = null;
 
   function openPanel(section: string, btn: HTMLElement) {
@@ -587,7 +563,6 @@ const about     = navigation.find(n => n.label === 'About')!;
     btn.setAttribute('aria-expanded', 'true');
     activeBtn = btn;
     document.body.style.overflow = 'hidden';
-    closeBtn.focus();
   }
 
   function closePanel() {
