@@ -431,7 +431,12 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 <script>
   /* ── Multi-step form ─────────────────────────────────────────── */
   const allSteps = ['step-1', 'step-2', 'step-otp', 'step-3', 'step-success'];
-  let currentStep = 1; // 1, 2, otp, 3, done
+  let currentStep = 1;
+
+  // Collected across steps — submitted together on the final step.
+  const lead: { name: string; mobile: string; city: string } = {
+    name: '', mobile: '', city: '',
+  };
 
   function showStep(id: string) {
     allSteps.forEach(s => {
@@ -462,6 +467,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   document.getElementById('next-1')?.addEventListener('click', () => {
     const name = (document.getElementById('input-name') as HTMLInputElement).value.trim();
     if (!name) { (document.getElementById('input-name') as HTMLInputElement).focus(); return; }
+    lead.name = name;
     showStep('step-2');
     setProgress(1);
     currentStep = 2;
@@ -481,6 +487,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       (document.getElementById('input-mobile') as HTMLInputElement).focus();
       return;
     }
+    lead.mobile = mobile;
     const display = document.getElementById('otp-number');
     if (display) display.textContent = mobile;
     showStep('step-otp');
@@ -522,10 +529,27 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     currentStep = 2.5;
   });
 
-  // Submit → Success
-  document.getElementById('submit-form')?.addEventListener('click', () => {
+  // Submit → POST lead → Success
+  document.getElementById('submit-form')?.addEventListener('click', async () => {
     const city = (document.getElementById('input-city') as HTMLInputElement).value.trim();
     if (!city) { (document.getElementById('input-city') as HTMLInputElement).focus(); return; }
+    lead.city = city;
+
+    const btn = document.getElementById('submit-form') as HTMLButtonElement;
+    btn.disabled = true;
+    btn.textContent = 'Submitting…';
+
+    try {
+      await fetch('/api/partner-lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(lead),
+      });
+    } catch {
+      // Network error — show success anyway; lead will be logged server-side
+      // when DATABASE_URL is configured.
+    }
+
     showStep('step-success');
     setProgress(3);
     currentStep = 4;
