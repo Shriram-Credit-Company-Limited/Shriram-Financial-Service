@@ -42,10 +42,6 @@ const about     = navigation.find(n => n.label === 'About')!;
           <svg class="nav-chevron h-4 w-4 transition-transform duration-300" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
         </button>
 
-        <button class="nav-trigger rounded-[10px] px-3 py-1 text-[16px] font-medium text-[#333] transition-colors hover:bg-[var(--color-n100)]"
-                data-panel="partner" aria-haspopup="dialog" aria-expanded="false">
-          Become a Partner
-        </button>
       </nav>
     </div>
 
@@ -98,7 +94,6 @@ const about     = navigation.find(n => n.label === 'About')!;
       <a href="/research/" class="block rounded px-3 py-3 text-[14px] font-semibold text-[var(--color-ink)] hover:bg-[var(--color-n100)]">Learning Centre</a>
       <a href="/product-hub/" class="block rounded px-3 py-3 text-[14px] font-semibold text-[var(--color-ink)] hover:bg-[var(--color-n100)]">Calculators</a>
       <a href="/about/support/" class="block rounded px-3 py-3 text-[14px] font-semibold text-[var(--color-ink)] hover:bg-[var(--color-n100)]">Support</a>
-      <a href="/about/become-a-partner/" class="block rounded px-3 py-3 text-[14px] font-semibold text-[var(--color-ink)] hover:bg-[var(--color-n100)]">Become a Partner</a>
       <details class="group mb-1">
         <summary class="flex cursor-pointer select-none items-center justify-between rounded px-3 py-3 text-[14px] font-semibold text-[var(--color-ink)] hover:bg-[var(--color-n100)]">
           About
@@ -134,7 +129,6 @@ const about     = navigation.find(n => n.label === 'About')!;
       <button class="nps-item" data-for="learning-centre">Learning Centre</button>
       <button class="nps-item" data-for="calculators">Calculators</button>
       <button class="nps-item" data-for="support">Support</button>
-      <button class="nps-item" data-for="partner">Become a Partner</button>
     </nav>
   </div>
 
@@ -265,24 +259,6 @@ const about     = navigation.find(n => n.label === 'About')!;
         </div>
       </div>
 
-      <!-- ── Become a Partner ── -->
-      <div class="nps-section" data-section="partner">
-        <h2 class="nps-heading">Become a Partner</h2>
-        <div class="nps-grid">
-          <div class="nps-col">
-            <p class="nps-col-title">Partner Programme</p>
-            <div class="nps-col-items">
-              <a href="/about/become-a-partner/">Join as Sub-Broker</a>
-              <a href="/about/become-a-partner/">Refer &amp; Earn</a>
-              <a href="/about/become-a-partner/">Authorised Person</a>
-              <a href="/about/become-a-partner/">Channel Partner</a>
-            </div>
-          </div>
-        </div>
-        <div class="nps-view-all">
-          <a href="/about/become-a-partner/">View All Partner Programmes</a>
-        </div>
-      </div>
 
     </div><!-- /nps-scroll-area -->
 
@@ -357,8 +333,7 @@ const about     = navigation.find(n => n.label === 'About')!;
   #nav-panel[data-panel="products"]        .nps-item[data-for="products"],
   #nav-panel[data-panel="learning-centre"] .nps-item[data-for="learning-centre"],
   #nav-panel[data-panel="calculators"]     .nps-item[data-for="calculators"],
-  #nav-panel[data-panel="support"]         .nps-item[data-for="support"],
-  #nav-panel[data-panel="partner"]         .nps-item[data-for="partner"] {
+  #nav-panel[data-panel="support"]         .nps-item[data-for="support"] {
     color: #f3b83f;
     font-weight: 600;
   }
@@ -391,8 +366,7 @@ const about     = navigation.find(n => n.label === 'About')!;
   #nav-panel[data-panel="products"]        .nps-section[data-section="products"],
   #nav-panel[data-panel="learning-centre"] .nps-section[data-section="learning-centre"],
   #nav-panel[data-panel="calculators"]     .nps-section[data-section="calculators"],
-  #nav-panel[data-panel="support"]         .nps-section[data-section="support"],
-  #nav-panel[data-panel="partner"]         .nps-section[data-section="partner"] {
+  #nav-panel[data-panel="support"]         .nps-section[data-section="support"] {
     display: flex;
   }
 
