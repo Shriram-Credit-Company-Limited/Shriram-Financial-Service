@@ -1,26 +1,37 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-const trade = [
-  { title: 'Equity', desc: 'Trade in NSE & BSE stocks with zero-delay execution and in-depth SEBI-registered research support.', href: '/products/equity/' },
-  { title: 'Derivatives', desc: 'Trade futures and options with advanced risk management tools and real-time analytics.', href: '/products/derivative/' },
-  { title: 'Commodities', desc: 'Diversify your portfolio with gold, silver, crude oil, and agricultural commodity products.', href: '/products/commodities/' },
-  { title: 'Currency', desc: 'Trade forex pairs with competitive spreads and real-time market insights across major currencies.', href: '/products/currency/' },
-  { title: 'Offer for Sale (OFS)', desc: 'Participate in institutional block deals and OFS at competitive prices with seamless online access.', href: '/products/ipo/' },
+const tradeCards = [
+  { title: 'Equity Trading Made Easy', desc: 'Buy and sell shares across NSE & BSE with expert stock recommendations, real-time market data, and zero brokerage on delivery trades.', href: '/products/equity/' },
+  { title: 'Derivatives', desc: 'Trade Futures & Options on NSE & BSE. Hedge your portfolio or capitalise on short-term opportunities with SEBI-registered research.', href: '/products/derivative/' },
+  { title: 'Invest in Commodities', desc: 'Diversify your portfolio with gold, silver, crude oil, and agricultural commodity products on MCX & NCDEX.', href: '/products/commodities/' },
+  { title: 'Forex Trading Simplified', desc: 'Trade USD/INR, EUR/INR, and other currency pairs with competitive spreads and real-time market insights.', href: '/products/currency/' },
+  { title: 'Margin Trading Facility', desc: 'Amplify your buying power with MTF — borrow funds to purchase more shares and maximise your investing potential.', href: '/products/loans/' },
 ];
 
-const invest = [
-  { title: 'Mutual Funds', desc: 'Invest in expertly managed funds with zero commission and easy SIP options across 3,000+ schemes.', href: '/products/mutual-funds/' },
-  { title: 'Initial Public Offering (IPO)', desc: 'Apply for upcoming IPOs with seamless online applications and timely allotment updates.', href: '/products/ipo/' },
-  { title: 'Global Investing', desc: 'Access international markets and invest in top US stocks and global ETFs from one account.', href: '/products/global-investing/' },
-  { title: 'Fixed Deposits', desc: 'Secure guaranteed returns with fixed deposits from trusted financial institutions.', href: '/products/fd/' },
-  { title: 'National Pension Scheme (NPS)', desc: 'Plan your retirement with tax-efficient NPS investments and flexible contribution options.', href: '/products/nps/' },
-  { title: 'Exchange Traded Fund (ETF)', desc: 'Trade diversified ETFs with low expense ratios, instant liquidity, and real-time pricing.', href: '/products/etf/' },
+const investCards = [
+  { title: 'Mutual Funds', desc: 'Compare 3,000+ Mutual Funds and invest in Direct Plans with 0% commission. Start SIP from ₹500/month.', href: '/products/mutual-funds/' },
+  { title: 'New Fund Offers (NFO)', desc: 'Get first-mover advantage on newly launched mutual fund schemes at initial NAV pricing.', href: '/products/mutual-funds/' },
+  { title: 'Exchange Traded Funds (ETF)', desc: 'Trade diversified ETFs with low expense ratios, instant liquidity, and real-time pricing on NSE & BSE.', href: '/products/etf/' },
+  { title: 'Initial Public Offerings (IPO)', desc: 'Stay updated and apply for IPOs across NSE & BSE — invest in companies as they debut on the stock market.', href: '/products/ipo/' },
+  { title: 'Bonds & Debentures', desc: 'Invest in government and corporate bonds for stable, predictable fixed-income returns with lower risk.', href: '/products/fd/' },
+  { title: 'Fixed Deposits', desc: 'Secure guaranteed returns with fixed deposits from trusted partner financial institutions. Up to 8.5% p.a.', href: '/products/fd/' },
+  { title: 'National Pension Scheme (NPS)', desc: 'Build a tax-efficient retirement corpus with government-backed NPS. Save up to ₹2 lakh in annual tax deductions.', href: '/products/nps/' },
+  { title: 'Global Investing', desc: 'Access international markets and invest in top US stocks and global ETFs from your Indian account.', href: '/products/global-investing/' },
 ];
 
-const other = [
-  { title: 'Loans', desc: 'Access instant personal and business loans at competitive interest rates with minimal paperwork.', href: '/products/loans/' },
-  { title: 'Insurances', desc: 'Protect yourself and your family with comprehensive life and health insurance plans.', href: '/products/insurance/' },
+const borrowCards = [
+  { title: 'Loan Against Mutual Funds', desc: 'Access instant liquidity by pledging your mutual fund holdings as collateral — without redeeming your investments.', href: '/products/loans/' },
+  { title: 'Loan Against Securities', desc: 'Leverage your equity and bond portfolio to borrow at competitive interest rates when you need liquidity fast.', href: '/products/loans/' },
+];
+
+const stages = [
+  { num: '01', name: 'Trade', desc: 'Execute equity, F&O, commodity and currency trades with research-backed precision and dedicated RM support.', pills: ['Equity', 'F&O', 'Commodities', 'Currency'], dot: { cx: 239, cy: 68 } },
+  { num: '02', name: 'Invest', desc: 'Build wealth through mutual funds, IPOs, ETFs, and bonds — systematically, commission-free, and with expert guidance.', pills: ['Mutual Funds', 'IPO', 'Bonds', 'Fixed Deposits'], dot: { cx: 241, cy: 374 } },
+  { num: '03', name: 'Earn', desc: 'Generate passive income through dividends, interest payments, and yield-based financial instruments.', pills: ['Dividends', 'Interest', 'REITs'], dot: { cx: 183, cy: 224 } },
+  { num: '04', name: 'Grow', desc: 'Compound your returns over time with tax-efficient and long-horizon strategies curated by our experts.', pills: ['ETFs', 'NPS', 'SIPs', 'PMS'], dot: { cx: 567, cy: 68 } },
+  { num: '05', name: 'Borrow', desc: 'Access short-term liquidity by leveraging your existing investments as collateral — without breaking your portfolio.', pills: ['LAMF', 'LAS', 'MTF'], dot: { cx: 627, cy: 224 } },
+  { num: '06', name: 'Protect', desc: 'Secure your financial future with insurance products designed for long-term investors and their families.', pills: ['Term Insurance', 'Health Cover'], dot: { cx: 565, cy: 374 } },
 ];
 
 const faqs = [
@@ -60,92 +71,74 @@ const faqs = [
   description="Explore all investment and trading products from Shriram Financial Services — equity, derivatives, mutual funds, IPO, NPS, ETF, loans, and more."
 >
 
-  <!-- ── Hero ──────────────────────────────────────────────────── -->
-  <section class="relative overflow-hidden bg-[var(--color-dark-800)]">
-    <div class="pointer-events-none absolute -right-40 -top-40 h-[500px] w-[500px] rounded-full bg-[var(--color-brand)]/10 blur-3xl"></div>
-    <div class="pointer-events-none absolute -bottom-20 left-0 h-64 w-64 rounded-full bg-[var(--color-brand)]/5 blur-3xl"></div>
-
-    <div class="site-wrap relative py-16 lg:py-24">
-      <!-- Breadcrumb -->
+  <!-- ── Hero ─────────────────────────────────────────────────────── -->
+  <section class="relative overflow-hidden" style="background: radial-gradient(ellipse 132% 312% at 117% -4%, #4F583B 0%, #3F4733 14%, #363A2C 25%, #2a2d23 38%, #1d1d1d 55%, #1d1d1d 100%);">
+    <div class="site-wrap relative z-10 py-16 lg:py-24">
       <nav class="mb-6 flex items-center gap-2 text-[12px] text-white/40" aria-label="Breadcrumb">
         <a href="/" class="transition-colors hover:text-white/70">Home</a>
         <span aria-hidden="true">›</span>
-        <span class="text-white/60">Product Suite</span>
+        <span class="text-white/60">Products</span>
       </nav>
-
       <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Product Suite</p>
-      <h1 class="mt-3 max-w-3xl text-[36px] font-bold uppercase leading-tight text-white lg:text-[56px]" style="font-family:var(--font-display)">
-        Product Suite
+      <h1 class="mt-3 max-w-3xl text-[32px] font-bold leading-tight text-white lg:text-[40px]" style="font-family:var(--font-display)">
+        Everything You Need to Grow Your Wealth
       </h1>
-      <p class="mt-4 max-w-xl text-[15px] leading-relaxed text-white/60 lg:text-[17px]">
-        Trade, Invest and Borrow — explore our comprehensive list of financial products and services.
+      <p class="mt-4 max-w-xl text-[15px] leading-relaxed text-white/60 lg:text-[16px]">
+        Trade, Invest and Borrow — explore our comprehensive list of financial products and services, all in one place.
       </p>
-
-      <div class="mt-8 flex flex-wrap gap-3">
-        <a href="/about/open-demat-account/" class="btn-primary">Open Free Demat Account</a>
-        <a href="/product-hub/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] border border-white/20 text-[14px] font-medium text-white transition-colors hover:bg-white/10">
-          Try Calculators
-        </a>
-      </div>
     </div>
   </section>
 
-  <!-- ── Products & Services ───────────────────────────────────── -->
+  <!-- ── All Products ──────────────────────────────────────────────── -->
   <section class="bg-[#f8f6f1] py-16 lg:py-24">
     <div class="site-wrap">
-      <h2 class="text-[28px] font-semibold text-[var(--color-ink)] lg:text-[36px]" style="font-family:var(--font-display)">
-        Our Products And Services
+      <h2 class="text-[24px] font-semibold text-[var(--color-ink)] lg:text-[30px]" style="font-family:var(--font-display)">
+        All Products
       </h2>
 
-      <!-- TRADE -->
-      <div class="mt-12 lg:mt-16">
-        <div class="mb-6 border-b border-[var(--color-warm-border)] pb-4">
-          <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Trade</p>
-          <h3 class="mt-1 text-[22px] font-bold text-[var(--color-dark-olive)] lg:text-[26px]" style="font-family:var(--font-display)">TRADE</h3>
-          <p class="mt-1 text-[14px] text-[var(--color-muted)]">Access diverse markets with advanced tools and real-time execution.</p>
+      <!-- Trade -->
+      <div class="mt-12 lg:mt-14">
+        <div class="mb-5 flex items-center gap-3">
+          <span class="inline-flex h-6 items-center rounded-full bg-[var(--color-dark-olive)]/10 px-3 text-[11px] font-bold uppercase tracking-widest text-[var(--color-dark-olive)]">Trade</span>
         </div>
         <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {trade.map(p => (
-            <a href={p.href} class="product-suite-card group">
-              <h4 class="product-suite-title">{p.title}</h4>
-              <p class="product-suite-desc">{p.desc}</p>
-              <span class="product-suite-arrow">→</span>
+          {tradeCards.map(p => (
+            <a href={p.href} class="product-card group">
+              <h4 class="product-card-title">{p.title}</h4>
+              <p class="product-card-desc">{p.desc}</p>
+              <span class="product-card-arrow" aria-hidden="true">→</span>
             </a>
           ))}
         </div>
       </div>
 
-      <!-- INVESTMENTS -->
-      <div class="mt-14 lg:mt-20">
-        <div class="mb-6 border-b border-[var(--color-warm-border)] pb-4">
-          <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Invest</p>
-          <h3 class="mt-1 text-[22px] font-bold text-[var(--color-dark-olive)] lg:text-[26px]" style="font-family:var(--font-display)">INVESTMENTS</h3>
-          <p class="mt-1 text-[14px] text-[var(--color-muted)]">Build long-term wealth with diversified investment solutions.</p>
+      <!-- Invest -->
+      <div class="mt-12 lg:mt-14">
+        <div class="mb-5 flex items-center gap-3">
+          <span class="inline-flex h-6 items-center rounded-full bg-[var(--color-dark-olive)]/10 px-3 text-[11px] font-bold uppercase tracking-widest text-[var(--color-dark-olive)]">Invest</span>
         </div>
         <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {invest.map(p => (
-            <a href={p.href} class="product-suite-card group">
-              <h4 class="product-suite-title">{p.title}</h4>
-              <p class="product-suite-desc">{p.desc}</p>
-              <span class="product-suite-arrow">→</span>
+          {investCards.map(p => (
+            <a href={p.href} class="product-card group">
+              <h4 class="product-card-title">{p.title}</h4>
+              <p class="product-card-desc">{p.desc}</p>
+              <span class="product-card-arrow" aria-hidden="true">→</span>
             </a>
           ))}
         </div>
       </div>
 
-      <!-- OTHER OFFERING -->
-      <div class="mt-14 lg:mt-20">
-        <div class="mb-6 border-b border-[var(--color-warm-border)] pb-4">
-          <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Other</p>
-          <h3 class="mt-1 text-[22px] font-bold text-[var(--color-dark-olive)] lg:text-[26px]" style="font-family:var(--font-display)">OTHER OFFERING</h3>
-          <p class="mt-1 text-[14px] text-[var(--color-muted)]">Comprehensive financial solutions to secure your future.</p>
+      <!-- Borrow -->
+      <div class="mt-12 lg:mt-14">
+        <div class="mb-5 flex items-center gap-3">
+          <span class="inline-flex h-6 items-center rounded-full bg-[var(--color-dark-olive)]/10 px-3 text-[11px] font-bold uppercase tracking-widest text-[var(--color-dark-olive)]">Borrow</span>
         </div>
         <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {other.map(p => (
-            <a href={p.href} class="product-suite-card group">
-              <h4 class="product-suite-title">{p.title}</h4>
-              <p class="product-suite-desc">{p.desc}</p>
-              <span class="product-suite-arrow">→</span>
+          {borrowCards.map(p => (
+            <a href={p.href} class="product-card group">
+              <h4 class="product-card-title">{p.title}</h4>
+              <p class="product-card-desc">{p.desc}</p>
+              <span class="product-card-arrow" aria-hidden="true">→</span>
             </a>
           ))}
         </div>
@@ -153,16 +146,79 @@ const faqs = [
     </div>
   </section>
 
-  <!-- ── FAQ ──────────────────────────────────────────────────── -->
+  <!-- ── Six Financial Stages, One Orbit ──────────────────────────── -->
+  <section class="overflow-hidden bg-[#1d1d1d] py-16 lg:py-24">
+    <div class="site-wrap">
+      <div class="mb-12 lg:mb-16">
+        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Your Wealth Journey</p>
+        <h2 class="mt-3 text-[24px] font-semibold text-white lg:text-[30px]" style="font-family:var(--font-display)">
+          Six Financial Stages, One Orbit
+        </h2>
+        <p class="mt-3 max-w-xl text-[15px] leading-relaxed text-white/55">
+          Every investor's journey passes through these six stages. We support you across all of them.
+        </p>
+      </div>
+
+      <div class="grid items-center gap-10 lg:grid-cols-2 lg:gap-12">
+
+        <!-- Left: stage accordion -->
+        <div id="stages-accord">
+          {stages.map((s, i) => (
+            <div class="stage-item border-b border-white/10 py-5 cursor-pointer" data-stage={s.num}>
+              <div class="flex items-center gap-4">
+                <span class="stage-num shrink-0 text-[13px] font-bold text-white/30">{s.num}</span>
+                <span class="stage-name text-[18px] font-semibold text-white/55">{s.name}</span>
+                <svg class="stage-chevron ml-auto h-4 w-4 shrink-0 text-white/30 transition-transform duration-200" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4"/></svg>
+              </div>
+              <div class="stage-body mt-3 pl-[38px]">
+                <p class="text-[14px] leading-relaxed text-white/55">{s.desc}</p>
+                <div class="mt-3 flex flex-wrap gap-2">
+                  {s.pills.map(pill => (
+                    <span class="inline-flex h-6 items-center rounded-full border border-white/15 px-3 text-[11px] font-medium text-white/55">{pill}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <!-- Right: SVG orbit -->
+        <div class="flex items-center justify-center">
+          <svg viewBox="0 0 840 448" class="w-full max-w-[480px]" aria-hidden="true" id="orbit-svg">
+            <!-- Outer dashed circle -->
+            <circle cx="407" cy="224" r="224" stroke="rgba(255,255,255,0.12)" stroke-width="1" stroke-dasharray="5 5" fill="none"/>
+            <!-- Inner dashed ellipse -->
+            <ellipse cx="407" cy="224" rx="224" ry="151" stroke="rgba(255,255,255,0.12)" stroke-width="1" stroke-dasharray="5 5" fill="none"/>
+            <!-- Center glow ring -->
+            <circle cx="407" cy="224" r="93.5" fill="rgba(243,184,63,0.07)" stroke="rgba(243,184,63,0.22)" stroke-width="1"/>
+            <!-- Center label -->
+            <text x="407" y="219" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="13" font-weight="600">Your</text>
+            <text x="407" y="236" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="13" font-weight="600">Wealth</text>
+
+            <!-- Stage dot groups -->
+            {stages.map(s => (
+              <g class="orbit-stage" data-stage={s.num}>
+                <circle cx={s.dot.cx} cy={s.dot.cy} r="28" class="orbit-dot" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+                <text x={s.dot.cx} y={s.dot.cy - 4} text-anchor="middle" class="orbit-label-num" fill="rgba(255,255,255,0.35)" font-size="9">{s.num}</text>
+                <text x={s.dot.cx} y={s.dot.cy + 9} text-anchor="middle" class="orbit-label-name" fill="rgba(255,255,255,0.50)" font-size="9" font-weight="500">{s.name}</text>
+              </g>
+            ))}
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── General Questions ─────────────────────────────────────────── -->
   <section class="bg-white py-16 lg:py-24">
     <div class="site-wrap">
-      <h2 class="text-[28px] font-semibold text-[var(--color-ink)] lg:text-[36px]" style="font-family:var(--font-display)">
-        Frequently Asked <span class="text-[var(--color-brand)]">Questions</span>
+      <h2 class="text-[24px] font-semibold text-[var(--color-ink)] lg:text-[30px]" style="font-family:var(--font-display)">
+        General <span class="text-[var(--color-brand)]">Questions</span>
       </h2>
 
       <div class="mt-10 grid gap-8 lg:grid-cols-[1fr_1.4fr] lg:gap-12">
 
-        <!-- Left: CTA card -->
+        <!-- CTA card -->
         <div class="flex flex-col justify-between rounded-[24px] bg-[var(--color-dark-olive)] p-8 lg:p-10">
           <div class="h-32 w-32 rounded-full border border-white/10 opacity-20 lg:h-48 lg:w-48"></div>
           <div class="mt-8">
@@ -178,10 +234,10 @@ const faqs = [
           </div>
         </div>
 
-        <!-- Right: accordion -->
+        <!-- FAQ accordion -->
         <div class="flex flex-col gap-2" id="ps-faq-accord">
           {faqs.map((item) => (
-            <details class="faq-row group overflow-hidden rounded-[12px] border border-[var(--color-n400)] bg-white">
+            <details class="group overflow-hidden rounded-[12px] border border-[var(--color-n400)] bg-white">
               <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 lg:px-6 lg:py-5">
                 <span class="text-[14px] font-medium text-[var(--color-n900)] lg:text-[15px]">{item.q}</span>
                 <span class="grid h-6 w-6 shrink-0 place-items-center rounded-full border border-[var(--color-n400)] text-[var(--color-n700)] transition-transform group-open:rotate-45">
@@ -198,19 +254,21 @@ const faqs = [
     </div>
   </section>
 
-  <!-- ── CTA Band ──────────────────────────────────────────────── -->
+  <!-- ── CTA Band ──────────────────────────────────────────────────── -->
   <section class="site-wrap pb-20">
-    <div class="relative overflow-hidden rounded-[24px] bg-[var(--color-brand)] p-10 lg:p-14">
-      <div class="pointer-events-none absolute right-0 top-0 h-64 w-64 translate-x-16 -translate-y-16 rounded-full bg-white/10 blur-2xl"></div>
+    <div class="relative overflow-hidden rounded-[24px] p-10 lg:p-14" style="background: radial-gradient(ellipse 132% 312% at 117% -4%, #4F583B 0%, #3F4733 14%, #363A2C 25%, #2a2d23 38%, #1d1d1d 55%, #1d1d1d 100%);">
       <div class="relative flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
         <div>
-          <h2 class="text-[26px] font-bold text-[#202318] lg:text-[32px]" style="font-family:var(--font-display)">Ready to Start Investing?</h2>
-          <p class="mt-2 max-w-md text-[14px] text-[#202318]/70">Open a free Demat account in under 10 minutes — zero delivery brokerage, SEBI-registered research, and a dedicated advisor.</p>
+          <h2 class="text-[22px] font-bold text-white lg:text-[28px]" style="font-family:var(--font-display)">
+            We are now your new gateway to the Stock Market!
+          </h2>
+          <p class="mt-2 max-w-md text-[14px] text-white/60">
+            Open a free Demat account in under 10 minutes — zero delivery brokerage, SEBI-registered research, and a dedicated advisor.
+          </p>
         </div>
-        <div class="flex shrink-0 flex-wrap gap-3">
-          <a href="/about/open-demat-account/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] bg-[#202318] text-[14px] font-semibold text-white transition-all hover:bg-black">Open Free Demat Account</a>
-          <a href="/product-hub/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] border border-[#202318]/30 text-[14px] font-medium text-[#202318] transition-all hover:bg-[#202318]/10">Try Calculators</a>
-        </div>
+        <a href="/about/open-demat-account/" class="inline-flex h-12 shrink-0 items-center justify-center rounded-[6px] bg-[var(--color-brand)] px-8 text-[13px] font-semibold text-[#202318] transition-all hover:bg-[var(--color-brand-hover)]">
+          Open Free Demat Account
+        </a>
       </div>
     </div>
   </section>
@@ -218,7 +276,8 @@ const faqs = [
 </BaseLayout>
 
 <style>
-  .product-suite-card {
+  /* Product Card v7 */
+  .product-card {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -227,15 +286,15 @@ const faqs = [
     border: 1px solid var(--color-warm-border);
     border-radius: 16px;
     text-decoration: none;
+    min-height: 130px;
     transition: background 0.22s ease, border-color 0.22s ease, transform 0.22s ease;
   }
-  .product-suite-card:hover {
+  .product-card:hover {
     background: var(--color-dark-olive);
     border-color: var(--color-dark-olive);
     transform: translateY(-2px);
   }
-
-  .product-suite-title {
+  .product-card-title {
     font-size: 16px;
     font-weight: 600;
     color: var(--color-ink);
@@ -243,38 +302,62 @@ const faqs = [
     line-height: 1.3;
     transition: color 0.22s ease;
   }
-  .product-suite-card:hover .product-suite-title {
-    color: var(--color-brand);
-  }
-
-  .product-suite-desc {
+  .product-card:hover .product-card-title { color: var(--color-brand); }
+  .product-card-desc {
     font-size: 13px;
     line-height: 1.6;
     color: var(--color-muted);
     flex: 1;
     transition: color 0.22s ease;
   }
-  .product-suite-card:hover .product-suite-desc {
-    color: rgba(255, 255, 255, 0.65);
-  }
-
-  .product-suite-arrow {
-    font-size: 16px;
+  .product-card:hover .product-card-desc { color: rgba(255,255,255,0.65); }
+  .product-card-arrow {
+    font-size: 15px;
     color: var(--color-brand);
-    margin-top: 4px;
     display: block;
     transition: transform 0.22s ease;
   }
-  .product-suite-card:hover .product-suite-arrow {
-    transform: translateX(4px);
-  }
+  .product-card:hover .product-card-arrow { transform: translateX(4px); }
+
+  /* Stage accordion */
+  .stage-body { display: none; }
+  .stage-item.is-active .stage-num  { color: var(--color-brand); }
+  .stage-item.is-active .stage-name { color: #fff; }
+  .stage-item.is-active .stage-chevron { transform: rotate(180deg); color: var(--color-brand); }
+  .stage-item.is-active .stage-body { display: block; }
+
+  /* Orbit SVG */
+  .orbit-dot { transition: fill 0.25s ease, stroke 0.25s ease; }
+  .orbit-label-num, .orbit-label-name { transition: fill 0.25s ease; }
+  .orbit-stage.is-active .orbit-dot { fill: rgba(243,184,63,0.18); stroke: rgba(243,184,63,0.65); stroke-width: 1.5px; }
+  .orbit-stage.is-active .orbit-label-num { fill: rgba(243,184,63,0.85); }
+  .orbit-stage.is-active .orbit-label-name { fill: rgba(243,184,63,0.90); }
 </style>
 
 <script>
-  const accord = document.getElementById('ps-faq-accord');
-  accord?.querySelectorAll('details').forEach(d => {
+  // FAQ accordion — only one open at a time
+  const faqAccord = document.getElementById('ps-faq-accord');
+  faqAccord?.querySelectorAll('details').forEach(d => {
     d.addEventListener('toggle', () => {
-      if (d.open) accord.querySelectorAll<HTMLDetailsElement>('details').forEach(o => { if (o !== d) o.removeAttribute('open'); });
+      if (d.open) {
+        faqAccord.querySelectorAll('details').forEach(o => { if (o !== d) o.removeAttribute('open'); });
+      }
     });
   });
+
+  // Stage accordion + orbit highlight sync
+  const stageItems = document.querySelectorAll('.stage-item');
+  const orbitStages = document.querySelectorAll('.orbit-stage');
+
+  function activateStage(num) {
+    stageItems.forEach(el => el.classList.toggle('is-active', el.dataset.stage === num));
+    orbitStages.forEach(el => el.classList.toggle('is-active', el.dataset.stage === num));
+  }
+
+  stageItems.forEach(el => {
+    el.addEventListener('click', () => activateStage(el.dataset.stage));
+  });
+
+  // Activate first stage on load
+  activateStage('01');
 </script>
