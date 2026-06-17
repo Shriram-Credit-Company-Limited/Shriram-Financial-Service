@@ -8,45 +8,56 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 >
 
   <!-- ══ 1. HERO ═══════════════════════════════════════════════════ -->
-  <section class="relative overflow-hidden bg-[var(--color-dark-800)] pt-20 pb-16 lg:pt-28 lg:pb-24">
-    <div class="site-wrap">
+  <section class="relative overflow-hidden pt-20 pb-16 lg:pt-28 lg:pb-24">
+    <div class="hero-wave" aria-hidden="true"></div>
+    <video
+      class="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-1000"
+      autoplay muted playsinline loop preload="auto" aria-hidden="true"
+      onloadeddata="this.style.opacity='1'"
+    >
+      <source src="/videos/BG.mp4" type="video/mp4" />
+    </video>
+    <div class="absolute inset-0 bg-gradient-to-r from-white/82 via-white/48 to-white/0" aria-hidden="true"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-black/8 via-transparent to-black/12" aria-hidden="true"></div>
+
+    <div class="site-wrap relative z-10">
       <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
 
         <!-- Left: headline -->
         <div class="reveal">
           <p class="text-[11px] font-bold uppercase tracking-[0.15em] text-[var(--color-brand)]">Partner with Shriram</p>
-          <h1 class="mt-4 text-[38px] font-bold leading-[1.12] text-white lg:text-[54px]" style="font-family:var(--font-display)">
+          <h1 class="mt-4 text-[36px] font-bold leading-[1.12] text-[#2e3914] lg:text-[52px]" style="font-family:var(--font-display)">
             Partner with Us.<br/>
             <span class="text-[var(--color-brand)]">Earn Unlimited Income.</span>
           </h1>
-          <p class="mt-5 max-w-[500px] text-[17px] leading-relaxed text-white/60">
+          <p class="mt-5 max-w-[500px] text-[17px] leading-relaxed text-[#2e3914]/70">
             Join India's fastest growing partner network. Build your own financial advisory practice — backed by the Shriram brand, technology, and research.
           </p>
-          <a href="#benefits" class="btn-primary mt-8 inline-flex">Learn More</a>
+          <a href="#benefits" class="mt-8 inline-flex h-[48px] items-center justify-center rounded-[6px] bg-[#2e3914] px-8 text-[14px] font-medium text-white transition-colors hover:bg-[#1a2010]">Learn More</a>
         </div>
 
-        <!-- Right: multi-step registration card -->
+        <!-- Right: transparent glass registration card -->
         <div class="reveal reveal-2">
-          <div id="partner-card" class="overflow-hidden rounded-[24px] bg-white shadow-2xl">
+          <div id="partner-card" class="warm-form overflow-hidden">
 
             <!-- Card header with progress -->
-            <div class="bg-[var(--color-dark-olive)] px-8 py-6">
-              <h2 class="text-[20px] font-bold text-white" style="font-family:var(--font-display)">Partner Registration</h2>
-              <p class="mt-0.5 text-[13px] text-white/50">in less than 30 seconds</p>
+            <div class="border-b border-[rgba(46,57,20,0.10)] px-8 py-6">
+              <h2 class="text-[20px] font-bold text-[#2e3914]" style="font-family:var(--font-display)">Partner Registration</h2>
+              <p class="mt-0.5 text-[13px] text-[#2e3914]/50">in less than 30 seconds</p>
               <div class="mt-5 flex items-center">
                 <div class="flex flex-col items-center gap-1.5" data-step-dot="1">
                   <div class="h-3 w-3 rounded-full bg-[var(--color-brand)] transition-all duration-300 ring-2 ring-[var(--color-brand)]/30"></div>
-                  <span class="text-[10px] font-bold text-[var(--color-brand)] transition-colors duration-300">Name</span>
+                  <span class="text-[10px] font-bold text-[#2e3914] transition-colors duration-300">Name</span>
                 </div>
-                <div class="mx-2 h-px flex-1 bg-white/20 transition-all duration-300" id="line-1"></div>
+                <div class="mx-2 h-px flex-1 bg-[#2e3914]/15 transition-all duration-300" id="line-1"></div>
                 <div class="flex flex-col items-center gap-1.5" data-step-dot="2">
-                  <div class="h-3 w-3 rounded-full bg-white/25 transition-all duration-300"></div>
-                  <span class="text-[10px] font-semibold text-white/40 transition-colors duration-300">Mobile</span>
+                  <div class="h-3 w-3 rounded-full bg-[#2e3914]/20 transition-all duration-300"></div>
+                  <span class="text-[10px] font-semibold text-[#2e3914]/35 transition-colors duration-300">Mobile</span>
                 </div>
-                <div class="mx-2 h-px flex-1 bg-white/20 transition-all duration-300" id="line-2"></div>
+                <div class="mx-2 h-px flex-1 bg-[#2e3914]/15 transition-all duration-300" id="line-2"></div>
                 <div class="flex flex-col items-center gap-1.5" data-step-dot="3">
-                  <div class="h-3 w-3 rounded-full bg-white/25 transition-all duration-300"></div>
-                  <span class="text-[10px] font-semibold text-white/40 transition-colors duration-300">City</span>
+                  <div class="h-3 w-3 rounded-full bg-[#2e3914]/20 transition-all duration-300"></div>
+                  <span class="text-[10px] font-semibold text-[#2e3914]/35 transition-colors duration-300">City</span>
                 </div>
               </div>
             </div>
@@ -56,10 +67,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
               <!-- Step 1: Name -->
               <div id="step-1" class="form-step px-8 py-8">
-                <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-muted)]">Step 1 of 3</p>
-                <p class="mt-3 text-[22px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">What should we call you?</p>
+                <p class="text-[11px] font-bold uppercase tracking-widest text-[#2e3914]/50">Step 1 of 3</p>
+                <p class="mt-3 text-[22px] font-bold text-[#2e3914]" style="font-family:var(--font-display)">What should we call you?</p>
                 <label class="mt-6 block">
-                  <span class="text-[11px] font-bold uppercase tracking-wider text-[var(--color-muted)]">Full Name</span>
+                  <span class="text-[11px] font-bold uppercase tracking-wider text-[#2e3914]/50">Full Name</span>
                   <input id="input-name" type="text" placeholder="Enter your full name" class="field mt-2" autocomplete="name" />
                 </label>
                 <div class="mt-6 flex justify-end">
@@ -69,10 +80,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
               <!-- Step 2: Mobile -->
               <div id="step-2" class="form-step hidden px-8 py-8">
-                <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-muted)]">Step 2 of 3</p>
-                <p class="mt-3 text-[22px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">Your Mobile number</p>
+                <p class="text-[11px] font-bold uppercase tracking-widest text-[#2e3914]/50">Step 2 of 3</p>
+                <p class="mt-3 text-[22px] font-bold text-[#2e3914]" style="font-family:var(--font-display)">Your Mobile number</p>
                 <label class="mt-6 block">
-                  <span class="text-[11px] font-bold uppercase tracking-wider text-[var(--color-muted)]">Mobile Number</span>
+                  <span class="text-[11px] font-bold uppercase tracking-wider text-[#2e3914]/50">Mobile Number</span>
                   <input id="input-mobile" type="tel" placeholder="+91 XXXXX XXXXX" maxlength="13" class="field mt-2" autocomplete="tel" />
                 </label>
                 <div class="mt-6 flex justify-between">
@@ -83,14 +94,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
               <!-- Step OTP -->
               <div id="step-otp" class="form-step hidden px-8 py-8">
-                <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-muted)]">Verification</p>
-                <p class="mt-3 text-[22px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">Verify your number</p>
-                <p class="mt-1 text-[14px] text-[var(--color-muted)]">OTP sent to <span id="otp-number" class="font-semibold text-[var(--color-ink)]"></span></p>
+                <p class="text-[11px] font-bold uppercase tracking-widest text-[#2e3914]/50">Verification</p>
+                <p class="mt-3 text-[22px] font-bold text-[#2e3914]" style="font-family:var(--font-display)">Verify your number</p>
+                <p class="mt-1 text-[14px] text-[#2e3914]/60">OTP sent to <span id="otp-number" class="font-semibold text-[#2e3914]"></span></p>
                 <label class="mt-6 block">
-                  <span class="text-[11px] font-bold uppercase tracking-wider text-[var(--color-muted)]">Enter OTP</span>
+                  <span class="text-[11px] font-bold uppercase tracking-wider text-[#2e3914]/50">Enter OTP</span>
                   <input id="input-otp" type="text" placeholder="• • • • • •" maxlength="6" class="field mt-2 text-center text-[22px] tracking-[0.5em] font-bold" autocomplete="one-time-code" inputmode="numeric" />
                 </label>
-                <p class="mt-2 text-[12px] text-[var(--color-muted)]">Didn't receive it? <button id="resend-otp" class="font-semibold text-[var(--color-brand)] hover:underline">Resend OTP</button></p>
+                <p class="mt-2 text-[12px] text-[#2e3914]/50">Didn't receive it? <button id="resend-otp" class="font-semibold text-[var(--color-brand)] hover:underline">Resend OTP</button></p>
                 <div class="mt-6 flex justify-between">
                   <button id="back-otp" class="step-back-btn">← Back</button>
                   <button id="verify-otp" class="btn-primary">Verify →</button>
@@ -99,10 +110,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
               <!-- Step 3: City -->
               <div id="step-3" class="form-step hidden px-8 py-8">
-                <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-muted)]">Step 3 of 3</p>
-                <p class="mt-3 text-[22px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">Which city are you from?</p>
+                <p class="text-[11px] font-bold uppercase tracking-widest text-[#2e3914]/50">Step 3 of 3</p>
+                <p class="mt-3 text-[22px] font-bold text-[#2e3914]" style="font-family:var(--font-display)">Which city are you from?</p>
                 <label class="mt-6 block">
-                  <span class="text-[11px] font-bold uppercase tracking-wider text-[var(--color-muted)]">City</span>
+                  <span class="text-[11px] font-bold uppercase tracking-wider text-[#2e3914]/50">City</span>
                   <input id="input-city" type="text" placeholder="e.g. Mumbai, Delhi, Chennai…" class="field mt-2" autocomplete="address-level2" />
                 </label>
                 <div class="mt-6 flex justify-between">
@@ -116,8 +127,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
                 <div class="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-[var(--color-brand)]/15">
                   <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-brand)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-8 w-8"><polyline points="20 6 9 17 4 12"/></svg>
                 </div>
-                <h3 class="text-[20px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">Request Submitted!</h3>
-                <p class="mt-2 text-[15px] text-[var(--color-muted)]">Our executive will contact you shortly.</p>
+                <h3 class="text-[20px] font-bold text-[#2e3914]" style="font-family:var(--font-display)">Request Submitted!</h3>
+                <p class="mt-2 text-[15px] text-[#2e3914]/60">Our executive will contact you shortly.</p>
                 <p class="mt-3 text-[22px] font-bold text-[var(--color-brand)]" style="font-family:var(--font-display)">Thank You.</p>
               </div>
 
@@ -397,17 +408,17 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
   /* Step back button */
   .step-back-btn {
-    border: 1px solid var(--color-n400);
+    border: 1px solid rgba(46,57,20,0.18);
     border-radius: 8px;
     padding: 10px 20px;
     font-size: 14px;
     font-weight: 600;
-    color: var(--color-muted);
+    color: rgba(46,57,20,0.55);
     background: transparent;
     cursor: pointer;
     transition: background 0.15s;
   }
-  .step-back-btn:hover { background: var(--color-n100); }
+  .step-back-btn:hover { background: rgba(46,57,20,0.06); }
 
   /* Step slide-in animation */
   @keyframes slideIn {
@@ -431,21 +442,20 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   }
 
   function setProgress(active: number) {
-    // active: 1 = Name done, 2 = Mobile done, 3 = City done
     document.querySelectorAll<HTMLElement>('[data-step-dot]').forEach(dot => {
       const n = parseInt(dot.dataset.stepDot ?? '0');
       const circle = dot.querySelector('div') as HTMLElement;
       const label  = dot.querySelector('span') as HTMLElement;
       const on = n <= active;
-      circle.style.backgroundColor = on ? 'var(--color-brand)' : 'rgba(255,255,255,0.25)';
+      circle.style.backgroundColor = on ? 'var(--color-brand)' : 'rgba(46,57,20,0.18)';
       circle.style.boxShadow = on ? '0 0 0 3px rgba(243,184,63,0.25)' : 'none';
-      label.style.color      = on ? 'var(--color-brand)' : 'rgba(255,255,255,0.4)';
+      label.style.color      = on ? '#2e3914' : 'rgba(46,57,20,0.35)';
       label.style.fontWeight = on ? '700' : '400';
     });
     const line1 = document.getElementById('line-1');
     const line2 = document.getElementById('line-2');
-    if (line1) line1.style.backgroundColor = active >= 2 ? 'rgba(243,184,63,0.5)' : 'rgba(255,255,255,0.2)';
-    if (line2) line2.style.backgroundColor = active >= 3 ? 'rgba(243,184,63,0.5)' : 'rgba(255,255,255,0.2)';
+    if (line1) line1.style.backgroundColor = active >= 2 ? 'rgba(243,184,63,0.5)' : 'rgba(46,57,20,0.12)';
+    if (line2) line2.style.backgroundColor = active >= 3 ? 'rgba(243,184,63,0.5)' : 'rgba(46,57,20,0.12)';
   }
 
   // Step 1 → 2
