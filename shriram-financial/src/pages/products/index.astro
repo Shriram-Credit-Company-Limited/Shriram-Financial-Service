@@ -155,33 +155,40 @@ const faqs = [
   <!-- ── Six Financial Stages, One Orbit ──────────────────────────── -->
   <section class="overflow-hidden bg-[#1d1d1d] py-16 lg:py-24">
     <div class="site-wrap">
-      <div class="mb-10 text-center lg:mb-12">
+      <div class="mb-10 lg:mb-14">
         <h2 class="text-[24px] font-semibold text-white lg:text-[32px]" style="font-family:var(--font-display)">
           Six Financial Stages, One Orbit.
         </h2>
-        <p class="mx-auto mt-3 max-w-2xl text-[15px] leading-relaxed text-white/50">
+        <p class="mt-3 max-w-2xl text-[15px] leading-relaxed text-white/50">
           Every financial move you make — trading, building, borrowing, protecting — happens in one connected place. Click any stage to explore.
         </p>
       </div>
 
-      <!-- Big animated canvas -->
-      <div class="mx-auto w-full max-w-[700px]">
-        <canvas id="orbit-canvas" class="block w-full" style="aspect-ratio:1/1" aria-hidden="true"></canvas>
-      </div>
+      <div class="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
 
-      <!-- Stage cards below canvas -->
-      <div id="stages-list" class="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
-        {stages.map(s => (
-          <div class="stage-row cursor-pointer rounded-[14px] border border-white/10 px-4 py-4 transition-colors" data-stage={s.num}>
-            <p class="stage-num text-[10px] font-bold uppercase tracking-widest mb-1">{s.num}</p>
-            <p class="stage-name text-[15px] font-semibold">{s.name}</p>
-            <div class="mt-2 flex flex-wrap gap-1">
-              {s.pills.map(pill => (
-                <span class="stage-pill rounded-full bg-white/5 px-2 py-0.5 text-[10px]">{pill}</span>
-              ))}
+        <!-- Left: stage list -->
+        <div class="rounded-[20px] bg-white/[0.03] p-2">
+          {stages.map(s => (
+            <div class="stage-row relative flex cursor-pointer items-center justify-between gap-4 overflow-hidden rounded-[14px] border border-transparent px-5 py-4 transition-colors" data-stage={s.num}>
+              <div class="shrink-0">
+                <p class="stage-num mb-0.5 text-[10px] font-bold uppercase tracking-widest">{s.num}</p>
+                <p class="stage-name text-[15px] font-semibold">{s.name}</p>
+              </div>
+              <div class="flex flex-wrap justify-end gap-1.5">
+                {s.pills.map(pill => (
+                  <span class="stage-pill rounded-full px-2.5 py-0.5 text-[11px] font-medium">{pill}</span>
+                ))}
+              </div>
+              <span class="stage-progress"></span>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+
+        <!-- Right: orbit canvas -->
+        <div class="mx-auto w-full max-w-[520px] lg:max-w-none">
+          <canvas id="orbit-canvas" class="block w-full" style="aspect-ratio:1/1" aria-hidden="true"></canvas>
+        </div>
+
       </div>
     </div>
   </section>
@@ -298,15 +305,31 @@ const faqs = [
     transform: translateX(0);
   }
 
-  /* ── Stage cards ── */
-  .stage-num  { color: rgba(255,255,255,0.25); }
-  .stage-name { color: rgba(255,255,255,0.50); transition: color 0.2s; }
-  .stage-pill { color: rgba(255,255,255,0.28); }
+  /* ── Stage rows ── */
+  .stage-num  { color: rgba(255,255,255,0.22); }
+  .stage-name { color: rgba(255,255,255,0.46); transition: color 0.3s; }
+  .stage-pill { color: rgba(255,255,255,0.26); background: rgba(255,255,255,0.05); }
 
-  .stage-row.is-active { border-color: rgba(243,184,63,0.35); background: rgba(243,184,63,0.06); }
+  .stage-row { transition: background 0.3s, border-color 0.3s; }
+  .stage-row.is-active { border-color: rgba(243,184,63,0.28); background: rgba(243,184,63,0.07); }
   .stage-row.is-active .stage-num  { color: var(--color-brand); }
   .stage-row.is-active .stage-name { color: #ffffff; }
-  .stage-row.is-active .stage-pill { background: rgba(243,184,63,0.12); color: rgba(243,184,63,0.85); }
+  .stage-row.is-active .stage-pill { background: rgba(243,184,63,0.12); color: rgba(243,184,63,0.82); }
+
+  /* Progress bar */
+  .stage-progress {
+    position: absolute;
+    bottom: 0; left: 14px; right: 14px;
+    height: 1.5px;
+    background: var(--color-brand);
+    border-radius: 9999px;
+    width: 0;
+    opacity: 0;
+  }
+  @keyframes stage-fill {
+    from { width: 0; opacity: 0.8; }
+    to   { width: calc(100% - 28px); opacity: 0.8; }
+  }
 </style>
 
 <script>
@@ -318,7 +341,46 @@ const faqs = [
     });
   });
 
-  // ── Orbit canvas — 3D perspective solar system ──────────────────
+  // ── Orbit: shared state, auto-cycle, progress bars ───────────────
+  const STAGES = ['01','02','03','04','05','06'];
+  const CYCLE_MS = 2800;
+  let orbitActive = STAGES[0];
+  let cycleIdx = 0;
+  const stageRows = Array.from(document.querySelectorAll('.stage-row'));
+
+  function setActive(num) {
+    orbitActive = num;
+    stageRows.forEach(row => {
+      const on = row.dataset.stage === num;
+      row.classList.toggle('is-active', on);
+      const bar = row.querySelector('.stage-progress');
+      if (!bar) return;
+      // Restart CSS animation cleanly
+      bar.style.animation = 'none';
+      void bar.offsetWidth;
+      bar.style.animation = on ? `stage-fill ${CYCLE_MS}ms linear forwards` : 'none';
+    });
+  }
+
+  function startCycle() {
+    return setInterval(() => {
+      cycleIdx = (cycleIdx + 1) % STAGES.length;
+      setActive(STAGES[cycleIdx]);
+    }, CYCLE_MS);
+  }
+
+  let cycleTimer = startCycle();
+
+  stageRows.forEach(el => el.addEventListener('click', () => {
+    clearInterval(cycleTimer);
+    cycleIdx = STAGES.indexOf(el.dataset.stage);
+    setActive(el.dataset.stage);
+    cycleTimer = startCycle();
+  }));
+
+  setActive(STAGES[0]);
+
+  // ── Orbit canvas — 3D perspective solar system ───────────────────
   (function () {
     const canvas = document.getElementById('orbit-canvas');
     if (!canvas) return;
@@ -332,23 +394,14 @@ const faqs = [
     const OR = L * 0.41;
     const IR = L * 0.25;
     const DEG = Math.PI / 180;
-
-    // 3D tilt: orbital plane elevation angle (view from above)
     const ELEV = 28 * DEG;
-    const sinE = Math.sin(ELEV);   // ~0.469 — Y compression factor
-    const cosE = Math.cos(ELEV);   // ~0.883
+    const sinE = Math.sin(ELEV);
 
-    // Project 3D orbital coords → 2D screen
     function proj(angle, r) {
-      const oz = Math.sin(angle) * r;  // depth in orbital plane
-      return {
-        x: cx + Math.cos(angle) * r,
-        y: cy + oz * sinE,             // compressed Y gives 3D tilt
-        depth: oz,                     // -r=far(top), +r=near(bottom)
-      };
+      const oz = Math.sin(angle) * r;
+      return { x: cx + Math.cos(angle) * r, y: cy + oz * sinE, depth: oz };
     }
 
-    // Random starfield
     const stars = Array.from({ length: 150 }, () => ({
       x: Math.random() * L, y: Math.random() * L,
       r: Math.random() * 1.3 + 0.2,
@@ -364,13 +417,10 @@ const faqs = [
       { stage:'05', name:'Borrow',  r:IR, a:  0*DEG, spd:0.50*DEG },
     ];
 
-    let active = '01';
     let frame = 0;
 
-    // Draw one orbit ring split into back (faint) and front (bright) halves
     function drawRing(r) {
       const steps = 90;
-      // Back half: angles π→2π → sin negative → y < cy (top of ellipse, far)
       ctx.beginPath();
       for (let i = 0; i <= steps; i++) {
         const a = Math.PI + Math.PI * (i / steps);
@@ -379,7 +429,6 @@ const faqs = [
       }
       ctx.setLineDash([4, 9]); ctx.lineWidth = 1;
       ctx.strokeStyle = 'rgba(255,255,255,0.06)'; ctx.stroke();
-      // Front half: angles 0→π → sin positive → y > cy (bottom of ellipse, near)
       ctx.beginPath();
       for (let i = 0; i <= steps; i++) {
         const a = Math.PI * (i / steps);
@@ -394,71 +443,64 @@ const faqs = [
       frame++;
       ctx.clearRect(0, 0, L, L);
 
-      // Starfield
       stars.forEach(s => {
         ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(255,255,255,${s.a})`; ctx.fill();
       });
 
-      // Orbit rings (3D ellipses)
       [OR, IR].forEach(r => drawRing(r));
 
-      // ── Planets (depth-sorted back→front) ────────────────────────
       planets.forEach(p => { p.a += p.spd; });
-      const sorted = [...planets].sort((a,b) => proj(a.a,a.r).depth - proj(b.a,b.r).depth);
+      const sorted = [...planets].sort((a, b) => proj(a.a, a.r).depth - proj(b.a, b.r).depth);
 
       sorted.forEach(p => {
         const pos = proj(p.a, p.r);
-        const isActive = p.stage === active;
+        const isActive = p.stage === orbitActive; // reads module-scope var
 
-        // Depth normalised: 0=far(top), 1=near(bottom)
-        const dn = (pos.depth / p.r + 1) / 2;
-        const scale = 0.50 + 0.60 * dn;    // 0.50 far → 1.10 near
-        const alpha = 0.40 + 0.60 * dn;    // 0.40 far → 1.00 near
+        const dn    = (pos.depth / p.r + 1) / 2;
+        const scale = 0.50 + 0.60 * dn;
+        const alpha = 0.40 + 0.60 * dn;
         const dotR  = (isActive ? 11 : 7) * scale;
 
-        // Active: halo glow + pulse ring
         if (isActive) {
-          const pg = ctx.createRadialGradient(pos.x,pos.y,0,pos.x,pos.y,dotR*5.5);
-          pg.addColorStop(0,  `rgba(243,184,63,${0.60*alpha})`);
-          pg.addColorStop(0.4,`rgba(243,184,63,${0.18*alpha})`);
-          pg.addColorStop(1,  'rgba(243,184,63,0)');
-          ctx.fillStyle = pg; ctx.beginPath(); ctx.arc(pos.x,pos.y,dotR*5.5,0,Math.PI*2); ctx.fill();
+          const pg = ctx.createRadialGradient(pos.x, pos.y, 0, pos.x, pos.y, dotR * 5.5);
+          pg.addColorStop(0,   `rgba(243,184,63,${0.60 * alpha})`);
+          pg.addColorStop(0.4, `rgba(243,184,63,${0.18 * alpha})`);
+          pg.addColorStop(1,   'rgba(243,184,63,0)');
+          ctx.fillStyle = pg; ctx.beginPath(); ctx.arc(pos.x, pos.y, dotR * 5.5, 0, Math.PI * 2); ctx.fill();
           const pr = 0.5 + 0.5 * Math.sin(frame * 0.09);
-          ctx.beginPath(); ctx.arc(pos.x,pos.y,dotR*(2.2+pr),0,Math.PI*2);
-          ctx.strokeStyle = `rgba(243,184,63,${0.50*(1-pr)*alpha})`; ctx.lineWidth=1.2; ctx.stroke();
+          ctx.beginPath(); ctx.arc(pos.x, pos.y, dotR * (2.2 + pr), 0, Math.PI * 2);
+          ctx.strokeStyle = `rgba(243,184,63,${0.50 * (1 - pr) * alpha})`; ctx.lineWidth = 1.2; ctx.stroke();
         } else {
-          const ig = ctx.createRadialGradient(pos.x,pos.y,0,pos.x,pos.y,dotR*3);
-          ig.addColorStop(0,`rgba(255,255,255,${0.09*alpha})`);
-          ig.addColorStop(1,'rgba(255,255,255,0)');
-          ctx.fillStyle = ig; ctx.beginPath(); ctx.arc(pos.x,pos.y,dotR*3,0,Math.PI*2); ctx.fill();
+          const ig = ctx.createRadialGradient(pos.x, pos.y, 0, pos.x, pos.y, dotR * 3);
+          ig.addColorStop(0, `rgba(255,255,255,${0.09 * alpha})`);
+          ig.addColorStop(1, 'rgba(255,255,255,0)');
+          ctx.fillStyle = ig; ctx.beginPath(); ctx.arc(pos.x, pos.y, dotR * 3, 0, Math.PI * 2); ctx.fill();
         }
 
-        // Planet sphere — 3D off-centre highlight
         const hl = ctx.createRadialGradient(
-          pos.x - dotR*0.32, pos.y - dotR*0.32, dotR*0.04,
+          pos.x - dotR * 0.32, pos.y - dotR * 0.32, dotR * 0.04,
           pos.x, pos.y, dotR
         );
         if (isActive) {
-          hl.addColorStop(0,  `rgba(255,225,140,${alpha})`);
-          hl.addColorStop(0.45,`rgba(243,184,63,${0.92*alpha})`);
-          hl.addColorStop(1,  `rgba(170,110,10,${0.45*alpha})`);
+          hl.addColorStop(0,    `rgba(255,225,140,${alpha})`);
+          hl.addColorStop(0.45, `rgba(243,184,63,${0.92 * alpha})`);
+          hl.addColorStop(1,    `rgba(170,110,10,${0.45 * alpha})`);
         } else {
-          hl.addColorStop(0,  `rgba(245,248,255,${0.90*alpha})`);
-          hl.addColorStop(0.45,`rgba(175,185,215,${0.65*alpha})`);
-          hl.addColorStop(1,  `rgba(90,100,145,${0.20*alpha})`);
+          hl.addColorStop(0,    `rgba(245,248,255,${0.90 * alpha})`);
+          hl.addColorStop(0.45, `rgba(175,185,215,${0.65 * alpha})`);
+          hl.addColorStop(1,    `rgba(90,100,145,${0.20 * alpha})`);
         }
-        ctx.beginPath(); ctx.arc(pos.x,pos.y,dotR,0,Math.PI*2);
+        ctx.beginPath(); ctx.arc(pos.x, pos.y, dotR, 0, Math.PI * 2);
         ctx.fillStyle = hl; ctx.fill();
 
-        // Label: placed along the orbit vector beyond the planet
-        const lp = proj(p.a, p.r + dotR + 20);
+        const lp    = proj(p.a, p.r + dotR + 20);
         const align = lp.x > cx + 20 ? 'left' : (lp.x < cx - 20 ? 'right' : 'center');
-        const base  = lp.y > pos.y + 2 ? 'top' : (lp.y < pos.y - 2 ? 'bottom' : 'middle');
+        const base  = lp.y > pos.y + 2 ? 'top'  : (lp.y < pos.y - 2 ? 'bottom' : 'middle');
         ctx.fillStyle = isActive
-          ? `rgba(243,184,63,${Math.min(1, 0.88*alpha+0.12)})`
-          : `rgba(255,255,255,${0.25 + 0.32*dn})`;
-        ctx.font = `${isActive?'700':'500'} ${Math.round(11+2*dn)}px Inter,system-ui,sans-serif`;
+          ? `rgba(243,184,63,${Math.min(1, 0.88 * alpha + 0.12)})`
+          : `rgba(255,255,255,${0.25 + 0.32 * dn})`;
+        ctx.font = `${isActive ? '700' : '500'} ${Math.round(11 + 2 * dn)}px Inter,system-ui,sans-serif`;
         ctx.textAlign = align; ctx.textBaseline = base;
         ctx.fillText(p.name, lp.x, lp.y);
       });
@@ -466,13 +508,6 @@ const faqs = [
       requestAnimationFrame(draw);
     }
 
-    const rows = document.querySelectorAll('.stage-row');
-    function setActive(num) {
-      active = num;
-      rows.forEach(r => r.classList.toggle('is-active', r.dataset.stage === num));
-    }
-    rows.forEach(el => el.addEventListener('click', () => setActive(el.dataset.stage)));
-    setActive('01');
     draw();
   })();
 </script>
