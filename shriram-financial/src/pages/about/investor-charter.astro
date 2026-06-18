@@ -1,0 +1,935 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const categories = [
+  { id: 'all',              label: 'All Documents',        count: 10 },
+  { id: 'investor-charter', label: 'Investor Charter',     count: 4 },
+  { id: 'grievance',        label: 'Grievance Redressal',  count: 1 },
+  { id: 'compliance',       label: 'Annual Compliance',    count: 1 },
+  { id: 'risk',             label: 'Risk Disclosures',     count: 1 },
+  { id: 'policies',         label: 'Policies',             count: 3 },
+];
+
+interface DocContent {
+  sections: Array<{ heading: string; items: string[] }>;
+  footer?: string;
+}
+
+interface Document {
+  id: string;
+  category: string;
+  categoryLabel: string;
+  title: string;
+  subtitle: string;
+  date: string;
+  ref: string;
+  badge?: string;
+  content: DocContent;
+}
+
+const documents: Document[] = [
+  {
+    id: 'ic-equity',
+    category: 'investor-charter',
+    categoryLabel: 'Investor Charter',
+    title: 'Investor Charter — Equity & F&O Broking',
+    subtitle: 'NSE & BSE · Cash and Derivatives Segment',
+    date: 'Effective: 1 April 2025',
+    ref: 'SEBI/HO/OIAE/IGRD/CIR/P/2023/156',
+    badge: 'SEBI',
+    content: {
+      sections: [
+        {
+          heading: 'SEBI Registrations',
+          items: [
+            'NSE — Cash Market: INB231103833',
+            'NSE — F&O Segment: INF231103833',
+            'NSE — Currency Derivatives: INE231103833',
+            'BSE — Cash Market: INB011103839',
+            'BSE — F&O Segment: INF011103839',
+          ],
+        },
+        {
+          heading: 'Rights of Investors',
+          items: [
+            'Receive a copy of KYC form and agreement documents at account opening.',
+            'Receive contract notes within 24 hours of trade execution via email or post.',
+            'Receive funds and securities within SEBI-prescribed settlement timelines (T+1).',
+            'Access your ledger, contract notes, and account statement at any time.',
+            'Lodge grievances with the stockbroker and receive resolution within 30 days.',
+            'Escalate unresolved complaints to SEBI SCORES (scores.sebi.gov.in).',
+            'Use the ODR platform at smartodr.in for online dispute resolution.',
+            'Receive clear information about all charges, brokerage, and applicable taxes before executing trades.',
+          ],
+        },
+        {
+          heading: 'Obligations of Investors',
+          items: [
+            'Provide accurate and complete KYC information and update within 30 days of any change.',
+            'Read all account-opening documents, risk disclosures, and exchange rules before signing.',
+            'Maintain adequate margin to avoid shortfall penalties under SEBI margin rules.',
+            'Monitor your account regularly and report any unauthorised trades immediately.',
+            'Not engage in insider trading, market manipulation, or illegal activities.',
+            'Not execute trades based on unverified tips, rumours, or unauthenticated sources.',
+          ],
+        },
+        {
+          heading: 'Grievance Redressal',
+          items: [
+            'Write to: compliance@shriramfinancialservices.com',
+            'Call: 1800 103 1212 (Toll-Free, Mon–Sat, 9 AM – 6 PM)',
+            'Escalate to NSE/BSE grievance portal if unresolved within 30 days.',
+            'Further escalate to SEBI SCORES: scores.sebi.gov.in',
+            'Online dispute resolution: smartodr.in (SEBI mandated ODR platform)',
+          ],
+        },
+      ],
+      footer: 'This Investor Charter is issued in compliance with SEBI Circular SEBI/HO/OIAE/IGRD/CIR/P/2023/156 dated September 7, 2023.',
+    },
+  },
+  {
+    id: 'ic-dp',
+    category: 'investor-charter',
+    categoryLabel: 'Investor Charter',
+    title: 'Investor Charter — Depository Participant',
+    subtitle: 'CDSL · Demat Account Services',
+    date: 'Effective: 1 April 2025',
+    ref: 'SEBI/HO/OIAE/IGRD/CIR/P/2023/156',
+    badge: 'CDSL',
+    content: {
+      sections: [
+        {
+          heading: 'DP Registration',
+          items: [
+            'CDSL Depository Participant Registration: IN-DP-165-2015',
+            'SEBI Registered Depository Participant under the Depositories Act, 1996.',
+          ],
+        },
+        {
+          heading: 'Rights of Investors (Demat Account Holder)',
+          items: [
+            'Receive a copy of the DP account opening form and DP–Client agreement at the time of account opening.',
+            'Receive a Beneficial Owner (BO) ID and Client Master Report upon account activation.',
+            'Receive transaction statements at defined intervals (monthly or on-demand).',
+            'Demat and remat of securities as per CDSL timelines.',
+            'Pledge and unpledge securities for margin or loan purposes.',
+            'Nomination facility for the Demat account.',
+            'Lodge complaints with CDSL and receive resolution within 21 days.',
+            'Escalate unresolved complaints to SEBI SCORES.',
+          ],
+        },
+        {
+          heading: 'Obligations of Investors',
+          items: [
+            'Provide valid PAN and KYC documents at account opening.',
+            'Keep the BO ID, login credentials, and TPIN confidential.',
+            'Report loss of TPIN or unauthorized transaction immediately.',
+            'Ensure the mobile number and email linked to the account are always active and updated.',
+            'Not pledge securities without understanding the implications.',
+          ],
+        },
+        {
+          heading: 'DP Grievance Redressal',
+          items: [
+            'Contact: compliance@shriramfinancialservices.com',
+            'CDSL Investor Grievance Portal: cdsl.co.in/investor-grievance',
+            'SEBI SCORES escalation: scores.sebi.gov.in',
+            'Arbitration available through CDSL as per DP–Client agreement.',
+          ],
+        },
+      ],
+      footer: 'Issued in compliance with SEBI Circular SEBI/HO/OIAE/IGRD/CIR/P/2023/156 and CDSL DP Operating Instructions.',
+    },
+  },
+  {
+    id: 'ic-research',
+    category: 'investor-charter',
+    categoryLabel: 'Investor Charter',
+    title: 'Investor Charter — Research Analyst',
+    subtitle: 'SEBI-Registered · Equity Research Reports',
+    date: 'Effective: 1 January 2025',
+    ref: 'SEBI/HO/IMD/DF1/CIR/P/2022/0106',
+    badge: 'SEBI',
+    content: {
+      sections: [
+        {
+          heading: 'SEBI Registration',
+          items: ['Research Analyst Registration No.: INH200009624'],
+        },
+        {
+          heading: 'Rights of Research Report Subscribers',
+          items: [
+            'Receive research reports prepared by SEBI-registered analysts only.',
+            'Access the research report without any obligation to execute trades through Shriram.',
+            'Receive disclosures on analyst holdings, conflicts of interest, and issuer relationships.',
+            'Receive clear buy/hold/sell recommendations with rationale and target price.',
+            'Lodge complaints regarding misleading research or undisclosed conflicts.',
+          ],
+        },
+        {
+          heading: 'Obligations of Research Subscribers',
+          items: [
+            'Treat research reports as one input in your investment decision — not a guarantee of returns.',
+            'Read all disclosures and disclaimers published with each report.',
+            'Not share or redistribute research reports without permission.',
+            'Not execute trades based solely on research tips without personal due diligence.',
+          ],
+        },
+        {
+          heading: 'Disclosures',
+          items: [
+            'Shriram Financial Services and/or its associates may hold securities covered in research reports.',
+            'All research recommendations are subject to market risk. Past performance is not indicative of future results.',
+            'Research analysts do not receive any compensation from companies covered in reports.',
+          ],
+        },
+      ],
+      footer: 'Issued in compliance with SEBI (Research Analysts) Regulations, 2014 and SEBI Circular SEBI/HO/IMD/DF1/CIR/P/2022/0106.',
+    },
+  },
+  {
+    id: 'ic-mf',
+    category: 'investor-charter',
+    categoryLabel: 'Investor Charter',
+    title: 'Investor Charter — Mutual Fund Distributor',
+    subtitle: 'AMFI-Registered · ARN 29483',
+    date: 'Effective: 1 April 2025',
+    ref: 'SEBI/HO/IMD/IMD-I/DOF5/P/CIR/2021/553',
+    badge: 'AMFI',
+    content: {
+      sections: [
+        {
+          heading: 'AMFI Registration',
+          items: ['AMFI Registration Number (ARN): ARN-29483'],
+        },
+        {
+          heading: 'Rights of Mutual Fund Investors',
+          items: [
+            'Receive complete and accurate information about mutual fund schemes before investing.',
+            'Receive account statements, annual reports, and NAV updates as per SEBI/AMFI norms.',
+            'Redeem mutual fund units at applicable NAV without undue delay.',
+            'Receive exit load details and any applicable charges before investing.',
+            'Lodge complaints via SEBI SCORES or AMC grievance portal.',
+            'Access audited accounts and portfolio disclosures of the mutual fund scheme.',
+          ],
+        },
+        {
+          heading: 'Obligations of Mutual Fund Investors',
+          items: [
+            'Provide accurate KYC details including PAN and address proof.',
+            'Read the Scheme Information Document (SID) and Key Information Memorandum (KIM) before investing.',
+            'Understand that mutual fund investments are subject to market risks.',
+            'Not execute transactions based on unverified performance data.',
+          ],
+        },
+        {
+          heading: 'Distributor Disclosure',
+          items: [
+            'Shriram Financial Services acts as an AMFI-registered distributor and earns trail commission from AMCs.',
+            'Commission rates and conflict of interest disclosures are available on request.',
+            'We recommend only SEBI-registered mutual fund schemes through ARN 29483.',
+          ],
+        },
+      ],
+      footer: 'Issued in compliance with SEBI Circular SEBI/HO/IMD/IMD-I/DOF5/P/CIR/2021/553 and AMFI Best Practices Guidelines.',
+    },
+  },
+  {
+    id: 'grievance-mechanism',
+    category: 'grievance',
+    categoryLabel: 'Grievance Redressal',
+    title: 'Grievance Redressal Mechanism',
+    subtitle: 'All Segments · SEBI SCORES & ODR Compliant',
+    date: 'Updated: June 2025',
+    ref: 'SEBI/HO/OIAE/IGRD/CIR/P/2023/156',
+    badge: 'SEBI',
+    content: {
+      sections: [
+        {
+          heading: 'Level 1 — Contact Shriram Financial Services',
+          items: [
+            'Email: compliance@shriramfinancialservices.com',
+            'Phone: 1800 103 1212 (Toll-Free, Mon–Sat, 9 AM – 6 PM)',
+            'Address: Shriram House, No. 4, Burkit Road, T. Nagar, Chennai – 600 017',
+            'Expected resolution time: 30 days from the date of complaint registration.',
+          ],
+        },
+        {
+          heading: 'Level 2 — Exchange / CDSL Grievance Portal',
+          items: [
+            'NSE Investor Grievance: igrc.nseindia.com',
+            'BSE Investor Grievance: bseindia.com/investors/grievance',
+            'CDSL Investor Grievance: cdsl.co.in/investor-grievance',
+            'Escalate if not resolved by Shriram within 30 days.',
+          ],
+        },
+        {
+          heading: 'Level 3 — SEBI SCORES',
+          items: [
+            'Portal: scores.sebi.gov.in',
+            'For complaints not resolved at Level 1 or Level 2.',
+            'SEBI reviews the complaint and directs the intermediary to resolve it.',
+            'Helpline: 1800 266 7575 (Toll-Free)',
+          ],
+        },
+        {
+          heading: 'Level 4 — Online Dispute Resolution (ODR)',
+          items: [
+            'Portal: smartodr.in (SEBI-mandated ODR platform)',
+            'Available for disputes relating to securities market transactions.',
+            'Panel of SEBI-empanelled conciliators and arbitrators.',
+            'Binding resolution within 21 days (conciliation) or 45 days (arbitration).',
+          ],
+        },
+      ],
+      footer: 'SEBI Circular Reference: SEBI/HO/OIAE/IGRD/CIR/P/2023/156 dated September 7, 2023.',
+    },
+  },
+  {
+    id: 'annual-compliance',
+    category: 'compliance',
+    categoryLabel: 'Annual Compliance',
+    title: 'Annual Compliance Report — FY 2024–25',
+    subtitle: 'Stockbroking & DP · SEBI Mandated Annual Disclosure',
+    date: 'Published: 30 April 2025',
+    ref: 'SEBI Annual Compliance Certificate',
+    badge: 'Annual',
+    content: {
+      sections: [
+        {
+          heading: 'Compliance Summary — FY 2024–25',
+          items: [
+            'All SEBI, Exchange, and Depository regulations were complied with during FY 2024–25.',
+            'Net Worth as per latest audited accounts meets the minimum capital adequacy requirement.',
+            'Internal audit conducted quarterly by a SEBI-empanelled auditor.',
+            'SEBI Annual System Audit completed within the prescribed timeline.',
+            'Cybersecurity and IT policy reviewed and updated in compliance with SEBI Circular CIR/MRD/DP/13/2015.',
+          ],
+        },
+        {
+          heading: 'Client Funds & Securities',
+          items: [
+            'Client funds held in a designated separate bank account — no commingling with proprietary funds.',
+            'Client securities segregated from proprietary holdings as per SEBI norms.',
+            'Quarterly client fund and securities audit conducted as per Exchange requirements.',
+            'Margin reporting to Exchanges completed daily within stipulated timelines.',
+          ],
+        },
+        {
+          heading: 'Grievance Statistics — FY 2024–25',
+          items: [
+            'Total grievances received: Updated quarterly on SCORES portal.',
+            'Grievances resolved within 30 days: 98%+ resolution rate maintained.',
+            'Pending grievances: Nil as of 31 March 2025.',
+          ],
+        },
+        {
+          heading: 'Certifications',
+          items: [
+            'This compliance report is certified by the Managing Director / Compliance Officer of Shriram Financial Services.',
+            'Submitted to NSE, BSE, MCX, NCDEX, CDSL, AMFI, and SEBI as per respective regulatory requirements.',
+          ],
+        },
+      ],
+      footer: 'Annual Compliance Report for Financial Year 2024–25 (April 2024 – March 2025).',
+    },
+  },
+  {
+    id: 'risk-disclosure',
+    category: 'risk',
+    categoryLabel: 'Risk Disclosures',
+    title: 'Risk Disclosure Document',
+    subtitle: 'All Segments — Mandatory SEBI Risk Warning',
+    date: 'Effective: 1 April 2025',
+    ref: 'SEBI Risk Disclosure — Mandatory',
+    badge: 'Mandatory',
+    content: {
+      sections: [
+        {
+          heading: 'General Market Risk',
+          items: [
+            'Investment in securities markets is subject to market risks. Read all related documents carefully before investing.',
+            'Shriram Financial Services does not guarantee any assured or fixed returns on investments.',
+            'Past performance of any security or research recommendation is not indicative of future results.',
+          ],
+        },
+        {
+          heading: 'Equity & Cash Segment',
+          items: [
+            'Stock prices fluctuate due to market, economic, political, and company-specific factors.',
+            'You may lose part or all of your invested capital.',
+            'Liquidity risk: Some securities may be illiquid and difficult to sell at desired prices.',
+          ],
+        },
+        {
+          heading: 'Derivatives (F&O) Segment',
+          items: [
+            'Derivatives are leveraged instruments. Losses can exceed your initial margin deposit.',
+            'Only invest money you can afford to lose in derivatives trading.',
+            'Options premium can go to zero on expiry. Buyers of options can lose the full premium paid.',
+            'Futures positions may require additional margin if the market moves against you.',
+          ],
+        },
+        {
+          heading: 'Mutual Funds',
+          items: [
+            'Mutual Fund investments are subject to market risks.',
+            'Please read the Scheme Information Document (SID) and Key Information Memorandum (KIM) carefully before investing.',
+            'NAV of schemes may go up or down based on market conditions.',
+          ],
+        },
+        {
+          heading: 'Currency & Commodities',
+          items: [
+            'Currency derivatives carry risks from exchange rate fluctuations and sovereign policy changes.',
+            'Commodity prices are subject to supply-demand dynamics, geopolitical events, and monsoon variability.',
+          ],
+        },
+      ],
+      footer: 'SEBI IMPORTANT NOTICE: "Investment in securities market are subject to market risks, read all the related documents carefully before investing."',
+    },
+  },
+  {
+    id: 'kyc-policy',
+    category: 'policies',
+    categoryLabel: 'Policies',
+    title: 'Know Your Client (KYC) Policy',
+    subtitle: 'Client Onboarding · SEBI & PMLA Compliant',
+    date: 'Updated: January 2025',
+    ref: 'SEBI KYC Registration Agency (KRA) Regulations, 2011',
+    badge: 'Policy',
+    content: {
+      sections: [
+        {
+          heading: 'KYC Requirements',
+          items: [
+            'PAN card — mandatory for all investors under SEBI/PMLA.',
+            'Aadhaar card — for address proof and Aadhaar-based eSign.',
+            'Passport-size photograph.',
+            'Bank account proof (cancelled cheque or 3-month bank statement).',
+            'Income proof (for F&O and Currency segment activation).',
+          ],
+        },
+        {
+          heading: 'KYC Verification Process',
+          items: [
+            'Online KYC via Aadhaar OTP-based e-verification (paperless).',
+            'Video KYC (V-KYC) for remote onboarding — 2-minute live video call.',
+            'KYC data submitted to SEBI-registered KRA (KYC Registration Agency).',
+            'Re-KYC required every 2 years or upon material change in personal details.',
+          ],
+        },
+        {
+          heading: 'Data Protection',
+          items: [
+            'All KYC data is encrypted and stored in compliance with IT Act, 2000.',
+            'KYC documents are shared only with regulators and exchanges as required by law.',
+            'No KYC data is sold or shared with third parties for commercial purposes.',
+          ],
+        },
+      ],
+      footer: 'Policy last updated: January 2025. Compliant with SEBI KRA Regulations, 2011 and Prevention of Money Laundering Act, 2002.',
+    },
+  },
+  {
+    id: 'aml-policy',
+    category: 'policies',
+    categoryLabel: 'Policies',
+    title: 'Anti-Money Laundering (AML) Policy',
+    subtitle: 'PMLA 2002 · SEBI AML Guidelines',
+    date: 'Updated: January 2025',
+    ref: 'Prevention of Money Laundering Act, 2002',
+    badge: 'Policy',
+    content: {
+      sections: [
+        {
+          heading: 'Policy Objective',
+          items: [
+            'To prevent the use of Shriram Financial Services as a channel for money laundering or terrorist financing.',
+            'To comply with the Prevention of Money Laundering Act, 2002 (PMLA) and SEBI AML Guidelines.',
+          ],
+        },
+        {
+          heading: 'Customer Due Diligence (CDD)',
+          items: [
+            'All clients undergo KYC verification before account activation.',
+            'Enhanced Due Diligence (EDD) for high-risk clients, Politically Exposed Persons (PEP), and NRIs.',
+            'Transaction monitoring for unusual patterns using automated systems.',
+            'Periodic re-verification of client credentials.',
+          ],
+        },
+        {
+          heading: 'Suspicious Transaction Reporting',
+          items: [
+            'Suspicious transactions are reported to the Financial Intelligence Unit — India (FIU-IND).',
+            'Shriram maintains an internal AML compliance team and a designated MLRO (Money Laundering Reporting Officer).',
+            'All suspicious activity reports (SAR) are filed within the prescribed timeline.',
+          ],
+        },
+      ],
+      footer: 'This policy is reviewed annually and updated to reflect regulatory changes. Last review: January 2025.',
+    },
+  },
+  {
+    id: 'privacy-policy',
+    category: 'policies',
+    categoryLabel: 'Policies',
+    title: 'Privacy Policy & Data Protection',
+    subtitle: 'IT Act 2000 · SEBI Cybersecurity Framework',
+    date: 'Updated: March 2025',
+    ref: 'Information Technology Act, 2000 · SEBI Circular CIR/MRD/DP/13/2015',
+    badge: 'Policy',
+    content: {
+      sections: [
+        {
+          heading: 'Data We Collect',
+          items: [
+            'Identity data: Name, PAN, Aadhaar (masked), date of birth.',
+            'Contact data: Mobile number, email address, registered address.',
+            'Financial data: Bank account details, income range (for segment activation).',
+            'Transaction data: Trade history, portfolio holdings, ledger entries.',
+            'Technical data: IP address, device type, browser data (for fraud prevention).',
+          ],
+        },
+        {
+          heading: 'How We Use Your Data',
+          items: [
+            'To open and operate your Demat and Trading account.',
+            'To comply with SEBI, Exchange, Depository, and tax regulations.',
+            'To send contract notes, account statements, and regulatory notifications.',
+            'To detect and prevent fraud, unauthorized access, and money laundering.',
+            'To improve our services and Antara platform experience.',
+          ],
+        },
+        {
+          heading: 'Data Sharing & Security',
+          items: [
+            'We share data only with regulators (SEBI, Income Tax), exchanges (NSE/BSE), and CDSL as required by law.',
+            'We do not sell your personal data to third parties for commercial purposes.',
+            'All data is encrypted using AES-256 at rest and TLS 1.3 in transit.',
+            'Annual VAPT (Vulnerability Assessment and Penetration Testing) as per SEBI mandate.',
+          ],
+        },
+        {
+          heading: 'Your Rights',
+          items: [
+            'Right to access: Request a copy of your personal data we hold.',
+            'Right to rectify: Correct inaccurate personal data.',
+            'Right to erasure: Request deletion of data no longer required (subject to regulatory retention periods).',
+            'Contact: compliance@shriramfinancialservices.com for any data privacy requests.',
+          ],
+        },
+      ],
+      footer: 'Privacy Policy last updated: March 2025. Compliant with IT Act, 2000, SEBI Cybersecurity Framework, and DPDP Act, 2023.',
+    },
+  },
+];
+---
+
+<BaseLayout
+  title="Investor Charter & Regulatory Documents | Shriram Financial Services"
+  description="Download and view all regulatory documents — Investor Charter, Grievance Redressal Mechanism, Annual Compliance Report, Risk Disclosures, and Policies — for Shriram Financial Services."
+>
+
+  <!-- ══ HERO ═══════════════════════════════════════════════════════ -->
+  <section class="relative overflow-hidden bg-[var(--color-dark-800)]">
+    <div class="pointer-events-none absolute -right-40 -top-40 h-[520px] w-[520px] rounded-full bg-[var(--color-brand)]/8 blur-3xl"></div>
+    <div class="pointer-events-none absolute -bottom-20 left-0 h-64 w-64 rounded-full bg-[var(--color-brand)]/5 blur-3xl"></div>
+    <div class="site-wrap relative py-[80px] lg:py-[96px]">
+      <p class="ic-reveal text-[14px] font-medium tracking-[.04em] text-[var(--color-brand)]">Regulatory & Compliance</p>
+      <h1 class="ic-reveal mt-[18px] max-w-[680px] text-[clamp(28px,4vw,48px)] font-bold leading-[1.1] text-white" style="font-family:var(--font-display)">
+        Investor Charter &amp; <span class="text-[var(--color-brand)]">Regulatory Documents</span>
+      </h1>
+      <p class="ic-reveal mt-[20px] max-w-[560px] text-[17px] leading-relaxed text-white/70">
+        All mandatory disclosures, investor rights, grievance mechanisms, and compliance documents — in one place. View online or download as PDF.
+      </p>
+      <div class="ic-reveal mt-[36px] flex flex-wrap gap-6 border-t border-white/15 pt-8 text-[14px] text-white/60">
+        {[
+          { label: 'SEBI Registered', val: 'Stockbroker & RA' },
+          { label: 'CDSL DP', val: 'IN-DP-165-2015' },
+          { label: 'AMFI Registered', val: 'ARN 29483' },
+          { label: 'PFRDA Registered', val: 'NPS POP' },
+        ].map(b => (
+          <div>
+            <div class="text-[12px] font-semibold uppercase tracking-wide text-[var(--color-brand)]">{b.label}</div>
+            <div class="mt-0.5">{b.val}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ DOCUMENT LIBRARY ══════════════════════════════════════════ -->
+  <section class="bg-white py-[72px]">
+    <div class="site-wrap">
+      <div class="flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-10">
+
+        <!-- Sidebar: Category Filters -->
+        <aside class="shrink-0 lg:sticky lg:top-[100px] lg:w-[220px]">
+          <div class="rounded-[16px] border border-[var(--color-n400)] bg-[#f8f6f1] p-4">
+            <p class="mb-3 px-2 text-[11px] font-bold uppercase tracking-widest text-[var(--color-muted)]">Filter by Type</p>
+            <ul class="space-y-1" role="list">
+              {categories.map(cat => (
+                <li>
+                  <button
+                    class="ic-filter-btn flex w-full items-center justify-between rounded-[10px] px-3 py-2.5 text-left text-[14px] font-medium transition-all"
+                    data-filter={cat.id}
+                    aria-pressed={cat.id === 'all' ? 'true' : 'false'}
+                  >
+                    <span>{cat.label}</span>
+                    <span class="rounded-full bg-white px-2 py-0.5 text-[11px] font-semibold text-[var(--color-muted)] shadow-sm">{cat.count}</span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- Stats -->
+          <div class="mt-4 rounded-[16px] border border-[var(--color-n400)] bg-[var(--color-dark-800)] p-5 text-center">
+            <div class="text-[28px] font-bold text-[var(--color-brand)]">{documents.length}</div>
+            <div class="mt-1 text-[12px] text-white/60">Documents Available</div>
+            <div class="mt-3 h-px bg-white/10"></div>
+            <div class="mt-3 text-[11px] leading-relaxed text-white/50">All documents updated in compliance with SEBI, NSE, BSE, CDSL, and AMFI mandates.</div>
+          </div>
+        </aside>
+
+        <!-- Document Grid -->
+        <div class="flex-1">
+          <!-- Search bar -->
+          <div class="mb-6 flex items-center gap-3 rounded-[12px] border border-[var(--color-n400)] bg-[#f8f6f1] px-4 py-3">
+            <svg class="h-4 w-4 shrink-0 text-[var(--color-muted)]" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="9" r="6"/><path d="m15 15 3 3"/></svg>
+            <input
+              id="ic-search"
+              type="text"
+              placeholder="Search documents…"
+              class="flex-1 bg-transparent text-[14px] text-[var(--color-ink)] placeholder:text-[var(--color-muted)] focus:outline-none"
+              autocomplete="off"
+            />
+          </div>
+
+          <!-- Document cards -->
+          <div id="ic-doc-grid" class="grid gap-4">
+            {documents.map(doc => (
+              <div
+                class="ic-doc-card group overflow-hidden rounded-[16px] border border-[var(--color-n400)] bg-white transition-shadow hover:shadow-[0_4px_24px_rgba(0,0,0,0.08)]"
+                data-category={doc.category}
+                data-title={doc.title.toLowerCase()}
+              >
+                <div class="flex flex-col gap-4 p-5 sm:flex-row sm:items-start sm:justify-between">
+                  <!-- Left: doc info -->
+                  <div class="min-w-0 flex-1">
+                    <div class="mb-2 flex flex-wrap items-center gap-2">
+                      <span class="rounded-[6px] bg-[var(--color-brand-light)] px-2.5 py-0.5 text-[11px] font-semibold text-[var(--color-brand-deep)]">{doc.categoryLabel}</span>
+                      {doc.badge && (
+                        <span class="rounded-[6px] border border-[var(--color-n400)] px-2.5 py-0.5 text-[11px] font-medium text-[var(--color-muted)]">{doc.badge}</span>
+                      )}
+                    </div>
+                    <h3 class="text-[16px] font-semibold leading-[1.3] text-[var(--color-ink)]" style="font-family:var(--font-display)">{doc.title}</h3>
+                    <p class="mt-1 text-[13px] text-[var(--color-muted)]">{doc.subtitle}</p>
+                    <div class="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-[12px] text-[var(--color-muted)]">
+                      <span class="flex items-center gap-1.5">
+                        <svg class="h-3 w-3" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="12" height="11" rx="2"/><path d="M5 1v4M11 1v4M2 8h12"/></svg>
+                        {doc.date}
+                      </span>
+                      <span class="flex items-center gap-1.5 opacity-60">
+                        <svg class="h-3 w-3" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M8 2l4 4-4 4"/></svg>
+                        Ref: {doc.ref}
+                      </span>
+                    </div>
+                  </div>
+
+                  <!-- Right: actions -->
+                  <div class="flex shrink-0 items-center gap-2 sm:flex-col sm:items-end">
+                    <button
+                      class="ic-view-btn flex items-center gap-2 rounded-[9px] border border-[var(--color-brand)] bg-[var(--color-brand-light)] px-4 py-2 text-[13px] font-semibold text-[var(--color-brand-deep)] transition-colors hover:bg-[var(--color-brand)] hover:text-white"
+                      data-doc-id={doc.id}
+                      aria-label={`View ${doc.title}`}
+                    >
+                      <svg class="h-3.5 w-3.5" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 8s3-5 7-5 7 5 7 5-3 5-7 5-7-5-7-5z"/><circle cx="8" cy="8" r="2"/></svg>
+                      View
+                    </button>
+                    <button
+                      class="ic-dl-btn flex items-center gap-2 rounded-[9px] border border-[var(--color-n400)] bg-white px-4 py-2 text-[13px] font-semibold text-[var(--color-ink)] transition-colors hover:border-[var(--color-ink)] hover:bg-[var(--color-n100)]"
+                      data-doc-id={doc.id}
+                      aria-label={`Download ${doc.title}`}
+                    >
+                      <svg class="h-3.5 w-3.5" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2v8M5 7l3 3 3-3"/><path d="M3 13h10"/></svg>
+                      Download
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Bottom strip: section count -->
+                <div class="border-t border-[var(--color-n400)] bg-[#f8f6f1] px-5 py-2.5 text-[11px] text-[var(--color-muted)]">
+                  {doc.content.sections.length} sections · PDF available · SEBI mandated disclosure
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <!-- Empty state -->
+          <div id="ic-empty" class="hidden py-16 text-center">
+            <div class="mx-auto mb-3 grid h-12 w-12 place-items-center rounded-full bg-[var(--color-n100)]">
+              <svg class="h-5 w-5 text-[var(--color-muted)]" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="9" r="6"/><path d="m15 15 3 3"/></svg>
+            </div>
+            <p class="text-[15px] font-medium text-[var(--color-ink)]">No documents match your search</p>
+            <p class="mt-1 text-[13px] text-[var(--color-muted)]">Try a different keyword or category.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ LEGAL DISCLAIMER ══════════════════════════════════════════ -->
+  <section class="border-t border-[var(--color-n400)] bg-[#f8f6f1] py-[48px]">
+    <div class="site-wrap">
+      <p class="text-[12px] leading-relaxed text-[var(--color-muted)]">
+        <strong class="text-[var(--color-ink)]">Important Disclosure:</strong> Investments in securities markets are subject to market risks. Read all related documents carefully before investing. Shriram Financial Services Limited is registered with SEBI as a Stockbroker (Registration Nos. INB231103833, INB011103839), Research Analyst (INH200009624), and CDSL Depository Participant (IN-DP-165-2015). AMFI-registered Mutual Fund Distributor: ARN 29483. PFRDA-registered NPS Point of Presence. CIN: U65110TN1974PLC006603. Registered Office: Shriram House, No. 4, Burkit Road, T. Nagar, Chennai – 600 017.
+      </p>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<!-- ══ PDF VIEWER MODAL ══════════════════════════════════════════════ -->
+<div
+  id="ic-modal"
+  class="fixed inset-0 z-[200] flex items-start justify-center bg-black/70 backdrop-blur-[6px]"
+  style="display:none"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="ic-modal-title"
+>
+  <!-- Modal shell -->
+  <div class="ic-modal-shell relative mx-auto my-6 flex h-[calc(100vh-3rem)] w-full max-w-[820px] flex-col overflow-hidden rounded-[20px] bg-white shadow-[0_32px_80px_rgba(0,0,0,0.35)]">
+
+    <!-- Toolbar -->
+    <div class="flex shrink-0 items-center justify-between border-b border-[var(--color-n400)] bg-[var(--color-dark-800)] px-5 py-3">
+      <div class="flex items-center gap-3">
+        <div class="flex h-7 w-7 items-center justify-center rounded-[6px] bg-[var(--color-brand)]/20">
+          <svg class="h-3.5 w-3.5 text-[var(--color-brand)]" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 2h6l4 4v8a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"/><path d="M10 2v4h4"/></svg>
+        </div>
+        <span id="ic-modal-title-bar" class="text-[13px] font-semibold text-white/80">Document Viewer</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <button
+          id="ic-print-btn"
+          class="flex items-center gap-2 rounded-[8px] bg-[var(--color-brand)] px-3 py-1.5 text-[12px] font-bold text-[#202318] transition-opacity hover:opacity-90"
+        >
+          <svg class="h-3.5 w-3.5" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6V2h8v4M4 11H2V6h12v5h-2M4 9h8v5H4z"/></svg>
+          Download PDF
+        </button>
+        <button
+          id="ic-close-btn"
+          class="grid h-8 w-8 place-items-center rounded-[8px] text-white/60 transition-colors hover:bg-white/10 hover:text-white"
+          aria-label="Close document viewer"
+        >
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4"><path d="M12 4 4 12M4 4l8 8"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Scrollable document content -->
+    <div class="flex-1 overflow-y-auto bg-[#e8e5de] p-4 sm:p-8">
+      <!-- A4 Paper -->
+      <div id="ic-doc-paper" class="ic-paper mx-auto min-h-[1000px] w-full max-w-[700px] rounded-[4px] bg-white px-[52px] py-[56px] shadow-[0_4px_24px_rgba(0,0,0,0.18)]">
+
+        <!-- Document header -->
+        <div class="mb-[36px] border-b border-[var(--color-n400)] pb-[24px]">
+          <div class="mb-3 flex items-center justify-between">
+            <img src="/images/logo-component6.png" alt="Shriram Financial Services" class="h-[44px] w-auto object-contain" />
+            <div class="text-right text-[10px] text-[var(--color-muted)]">
+              <div>SEBI Reg: INB231103833</div>
+              <div>CDSL DP: IN-DP-165-2015</div>
+              <div>AMFI: ARN-29483</div>
+            </div>
+          </div>
+          <h1 id="ic-modal-title" class="mt-4 text-[20px] font-bold leading-[1.2] text-[var(--color-dark-800)]" style="font-family:var(--font-display)">Document Title</h1>
+          <p id="ic-modal-subtitle" class="mt-1 text-[13px] text-[var(--color-muted)]"></p>
+          <div class="mt-3 flex flex-wrap gap-4 text-[11px] text-[var(--color-muted)]">
+            <span id="ic-modal-date"></span>
+            <span id="ic-modal-ref" class="opacity-70"></span>
+          </div>
+          <div class="mt-3 h-[3px] w-[48px] rounded-full bg-[var(--color-brand)]"></div>
+        </div>
+
+        <!-- Dynamic sections -->
+        <div id="ic-modal-body" class="space-y-[28px] text-[13.5px] leading-[1.7]"></div>
+
+        <!-- Document footer -->
+        <div class="mt-[44px] border-t border-[var(--color-n400)] pt-[20px]">
+          <p id="ic-modal-footer" class="text-[11px] italic leading-relaxed text-[var(--color-muted)]"></p>
+          <div class="mt-4 flex items-center justify-between text-[10px] text-[var(--color-muted)]">
+            <span>Shriram Financial Services Limited · Shriram House, T. Nagar, Chennai – 600 017</span>
+            <span>www.shriramfinancialservices.com</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Document data (JSON embedded for JS) -->
+<script id="ic-data" type="application/json" set:html={JSON.stringify(documents)}></script>
+
+<style>
+  /* ── Scroll reveal ──────────────────────────────────────── */
+  .ic-reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.6s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  .ic-reveal.in-view { opacity: 1; transform: none; }
+
+  /* ── Sidebar filter buttons ─────────────────────────────── */
+  .ic-filter-btn { color: var(--color-muted); }
+  .ic-filter-btn:hover { background: var(--color-n400); color: var(--color-ink); }
+  .ic-filter-btn[aria-pressed="true"] { background: var(--color-dark-800); color: #fff; }
+  .ic-filter-btn[aria-pressed="true"] span:last-child { background: var(--color-brand); color: #202318; }
+
+  /* ── Hidden doc card ────────────────────────────────────── */
+  .ic-doc-card.hidden { display: none; }
+
+  /* ── Modal backdrop click area ──────────────────────────── */
+  #ic-modal { cursor: default; }
+
+  /* ── Print styles ───────────────────────────────────────── */
+  @media print {
+    body > *:not(#ic-modal) { display: none !important; }
+    #ic-modal {
+      display: flex !important;
+      position: static !important;
+      background: none !important;
+      backdrop-filter: none !important;
+    }
+    .ic-modal-shell {
+      box-shadow: none !important;
+      border-radius: 0 !important;
+      height: auto !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+    }
+    .ic-modal-shell > *:first-child { display: none !important; } /* hide toolbar */
+    #ic-doc-paper { box-shadow: none !important; padding: 0 !important; }
+    #ic-modal > div > div:nth-child(2) { background: white !important; padding: 0 !important; overflow: visible !important; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ic-reveal { opacity: 1; transform: none; transition: none; }
+  }
+</style>
+
+<script>
+  /* ── Scroll reveal ─────────────────────────────────────────── */
+  const revObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { (e.target as HTMLElement).classList.add('in-view'); revObs.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.ic-reveal').forEach(el => revObs.observe(el));
+
+  /* ── Load document data ────────────────────────────────────── */
+  type Section = { heading: string; items: string[] };
+  type DocData = { id: string; category: string; title: string; subtitle: string; date: string; ref: string; content: { sections: Section[]; footer?: string } };
+  const docs: DocData[] = JSON.parse(document.getElementById('ic-data')!.textContent!);
+  const docMap = new Map(docs.map(d => [d.id, d]));
+
+  /* ── Category filter ────────────────────────────────────────── */
+  const cards = document.querySelectorAll<HTMLElement>('.ic-doc-card');
+  const emptyState = document.getElementById('ic-empty')!;
+  let activeFilter = 'all';
+
+  function applyFilters() {
+    const q = (document.getElementById('ic-search') as HTMLInputElement).value.toLowerCase().trim();
+    let visible = 0;
+    cards.forEach(card => {
+      const catMatch = activeFilter === 'all' || card.dataset.category === activeFilter;
+      const searchMatch = !q || (card.dataset.title ?? '').includes(q);
+      const show = catMatch && searchMatch;
+      card.classList.toggle('hidden', !show);
+      if (show) visible++;
+    });
+    emptyState.classList.toggle('hidden', visible > 0);
+  }
+
+  document.querySelectorAll<HTMLButtonElement>('.ic-filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll<HTMLButtonElement>('.ic-filter-btn').forEach(b => b.setAttribute('aria-pressed', 'false'));
+      btn.setAttribute('aria-pressed', 'true');
+      activeFilter = btn.dataset.filter ?? 'all';
+      applyFilters();
+    });
+  });
+
+  document.getElementById('ic-search')!.addEventListener('input', applyFilters);
+
+  /* ── PDF Modal ─────────────────────────────────────────────── */
+  const modal     = document.getElementById('ic-modal')!;
+  const closeBtn  = document.getElementById('ic-close-btn')!;
+  const printBtn  = document.getElementById('ic-print-btn')!;
+  const titleEl   = document.getElementById('ic-modal-title')!;
+  const titleBar  = document.getElementById('ic-modal-title-bar')!;
+  const subtitleEl= document.getElementById('ic-modal-subtitle')!;
+  const dateEl    = document.getElementById('ic-modal-date')!;
+  const refEl     = document.getElementById('ic-modal-ref')!;
+  const bodyEl    = document.getElementById('ic-modal-body')!;
+  const footerEl  = document.getElementById('ic-modal-footer')!;
+
+  function openDoc(id: string) {
+    const doc = docMap.get(id);
+    if (!doc) return;
+
+    titleEl.textContent    = doc.title;
+    titleBar.textContent   = doc.title;
+    subtitleEl.textContent = doc.subtitle;
+    dateEl.textContent     = doc.date;
+    refEl.textContent      = `Ref: ${doc.ref}`;
+    footerEl.textContent   = doc.content.footer ?? '';
+
+    bodyEl.innerHTML = doc.content.sections.map(sec => `
+      <div>
+        <h2 style="font-size:14px;font-weight:700;color:#1a2010;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #ddd;font-family:var(--font-display)">${sec.heading}</h2>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:7px">
+          ${sec.items.map(item => `
+            <li style="display:flex;gap:10px;align-items:flex-start">
+              <span style="color:#f3b83f;font-size:16px;line-height:1.4;flex-shrink:0">·</span>
+              <span style="color:#555;font-size:13px;line-height:1.7">${item}</span>
+            </li>
+          `).join('')}
+        </ul>
+      </div>
+    `).join('');
+
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    (modal.querySelector('.ic-modal-shell') as HTMLElement)?.scrollTo({ top: 0 });
+  }
+
+  function closeModal() {
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll<HTMLButtonElement>('.ic-view-btn').forEach(btn => {
+    btn.addEventListener('click', () => openDoc(btn.dataset.docId!));
+  });
+
+  document.querySelectorAll<HTMLButtonElement>('.ic-dl-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      openDoc(btn.dataset.docId!);
+      setTimeout(() => window.print(), 400);
+    });
+  });
+
+  closeBtn.addEventListener('click', closeModal);
+  printBtn.addEventListener('click', () => window.print());
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.style.display !== 'none') closeModal();
+  });
+</script>

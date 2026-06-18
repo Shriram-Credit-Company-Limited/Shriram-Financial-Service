@@ -66,6 +66,7 @@ export const navigation: NavSection[] = [
       { label: 'Become a Partner',  href: '/about/become-a-partner/' },
       { label: 'Open Demat Account',href: '/about/open-demat-account/' },
       { label: 'Support',           href: '/about/support/' },
+      { label: 'Investor Charter',   href: '/about/investor-charter/' },
       { label: 'Regulatory',        href: '/about/regulatory/' },
       { label: 'Antara Web Login',  href: '/about/antara-web-login/' },
       { label: 'Sitemap',           href: '/about/sitemap/' },
