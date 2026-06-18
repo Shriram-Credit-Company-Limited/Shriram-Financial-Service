@@ -4,28 +4,29 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 const equityTypes = [
   {
     label: 'Common Equity Shares',
-    desc: 'Buy voting rights and profit participation in a company. Trade on NSE or BSE — includes blue-chip, growth, value, and penny stock variants.',
+    desc: 'The most widely traded shares. Investors receive voting rights and participate in the company\'s profits through dividends and price appreciation.',
   },
   {
     label: 'Preferred Equity Shares',
-    desc: 'Priority dividend payouts over common shareholders with lower volatility. Limited voting rights; preferred for income-focused investors.',
+    desc: 'Preferred shareholders receive preference in dividend payments over common shareholders. These shares generally carry limited or no voting rights.',
   },
 ];
 
 const eligibility = [
-  'Indian resident (100%) or minor if guardian opens the account',
-  'Valid PAN Card mandatory for all account holders',
-  'Valid KYC as per SEBI regulations for legal entities',
-  'For NRI: RBI-approved broker and NRE/NRO bank account required',
-  'Age 18+ years for independent account opening',
-  'For minors, guardian\'s PAN and signature are required',
+  'Indian resident (NRIs can invest through specific routes)',
+  'Valid PAN card mandatory for all account holders',
+  'Active bank account in your name',
+  'Completed KYC verification as per SEBI regulations',
+  '18+ years of age (minors can invest through guardians)',
 ];
 
 const documents = [
-  'PAN Card / Form 60 (for NRI accounts)',
-  'Address Proof — Aadhaar / Passport / Driver\'s Licence / Utility Bill',
-  'Bank Account Details — cancelled cheque or latest bank statement',
+  'PAN card (mandatory)',
+  'Aadhaar card for identity verification',
+  'Address proof — Aadhaar, Passport, or Utility Bill',
+  'Cancelled cheque or recent bank statement',
   'Passport-size photograph (JPEG format)',
+  'Valid mobile number and email ID',
 ];
 
 const steps = [
@@ -36,11 +37,11 @@ const steps = [
 ];
 
 const brokerageRows = [
-  { label: 'Brokerage', delivery: '₹0 (Zero)', intraday: '₹20 per executed order' },
-  { label: 'STT', delivery: '0.1% on sell side', intraday: '0.025% on buy & sell side' },
-  { label: 'GST', delivery: '18% on brokerage + exchange charges', intraday: '18% on brokerage + exchange charges' },
-  { label: 'DP Charges', delivery: '₹15.93 per scrip on sell', intraday: 'N/A' },
-  { label: 'Exchange Charges', delivery: '0.00345% (NSE) / 0.00375% (BSE)', intraday: '0.00345% (NSE) / 0.00375% (BSE)' },
+  { label: 'Brokerage', delivery: '₹0 (Zero)', intraday: '₹20 per executed order', fo: '₹20 per executed order' },
+  { label: 'STT', delivery: '0.1% on sell side', intraday: '0.025% on buy & sell side', fo: '0.02% on sell side' },
+  { label: 'GST', delivery: '18% on brokerage + exchange charges', intraday: '18% on brokerage + exchange charges', fo: '18% on brokerage + exchange charges' },
+  { label: 'DP Charges', delivery: '₹15.93 per scrip on sell', intraday: 'N/A', fo: 'N/A' },
+  { label: 'Exchange Charges', delivery: '0.00345% (NSE) / 0.00375% (BSE)', intraday: '0.00345% (NSE) / 0.00375% (BSE)', fo: '0.002%' },
 ];
 
 const taxRows = [
@@ -48,65 +49,66 @@ const taxRows = [
   { feature: 'Tax Rate', stcg: '20% Flat', ltcg: '12.5%' },
   { feature: 'Tax-Free Limit', stcg: 'Nil (taxed from ₹1)', ltcg: 'Up to ₹1.25 Lakh per year' },
   { feature: 'Indexation Benefit', stcg: 'Not Applicable', ltcg: 'Not Applicable' },
-  { feature: 'Applicable Section', stcg: 'Section 70A', ltcg: 'Section 70A' },
+  { feature: 'Applicable Section', stcg: 'Section 111A', ltcg: 'Section 112A' },
 ];
 
 const categories = [
-  { label: 'Large Cap', desc: 'Top 100 companies by market cap. Stable, low-risk, ideal for long-term wealth building.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><circle cx="12" cy="12" r="9"/><path d="M9 9.5h1.5a1.5 1.5 0 0 1 0 3H9v3m3-6v6"/></svg>` },
-  { label: 'Mid Cap', desc: 'Companies ranked 101–250 by market cap. Balanced risk and growth potential.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><path d="M3 3v18h18"/><path d="m7 16 4-4 4 4 4-4"/></svg>` },
-  { label: 'Small Cap', desc: 'Companies beyond 250 in market cap ranking. High growth potential with higher volatility.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><path d="M3 3v18h18"/><path d="m7 12 4-4 4 4 4-4"/></svg>` },
-  { label: 'Blue Chip', desc: 'Established, financially sound companies with a history of reliable performance.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>` },
-  { label: 'Growth Stocks', desc: 'Companies expected to grow faster than the market. Higher valuations, reinvest profits.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>` },
-  { label: 'Dividend Stocks', desc: 'Companies that regularly distribute profits as dividends. Ideal for passive income.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3H8L2 7h20l-6-4zM12 12v4M10 14h4"/></svg>` },
-  { label: 'Value Stocks', desc: 'Undervalued companies trading below intrinsic value. Suitable for patient investors.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 1 0 0 7h5a3.5 3.5 0 1 1 0 7H6"/></svg>` },
-  { label: 'Penny Stocks', desc: 'Low-priced, small company shares. High risk and high reward — for experienced traders only.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 3"/></svg>` },
+  { label: 'Large Cap',      desc: 'Top 100 companies by market cap — stable and lower risk.' },
+  { label: 'Mid Cap',        desc: 'Companies ranked 101–250 — a balance of growth and stability.' },
+  { label: 'Small Cap',      desc: 'Companies ranked beyond 250 — higher growth potential with higher risk.' },
+  { label: 'Growth Stocks',  desc: 'Companies expected to grow earnings faster than the broader market.' },
+  { label: 'Dividend Stocks',desc: 'Companies that share regular profits with shareholders as dividends.' },
+  { label: 'Value Stocks',   desc: 'Stocks trading below their intrinsic worth — potentially undervalued.' },
+  { label: 'Blue Chip',      desc: 'Well-established, financially sound market leaders with a strong record.' },
+  { label: 'Cyclical Stocks',desc: 'Stocks whose performance moves in line with broader economic cycles.' },
 ];
 
 const research = [
   {
     title: 'Fundamental Research',
-    desc: 'In-depth company analysis, financial modelling, and valuation reports to help you pick stocks with strong long-term potential.',
+    idx: 'Approach 01',
+    desc: 'In-depth company analysis, financial modelling and valuation reports to assess a stock\'s true intrinsic worth.',
     href: '/research/',
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#202318" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 shrink-0"><path d="M3 3v18h18"/><path d="m7 16 4-4 4 4 4-4"/></svg>`,
   },
   {
     title: 'Technical Research',
-    desc: 'Chart patterns, price action, and technical indicators to identify optimal entry and exit points for your trades.',
+    idx: 'Approach 02',
+    desc: 'Chart patterns, price action and technical indicators to time entries and exits with greater precision.',
     href: '/research/',
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#202318" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 shrink-0"><rect x="3" y="3" width="4" height="18"/><rect x="10" y="8" width="4" height="13"/><rect x="17" y="5" width="4" height="16"/></svg>`,
   },
 ];
 
-const strategies = [
-  { label: 'Intraday Trading', tools: 'Charts, screeners, real-time data', profitability: 'High (with skill)', time: 'Full-time (market hours)', skill: 'Advanced', capital: 'Moderate', risk: 'Very High' },
-  { label: 'Swing Trading', tools: 'Technical analysis, alerts', profitability: 'Medium–High', time: 'Part-time (daily review)', skill: 'Intermediate', capital: 'Moderate', risk: 'Medium–High' },
-  { label: 'Long-Term Investing', tools: 'Fundamental research, SIP', profitability: 'High (long horizon)', time: 'Minimal (periodic review)', skill: 'Beginner–Intermediate', capital: 'Low to High', risk: 'Low–Medium' },
+const strategyRows = [
+  { label: 'Holding Period',    intraday: 'Same day (square-off before close)', swing: '2 days to a few weeks', lt: '1+ years (often 5–10+ years)' },
+  { label: 'Time Commitment',   intraday: 'High — active monitoring', swing: 'Moderate — daily/weekly check', lt: 'Low — periodic review' },
+  { label: 'Capital Required',  intraday: 'Lower entry, margin common', swing: 'Moderate', lt: 'Can start small via SIP (₹500+)' },
+  { label: 'Risk Level',        intraday: 'Very High', swing: 'High', lt: 'Moderate to Low' },
 ];
 
 const vsRows = [
-  { feature: 'Control', equity: 'Full control over stock selection', mf: 'Fund manager decides' },
-  { feature: 'Returns', equity: 'Potentially higher (and lower)', mf: 'Moderate, diversified' },
-  { feature: 'Risk', equity: 'Higher (concentrated positions)', mf: 'Lower (diversified)' },
-  { feature: 'Minimum Investment', equity: '1 share (can be < ₹10)', mf: '₹500 (SIP)' },
-  { feature: 'Taxation', equity: 'STCG 20% / LTCG 12.5%', mf: 'Equity MF: same as equity' },
-  { feature: 'Liquidity', equity: 'Instant (exchange hours)', mf: 'T+1 to T+3 redemption' },
-  { feature: 'Transparency', equity: 'Real-time price discovery', mf: 'NAV declared daily' },
-  { feature: 'Expertise Required', equity: 'Medium to High', mf: 'Low (passive investing)' },
+  { feature: 'Control',              equity: 'Direct ownership and control', mf: 'Fund manager decides' },
+  { feature: 'Risk',                 equity: 'Company-specific risk', mf: 'Diversified risk' },
+  { feature: 'Return Potential',     equity: 'Potentially higher (unlimited upside)', mf: 'Market-linked returns' },
+  { feature: 'Research Involvement', equity: 'Active research needed', mf: 'Professional management' },
+  { feature: 'Suitable For',         equity: 'Knowledgeable investors', mf: 'All investor types' },
+  { feature: 'Cost',                 equity: 'Brokerage per trade', mf: 'Expense ratio annually' },
+  { feature: 'Liquidity',            equity: 'Real-time during market hours', mf: 'End-of-day NAV' },
+  { feature: 'Management',           equity: 'Self-managed portfolio', mf: 'Professionally managed' },
 ];
 
 const risks = [
-  { label: 'Market Risk', desc: 'Economic events, rate changes, or geopolitical shocks can push all stocks lower regardless of company fundamentals.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="m3 3 18 18M3 12c0 5 3.6 9 9 9s9-4 9-9"/><path d="M12 3a9 9 0 0 1 9 9"/></svg>` },
-  { label: 'Volatility', desc: 'Short-term price swings create paper losses even in quality stocks. Reacting emotionally during dips often crystallises permanent losses.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>` },
-  { label: 'Stock-Specific Risk', desc: 'Fraud, management failure, or regulatory action can devastate individual stocks. Diversify — never over-concentrate in a single name.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>` },
-  { label: 'Behavioural Risk', desc: 'FOMO buying at peaks and panic selling at lows destroy returns. Discipline and a plan beat market timing every time.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>` },
+  { n: '01', label: 'Market Risk',       desc: 'Broad market movements can affect all stocks due to economic events, policy changes or global sentiment.' },
+  { n: '02', label: 'Volatility',        desc: 'Prices can fluctuate significantly within short periods, testing investor discipline and patience.' },
+  { n: '03', label: 'Stock-Specific Risk', desc: 'Company-specific factors such as poor earnings or governance issues can impact a single stock sharply.' },
+  { n: '04', label: 'Behavioural Risk',  desc: 'Emotional decisions driven by fear or greed can lead to poor timing and avoidable losses.' },
 ];
 
 const faqs = [
-  { q: 'What is the difference between large cap, mid cap, and small cap stocks?', a: 'Large cap stocks are the top 100 companies by market cap — stable and lower risk. Mid caps (rank 101–250) balance growth and stability. Small caps (rank 251+) carry higher growth potential with higher volatility.' },
-  { q: 'What is the safest platform to invest in equity?', a: 'Choose a SEBI-registered stockbroker — Shriram Financial Services is a member of NSE & BSE. Your shares are held in a CDSL demat account and funds are kept in a segregated client account, never mixed with company funds.' },
-  { q: 'Should I invest in equity or mutual funds?', a: 'Direct equity suits investors who can research stocks or access advisory like Shriram\'s SEBI-registered research desk. Mutual funds are better for passive investors who prefer diversification without stock-picking.' },
-  { q: 'How do I calculate a full breakdown of equity investment returns?', a: 'Net return = (Sell − Buy) − (Brokerage + STT + GST + DP Charges + Exchange Charges) − Tax (STCG 20% or LTCG 12.5%). Use our Brokerage Calculator on this page for an instant estimate.' },
-  { q: 'What is a Demat account and do I need one for equity investing?', a: 'A Demat account holds shares in electronic form. Yes, a Demat + trading account is mandatory to buy and sell shares on NSE or BSE. Open both with Shriram in under 10 minutes, fully paperless.' },
+  { q: 'What is the difference between large-cap, mid-cap and small-cap stocks?', a: 'Large-cap stocks are the top 100 companies by market capitalisation and tend to be stable. Mid-caps (ranked 101–250) balance growth and stability, while small-caps (beyond 250) offer higher growth potential at higher risk.' },
+  { q: 'How is stock market profit taxed in India in 2026?', a: 'Short-term capital gains (held up to 12 months) are taxed at 20% flat, while long-term gains (held over 12 months) are taxed at 12.5% beyond the ₹1.25 lakh annual exemption.' },
+  { q: 'What is a P/E ratio and why does it matter for investors?', a: 'The price-to-earnings (P/E) ratio compares a stock\'s price to its earnings per share. It helps investors gauge whether a stock is over- or under-valued relative to its peers and historical levels.' },
+  { q: 'Should I invest a lump sum or use SIP for equity investments?', a: 'A SIP spreads investments over time and averages out market volatility, making it ideal for most investors. Lump-sum investing can work when markets are favourable and you have a longer horizon and higher risk appetite.' },
+  { q: 'How do I evaluate if a stock is fundamentally strong?', a: 'Assess consistent revenue and profit growth, low debt, healthy return ratios (ROE / ROCE), strong cash flows and competent management. Combine these fundamentals with reasonable valuations before investing.' },
   { q: 'What is the minimum amount needed to start equity investing?', a: 'No regulatory minimum exists. You can start with the price of one share — many blue-chips trade under ₹500. Zero delivery brokerage at Shriram means no extra cost for buy-and-hold investors.' },
 ];
 ---
@@ -120,53 +122,105 @@ const faqs = [
   <section class="relative overflow-hidden bg-[var(--color-dark-800)]">
     <div class="pointer-events-none absolute -right-40 -top-40 h-[560px] w-[560px] rounded-full bg-[var(--color-brand)]/10 blur-3xl"></div>
     <div class="pointer-events-none absolute -bottom-32 left-0 h-80 w-80 rounded-full bg-[var(--color-brand)]/5 blur-3xl"></div>
-    <div class="site-wrap relative py-16 lg:py-28">
-      <p class="reveal reveal-1 text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Equity Investing</p>
-      <h1 class="reveal reveal-2 mt-4 max-w-3xl text-[32px] font-bold leading-tight text-white lg:text-[40px]" style="font-family:var(--font-display)">
-        Build Long-Term Wealth<br class="hidden sm:block"> Through Equity Investing
+    <div class="site-wrap relative py-[120px]">
+      <p class="equity-reveal text-[14px] font-medium tracking-[.04em] text-[var(--color-brand)]">Equity Investing, Made Simple</p>
+      <h1 class="equity-reveal mt-[22px] max-w-[880px] text-[clamp(32px,4vw,52px)] font-bold leading-[1.06] text-white" style="font-family:var(--font-display)">
+        Build Long-Term Wealth Through <span class="text-[var(--color-brand)]">Equity Investing</span>
       </h1>
-      <p class="reveal reveal-3 mt-5 max-w-2xl text-[15px] leading-relaxed text-white/60 lg:text-[17px]">
+      <p class="equity-reveal mt-[26px] max-w-[600px] text-[18px] leading-relaxed text-white/70">
         Buy and invest in equity stocks in India with live market data, deep research insights, stock analysis tools, and expert-backed guidance from Shriram Financial Services.
       </p>
-      <div class="reveal reveal-3 mt-7 grid grid-cols-2 gap-x-6 gap-y-3 sm:flex sm:gap-8">
-        {[
-          { label: 'SEBI-registered', icon: `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" class="h-4 w-4"><circle cx="8" cy="8" r="6"/><path d="M5 8l2 2 4-4"/></svg>` },
-          { label: 'Full-service',    icon: `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" class="h-4 w-4"><path d="M2 12l6-8 6 8"/><path d="M5 9h6"/></svg>` },
-          { label: 'Research-led',    icon: `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" class="h-4 w-4"><circle cx="7" cy="7" r="4"/><path d="m12 12-2.5-2.5"/></svg>` },
-          { label: 'Transparent',     icon: `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" class="h-4 w-4"><rect x="2" y="2" width="12" height="12" rx="2"/><path d="M5 8h6M8 5v6"/></svg>` },
-        ].map(b => (
-          <div class="flex items-center gap-2 text-[13px] font-medium text-white/70">
-            <span class="text-[var(--color-brand)]" set:html={b.icon} />{b.label}
-          </div>
-        ))}
-      </div>
-      <div class="reveal reveal-4 mt-9 flex flex-wrap gap-3">
+      <div class="equity-reveal mt-[38px] flex flex-wrap gap-[14px]">
         <a href="/about/open-demat-account/" class="btn-primary">Open Demat Account</a>
-        <a href="/about/support/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] border border-white/25 text-[14px] font-medium text-white transition-colors hover:bg-white/10">Talk to RM</a>
+        <a href="/about/support/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Talk to RM</a>
+      </div>
+      <div class="equity-reveal mt-[54px] flex flex-wrap gap-x-9 gap-y-3 border-t border-white/15 pt-9">
+        {[
+          '✓ SEBI-registered',
+          '✓ Research-led',
+          '✓ Full-service',
+          '✓ Transparent',
+        ].map(f => (
+          <span class="text-[15px] font-medium text-white/90">
+            <span class="mr-2 text-[var(--color-brand)]">{f.slice(0,1)}</span>{f.slice(1)}
+          </span>
+        ))}
       </div>
     </div>
   </section>
 
-  <!-- ══ 2. WHAT ARE EQUITY STOCKS ════════════════════════════════ -->
-  <section class="bg-white py-16 lg:py-24">
+  <!-- ══ 2. WHAT ARE EQUITY STOCKS — editorial + exchanges ════════ -->
+  <section class="bg-white py-[104px]">
     <div class="site-wrap">
-      <div class="equity-reveal">
-        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">The Basics</p>
-        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">What Are Equity Stocks</h2>
-        <div class="mt-6 max-w-3xl space-y-4 text-[15px] leading-relaxed text-[var(--color-muted)] lg:text-[16px]">
+      <!-- Editorial two-column -->
+      <div class="equity-reveal mx-auto grid max-w-[1000px] items-start gap-[72px] lg:grid-cols-[5fr_7fr]">
+        <h2 class="text-[40px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          What Are <span class="text-[var(--color-brand)]">Equity Stocks?</span>
+        </h2>
+        <div class="space-y-5 text-[17px] leading-relaxed text-[var(--color-muted)]">
           <p>Equity stocks, also known as shares, represent ownership in a company. When you purchase equity shares, you become a partial owner of that company and gain rights to a portion of its assets and earnings.</p>
-          <p>In India, equity shares are traded on two major exchanges: the National Stock Exchange (NSE) and the Bombay Stock Exchange (BSE). All trading activities are regulated by the Securities and Exchange Board of India (SEBI) to protect investor interests.</p>
+          <p>In India, equity stocks trade on two major exchanges, with all activity regulated by the Securities and Exchange Board of India (SEBI) to protect investor interests.</p>
         </div>
       </div>
 
-      <!-- Types of Equity Stocks -->
-      <div class="equity-reveal mt-12">
-        <h3 class="mb-6 text-[20px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">Types of Equity Stocks</h3>
-        <div class="grid gap-5 sm:grid-cols-2">
-          {equityTypes.map((t, i) => (
-            <div class="product-card-light p-7">
-              <h4 class="text-[17px] font-bold text-[var(--color-dark-olive)]" style="font-family:var(--font-display)">{t.label}</h4>
-              <p class="mt-3 text-[14px] leading-relaxed text-[var(--color-muted)]">{t.desc}</p>
+      <!-- Part: Where Equity Stocks Trade -->
+      <div class="equity-reveal mx-auto mt-[76px] max-w-[1000px] border-t border-[var(--color-n400)] pt-[60px]">
+        <h3 class="mb-[10px] text-[26px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">Where Equity Stocks Trade</h3>
+        <p class="mb-[34px] max-w-[680px] text-[16px] text-[var(--color-muted)]">The market functions through two primary exchanges that enable transparent, electronic trading of shares.</p>
+        <div class="grid gap-6 sm:grid-cols-2">
+          <div class="product-card-light p-[34px]">
+            <div class="mb-4 flex h-11 w-11 items-center justify-center rounded-[10px] bg-[var(--color-dark-olive)]">
+              <span class="text-[13px] font-bold text-[var(--color-brand)]">NSE</span>
+            </div>
+            <h4 class="mb-[10px] text-[22px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">National Stock Exchange</h4>
+            <p class="text-[15px] leading-relaxed text-[var(--color-muted)]">India's largest exchange by trading volume, offering electronic trading across equities, derivatives and debt instruments with high liquidity and transparent price discovery.</p>
+          </div>
+          <div class="product-card-light p-[34px]">
+            <div class="mb-4 flex h-11 w-11 items-center justify-center rounded-[10px] bg-[var(--color-dark-olive)]">
+              <span class="text-[13px] font-bold text-[var(--color-brand)]">BSE</span>
+            </div>
+            <h4 class="mb-[10px] text-[22px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">Bombay Stock Exchange</h4>
+            <p class="text-[15px] leading-relaxed text-[var(--color-muted)]">Asia's oldest stock exchange, home to thousands of listed companies and the benchmark Sensex index, providing a deep and well-regulated marketplace for investors.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 3. TYPES OF EQUITY STOCKS ════════════════════════════════ -->
+  <section class="bg-[#f8f6f1] py-[104px]">
+    <div class="site-wrap">
+      <!-- Centered sec-head -->
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          Types of <span class="text-[var(--color-brand)]">Equity Stocks</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Stocks are grouped two ways — by the rights they carry, and by the size and style of the company behind them.</p>
+      </div>
+
+      <!-- By Shareholder Rights -->
+      <div class="equity-reveal">
+        <h3 class="mb-[10px] text-[26px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">By Shareholder Rights</h3>
+        <p class="mb-[34px] max-w-[680px] text-[16px] text-[var(--color-muted)]">Companies issue different classes of shares, each carrying its own rights to voting, dividends and profits.</p>
+        <div class="grid gap-6 sm:grid-cols-2">
+          {equityTypes.map(t => (
+            <div class="product-card-light p-[34px]">
+              <h4 class="mb-[10px] text-[22px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">{t.label}</h4>
+              <p class="text-[15px] leading-relaxed text-[var(--color-muted)]">{t.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Part: By Size and Style — cat-grid -->
+      <div class="equity-reveal mt-[76px] border-t border-[var(--color-n400)] pt-[60px]">
+        <h3 class="mb-[10px] text-[26px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">By Size and Style</h3>
+        <p class="mb-[34px] max-w-[680px] text-[16px] text-[var(--color-muted)]">The main categories investors use to classify and compare stocks.</p>
+        <div class="cat-grid overflow-hidden rounded-[14px] border-l border-t border-[var(--color-n400)]">
+          {categories.map(c => (
+            <div class="border-b border-r border-[var(--color-n400)] bg-white px-[28px] py-[32px]">
+              <h4 class="mb-[9px] text-[19px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">{c.label}</h4>
+              <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">{c.desc}</p>
             </div>
           ))}
         </div>
@@ -174,336 +228,266 @@ const faqs = [
     </div>
   </section>
 
-  <!-- ══ 3. HOW STOCK MARKET WORKS IN INDIA ════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-16 lg:py-24">
+  <!-- ══ 4. HOW TO START INVESTING ════════════════════════════════ -->
+  <section class="bg-white py-[104px]">
     <div class="site-wrap">
-      <div class="equity-reveal">
-        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Market Structure</p>
-        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">How Stock Market Works in India</h2>
-        <p class="mt-4 max-w-3xl text-[15px] leading-relaxed text-[var(--color-muted)] lg:text-[16px]">
-          The stock market in India functions through exchanges like the NSE (National Stock Exchange) and BSE (Bombay Stock Exchange). These platforms connect buyers and sellers of shares in a transparent, regulated environment.
-        </p>
+      <!-- Centered sec-head -->
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          How to <span class="text-[var(--color-brand)]">Start Investing</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Four simple steps from sign-up to your first trade — plus exactly what you'll need to qualify.</p>
       </div>
-      <div class="equity-reveal mt-10 grid gap-5 sm:grid-cols-2">
-        <div class="product-card-light p-8">
-          <div class="mb-4 flex h-11 w-11 items-center justify-center rounded-[10px] bg-[var(--color-dark-olive)]">
-            <span class="text-[13px] font-bold text-[var(--color-brand)]">NSE</span>
-          </div>
-          <h3 class="text-[17px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">National Stock Exchange (NSE)</h3>
-          <p class="mt-3 text-[14px] leading-relaxed text-[var(--color-muted)]">Founded in 1992, India's largest stock exchange by trading volume. Known for its technology-driven infrastructure, the NSE operates the NIFTY 50 index and offers electronic trading in equities, derivatives, currency, and debt instruments with high speed and transparency.</p>
-        </div>
-        <div class="product-card-light p-8">
-          <div class="mb-4 flex h-11 w-11 items-center justify-center rounded-[10px] bg-[var(--color-dark-olive)]">
-            <span class="text-[13px] font-bold text-[var(--color-brand)]">BSE</span>
-          </div>
-          <h3 class="text-[17px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">Bombay Stock Exchange (BSE)</h3>
-          <p class="mt-3 text-[14px] leading-relaxed text-[var(--color-muted)]">Established in 1875, Asia's oldest stock exchange. The BSE lists over 5,000 companies and operates the SENSEX index, tracking the top 30 companies. It serves as the primary exchange for large-cap listed companies and institutional investors across India.</p>
-        </div>
-      </div>
-      <div class="equity-reveal mt-8 text-center">
-        <a href="/about/open-demat-account/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] bg-[var(--color-dark-olive)] text-[14px] font-semibold text-white transition-colors hover:bg-[#1a2010]">Open Demat Account</a>
-      </div>
-    </div>
-  </section>
 
-  <!-- ══ 4. ELIGIBILITY & DOCUMENTS ════════════════════════════════ -->
-  <section class="bg-white py-16 lg:py-24">
-    <div class="site-wrap">
-      <div class="equity-reveal">
-        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Requirements</p>
-        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Eligibility &amp; Documents Required</h2>
-        <p class="mt-3 text-[15px] text-[var(--color-muted)]">Check the eligibility and the documents required for starting your equity journey.</p>
-      </div>
-      <div class="equity-reveal mt-10 grid gap-6 sm:grid-cols-2">
-        <!-- Eligibility -->
-        <div class="rounded-[20px] border border-[var(--color-warm-border)] bg-[#f8f6f1] p-8">
-          <div class="mb-5 flex items-center gap-3">
-            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-dark-olive)]">
-              <svg viewBox="0 0 20 20" fill="none" stroke="var(--color-brand)" stroke-width="1.8" class="h-5 w-5"><circle cx="10" cy="10" r="8"/><path d="M7 10l2 2 4-4"/></svg>
-            </div>
-            <h3 class="text-[17px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">Eligibility Criteria</h3>
-          </div>
-          <ul class="space-y-3">
-            {eligibility.map(item => (
-              <li class="flex items-start gap-3">
-                <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--color-brand)]/20">
-                  <svg viewBox="0 0 12 12" fill="none" stroke="var(--color-brand-deep)" stroke-width="2" class="h-3 w-3"><path d="M2 6l3 3 5-5"/></svg>
-                </span>
-                <span class="text-[13px] leading-snug text-[var(--color-ink)]">{item}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <!-- Documents -->
-        <div class="rounded-[20px] border border-[var(--color-warm-border)] bg-[#f8f6f1] p-8">
-          <div class="mb-5 flex items-center gap-3">
-            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-dark-olive)]">
-              <svg viewBox="0 0 20 20" fill="none" stroke="var(--color-brand)" stroke-width="1.8" class="h-5 w-5"><rect x="4" y="2" width="12" height="16" rx="2"/><path d="M8 7h4M8 11h4M8 15h2"/></svg>
-            </div>
-            <h3 class="text-[17px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">Documents Required</h3>
-          </div>
-          <ul class="space-y-3">
-            {documents.map(item => (
-              <li class="flex items-start gap-3">
-                <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--color-brand)]/20">
-                  <svg viewBox="0 0 12 12" fill="none" stroke="var(--color-brand-deep)" stroke-width="2" class="h-3 w-3"><path d="M2 6l3 3 5-5"/></svg>
-                </span>
-                <span class="text-[13px] leading-snug text-[var(--color-ink)]">{item}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ 5. HOW TO START INVESTING ════════════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-16 lg:py-24">
-    <div class="site-wrap">
-      <div class="equity-reveal text-center">
-        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Getting Started</p>
-        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">How to Start Investing</h2>
-      </div>
-      <div class="equity-reveal mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {steps.map((s, i) => (
-          <div class="relative flex flex-col gap-4 rounded-[20px] border border-[var(--color-warm-border)] bg-white p-7" style={`animation-delay:${i*60}ms`}>
-            <span class="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-dark-olive)] text-[13px] font-bold text-[var(--color-brand)]">{s.n}</span>
-            {i < steps.length - 1 && <span class="absolute -right-3 top-9 hidden h-5 w-5 items-center justify-center lg:flex"><svg viewBox="0 0 12 12" fill="none" stroke="var(--color-brand)" stroke-width="2" class="h-3 w-3"><path d="M2 6h8M6 2l4 4-4 4"/></svg></span>}
-            <h3 class="text-[15px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{s.title}</h3>
-            <p class="text-[13px] leading-relaxed text-[var(--color-muted)]">{s.desc}</p>
+      <!-- Steps connected grid -->
+      <div class="equity-reveal steps-grid overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
+        {steps.map(s => (
+          <div class="px-[30px] py-[34px]">
+            <div class="mb-[22px] font-display text-[34px] font-normal leading-none text-[var(--color-brand)]">{s.n}</div>
+            <h4 class="mb-[10px] text-[19px] font-medium leading-[1.25] text-[var(--color-ink)]" style="font-family:var(--font-display)">{s.title}</h4>
+            <p class="text-[14.5px] leading-relaxed text-[var(--color-muted)]">{s.desc}</p>
           </div>
         ))}
       </div>
-    </div>
-  </section>
 
-  <!-- ══ 6. BROKERAGE & CHARGES ════════════════════════════════════ -->
-  <section class="bg-white py-16 lg:py-24">
-    <div class="site-wrap">
-      <div class="equity-reveal">
-        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Costs</p>
-        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Brokerage &amp; Charges</h2>
-      </div>
-      <div class="equity-reveal mt-10 overflow-hidden rounded-[20px] border border-[var(--color-n400)]">
-        <div class="overflow-x-auto">
-          <table class="w-full text-[14px]">
-            <thead>
-              <tr class="bg-[var(--color-dark-olive)]">
-                <th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-white/70">Charge Type</th>
-                <th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-[var(--color-brand)]">Delivery Equity</th>
-                <th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-[var(--color-brand)]">Intraday</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-[var(--color-n400)]">
-              {brokerageRows.map((r, i) => (
-                <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[#f8f6f1]'}>
-                  <td class="px-6 py-4 font-semibold text-[var(--color-ink)]">{r.label}</td>
-                  <td class="px-6 py-4 text-[var(--color-muted)]">{r.delivery}</td>
-                  <td class="px-6 py-4 text-[var(--color-muted)]">{r.intraday}</td>
-                </tr>
+      <!-- Part: Eligibility & Documents -->
+      <div class="equity-reveal mt-[76px] border-t border-[var(--color-n400)] pt-[60px]">
+        <h3 class="mb-[10px] text-[26px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">Eligibility &amp; Documents</h3>
+        <p class="mb-[34px] max-w-[680px] text-[16px] text-[var(--color-muted)]">Everything you need to qualify and complete your account opening.</p>
+        <div class="grid gap-6 sm:grid-cols-2">
+          <!-- Eligibility -->
+          <div class="product-card-light p-[34px]">
+            <h4 class="mb-6 flex items-center gap-3 text-[22px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">
+              <span class="grid h-[34px] w-[34px] shrink-0 place-items-center rounded-[8px] border border-[var(--color-n400)] text-[13px] font-bold text-[var(--color-dark-olive)]">01</span>
+              Eligibility Criteria
+            </h4>
+            <ul class="space-y-4">
+              {eligibility.map(item => (
+                <li class="flex items-start gap-[14px] border-b border-[var(--color-n400)]/50 pb-4 last:border-0 last:pb-0">
+                  <span class="shrink-0 text-[15px] font-bold leading-[1.7] text-[var(--color-brand)]">✓</span>
+                  <span class="text-[15.5px] text-[var(--color-muted)]">{item}</span>
+                </li>
               ))}
-            </tbody>
-          </table>
-        </div>
-        <div class="border-t border-[var(--color-n400)] bg-[#f8f6f1] px-6 py-4">
-          <a href="/product-hub/" class="text-[13px] font-semibold text-[var(--color-brand)] hover:text-[var(--color-brand-hover)]">View Full Pricing →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ 7. TAX ON EQUITY – LTCG & STCG ════════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-16 lg:py-24">
-    <div class="site-wrap">
-      <div class="equity-reveal">
-        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Taxation</p>
-        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Tax on Equity Stocks — LTCG &amp; STCG</h2>
-        <p class="mt-3 max-w-2xl text-[15px] text-[var(--color-muted)]">Understanding capital gains tax helps you plan your exit strategy and keep more of your returns.</p>
-      </div>
-      <div class="equity-reveal mt-10 overflow-hidden rounded-[20px] border border-[var(--color-n400)]">
-        <div class="overflow-x-auto">
-          <table class="w-full text-[14px]">
-            <thead>
-              <tr class="bg-[var(--color-dark-olive)]">
-                <th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-white/70">Feature</th>
-                <th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-[var(--color-brand)]">Short Term (STCG)</th>
-                <th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-[var(--color-brand)]">Long Term (LTCG)</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-[var(--color-n400)]">
-              {taxRows.map((r, i) => (
-                <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[#f8f6f1]'}>
-                  <td class="px-6 py-4 font-semibold text-[var(--color-ink)]">{r.feature}</td>
-                  <td class="px-6 py-4 text-[var(--color-muted)]">{r.stcg}</td>
-                  <td class="px-6 py-4 text-[var(--color-muted)]">{r.ltcg}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ 8. TYPES OF EQUITY — CATEGORIES ═══════════════════════════ -->
-  <section class="bg-white py-16 lg:py-24">
-    <div class="site-wrap">
-      <div class="equity-reveal">
-        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Categories</p>
-        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Types of Equity Stocks — Categories Explained</h2>
-      </div>
-      <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {categories.map((c, i) => (
-          <div class="equity-reveal product-card-light group flex flex-col gap-3 p-6" style={`animation-delay:${i*50}ms`}>
-            <div class="flex h-11 w-11 items-center justify-center rounded-[10px] bg-[var(--color-dark-olive)] text-[var(--color-brand)]" set:html={c.icon} />
-            <h3 class="text-[15px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{c.label}</h3>
-            <p class="text-[13px] leading-relaxed text-[var(--color-muted)]">{c.desc}</p>
+            </ul>
           </div>
-        ))}
+          <!-- Documents -->
+          <div class="product-card-light p-[34px]">
+            <h4 class="mb-6 flex items-center gap-3 text-[22px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">
+              <span class="grid h-[34px] w-[34px] shrink-0 place-items-center rounded-[8px] border border-[var(--color-n400)] text-[13px] font-bold text-[var(--color-dark-olive)]">02</span>
+              Documents Required
+            </h4>
+            <ul class="space-y-4">
+              {documents.map(item => (
+                <li class="flex items-start gap-[14px] border-b border-[var(--color-n400)]/50 pb-4 last:border-0 last:pb-0">
+                  <span class="shrink-0 text-[15px] font-bold leading-[1.7] text-[var(--color-brand)]">✓</span>
+                  <span class="text-[15.5px] text-[var(--color-muted)]">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Center CTA -->
+      <div class="equity-reveal mt-[52px] text-center">
+        <a href="/about/open-demat-account/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-[var(--color-n400)] px-[26px] text-[15px] font-semibold text-[var(--color-ink)] transition-colors hover:border-[var(--color-ink)]">Open Demat Account</a>
       </div>
     </div>
   </section>
 
-  <!-- ══ 9. HOW TO ANALYSE STOCKS (Research Hub) ═══════════════════ -->
-  <section class="relative overflow-hidden bg-[var(--color-dark-800)] py-16 lg:py-24">
-    <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(243,184,63,0.08),transparent_60%)]"></div>
-    <div class="site-wrap relative">
-      <div class="equity-reveal text-center">
-        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Research Hub</p>
-        <h2 class="mt-3 text-[28px] font-bold text-white lg:text-[38px]" style="font-family:var(--font-display)">How to Analyse Stocks</h2>
-        <p class="mx-auto mt-4 max-w-xl text-[15px] text-white/55">Expert analysis and actionable trading recommendations. Data-driven insights to power your trades — explore research-backed ideas and market opportunities in real time.</p>
-      </div>
-      <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:max-w-3xl lg:mx-auto">
-        {research.map((r, i) => (
-          <a href={r.href}
-             class="equity-reveal group relative flex h-[300px] flex-col overflow-hidden rounded-[24px] border border-white/10 bg-[#2b2c2b] p-8 text-left hover:z-10 hover:bg-[#2e3914]"
-             style={`animation-delay:${i * 80}ms`}>
-            <div class="product-card-circle" set:html={r.icon} />
-            <div class="flex-1"></div>
-            <h3 class="text-[20px] font-bold text-white" style="font-family:var(--font-display)">{r.title}</h3>
-            <p class="mt-3 text-[13px] leading-relaxed text-white/55">{r.desc}</p>
-            <span class="mt-5 flex items-center gap-2 text-[13px] font-semibold text-[var(--color-brand)] transition-transform group-hover:translate-x-1">
-              Explore
-              <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" class="h-3 w-3"><path d="M2 6h8M6 2l4 4-4 4"/></svg>
-            </span>
-          </a>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ 10. TOP TRADING STRATEGIES ════════════════════════════════ -->
-  <section class="bg-white py-16 lg:py-24">
+  <!-- ══ 5. COSTS & TAXES ══════════════════════════════════════════ -->
+  <section class="bg-[#f8f6f1] py-[104px]">
     <div class="site-wrap">
-      <div class="equity-reveal">
-        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Strategy</p>
-        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Top Trading Strategies for Indian Investors</h2>
+      <!-- Centered sec-head -->
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          Costs &amp; <span class="text-[var(--color-brand)]">Taxes</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">What you pay to trade, and how your gains are taxed — with no hidden costs.</p>
       </div>
-      <div class="equity-reveal mt-10 overflow-hidden rounded-[20px] border border-[var(--color-n400)]">
-        <div class="overflow-x-auto">
-          <table class="w-full text-[14px]">
-            <thead>
-              <tr class="bg-[var(--color-dark-olive)]">
-                <th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-white/70">Parameter</th>
-                {strategies.map(s => (
-                  <th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-[var(--color-brand)]">{s.label}</th>
+
+      <!-- Brokerage table -->
+      <div class="equity-reveal">
+        <h3 class="mb-[10px] text-[26px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">Brokerage &amp; Charges</h3>
+        <p class="mb-[34px] max-w-[680px] text-[16px] text-[var(--color-muted)]">A clear breakdown of the charges that apply across delivery, intraday and F&amp;O segments.</p>
+        <div class="overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
+          <div class="overflow-x-auto">
+            <table class="w-full text-[15.5px]">
+              <thead>
+                <tr class="bg-[var(--color-dark-olive)]">
+                  <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Charge Type</th>
+                  <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Delivery</th>
+                  <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Intraday</th>
+                  <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">F&amp;O</th>
+                </tr>
+              </thead>
+              <tbody>
+                {brokerageRows.map((r, i) => (
+                  <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[#f8f6f1]'}>
+                    <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">{r.label}</td>
+                    <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.delivery}</td>
+                    <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.intraday}</td>
+                    <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.fo}</td>
+                  </tr>
                 ))}
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-[var(--color-n400)]">
-              {[
-                { key: 'tools',        label: 'Tools Used' },
-                { key: 'profitability',label: 'Profitability' },
-                { key: 'time',         label: 'Time Required' },
-                { key: 'skill',        label: 'Skill Level' },
-                { key: 'capital',      label: 'Capital Required' },
-                { key: 'risk',         label: 'Risk Level' },
-              ].map((row, i) => (
-                <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[#f8f6f1]'}>
-                  <td class="px-6 py-4 font-semibold text-[var(--color-ink)]">{row.label}</td>
-                  {strategies.map(s => (
-                    <td class="px-6 py-4 text-[var(--color-muted)]">{(s as any)[row.key]}</td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ 11. EQUITY STOCKS vs MUTUAL FUNDS ═════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-16 lg:py-24">
-    <div class="site-wrap">
-      <div class="equity-reveal">
-        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Comparison</p>
-        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Equity Stocks vs Mutual Funds</h2>
-        <p class="mt-3 max-w-2xl text-[15px] text-[var(--color-muted)]">Both are great wealth-building tools — the right choice depends on your goals, expertise, and time horizon.</p>
-      </div>
-      <div class="equity-reveal mt-10 overflow-hidden rounded-[20px] border border-[var(--color-n400)]">
-        <div class="overflow-x-auto">
-          <table class="w-full text-[14px]">
-            <thead>
-              <tr class="bg-[var(--color-dark-olive)]">
-                <th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-white/70">Feature</th>
-                <th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-[var(--color-brand)]">Equity Stocks</th>
-                <th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-[var(--color-brand)]">Mutual Funds</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-[var(--color-n400)]">
-              {vsRows.map((r, i) => (
-                <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[#f8f6f1]'}>
-                  <td class="px-6 py-4 font-semibold text-[var(--color-ink)]">{r.feature}</td>
-                  <td class="px-6 py-4 text-[var(--color-muted)]">{r.equity}</td>
-                  <td class="px-6 py-4 text-[var(--color-muted)]">{r.mf}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ 12. RISKS OF INVESTING ════════════════════════════════════ -->
-  <section class="bg-white py-16 lg:py-24">
-    <div class="site-wrap">
-      <div class="equity-reveal">
-        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Know Before You Invest</p>
-        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Risks of Investing in Equity Stocks</h2>
-        <p class="mt-3 max-w-2xl text-[15px] text-[var(--color-muted)]">Every investment carries risk. Understanding these risks helps you invest with clarity and avoid common mistakes.</p>
-      </div>
-      <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {risks.map((r, i) => (
-          <div class="equity-reveal product-card-light flex flex-col gap-4 p-7" style={`animation-delay:${i*60}ms`}>
-            <div class="flex h-12 w-12 items-center justify-center rounded-[12px] bg-[#fef4e6] text-[var(--color-brand-deep)]" set:html={r.icon} />
-            <h3 class="text-[16px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{r.label}</h3>
-            <p class="text-[13px] leading-relaxed text-[var(--color-muted)]">{r.desc}</p>
+              </tbody>
+            </table>
           </div>
-        ))}
+        </div>
+      </div>
+
+      <!-- Part: Tax table -->
+      <div class="equity-reveal mt-[76px] border-t border-[var(--color-n400)] pt-[60px]">
+        <h3 class="mb-[10px] text-[26px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">Tax on Equity Stocks — LTCG &amp; STCG</h3>
+        <p class="mb-[34px] max-w-[680px] text-[16px] text-[var(--color-muted)]">How short-term and long-term capital gains are treated for equity investors.</p>
+        <div class="overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
+          <div class="overflow-x-auto">
+            <table class="w-full text-[15.5px]">
+              <thead>
+                <tr class="bg-[var(--color-dark-olive)]">
+                  <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Feature</th>
+                  <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Short-Term (STCG)</th>
+                  <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Long-Term (LTCG)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {taxRows.map((r, i) => (
+                  <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[#f8f6f1]'}>
+                    <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">{r.feature}</td>
+                    <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.stcg}</td>
+                    <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.ltcg}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ══ 13. FAQ ════════════════════════════════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-16 lg:py-24">
+  <!-- ══ 6. ANALYSE & DECIDE ═══════════════════════════════════════ -->
+  <section class="bg-white py-[104px]">
     <div class="site-wrap">
-      <div class="equity-reveal">
-        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">FAQ</p>
-        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">FAQs — Equity Stocks &amp; Stock Market India</h2>
+      <!-- Centered sec-head -->
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          Analyse and <span class="text-[var(--color-brand)]">Decide</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">How to research a stock, choose a strategy, compare your options and weigh the risks.</p>
       </div>
-      <div class="equity-reveal mt-10 divide-y divide-[var(--color-n400)] overflow-hidden rounded-[24px] border border-[var(--color-n400)] bg-white">
-        {faqs.map((item) => (
-          <details class="eq-faq group">
-            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 transition-colors hover:bg-[var(--color-n100)]">
-              <span class="text-[15px] font-medium text-[var(--color-ink)]">{item.q}</span>
-              <span class="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-[var(--color-n400)] text-[var(--color-muted)] transition-transform group-open:rotate-45">
-                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" class="h-3 w-3"><path d="M6 2v8M2 6h8"/></svg>
+
+      <!-- Research Approaches — dark analyse-cards -->
+      <div class="equity-reveal">
+        <h3 class="mb-[10px] text-[26px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">Research Approaches</h3>
+        <p class="mb-[34px] max-w-[680px] text-[16px] text-[var(--color-muted)]">Two complementary approaches, backed by data-driven insights and research-led ideas.</p>
+        <div class="grid gap-6 sm:grid-cols-2">
+          {research.map(r => (
+            <a href={r.href} class="analyse-card group block rounded-[14px] bg-[var(--color-dark-800)] p-[46px] text-left transition-colors hover:bg-[var(--color-dark-olive)]">
+              <div class="mb-[26px] text-[13px] font-medium tracking-[.05em] text-white/50">{r.idx}</div>
+              <h4 class="mb-[14px] text-[25px] font-medium text-white" style="font-family:var(--font-display)">{r.title}</h4>
+              <p class="max-w-[360px] text-[15.5px] leading-relaxed text-white/72">{r.desc}</p>
+              <span class="mt-[30px] inline-flex items-center gap-[10px] text-[15px] font-semibold text-[var(--color-brand)]">
+                Explore
+                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" class="h-3 w-3 transition-transform group-hover:translate-x-1.5"><path d="M2 6h8M6 2l4 4-4 4"/></svg>
               </span>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Part: Trading Strategies table -->
+      <div class="equity-reveal mt-[76px] border-t border-[var(--color-n400)] pt-[60px]">
+        <h3 class="mb-[10px] text-[26px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">Top Trading Strategies</h3>
+        <p class="mb-[34px] max-w-[680px] text-[16px] text-[var(--color-muted)]">Match your time, capital and risk appetite to the right approach.</p>
+        <div class="overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
+          <div class="overflow-x-auto">
+            <table class="w-full text-[15.5px]">
+              <thead>
+                <tr class="bg-[var(--color-dark-olive)]">
+                  <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Parameter</th>
+                  <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Intraday Trading</th>
+                  <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Swing Trading</th>
+                  <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Long-Term Investing</th>
+                </tr>
+              </thead>
+              <tbody>
+                {strategyRows.map((r, i) => (
+                  <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[#f8f6f1]'}>
+                    <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">{r.label}</td>
+                    <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.intraday}</td>
+                    <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.swing}</td>
+                    <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.lt}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Part: Equity vs MF table -->
+      <div class="equity-reveal mt-[76px] border-t border-[var(--color-n400)] pt-[60px]">
+        <h3 class="mb-[10px] text-[26px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">Equity Stocks vs Mutual Funds</h3>
+        <p class="mb-[34px] max-w-[680px] text-[16px] text-[var(--color-muted)]">Compare direct equity investing with mutual funds across the factors that matter most.</p>
+        <div class="overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
+          <div class="overflow-x-auto">
+            <table class="w-full text-[15.5px]">
+              <thead>
+                <tr class="bg-[var(--color-dark-olive)]">
+                  <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Feature</th>
+                  <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Equity Stocks</th>
+                  <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Mutual Funds</th>
+                </tr>
+              </thead>
+              <tbody>
+                {vsRows.map((r, i) => (
+                  <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[#f8f6f1]'}>
+                    <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">{r.feature}</td>
+                    <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.equity}</td>
+                    <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.mf}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Part: Risks — numbered cards -->
+      <div class="equity-reveal mt-[76px] border-t border-[var(--color-n400)] pt-[60px]">
+        <h3 class="mb-[10px] text-[26px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">Risks to Weigh</h3>
+        <p class="mb-[34px] max-w-[680px] text-[16px] text-[var(--color-muted)]">Understand what can move against you before you commit capital.</p>
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {risks.map(r => (
+            <div class="product-card-light p-[30px]">
+              <div class="mb-[18px] text-[15px] font-medium tracking-[.05em] text-[var(--color-brand)]">{r.n}</div>
+              <h4 class="mb-[10px] text-[19px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">{r.label}</h4>
+              <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">{r.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 7. FAQ ════════════════════════════════════════════════════ -->
+  <section class="bg-[#f8f6f1] py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          Frequently Asked <span class="text-[var(--color-brand)]">Questions</span>
+        </h2>
+      </div>
+      <div class="equity-reveal mx-auto max-w-[840px] border-t border-[var(--color-n400)]">
+        {faqs.map(item => (
+          <details class="eq-faq group border-b border-[var(--color-n400)]">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-5 py-[26px] px-2">
+              <span class="text-[18px] font-semibold text-[var(--color-ink)]">{item.q}</span>
+              <span class="shrink-0 text-[22px] leading-none text-[var(--color-brand)] transition-transform duration-300 group-open:rotate-45">+</span>
             </summary>
-            <div class="border-t border-[var(--color-n400)] bg-[var(--color-n100)] px-6 py-5">
-              <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">{item.a}</p>
+            <div class="overflow-hidden px-2 pb-0 text-[16px] leading-relaxed text-[var(--color-muted)] transition-all duration-300 group-open:pb-[28px]">
+              <p class="max-w-[680px]">{item.a}</p>
             </div>
           </details>
         ))}
@@ -511,17 +495,15 @@ const faqs = [
     </div>
   </section>
 
-  <!-- ══ 14. BOTTOM CTA BANNER ═════════════════════════════════════ -->
-  <section class="bg-[var(--color-dark-800)] py-16 lg:py-20">
+  <!-- ══ 8. FINAL CTA ══════════════════════════════════════════════ -->
+  <section class="bg-white py-0 pt-0 pb-[104px]">
     <div class="site-wrap">
-      <div class="equity-reveal flex flex-col items-center gap-6 text-center lg:flex-row lg:items-center lg:justify-between lg:text-left">
-        <div>
-          <h2 class="text-[28px] font-bold text-white lg:text-[36px]" style="font-family:var(--font-display)">Open Your Demat Account in Minutes</h2>
-          <p class="mt-3 max-w-lg text-[15px] text-white/55">100% digital, paperless, and SEBI-compliant. Start investing in equities with ₹0 delivery brokerage and expert advisory from day one.</p>
-        </div>
-        <div class="flex shrink-0 flex-col gap-3 sm:flex-row">
-          <a href="/about/open-demat-account/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] bg-[var(--color-brand)] text-[14px] font-semibold text-[#202318] transition-colors hover:bg-[var(--color-brand-hover)]">Get Started →</a>
-          <a href="/about/support/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] border border-white/20 text-[14px] font-medium text-white transition-colors hover:bg-white/10">Talk to an RM</a>
+      <div class="equity-reveal rounded-[22px] bg-[var(--color-dark-800)] px-[60px] py-[64px] text-center">
+        <h3 class="mx-auto max-w-[560px] text-[38px] font-bold leading-[1.12] text-white" style="font-family:var(--font-display)">Open Your Demat Account in Minutes</h3>
+        <p class="mx-auto mt-[18px] max-w-[480px] text-[17px] leading-relaxed text-white/72">Start investing in stocks, mutual funds and more — 100% digital and paperless.</p>
+        <div class="mt-[34px] flex flex-wrap justify-center gap-[14px]">
+          <a href="/about/open-demat-account/" class="btn-primary">Open Demat Account</a>
+          <a href="/about/support/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Talk to an RM</a>
         </div>
       </div>
     </div>
@@ -532,27 +514,42 @@ const faqs = [
 <style>
   .equity-reveal {
     opacity: 0;
-    transform: translateY(28px);
-    transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    transform: translateY(20px);
+    transition: opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
   }
-  .equity-reveal.in-view { opacity: 1; transform: translateY(0); }
+  .equity-reveal.in-view { opacity: 1; transform: none; }
+
+  /* Steps: 2-col mobile → 4-col desktop with connected internal borders */
+  .steps-grid { display: grid; grid-template-columns: repeat(2, 1fr); }
+  .steps-grid > * { border-right: 1px solid var(--color-n400); border-bottom: 1px solid var(--color-n400); }
+  .steps-grid > *:nth-child(2n) { border-right: 0; }
+  .steps-grid > *:nth-last-child(-n+2) { border-bottom: 0; }
+  @media (min-width: 1024px) {
+    .steps-grid { grid-template-columns: repeat(4, 1fr); }
+    .steps-grid > * { border-right: 1px solid var(--color-n400); border-bottom: 0; }
+    .steps-grid > *:last-child { border-right: 0; }
+  }
+
+  /* Cat grid: 2-col mobile → 4-col desktop */
+  .cat-grid { display: grid; grid-template-columns: repeat(2, 1fr); }
+  @media (min-width: 1024px) { .cat-grid { grid-template-columns: repeat(4, 1fr); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .equity-reveal { opacity: 1; transform: none; transition: none; }
+  }
 </style>
 
 <script>
-  /* Scroll reveal */
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) {
-        const el = e.target as HTMLElement;
-        const d = parseInt(el.style.animationDelay) || 0;
-        setTimeout(() => el.classList.add('in-view'), d);
-        obs.unobserve(el);
+        (e.target as HTMLElement).classList.add('in-view');
+        obs.unobserve(e.target);
       }
     });
   }, { threshold: 0.10 });
   document.querySelectorAll('.equity-reveal').forEach(el => obs.observe(el));
 
-  /* FAQ accordion */
   document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(d => {
     d.addEventListener('toggle', () => {
       if (d.open) document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(o => { if (o !== d) o.removeAttribute('open'); });
