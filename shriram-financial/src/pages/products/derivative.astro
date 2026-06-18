@@ -44,10 +44,10 @@ const strategies = [
 ];
 
 const risks = [
-  { label: 'Leverage Risk', desc: 'F&O positions are leveraged — a small adverse move in the underlying can result in losses far exceeding the initial margin deposited.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M3 3v18h18"/><path d="m7 14 4-5 4 3 4-6"/></svg>` },
-  { label: 'Expiry Risk', desc: 'Options lose time value rapidly as they approach expiry (theta decay). Positions left unmanaged near expiry can expire worthless.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>` },
-  { label: 'Volatility Risk', desc: 'Sharp, unexpected volatility events (gap openings, news events) can trigger margin calls or cause large overnight losses in open futures positions.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>` },
-  { label: 'Liquidity Risk', desc: 'Out-of-the-money contracts, particularly in individual stocks, may have very low open interest — making it difficult to exit at a fair price.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>` },
+  { n: '01', label: 'Leverage Risk', desc: 'F&O positions are leveraged — a small adverse move in the underlying can result in losses far exceeding the initial margin deposited.' },
+  { n: '02', label: 'Expiry Risk', desc: 'Options lose time value rapidly as they approach expiry (theta decay). Positions left unmanaged near expiry can expire worthless.' },
+  { n: '03', label: 'Volatility Risk', desc: 'Sharp, unexpected volatility events (gap openings, news events) can trigger margin calls or cause large overnight losses in open futures positions.' },
+  { n: '04', label: 'Liquidity Risk', desc: 'Out-of-the-money contracts, particularly in individual stocks, may have very low open interest — making it difficult to exit at a fair price.' },
 ];
 
 const faqs = [
@@ -69,91 +69,106 @@ const faqs = [
   <section class="relative overflow-hidden bg-[var(--color-dark-800)]">
     <div class="pointer-events-none absolute -right-40 -top-40 h-[560px] w-[560px] rounded-full bg-[var(--color-brand)]/10 blur-3xl"></div>
     <div class="pointer-events-none absolute -bottom-32 left-0 h-80 w-80 rounded-full bg-[var(--color-brand)]/5 blur-3xl"></div>
-    <div class="site-wrap relative py-16 lg:py-28">
-      <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Derivatives</p>
-      <h1 class="mt-4 max-w-3xl text-[32px] font-bold leading-tight text-white lg:text-[40px]" style="font-family:var(--font-display)">
-        Trade Smarter with<br class="hidden sm:block"> Futures &amp; Options
+    <div class="site-wrap relative py-[120px]">
+      <p class="equity-reveal text-[14px] font-medium tracking-[.04em] text-[var(--color-brand)]">Derivatives</p>
+      <h1 class="equity-reveal mt-[22px] max-w-[880px] text-[clamp(32px,4vw,52px)] font-bold leading-[1.06] text-white" style="font-family:var(--font-display)">
+        Trade Smarter with <span class="text-[var(--color-brand)]">Futures &amp; Options</span>
       </h1>
-      <p class="mt-5 max-w-2xl text-[15px] leading-relaxed text-white/60 lg:text-[17px]">
+      <p class="equity-reveal mt-[26px] max-w-[600px] text-[18px] leading-relaxed text-white/70">
         Access NSE and BSE derivative markets with advanced analytics, SEBI-registered research, and dedicated risk management support from Shriram Financial Services.
       </p>
-      <div class="mt-7 grid grid-cols-2 gap-x-6 gap-y-3 sm:flex sm:gap-8">
-        {[['SEBI-registered'],['Flat ₹20/order'],['Real-time analytics'],['Expert RM support']].map(([l]) => (
-          <div class="flex items-center gap-2 text-[13px] font-medium text-white/70">
-            <span class="h-1.5 w-1.5 rounded-full bg-[var(--color-brand)]"></span>{l}
-          </div>
-        ))}
-      </div>
-      <div class="mt-9 flex flex-wrap gap-3">
+      <div class="equity-reveal mt-[38px] flex flex-wrap gap-[14px]">
         <a href="/about/open-demat-account/" class="btn-primary">Activate F&O Segment</a>
-        <a href="/about/support/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] border border-white/25 text-[14px] font-medium text-white transition-colors hover:bg-white/10">Talk to RM</a>
+        <a href="/about/support/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Talk to RM</a>
+      </div>
+      <div class="equity-reveal mt-[54px] flex flex-wrap gap-x-9 gap-y-3 border-t border-white/15 pt-9">
+        {['✓ SEBI-registered', '✓ Flat ₹20/order', '✓ Real-time analytics', '✓ Expert RM support'].map(f => (
+          <span class="text-[15px] font-medium text-white/90">
+            <span class="mr-2 text-[var(--color-brand)]">{f.slice(0,1)}</span>{f.slice(1)}
+          </span>
+        ))}
       </div>
     </div>
   </section>
 
   <!-- ══ 2. WHAT ARE DERIVATIVES ════════════════════════════════════ -->
-  <section class="bg-white py-16 lg:py-24">
+  <section class="bg-white py-[104px]">
     <div class="site-wrap">
-      <div class="equity-reveal">
-        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">The Basics</p>
-        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">What Are Derivatives</h2>
-        <p class="mt-4 max-w-3xl text-[15px] leading-relaxed text-[var(--color-muted)]">A derivative is a financial contract whose value is derived from an underlying asset — such as stocks, indices, commodities, or currencies. In India, derivatives are traded on NSE and BSE and are regulated by SEBI.</p>
+      <div class="equity-reveal mx-auto grid max-w-[1000px] items-start gap-[72px] lg:grid-cols-[5fr_7fr]">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          What Are <span class="text-[var(--color-brand)]">Derivatives?</span>
+        </h2>
+        <div class="space-y-5 text-[17px] leading-relaxed text-[var(--color-muted)]">
+          <p>A derivative is a financial contract whose value is derived from an underlying asset — such as stocks, indices, commodities, or currencies. In India, derivatives are traded on NSE and BSE and are regulated by SEBI.</p>
+          <p>Derivatives are used for hedging existing positions, speculating on price movements, or arbitraging price differences across markets.</p>
+        </div>
       </div>
-      <div class="equity-reveal mt-10 grid gap-5 sm:grid-cols-2">
-        {types.map(t => (
-          <div class="product-card-light p-7">
-            <h3 class="text-[17px] font-bold text-[var(--color-dark-olive)]" style="font-family:var(--font-display)">{t.label}</h3>
-            <p class="mt-3 text-[14px] leading-relaxed text-[var(--color-muted)]">{t.desc}</p>
-          </div>
-        ))}
+      <div class="equity-reveal mx-auto mt-[76px] max-w-[1000px] border-t border-[var(--color-n400)] pt-[60px]">
+        <h3 class="mb-[10px] text-[26px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">Core Derivative Types</h3>
+        <p class="mb-[34px] max-w-[680px] text-[16px] text-[var(--color-muted)]">Two major instrument types cover most of the derivative market activity in India.</p>
+        <div class="grid gap-5 sm:grid-cols-2">
+          {types.map(t => (
+            <div class="product-card-light p-[34px]">
+              <h4 class="mb-[10px] text-[22px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">{t.label}</h4>
+              <p class="text-[15px] leading-relaxed text-[var(--color-muted)]">{t.desc}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ══ 3. ELIGIBILITY & DOCUMENTS ════════════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-16 lg:py-24">
+  <section class="bg-[#f8f6f1] py-[104px]">
     <div class="site-wrap">
-      <div class="equity-reveal">
-        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Requirements</p>
-        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Eligibility &amp; Documents Required</h2>
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          Eligibility &amp; <span class="text-[var(--color-brand)]">Documents Required</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Everything you need to qualify and activate your F&O segment.</p>
       </div>
-      <div class="equity-reveal mt-10 grid gap-6 sm:grid-cols-2">
-        <div class="rounded-[20px] border border-[var(--color-warm-border)] bg-white p-8">
-          <h3 class="mb-5 text-[17px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">Eligibility Criteria</h3>
-          <ul class="space-y-3">{eligibility.map(item => (
-            <li class="flex items-start gap-3">
-              <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--color-brand)]/20"><svg viewBox="0 0 12 12" fill="none" stroke="var(--color-brand-deep)" stroke-width="2" class="h-3 w-3"><path d="M2 6l3 3 5-5"/></svg></span>
-              <span class="text-[13px] leading-snug text-[var(--color-ink)]">{item}</span>
-            </li>
-          ))}</ul>
+      <div class="equity-reveal grid gap-6 sm:grid-cols-2">
+        <div class="product-card-light p-[34px]">
+          <h4 class="mb-6 text-[22px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">Eligibility Criteria</h4>
+          <ul class="space-y-4">
+            {eligibility.map(item => (
+              <li class="flex items-start gap-[14px] border-b border-[var(--color-n400)]/50 pb-4 last:border-0 last:pb-0">
+                <span class="shrink-0 text-[15px] font-bold leading-[1.7] text-[var(--color-brand)]">✓</span>
+                <span class="text-[15.5px] text-[var(--color-muted)]">{item}</span>
+              </li>
+            ))}
+          </ul>
         </div>
-        <div class="rounded-[20px] border border-[var(--color-warm-border)] bg-white p-8">
-          <h3 class="mb-5 text-[17px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">Documents Required</h3>
-          <ul class="space-y-3">{documents.map(item => (
-            <li class="flex items-start gap-3">
-              <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--color-brand)]/20"><svg viewBox="0 0 12 12" fill="none" stroke="var(--color-brand-deep)" stroke-width="2" class="h-3 w-3"><path d="M2 6l3 3 5-5"/></svg></span>
-              <span class="text-[13px] leading-snug text-[var(--color-ink)]">{item}</span>
-            </li>
-          ))}</ul>
+        <div class="product-card-light p-[34px]">
+          <h4 class="mb-6 text-[22px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">Documents Required</h4>
+          <ul class="space-y-4">
+            {documents.map(item => (
+              <li class="flex items-start gap-[14px] border-b border-[var(--color-n400)]/50 pb-4 last:border-0 last:pb-0">
+                <span class="shrink-0 text-[15px] font-bold leading-[1.7] text-[var(--color-brand)]">✓</span>
+                <span class="text-[15.5px] text-[var(--color-muted)]">{item}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ══ 4. HOW TO START ════════════════════════════════════════════ -->
-  <section class="bg-white py-16 lg:py-24">
+  <section class="bg-white py-[104px]">
     <div class="site-wrap">
-      <div class="equity-reveal text-center">
-        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Getting Started</p>
-        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">How to Start Trading F&amp;O</h2>
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          How to <span class="text-[var(--color-brand)]">Start Trading F&amp;O</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Four steps from account setup to your first futures or options trade.</p>
       </div>
-      <div class="equity-reveal mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {steps.map((s, i) => (
-          <div class="relative rounded-[20px] border border-[var(--color-warm-border)] bg-[#f8f6f1] p-7" style={`animation-delay:${i*60}ms`}>
-            <span class="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-dark-olive)] text-[13px] font-bold text-[var(--color-brand)]">{s.n}</span>
-            {i < steps.length - 1 && <span class="absolute -right-3 top-9 hidden lg:flex"><svg viewBox="0 0 12 12" fill="none" stroke="var(--color-brand)" stroke-width="2" class="h-3 w-3"><path d="M2 6h8M6 2l4 4-4 4"/></svg></span>}
-            <h3 class="mt-4 text-[15px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{s.title}</h3>
-            <p class="mt-2 text-[13px] leading-relaxed text-[var(--color-muted)]">{s.desc}</p>
+      <div class="equity-reveal steps-grid overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
+        {steps.map(s => (
+          <div class="px-[30px] py-[34px]">
+            <div class="mb-[22px] font-display text-[34px] font-normal leading-none text-[var(--color-brand)]">{s.n}</div>
+            <h4 class="mb-[10px] text-[19px] font-medium leading-[1.25] text-[var(--color-ink)]" style="font-family:var(--font-display)">{s.title}</h4>
+            <p class="text-[14.5px] leading-relaxed text-[var(--color-muted)]">{s.desc}</p>
           </div>
         ))}
       </div>
@@ -161,26 +176,28 @@ const faqs = [
   </section>
 
   <!-- ══ 5. CHARGES ════════════════════════════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-16 lg:py-24">
+  <section class="bg-[#f8f6f1] py-[104px]">
     <div class="site-wrap">
-      <div class="equity-reveal">
-        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Costs</p>
-        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Brokerage &amp; Charges</h2>
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          Brokerage &amp; <span class="text-[var(--color-brand)]">Charges</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">A full breakdown of trading costs across futures and options segments.</p>
       </div>
-      <div class="equity-reveal mt-10 overflow-hidden rounded-[20px] border border-[var(--color-n400)]">
+      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
         <div class="overflow-x-auto">
-          <table class="w-full text-[14px]">
+          <table class="w-full text-[15.5px]">
             <thead><tr class="bg-[var(--color-dark-olive)]">
-              <th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-white/70">Charge Type</th>
-              <th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-[var(--color-brand)]">Futures</th>
-              <th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-[var(--color-brand)]">Options</th>
+              <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Charge Type</th>
+              <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Futures</th>
+              <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Options</th>
             </tr></thead>
-            <tbody class="divide-y divide-[var(--color-n400)]">
+            <tbody>
               {chargeRows.map((r, i) => (
                 <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[#f8f6f1]'}>
-                  <td class="px-6 py-4 font-semibold text-[var(--color-ink)]">{r.label}</td>
-                  <td class="px-6 py-4 text-[var(--color-muted)]">{r.futures}</td>
-                  <td class="px-6 py-4 text-[var(--color-muted)]">{r.options}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">{r.label}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.futures}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.options}</td>
                 </tr>
               ))}
             </tbody>
@@ -191,13 +208,15 @@ const faqs = [
   </section>
 
   <!-- ══ 6. STRATEGIES ══════════════════════════════════════════════ -->
-  <section class="bg-white py-16 lg:py-24">
+  <section class="bg-white py-[104px]">
     <div class="site-wrap">
-      <div class="equity-reveal">
-        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Strategy</p>
-        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Popular F&amp;O Strategies for Indian Traders</h2>
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          Popular F&amp;O <span class="text-[var(--color-brand)]">Strategies</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Match your market outlook — bullish, bearish, or neutral — to the right options strategy.</p>
       </div>
-      <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {strategies.map((s, i) => (
           <div class="equity-reveal product-card-light flex flex-col gap-3 p-7" style={`animation-delay:${i*60}ms`}>
             <span class="inline-flex w-fit rounded-full bg-[var(--color-brand)]/15 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-[var(--color-brand-deep)]">{s.type}</span>
@@ -210,18 +229,20 @@ const faqs = [
   </section>
 
   <!-- ══ 7. RISKS ════════════════════════════════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-16 lg:py-24">
+  <section class="bg-[#f8f6f1] py-[104px]">
     <div class="site-wrap">
-      <div class="equity-reveal">
-        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Know Before You Trade</p>
-        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Risks of Trading Derivatives</h2>
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          Risks of Trading <span class="text-[var(--color-brand)]">Derivatives</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Understand what can move against you before you commit capital.</p>
       </div>
-      <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {risks.map((r, i) => (
-          <div class="equity-reveal product-card-light flex flex-col gap-4 p-7" style={`animation-delay:${i*60}ms`}>
-            <div class="flex h-12 w-12 items-center justify-center rounded-[12px] bg-[#fef4e6] text-[var(--color-brand-deep)]" set:html={r.icon} />
-            <h3 class="text-[16px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{r.label}</h3>
-            <p class="text-[13px] leading-relaxed text-[var(--color-muted)]">{r.desc}</p>
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {risks.map(r => (
+          <div class="equity-reveal rounded-[18px] bg-[var(--color-dark-800)] p-[36px]">
+            <div class="mb-[18px] text-[48px] font-bold leading-none text-[var(--color-brand)]/25">{r.n}</div>
+            <h4 class="mb-3 text-[20px] font-medium text-white" style="font-family:var(--font-display)">{r.label}</h4>
+            <p class="text-[14.5px] leading-relaxed text-white/60">{r.desc}</p>
           </div>
         ))}
       </div>
@@ -229,23 +250,22 @@ const faqs = [
   </section>
 
   <!-- ══ 8. FAQ ══════════════════════════════════════════════════════ -->
-  <section class="bg-white py-16 lg:py-24">
+  <section class="bg-white py-[104px]">
     <div class="site-wrap">
-      <div class="equity-reveal">
-        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">FAQ</p>
-        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Frequently Asked Questions</h2>
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          Frequently Asked <span class="text-[var(--color-brand)]">Questions</span>
+        </h2>
       </div>
-      <div class="equity-reveal mt-10 divide-y divide-[var(--color-n400)] overflow-hidden rounded-[24px] border border-[var(--color-n400)] bg-white">
+      <div class="equity-reveal mx-auto max-w-[840px] border-t border-[var(--color-n400)]">
         {faqs.map(item => (
-          <details class="eq-faq group">
-            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 hover:bg-[var(--color-n100)]">
-              <span class="text-[15px] font-medium text-[var(--color-ink)]">{item.q}</span>
-              <span class="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-[var(--color-n400)] text-[var(--color-muted)] transition-transform group-open:rotate-45">
-                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" class="h-3 w-3"><path d="M6 2v8M2 6h8"/></svg>
-              </span>
+          <details class="eq-faq group border-b border-[var(--color-n400)]">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-5 py-[26px] px-2">
+              <span class="text-[18px] font-semibold text-[var(--color-ink)]">{item.q}</span>
+              <span class="shrink-0 text-[22px] leading-none text-[var(--color-brand)] transition-transform duration-300 group-open:rotate-45">+</span>
             </summary>
-            <div class="border-t border-[var(--color-n400)] bg-[var(--color-n100)] px-6 py-5">
-              <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">{item.a}</p>
+            <div class="overflow-hidden px-2 pb-0 text-[16px] leading-relaxed text-[var(--color-muted)] transition-all duration-300 group-open:pb-[28px]">
+              <p class="max-w-[680px]">{item.a}</p>
             </div>
           </details>
         ))}
@@ -253,17 +273,15 @@ const faqs = [
     </div>
   </section>
 
-  <!-- ══ 9. CTA BANNER ══════════════════════════════════════════════ -->
-  <section class="bg-[var(--color-dark-800)] py-16 lg:py-20">
+  <!-- ══ 9. FINAL CTA ══════════════════════════════════════════════ -->
+  <section class="bg-white py-[104px]">
     <div class="site-wrap">
-      <div class="equity-reveal flex flex-col items-center gap-6 text-center lg:flex-row lg:items-center lg:justify-between lg:text-left">
-        <div>
-          <h2 class="text-[28px] font-bold text-white lg:text-[36px]" style="font-family:var(--font-display)">Start Trading Futures &amp; Options Today</h2>
-          <p class="mt-3 max-w-lg text-[15px] text-white/55">Activate F&O on your Shriram account in minutes. Access research-backed recommendations and trade with confidence.</p>
-        </div>
-        <div class="flex shrink-0 flex-col gap-3 sm:flex-row">
-          <a href="/about/open-demat-account/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] bg-[var(--color-brand)] text-[14px] font-semibold text-[#202318] hover:bg-[var(--color-brand-hover)]">Activate F&O →</a>
-          <a href="/about/support/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] border border-white/20 text-[14px] font-medium text-white hover:bg-white/10">Talk to an RM</a>
+      <div class="equity-reveal overflow-hidden rounded-[22px] bg-[var(--color-dark-800)] px-[60px] py-[64px] text-center">
+        <h3 class="mx-auto max-w-[560px] text-[38px] font-bold leading-[1.12] text-white" style="font-family:var(--font-display)">Start Trading Futures &amp; Options Today</h3>
+        <p class="mx-auto mt-[18px] max-w-[480px] text-[17px] leading-relaxed text-white/70">Activate F&O on your Shriram account in minutes. Access research-backed recommendations and trade with confidence.</p>
+        <div class="mt-[34px] flex flex-wrap justify-center gap-[14px]">
+          <a href="/about/open-demat-account/" class="btn-primary">Activate F&O →</a>
+          <a href="/about/support/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Talk to an RM</a>
         </div>
       </div>
     </div>
@@ -272,11 +290,42 @@ const faqs = [
 </BaseLayout>
 
 <style>
-  .equity-reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1), transform 0.65s cubic-bezier(0.22,1,0.36,1); }
-  .equity-reveal.in-view { opacity: 1; transform: translateY(0); }
+  .equity-reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  .equity-reveal.in-view { opacity: 1; transform: none; }
+
+  .steps-grid { display: grid; grid-template-columns: repeat(2, 1fr); }
+  .steps-grid > * { border-right: 1px solid var(--color-n400); border-bottom: 1px solid var(--color-n400); }
+  .steps-grid > *:nth-child(2n) { border-right: 0; }
+  .steps-grid > *:nth-last-child(-n+2) { border-bottom: 0; }
+  @media (min-width: 1024px) {
+    .steps-grid { grid-template-columns: repeat(4, 1fr); }
+    .steps-grid > * { border-right: 1px solid var(--color-n400); border-bottom: 0; }
+    .steps-grid > *:last-child { border-right: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .equity-reveal { opacity: 1; transform: none; transition: none; }
+  }
 </style>
+
 <script>
-  const obs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { const el = e.target as HTMLElement; setTimeout(() => el.classList.add('in-view'), parseInt(el.style.animationDelay)||0); obs.unobserve(el); } }); }, { threshold: 0.10 });
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        (e.target as HTMLElement).classList.add('in-view');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.10 });
   document.querySelectorAll('.equity-reveal').forEach(el => obs.observe(el));
-  document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(d => { d.addEventListener('toggle', () => { if (d.open) document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(o => { if (o !== d) o.removeAttribute('open'); }); }); });
+
+  document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(d => {
+    d.addEventListener('toggle', () => {
+      if (d.open) document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(o => { if (o !== d) o.removeAttribute('open'); });
+    });
+  });
 </script>

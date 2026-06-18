@@ -2,12 +2,12 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const etfTypes = [
-  { label: 'Index ETFs', desc: 'Track benchmark indices like NIFTY 50, SENSEX, NIFTY Next 50. Low cost, broad diversification, and zero manager risk.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M3 3v18h18"/><path d="m7 12 4-4 4 4 4-4"/></svg>` },
-  { label: 'Gold ETFs', desc: 'Invest in physical gold stored in vaults. Each unit = 1 gram of gold. No storage hassle, no purity risk, tradeable like stocks.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><circle cx="12" cy="12" r="9"/><path d="M9 9.5h1.5a1.5 1.5 0 0 1 0 3H9v3m3-6v6"/></svg>` },
-  { label: 'Sectoral ETFs', desc: 'Track sector-specific indices: Bank Nifty, NIFTY IT, NIFTY Pharma, NIFTY FMCG. Concentrated exposure to a single industry.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>` },
-  { label: 'Debt ETFs', desc: 'Track fixed-income indices (government securities, corporate bonds). Lower volatility than equity ETFs, better liquidity than bond funds.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 9h8M8 13h5"/></svg>` },
-  { label: 'International ETFs', desc: 'Exposure to global markets (US S&P 500, Nasdaq 100, MSCI World) through India-listed ETFs. Currency diversification built in.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><circle cx="12" cy="12" r="9"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>` },
-  { label: 'Smart Beta ETFs', desc: 'Factor-based strategies (Momentum, Low Volatility, Quality, Equal Weight) that go beyond simple index replication.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>` },
+  { label: 'Index ETFs', desc: 'Track benchmark indices like NIFTY 50, SENSEX, NIFTY Next 50. Low cost, broad diversification, and zero manager risk.' },
+  { label: 'Gold ETFs', desc: 'Invest in physical gold stored in vaults. Each unit = 1 gram of gold. No storage hassle, no purity risk, tradeable like stocks.' },
+  { label: 'Sectoral ETFs', desc: 'Track sector-specific indices: Bank Nifty, NIFTY IT, NIFTY Pharma, NIFTY FMCG. Concentrated exposure to a single industry.' },
+  { label: 'Debt ETFs', desc: 'Track fixed-income indices (government securities, corporate bonds). Lower volatility than equity ETFs, better liquidity than bond funds.' },
+  { label: 'International ETFs', desc: 'Exposure to global markets (US S&P 500, Nasdaq 100, MSCI World) through India-listed ETFs. Currency diversification built in.' },
+  { label: 'Smart Beta ETFs', desc: 'Factor-based strategies (Momentum, Low Volatility, Quality, Equal Weight) that go beyond simple index replication.' },
 ];
 
 const vsRows = [
@@ -28,10 +28,10 @@ const steps = [
 ];
 
 const risks = [
-  { label: 'Tracking Error', desc: 'Small gaps between the ETF\'s return and the index it tracks can erode performance over time. Lower tracking error = better index replication.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>` },
-  { label: 'Liquidity Risk', desc: 'Sectoral and debt ETFs can have thin trading volumes and wide bid-ask spreads, making large trades expensive. Stick to high-volume ETFs for easier entry and exit.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M3 3v18h18"/><path d="m7 14 4-5 4 3 4-6"/></svg>` },
-  { label: 'Market Risk', desc: 'Equity ETFs fall when the market falls — there is no active downside buffer. Use debt or hybrid ETFs to balance overall portfolio risk.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="m3 3 18 18M3 12c0 5 3.6 9 9 9s9-4 9-9"/><path d="M12 3a9 9 0 0 1 9 9"/></svg>` },
-  { label: 'Currency Risk', desc: 'International ETFs embed currency risk. If the INR appreciates against USD, your INR-denominated returns from a US ETF drop even if the underlying index rose.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>` },
+  { n: '01', label: 'Tracking Error', desc: 'Small gaps between the ETF\'s return and the index it tracks can erode performance over time. Lower tracking error = better index replication.' },
+  { n: '02', label: 'Liquidity Risk', desc: 'Sectoral and debt ETFs can have thin trading volumes and wide bid-ask spreads, making large trades expensive. Stick to high-volume ETFs for easier entry and exit.' },
+  { n: '03', label: 'Market Risk', desc: 'Equity ETFs fall when the market falls — there is no active downside buffer. Use debt or hybrid ETFs to balance overall portfolio risk.' },
+  { n: '04', label: 'Currency Risk', desc: 'International ETFs embed currency risk. If the INR appreciates against USD, your INR-denominated returns from a US ETF drop even if the underlying index rose.' },
 ];
 
 const faqs = [
@@ -48,94 +48,150 @@ const faqs = [
   description="Buy Index ETFs, Gold ETFs, and international ETFs on NSE & BSE. Ultra-low expense ratios, real-time pricing, and flat ₹20 brokerage. Start ETF investing today."
 >
 
+  <!-- ══ 1. HERO ═══════════════════════════════════════════════════ -->
   <section class="relative overflow-hidden bg-[var(--color-dark-800)]">
     <div class="pointer-events-none absolute -right-40 -top-40 h-[560px] w-[560px] rounded-full bg-[var(--color-brand)]/10 blur-3xl"></div>
-    <div class="site-wrap relative py-16 lg:py-28">
-      <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Exchange Traded Funds</p>
-      <h1 class="mt-4 max-w-3xl text-[32px] font-bold leading-tight text-white lg:text-[40px]" style="font-family:var(--font-display)">
-        Trade ETFs — Diversify Your<br class="hidden sm:block"> Portfolio Instantly
+    <div class="pointer-events-none absolute -bottom-32 left-0 h-80 w-80 rounded-full bg-[var(--color-brand)]/5 blur-3xl"></div>
+    <div class="site-wrap relative py-[120px]">
+      <p class="equity-reveal text-[14px] font-medium tracking-[.04em] text-[var(--color-brand)]">Exchange Traded Funds</p>
+      <h1 class="equity-reveal mt-[22px] max-w-[880px] text-[clamp(32px,4vw,52px)] font-bold leading-[1.06] text-white" style="font-family:var(--font-display)">
+        Trade ETFs — Diversify Your <span class="text-[var(--color-brand)]">Portfolio Instantly</span>
       </h1>
-      <p class="mt-5 max-w-2xl text-[15px] leading-relaxed text-white/60 lg:text-[17px]">
+      <p class="equity-reveal mt-[26px] max-w-[600px] text-[18px] leading-relaxed text-white/70">
         Access Index ETFs, Gold ETFs, Sector ETFs, Debt ETFs, and International ETFs on NSE and BSE. Real-time pricing, ultra-low expense ratios, and the simplicity of stock trading.
       </p>
-      <div class="mt-7 grid grid-cols-2 gap-x-6 gap-y-3 sm:flex sm:gap-8">
-        {[['Real-time trading'],['Lowest expense ratios'],['NSE & BSE listed'],['All categories covered']].map(([l]) => (<div class="flex items-center gap-2 text-[13px] font-medium text-white/70"><span class="h-1.5 w-1.5 rounded-full bg-[var(--color-brand)]"></span>{l}</div>))}
-      </div>
-      <div class="mt-9 flex flex-wrap gap-3">
+      <div class="equity-reveal mt-[38px] flex flex-wrap gap-[14px]">
         <a href="/about/open-demat-account/" class="btn-primary">Start Trading ETFs</a>
-        <a href="/about/support/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] border border-white/25 text-[14px] font-medium text-white transition-colors hover:bg-white/10">Talk to RM</a>
+        <a href="/about/support/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Talk to RM</a>
+      </div>
+      <div class="equity-reveal mt-[54px] flex flex-wrap gap-x-9 gap-y-3 border-t border-white/15 pt-9">
+        {['✓ Real-time trading', '✓ Lowest expense ratios', '✓ NSE & BSE listed', '✓ All categories covered'].map(f => (
+          <span class="text-[15px] font-medium text-white/90">
+            <span class="mr-2 text-[var(--color-brand)]">{f.slice(0,1)}</span>{f.slice(1)}
+          </span>
+        ))}
       </div>
     </div>
   </section>
 
-  <section class="bg-white py-16 lg:py-24">
+  <!-- ══ 2. WHAT ARE ETFS ══════════════════════════════════════════ -->
+  <section class="bg-white py-[104px]">
     <div class="site-wrap">
-      <div class="equity-reveal">
-        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Types</p>
-        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Types of ETFs Available in India</h2>
-        <p class="mt-4 max-w-3xl text-[15px] text-[var(--color-muted)]">The Indian ETF market has grown to ₹7+ lakh crore in AUM. Here are the major categories you can access through Shriram.</p>
+      <div class="equity-reveal mx-auto grid max-w-[1000px] items-start gap-[72px] lg:grid-cols-[5fr_7fr]">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          Types of ETFs Available <span class="text-[var(--color-brand)]">in India</span>
+        </h2>
+        <div class="space-y-5 text-[17px] leading-relaxed text-[var(--color-muted)]">
+          <p>An ETF (Exchange Traded Fund) is a basket of securities that trades on a stock exchange just like an individual share. It combines the diversification of a mutual fund with the real-time liquidity of stocks.</p>
+          <p>The Indian ETF market has grown to ₹7+ lakh crore in AUM. Here are the major categories you can access through Shriram.</p>
+        </div>
       </div>
-      <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {etfTypes.map((e, i) => (<div class="equity-reveal product-card-light flex flex-col gap-3 p-6" style={`animation-delay:${i*50}ms`}><div class="flex h-11 w-11 items-center justify-center rounded-[10px] bg-[var(--color-dark-olive)] text-[var(--color-brand)]" set:html={e.icon} /><h3 class="text-[15px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{e.label}</h3><p class="text-[13px] leading-relaxed text-[var(--color-muted)]">{e.desc}</p></div>))}
+      <div class="equity-reveal mx-auto mt-[76px] max-w-[1000px] border-t border-[var(--color-n400)] pt-[60px]">
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {etfTypes.map((e, i) => (
+            <div class="product-card-light flex flex-col gap-3 p-6" style={`animation-delay:${i*50}ms`}>
+              <h3 class="text-[15px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{e.label}</h3>
+              <p class="text-[13px] leading-relaxed text-[var(--color-muted)]">{e.desc}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="bg-[#f8f6f1] py-16 lg:py-24">
+  <!-- ══ 3. HOW TO START ════════════════════════════════════════════ -->
+  <section class="bg-[#f8f6f1] py-[104px]">
     <div class="site-wrap">
-      <div class="equity-reveal text-center">
-        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Getting Started</p>
-        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">How to Start Investing in ETFs</h2>
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          How to Start <span class="text-[var(--color-brand)]">Investing in ETFs</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Four steps from account setup to your first ETF purchase — and ongoing portfolio management.</p>
       </div>
-      <div class="equity-reveal mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {steps.map((s, i) => (<div class="relative rounded-[20px] border border-[var(--color-warm-border)] bg-white p-7" style={`animation-delay:${i*60}ms`}><span class="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-dark-olive)] text-[13px] font-bold text-[var(--color-brand)]">{s.n}</span>{i < steps.length - 1 && <span class="absolute -right-3 top-9 hidden lg:flex"><svg viewBox="0 0 12 12" fill="none" stroke="var(--color-brand)" stroke-width="2" class="h-3 w-3"><path d="M2 6h8M6 2l4 4-4 4"/></svg></span>}<h3 class="mt-4 text-[15px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{s.title}</h3><p class="mt-2 text-[13px] leading-relaxed text-[var(--color-muted)]">{s.desc}</p></div>))}
+      <div class="equity-reveal steps-grid overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
+        {steps.map(s => (
+          <div class="px-[30px] py-[34px]">
+            <div class="mb-[22px] font-display text-[34px] font-normal leading-none text-[var(--color-brand)]">{s.n}</div>
+            <h4 class="mb-[10px] text-[19px] font-medium leading-[1.25] text-[var(--color-ink)]" style="font-family:var(--font-display)">{s.title}</h4>
+            <p class="text-[14.5px] leading-relaxed text-[var(--color-muted)]">{s.desc}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
 
-  <section class="bg-white py-16 lg:py-24">
+  <!-- ══ 4. ETF VS MUTUAL FUNDS ════════════════════════════════════ -->
+  <section class="bg-white py-[104px]">
     <div class="site-wrap">
-      <div class="equity-reveal">
-        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Comparison</p>
-        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">ETF vs Mutual Funds</h2>
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          ETF vs <span class="text-[var(--color-brand)]">Mutual Funds</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Compare ETFs with index mutual funds across the factors that matter most to investors.</p>
       </div>
-      <div class="equity-reveal mt-10 overflow-hidden rounded-[20px] border border-[var(--color-n400)]">
-        <div class="overflow-x-auto"><table class="w-full text-[14px]">
-          <thead><tr class="bg-[var(--color-dark-olive)]"><th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-white/70">Feature</th><th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-[var(--color-brand)]">ETF</th><th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-[var(--color-brand)]">Index Mutual Fund</th></tr></thead>
-          <tbody class="divide-y divide-[var(--color-n400)]">{vsRows.map((r,i) => (<tr class={i%2===0?'bg-white':'bg-[#f8f6f1]'}><td class="px-6 py-4 font-semibold text-[var(--color-ink)]">{r.feature}</td><td class="px-6 py-4 text-[var(--color-muted)]">{r.etf}</td><td class="px-6 py-4 text-[var(--color-muted)]">{r.mf}</td></tr>))}</tbody>
+      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
+        <div class="overflow-x-auto"><table class="w-full text-[15.5px]">
+          <thead><tr class="bg-[var(--color-dark-olive)]"><th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Feature</th><th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">ETF</th><th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Index Mutual Fund</th></tr></thead>
+          <tbody>{vsRows.map((r,i) => (<tr class={i%2===0?'bg-white':'bg-[#f8f6f1]'}><td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">{r.feature}</td><td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.etf}</td><td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.mf}</td></tr>))}</tbody>
         </table></div>
       </div>
     </div>
   </section>
 
-  <section class="bg-[#f8f6f1] py-16 lg:py-24">
+  <!-- ══ 5. RISKS ════════════════════════════════════════════════════ -->
+  <section class="bg-[#f8f6f1] py-[104px]">
     <div class="site-wrap">
-      <div class="equity-reveal"><p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Know Before You Trade</p><h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Risks of ETF Investing</h2></div>
-      <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {risks.map((r, i) => (<div class="equity-reveal product-card-light flex flex-col gap-4 p-7" style={`animation-delay:${i*60}ms`}><div class="flex h-12 w-12 items-center justify-center rounded-[12px] bg-[#fef4e6] text-[var(--color-brand-deep)]" set:html={r.icon} /><h3 class="text-[16px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{r.label}</h3><p class="text-[13px] leading-relaxed text-[var(--color-muted)]">{r.desc}</p></div>))}
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          Risks of <span class="text-[var(--color-brand)]">ETF Investing</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Understand what can move against you before you commit capital.</p>
+      </div>
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {risks.map(r => (
+          <div class="equity-reveal rounded-[18px] bg-[var(--color-dark-800)] p-[36px]">
+            <div class="mb-[18px] text-[48px] font-bold leading-none text-[var(--color-brand)]/25">{r.n}</div>
+            <h4 class="mb-3 text-[20px] font-medium text-white" style="font-family:var(--font-display)">{r.label}</h4>
+            <p class="text-[14.5px] leading-relaxed text-white/60">{r.desc}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
 
-  <section class="bg-white py-16 lg:py-24">
+  <!-- ══ 6. FAQ ════════════════════════════════════════════════════ -->
+  <section class="bg-white py-[104px]">
     <div class="site-wrap">
-      <div class="equity-reveal"><p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">FAQ</p><h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Frequently Asked Questions</h2></div>
-      <div class="equity-reveal mt-10 divide-y divide-[var(--color-n400)] overflow-hidden rounded-[24px] border border-[var(--color-n400)] bg-white">
-        {faqs.map(item => (<details class="eq-faq group"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 hover:bg-[var(--color-n100)]"><span class="text-[15px] font-medium text-[var(--color-ink)]">{item.q}</span><span class="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-[var(--color-n400)] transition-transform group-open:rotate-45"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" class="h-3 w-3"><path d="M6 2v8M2 6h8"/></svg></span></summary><div class="border-t border-[var(--color-n400)] bg-[var(--color-n100)] px-6 py-5"><p class="text-[14px] leading-relaxed text-[var(--color-muted)]">{item.a}</p></div></details>))}
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          Frequently Asked <span class="text-[var(--color-brand)]">Questions</span>
+        </h2>
+      </div>
+      <div class="equity-reveal mx-auto max-w-[840px] border-t border-[var(--color-n400)]">
+        {faqs.map(item => (
+          <details class="eq-faq group border-b border-[var(--color-n400)]">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-5 py-[26px] px-2">
+              <span class="text-[18px] font-semibold text-[var(--color-ink)]">{item.q}</span>
+              <span class="shrink-0 text-[22px] leading-none text-[var(--color-brand)] transition-transform duration-300 group-open:rotate-45">+</span>
+            </summary>
+            <div class="overflow-hidden px-2 pb-0 text-[16px] leading-relaxed text-[var(--color-muted)] transition-all duration-300 group-open:pb-[28px]">
+              <p class="max-w-[680px]">{item.a}</p>
+            </div>
+          </details>
+        ))}
       </div>
     </div>
   </section>
 
-  <section class="bg-[var(--color-dark-800)] py-16 lg:py-20">
+  <!-- ══ 7. FINAL CTA ══════════════════════════════════════════════ -->
+  <section class="bg-white py-[104px]">
     <div class="site-wrap">
-      <div class="equity-reveal flex flex-col items-center gap-6 text-center lg:flex-row lg:items-center lg:justify-between lg:text-left">
-        <div>
-          <h2 class="text-[28px] font-bold text-white lg:text-[36px]" style="font-family:var(--font-display)">Start Building Your ETF Portfolio</h2>
-          <p class="mt-3 max-w-lg text-[15px] text-white/55">Access all ETF categories on NSE & BSE with flat ₹20 brokerage, real-time pricing, and expert portfolio guidance.</p>
-        </div>
-        <div class="flex shrink-0 flex-col gap-3 sm:flex-row">
-          <a href="/about/open-demat-account/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] bg-[var(--color-brand)] text-[14px] font-semibold text-[#202318] hover:bg-[var(--color-brand-hover)]">Open Demat Account →</a>
-          <a href="/about/support/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] border border-white/20 text-[14px] font-medium text-white hover:bg-white/10">Talk to an RM</a>
+      <div class="equity-reveal overflow-hidden rounded-[22px] bg-[var(--color-dark-800)] px-[60px] py-[64px] text-center">
+        <h3 class="mx-auto max-w-[560px] text-[38px] font-bold leading-[1.12] text-white" style="font-family:var(--font-display)">Start Building Your ETF Portfolio</h3>
+        <p class="mx-auto mt-[18px] max-w-[480px] text-[17px] leading-relaxed text-white/70">Access all ETF categories on NSE & BSE with flat ₹20 brokerage, real-time pricing, and expert portfolio guidance.</p>
+        <div class="mt-[34px] flex flex-wrap justify-center gap-[14px]">
+          <a href="/about/open-demat-account/" class="btn-primary">Open Demat Account</a>
+          <a href="/about/support/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Talk to an RM</a>
         </div>
       </div>
     </div>
@@ -144,11 +200,42 @@ const faqs = [
 </BaseLayout>
 
 <style>
-  .equity-reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1), transform 0.65s cubic-bezier(0.22,1,0.36,1); }
-  .equity-reveal.in-view { opacity: 1; transform: translateY(0); }
+  .equity-reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  .equity-reveal.in-view { opacity: 1; transform: none; }
+
+  .steps-grid { display: grid; grid-template-columns: repeat(2, 1fr); }
+  .steps-grid > * { border-right: 1px solid var(--color-n400); border-bottom: 1px solid var(--color-n400); }
+  .steps-grid > *:nth-child(2n) { border-right: 0; }
+  .steps-grid > *:nth-last-child(-n+2) { border-bottom: 0; }
+  @media (min-width: 1024px) {
+    .steps-grid { grid-template-columns: repeat(4, 1fr); }
+    .steps-grid > * { border-right: 1px solid var(--color-n400); border-bottom: 0; }
+    .steps-grid > *:last-child { border-right: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .equity-reveal { opacity: 1; transform: none; transition: none; }
+  }
 </style>
+
 <script>
-  const obs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { const el = e.target as HTMLElement; setTimeout(() => el.classList.add('in-view'), parseInt(el.style.animationDelay)||0); obs.unobserve(el); } }); }, { threshold: 0.10 });
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        (e.target as HTMLElement).classList.add('in-view');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.10 });
   document.querySelectorAll('.equity-reveal').forEach(el => obs.observe(el));
-  document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(d => { d.addEventListener('toggle', () => { if (d.open) document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(o => { if (o !== d) o.removeAttribute('open'); }); }); });
+
+  document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(d => {
+    d.addEventListener('toggle', () => {
+      if (d.open) document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(o => { if (o !== d) o.removeAttribute('open'); });
+    });
+  });
 </script>

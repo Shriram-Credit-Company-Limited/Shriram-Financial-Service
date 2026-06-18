@@ -7,10 +7,10 @@ const accounts = [
 ];
 
 const assetClasses = [
-  { code: 'E', label: 'Equity (Class E)', desc: 'Equity and equity-related instruments. Up to 75% allocation (tapers after age 50). Highest growth potential and highest volatility.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M3 3v18h18"/><path d="m7 12 4-4 4 4 4-4"/></svg>` },
-  { code: 'C', label: 'Corporate Bonds (Class C)', desc: 'High-rated corporate debt (AA and above). Moderate risk with stable, predictable returns — good for core stability in your NPS mix.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 9h8M8 13h5"/></svg>` },
-  { code: 'G', label: 'Government Securities (Class G)', desc: 'Central and state government bonds — the lowest-risk NPS class. Suitable for conservative investors nearing retirement.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><path d="M3 22V12l9-9 9 9v10M9 22v-6h6v6"/></svg>` },
-  { code: 'A', label: 'Alternative Investments (Class A)', desc: 'REITs, InvITs, and alternative assets. Capped at 5% allocation — adds diversification beyond traditional debt and equity.', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6"><circle cx="12" cy="12" r="9"/><path d="M12 3v9l6 3"/></svg>` },
+  { code: 'E', label: 'Equity (Class E)', desc: 'Equity and equity-related instruments. Up to 75% allocation (tapers after age 50). Highest growth potential and highest volatility.' },
+  { code: 'C', label: 'Corporate Bonds (Class C)', desc: 'High-rated corporate debt (AA and above). Moderate risk with stable, predictable returns — good for core stability in your NPS mix.' },
+  { code: 'G', label: 'Government Securities (Class G)', desc: 'Central and state government bonds — the lowest-risk NPS class. Suitable for conservative investors nearing retirement.' },
+  { code: 'A', label: 'Alternative Investments (Class A)', desc: 'REITs, InvITs, and alternative assets. Capped at 5% allocation — adds diversification beyond traditional debt and equity.' },
 ];
 
 const taxRows = [
@@ -49,113 +49,171 @@ const faqs = [
   description="Invest in NPS online and save up to ₹2 lakh in tax deductions annually. Market-linked retirement corpus, PFRDA regulated, flexible fund choice. Open NPS account today."
 >
 
+  <!-- ══ 1. HERO ═══════════════════════════════════════════════════ -->
   <section class="relative overflow-hidden bg-[var(--color-dark-800)]">
     <div class="pointer-events-none absolute -right-40 -top-40 h-[560px] w-[560px] rounded-full bg-[var(--color-brand)]/10 blur-3xl"></div>
-    <div class="site-wrap relative py-16 lg:py-28">
-      <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">National Pension Scheme</p>
-      <h1 class="mt-4 max-w-3xl text-[32px] font-bold leading-tight text-white lg:text-[40px]" style="font-family:var(--font-display)">
-        Retire Rich with NPS —<br class="hidden sm:block"> Tax-Efficient &amp; Market-Linked
+    <div class="pointer-events-none absolute -bottom-32 left-0 h-80 w-80 rounded-full bg-[var(--color-brand)]/5 blur-3xl"></div>
+    <div class="site-wrap relative py-[120px]">
+      <p class="equity-reveal text-[14px] font-medium tracking-[.04em] text-[var(--color-brand)]">National Pension Scheme</p>
+      <h1 class="equity-reveal mt-[22px] max-w-[880px] text-[clamp(32px,4vw,52px)] font-bold leading-[1.06] text-white" style="font-family:var(--font-display)">
+        Retire Rich with NPS — <span class="text-[var(--color-brand)]">Tax-Efficient &amp; Market-Linked</span>
       </h1>
-      <p class="mt-5 max-w-2xl text-[15px] leading-relaxed text-white/60 lg:text-[17px]">
+      <p class="equity-reveal mt-[26px] max-w-[600px] text-[18px] leading-relaxed text-white/70">
         The National Pension Scheme (NPS) offers up to ₹2 lakh in tax deductions annually, market-linked returns, and a guaranteed retirement income — all in one PFRDA-regulated account.
       </p>
-      <div class="mt-7 grid grid-cols-2 gap-x-6 gap-y-3 sm:flex sm:gap-8">
-        {[['Up to ₹2L tax saving'],['PFRDA regulated'],['Market-linked returns'],['Flexible fund choice']].map(([l]) => (<div class="flex items-center gap-2 text-[13px] font-medium text-white/70"><span class="h-1.5 w-1.5 rounded-full bg-[var(--color-brand)]"></span>{l}</div>))}
-      </div>
-      <div class="mt-9 flex flex-wrap gap-3">
+      <div class="equity-reveal mt-[38px] flex flex-wrap gap-[14px]">
         <a href="/about/open-demat-account/" class="btn-primary">Open NPS Account</a>
-        <a href="/about/support/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] border border-white/25 text-[14px] font-medium text-white transition-colors hover:bg-white/10">Talk to RM</a>
+        <a href="/about/support/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Talk to RM</a>
+      </div>
+      <div class="equity-reveal mt-[54px] flex flex-wrap gap-x-9 gap-y-3 border-t border-white/15 pt-9">
+        {['✓ Up to ₹2L tax saving', '✓ PFRDA regulated', '✓ Market-linked returns', '✓ Flexible fund choice'].map(f => (
+          <span class="text-[15px] font-medium text-white/90">
+            <span class="mr-2 text-[var(--color-brand)]">{f.slice(0,1)}</span>{f.slice(1)}
+          </span>
+        ))}
       </div>
     </div>
   </section>
 
-  <section class="bg-white py-16 lg:py-24">
+  <!-- ══ 2. ACCOUNT TYPES ══════════════════════════════════════════ -->
+  <section class="bg-white py-[104px]">
     <div class="site-wrap">
-      <div class="equity-reveal">
-        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Account Types</p>
-        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">NPS Account Types — Tier 1 &amp; Tier 2</h2>
-        <p class="mt-4 max-w-3xl text-[15px] text-[var(--color-muted)]">NPS operates through two types of accounts designed for different financial needs — mandatory pension savings and flexible voluntary savings.</p>
-      </div>
-      <div class="equity-reveal mt-10 grid gap-5 sm:grid-cols-2">
-        {accounts.map((a, i) => (<div class="product-card-light p-8" style={`animation-delay:${i*80}ms`}><span class="inline-flex w-fit rounded-full bg-[var(--color-brand)]/15 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-[var(--color-brand-deep)]">{a.tag}</span><h3 class="mt-4 text-[18px] font-bold text-[var(--color-dark-olive)]" style="font-family:var(--font-display)">{a.label}</h3><p class="mt-3 text-[14px] leading-relaxed text-[var(--color-muted)]">{a.desc}</p></div>))}
-      </div>
-    </div>
-  </section>
-
-  <section class="bg-[#f8f6f1] py-16 lg:py-24">
-    <div class="site-wrap">
-      <div class="equity-reveal">
-        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Asset Classes</p>
-        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">NPS Asset Classes — Where Your Money is Invested</h2>
-      </div>
-      <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {assetClasses.map((a, i) => (<div class="equity-reveal product-card-light flex flex-col gap-3 p-6" style={`animation-delay:${i*60}ms`}><div class="flex items-center gap-3"><div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] bg-[var(--color-dark-olive)] text-[13px] font-bold text-[var(--color-brand)]">Class {a.code}</div></div><h3 class="text-[15px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{a.label}</h3><p class="text-[13px] leading-relaxed text-[var(--color-muted)]">{a.desc}</p></div>))}
-      </div>
-    </div>
-  </section>
-
-  <section class="bg-white py-16 lg:py-24">
-    <div class="site-wrap">
-      <div class="equity-reveal">
-        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Tax Benefits</p>
-        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Tax Savings with NPS</h2>
-        <p class="mt-3 max-w-2xl text-[15px] text-[var(--color-muted)]">NPS offers the highest combined tax deduction among all Section 80 instruments — up to ₹2 lakh per year with the right combination.</p>
-      </div>
-      <div class="equity-reveal mt-10 overflow-hidden rounded-[20px] border border-[var(--color-n400)]">
-        <div class="overflow-x-auto"><table class="w-full text-[14px]">
-          <thead><tr class="bg-[var(--color-dark-olive)]"><th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-white/70">Section</th><th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-[var(--color-brand)]">Deduction Limit</th><th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-[var(--color-brand)]">Eligible For</th><th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-[var(--color-brand)]">Note</th></tr></thead>
-          <tbody class="divide-y divide-[var(--color-n400)]">{taxRows.map((r,i) => (<tr class={i%2===0?'bg-white':'bg-[#f8f6f1]'}><td class="px-6 py-4 font-semibold text-[var(--color-brand-deep)]">{r.section}</td><td class="px-6 py-4 font-medium text-[var(--color-ink)]">{r.limit}</td><td class="px-6 py-4 text-[var(--color-muted)]">{r.category}</td><td class="px-6 py-4 text-[var(--color-muted)] text-[12px]">{r.note}</td></tr>))}</tbody>
-        </table></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="bg-[#f8f6f1] py-16 lg:py-24">
-    <div class="site-wrap">
-      <div class="equity-reveal text-center">
-        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Getting Started</p>
-        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">How to Join NPS</h2>
-      </div>
-      <div class="equity-reveal mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {steps.map((s, i) => (<div class="relative rounded-[20px] border border-[var(--color-warm-border)] bg-white p-7" style={`animation-delay:${i*60}ms`}><span class="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-dark-olive)] text-[13px] font-bold text-[var(--color-brand)]">{s.n}</span>{i < steps.length - 1 && <span class="absolute -right-3 top-9 hidden lg:flex"><svg viewBox="0 0 12 12" fill="none" stroke="var(--color-brand)" stroke-width="2" class="h-3 w-3"><path d="M2 6h8M6 2l4 4-4 4"/></svg></span>}<h3 class="mt-4 text-[15px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{s.title}</h3><p class="mt-2 text-[13px] leading-relaxed text-[var(--color-muted)]">{s.desc}</p></div>))}
-      </div>
-    </div>
-  </section>
-
-  <section class="bg-white py-16 lg:py-24">
-    <div class="site-wrap">
-      <div class="equity-reveal">
-        <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Comparison</p>
-        <h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">NPS vs EPF vs PPF</h2>
-      </div>
-      <div class="equity-reveal mt-10 overflow-hidden rounded-[20px] border border-[var(--color-n400)]">
-        <div class="overflow-x-auto"><table class="w-full text-[14px]">
-          <thead><tr class="bg-[var(--color-dark-olive)]"><th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-white/70">Feature</th><th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-[var(--color-brand)]">NPS</th><th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-[var(--color-brand)]">EPF</th><th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-[var(--color-brand)]">PPF</th></tr></thead>
-          <tbody class="divide-y divide-[var(--color-n400)]">{vsRows.map((r,i) => (<tr class={i%2===0?'bg-white':'bg-[#f8f6f1]'}><td class="px-6 py-4 font-semibold text-[var(--color-ink)]">{r.feature}</td><td class="px-6 py-4 text-[var(--color-muted)]">{r.nps}</td><td class="px-6 py-4 text-[var(--color-muted)]">{r.epf}</td><td class="px-6 py-4 text-[var(--color-muted)]">{r.ppf}</td></tr>))}</tbody>
-        </table></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="bg-[#f8f6f1] py-16 lg:py-24">
-    <div class="site-wrap">
-      <div class="equity-reveal"><p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">FAQ</p><h2 class="mt-3 text-[28px] font-bold text-[var(--color-ink)] lg:text-[38px]" style="font-family:var(--font-display)">Frequently Asked Questions</h2></div>
-      <div class="equity-reveal mt-10 divide-y divide-[var(--color-n400)] overflow-hidden rounded-[24px] border border-[var(--color-n400)] bg-white">
-        {faqs.map(item => (<details class="eq-faq group"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 hover:bg-[var(--color-n100)]"><span class="text-[15px] font-medium text-[var(--color-ink)]">{item.q}</span><span class="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-[var(--color-n400)] transition-transform group-open:rotate-45"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" class="h-3 w-3"><path d="M6 2v8M2 6h8"/></svg></span></summary><div class="border-t border-[var(--color-n400)] bg-[var(--color-n100)] px-6 py-5"><p class="text-[14px] leading-relaxed text-[var(--color-muted)]">{item.a}</p></div></details>))}
-      </div>
-    </div>
-  </section>
-
-  <section class="bg-[var(--color-dark-800)] py-16 lg:py-20">
-    <div class="site-wrap">
-      <div class="equity-reveal flex flex-col items-center gap-6 text-center lg:flex-row lg:items-center lg:justify-between lg:text-left">
-        <div>
-          <h2 class="text-[28px] font-bold text-white lg:text-[36px]" style="font-family:var(--font-display)">Secure Your Retirement with NPS Today</h2>
-          <p class="mt-3 max-w-lg text-[15px] text-white/55">Open your NPS PRAN account with Shriram Financial Services. Save tax, grow wealth, and ensure a guaranteed monthly pension.</p>
+      <div class="equity-reveal mx-auto grid max-w-[1000px] items-start gap-[72px] lg:grid-cols-[5fr_7fr]">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          NPS Account Types — <span class="text-[var(--color-brand)]">Tier 1 &amp; Tier 2</span>
+        </h2>
+        <div class="space-y-5 text-[17px] leading-relaxed text-[var(--color-muted)]">
+          <p>NPS operates through two types of accounts designed for different financial needs — mandatory pension savings and flexible voluntary savings.</p>
+          <p>Together, they allow you to maximise retirement savings while maintaining some liquidity for short-term needs.</p>
         </div>
-        <div class="flex shrink-0 flex-col gap-3 sm:flex-row">
-          <a href="/about/open-demat-account/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] bg-[var(--color-brand)] text-[14px] font-semibold text-[#202318] hover:bg-[var(--color-brand-hover)]">Open NPS Account →</a>
-          <a href="/about/support/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] border border-white/20 text-[14px] font-medium text-white hover:bg-white/10">Talk to an RM</a>
+      </div>
+      <div class="equity-reveal mx-auto mt-[76px] max-w-[1000px] border-t border-[var(--color-n400)] pt-[60px]">
+        <div class="grid gap-5 sm:grid-cols-2">
+          {accounts.map((a, i) => (
+            <div class="product-card-light p-[34px]" style={`animation-delay:${i*80}ms`}>
+              <span class="inline-flex w-fit rounded-full bg-[var(--color-brand)]/15 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-[var(--color-brand-deep)]">{a.tag}</span>
+              <h3 class="mt-4 text-[18px] font-bold text-[var(--color-dark-olive)]" style="font-family:var(--font-display)">{a.label}</h3>
+              <p class="mt-3 text-[14px] leading-relaxed text-[var(--color-muted)]">{a.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 3. ASSET CLASSES ══════════════════════════════════════════ -->
+  <section class="bg-[#f8f6f1] py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          NPS Asset Classes — <span class="text-[var(--color-brand)]">Where Your Money Is Invested</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Four classes covering the full risk-return spectrum — from equity to government bonds to alternatives.</p>
+      </div>
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {assetClasses.map((a, i) => (
+          <div class="equity-reveal product-card-light flex flex-col gap-3 p-6" style={`animation-delay:${i*60}ms`}>
+            <div class="flex h-10 w-auto min-w-[60px] items-center justify-center rounded-[10px] bg-[var(--color-dark-olive)] px-3 w-fit">
+              <span class="text-[13px] font-bold text-[var(--color-brand)]">Class {a.code}</span>
+            </div>
+            <h3 class="text-[15px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{a.label}</h3>
+            <p class="text-[13px] leading-relaxed text-[var(--color-muted)]">{a.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 4. TAX SAVINGS ════════════════════════════════════════════ -->
+  <section class="bg-white py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          Tax Savings <span class="text-[var(--color-brand)]">with NPS</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">NPS offers the highest combined tax deduction among all Section 80 instruments — up to ₹2 lakh per year with the right combination.</p>
+      </div>
+      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
+        <div class="overflow-x-auto"><table class="w-full text-[15.5px]">
+          <thead><tr class="bg-[var(--color-dark-olive)]"><th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Section</th><th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Deduction Limit</th><th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Eligible For</th><th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Note</th></tr></thead>
+          <tbody>{taxRows.map((r,i) => (<tr class={i%2===0?'bg-white':'bg-[#f8f6f1]'}><td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-brand-deep)]">{r.section}</td><td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-medium text-[var(--color-ink)]">{r.limit}</td><td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.category}</td><td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[12px] text-[var(--color-muted)]">{r.note}</td></tr>))}</tbody>
+        </table></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 5. HOW TO JOIN ════════════════════════════════════════════ -->
+  <section class="bg-[#f8f6f1] py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          How to <span class="text-[var(--color-brand)]">Join NPS</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Four steps from registration to your first contribution — fully digital and paperless.</p>
+      </div>
+      <div class="equity-reveal steps-grid overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
+        {steps.map(s => (
+          <div class="px-[30px] py-[34px]">
+            <div class="mb-[22px] font-display text-[34px] font-normal leading-none text-[var(--color-brand)]">{s.n}</div>
+            <h4 class="mb-[10px] text-[19px] font-medium leading-[1.25] text-[var(--color-ink)]" style="font-family:var(--font-display)">{s.title}</h4>
+            <p class="text-[14.5px] leading-relaxed text-[var(--color-muted)]">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 6. NPS VS EPF VS PPF ══════════════════════════════════════ -->
+  <section class="bg-white py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          NPS vs EPF <span class="text-[var(--color-brand)]">vs PPF</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Compare India's three major retirement savings instruments across returns, lock-in, and tax efficiency.</p>
+      </div>
+      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
+        <div class="overflow-x-auto"><table class="w-full text-[15.5px]">
+          <thead><tr class="bg-[var(--color-dark-olive)]"><th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Feature</th><th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">NPS</th><th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">EPF</th><th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">PPF</th></tr></thead>
+          <tbody>{vsRows.map((r,i) => (<tr class={i%2===0?'bg-white':'bg-[#f8f6f1]'}><td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">{r.feature}</td><td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.nps}</td><td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.epf}</td><td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.ppf}</td></tr>))}</tbody>
+        </table></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 7. FAQ ════════════════════════════════════════════════════ -->
+  <section class="bg-[#f8f6f1] py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          Frequently Asked <span class="text-[var(--color-brand)]">Questions</span>
+        </h2>
+      </div>
+      <div class="equity-reveal mx-auto max-w-[840px] border-t border-[var(--color-n400)]">
+        {faqs.map(item => (
+          <details class="eq-faq group border-b border-[var(--color-n400)]">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-5 py-[26px] px-2">
+              <span class="text-[18px] font-semibold text-[var(--color-ink)]">{item.q}</span>
+              <span class="shrink-0 text-[22px] leading-none text-[var(--color-brand)] transition-transform duration-300 group-open:rotate-45">+</span>
+            </summary>
+            <div class="overflow-hidden px-2 pb-0 text-[16px] leading-relaxed text-[var(--color-muted)] transition-all duration-300 group-open:pb-[28px]">
+              <p class="max-w-[680px]">{item.a}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 8. FINAL CTA ══════════════════════════════════════════════ -->
+  <section class="bg-white py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal overflow-hidden rounded-[22px] bg-[var(--color-dark-800)] px-[60px] py-[64px] text-center">
+        <h3 class="mx-auto max-w-[560px] text-[38px] font-bold leading-[1.12] text-white" style="font-family:var(--font-display)">Secure Your Retirement with NPS Today</h3>
+        <p class="mx-auto mt-[18px] max-w-[480px] text-[17px] leading-relaxed text-white/70">Open your NPS PRAN account with Shriram Financial Services. Save tax, grow wealth, and ensure a guaranteed monthly pension.</p>
+        <div class="mt-[34px] flex flex-wrap justify-center gap-[14px]">
+          <a href="/about/open-demat-account/" class="btn-primary">Open NPS Account</a>
+          <a href="/about/support/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Talk to an RM</a>
         </div>
       </div>
     </div>
@@ -164,11 +222,42 @@ const faqs = [
 </BaseLayout>
 
 <style>
-  .equity-reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1), transform 0.65s cubic-bezier(0.22,1,0.36,1); }
-  .equity-reveal.in-view { opacity: 1; transform: translateY(0); }
+  .equity-reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  .equity-reveal.in-view { opacity: 1; transform: none; }
+
+  .steps-grid { display: grid; grid-template-columns: repeat(2, 1fr); }
+  .steps-grid > * { border-right: 1px solid var(--color-n400); border-bottom: 1px solid var(--color-n400); }
+  .steps-grid > *:nth-child(2n) { border-right: 0; }
+  .steps-grid > *:nth-last-child(-n+2) { border-bottom: 0; }
+  @media (min-width: 1024px) {
+    .steps-grid { grid-template-columns: repeat(4, 1fr); }
+    .steps-grid > * { border-right: 1px solid var(--color-n400); border-bottom: 0; }
+    .steps-grid > *:last-child { border-right: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .equity-reveal { opacity: 1; transform: none; transition: none; }
+  }
 </style>
+
 <script>
-  const obs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { const el = e.target as HTMLElement; setTimeout(() => el.classList.add('in-view'), parseInt(el.style.animationDelay)||0); obs.unobserve(el); } }); }, { threshold: 0.10 });
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        (e.target as HTMLElement).classList.add('in-view');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.10 });
   document.querySelectorAll('.equity-reveal').forEach(el => obs.observe(el));
-  document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(d => { d.addEventListener('toggle', () => { if (d.open) document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(o => { if (o !== d) o.removeAttribute('open'); }); }); });
+
+  document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(d => {
+    d.addEventListener('toggle', () => {
+      if (d.open) document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(o => { if (o !== d) o.removeAttribute('open'); });
+    });
+  });
 </script>
