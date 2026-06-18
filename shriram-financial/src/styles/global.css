@@ -291,7 +291,7 @@ h1, h2, h3, h4, h5, .font-display {
   box-shadow: var(--shadow-card);
   transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
 }
-.product-card-light:hover {
+a.product-card-light:hover {
   box-shadow: var(--shadow-lift);
   border-color: rgba(243, 184, 63, 0.25);
   transform: translateY(-2px);
