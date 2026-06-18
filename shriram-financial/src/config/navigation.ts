@@ -23,9 +23,9 @@ export const navigation: NavSection[] = [
   },
   {
     label: 'Product Hub',
-    href: '/product-hub/',
+    href: '/calculators/sip/',
     template: 'T2',
-    children: [{ label: 'Product & Calculator Hub', href: '/product-hub/' }],
+    children: [{ label: 'Calculators', href: '/calculators/sip/' }],
   },
   {
     label: 'Products',
