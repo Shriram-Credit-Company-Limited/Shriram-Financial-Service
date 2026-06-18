@@ -60,8 +60,8 @@ const faqs = [
 ---
 
 <BaseLayout
-  title="Commodity Trading India — MCX Gold Silver Crude Oil | Shriram"
-  description="Trade gold, silver, crude oil, and agricultural commodities on MCX and NCDEX. Flat ₹20 brokerage, research-backed advisory, and physical delivery support. Start today."
+  title="Commodity Trading in India — MCX Gold Silver Crude Oil | Shriram"
+  description="Start commodity trading in India on MCX and NCDEX. Trade gold, silver, crude oil, and agri commodities. Flat ₹20 brokerage, research-backed advisory. Start today."
 >
 
   <!-- ══ 1. HERO ═══════════════════════════════════════════════════ -->
@@ -71,7 +71,7 @@ const faqs = [
     <div class="site-wrap relative py-[120px]">
       <p class="equity-reveal text-[14px] font-medium tracking-[.04em] text-[var(--color-brand)]">Commodities</p>
       <h1 class="equity-reveal mt-[22px] max-w-[880px] text-[clamp(32px,4vw,52px)] font-bold leading-[1.06] text-white" style="font-family:var(--font-display)">
-        Trade Gold, Crude Oil &amp; <span class="text-[var(--color-brand)]">Agricultural Commodities</span>
+        <span class="text-[var(--color-brand)]">Commodity Trading in India</span> — Gold, Crude Oil &amp; More
       </h1>
       <p class="equity-reveal mt-[26px] max-w-[600px] text-[18px] leading-relaxed text-white/70">
         Diversify your portfolio with commodity futures and options on MCX and NCDEX. Hedge against inflation, trade energy cycles, and capitalise on agri seasonality.
@@ -233,6 +233,83 @@ const faqs = [
             <p class="text-[14.5px] leading-relaxed text-white/60">{r.desc}</p>
           </div>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 7b. COMMODITY FUTURES REFERENCE TABLE ═════════════════════ -->
+  <section class="bg-[#f8f6f1] py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          Types of Commodities — <span class="text-[var(--color-brand)]">Exchange, Lot Size &amp; Price Drivers</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">A quick-reference guide to key commodities available for trading in India.</p>
+      </div>
+      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
+        <div class="overflow-x-auto">
+          <table class="w-full text-[14.5px]">
+            <thead>
+              <tr class="bg-[var(--color-dark-olive)]">
+                <th class="px-[20px] py-[16px] text-left text-[13px] font-semibold text-white">Commodity</th>
+                <th class="px-[20px] py-[16px] text-left text-[13px] font-semibold text-[var(--color-brand)]">Category</th>
+                <th class="px-[20px] py-[16px] text-left text-[13px] font-semibold text-[var(--color-brand)]">Exchange</th>
+                <th class="px-[20px] py-[16px] text-left text-[13px] font-semibold text-[var(--color-brand)]">Lot Size</th>
+                <th class="px-[20px] py-[16px] text-left text-[13px] font-semibold text-[var(--color-brand)]">Key Price Driver</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { name: 'Gold', cat: 'Precious Metal', ex: 'MCX', lot: '1 kg', driver: 'USD strength, inflation, geopolitics' },
+                { name: 'Silver', cat: 'Precious Metal', ex: 'MCX', lot: '30 kg', driver: 'Industrial demand, gold price movement' },
+                { name: 'Crude Oil', cat: 'Energy', ex: 'MCX', lot: '100 barrels', driver: 'OPEC+ policy, US inventory data, geopolitics' },
+                { name: 'Copper', cat: 'Base Metal', ex: 'MCX', lot: '2.5 MT', driver: 'China manufacturing data, global GDP growth' },
+                { name: 'Zinc', cat: 'Base Metal', ex: 'MCX', lot: '5 MT', driver: 'Galvanising demand, mine supply' },
+                { name: 'Aluminium', cat: 'Base Metal', ex: 'MCX', lot: '5 MT', driver: 'Energy cost, China production, EVs demand' },
+                { name: 'Wheat (Jeera)', cat: 'Agricultural', ex: 'NCDEX', lot: '3 MT', driver: 'Monsoon, exports, MSP, acreage' },
+                { name: 'Soybean', cat: 'Agricultural', ex: 'NCDEX', lot: '10 MT', driver: 'Kharif crop output, import parity, edible oil demand' },
+              ].map((r, i) => (
+                <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[#f8f6f1]'}>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[20px] py-[15px] font-semibold text-[var(--color-ink)]">{r.name}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[20px] py-[15px] text-[var(--color-muted)]">{r.cat}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[20px] py-[15px] font-medium text-[var(--color-dark-olive)]">{r.ex}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[20px] py-[15px] text-[var(--color-muted)]">{r.lot}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[20px] py-[15px] text-[var(--color-muted)]">{r.driver}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 7c. IS COMMODITY TRADING LEGAL? SEBI RULES ═════════════════ -->
+  <section class="bg-white py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          Is Commodity Trading Legal in India? <span class="text-[var(--color-brand)]">SEBI Rules Explained</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Yes — commodity futures and options trading in India is 100% legal and tightly regulated by SEBI.</p>
+      </div>
+      <div class="equity-reveal grid gap-5 sm:grid-cols-3">
+        {[
+          { body: 'SEBI', full: 'Securities and Exchange Board of India', desc: 'SEBI became the unified regulator for commodity derivatives in September 2015 (absorbing the erstwhile FMC). It sets margin rules, position limits, and participant eligibility for MCX and NCDEX.' },
+          { body: 'MCX', full: 'Multi Commodity Exchange of India Ltd', desc: 'India\'s leading commodity exchange, regulated by SEBI. MCX is a publicly listed company (NSE: MCX) and handles over 90% of commodity derivative volumes in India.' },
+          { body: 'NCDEX', full: 'National Commodity & Derivatives Exchange', desc: 'India\'s premier agricultural commodity exchange, also regulated by SEBI. NCDEX provides physical delivery infrastructure for farm commodities with government-approved warehouses across India.' },
+        ].map((b, i) => (
+          <div class="product-card-light flex flex-col gap-4 p-[34px]" style={`animation-delay:${i*80}ms`}>
+            <div class="flex h-11 w-auto min-w-[60px] items-center justify-center rounded-[10px] bg-[var(--color-dark-olive)] px-4 self-start">
+              <span class="text-[13px] font-bold text-[var(--color-brand)]">{b.body}</span>
+            </div>
+            <h3 class="text-[15px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{b.full}</h3>
+            <p class="text-[13px] leading-relaxed text-[var(--color-muted)]">{b.desc}</p>
+          </div>
+        ))}
+      </div>
+      <div class="equity-reveal mt-[34px] rounded-[18px] bg-[#f8f6f1] border border-[var(--color-n400)] p-[28px] text-[14px] leading-relaxed text-[var(--color-muted)]">
+        <strong class="text-[var(--color-ink)]">Key regulatory points:</strong> All commodity brokers must be SEBI-registered members of MCX or NCDEX. Individual investors need only a trading account (no special licence). Position limits apply to prevent market manipulation. SEBI mandates upfront margin collection before every trade.
       </div>
     </div>
   </section>

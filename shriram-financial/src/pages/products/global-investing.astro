@@ -36,8 +36,8 @@ const faqs = [
 ---
 
 <BaseLayout
-  title="Invest US Stocks from India — S&P 500 International ETFs | Shriram"
-  description="Invest in US stocks, S&P 500, and Nasdaq 100 from India via LRS or India-listed international ETFs. FEMA-compliant, expert-guided global investing. Start today."
+  title="Global Investing from India — US Stocks S&amp;P 500 International ETFs | Shriram"
+  description="Start global investing from India in US stocks, S&amp;P 500, and Nasdaq 100 via LRS or India-listed international ETFs. FEMA-compliant, expert-guided. Start today."
 >
 
   <!-- ══ 1. HERO ═══════════════════════════════════════════════════ -->
@@ -47,7 +47,7 @@ const faqs = [
     <div class="site-wrap relative py-[120px]">
       <p class="equity-reveal text-[14px] font-medium tracking-[.04em] text-[var(--color-brand)]">Global Investing</p>
       <h1 class="equity-reveal mt-[22px] max-w-[880px] text-[clamp(32px,4vw,52px)] font-bold leading-[1.06] text-white" style="font-family:var(--font-display)">
-        Invest in US Stocks &amp; <span class="text-[var(--color-brand)]">Global Markets from India</span>
+        <span class="text-[var(--color-brand)]">Global Investing from India</span> — US Stocks, ETFs &amp; More
       </h1>
       <p class="equity-reveal mt-[26px] max-w-[600px] text-[18px] leading-relaxed text-white/70">
         Diversify beyond India. Access S&P 500, Nasdaq 100, and global leaders like Apple, NVIDIA, and Microsoft — with expert guidance and LRS-compliant processes from Shriram Financial Services.
@@ -156,6 +156,101 @@ const faqs = [
             <div class="mb-[18px] text-[48px] font-bold leading-none text-[var(--color-brand)]/25">{r.n}</div>
             <h4 class="mb-3 text-[20px] font-medium text-white" style="font-family:var(--font-display)">{r.label}</h4>
             <p class="text-[14.5px] leading-relaxed text-white/60">{r.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 5b. TAXATION OF GLOBAL INVESTMENTS ════════════════════════ -->
+  <section class="bg-white py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          Taxation of <span class="text-[var(--color-brand)]">Global Investments</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Tax treatment depends on your route — direct LRS investing vs India-listed international funds. Both India and source-country taxes may apply.</p>
+      </div>
+      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
+        <div class="overflow-x-auto">
+          <table class="w-full text-[15px]">
+            <thead>
+              <tr class="bg-[var(--color-dark-olive)]">
+                <th class="px-[24px] py-[16px] text-left text-[13px] font-semibold text-white">Tax Head</th>
+                <th class="px-[24px] py-[16px] text-left text-[13px] font-semibold text-[var(--color-brand)]">Direct US Stocks (LRS)</th>
+                <th class="px-[24px] py-[16px] text-left text-[13px] font-semibold text-[var(--color-brand)]">India-Listed Intl ETF/Fund</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { head: 'US Dividend Withholding Tax', lrs: '25% (15% with DTAA benefit — file W-8BEN)', india: 'Not applicable (fund handles it)' },
+                { head: 'STCG (under 2 years — LRS; under 3 years — India funds)', lrs: 'As per income tax slab', india: 'As per income tax slab' },
+                { head: 'LTCG (2+ years — LRS; 3+ years — India funds)', lrs: '12.5% (no indexation from FY2024)', india: 'As per slab (no indexation from Apr 2023)' },
+                { head: 'DTAA Benefit', lrs: 'India-US DTAA allows credit for US tax paid', india: 'Managed at fund level — transparent to investor' },
+                { head: 'TCS on LRS Remittance', lrs: '20% TCS above ₹7 lakh/year (refundable via ITR)', india: 'No TCS (domestic investment)' },
+              ].map((r, i) => (
+                <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[#f8f6f1]'}>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[24px] py-[15px] font-semibold text-[var(--color-ink)]">{r.head}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[24px] py-[15px] text-[var(--color-muted)]">{r.lrs}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[24px] py-[15px] text-[var(--color-muted)]">{r.india}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 5c. REGULATORY GUIDE ════════════════════════════════════════ -->
+  <section class="bg-[#f8f6f1] py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          Regulatory Guide — <span class="text-[var(--color-brand)]">LRS, FEMA &amp; RBI Rules</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Everything Indian residents need to know to invest globally in a legal and FEMA-compliant manner.</p>
+      </div>
+      <div class="equity-reveal grid gap-5 sm:grid-cols-3">
+        {[
+          {
+            title: 'LRS — Liberalised Remittance Scheme',
+            points: [
+              'All Indian residents can remit up to USD 250,000 (~₹2.08 crore) per financial year',
+              'Covers overseas investment, education, travel, and property purchase',
+              'Remittance above ₹7 lakh/year attracts 20% TCS (refundable via ITR filing)',
+              'Submit Form A2 with your authorised dealer bank for each remittance',
+            ]
+          },
+          {
+            title: 'FEMA 1999 Compliance',
+            points: [
+              'FEMA governs all cross-border capital flows for Indian residents',
+              'Overseas investment in securities is a "capital account transaction" permitted under FEMA',
+              'OTC forex trading (offshore brokers) is a FEMA violation — punishable by penalty',
+              'Keep proof of all overseas investments and file Schedule FA in your ITR',
+            ]
+          },
+          {
+            title: 'RBI Guidelines',
+            points: [
+              'RBI approves and monitors LRS remittances through authorised dealer banks',
+              'No RBI approval needed for individual LRS investments up to USD 250,000',
+              'RBI can revise LRS limits — check rbi.org.in for current guidelines',
+              'NRIs have separate FEMA permissions and cannot use LRS',
+            ]
+          },
+        ].map((c, i) => (
+          <div class="product-card-light flex flex-col gap-4 p-[34px]" style={`animation-delay:${i*80}ms`}>
+            <h3 class="text-[16px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{c.title}</h3>
+            <ul class="space-y-2.5">
+              {c.points.map(p => (
+                <li class="flex items-start gap-2.5 text-[13px] leading-relaxed text-[var(--color-muted)]">
+                  <span class="shrink-0 text-[13px] font-bold text-[var(--color-brand)]">→</span>
+                  {p}
+                </li>
+              ))}
+            </ul>
           </div>
         ))}
       </div>

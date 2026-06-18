@@ -61,8 +61,8 @@ const faqs = [
 ---
 
 <BaseLayout
-  title="F&O Trading India — Futures Options NSE | Shriram Financial"
-  description="Trade futures and options on NSE with expert advisory, margin calculators, and real-time analytics. SEBI-registered. Flat ₹20/order. Activate F&O segment today."
+  title="Derivatives Trading India — Futures &amp; Options NSE | Shriram"
+  description="Start derivatives trading in India on NSE with expert advisory, margin calculators, and real-time analytics. SEBI-registered. Flat ₹20/order. Activate F&amp;O segment today."
 >
 
   <!-- ══ 1. HERO ═══════════════════════════════════════════════════ -->
@@ -72,7 +72,7 @@ const faqs = [
     <div class="site-wrap relative py-[120px]">
       <p class="equity-reveal text-[14px] font-medium tracking-[.04em] text-[var(--color-brand)]">Derivatives</p>
       <h1 class="equity-reveal mt-[22px] max-w-[880px] text-[clamp(32px,4vw,52px)] font-bold leading-[1.06] text-white" style="font-family:var(--font-display)">
-        Trade Smarter with <span class="text-[var(--color-brand)]">Futures &amp; Options</span>
+        <span class="text-[var(--color-brand)]">Derivatives Trading</span> in India — Futures &amp; Options on NSE
       </h1>
       <p class="equity-reveal mt-[26px] max-w-[600px] text-[18px] leading-relaxed text-white/70">
         Access NSE and BSE derivative markets with advanced analytics, SEBI-registered research, and dedicated risk management support from Shriram Financial Services.
@@ -171,6 +171,84 @@ const faqs = [
             <p class="text-[14.5px] leading-relaxed text-[var(--color-muted)]">{s.desc}</p>
           </div>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 4b. FUTURES VS OPTIONS COMPARISON ═════════════════════════ -->
+  <section class="bg-[#f8f6f1] py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          Futures vs Options — <span class="text-[var(--color-brand)]">Key Differences</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Understand the fundamental differences before deciding which instrument fits your trading style.</p>
+      </div>
+      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
+        <div class="overflow-x-auto">
+          <table class="w-full text-[15.5px]">
+            <thead>
+              <tr class="bg-[var(--color-dark-olive)]">
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Feature</th>
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Futures</th>
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Options</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { label: 'Obligation', futures: 'Both buyer and seller must fulfil at expiry', options: 'Buyer has right, not obligation; seller is obligated' },
+                { label: 'Max Loss (Buyer)', futures: 'Unlimited (adverse price move)', options: 'Limited to premium paid' },
+                { label: 'Max Profit (Buyer)', futures: 'Unlimited', options: 'Unlimited (calls) / Strike price minus premium (puts)' },
+                { label: 'Upfront Cost', futures: 'SPAN + Exposure margin (5–15% of contract value)', options: 'Premium only (lower upfront for buyers)' },
+                { label: 'Time Decay', futures: 'Not applicable', options: 'Theta erodes option value daily (hurts buyers)' },
+                { label: 'Best Used For', futures: 'Directional bets, hedging large portfolios', options: 'Limited-risk speculation, income strategies (writing)' },
+              ].map((r, i) => (
+                <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[#f8f6f1]'}>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">{r.label}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.futures}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.options}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 4c. MARGIN IN DERIVATIVES ══════════════════════════════════ -->
+  <section class="bg-white py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          Margin in Derivatives — <span class="text-[var(--color-brand)]">SPAN &amp; Exposure Explained</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">SEBI mandates upfront margin collection before any F&O position. Here's how it works.</p>
+      </div>
+      <div class="equity-reveal grid gap-6 sm:grid-cols-2">
+        <div class="product-card-light p-[34px]">
+          <div class="mb-4 flex h-11 w-auto min-w-[80px] items-center justify-center rounded-[10px] bg-[var(--color-dark-olive)] px-4 self-start">
+            <span class="text-[13px] font-bold text-[var(--color-brand)]">SPAN</span>
+          </div>
+          <h3 class="mb-3 text-[20px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">SPAN Margin</h3>
+          <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">The Standard Portfolio Analysis of Risk (SPAN) margin covers the worst-case one-day loss scenario in your portfolio. It is calculated using a risk array that covers 16 price/volatility scenarios. For NIFTY futures, SPAN margin typically ranges from ₹50,000–₹1,20,000 per lot depending on market conditions.</p>
+        </div>
+        <div class="product-card-light p-[34px]">
+          <div class="mb-4 flex h-11 w-auto min-w-[80px] items-center justify-center rounded-[10px] bg-[var(--color-dark-olive)] px-4 self-start">
+            <span class="text-[13px] font-bold text-[var(--color-brand)]">EXP</span>
+          </div>
+          <h3 class="mb-3 text-[20px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">Exposure Margin</h3>
+          <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">An additional buffer charged over SPAN to cover adverse intra-day moves and weekend gaps. For index futures it is 3% of contract value; for stock futures it is 5% of contract value. Both SPAN and Exposure must be maintained to avoid forced square-off by your broker.</p>
+        </div>
+      </div>
+      <div class="equity-reveal mt-[34px] rounded-[18px] border border-[var(--color-n400)] bg-[#f8f6f1] p-[34px]">
+        <h4 class="mb-4 text-[18px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">Example: NIFTY Futures Margin (1 Lot = 25 units at ₹24,000)</h4>
+        <div class="grid gap-4 sm:grid-cols-3 text-[14px]">
+          <div><span class="font-semibold text-[var(--color-ink)]">Contract Value: </span><span class="text-[var(--color-muted)]">₹6,00,000</span></div>
+          <div><span class="font-semibold text-[var(--color-ink)]">SPAN Margin (~9%): </span><span class="text-[var(--color-muted)]">₹54,000</span></div>
+          <div><span class="font-semibold text-[var(--color-ink)]">Exposure Margin (3%): </span><span class="text-[var(--color-muted)]">₹18,000</span></div>
+          <div class="sm:col-span-3"><span class="font-semibold text-[var(--color-ink)]">Total Margin Required: </span><span class="font-bold text-[var(--color-dark-olive)]">~₹72,000 (approx. 12% of contract value)</span></div>
+        </div>
       </div>
     </div>
   </section>

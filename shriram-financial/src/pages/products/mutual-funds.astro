@@ -52,8 +52,8 @@ const faqs = [
 ---
 
 <BaseLayout
-  title="Invest Mutual Funds Online — 0% Commission Direct Plans | Shriram"
-  description="Invest in 3,000+ direct mutual fund schemes online with 0% commission and SIP from ₹500. Expert research, instant KYC. Start mutual fund investment today."
+  title="Invest in Mutual Funds India 2026 — 0% Commission Direct Plans | Shriram"
+  description="Invest in mutual funds in India 2026. Browse 3,000+ direct schemes with 0% commission, SIP from ₹500, and expert research. Start mutual fund investment today."
 >
 
   <!-- ══ 1. HERO ═══════════════════════════════════════════════════ -->
@@ -63,7 +63,7 @@ const faqs = [
     <div class="site-wrap relative py-[120px]">
       <p class="equity-reveal text-[14px] font-medium tracking-[.04em] text-[var(--color-brand)]">Mutual Funds</p>
       <h1 class="equity-reveal mt-[22px] max-w-[880px] text-[clamp(32px,4vw,52px)] font-bold leading-[1.06] text-white" style="font-family:var(--font-display)">
-        Invest in Mutual Funds with <span class="text-[var(--color-brand)]">Zero Commission</span>
+        Invest in <span class="text-[var(--color-brand)]">Mutual Funds India 2026</span> with Zero Commission
       </h1>
       <p class="equity-reveal mt-[26px] max-w-[600px] text-[18px] leading-relaxed text-white/70">
         Browse 3,000+ direct mutual fund schemes across all categories. Start a SIP from ₹500, track NAV daily, and let expert-curated research guide your selections.
@@ -190,6 +190,125 @@ const faqs = [
             <h4 class="mb-3 text-[20px] font-medium text-white" style="font-family:var(--font-display)">{r.label}</h4>
             <p class="text-[14.5px] leading-relaxed text-white/60">{r.desc}</p>
           </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 7b. SIP / SWP / STP / LUMP SUM COMPARISON ══════════════ -->
+  <section class="bg-white py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          SIP, SWP, STP &amp; <span class="text-[var(--color-brand)]">Lump Sum — What's the Difference?</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Four investment modes — each suited to a different goal, income pattern, or market condition.</p>
+      </div>
+      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
+        <div class="overflow-x-auto">
+          <table class="w-full text-[15.5px]">
+            <thead>
+              <tr class="bg-[var(--color-dark-olive)]">
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Feature</th>
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">SIP</th>
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">SWP</th>
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">STP</th>
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Lump Sum</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { label: 'Meaning', sip: 'Invest fixed amount regularly', swp: 'Withdraw fixed amount regularly', stp: 'Transfer between funds periodically', lump: 'One-time full investment' },
+                { label: 'Who It Suits', sip: 'Salaried investors', swp: 'Retirees seeking income', stp: 'Investors shifting from debt to equity', lump: 'Investors with surplus capital' },
+                { label: 'Min. Amount', sip: '₹500/month', swp: 'Usually ₹500/withdrawal', stp: '₹500/transfer', lump: '₹1,000 one time' },
+                { label: 'Market Timing Risk', sip: 'Low (averaged entry)', swp: 'Moderate (NAV at redemption)', stp: 'Low (phased shift)', lump: 'High (single entry point)' },
+                { label: 'Best Market Condition', sip: 'Volatile or rising', swp: 'Any (steady income need)', stp: 'After lump sum idle in liquid fund', lump: 'Low market or confident bull view' },
+              ].map((r, i) => (
+                <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[#f8f6f1]'}>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">{r.label}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.sip}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.swp}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.stp}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.lump}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 7c. BEST MUTUAL FUNDS INDIA 2026 ══════════════════════════ -->
+  <section class="bg-[#f8f6f1] py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          Best Mutual Funds in <span class="text-[var(--color-brand)]">India 2026</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Indicative category-wise performance. Past returns are not a guarantee of future performance. Consult your RM for personalised fund selection.</p>
+      </div>
+      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
+        <div class="overflow-x-auto">
+          <table class="w-full text-[15.5px]">
+            <thead>
+              <tr class="bg-[var(--color-dark-olive)]">
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Category</th>
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Example Fund Type</th>
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">1Y Returns*</th>
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">3Y Returns*</th>
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">5Y Returns*</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { cat: 'Large Cap Equity', type: 'Nifty 50 Index / Large Cap', y1: '12–16%', y3: '14–18%', y5: '13–17%' },
+                { cat: 'Flexi Cap Equity', type: 'Flexi Cap / Multi Cap', y1: '14–20%', y3: '15–20%', y5: '15–19%' },
+                { cat: 'ELSS (Tax Saving)', type: 'Equity Linked Saving Scheme', y1: '14–18%', y3: '14–19%', y5: '14–18%' },
+                { cat: 'Hybrid / Balanced', type: 'Balanced Advantage Fund', y1: '9–13%', y3: '10–14%', y5: '10–14%' },
+                { cat: 'Short Duration Debt', type: 'Short Duration Debt Fund', y1: '6–8%', y3: '6–7.5%', y5: '6–7%' },
+                { cat: 'Liquid Fund', type: 'Liquid / Overnight Fund', y1: '6.5–7%', y3: '6–6.5%', y5: '5.5–6%' },
+              ].map((r, i) => (
+                <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[#f8f6f1]'}>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">{r.cat}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.type}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-medium text-[var(--color-dark-olive)]">{r.y1}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-medium text-[var(--color-dark-olive)]">{r.y3}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-medium text-[var(--color-dark-olive)]">{r.y5}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="mt-4 text-center text-[13px] text-[var(--color-muted)]">*Indicative category range. Actual fund returns vary. Source: AMFI / NAV data. Not investment advice.</p>
+    </div>
+  </section>
+
+  <!-- ══ 7d. MUTUAL FUND CALCULATORS ════════════════════════════════ -->
+  <section class="bg-white py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          Mutual Fund <span class="text-[var(--color-brand)]">Calculators</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Plan your investments with our free calculators — estimate SIP corpus, lump sum growth, and SWP withdrawals.</p>
+      </div>
+      <div class="equity-reveal grid gap-5 sm:grid-cols-3">
+        {[
+          { title: 'SIP Calculator', desc: 'Estimate the future value of your monthly SIP investments over 5, 10, or 20 years at expected returns.', href: '/calculators/sip/', cta: 'Calculate SIP Returns' },
+          { title: 'Lump Sum Calculator', desc: 'Find out how much your one-time investment will grow at a given rate of return and time horizon.', href: '/calculators/sip/', cta: 'Calculate Lump Sum' },
+          { title: 'SWP Calculator', desc: 'Plan your retirement income — calculate how long your corpus lasts with regular monthly withdrawals.', href: '/calculators/sip/', cta: 'Plan SWP Withdrawals' },
+        ].map((c, i) => (
+          <a href={c.href} class="group block rounded-[18px] bg-[var(--color-dark-800)] p-[40px] text-left transition-colors hover:bg-[var(--color-dark-olive)]" style={`animation-delay:${i*80}ms`}>
+            <div class="mb-[14px] text-[13px] font-medium tracking-[.05em] text-white/50">Calculator 0{i+1}</div>
+            <h3 class="mb-[12px] text-[22px] font-medium text-white" style="font-family:var(--font-display)">{c.title}</h3>
+            <p class="mb-[24px] text-[14px] leading-relaxed text-white/65">{c.desc}</p>
+            <span class="inline-flex items-center gap-[10px] text-[14px] font-semibold text-[var(--color-brand)]">
+              {c.cta}
+              <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" class="h-3 w-3 transition-transform group-hover:translate-x-1.5"><path d="M2 6h8M6 2l4 4-4 4"/></svg>
+            </span>
+          </a>
         ))}
       </div>
     </div>

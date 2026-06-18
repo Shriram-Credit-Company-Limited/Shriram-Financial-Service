@@ -49,8 +49,8 @@ const faqs = [
 ---
 
 <BaseLayout
-  title="Currency Trading India — USD INR Forex Futures NSE | Shriram"
-  description="Trade USD/INR, EUR/INR, GBP/INR, and JPY/INR currency futures on NSE. Flat ₹20 brokerage, low margin, expert guidance. Enable forex trading with Shriram today."
+  title="Currency Trading in India — USD INR Forex Futures NSE | Shriram"
+  description="Start currency trading in India on NSE. Trade USD/INR, EUR/INR, GBP/INR, and JPY/INR futures. Flat ₹20 brokerage, low margin, expert guidance. Enable forex trading today."
 >
 
   <!-- ══ 1. HERO ═══════════════════════════════════════════════════ -->
@@ -60,7 +60,7 @@ const faqs = [
     <div class="site-wrap relative py-[120px]">
       <p class="equity-reveal text-[14px] font-medium tracking-[.04em] text-[var(--color-brand)]">Currency</p>
       <h1 class="equity-reveal mt-[22px] max-w-[880px] text-[clamp(32px,4vw,52px)] font-bold leading-[1.06] text-white" style="font-family:var(--font-display)">
-        Trade Currency Futures &amp; <span class="text-[var(--color-brand)]">Hedge Forex Risk</span>
+        <span class="text-[var(--color-brand)]">Currency Trading in India</span> — Hedge Forex Risk on NSE
       </h1>
       <p class="equity-reveal mt-[26px] max-w-[600px] text-[18px] leading-relaxed text-white/70">
         Access all four INR currency pairs — USD, EUR, GBP, and JPY — with live pricing, low margin requirements, and expert guidance from Shriram Financial Services.
@@ -185,6 +185,61 @@ const faqs = [
             <p class="text-[14.5px] leading-relaxed text-white/60">{r.desc}</p>
           </div>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 6b. IS CURRENCY TRADING LEGAL IN INDIA? ═══════════════════ -->
+  <section class="bg-[#f8f6f1] py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          Is Currency Trading Legal in India? <span class="text-[var(--color-brand)]">RBI, SEBI &amp; FEMA Rules</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Yes — currency futures and options trading on recognised exchanges is fully legal in India. Offshore forex (OTC) trading is not.</p>
+      </div>
+      <div class="equity-reveal grid gap-5 sm:grid-cols-2">
+        <div class="product-card-light p-[34px]">
+          <div class="mb-4 flex h-11 w-auto min-w-[80px] items-center justify-center rounded-[10px] bg-[var(--color-dark-olive)] px-4 self-start">
+            <span class="text-[12px] font-bold text-[var(--color-brand)]">LEGAL</span>
+          </div>
+          <h3 class="mb-3 text-[20px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">What Is Permitted</h3>
+          <div class="space-y-3 text-[13.5px] text-[var(--color-muted)]">
+            {[
+              'Currency futures and options on NSE, BSE, and MSE — fully SEBI regulated',
+              'INR-based pairs only: USD/INR, EUR/INR, GBP/INR, JPY/INR',
+              'Speculative positions up to $100 million without underlying forex exposure',
+              'Hedging forex payables/receivables from import-export business',
+            ].map(item => (
+              <div class="flex items-start gap-2.5">
+                <span class="shrink-0 text-[14px] font-bold text-[var(--color-brand)]">✓</span>
+                <span>{item}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div class="product-card-light p-[34px]">
+          <div class="mb-4 flex h-11 w-auto min-w-[80px] items-center justify-center rounded-[10px] bg-red-800/80 px-4 self-start">
+            <span class="text-[12px] font-bold text-white">ILLEGAL</span>
+          </div>
+          <h3 class="mb-3 text-[20px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">What Is Not Permitted</h3>
+          <div class="space-y-3 text-[13.5px] text-[var(--color-muted)]">
+            {[
+              'Offshore forex brokers (e.g., MetaTrader platforms offering FX on margin) — prohibited under FEMA',
+              'Derivatives on cross-currency pairs (e.g., EUR/USD) — not permitted for Indian residents',
+              'NRI participation in Indian currency futures (currently not allowed)',
+              'Leveraged OTC forex with unregulated brokers — SEBI classifies this as illegal',
+            ].map(item => (
+              <div class="flex items-start gap-2.5">
+                <span class="shrink-0 text-[14px] font-bold text-red-600">✗</span>
+                <span>{item}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div class="equity-reveal mt-[28px] rounded-[18px] bg-[var(--color-dark-800)] p-[28px] text-[14px] leading-relaxed text-white/70">
+        <strong class="text-[var(--color-brand)]">Key regulation:</strong> All currency derivatives in India are governed by SEBI and the RBI, with the overarching framework set by FEMA 1999. Shriram Financial Services is a SEBI-registered broker with NSE currency segment membership — all trades are exchange-cleared, transparent, and legally compliant.
       </div>
     </div>
   </section>

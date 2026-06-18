@@ -45,8 +45,8 @@ const faqs = [
 ---
 
 <BaseLayout
-  title="NPS Investment India — Tax Saving National Pension Scheme | Shriram"
-  description="Invest in NPS online and save up to ₹2 lakh in tax deductions annually. Market-linked retirement corpus, PFRDA regulated, flexible fund choice. Open NPS account today."
+  title="NPS India 2026 — National Pension Scheme Tax Saving | Shriram"
+  description="Invest in NPS India 2026 and save up to ₹2 lakh in tax deductions annually. Market-linked retirement corpus, PFRDA regulated, flexible fund choice. Open NPS account today."
 >
 
   <!-- ══ 1. HERO ═══════════════════════════════════════════════════ -->
@@ -56,7 +56,7 @@ const faqs = [
     <div class="site-wrap relative py-[120px]">
       <p class="equity-reveal text-[14px] font-medium tracking-[.04em] text-[var(--color-brand)]">National Pension Scheme</p>
       <h1 class="equity-reveal mt-[22px] max-w-[880px] text-[clamp(32px,4vw,52px)] font-bold leading-[1.06] text-white" style="font-family:var(--font-display)">
-        Retire Rich with NPS — <span class="text-[var(--color-brand)]">Tax-Efficient &amp; Market-Linked</span>
+        <span class="text-[var(--color-brand)]">NPS India 2026</span> — Tax-Efficient &amp; Market-Linked Retirement
       </h1>
       <p class="equity-reveal mt-[26px] max-w-[600px] text-[18px] leading-relaxed text-white/70">
         The National Pension Scheme (NPS) offers up to ₹2 lakh in tax deductions annually, market-linked returns, and a guaranteed retirement income — all in one PFRDA-regulated account.
@@ -177,6 +177,99 @@ const faqs = [
           <thead><tr class="bg-[var(--color-dark-olive)]"><th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Feature</th><th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">NPS</th><th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">EPF</th><th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">PPF</th></tr></thead>
           <tbody>{vsRows.map((r,i) => (<tr class={i%2===0?'bg-white':'bg-[#f8f6f1]'}><td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">{r.feature}</td><td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.nps}</td><td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.epf}</td><td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.ppf}</td></tr>))}</tbody>
         </table></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 6b. NPS WITHDRAWAL RULES ══════════════════════════════════ -->
+  <section class="bg-[#f8f6f1] py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          NPS Withdrawal <span class="text-[var(--color-brand)]">Rules</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">NPS locks in your corpus until retirement, but partial withdrawals are allowed in specific circumstances.</p>
+      </div>
+      <div class="equity-reveal grid gap-6 sm:grid-cols-2">
+        <div class="product-card-light p-[34px]">
+          <div class="mb-4 flex h-11 w-auto min-w-[80px] items-center justify-center rounded-[10px] bg-[var(--color-dark-olive)] px-4 self-start">
+            <span class="text-[12px] font-bold text-[var(--color-brand)]">Age 60</span>
+          </div>
+          <h3 class="mb-3 text-[20px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">Maturity at Age 60</h3>
+          <div class="space-y-3 text-[14px]">
+            {[
+              { label: '60% of corpus', desc: 'Fully tax-free withdrawal — no tax liability on this portion' },
+              { label: '40% of corpus', desc: 'Must purchase a PFRDA-registered annuity plan — annuity income is taxable per slab' },
+              { label: 'Deferred Exit', desc: 'Can defer withdrawal until age 75 if you wish to continue growing the corpus' },
+              { label: 'Lump Sum Option', desc: 'If corpus is below ₹5 lakh, can withdraw the entire amount as a lump sum' },
+            ].map(r => (
+              <div class="flex items-start gap-3 border-b border-[var(--color-n400)]/50 pb-3 last:border-0 last:pb-0">
+                <span class="shrink-0 mt-0.5 text-[14px] font-bold text-[var(--color-brand)]">✓</span>
+                <div><span class="font-semibold text-[var(--color-ink)]">{r.label}:</span> <span class="text-[var(--color-muted)]">{r.desc}</span></div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div class="product-card-light p-[34px]">
+          <div class="mb-4 flex h-11 w-auto min-w-[80px] items-center justify-center rounded-[10px] bg-[var(--color-dark-olive)] px-4 self-start">
+            <span class="text-[12px] font-bold text-[var(--color-brand)]">Partial</span>
+          </div>
+          <h3 class="mb-3 text-[20px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">Partial Withdrawal Conditions</h3>
+          <div class="space-y-3 text-[14px]">
+            {[
+              { label: 'After 3 years', desc: 'Must have been a subscriber for at least 3 years before partial withdrawal' },
+              { label: 'Max 25% of own contributions', desc: 'Only your contributions count — not employer contributions or returns' },
+              { label: 'Max 3 withdrawals', desc: 'Over the lifetime of your PRAN account' },
+              { label: 'Eligible purposes', desc: "Child's education/marriage, home purchase, critical illness, or starting a business" },
+            ].map(r => (
+              <div class="flex items-start gap-3 border-b border-[var(--color-n400)]/50 pb-3 last:border-0 last:pb-0">
+                <span class="shrink-0 mt-0.5 text-[14px] font-bold text-[var(--color-brand)]">→</span>
+                <div><span class="font-semibold text-[var(--color-ink)]">{r.label}:</span> <span class="text-[var(--color-muted)]">{r.desc}</span></div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 6c. NPS CHARGES & FEES ═════════════════════════════════════ -->
+  <section class="bg-white py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          NPS Charges &amp; <span class="text-[var(--color-brand)]">Fees</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">NPS is one of the lowest-cost retirement products in India. Here is a complete breakdown of applicable charges.</p>
+      </div>
+      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
+        <div class="overflow-x-auto">
+          <table class="w-full text-[15.5px]">
+            <thead>
+              <tr class="bg-[var(--color-dark-olive)]">
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Charge Head</th>
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Amount</th>
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Note</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { charge: 'PRAN Card Issuance', amount: 'One-time ₹40', note: 'Physical PRAN card issued on registration' },
+                { charge: 'CRA Maintenance (NSDL/CAMS)', amount: '₹69–₹95 per year', note: 'Charged by Central Record Keeping Agency' },
+                { charge: 'PFM Investment Management Fee', amount: '0.01% p.a. on AUM', note: 'Lowest fund management fee in India' },
+                { charge: 'Contribution Processing', amount: '0.10% per contribution (min ₹20, max ₹10,000)', note: 'Per transaction charge' },
+                { charge: 'Withdrawal / Annuity Service', amount: '0.005% of corpus (max ₹500)', note: 'At maturity or premature exit' },
+                { charge: 'Point of Presence (PoP) Fee', amount: '0.25% of contribution (min ₹20)', note: 'Charged by your NPS service provider (e.g., Shriram)' },
+              ].map((r, i) => (
+                <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[#f8f6f1]'}>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">{r.charge}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-medium text-[var(--color-dark-olive)]">{r.amount}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.note}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </section>

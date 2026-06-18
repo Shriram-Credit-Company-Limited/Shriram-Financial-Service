@@ -1,0 +1,340 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const benefits = [
+  { n: '01', label: 'Amplified Buying Power', desc: 'Leverage up to 4× your available cash — buy ₹4 lakh worth of stocks with just ₹1 lakh in your account.' },
+  { n: '02', label: 'No Overnight Square-Off', desc: 'Unlike intraday positions, MTF lets you hold stocks beyond market hours for as long as you wish.' },
+  { n: '03', label: 'Unlimited Holding Period', desc: 'Hold your leveraged position for days, weeks, or months — as long as you maintain the minimum margin and pay the interest.' },
+  { n: '04', label: 'Use Existing Stocks as Collateral', desc: 'Pledge your existing Demat holdings to meet margin requirements — no need to sell existing investments.' },
+];
+
+const steps = [
+  { n: '01', title: 'Pledge Stocks as Margin', desc: 'Pledge your existing approved stocks from your Demat account with the depository. The pledged value counts as collateral for MTF.' },
+  { n: '02', title: 'Broker Funds the Remaining', desc: 'Shriram funds the remaining purchase amount (up to 4× your collateral). The funded amount is held in a separate MTF account.' },
+  { n: '03', title: 'Buy More Stock', desc: 'Place your MTF buy order for approved stocks on NSE/BSE. The combined margin + funding completes the purchase.' },
+  { n: '04', title: 'Hold Until Profit', desc: 'Hold the position as long as needed. Pay MTF interest daily on the funded amount. Square off when your target is achieved.' },
+];
+
+const activateSteps = [
+  { n: '01', title: 'Request MTF Activation', desc: 'Log in to your Shriram account and request MTF segment activation — done digitally in minutes.' },
+  { n: '02', title: 'Sign MTF Agreement', desc: 'E-sign the MTF terms and conditions including the pledge mechanism and interest rate disclosure.' },
+  { n: '03', title: 'Pledge Approved Securities', desc: 'Pledge eligible approved stocks in your Demat account. The pledge creates a lien in favour of your broker.' },
+  { n: '04', title: 'Start Buying on Margin', desc: 'Once collateral is marked, place MTF buy orders. Your effective buying power is displayed in your trading terminal.' },
+];
+
+const chargeRows = [
+  { label: 'MTF Interest Rate', value: '12–18% per annum (charged daily on funded amount)' },
+  { label: 'Minimum Margin Requirement', value: '20–25% of stock value (stock-specific)' },
+  { label: 'DP Pledge Charges', value: '₹30 per scrip per pledge / unpledge' },
+  { label: 'Brokerage on MTF Buy/Sell', value: '₹20 per executed order (same as delivery)' },
+  { label: 'MTF Funding Limit', value: 'Up to 4× your collateral value (subject to stock eligibility)' },
+];
+
+const eligibleStocks = [
+  { name: 'Reliance Industries', ticker: 'RELIANCE', nse: 'NSE/BSE' },
+  { name: 'HDFC Bank', ticker: 'HDFCBANK', nse: 'NSE/BSE' },
+  { name: 'Infosys', ticker: 'INFY', nse: 'NSE/BSE' },
+  { name: 'TCS', ticker: 'TCS', nse: 'NSE/BSE' },
+  { name: 'ICICI Bank', ticker: 'ICICIBANK', nse: 'NSE/BSE' },
+  { name: 'Larsen & Toubro', ticker: 'LT', nse: 'NSE/BSE' },
+  { name: 'Bharti Airtel', ticker: 'BHARTIARTL', nse: 'NSE/BSE' },
+  { name: 'SBI', ticker: 'SBIN', nse: 'NSE/BSE' },
+  { name: 'Axis Bank', ticker: 'AXISBANK', nse: 'NSE/BSE' },
+  { name: 'HCL Technologies', ticker: 'HCLTECH', nse: 'NSE/BSE' },
+];
+
+const risks = [
+  { n: '01', label: 'Margin Call Risk', desc: 'If your stock falls and margin drops below the minimum, your broker may issue a margin call requiring you to add funds or face forced square-off.' },
+  { n: '02', label: 'Forced Liquidation', desc: 'Failure to restore margin triggers automatic square-off — possibly at a loss, locking in your downside and eliminating the chance of recovery.' },
+  { n: '03', label: 'Interest Cost Erosion', desc: 'At 12–18% p.a., daily interest compounds. A position held for 3 months on 100% funded amount costs 3–4.5% just in interest charges.' },
+  { n: '04', label: 'Amplified Losses', desc: 'Just as MTF amplifies gains, it amplifies losses too. A 25% fall in a 4× leveraged position wipes out 100% of your equity contribution.' },
+];
+
+const faqs = [
+  { q: 'What is MTF (Margin Trading Facility)?', a: 'MTF is a facility offered by SEBI-registered brokers that allows you to buy stocks using borrowed funds — typically up to 4× your collateral. You pay daily interest on the funded amount and can hold the position for an unlimited period (unlike intraday, which must be squared off same day).' },
+  { q: 'What is the difference between MTF and intraday trading?', a: 'Intraday must be squared off by the end of the trading day. MTF positions can be held overnight and for multiple days or weeks. MTF is used for medium-term leveraged investing; intraday is for same-day speculation.' },
+  { q: 'How is MTF different from futures trading?', a: 'MTF lets you hold actual shares (credited to your Demat on pledge), with no expiry date. Futures are derivative contracts with a fixed monthly/weekly expiry and different margin requirements. MTF is better for stock-specific medium-term positions.' },
+  { q: 'What stocks are eligible for MTF?', a: 'SEBI approves a list of stocks eligible for MTF — generally Nifty 500 stocks meeting liquidity and volatility thresholds. Your broker publishes an updated MTF scrip list. Contact Shriram for the current approved stock list.' },
+  { q: 'Can I pledge mutual funds or ETFs as MTF collateral?', a: 'No — MTF pledging is restricted to approved equity stocks. However, some brokers accept liquid fund units or ETFs as additional collateral at a haircut. Check with your Shriram RM for current approved collateral types.' },
+  { q: 'What happens if I don\'t pay the MTF interest?', a: 'Daily MTF interest accrues and is debited from your trading ledger. If the ledger balance runs negative and the shortfall isn\'t covered, your broker may liquidate MTF positions to recover the outstanding amount.' },
+];
+---
+
+<BaseLayout
+  title="Margin Trading Facility (MTF) in India — 4x Buying Power | Shriram"
+  description="Access Margin Trading Facility (MTF) in India with up to 4× buying power. Hold leveraged positions without overnight square-off. Pledge existing stocks as collateral. Start with Shriram."
+>
+
+  <!-- ══ 1. HERO ═══════════════════════════════════════════════════ -->
+  <section class="relative overflow-hidden bg-[var(--color-dark-800)]">
+    <div class="pointer-events-none absolute -right-40 -top-40 h-[560px] w-[560px] rounded-full bg-[var(--color-brand)]/10 blur-3xl"></div>
+    <div class="pointer-events-none absolute -bottom-32 left-0 h-80 w-80 rounded-full bg-[var(--color-brand)]/5 blur-3xl"></div>
+    <div class="site-wrap relative py-[120px]">
+      <p class="equity-reveal text-[14px] font-medium tracking-[.04em] text-[var(--color-brand)]">Margin Trading Facility</p>
+      <h1 class="equity-reveal mt-[22px] max-w-[880px] text-[clamp(32px,4vw,52px)] font-bold leading-[1.06] text-white" style="font-family:var(--font-display)">
+        <span class="text-[var(--color-brand)]">Margin Trading Facility in India</span> — Up to 4× Buying Power
+      </h1>
+      <p class="equity-reveal mt-[26px] max-w-[600px] text-[18px] leading-relaxed text-white/70">
+        MTF (Margin Trading Facility) lets you buy more stocks than your cash allows — hold positions overnight, use existing stocks as collateral, and amplify returns on high-conviction calls.
+      </p>
+      <div class="equity-reveal mt-[38px] flex flex-wrap gap-[14px]">
+        <a href="/about/open-demat-account/" class="btn-primary">Activate MTF Now</a>
+        <a href="/about/support/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Talk to RM</a>
+      </div>
+      <div class="equity-reveal mt-[54px] flex flex-wrap gap-x-9 gap-y-3 border-t border-white/15 pt-9">
+        {['✓ Up to 4× leverage', '✓ No overnight square-off', '✓ Pledge existing stocks', '✓ SEBI regulated'].map(f => (
+          <span class="text-[15px] font-medium text-white/90">
+            <span class="mr-2 text-[var(--color-brand)]">{f.slice(0,1)}</span>{f.slice(1)}
+          </span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 2. WHAT IS MTF ════════════════════════════════════════════ -->
+  <section class="bg-white py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto grid max-w-[1000px] items-start gap-[72px] lg:grid-cols-[5fr_7fr]">
+        <h2 class="text-[40px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          What Is <span class="text-[var(--color-brand)]">MTF?</span>
+        </h2>
+        <div class="space-y-5 text-[17px] leading-relaxed text-[var(--color-muted)]">
+          <p>Margin Trading Facility (MTF) is a SEBI-regulated mechanism that allows investors to buy stocks beyond their immediate cash balance by borrowing the shortfall from their broker.</p>
+          <p>Unlike intraday trading — where positions must close by market end — MTF positions can be held for extended periods. This makes MTF ideal for investors with a medium-term view who want to amplify their buying power without selling existing holdings.</p>
+          <p>MTF is distinct from futures trading: you own actual shares (not derivative contracts), there is no expiry date, and the margin requirement is specific to each approved stock.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 3. HOW MTF WORKS ═══════════════════════════════════════════ -->
+  <section class="bg-[#f8f6f1] py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          How MTF <span class="text-[var(--color-brand)]">Works</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Four steps from pledging your stocks to taking a leveraged position.</p>
+      </div>
+      <div class="equity-reveal steps-grid overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
+        {steps.map(s => (
+          <div class="px-[30px] py-[34px]">
+            <div class="mb-[22px] font-display text-[34px] font-normal leading-none text-[var(--color-brand)]">{s.n}</div>
+            <h4 class="mb-[10px] text-[19px] font-medium leading-[1.25] text-[var(--color-ink)]" style="font-family:var(--font-display)">{s.title}</h4>
+            <p class="text-[14.5px] leading-relaxed text-[var(--color-muted)]">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 4. MTF BENEFITS ════════════════════════════════════════════ -->
+  <section class="bg-white py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          MTF <span class="text-[var(--color-brand)]">Benefits</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Why investors use MTF to capture short-to-medium-term opportunities.</p>
+      </div>
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {benefits.map(b => (
+          <div class="equity-reveal product-card-light flex flex-col gap-3 p-[30px]">
+            <div class="mb-[14px] text-[15px] font-medium tracking-[.05em] text-[var(--color-brand)]">{b.n}</div>
+            <h4 class="mb-[10px] text-[19px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">{b.label}</h4>
+            <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">{b.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 5. MTF CHARGES ════════════════════════════════════════════ -->
+  <section class="bg-[#f8f6f1] py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          MTF Interest &amp; <span class="text-[var(--color-brand)]">Charges</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">A complete breakdown of all costs involved in MTF — always calculate interest cost vs expected return before taking a position.</p>
+      </div>
+      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
+        <div class="overflow-x-auto">
+          <table class="w-full text-[15.5px]">
+            <thead>
+              <tr class="bg-[var(--color-dark-olive)]">
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Charge Type</th>
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Amount / Rate</th>
+              </tr>
+            </thead>
+            <tbody>
+              {chargeRows.map((r, i) => (
+                <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[#f8f6f1]'}>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">{r.label}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.value}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 6. MTF ELIGIBLE STOCKS ════════════════════════════════════ -->
+  <section class="bg-white py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          MTF Eligible <span class="text-[var(--color-brand)]">Stocks</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">SEBI approves stocks for MTF based on market cap, liquidity, and volatility. Below is a sample of commonly approved Nifty 50 stocks. The full list is available on the Shriram platform.</p>
+      </div>
+      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
+        <div class="overflow-x-auto">
+          <table class="w-full text-[15.5px]">
+            <thead>
+              <tr class="bg-[var(--color-dark-olive)]">
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Company</th>
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Ticker</th>
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Exchange</th>
+              </tr>
+            </thead>
+            <tbody>
+              {eligibleStocks.map((s, i) => (
+                <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[#f8f6f1]'}>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">{s.name}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-medium text-[var(--color-dark-olive)]">{s.ticker}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{s.nse}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="mt-4 text-center text-[13px] text-[var(--color-muted)]">*Sample list only. Actual MTF eligibility changes per SEBI/exchange notifications. Check the Shriram platform for the current approved list.</p>
+    </div>
+  </section>
+
+  <!-- ══ 7. HOW TO ACTIVATE MTF ════════════════════════════════════ -->
+  <section class="bg-[#f8f6f1] py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          How to <span class="text-[var(--color-brand)]">Activate MTF</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Four steps from activation to your first leveraged position — fully digital.</p>
+      </div>
+      <div class="equity-reveal steps-grid overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
+        {activateSteps.map(s => (
+          <div class="px-[30px] py-[34px]">
+            <div class="mb-[22px] font-display text-[34px] font-normal leading-none text-[var(--color-brand)]">{s.n}</div>
+            <h4 class="mb-[10px] text-[19px] font-medium leading-[1.25] text-[var(--color-ink)]" style="font-family:var(--font-display)">{s.title}</h4>
+            <p class="text-[14.5px] leading-relaxed text-[var(--color-muted)]">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 8. MTF RISKS ═══════════════════════════════════════════════ -->
+  <section class="bg-white py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          MTF <span class="text-[var(--color-brand)]">Risks</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Leverage amplifies both gains and losses. Understand every risk before using MTF.</p>
+      </div>
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {risks.map(r => (
+          <div class="equity-reveal rounded-[18px] bg-[var(--color-dark-800)] p-[36px]">
+            <div class="mb-[18px] text-[48px] font-bold leading-none text-[var(--color-brand)]/25">{r.n}</div>
+            <h4 class="mb-3 text-[20px] font-medium text-white" style="font-family:var(--font-display)">{r.label}</h4>
+            <p class="text-[14.5px] leading-relaxed text-white/60">{r.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 9. FAQ ═════════════════════════════════════════════════════ -->
+  <section class="bg-[#f8f6f1] py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          Frequently Asked <span class="text-[var(--color-brand)]">Questions</span>
+        </h2>
+      </div>
+      <div class="equity-reveal mx-auto max-w-[840px] border-t border-[var(--color-n400)]">
+        {faqs.map(item => (
+          <details class="eq-faq group border-b border-[var(--color-n400)]">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-5 py-[26px] px-2">
+              <span class="text-[18px] font-semibold text-[var(--color-ink)]">{item.q}</span>
+              <span class="shrink-0 text-[22px] leading-none text-[var(--color-brand)] transition-transform duration-300 group-open:rotate-45">+</span>
+            </summary>
+            <div class="overflow-hidden px-2 pb-0 text-[16px] leading-relaxed text-[var(--color-muted)] transition-all duration-300 group-open:pb-[28px]">
+              <p class="max-w-[680px]">{item.a}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 10. FINAL CTA ══════════════════════════════════════════════ -->
+  <section class="bg-white py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal overflow-hidden rounded-[22px] bg-[var(--color-dark-800)] px-[60px] py-[64px] text-center">
+        <h3 class="mx-auto max-w-[560px] text-[38px] font-bold leading-[1.12] text-white" style="font-family:var(--font-display)">Activate MTF and Trade with More Power</h3>
+        <p class="mx-auto mt-[18px] max-w-[480px] text-[17px] leading-relaxed text-white/70">Enable Margin Trading Facility on your Shriram account today. Leverage approved stocks, hold positions longer, and capitalise on your high-conviction views.</p>
+        <div class="mt-[34px] flex flex-wrap justify-center gap-[14px]">
+          <a href="/about/open-demat-account/" class="btn-primary">Activate MTF</a>
+          <a href="/about/support/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Talk to an RM</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .equity-reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  .equity-reveal.in-view { opacity: 1; transform: none; }
+
+  .steps-grid { display: grid; grid-template-columns: repeat(2, 1fr); }
+  .steps-grid > * { border-right: 1px solid var(--color-n400); border-bottom: 1px solid var(--color-n400); }
+  .steps-grid > *:nth-child(2n) { border-right: 0; }
+  .steps-grid > *:nth-last-child(-n+2) { border-bottom: 0; }
+  @media (min-width: 1024px) {
+    .steps-grid { grid-template-columns: repeat(4, 1fr); }
+    .steps-grid > * { border-right: 1px solid var(--color-n400); border-bottom: 0; }
+    .steps-grid > *:last-child { border-right: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .equity-reveal { opacity: 1; transform: none; transition: none; }
+  }
+</style>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        (e.target as HTMLElement).classList.add('in-view');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.10 });
+  document.querySelectorAll('.equity-reveal').forEach(el => obs.observe(el));
+
+  document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(d => {
+    d.addEventListener('toggle', () => {
+      if (d.open) document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(o => { if (o !== d) o.removeAttribute('open'); });
+    });
+  });
+</script>

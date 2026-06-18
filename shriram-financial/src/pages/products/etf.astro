@@ -44,8 +44,8 @@ const faqs = [
 ---
 
 <BaseLayout
-  title="ETF Investment India — Buy Index Gold ETF NSE BSE | Shriram"
-  description="Buy Index ETFs, Gold ETFs, and international ETFs on NSE & BSE. Ultra-low expense ratios, real-time pricing, and flat ₹20 brokerage. Start ETF investing today."
+  title="ETF in India — Buy Index Gold ETF NSE BSE | Shriram"
+  description="Invest in ETF in India — Index ETFs, Gold ETFs, and international ETFs on NSE &amp; BSE. Ultra-low expense ratios, real-time pricing, and flat ₹20 brokerage. Start today."
 >
 
   <!-- ══ 1. HERO ═══════════════════════════════════════════════════ -->
@@ -55,7 +55,7 @@ const faqs = [
     <div class="site-wrap relative py-[120px]">
       <p class="equity-reveal text-[14px] font-medium tracking-[.04em] text-[var(--color-brand)]">Exchange Traded Funds</p>
       <h1 class="equity-reveal mt-[22px] max-w-[880px] text-[clamp(32px,4vw,52px)] font-bold leading-[1.06] text-white" style="font-family:var(--font-display)">
-        Trade ETFs — Diversify Your <span class="text-[var(--color-brand)]">Portfolio Instantly</span>
+        Invest in <span class="text-[var(--color-brand)]">ETF in India</span> — Diversify Your Portfolio Instantly
       </h1>
       <p class="equity-reveal mt-[26px] max-w-[600px] text-[18px] leading-relaxed text-white/70">
         Access Index ETFs, Gold ETFs, Sector ETFs, Debt ETFs, and International ETFs on NSE and BSE. Real-time pricing, ultra-low expense ratios, and the simplicity of stock trading.
@@ -155,6 +155,104 @@ const faqs = [
             <p class="text-[14.5px] leading-relaxed text-white/60">{r.desc}</p>
           </div>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 5b. ETF SIP ════════════════════════════════════════════════ -->
+  <section class="bg-white py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          ETF SIP — Can You Do Systematic <span class="text-[var(--color-brand)]">Investment in an ETF?</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">ETFs don't support traditional auto-debit SIPs like mutual funds — but there are effective workarounds for disciplined monthly investing.</p>
+      </div>
+      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
+        <div class="overflow-x-auto">
+          <table class="w-full text-[15.5px]">
+            <thead>
+              <tr class="bg-[var(--color-dark-olive)]">
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Feature</th>
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">ETF SIP (Manual)</th>
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Mutual Fund SIP</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { label: 'Auto-Debit', etf: 'Not available (manual purchase required)', mf: 'Yes — automated monthly debit' },
+                { label: 'Price Execution', etf: 'Live market price (can use limit orders)', mf: 'End-of-day NAV — no control over entry price' },
+                { label: 'Minimum Amount', etf: 'Price of 1 unit (can be as low as ₹30)', mf: 'Usually ₹500/month' },
+                { label: 'Expense Ratio', etf: '0.04–0.40% (very low)', mf: '0.1–2.5% (varies)' },
+                { label: 'Demat Account', etf: 'Required', mf: 'Optional (can invest via AMC)' },
+                { label: 'Best For', etf: 'Cost-conscious, active investors comfortable with manual buying', mf: 'Investors who prefer automation and simplicity' },
+              ].map((r, i) => (
+                <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[#f8f6f1]'}>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">{r.label}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.etf}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.mf}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 5c. ETF PORTFOLIO CONSTRUCTION ════════════════════════════ -->
+  <section class="bg-[#f8f6f1] py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          ETF Portfolio <span class="text-[var(--color-brand)]">Construction</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Two model portfolios — for beginners starting simple and advanced investors seeking core-satellite diversification.</p>
+      </div>
+      <div class="equity-reveal grid gap-6 sm:grid-cols-2">
+        <div class="product-card-light p-[34px]">
+          <div class="mb-4 inline-flex rounded-full bg-[var(--color-brand)]/15 px-4 py-1.5 text-[12px] font-bold uppercase tracking-wide text-[var(--color-dark-olive)]">Beginner Portfolio</div>
+          <h3 class="mb-4 text-[22px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">The 3-ETF Portfolio</h3>
+          <p class="mb-5 text-[14px] text-[var(--color-muted)]">A simple, low-cost portfolio covering the three major asset classes. Rebalance once a year.</p>
+          <div class="space-y-3">
+            {[
+              { etf: 'Nifty 50 ETF', alloc: '60%', role: 'Core equity growth engine' },
+              { etf: 'Gold ETF', alloc: '20%', role: 'Inflation hedge & safe haven' },
+              { etf: 'Nifty 5-Year Debt ETF', alloc: '20%', role: 'Stability & income' },
+            ].map(p => (
+              <div class="flex items-center justify-between rounded-[10px] border border-[var(--color-n400)] px-4 py-3">
+                <div>
+                  <div class="text-[13px] font-semibold text-[var(--color-ink)]">{p.etf}</div>
+                  <div class="text-[11px] text-[var(--color-muted)]">{p.role}</div>
+                </div>
+                <span class="text-[18px] font-bold text-[var(--color-dark-olive)]">{p.alloc}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div class="product-card-light p-[34px]">
+          <div class="mb-4 inline-flex rounded-full bg-[var(--color-brand)]/15 px-4 py-1.5 text-[12px] font-bold uppercase tracking-wide text-[var(--color-dark-olive)]">Advanced Portfolio</div>
+          <h3 class="mb-4 text-[22px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">Core-Satellite Portfolio</h3>
+          <p class="mb-5 text-[14px] text-[var(--color-muted)]">A structured blend of passive core holdings and tactical satellite positions for enhanced returns.</p>
+          <div class="space-y-3">
+            {[
+              { etf: 'Nifty 50 ETF (Core)', alloc: '40%', role: 'Broad market base' },
+              { etf: 'Nifty Next 50 ETF', alloc: '15%', role: 'Mid-to-large cap growth' },
+              { etf: 'Nasdaq 100 ETF', alloc: '10%', role: 'Global tech satellite' },
+              { etf: 'Nifty Bank ETF', alloc: '10%', role: 'Sectoral satellite' },
+              { etf: 'Gold ETF', alloc: '15%', role: 'Safe haven' },
+              { etf: 'Short Duration Debt ETF', alloc: '10%', role: 'Stability buffer' },
+            ].map(p => (
+              <div class="flex items-center justify-between rounded-[10px] border border-[var(--color-n400)] px-4 py-3">
+                <div>
+                  <div class="text-[13px] font-semibold text-[var(--color-ink)]">{p.etf}</div>
+                  <div class="text-[11px] text-[var(--color-muted)]">{p.role}</div>
+                </div>
+                <span class="text-[18px] font-bold text-[var(--color-dark-olive)]">{p.alloc}</span>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   </section>

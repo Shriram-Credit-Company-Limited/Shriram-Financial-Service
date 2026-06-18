@@ -1,0 +1,322 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const bondTypes = [
+  { label: 'Government Securities (G-Secs)', desc: 'Sovereign bonds issued by the Government of India. Zero credit risk — backed by the full faith of the government. Traded on NSE/BSE via RBI Retail Direct or through brokers.', tag: 'Zero Credit Risk' },
+  { label: 'Sovereign Gold Bonds (SGBs)', desc: 'RBI-issued bonds denominated in grams of gold. Earn 2.5% p.a. fixed interest + gold price appreciation. Capital gains on maturity (8 years) are fully tax-exempt.', tag: 'Gold-Linked' },
+  { label: 'Treasury Bills (T-Bills)', desc: 'Short-term government instruments — 91-day, 182-day, and 364-day. Issued at discount and redeemed at face value. Zero coupon; ideal for short-term parking of funds.', tag: 'Short-Term' },
+  { label: 'Corporate Bonds', desc: 'Debt instruments issued by companies (private and public) to raise funds. Higher yield than G-Secs but carries credit risk. Rated by CRISIL/ICRA — stick to AA+ or above for safety.', tag: 'Higher Yield' },
+  { label: 'Non-Convertible Debentures (NCDs)', desc: 'Debt instruments issued by NBFCs and corporates. Cannot be converted to equity. Offer 8–11% yields but require careful credit assessment. SEBI-regulated, listed on exchanges.', tag: 'NBFC / Corporate' },
+  { label: 'PSU Bonds', desc: 'Bonds issued by Public Sector Undertakings (NTPC, NHAI, REC, PFC). Quasi-sovereign — near-zero credit risk with yields 0.5–1% above G-Secs. Eligible for 54EC tax exemption (certain bonds).', tag: 'PSU Backed' },
+];
+
+const risks = [
+  { n: '01', label: 'Interest Rate Risk', desc: 'When interest rates rise, existing bond prices fall (inverse relationship). Longer-duration bonds are more sensitive to rate changes — a 1% rate rise can drop a 10-year bond price by ~8–10%.' },
+  { n: '02', label: 'Credit Risk', desc: 'Corporate and NCD issuers may default on interest or principal. Always check the credit rating (CRISIL/ICRA/CARE). AA and above means high safety; below BBB is speculative grade.' },
+  { n: '03', label: 'Liquidity Risk', desc: 'Most bonds outside G-Secs have thin secondary market trading. If you need to sell before maturity, you may get a price below fair value — or find no buyers at all for lower-rated bonds.' },
+  { n: '04', label: 'Inflation Risk', desc: 'Fixed coupon bonds lose real value in high inflation environments. If inflation runs at 6% and your bond pays 7%, your real return is just 1% — barely above zero.' },
+];
+
+const investSteps = [
+  { n: '01', title: 'Open Demat Account', desc: 'Bonds require a Demat account for holding in dematerialised form. Open one digitally with Shriram in under 10 minutes.' },
+  { n: '02', title: 'Fund Your Account', desc: 'Transfer funds to your trading account. For G-Secs, you can also use the RBI Retail Direct portal directly. For listed bonds, use your broker account.' },
+  { n: '03', title: 'Choose Your Bond', desc: 'Decide between G-Secs (zero credit risk), Corporate Bonds (higher yield), or NCDs (highest yield but more risk). Consider tenor, rating, and yield vs your FD alternatives.' },
+  { n: '04', title: 'Place Order on NSE / BSE', desc: 'Place a buy order for listed bonds on NSE or BSE through the Shriram platform. For G-Secs, also accessible via RBI Retail Direct or Shriram platform.' },
+];
+
+const strategies = [
+  {
+    title: 'Bond Laddering',
+    desc: 'Spread investments across bonds maturing at different dates (1yr, 3yr, 5yr, 7yr, 10yr). As each bond matures, reinvest at prevailing rates. Reduces interest rate and reinvestment risk simultaneously.',
+    tag: 'Reduce Rate Risk',
+  },
+  {
+    title: 'Barbell Strategy',
+    desc: 'Invest at two extremes — short-term bonds (T-Bills) for liquidity + long-term bonds (G-Secs 15yr+) for yield. Avoid mid-duration bonds. Works well in uncertain rate environments.',
+    tag: 'Yield + Liquidity',
+  },
+  {
+    title: 'Bullet Strategy',
+    desc: 'Concentrate all bond maturities at a single target date aligned with a specific financial goal (e.g., child\'s education in 7 years). Minimises reinvestment risk for goal-based investors.',
+    tag: 'Goal-Based',
+  },
+];
+
+const vsRows = [
+  { feature: 'Return Range', bonds: '6–11% (varies by type and rating)', fd: '6.5–8.5% p.a. (bank) / 7.5–9% (NBFC)', mf: '6–14% (varies by fund type)' },
+  { feature: 'Capital Safety', bonds: 'G-Secs: Full. Corp/NCD: Rating-dependent', fd: 'DICGC insured up to ₹5L (bank)', mf: 'Market-linked — not guaranteed' },
+  { feature: 'Liquidity', bonds: 'Listed bonds: High. Unlisted: Low', fd: 'Low (premature withdrawal penalty)', mf: 'Medium-High (T+1 to T+3)' },
+  { feature: 'Tax on Returns', bonds: 'Interest: Per slab. LTCG: 10% (no index)', fd: 'Interest: Per slab (TDS 10%)', mf: 'Debt MF: Per slab (no LTCG benefit from Apr 2023)' },
+  { feature: 'Minimum Investment', bonds: '₹1,000 (G-Secs) / varies (Corp bonds)', fd: '₹1,000 (most banks/NBFCs)', mf: '₹500 (SIP) / ₹1,000 (lump sum)' },
+  { feature: 'Best For', bonds: 'Regular income, portfolio diversification', fd: 'Capital protection, guaranteed income', mf: 'Long-term goal-based diversified investing' },
+];
+
+const faqs = [
+  { q: 'What is the difference between a bond and a fixed deposit?', a: 'An FD is a fixed-term deposit with a bank or NBFC — guaranteed return, DICGC insured (banks up to ₹5L), and no secondary market. A bond is a marketable debt instrument that can be bought and sold on exchanges before maturity. Bonds offer potentially higher yields but carry liquidity and credit risks FDs don\'t have.' },
+  { q: 'Are government bonds (G-Secs) safe?', a: 'G-Secs are considered zero credit risk — they are backed by the sovereign guarantee of the Government of India. The only risk is interest rate risk: if rates rise, the market price of existing G-Secs falls. If held to maturity, you receive the full face value + all promised coupons.' },
+  { q: 'What is the minimum investment in G-Secs?', a: 'G-Secs can be bought in multiples of ₹10,000 via RBI Retail Direct or through SEBI-registered brokers. Some platforms allow smaller ticket sizes. T-Bills start at ₹10,000 per unit.' },
+  { q: 'How are bond returns taxed in India?', a: 'Coupon (interest) payments are taxed per your income tax slab. Capital gains on bond sale/maturity: STCG (held under 12 months for listed bonds) per slab; LTCG (12+ months) at 10% without indexation. SGBs held to maturity (8 years) are fully capital gains tax exempt.' },
+  { q: 'What is an NCD and how is it different from a corporate bond?', a: 'NCDs (Non-Convertible Debentures) are a type of corporate bond that cannot be converted into equity. All NCDs are bonds, but not all corporate bonds are NCDs. NCDs are typically issued by NBFCs, are SEBI-regulated, listed on exchanges, and offer higher yields than bank FDs at the cost of credit risk.' },
+  { q: 'Can I invest in US or international bonds from India?', a: 'Yes — via LRS (up to USD 250,000/year) or India-listed international bond funds. Options include US Treasury ETFs, global aggregate bond funds, and INR-denominated Masala Bonds issued by Indian entities abroad.' },
+];
+---
+
+<BaseLayout
+  title="Invest in Bonds in India — G-Secs, NCDs, Corporate Bonds | Shriram"
+  description="Complete guide to bonds in India. Invest in G-Secs, Sovereign Gold Bonds, NCDs, and Corporate Bonds. Compare returns vs FD, tax rules, and how to invest with Shriram."
+>
+
+  <!-- ══ 1. HERO ═══════════════════════════════════════════════════ -->
+  <section class="relative overflow-hidden bg-[var(--color-dark-800)]">
+    <div class="pointer-events-none absolute -right-40 -top-40 h-[560px] w-[560px] rounded-full bg-[var(--color-brand)]/10 blur-3xl"></div>
+    <div class="pointer-events-none absolute -bottom-32 left-0 h-80 w-80 rounded-full bg-[var(--color-brand)]/5 blur-3xl"></div>
+    <div class="site-wrap relative py-[120px]">
+      <p class="equity-reveal text-[14px] font-medium tracking-[.04em] text-[var(--color-brand)]">Bonds</p>
+      <h1 class="equity-reveal mt-[22px] max-w-[880px] text-[clamp(32px,4vw,52px)] font-bold leading-[1.06] text-white" style="font-family:var(--font-display)">
+        Invest in Bonds — Complete Guide to <span class="text-[var(--color-brand)]">Bonds in India</span>
+      </h1>
+      <p class="equity-reveal mt-[26px] max-w-[600px] text-[18px] leading-relaxed text-white/70">
+        From zero-risk G-Secs to high-yield NCDs — bonds in India offer predictable income, portfolio diversification, and an alternative to bank FDs. Invest through Shriram with expert guidance.
+      </p>
+      <div class="equity-reveal mt-[38px] flex flex-wrap gap-[14px]">
+        <a href="/about/open-demat-account/" class="btn-primary">Invest in Bonds</a>
+        <a href="/about/support/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Talk to RM</a>
+      </div>
+      <div class="equity-reveal mt-[54px] flex flex-wrap gap-x-9 gap-y-3 border-t border-white/15 pt-9">
+        {['✓ G-Secs from ₹10,000', '✓ SGBs via RBI', '✓ Listed on NSE / BSE', '✓ SEBI regulated'].map(f => (
+          <span class="text-[15px] font-medium text-white/90">
+            <span class="mr-2 text-[var(--color-brand)]">{f.slice(0,1)}</span>{f.slice(1)}
+          </span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 2. WHAT IS A BOND ══════════════════════════════════════════ -->
+  <section class="bg-white py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto grid max-w-[1000px] items-start gap-[72px] lg:grid-cols-[5fr_7fr]">
+        <h2 class="text-[40px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          What Is a <span class="text-[var(--color-brand)]">Bond?</span>
+        </h2>
+        <div class="space-y-5 text-[17px] leading-relaxed text-[var(--color-muted)]">
+          <p>A bond is a debt instrument where the issuer (government or company) borrows money from investors and promises to pay periodic interest (the coupon) and return the principal on the maturity date.</p>
+          <p>Four key bond terms you must understand:</p>
+          <div class="grid gap-3 sm:grid-cols-2">
+            {[
+              { term: 'Face Value', def: 'The principal amount repaid at maturity (usually ₹1,000 or ₹10,000)' },
+              { term: 'Coupon', def: 'The annual interest rate paid on the face value — e.g., 7.5% coupon on ₹10,000 face value = ₹750/year' },
+              { term: 'Maturity', def: 'The date when the issuer repays the face value — can range from 91 days (T-Bills) to 40 years (G-Secs)' },
+              { term: 'Yield', def: 'The effective return considering current market price. If price < face value, yield > coupon. If price > face value, yield < coupon.' },
+            ].map(t => (
+              <div class="rounded-[10px] border border-[var(--color-n400)] bg-[#f8f6f1] p-4">
+                <div class="mb-1 text-[13px] font-bold text-[var(--color-ink)]">{t.term}</div>
+                <div class="text-[12.5px] leading-relaxed text-[var(--color-muted)]">{t.def}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 3. TYPES OF BONDS ══════════════════════════════════════════ -->
+  <section class="bg-[#f8f6f1] py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          Types of <span class="text-[var(--color-brand)]">Bonds in India</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Six major bond categories available to Indian retail investors — from sovereign to corporate.</p>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {bondTypes.map((t, i) => (
+          <div class="equity-reveal product-card-light flex flex-col gap-3 p-[30px]" style={`animation-delay:${i*60}ms`}>
+            <span class="inline-flex w-fit rounded-full bg-[var(--color-brand)]/15 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-[var(--color-dark-olive)]">{t.tag}</span>
+            <h3 class="text-[16px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{t.label}</h3>
+            <p class="text-[13px] leading-relaxed text-[var(--color-muted)]">{t.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 4. HOW BOND PRICES MOVE — RISKS ═══════════════════════════ -->
+  <section class="bg-white py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          How Bond Prices Move — <span class="text-[var(--color-brand)]">Key Risks</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Bond prices are not fixed — they fluctuate based on these four key risk factors.</p>
+      </div>
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {risks.map(r => (
+          <div class="equity-reveal rounded-[18px] bg-[var(--color-dark-800)] p-[36px]">
+            <div class="mb-[18px] text-[48px] font-bold leading-none text-[var(--color-brand)]/25">{r.n}</div>
+            <h4 class="mb-3 text-[20px] font-medium text-white" style="font-family:var(--font-display)">{r.label}</h4>
+            <p class="text-[14.5px] leading-relaxed text-white/60">{r.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 5. HOW TO INVEST IN BONDS ══════════════════════════════════ -->
+  <section class="bg-[#f8f6f1] py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          How to <span class="text-[var(--color-brand)]">Invest in Bonds</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Four steps from opening your account to placing your first bond order.</p>
+      </div>
+      <div class="equity-reveal steps-grid overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
+        {investSteps.map(s => (
+          <div class="px-[30px] py-[34px]">
+            <div class="mb-[22px] font-display text-[34px] font-normal leading-none text-[var(--color-brand)]">{s.n}</div>
+            <h4 class="mb-[10px] text-[19px] font-medium leading-[1.25] text-[var(--color-ink)]" style="font-family:var(--font-display)">{s.title}</h4>
+            <p class="text-[14.5px] leading-relaxed text-[var(--color-muted)]">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 6. BOND INVESTMENT STRATEGIES ═════════════════════════════ -->
+  <section class="bg-white py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          Bond Investment <span class="text-[var(--color-brand)]">Strategies</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Three proven portfolio strategies used by bond investors to manage risk and optimise returns.</p>
+      </div>
+      <div class="grid gap-5 sm:grid-cols-3">
+        {strategies.map((s, i) => (
+          <div class="equity-reveal rounded-[18px] bg-[var(--color-dark-800)] p-[40px]" style={`animation-delay:${i*80}ms`}>
+            <span class="inline-flex w-fit rounded-full border border-[var(--color-brand)]/30 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-[var(--color-brand)]">{s.tag}</span>
+            <h3 class="mt-5 mb-4 text-[22px] font-medium text-white" style="font-family:var(--font-display)">{s.title}</h3>
+            <p class="text-[14px] leading-relaxed text-white/65">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 7. BONDS VS FD VS DEBT MF ══════════════════════════════════ -->
+  <section class="bg-[#f8f6f1] py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          Bonds vs FD vs <span class="text-[var(--color-brand)]">Debt Mutual Funds</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Compare India's three major fixed-income investment options across returns, risk, liquidity, and tax treatment.</p>
+      </div>
+      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
+        <div class="overflow-x-auto">
+          <table class="w-full text-[15.5px]">
+            <thead>
+              <tr class="bg-[var(--color-dark-olive)]">
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Feature</th>
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Bonds</th>
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Fixed Deposit</th>
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Debt Mutual Fund</th>
+              </tr>
+            </thead>
+            <tbody>
+              {vsRows.map((r, i) => (
+                <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[#f8f6f1]'}>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">{r.feature}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.bonds}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.fd}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.mf}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 8. FAQ ══════════════════════════════════════════════════════ -->
+  <section class="bg-white py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          Frequently Asked <span class="text-[var(--color-brand)]">Questions</span>
+        </h2>
+      </div>
+      <div class="equity-reveal mx-auto max-w-[840px] border-t border-[var(--color-n400)]">
+        {faqs.map(item => (
+          <details class="eq-faq group border-b border-[var(--color-n400)]">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-5 py-[26px] px-2">
+              <span class="text-[18px] font-semibold text-[var(--color-ink)]">{item.q}</span>
+              <span class="shrink-0 text-[22px] leading-none text-[var(--color-brand)] transition-transform duration-300 group-open:rotate-45">+</span>
+            </summary>
+            <div class="overflow-hidden px-2 pb-0 text-[16px] leading-relaxed text-[var(--color-muted)] transition-all duration-300 group-open:pb-[28px]">
+              <p class="max-w-[680px]">{item.a}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 9. FINAL CTA ════════════════════════════════════════════════ -->
+  <section class="bg-white py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal overflow-hidden rounded-[22px] bg-[var(--color-dark-800)] px-[60px] py-[64px] text-center">
+        <h3 class="mx-auto max-w-[560px] text-[38px] font-bold leading-[1.12] text-white" style="font-family:var(--font-display)">Start Building Your Bond Portfolio</h3>
+        <p class="mx-auto mt-[18px] max-w-[480px] text-[17px] leading-relaxed text-white/70">Access G-Secs, SGBs, Corporate Bonds, and NCDs through Shriram Financial Services. Expert guidance, transparent pricing, and seamless Demat integration.</p>
+        <div class="mt-[34px] flex flex-wrap justify-center gap-[14px]">
+          <a href="/about/open-demat-account/" class="btn-primary">Open Demat Account</a>
+          <a href="/about/support/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Talk to an RM</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .equity-reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  .equity-reveal.in-view { opacity: 1; transform: none; }
+
+  .steps-grid { display: grid; grid-template-columns: repeat(2, 1fr); }
+  .steps-grid > * { border-right: 1px solid var(--color-n400); border-bottom: 1px solid var(--color-n400); }
+  .steps-grid > *:nth-child(2n) { border-right: 0; }
+  .steps-grid > *:nth-last-child(-n+2) { border-bottom: 0; }
+  @media (min-width: 1024px) {
+    .steps-grid { grid-template-columns: repeat(4, 1fr); }
+    .steps-grid > * { border-right: 1px solid var(--color-n400); border-bottom: 0; }
+    .steps-grid > *:last-child { border-right: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .equity-reveal { opacity: 1; transform: none; transition: none; }
+  }
+</style>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        (e.target as HTMLElement).classList.add('in-view');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.10 });
+  document.querySelectorAll('.equity-reveal').forEach(el => obs.observe(el));
+
+  document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(d => {
+    d.addEventListener('toggle', () => {
+      if (d.open) document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(o => { if (o !== d) o.removeAttribute('open'); });
+    });
+  });
+</script>
