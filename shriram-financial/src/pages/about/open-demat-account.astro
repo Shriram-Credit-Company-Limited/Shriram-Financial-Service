@@ -1,53 +1,360 @@
 ---
-import AboutTemplate from '../../layouts/AboutTemplate.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const benefits = [
+  { title: 'Hold All Investments Digitally', desc: 'Stocks, bonds, ETFs, mutual fund units, government securities — all in one digital account. No physical certificates, no storage risk.' },
+  { title: '₹0 Delivery Brokerage', desc: 'Buy and hold shares for absolutely zero brokerage. Your returns stay yours, entirely — forever.' },
+  { title: 'Free SEBI Research Access', desc: 'SEBI-registered equity research, daily trade ideas, and mutual fund recommendations — from Day 1 of account activation.' },
+  { title: 'Dedicated Relationship Manager', desc: 'A named RM is assigned to your account within 48 hours of activation — available on call, WhatsApp, and email.' },
+  { title: 'Antara Trading Platform', desc: 'Trade, invest in mutual funds, track your portfolio, and apply for IPOs — all from one unified web and mobile platform.' },
+  { title: 'CDSL Depository Backed', desc: 'Your securities held securely with CDSL — a SEBI-regulated, government-backed central depository.' },
+];
+
+const documents = [
+  { label: 'PAN Card', desc: 'Mandatory for all investors. Used for identity verification and tax compliance under SEBI and IT regulations.' },
+  { label: 'Aadhaar Card', desc: 'For address proof and Aadhaar-based e-Sign. An OTP is sent to your Aadhaar-linked mobile number.' },
+  { label: 'Bank Account Proof', desc: 'A cancelled cheque or recent 3-month bank statement to link your savings or current account for fund transfers.' },
+  { label: 'Passport Photo', desc: 'A passport-size photograph — can be taken with your phone camera during the online account opening process.' },
+];
+
+const steps = [
+  { n: '01', title: 'Enter PAN & Mobile', desc: 'Start on the Shriram platform. Enter your mobile number for OTP verification and your PAN for identity lookup. Takes under 2 minutes.' },
+  { n: '02', title: 'Fill Personal Details', desc: 'Provide full name (as on PAN), date of birth, address (as on Aadhaar), and your bank account number and IFSC code.' },
+  { n: '03', title: 'Upload KYC Documents', desc: 'Upload PAN card, Aadhaar (front & back), and a cancelled cheque or bank statement. All uploads are encrypted end-to-end.' },
+  { n: '04', title: 'Video KYC & e-Sign', desc: 'Complete a 2-minute live video KYC call — fully remote, no branch visit. Then e-sign documents via Aadhaar OTP instantly.' },
+  { n: '05', title: 'Account Activated', desc: 'Demat and Trading account activated within 24 hours of KYC. Receive your Client ID and Antara platform access via email and SMS.' },
+];
+
+const readiness = [
+  'You are 18 years of age or older (minors can invest through a registered guardian)',
+  'You have a valid PAN card in your name',
+  'You have an Aadhaar card linked to your active mobile number',
+  'You have an active bank account in your name — savings or current',
+  'You are an Indian resident (NRIs can invest via RBI-approved NRE/NRO routes)',
+];
+
+const charges = [
+  { label: 'Account Opening Fee', value: '₹0', note: 'Free account opening — no initial cost' },
+  { label: 'Annual Maintenance Charge', value: '₹300 + GST', note: 'Waived for the first year' },
+  { label: 'Equity Delivery Brokerage', value: '₹0 (Zero)', note: 'Permanently zero on all delivery trades' },
+  { label: 'Equity Intraday Brokerage', value: '₹20 per order', note: 'Flat fee regardless of trade size' },
+  { label: 'F&O Brokerage', value: '₹20 per order', note: 'Flat fee for futures and options contracts' },
+  { label: 'DP Charges (on sell)', value: '₹15.93 per scrip', note: 'Charged by CDSL on each delivery sell transaction' },
+];
+
+const faqs = [
+  { q: 'What is a Demat account and why do I need one?', a: 'A Demat (Dematerialised) account holds your investments — shares, mutual funds, bonds — in digital form instead of physical certificates. It is mandatory for trading on NSE and BSE and for applying to IPOs. Think of it as your digital locker for all financial securities.' },
+  { q: 'How long does it take to open a Demat account with Shriram?', a: 'The account opening process takes under 10 minutes online. Account activation happens within 24 hours of successful KYC completion. You will receive your Client ID and Antara platform access via email and SMS.' },
+  { q: 'Is there any charge to open a Demat account?', a: 'Account opening is currently free (₹0). The Annual Maintenance Charge (AMC) is ₹300 + GST per year, waived for the first year. Equity delivery brokerage is permanently zero — you only pay ₹20 flat per order for intraday and F&O trades.' },
+  { q: 'What documents are required to open a Demat account?', a: 'You need: PAN card, Aadhaar card (for address proof and e-Sign), a cancelled cheque or bank statement, and a passport-size photograph. All documents are uploaded digitally — no physical copies or branch visit needed.' },
+  { q: 'Can NRIs open a Demat account with Shriram?', a: 'Yes. NRIs can open a Demat account through RBI-approved routes using NRE or NRO bank accounts. Please contact our support team for NRI-specific account opening guidance and documentation.' },
+  { q: 'Do I get a Trading account along with the Demat account?', a: 'Yes — both Demat and Trading accounts are opened simultaneously when you apply with Shriram. Your Trading account is used to buy and sell on NSE and BSE; the Demat account holds the securities after settlement.' },
+  { q: 'Is it safe to open a Demat account online?', a: 'Absolutely. The process is SEBI-compliant and uses Aadhaar OTP-based e-Sign. All documents are encrypted in transit and storage. Your securities are held with CDSL — a government-backed, SEBI-regulated depository.' },
+];
 ---
-<AboutTemplate
-  title="Open Your Demat Account"
-  eyebrow="Get Started Today"
-  lead="Open a fully digital Demat and Trading account in under 10 minutes. Zero delivery brokerage, SEBI-registered research, and a dedicated Relationship Manager — all activated the moment you're onboarded."
-  description="Open a Demat and Trading account with Shriram Financial Services online in minutes. Zero delivery brokerage, free research, and dedicated support for every investor."
+
+<BaseLayout
+  title="Open Demat Account Online — Free, Paperless in 10 Minutes | Shriram"
+  description="Open a free Demat and Trading account online with Shriram Financial Services. Zero delivery brokerage, CDSL-registered, SEBI-compliant, 100% paperless in under 10 minutes."
 >
-  <p>
-    A Demat (Dematerialised) account is the digital vault that holds your investments — shares, mutual funds, bonds, ETFs, and more. Combined with a Trading account, it gives you the ability to buy and sell securities on NSE and BSE. With Shriram Financial Services, both accounts are opened simultaneously, fully online, in under 10 minutes.
-  </p>
 
-  <h2>Step-by-Step: How to Open Your Account</h2>
-  <ul>
-    <li><strong>Step 1 — Start Online:</strong> Visit our account opening portal (linked below) and enter your mobile number and PAN. An OTP will be sent to your registered mobile for verification.</li>
-    <li><strong>Step 2 — Fill Your Details:</strong> Provide your personal details — full name (as on PAN), date of birth, address (as on Aadhaar), bank account number and IFSC code.</li>
-    <li><strong>Step 3 — Upload Documents:</strong> Upload a clear photo of your PAN card, Aadhaar (front and back), and a cancelled cheque or bank statement. All uploads are encrypted and processed securely.</li>
-    <li><strong>Step 4 — Complete Video KYC:</strong> Complete a 2-minute live video KYC call with our verification officer. This replaces the need to visit a branch — fully remote and available 9 AM to 6 PM, Mon–Sat.</li>
-    <li><strong>Step 5 — Sign Digitally:</strong> Sign your account opening documents using Aadhaar-based e-Sign (OTP on mobile). No physical signature required.</li>
-    <li><strong>Step 6 — Account Activated:</strong> Your Demat and Trading account is activated within 24 hours of successful KYC. You will receive your Client ID, trading credentials, and Antara platform access via email and SMS.</li>
-  </ul>
+  <!-- ══ 1. HERO ═══════════════════════════════════════════════════ -->
+  <section class="relative overflow-hidden bg-[var(--color-dark-800)]">
+    <div class="pointer-events-none absolute -right-40 -top-40 h-[560px] w-[560px] rounded-full bg-[var(--color-brand)]/10 blur-3xl"></div>
+    <div class="pointer-events-none absolute -bottom-32 left-0 h-80 w-80 rounded-full bg-[var(--color-brand)]/5 blur-3xl"></div>
 
-  <h2>Documents Required</h2>
-  <ul>
-    <li>PAN Card (mandatory for all investors)</li>
-    <li>Aadhaar Card (for address proof and e-Sign)</li>
-    <li>Bank account details — cancelled cheque or 3-month bank statement</li>
-    <li>A passport-size photograph (can be uploaded from your phone)</li>
-  </ul>
+    <div class="site-wrap relative py-[100px] lg:py-[120px]">
+      <div class="grid items-center gap-[52px] lg:grid-cols-[1fr_400px]">
 
-  <h2>What You Get When You Open</h2>
-  <ul>
-    <li><strong>₹0 Delivery Brokerage:</strong> Buy and hold shares for absolutely zero brokerage. Your returns are yours, entirely.</li>
-    <li><strong>Free Research Access:</strong> From Day 1, access our SEBI-registered equity research, daily technical trade ideas, and mutual fund recommendations on Antara.</li>
-    <li><strong>Dedicated Relationship Manager:</strong> A named RM is assigned to your account within 48 hours of activation — available on call, WhatsApp, and email.</li>
-    <li><strong>Antara Platform (Web + Mobile):</strong> Trade, invest in mutual funds, track your portfolio, and apply for IPOs — all from one unified platform.</li>
-    <li><strong>CDSL Demat Account:</strong> Your securities are held with CDSL (Central Depository Services Ltd.) — a SEBI-regulated, government-backed depository.</li>
-  </ul>
+        <!-- Left: copy -->
+        <div>
+          <p class="demat-reveal text-[14px] font-medium tracking-[.04em] text-[var(--color-brand)]">Open a Demat Account</p>
+          <h1 class="demat-reveal mt-[22px] max-w-[680px] text-[clamp(28px,4vw,50px)] font-bold leading-[1.08] text-white" style="font-family:var(--font-display)">
+            Open a Demat Account in Minutes —&nbsp;<span class="text-[var(--color-brand)]">100% Online, Zero Paperwork</span>
+          </h1>
+          <p class="demat-reveal mt-[24px] max-w-[540px] text-[18px] leading-relaxed text-white/70">
+            Hold stocks, bonds, ETFs, and mutual fund units digitally. SEBI-registered, CDSL-partnered, fully paperless — start investing today.
+          </p>
+          <div class="demat-reveal mt-[38px] flex flex-wrap gap-[14px]">
+            <a href="https://ekyc.shriraminsight.com/" class="btn-primary" target="_blank" rel="noopener noreferrer">Start Opening Now</a>
+            <a href="/about/support/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Talk to an Expert</a>
+          </div>
+          <div class="demat-reveal mt-[54px] flex flex-wrap gap-x-9 gap-y-3 border-t border-white/15 pt-9">
+            {['✓ SEBI-registered', '✓ CDSL-partnered', '✓ Zero brokerage', '✓ Free research'].map(f => (
+              <span class="text-[15px] font-medium text-white/90">
+                <span class="mr-2 text-[var(--color-brand)]">{f.slice(0,1)}</span>{f.slice(1)}
+              </span>
+            ))}
+          </div>
+        </div>
 
-  <h2>Charges at a Glance</h2>
-  <ul>
-    <li>Account Opening Fee: Rs. 0 (Nil) — free for a limited period</li>
-    <li>Annual Maintenance Charge (AMC): Rs. 300 + GST per year (waived for the first year)</li>
-    <li>Equity Delivery Brokerage: Rs. 0 (Zero)</li>
-    <li>Equity Intraday Brokerage: Rs. 20 per executed order (flat)</li>
-    <li>F&O Brokerage: Rs. 20 per executed order (flat)</li>
-  </ul>
+        <!-- Right: quick start card -->
+        <div class="demat-reveal">
+          <div class="rounded-[20px] bg-[var(--color-dark-olive)] p-[34px]">
+            <p class="mb-1 text-[12px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Get Started Today</p>
+            <h2 class="mb-[6px] text-[24px] font-bold text-white" style="font-family:var(--font-display)">Open in 3 Simple Steps</h2>
+            <p class="mb-[28px] text-[14px] leading-relaxed text-white/60">Your investing journey starts here — 100% digital, no branch visit needed.</p>
+            <ul class="mb-[32px] space-y-[16px]">
+              {[
+                { n: '1', t: 'Enter your PAN & mobile number' },
+                { n: '2', t: 'Upload documents & complete eKYC' },
+                { n: '3', t: 'Receive your Demat ID within 24 hours' },
+              ].map(s => (
+                <li class="flex items-center gap-4">
+                  <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[var(--color-brand)]/50 text-[13px] font-bold text-[var(--color-brand)]">{s.n}</span>
+                  <span class="text-[14.5px] text-white/80">{s.t}</span>
+                </li>
+              ))}
+            </ul>
+            <a href="https://ekyc.shriraminsight.com/" target="_blank" rel="noopener noreferrer"
+               class="flex w-full items-center justify-center rounded-[9px] bg-[var(--color-brand)] px-6 py-[13px] text-[15px] font-bold text-[#202318] transition-colors hover:bg-[var(--color-brand-hover)]">
+              Open My Demat Account →
+            </a>
+            <p class="mt-4 text-center text-[12px] text-white/40">Free · Zero delivery brokerage · Toll-free: 1800 103 1212</p>
+          </div>
+        </div>
 
-  <p>
-    <strong>Ready to start your investing journey?</strong> Call <strong>1800 103 1212</strong> (Toll-Free) or WhatsApp <strong>+91 98765 43210</strong> and our account opening team will guide you through the process personally.
-  </p>
-</AboutTemplate>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 2. WHAT IS A DEMAT ACCOUNT ════════════════════════════════ -->
+  <section class="bg-white py-[104px]">
+    <div class="site-wrap">
+      <div class="demat-reveal mx-auto grid max-w-[1000px] items-start gap-[72px] lg:grid-cols-[5fr_7fr]">
+        <h2 class="text-[40px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          What Is a <span class="text-[var(--color-brand)]">Demat Account?</span>
+        </h2>
+        <div class="space-y-5 text-[17px] leading-relaxed text-[var(--color-muted)]">
+          <p>An electronic account that holds your financial securities — stocks, bonds, ETFs, mutual fund units, and government securities — in digital form instead of physical certificates.</p>
+          <p>It is maintained by CDSL or NSDL through a SEBI-registered Depository Participant like Shriram Financial Services. Combined with a Trading account (opened simultaneously), it gives you the ability to buy and sell securities on NSE and BSE instantly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 3. WHY OPEN A DEMAT ACCOUNT ══════════════════════════════ -->
+  <section class="bg-[#f8f6f1] py-[104px]">
+    <div class="site-wrap">
+      <div class="demat-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          Why Open a Demat Account <span class="text-[var(--color-brand)]">With Shriram?</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Everything you need to invest professionally — at zero or flat-fee costs, with expert guidance from Day 1.</p>
+      </div>
+
+      <div class="demat-reveal benefits-grid overflow-hidden rounded-[14px] border-l border-t border-[var(--color-n400)]">
+        {benefits.map(b => (
+          <div class="border-b border-r border-[var(--color-n400)] bg-white px-[28px] py-[32px]">
+            <h4 class="mb-[9px] text-[19px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">{b.title}</h4>
+            <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">{b.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 4. DOCUMENTS REQUIRED ═════════════════════════════════════ -->
+  <section class="bg-white py-[104px]">
+    <div class="site-wrap">
+      <div class="demat-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          Documents <span class="text-[var(--color-brand)]">Required</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Just four documents — all uploaded digitally from your phone or laptop. No physical copies, no branch visit.</p>
+      </div>
+
+      <div class="demat-reveal mx-auto grid max-w-[900px] gap-5 sm:grid-cols-2">
+        {documents.map((d, i) => (
+          <div class="product-card-light p-[34px]">
+            <h4 class="mb-5 flex items-center gap-3 text-[22px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">
+              <span class="grid h-[34px] w-[34px] shrink-0 place-items-center rounded-[8px] border border-[var(--color-n400)] text-[13px] font-bold text-[var(--color-dark-olive)]">0{i + 1}</span>
+              {d.label}
+            </h4>
+            <p class="text-[15px] leading-relaxed text-[var(--color-muted)]">{d.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 5. HOW TO OPEN — STEP BY STEP ═════════════════════════════ -->
+  <section class="bg-[#f8f6f1] py-[104px]">
+    <div class="site-wrap">
+      <div class="demat-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          How to Open a Demat Account — <span class="text-[var(--color-brand)]">Step by Step</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Five simple steps. Fully digital. Complete on your phone in under 10 minutes.</p>
+      </div>
+
+      <div class="demat-reveal steps-grid overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
+        {steps.map(s => (
+          <div class="px-[30px] py-[34px]">
+            <div class="mb-[22px] text-[34px] font-normal leading-none text-[var(--color-brand)]">{s.n}</div>
+            <h4 class="mb-[10px] text-[19px] font-medium leading-[1.25] text-[var(--color-ink)]" style="font-family:var(--font-display)">{s.title}</h4>
+            <p class="text-[14.5px] leading-relaxed text-[var(--color-muted)]">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="demat-reveal mt-[52px] text-center">
+        <a href="https://ekyc.shriraminsight.com/" class="btn-primary" target="_blank" rel="noopener noreferrer">Open My Demat Account</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 6. AM I READY? ════════════════════════════════════════════ -->
+  <section class="bg-white py-[104px]">
+    <div class="site-wrap">
+      <div class="demat-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          Am I Ready to Open a <span class="text-[var(--color-brand)]">Demat Account?</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">If you can tick all five boxes below, you are ready to open your account right now.</p>
+      </div>
+
+      <div class="demat-reveal mx-auto max-w-[720px] space-y-[14px]">
+        {readiness.map((item, i) => (
+          <div class="flex items-start gap-5 rounded-[14px] border border-[var(--color-n400)] bg-[#f8f6f1] px-[28px] py-[22px]">
+            <span class="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full bg-[var(--color-dark-olive)] text-[13px] font-bold text-[var(--color-brand)]">0{i + 1}</span>
+            <span class="text-[16px] leading-[1.7] text-[var(--color-ink)]">{item}</span>
+          </div>
+        ))}
+      </div>
+
+      <div class="demat-reveal mt-[52px] text-center">
+        <a href="https://ekyc.shriraminsight.com/" class="btn-primary" target="_blank" rel="noopener noreferrer">I'm Ready — Open My Account</a>
+        <p class="mt-4 text-[14px] text-[var(--color-muted)]">Need help? Call us on <strong class="text-[var(--color-ink)]">1800 103 1212</strong> (Toll-Free, Mon–Sat 9AM–6PM)</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 7. CHARGES AT A GLANCE ════════════════════════════════════ -->
+  <section class="bg-[#f8f6f1] py-[104px]">
+    <div class="site-wrap">
+      <div class="demat-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          Charges at a <span class="text-[var(--color-brand)]">Glance</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Transparent, flat-fee pricing — no hidden costs, no surprises. Zero delivery brokerage, forever.</p>
+      </div>
+
+      <div class="demat-reveal mx-auto max-w-[900px] overflow-hidden rounded-[20px] border border-[var(--color-n400)]">
+        <div class="overflow-x-auto">
+          <table class="w-full text-[14px]">
+            <thead>
+              <tr class="bg-[var(--color-dark-olive)]">
+                <th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-white/70">Charge Type</th>
+                <th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-[var(--color-brand)]">Amount</th>
+                <th class="px-6 py-4 text-left text-[12px] font-semibold uppercase tracking-wide text-white/50">Notes</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-[var(--color-n400)]">
+              {charges.map((c, i) => (
+                <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[#f8f6f1]'}>
+                  <td class="px-6 py-4 font-semibold text-[var(--color-ink)]">{c.label}</td>
+                  <td class="px-6 py-4 font-bold text-[var(--color-brand)]">{c.value}</td>
+                  <td class="px-6 py-4 text-[var(--color-muted)]">{c.note}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 8. FAQ ════════════════════════════════════════════════════ -->
+  <section class="bg-white py-[104px]">
+    <div class="site-wrap">
+      <div class="demat-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          Frequently Asked <span class="text-[var(--color-brand)]">Questions</span>
+        </h2>
+      </div>
+
+      <div class="demat-reveal mx-auto max-w-[860px] divide-y divide-[var(--color-n400)] overflow-hidden rounded-[24px] border border-[var(--color-n400)] bg-white">
+        {faqs.map(item => (
+          <details class="demat-faq group">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 hover:bg-[var(--color-n100)]">
+              <span class="text-[15px] font-medium text-[var(--color-ink)]">{item.q}</span>
+              <span class="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-[var(--color-n400)] transition-transform group-open:rotate-45">
+                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" class="h-3 w-3"><path d="M6 2v8M2 6h8"/></svg>
+              </span>
+            </summary>
+            <div class="border-t border-[var(--color-n400)] bg-[var(--color-n100)] px-6 py-5">
+              <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">{item.a}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 9. FINAL CTA ══════════════════════════════════════════════ -->
+  <section class="bg-white py-[104px]">
+    <div class="site-wrap">
+      <div class="demat-reveal overflow-hidden rounded-[22px] bg-[var(--color-dark-800)] px-[60px] py-[64px] text-center">
+        <p class="mb-4 text-[14px] font-medium tracking-[.04em] text-[var(--color-brand)]">Still Have Questions?</p>
+        <h3 class="mx-auto max-w-[560px] text-[38px] font-bold leading-[1.12] text-white" style="font-family:var(--font-display)">Call Our Experts for Quick Assistance</h3>
+        <p class="mx-auto mt-[18px] max-w-[480px] text-[17px] leading-relaxed text-white/70">
+          Reach us on <strong class="text-[var(--color-brand)]">1800 103 1212</strong> (Toll-Free) — or start your application online in under 10 minutes.
+        </p>
+        <div class="mt-[34px] flex flex-wrap justify-center gap-[14px]">
+          <a href="https://ekyc.shriraminsight.com/" class="btn-primary" target="_blank" rel="noopener noreferrer">Open Demat Account</a>
+          <a href="/about/support/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Talk to an Expert</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .demat-reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  .demat-reveal.in-view { opacity: 1; transform: none; }
+
+  /* Steps: 2-col mobile → 5-col desktop with connected internal borders */
+  .steps-grid { display: grid; grid-template-columns: repeat(2, 1fr); }
+  .steps-grid > * { border-right: 1px solid var(--color-n400); border-bottom: 1px solid var(--color-n400); }
+  .steps-grid > *:nth-child(2n) { border-right: 0; }
+  .steps-grid > *:nth-last-child(-n+1) { border-bottom: 0; }
+  @media (min-width: 1024px) {
+    .steps-grid { grid-template-columns: repeat(5, 1fr); }
+    .steps-grid > * { border-right: 1px solid var(--color-n400); border-bottom: 0; }
+    .steps-grid > *:last-child { border-right: 0; }
+  }
+
+  /* Benefits: 2-col mobile → 3-col desktop */
+  .benefits-grid { display: grid; grid-template-columns: repeat(2, 1fr); }
+  @media (min-width: 1024px) { .benefits-grid { grid-template-columns: repeat(3, 1fr); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .demat-reveal { opacity: 1; transform: none; transition: none; }
+  }
+</style>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        (e.target as HTMLElement).classList.add('in-view');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.demat-reveal').forEach(el => obs.observe(el));
+
+  document.querySelectorAll<HTMLDetailsElement>('.demat-faq').forEach(d => {
+    d.addEventListener('toggle', () => {
+      if (d.open) document.querySelectorAll<HTMLDetailsElement>('.demat-faq').forEach(o => {
+        if (o !== d) o.removeAttribute('open');
+      });
+    });
+  });
+</script>
