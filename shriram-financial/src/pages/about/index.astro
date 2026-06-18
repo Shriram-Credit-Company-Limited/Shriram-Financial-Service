@@ -1,50 +1,438 @@
 ---
-import AboutTemplate from '../../layouts/AboutTemplate.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const leadership = [
+  {
+    name: 'Placeholder Name',
+    title: 'CEO & Designated Director',
+    bio: 'Leads Shriram Financial Securities with a focus on client-centric wealth management, driving growth across equities, mutual funds, and advisory services.',
+  },
+  {
+    name: 'Placeholder Name',
+    title: 'Designated Director',
+    bio: 'Oversees regulatory compliance and strategic operations, ensuring the firm meets SEBI standards and maintains its commitment to transparent investing.',
+  },
+  {
+    name: 'Placeholder Name',
+    title: 'Chief Technology Officer',
+    bio: "Architects the firm's digital platform and technology infrastructure, building tools that make professional investing accessible to every client.",
+  },
+  {
+    name: 'Placeholder Name',
+    title: 'Independent Director',
+    bio: 'Brings independent oversight to the Board, safeguarding the interests of all stakeholders with deep experience in financial governance.',
+  },
+  {
+    name: 'Placeholder Name',
+    title: 'Compliance Officer',
+    bio: 'Manages all regulatory filings and investor grievance mechanisms, ensuring full compliance with SEBI, NSE, BSE, and CDSL requirements.',
+  },
+];
 ---
-<AboutTemplate
-  title="About Shriram Financial Services"
-  eyebrow="Our Story"
-  lead="For over five decades, the Shriram Group has been the financial backbone of India's middle class. Today, Shriram Financial Services extends that legacy into the capital markets — bringing professional investing within reach of every Indian household."
-  description="Learn about Shriram Financial Services — our mission, values, history, and the team behind India's most trusted investment partner."
+
+<BaseLayout
+  title="About Shriram Financial Securities | Our Story, Mission & Leadership"
+  description="Learn about Shriram Financial Securities — our 50+ year Shriram Group legacy, mission, vision, leadership team, key milestones and office locations across India."
 >
-  <p>
-    The Shriram Group was founded in 1974 in Chennai with a singular belief: that financial services should empower ordinary people, not just the privileged few. What began as a small chit fund operation has grown into one of India's most diversified and respected financial conglomerates — with over ₹2.3 lakh crore in assets under management and a presence in every corner of the country. Associated with Sanlam Group, one of the largest financial services groups in Africa, Shriram Financial Services brings global standards of advisory to local investors.
-  </p>
 
-  <h2>Our Mission</h2>
-  <p>
-    To democratise wealth creation. We believe that a salaried professional in Tier 2 India deserves the same quality of investment research, technology, and personalised advisory that was previously accessible only to high-net-worth investors in metropolitan cities. Through the Antara platform and our nationwide network of relationship managers, we are making this a reality.
-  </p>
+  <!-- ══ 1. HERO ═══════════════════════════════════════════════════ -->
+  <section class="relative overflow-hidden bg-[var(--color-dark-800)]">
+    <div class="pointer-events-none absolute -right-40 -top-40 h-[560px] w-[560px] rounded-full bg-[var(--color-brand)]/10 blur-3xl"></div>
+    <div class="pointer-events-none absolute -bottom-32 left-0 h-80 w-80 rounded-full bg-[var(--color-brand)]/5 blur-3xl"></div>
 
-  <h2>What Sets Us Apart</h2>
-  <ul>
-    <li><strong>SEBI-Registered Research:</strong> Our in-house research team (SEBI Registration: INH200009624) publishes equity, F&O, and mutual fund research — not third-party tips. We stake our reputation on every call we make.</li>
-    <li><strong>Fiduciary Commitment:</strong> We are regulated brokers and AMFI-registered mutual fund distributors. Our legal and ethical obligation is to your financial interest — not to product manufacturers who pay us higher commissions.</li>
-    <li><strong>Nationwide Human Touch:</strong> 3,000+ branches and service centres across India. Every client gets a dedicated Relationship Manager — a real human being who knows your name, your portfolio, and your goals.</li>
-    <li><strong>Technology That Empowers:</strong> Antara, our proprietary trading and investment platform, is built for both first-time investors and experienced traders. Clean, fast, and available across web and mobile.</li>
-    <li><strong>Trust Built Over Decades:</strong> The Shriram name carries 50 years of trust. We have been through multiple market cycles — the dot-com crash, the 2008 global financial crisis, COVID-19 — and our clients have always come out ahead by staying disciplined.</li>
-  </ul>
+    <div class="site-wrap relative py-[120px]">
+      <p class="about-reveal text-[14px] font-medium tracking-[.04em] text-[var(--color-brand)]">About Us</p>
+      <h1 class="about-reveal mt-[22px] max-w-[840px] text-[clamp(30px,4vw,52px)] font-bold leading-[1.06] text-white" style="font-family:var(--font-display)">
+        India's Trusted Financial Companion <span class="text-[var(--color-brand)]">Since 2000</span>
+      </h1>
+      <p class="about-reveal mt-[26px] max-w-[620px] text-[18px] leading-relaxed text-white/70">
+        A Shriram Group company delivering personalised equity, mutual fund, and insurance solutions to retail and HNI clients across 21 states.
+      </p>
+      <div class="about-reveal mt-[38px] flex flex-wrap gap-[14px]">
+        <a href="/about/open-demat-account/" class="btn-primary">Open Demat Account</a>
+        <a href="/about/support/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Talk to an Advisor</a>
+      </div>
 
-  <h2>Regulatory Standing</h2>
-  <ul>
-    <li>SEBI-Registered Stockbroker: NSE (Cash & F&O), BSE (Cash & F&O), MCX, NCDEX</li>
-    <li>SEBI Research Analyst: INH200009624</li>
-    <li>AMFI-Registered Mutual Fund Distributor: ARN 29483</li>
-    <li>PFRDA-Registered NPS Point of Presence</li>
-    <li>Depository Participant: CDSL</li>
-  </ul>
+      <!-- Stat cards -->
+      <div class="about-reveal mt-[60px] grid grid-cols-2 gap-4 sm:grid-cols-4">
+        {[
+          { value: '50+', label: 'Years of Shriram Group Legacy' },
+          { value: '21', label: 'States Pan India' },
+          { value: '₹2.08L Cr', label: 'Group AUM (Dec 2025)' },
+          { value: '12M+', label: 'Group Customer Base' },
+        ].map(s => (
+          <div class="rounded-[14px] border border-white/10 px-[24px] py-[26px]" style="background:rgba(7,82,168,0.35)">
+            <div class="text-[30px] font-bold leading-none text-[var(--color-brand)]">{s.value}</div>
+            <div class="mt-[10px] text-[13px] font-medium leading-snug text-white/70">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
 
-  <h2>Our Values</h2>
-  <ul>
-    <li><strong>Transparency:</strong> No hidden charges. No conflicts of interest. We tell you exactly what you pay and exactly why we recommend what we do.</li>
-    <li><strong>Long-Term Thinking:</strong> We are not in the business of day-trading recommendations that generate brokerage. We are in the business of helping you build wealth over 10, 20, and 30 years.</li>
-    <li><strong>Inclusion:</strong> Investing is not just for the wealthy. We have designed our products, minimums, and technology to serve India's aspiring middle class — the largest and fastest-growing investing demographic in the world.</li>
-    <li><strong>Responsibility:</strong> We are deeply aware of the trust clients place in us. Every recommendation, every platform feature, every interaction is designed with the client's best interest as the primary measure of success.</li>
-  </ul>
+  <!-- ══ 2. COMPANY OVERVIEW ════════════════════════════════════════ -->
+  <section class="bg-white py-[104px]">
+    <div class="site-wrap">
+      <p class="about-reveal mb-[56px] inline-block rounded-[8px] border border-[var(--color-brand)]/40 bg-[var(--color-brand)]/10 px-[18px] py-[10px] text-[14px] font-bold text-[var(--color-brand)]">Who We Are</p>
 
-  <h2>Registered Office</h2>
-  <p>
-    Shriram House, No. 4, Burkit Road, T. Nagar, Chennai – 600 017, Tamil Nadu, India.<br />
-    Phone: 1800 103 1212 (Toll-Free) | Email: support@shriramfinancialservices.com
-  </p>
-</AboutTemplate>
+      <!-- Editorial two-column -->
+      <div class="about-reveal mx-auto grid max-w-[1000px] items-start gap-[72px] lg:grid-cols-[5fr_7fr]">
+        <h2 class="text-[40px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          Company <span class="text-[var(--color-brand)]">Overview</span>
+        </h2>
+        <div class="space-y-5 text-[17px] leading-relaxed text-[var(--color-muted)]">
+          <p>Shriram Financial Securities (formerly Way2Wealth Brokers Pvt. Ltd.) is a subsidiary of Shriram Credit Company Ltd and part of the Shriram Group — one of India's largest financial services conglomerates.</p>
+          <p>We provide a comprehensive range of wealth management and investment services to HNI, retail and institutional clients: equity, commodities, currency trading, PMS, mutual funds, AIF, IPO distribution and fixed income.</p>
+        </div>
+      </div>
+
+      <!-- Regulatory standing .part -->
+      <div class="about-reveal mx-auto mt-[76px] max-w-[1000px] border-t border-[var(--color-n400)] pt-[60px]">
+        <h3 class="mb-[10px] text-[26px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">Regulatory Standing</h3>
+        <p class="mb-[34px] max-w-[680px] text-[16px] text-[var(--color-muted)]">Fully licensed and regulated by India's financial market authorities.</p>
+        <div class="reg-grid overflow-hidden rounded-[14px] border-l border-t border-[var(--color-n400)]">
+          {[
+            { label: 'SEBI Stockbroker', desc: 'NSE (Cash & F&O), BSE (Cash & F&O), MCX, NCDEX — INZ000157633' },
+            { label: 'Research Analyst', desc: 'SEBI-registered research team — INH200009624' },
+            { label: 'MF Distributor', desc: 'AMFI-registered mutual fund distributor — ARN 29483' },
+            { label: 'NPS Distributor', desc: 'PFRDA-registered NPS Point of Presence' },
+            { label: 'Depository Participant', desc: 'CDSL registered depository participant for Demat accounts' },
+            { label: 'Insurance Broker', desc: 'IRDAI-registered insurance broker for life and general insurance' },
+          ].map(r => (
+            <div class="border-b border-r border-[var(--color-n400)] bg-white px-[28px] py-[32px]">
+              <h4 class="mb-[9px] text-[19px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">{r.label}</h4>
+              <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">{r.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 3. MISSION, VISION & VALUES ══════════════════════════════ -->
+  <section class="bg-[#f8f6f1] py-[104px]">
+    <div class="site-wrap">
+      <p class="about-reveal mb-[56px] inline-block rounded-[8px] border border-[var(--color-brand)]/40 bg-[var(--color-brand)]/10 px-[18px] py-[10px] text-[14px] font-bold text-[var(--color-brand)]">Our Philosophy</p>
+
+      <div class="about-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          Mission, Vision <span class="text-[var(--color-brand)]">&amp; Values</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">The principles that guide every client interaction and business decision at Shriram Financial Securities.</p>
+      </div>
+
+      <div class="about-reveal grid gap-6 md:grid-cols-3">
+        <div class="product-card-light p-[40px]">
+          <div class="mb-5 flex h-11 w-11 items-center justify-center rounded-[10px] bg-[var(--color-dark-olive)] text-[var(--color-brand)]">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+          </div>
+          <h3 class="mb-4 text-[24px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">Mission</h3>
+          <p class="text-[15.5px] leading-relaxed text-[var(--color-muted)]">Pre-eminent destination for personalised financial solutions that help individuals create wealth.</p>
+        </div>
+        <div class="product-card-light p-[40px]">
+          <div class="mb-5 flex h-11 w-11 items-center justify-center rounded-[10px] bg-[var(--color-dark-olive)] text-[var(--color-brand)]">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <h3 class="mb-4 text-[24px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">Vision</h3>
+          <p class="text-[15.5px] leading-relaxed text-[var(--color-muted)]">Knowledge combined with investor trust and involvement leads to wealth growth and an exciting experience.</p>
+        </div>
+        <div class="product-card-light p-[40px]">
+          <div class="mb-5 flex h-11 w-11 items-center justify-center rounded-[10px] bg-[var(--color-dark-olive)] text-[var(--color-brand)]">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"/><path d="M9 12L11 14L15 10"/></svg>
+          </div>
+          <h3 class="mb-4 text-[24px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">Values</h3>
+          <p class="text-[15.5px] leading-relaxed text-[var(--color-muted)]">Knowledge, Trust, Excitement and Growth as the four pillars behind every client relationship.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 4. OUR GROUP ══════════════════════════════════════════════ -->
+  <section class="bg-white py-[104px]">
+    <div class="site-wrap">
+      <p class="about-reveal mb-[56px] inline-block rounded-[8px] border border-[var(--color-brand)]/40 bg-[var(--color-brand)]/10 px-[18px] py-[10px] text-[14px] font-bold text-[var(--color-brand)]">Our Group</p>
+
+      <!-- Shriram Group editorial -->
+      <div class="about-reveal mx-auto grid max-w-[1000px] items-start gap-[72px] lg:grid-cols-[5fr_7fr]">
+        <h2 class="text-[40px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          The <span class="text-[var(--color-brand)]">Shriram Group</span>
+        </h2>
+        <div class="text-[17px] leading-relaxed text-[var(--color-muted)]">
+          <p>Founded in 1974 by Shri. R. Thyagarajan, the Shriram Group works with the philosophy of financially empowering the underserved. It manages assets of over ₹2.08 lakh crore across 4,050 branches in consumer finance, vehicle finance, life &amp; general insurance, chit funds, asset management and stock broking.</p>
+        </div>
+      </div>
+
+      <!-- Shriram stat badges -->
+      <div class="about-reveal mx-auto mt-[40px] max-w-[1000px] flex flex-wrap gap-3">
+        {['80,000+ Employees', '3,850+ Branches', 'Padma Bhushan Founder'].map(b => (
+          <span class="inline-flex items-center rounded-[8px] border border-[var(--color-n400)] bg-[var(--color-n100)] px-[18px] py-[10px] text-[15px] font-medium text-[var(--color-ink)]">{b}</span>
+        ))}
+      </div>
+
+      <!-- .part: Sanlam Group -->
+      <div class="about-reveal mx-auto mt-[76px] max-w-[1000px] border-t border-[var(--color-n400)] pt-[60px]">
+        <div class="grid items-start gap-[72px] lg:grid-cols-[5fr_7fr]">
+          <h2 class="text-[36px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+            The <span class="text-[var(--color-brand)]">Sanlam Group</span>
+          </h2>
+          <div class="space-y-5 text-[17px] leading-relaxed text-[var(--color-muted)]">
+            <p>Sanlam is a leading financial services group based in Cape Town, South Africa. Sanlam's association with the Shriram Group began in 2005 with the emergence of Shriram Life Insurance Company (SLIC), a part of the diversified Shriram Group.</p>
+            <p>Over the years, the relationship has deepened significantly, with Sanlam holding a key stake in the Shriram Group through its 100% subsidiary.</p>
+          </div>
+        </div>
+        <div class="mt-[40px] flex flex-wrap gap-3">
+          {['Founded 1918', 'Listed on JSE', 'Pan-African Reach'].map(b => (
+            <span class="inline-flex items-center rounded-[8px] border border-[var(--color-n400)] bg-[var(--color-n100)] px-[18px] py-[10px] text-[15px] font-medium text-[var(--color-ink)]">{b}</span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 5. WHAT WE DO ════════════════════════════════════════════ -->
+  <section class="bg-[#f8f6f1] py-[104px]">
+    <div class="site-wrap">
+      <p class="about-reveal mb-[56px] inline-block rounded-[8px] border border-[var(--color-brand)]/40 bg-[var(--color-brand)]/10 px-[18px] py-[10px] text-[14px] font-bold text-[var(--color-brand)]">Our Business</p>
+
+      <div class="about-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          What <span class="text-[var(--color-brand)]">We Do</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">A full-service financial securities firm offering broking, distribution, fund-based services and research.</p>
+      </div>
+
+      <div class="about-reveal services-grid overflow-hidden rounded-[14px] border-l border-t border-[var(--color-n400)]">
+        <div class="border-b border-r border-[var(--color-n400)] bg-white px-[34px] py-[40px]">
+          <h3 class="mb-5 text-[22px] font-bold text-[var(--color-brand)]" style="font-family:var(--font-display)">Broking</h3>
+          <ul class="space-y-5">
+            <li>
+              <h4 class="mb-[6px] text-[18px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">Equity &amp; Derivatives</h4>
+              <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">NSE, BSE, MSEI trading with institutional empanelment and algo capabilities.</p>
+            </li>
+            <li class="border-t border-[var(--color-n400)] pt-5">
+              <h4 class="mb-[6px] text-[18px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">Commodities &amp; Currency</h4>
+              <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">MCX, NCDEX commodity broking and currency futures trading.</p>
+            </li>
+          </ul>
+        </div>
+        <div class="border-b border-r border-[var(--color-n400)] bg-white px-[34px] py-[40px]">
+          <h3 class="mb-5 text-[22px] font-bold text-[var(--color-brand)]" style="font-family:var(--font-display)">Distribution</h3>
+          <ul class="space-y-5">
+            <li>
+              <h4 class="mb-[6px] text-[18px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">Mutual Funds</h4>
+              <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">AMFI-registered distributor offering 3,000+ direct and regular plan mutual funds with zero commission.</p>
+            </li>
+            <li class="border-t border-[var(--color-n400)] pt-5">
+              <h4 class="mb-[6px] text-[18px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">IPO &amp; Fixed Income</h4>
+              <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">Primary market IPO distribution and fixed income securities placement.</p>
+            </li>
+          </ul>
+        </div>
+        <div class="border-b border-r border-[var(--color-n400)] bg-white px-[34px] py-[40px]">
+          <h3 class="mb-5 text-[22px] font-bold text-[var(--color-brand)]" style="font-family:var(--font-display)">Fund-Based</h3>
+          <ul class="space-y-5">
+            <li>
+              <h4 class="mb-[6px] text-[18px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">Loan Against Securities</h4>
+              <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">Overdraft facility against your equity and mutual fund portfolio.</p>
+            </li>
+            <li class="border-t border-[var(--color-n400)] pt-5">
+              <h4 class="mb-[6px] text-[18px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">PMS &amp; AIF</h4>
+              <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">Portfolio Management Services and Alternative Investment Fund access for HNI clients.</p>
+            </li>
+          </ul>
+        </div>
+        <div class="border-b border-r border-[var(--color-n400)] bg-white px-[34px] py-[40px]">
+          <h3 class="mb-5 text-[22px] font-bold text-[var(--color-brand)]" style="font-family:var(--font-display)">Research</h3>
+          <ul class="space-y-5">
+            <li>
+              <h4 class="mb-[6px] text-[18px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">Fundamental Analysis</h4>
+              <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">In-depth company coverage, financial modelling and valuation reports by SEBI-registered analysts.</p>
+            </li>
+            <li class="border-t border-[var(--color-n400)] pt-5">
+              <h4 class="mb-[6px] text-[18px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">Technical Analysis</h4>
+              <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">Chart patterns, indicators and trade setups for short-term and positional trading.</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 6. KEY MILESTONES ════════════════════════════════════════ -->
+  <section class="bg-white py-[104px]">
+    <div class="site-wrap">
+      <p class="about-reveal mb-[56px] inline-block rounded-[8px] border border-[var(--color-brand)]/40 bg-[var(--color-brand)]/10 px-[18px] py-[10px] text-[14px] font-bold text-[var(--color-brand)]">Our Journey</p>
+
+      <div class="about-reveal mx-auto mb-[60px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          Key <span class="text-[var(--color-brand)]">Milestones</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">From a small web-trading startup in Bengaluru to a pan-India financial services brand.</p>
+      </div>
+
+      <div class="about-reveal grid gap-x-[80px] gap-y-[60px] lg:grid-cols-2">
+        <!-- Left column timeline -->
+        <div class="relative pl-[40px]">
+          <div class="absolute left-[4px] top-0 h-full w-[2px] bg-[var(--color-n400)]"></div>
+          <div class="space-y-[52px]">
+            {[
+              { year: '2000', event: 'Incorporated as Sivan Web Trading Pvt. Ltd., Bengaluru. Rebranded as Way2Wealth Securities.' },
+              { year: '2008', event: 'Launched commodities business; 100th franchise outlet inaugurated.' },
+              { year: '2009', event: 'Launched single-screen multi-product online trading — among the first in India.' },
+              { year: '2011', event: 'Online trading for Karnataka Bank clients; acquired Techno Shares & Stocks.' },
+            ].map(m => (
+              <div class="relative">
+                <div class="absolute -left-[40px] top-[8px] h-[10px] w-[10px] rounded-full bg-[var(--color-brand)]"></div>
+                <div class="text-[22px] font-bold text-[var(--color-brand)]">{m.year}</div>
+                <p class="mt-[8px] text-[16px] leading-relaxed text-[var(--color-muted)]">{m.event}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Right column timeline -->
+        <div class="relative pl-[40px]">
+          <div class="absolute left-[4px] top-0 h-full w-[2px] bg-[var(--color-n400)]"></div>
+          <div class="space-y-[52px]">
+            {[
+              { year: '2012', event: 'Acquired Total Insurance Brokers Pvt. Ltd.; launched Mandi2Market.' },
+              { year: '2013', event: 'Ranked top-10 broking entity in retail segment by BSE.' },
+              { year: '2019', event: 'MCX Leading Broking House of the Year award.' },
+              { year: '2026', event: 'Rebranded as Shriram Financial Securities — a unified Shriram financial identity.' },
+            ].map(m => (
+              <div class="relative">
+                <div class="absolute -left-[40px] top-[8px] h-[10px] w-[10px] rounded-full bg-[var(--color-brand)]"></div>
+                <div class="text-[22px] font-bold text-[var(--color-brand)]">{m.year}</div>
+                <p class="mt-[8px] text-[16px] leading-relaxed text-[var(--color-muted)]">{m.event}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 7. KEY MANAGERIAL PERSONNEL ══════════════════════════════ -->
+  <section class="bg-[#f8f6f1] py-[104px]">
+    <div class="site-wrap">
+      <p class="about-reveal mb-[56px] inline-block rounded-[8px] border border-[var(--color-brand)]/40 bg-[var(--color-brand)]/10 px-[18px] py-[10px] text-[14px] font-bold text-[var(--color-brand)]">Our Leadership</p>
+
+      <div class="about-reveal mx-auto mb-[60px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          Key Managerial <span class="text-[var(--color-brand)]">Personnel</span>
+        </h2>
+      </div>
+
+      <!-- Top row — 3 cards -->
+      <div class="about-reveal grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {leadership.slice(0, 3).map(p => (
+          <div class="product-card-light p-[34px]">
+            <div class="mb-5 flex h-[80px] w-[80px] items-center justify-center rounded-full bg-[var(--color-dark-800)] text-[var(--color-brand)]">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <h3 class="text-[20px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{p.name}</h3>
+            <p class="mt-[6px] text-[14px] font-semibold text-[var(--color-brand)]">{p.title}</p>
+            <p class="mt-[14px] text-[14.5px] leading-relaxed text-[var(--color-muted)]">{p.bio}</p>
+          </div>
+        ))}
+      </div>
+
+      <!-- Bottom row — 2 cards -->
+      <div class="about-reveal mt-5 grid gap-5 md:grid-cols-2">
+        {leadership.slice(3).map(p => (
+          <div class="product-card-light p-[34px]">
+            <div class="mb-5 flex h-[80px] w-[80px] items-center justify-center rounded-full bg-[var(--color-dark-800)] text-[var(--color-brand)]">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <h3 class="text-[20px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{p.name}</h3>
+            <p class="mt-[6px] text-[14px] font-semibold text-[var(--color-brand)]">{p.title}</p>
+            <p class="mt-[14px] text-[14.5px] leading-relaxed text-[var(--color-muted)]">{p.bio}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 8. OUR OFFICES ════════════════════════════════════════════ -->
+  <section class="bg-white py-[104px]">
+    <div class="site-wrap">
+      <p class="about-reveal mb-[52px] inline-block rounded-[8px] border border-[var(--color-brand)]/40 bg-[var(--color-brand)]/10 px-[18px] py-[10px] text-[14px] font-bold text-[var(--color-brand)]">Our Offices</p>
+
+      <!-- Registered office dark card -->
+      <div class="about-reveal mb-[48px] overflow-hidden rounded-[18px] bg-[var(--color-dark-800)] px-[52px] py-[44px]">
+        <p class="mb-[8px] text-[13px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Registered Office</p>
+        <h3 class="text-[28px] font-bold text-white" style="font-family:var(--font-display)">Bengaluru, Karnataka</h3>
+        <p class="mt-[14px] text-[16px] leading-relaxed text-white/70">Rukmini Towers, 3rd &amp; 4th Floor, #3/1 Platform Road, Sheshadripuram — 560 020</p>
+      </div>
+
+      <!-- City office cards 2×2 -->
+      <div class="about-reveal grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {[
+          { city: 'Mumbai', address: '101–104, Dynasty Business Park, J.B. Nagar, Andheri East – 400059' },
+          { city: 'New Delhi', address: '801, 8th Floor, Mercantile House, K G Marg, Connaught Place – 110001' },
+          { city: 'Hyderabad', address: 'Ground Floor, Wing B, Diamond District, Old Airport Road, Begumpet – 500016' },
+          { city: 'Chennai', address: 'Shriram House, No. 4, Burkit Road, T. Nagar, Chennai – 600 017' },
+        ].map(o => (
+          <div class="product-card-light p-[28px]">
+            <h4 class="mb-3 text-[20px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{o.city}</h4>
+            <p class="text-[14.5px] leading-relaxed text-[var(--color-muted)]">{o.address}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 9. FINAL CTA ══════════════════════════════════════════════ -->
+  <section class="bg-white py-[104px]">
+    <div class="site-wrap">
+      <div class="about-reveal overflow-hidden rounded-[24px] bg-[var(--color-dark-800)] px-[60px] py-[80px] text-center">
+        <p class="mb-4 text-[14px] font-medium tracking-[.04em] text-[var(--color-brand)]">Start Your Journey</p>
+        <h2 class="mx-auto max-w-[600px] text-[clamp(28px,3.5vw,42px)] font-bold leading-[1.1] text-white" style="font-family:var(--font-display)">
+          Ready to Invest with India's Trusted Partner?
+        </h2>
+        <p class="mx-auto mt-5 max-w-[480px] text-[17px] leading-relaxed text-white/65">
+          Open a free Demat account in minutes — zero delivery brokerage, SEBI-registered research, and a dedicated advisor all in one place.
+        </p>
+        <div class="mt-[38px] flex flex-wrap justify-center gap-[14px]">
+          <a href="/about/open-demat-account/" class="btn-primary">Open Demat Account</a>
+          <a href="/about/support/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Talk to an Advisor</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .about-reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  .about-reveal.in-view { opacity: 1; transform: none; }
+
+  /* Regulatory grid: 2-col mobile → 3-col desktop */
+  .reg-grid { display: grid; grid-template-columns: repeat(2, 1fr); }
+  @media (min-width: 1024px) { .reg-grid { grid-template-columns: repeat(3, 1fr); } }
+
+  /* Services grid: 1-col mobile → 2-col tablet → 4-col desktop */
+  .services-grid { display: grid; grid-template-columns: 1fr; }
+  @media (min-width: 640px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .services-grid { grid-template-columns: repeat(4, 1fr); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .about-reveal { opacity: 1; transform: none; transition: none; }
+  }
+</style>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        (e.target as HTMLElement).classList.add('in-view');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.about-reveal').forEach(el => obs.observe(el));
+</script>
