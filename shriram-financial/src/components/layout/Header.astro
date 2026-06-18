@@ -26,7 +26,7 @@ const about     = navigation.find(n => n.label === 'About')!;
 
         <button class="nav-trigger flex items-center gap-1 rounded-[10px] px-3 py-1 text-[15px] font-medium text-[#333] transition-colors hover:bg-[var(--color-n100)]"
                 data-panel="learning-centre" aria-haspopup="dialog" aria-expanded="false">
-          Learning Centre
+          Research Centre
           <svg class="nav-chevron h-4 w-4 transition-transform duration-300" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
         </button>
 
@@ -95,7 +95,7 @@ const about     = navigation.find(n => n.label === 'About')!;
           ))}
         </div>
       </details>
-      <a href="/research/" class="block rounded px-3 py-3 text-[14px] font-semibold text-[var(--color-ink)] hover:bg-[var(--color-n100)]">Learning Centre</a>
+      <a href="/research/" class="block rounded px-3 py-3 text-[14px] font-semibold text-[var(--color-ink)] hover:bg-[var(--color-n100)]">Research Centre</a>
       <a href="/calculators/sip/" class="block rounded px-3 py-3 text-[14px] font-semibold text-[var(--color-ink)] hover:bg-[var(--color-n100)]">Calculators</a>
       <a href="/about/support/" class="block rounded px-3 py-3 text-[14px] font-semibold text-[var(--color-ink)] hover:bg-[var(--color-n100)]">Support</a>
       <details class="group mb-1">
@@ -130,7 +130,7 @@ const about     = navigation.find(n => n.label === 'About')!;
     </button>
     <nav class="nps-nav" aria-label="Panel navigation">
       <button class="nps-item" data-for="products">Products</button>
-      <button class="nps-item" data-for="learning-centre">Learning Centre</button>
+      <button class="nps-item" data-for="learning-centre">Research Centre</button>
       <button class="nps-item" data-for="calculators">Calculators</button>
       <button class="nps-item" data-for="support">Support</button>
     </nav>
@@ -179,45 +179,17 @@ const about     = navigation.find(n => n.label === 'About')!;
         </div>
       </div>
 
-      <!-- ── Learning Centre ── -->
+      <!-- ── Research Centre ── -->
       <div class="nps-section" data-section="learning-centre">
-        <h2 class="nps-heading">Learning Centre</h2>
+        <h2 class="nps-heading">Research Centre</h2>
         <div class="nps-grid">
           <div class="nps-col">
-            <p class="nps-col-title">Beginner Trader</p>
             <div class="nps-col-items">
-              <a href="/research/">Research</a>
-              <a href="/research/">Featured Articles</a>
-              <a href="/research/">Knowledge Base &amp; Awareness</a>
-              <a href="/research/">Financial News Hub</a>
-              <a href="/research/">Personal Finance</a>
+              <a href="/research/technical/">Technical Research</a>
+              <a href="/research/fundamental/">Fundamental Research</a>
+              <a href="/research/mutual-fund/">Mutual Fund Research</a>
             </div>
           </div>
-          <div class="nps-divider" aria-hidden="true"></div>
-          <div class="nps-col">
-            <p class="nps-col-title">Occasional Trader</p>
-            <div class="nps-col-items">
-              <a href="/research/">Stock Market</a>
-              <a href="/research/">Mutual Fund</a>
-              <a href="/research/">F&amp;O</a>
-              <a href="/research/">IPO</a>
-              <a href="/research/">Bonds</a>
-            </div>
-          </div>
-          <div class="nps-divider" aria-hidden="true"></div>
-          <div class="nps-col">
-            <p class="nps-col-title">Seasoned Traders</p>
-            <div class="nps-col-items">
-              <a href="/research/">Demat Account</a>
-              <a href="/research/">Trading Account</a>
-              <a href="/research/">Intraday Trading</a>
-              <a href="/research/">Delivery Trading</a>
-              <a href="/research/">Commodity Trading</a>
-            </div>
-          </div>
-        </div>
-        <div class="nps-view-all">
-          <a href="/research/">View All Resources</a>
         </div>
       </div>
 
