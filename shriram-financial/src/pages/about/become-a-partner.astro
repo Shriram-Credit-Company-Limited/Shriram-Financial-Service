@@ -8,17 +8,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 >
 
   <!-- ══ 1. HERO ═══════════════════════════════════════════════════ -->
-  <section class="relative overflow-hidden pt-20 pb-16 lg:pt-28 lg:pb-24">
+  <section class="relative overflow-hidden pt-20 pb-16 lg:pt-28 lg:pb-24 bg-[#faf8f4]">
     <div class="hero-wave" aria-hidden="true"></div>
-    <video
-      class="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-1000"
-      autoplay muted playsinline loop preload="auto" aria-hidden="true"
-      onloadeddata="this.style.opacity='1'"
-    >
-      <source src="/videos/BG.mp4" type="video/mp4" />
-    </video>
-    <div class="absolute inset-0 bg-gradient-to-r from-white/82 via-white/48 to-white/0" aria-hidden="true"></div>
-    <div class="absolute inset-0 bg-gradient-to-b from-black/8 via-transparent to-black/12" aria-hidden="true"></div>
 
     <div class="site-wrap relative z-10">
       <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
@@ -36,94 +27,61 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           <a href="#benefits" class="mt-8 inline-flex h-[48px] items-center justify-center rounded-[6px] bg-[#2e3914] px-8 text-[14px] font-medium text-white transition-colors hover:bg-[#1a2010]">Learn More</a>
         </div>
 
-        <!-- Right: transparent glass registration card -->
+        <!-- Right: single-page registration form -->
         <div class="reveal reveal-2">
           <div id="partner-card" class="warm-form overflow-hidden">
 
-            <!-- Card header with progress -->
+            <!-- Card header -->
             <div class="border-b border-[rgba(46,57,20,0.10)] px-8 py-6">
               <h2 class="text-[20px] font-bold text-[#2e3914]" style="font-family:var(--font-display)">Partner Registration</h2>
-              <p class="mt-0.5 text-[13px] text-[#2e3914]/50">in less than 30 seconds</p>
-              <div class="mt-5 flex items-center">
-                <div class="flex flex-col items-center gap-1.5" data-step-dot="1">
-                  <div class="h-3 w-3 rounded-full bg-[var(--color-brand)] transition-all duration-300 ring-2 ring-[var(--color-brand)]/30"></div>
-                  <span class="text-[10px] font-bold text-[#2e3914] transition-colors duration-300">Name</span>
-                </div>
-                <div class="mx-2 h-px flex-1 bg-[#2e3914]/15 transition-all duration-300" id="line-1"></div>
-                <div class="flex flex-col items-center gap-1.5" data-step-dot="2">
-                  <div class="h-3 w-3 rounded-full bg-[#2e3914]/20 transition-all duration-300"></div>
-                  <span class="text-[10px] font-semibold text-[#2e3914]/35 transition-colors duration-300">Mobile</span>
-                </div>
-                <div class="mx-2 h-px flex-1 bg-[#2e3914]/15 transition-all duration-300" id="line-2"></div>
-                <div class="flex flex-col items-center gap-1.5" data-step-dot="3">
-                  <div class="h-3 w-3 rounded-full bg-[#2e3914]/20 transition-all duration-300"></div>
-                  <span class="text-[10px] font-semibold text-[#2e3914]/35 transition-colors duration-300">City</span>
-                </div>
-              </div>
+              <p class="mt-0.5 text-[13px] text-[#2e3914]/50">Fill in your details and we'll get in touch</p>
             </div>
 
-            <!-- Steps container -->
-            <div class="relative" style="min-height:230px">
+            <!-- Single-page form -->
+            <div class="px-8 py-8">
+              <div id="form-fields" class="space-y-5">
 
-              <!-- Step 1: Name -->
-              <div id="step-1" class="form-step px-8 py-8">
-                <p class="text-[11px] font-bold uppercase tracking-widest text-[#2e3914]/50">Step 1 of 3</p>
-                <p class="mt-3 text-[22px] font-bold text-[#2e3914]" style="font-family:var(--font-display)">What should we call you?</p>
-                <label class="mt-6 block">
+                <label class="block">
                   <span class="text-[11px] font-bold uppercase tracking-wider text-[#2e3914]/50">Full Name</span>
                   <input id="input-name" type="text" placeholder="Enter your full name" class="field mt-2" autocomplete="name" />
                 </label>
-                <div class="mt-6 flex justify-end">
-                  <button id="next-1" class="btn-primary">Next →</button>
-                </div>
-              </div>
 
-              <!-- Step 2: Mobile -->
-              <div id="step-2" class="form-step hidden px-8 py-8">
-                <p class="text-[11px] font-bold uppercase tracking-widest text-[#2e3914]/50">Step 2 of 3</p>
-                <p class="mt-3 text-[22px] font-bold text-[#2e3914]" style="font-family:var(--font-display)">Your Mobile number</p>
-                <label class="mt-6 block">
+                <label class="block">
                   <span class="text-[11px] font-bold uppercase tracking-wider text-[#2e3914]/50">Mobile Number</span>
                   <input id="input-mobile" type="tel" placeholder="+91 XXXXX XXXXX" maxlength="13" class="field mt-2" autocomplete="tel" />
                 </label>
-                <div class="mt-6 flex justify-between">
-                  <button id="back-2" class="step-back-btn">← Back</button>
-                  <button id="next-2" class="btn-primary">Send OTP →</button>
-                </div>
-              </div>
 
-              <!-- Step OTP -->
-              <div id="step-otp" class="form-step hidden px-8 py-8">
-                <p class="text-[11px] font-bold uppercase tracking-widest text-[#2e3914]/50">Verification</p>
-                <p class="mt-3 text-[22px] font-bold text-[#2e3914]" style="font-family:var(--font-display)">Verify your number</p>
-                <p class="mt-1 text-[14px] text-[#2e3914]/60">OTP sent to <span id="otp-number" class="font-semibold text-[#2e3914]"></span></p>
-                <label class="mt-6 block">
-                  <span class="text-[11px] font-bold uppercase tracking-wider text-[#2e3914]/50">Enter OTP</span>
-                  <input id="input-otp" type="text" placeholder="• • • • • •" maxlength="6" class="field mt-2 text-center text-[22px] tracking-[0.5em] font-bold" autocomplete="one-time-code" inputmode="numeric" />
+                <label class="block">
+                  <span class="text-[11px] font-bold uppercase tracking-wider text-[#2e3914]/50">Email Address</span>
+                  <input id="input-email" type="email" placeholder="you@example.com" class="field mt-2" autocomplete="email" />
                 </label>
-                <p class="mt-2 text-[12px] text-[#2e3914]/50">Didn't receive it? <button id="resend-otp" class="font-semibold text-[var(--color-brand)] hover:underline">Resend OTP</button></p>
-                <div class="mt-6 flex justify-between">
-                  <button id="back-otp" class="step-back-btn">← Back</button>
-                  <button id="verify-otp" class="btn-primary">Verify →</button>
-                </div>
-              </div>
 
-              <!-- Step 3: City -->
-              <div id="step-3" class="form-step hidden px-8 py-8">
-                <p class="text-[11px] font-bold uppercase tracking-widest text-[#2e3914]/50">Step 3 of 3</p>
-                <p class="mt-3 text-[22px] font-bold text-[#2e3914]" style="font-family:var(--font-display)">Which city are you from?</p>
-                <label class="mt-6 block">
+                <label class="block">
                   <span class="text-[11px] font-bold uppercase tracking-wider text-[#2e3914]/50">City</span>
                   <input id="input-city" type="text" placeholder="e.g. Mumbai, Delhi, Chennai…" class="field mt-2" autocomplete="address-level2" />
                 </label>
-                <div class="mt-6 flex justify-between">
-                  <button id="back-3" class="step-back-btn">← Back</button>
-                  <button id="submit-form" class="btn-primary">Submit →</button>
+
+                <label class="block">
+                  <span class="text-[11px] font-bold uppercase tracking-wider text-[#2e3914]/50">Partner Type</span>
+                  <select id="input-type" class="field mt-2">
+                    <option value="" disabled selected>Select your background</option>
+                    <option value="sub-broker">Sub-Broker / Remisier</option>
+                    <option value="insurance-agent">Insurance Agent</option>
+                    <option value="ca-financial-advisor">CA / Financial Advisor</option>
+                    <option value="retired-banking">Retired Banking Professional</option>
+                    <option value="entrepreneur">Entrepreneur / Business Owner</option>
+                    <option value="other">Other</option>
+                  </select>
+                </label>
+
+                <div class="pt-2">
+                  <button id="submit-form" class="btn-primary w-full">Submit Registration →</button>
                 </div>
+
               </div>
 
               <!-- Success state -->
-              <div id="step-success" class="form-step hidden px-8 py-10 text-center">
+              <div id="step-success" class="hidden py-6 text-center">
                 <div class="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-[var(--color-brand)]/15">
                   <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-brand)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-8 w-8"><polyline points="20 6 9 17 4 12"/></svg>
                 </div>
@@ -406,167 +364,38 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   .portfolio-tab[data-active="false"] { background-color: var(--color-n100); color: var(--color-muted); }
   .portfolio-tab[data-active="false"]:hover { background-color: var(--color-n400); }
 
-  /* Step back button */
-  .step-back-btn {
-    border: 1px solid rgba(46,57,20,0.18);
-    border-radius: 8px;
-    padding: 10px 20px;
-    font-size: 14px;
-    font-weight: 600;
-    color: rgba(46,57,20,0.55);
-    background: transparent;
-    cursor: pointer;
-    transition: background 0.15s;
-  }
-  .step-back-btn:hover { background: rgba(46,57,20,0.06); }
-
   /* Step slide-in animation */
   @keyframes slideIn {
     from { opacity: 0; transform: translateX(16px); }
     to   { opacity: 1; transform: translateX(0); }
   }
-  .form-step:not(.hidden) { animation: slideIn 0.28s ease; }
 </style>
 
 <script>
-  /* ── Multi-step form ─────────────────────────────────────────── */
-  const allSteps = ['step-1', 'step-2', 'step-otp', 'step-3', 'step-success'];
-  let currentStep = 1;
-
-  // Collected across steps — submitted together on the final step.
-  const lead: { name: string; mobile: string; city: string } = {
-    name: '', mobile: '', city: '',
-  };
-
-  function showStep(id: string) {
-    allSteps.forEach(s => {
-      const el = document.getElementById(s);
-      if (!el) return;
-      el.classList.toggle('hidden', s !== id);
-    });
-  }
-
-  function setProgress(active: number) {
-    document.querySelectorAll<HTMLElement>('[data-step-dot]').forEach(dot => {
-      const n = parseInt(dot.dataset.stepDot ?? '0');
-      const circle = dot.querySelector('div') as HTMLElement;
-      const label  = dot.querySelector('span') as HTMLElement;
-      const on = n <= active;
-      circle.style.backgroundColor = on ? 'var(--color-brand)' : 'rgba(46,57,20,0.18)';
-      circle.style.boxShadow = on ? '0 0 0 3px rgba(243,184,63,0.25)' : 'none';
-      label.style.color      = on ? '#2e3914' : 'rgba(46,57,20,0.35)';
-      label.style.fontWeight = on ? '700' : '400';
-    });
-    const line1 = document.getElementById('line-1');
-    const line2 = document.getElementById('line-2');
-    if (line1) line1.style.backgroundColor = active >= 2 ? 'rgba(243,184,63,0.5)' : 'rgba(46,57,20,0.12)';
-    if (line2) line2.style.backgroundColor = active >= 3 ? 'rgba(243,184,63,0.5)' : 'rgba(46,57,20,0.12)';
-  }
-
-  // Step 1 → 2
-  document.getElementById('next-1')?.addEventListener('click', () => {
-    const name = (document.getElementById('input-name') as HTMLInputElement).value.trim();
-    if (!name) { (document.getElementById('input-name') as HTMLInputElement).focus(); return; }
-    lead.name = name;
-    showStep('step-2');
-    setProgress(1);
-    currentStep = 2;
-  });
-
-  // Step 2 back
-  document.getElementById('back-2')?.addEventListener('click', () => {
-    showStep('step-1');
-    setProgress(0);
-    currentStep = 1;
-  });
-
-  // Step 2 → OTP
-  document.getElementById('next-2')?.addEventListener('click', () => {
+  /* ── Single-page form submission ─────────────────────────────── */
+  document.getElementById('submit-form')?.addEventListener('click', () => {
+    const name   = (document.getElementById('input-name')   as HTMLInputElement).value.trim();
     const mobile = (document.getElementById('input-mobile') as HTMLInputElement).value.trim();
-    if (mobile.replace(/\D/g, '').length < 10) {
-      (document.getElementById('input-mobile') as HTMLInputElement).focus();
-      return;
-    }
-    lead.mobile = mobile;
-    const display = document.getElementById('otp-number');
-    if (display) display.textContent = mobile;
-    showStep('step-otp');
-    setProgress(2);
-    currentStep = 2.5;
+    const email  = (document.getElementById('input-email')  as HTMLInputElement).value.trim();
+    const city   = (document.getElementById('input-city')   as HTMLInputElement).value.trim();
+    const type   = (document.getElementById('input-type')   as HTMLSelectElement).value;
+
+    if (!name)   { (document.getElementById('input-name')   as HTMLInputElement).focus();   return; }
+    if (mobile.replace(/\D/g, '').length < 10) { (document.getElementById('input-mobile') as HTMLInputElement).focus(); return; }
+    if (!email || !email.includes('@')) { (document.getElementById('input-email') as HTMLInputElement).focus(); return; }
+    if (!city)   { (document.getElementById('input-city')   as HTMLInputElement).focus();   return; }
+    if (!type)   { (document.getElementById('input-type')   as HTMLSelectElement).focus();  return; }
+
+    // Show success
+    const formFields = document.getElementById('form-fields');
+    const success    = document.getElementById('step-success');
+    if (formFields) formFields.classList.add('hidden');
+    if (success)    success.classList.remove('hidden');
   });
 
-  // OTP back
-  document.getElementById('back-otp')?.addEventListener('click', () => {
-    showStep('step-2');
-    setProgress(1);
-    currentStep = 2;
-  });
-
-  // Resend OTP
-  document.getElementById('resend-otp')?.addEventListener('click', () => {
-    const btn = document.getElementById('resend-otp') as HTMLButtonElement;
-    btn.textContent = 'OTP Sent!';
-    btn.disabled = true;
-    setTimeout(() => { btn.textContent = 'Resend OTP'; btn.disabled = false; }, 30000);
-  });
-
-  // OTP → Step 3
-  document.getElementById('verify-otp')?.addEventListener('click', () => {
-    const otp = (document.getElementById('input-otp') as HTMLInputElement).value.trim();
-    if (otp.replace(/\D/g, '').length < 4) {
-      (document.getElementById('input-otp') as HTMLInputElement).focus();
-      return;
-    }
-    showStep('step-3');
-    setProgress(2);
-    currentStep = 3;
-  });
-
-  // Step 3 back
-  document.getElementById('back-3')?.addEventListener('click', () => {
-    showStep('step-otp');
-    setProgress(2);
-    currentStep = 2.5;
-  });
-
-  // Submit → POST lead → Success
-  document.getElementById('submit-form')?.addEventListener('click', async () => {
-    const city = (document.getElementById('input-city') as HTMLInputElement).value.trim();
-    if (!city) { (document.getElementById('input-city') as HTMLInputElement).focus(); return; }
-    lead.city = city;
-
-    const btn = document.getElementById('submit-form') as HTMLButtonElement;
-    btn.disabled = true;
-    btn.textContent = 'Submitting…';
-
-    try {
-      await fetch('/api/partner-lead', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(lead),
-      });
-    } catch {
-      // Network error — show success anyway; lead will be logged server-side
-      // when DATABASE_URL is configured.
-    }
-
-    showStep('step-success');
-    setProgress(3);
-    currentStep = 4;
-  });
-
-  // CTA banner → scroll to form and reset if done
+  /* ── CTA button scrolls to form ──────────────────────────────── */
   document.getElementById('cta-register')?.addEventListener('click', () => {
     document.getElementById('partner-card')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    if (currentStep === 4) {
-      showStep('step-1');
-      setProgress(0);
-      currentStep = 1;
-      (document.getElementById('input-name') as HTMLInputElement).value = '';
-      (document.getElementById('input-mobile') as HTMLInputElement).value = '';
-      (document.getElementById('input-otp') as HTMLInputElement).value = '';
-      (document.getElementById('input-city') as HTMLInputElement).value = '';
-    }
   });
 
   /* ── Product portfolio tabs ──────────────────────────────────── */
