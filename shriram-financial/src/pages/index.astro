@@ -5,7 +5,7 @@ const differItems = [
   {
     num: 'I.',
     title: 'Research-Backed Insights',
-    sub: 'Get clear, high-accuracy buy and sell recommendations from our SEBI-registered market experts. No complex jargon—just simple, real-time data and market reports to help you trade with absolute confidence.',
+    sub: 'SEBI-registered analysts deliver clear, actionable buy/sell calls — no jargon. Real-time data and expert recommendations so you trade with conviction.',
     points: [],
     cta: 'Explore Research',
     href: '/research/',
@@ -13,7 +13,7 @@ const differItems = [
   {
     num: 'II.',
     title: 'A Relationship-Led Human Experience',
-    sub: 'Premium investing experience with dedicated relationship management. Get mapped with experienced domain experts who understand your risk appetite and financial milestones. Experience seamless, personalised portfolio reviews over a call or in person.',
+    sub: 'A dedicated relationship manager who knows your goals, tracks your portfolio, and meets you when it matters — by call or in person.',
     points: [],
     cta: 'Meet Your Advisor',
     href: '/about/',
@@ -21,7 +21,7 @@ const differItems = [
   {
     num: 'III.',
     title: 'Partner Network',
-    sub: 'Through our strong nationwide partnerships with India\'s top financial institutions, we open doors for you. Get access to specialised premium investment options, curated Portfolio Management Services (PMS), and wealth products usually reserved for big investors.',
+    sub: 'Nationwide partnerships unlock PMS, premium bonds, and institutional-grade investment products — usually reserved for high-net-worth investors.',
     points: [],
     cta: 'Our Story',
     href: '/about/',
@@ -29,7 +29,7 @@ const differItems = [
   {
     num: 'IV.',
     title: 'Gentle Reminders, Zero Stress',
-    sub: 'Get personalised, instant notifications on your phone only for things that matter. Know exactly when to enter or exit a stock, track your watchlist, and get alerts when your portfolio needs a quick update.',
+    sub: 'Smart alerts only when your portfolio needs attention — entry/exit signals, watchlist triggers, and timely nudges. Nothing more.',
     points: [],
     cta: 'Explore Antara',
     href: '/about/antara-web-login/',
@@ -89,7 +89,7 @@ const faqs = [
   },
   {
     q: 'What are the brokerage charges for options trading with Shriram Securities?',
-    a: 'Brokerage charges for options trading are structured to be competitive and straightforward. Shriram Securities charges a flat fee of ₹20 per executed order for options trading. To further understand and calculate the total costs, including brokerage, taxes, and other fees, you can use the Brokerage Calculator. This tool helps you estimate the net profit or loss on your trades by accounting for all applicable charges.',
+    a: 'Shriram Securities charges a flat ₹20 per executed order for options trading. Use our Brokerage Calculator to estimate total costs including STT, GST, and exchange charges.',
   },
   {
     q: 'Are there any charges associated with the Demat Account?',
@@ -110,7 +110,10 @@ const faqs = [
 ];
 ---
 
-<BaseLayout title="" description="Shriram Financial Services — Advisory-Led Wealth Curation. Invest across equity, mutual funds, bonds and more with India's most trusted platform.">
+<BaseLayout
+  title="Online Stock Trading & Wealth Management | Shriram Financial Services"
+  description="Trade stocks, invest in mutual funds, and manage wealth with India's SEBI-registered advisor-led platform. Zero delivery brokerage. Open a free Demat account today."
+>
 
   <!-- ══ HERO ══ -->
   <section class="relative lg:min-h-[max(560px,calc(100vh-80px))] overflow-hidden">
@@ -243,7 +246,7 @@ const faqs = [
               Why Shriram Financial <span class="font-semibold text-[#f3b83f]">Services?</span>
             </h2>
             <p class="mt-4 text-[15px] leading-[1.5] text-white lg:text-[15px] xl:text-[18px]">
-              Real Humans | Smart Tech | Better Returns. Because Your Money Deserves Personal Attention, we combine easy-to-use technology with real human experts and data-backed research to help you build lasting, long-term wealth.
+              Real advisors. Smart tech. Better returns. SEBI-registered research paired with dedicated relationship managers — so every financial decision you make is backed by expertise.
             </p>
           </div>
 
@@ -287,7 +290,7 @@ const faqs = [
         Strategic Advisory For Every Investor
       </h2>
       <p class="mt-4 max-w-4xl text-[15px] text-[var(--color-muted)]">
-        Whether you're placing your first trade, investing in SIP or rebalancing a large portfolio, our SEBI-registered analysts and personal relationship managers ensure every move you make is research-backed.
+        First SIP or full portfolio rebalance — every move is backed by SEBI-registered research and a dedicated advisor who knows your goals.
       </p>
 
       <div class="advisory-grid mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -322,7 +325,7 @@ const faqs = [
               Confused About Where to Start? <span class="text-[var(--color-brand)]">We've got your back.</span>
             </p>
             <p class="mt-2 max-w-xl text-[14px] leading-relaxed text-[var(--color-muted)]">
-              Our dedicated financial specialists will look at your current savings and help you build a personalised, easy-to-follow wealth plan for your future.
+              Our specialists review your current savings and build a personalised wealth plan — in a free 15-minute call.
             </p>
           </div>
           <a href="/about/support/" class="btn-primary shrink-0">Schedule a Call</a>
@@ -411,11 +414,11 @@ const faqs = [
              style="background-image:repeating-linear-gradient(90deg,#EBDEC6 0 7px,transparent 7px 14px);"></div>
         <div class="relative grid grid-cols-2 gap-x-6 gap-y-12 sm:grid-cols-5">
           {[
-            { img: '/images/step-icon-1.svg', title: 'Profile and Bank Setup',             desc: 'Enter basic profile details. Verify your mobile number with a quick OTP. Add your bank account number you want to link for Trading.' },
-            { img: '/images/step-icon-2.svg', title: 'Complete eKYC via Aadhaar',          desc: 'Upload your PAN card to confirm your identity. Upload a Passport, Voter ID, or use Aadhaar online for address proof.' },
-            { img: '/images/step-icon-3.svg', title: 'Upload Documents',                   desc: 'Upload a cancelled cheque or recent bank statement to link your account. (Optional) Share a 6-month bank statement if you want to trade F&O.' },
-            { img: '/images/step-icon-4.svg', title: 'Video Verification & Digital eSign', desc: 'Record a brief, live video of your face using your camera to confirm identity. Digitally sign the official form using a secure mobile OTP.' },
-            { img: '/images/step-icon-5.svg', title: 'Review & Account Activation',        desc: 'Our team will verify your digital application documents. Receive your secure login details via email within 1–2 business days.' },
+            { img: '/images/step-icon-1.svg', title: 'Profile and Bank Setup',             desc: 'Enter your name, mobile, and PAN. Verify with OTP and link your bank account.' },
+            { img: '/images/step-icon-2.svg', title: 'Complete eKYC via Aadhaar',          desc: 'Upload your PAN and address proof — Aadhaar, Passport, or Voter ID.' },
+            { img: '/images/step-icon-3.svg', title: 'Upload Documents',                   desc: 'Upload a cancelled cheque or bank statement. Add a 6-month statement to unlock F&O.' },
+            { img: '/images/step-icon-4.svg', title: 'Video Verification & Digital eSign', desc: 'Record a quick face video, then e-Sign the form with a secure mobile OTP.' },
+            { img: '/images/step-icon-5.svg', title: 'Review & Account Activation',        desc: 'Our team reviews your application. Login details arrive within 1–2 business days.' },
           ].map((step) => (
             <div class="flex flex-col items-center gap-6 text-center">
               <div class="relative z-10 flex h-[64px] shrink-0 items-center justify-center rounded-[24px] bg-[#FFF0D7] px-8">
