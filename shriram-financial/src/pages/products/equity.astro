@@ -395,25 +395,26 @@ const faqs = [
         <p class="faq-title">General Questions</p>
         <div class="faq-acc">
           {faqs.map((item, i) => (
-            <div class={`faq-item${i === 0 ? ' open' : ''}`}>
-              <div class="q">
+            <details class="faq-item" open={i === 0}>
+              <summary class="faq-sum">
                 <span class="qt">{item.q}</span>
-                <div class="qa-wrap"><div class="qa"><p>{item.a}</p></div></div>
-              </div>
-              <span class="faq-icon">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <line class="v" x1="12" y1="5" x2="12" y2="19" stroke="#404040" stroke-width="2" stroke-linecap="round"/>
-                  <line x1="5" y1="12" x2="19" y2="12" stroke="#404040" stroke-width="2" stroke-linecap="round"/>
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="faq-icon">
+                  <path d="M2 8h12"/>
+                  <path class="faq-v" d="M8 2v12"/>
                 </svg>
-              </span>
-            </div>
+              </summary>
+              <div class="qa"><p>{item.a}</p></div>
+            </details>
           ))}
         </div>
       </div>
 
       <div class="faq-side">
         <div class="usr" aria-hidden="true">
-          <img src="/user-icon.png" alt="" />
+          <svg viewBox="0 0 120 135" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="60" cy="37" r="29"/>
+            <path d="M0 135a60 60 0 0 1 120 0H0z"/>
+          </svg>
         </div>
         <div class="side-in">
           <div class="side-tx">
@@ -662,17 +663,16 @@ const faqs = [
   .faq-left  { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; gap: 48px; }
   .faq-title { font-weight: 400; font-size: 40px; color: var(--olive-title); text-transform: capitalize; line-height: 1.5; white-space: nowrap; }
   .faq-acc   { border-radius: 24px; overflow: hidden; display: flex; flex-direction: column; gap: 2px; width: 100%; }
-  .faq-item  { background: var(--card); padding: 24px; display: flex; gap: 40px; align-items: flex-start; cursor: pointer; }
-  .faq-item .q { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; }
-  .faq-item .qt { font-weight: 500; font-size: 14px; color: #333; line-height: 1.5; }
-  .qa-wrap { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .38s cubic-bezier(.4,0,.2,1); }
-  .faq-item.open .qa-wrap { grid-template-rows: 1fr; }
-  .qa { overflow: hidden; min-height: 0; }
-  .qa p { padding-top: 16px; font-weight: 400; font-size: 14px; color: #404040; line-height: 1.5; }
-  .faq-icon { width: 24px; height: 24px; flex: none; }
-  .faq-icon svg { display: block; width: 24px; height: 24px; }
-  .faq-icon svg .v { transform-box: fill-box; transform-origin: center; transition: transform .38s cubic-bezier(.4,0,.2,1), opacity .38s ease; }
-  .faq-item.open .faq-icon svg .v { transform: scaleY(0); opacity: 0; }
+  .faq-item  { background: var(--card); list-style: none; }
+  .faq-sum   { display: flex; align-items: flex-start; justify-content: space-between; gap: 40px; padding: 24px; cursor: pointer; list-style: none; }
+  .faq-sum::-webkit-details-marker { display: none; }
+  .faq-item .qt { font-weight: 500; font-size: 14px; color: #333; line-height: 1.5; flex: 1; }
+  .faq-item[open] .qt { font-weight: 600; }
+  .faq-icon  { width: 16px; height: 16px; flex: none; color: #404040; }
+  .faq-v     { transition: opacity .28s ease; }
+  .faq-item[open] .faq-v { opacity: 0; }
+  .qa { padding: 0 24px 20px; }
+  .qa p { font-weight: 400; font-size: 14px; color: #404040; line-height: 1.5; }
 
   .faq-side {
     width: 464px; flex: none;
@@ -685,7 +685,7 @@ const faqs = [
     position: absolute; left: var(--container-pad); top: 64px;
     width: 130.667px; height: 147px; opacity: .1;
   }
-  .usr img { display: block; width: 100%; height: 100%; object-fit: contain; }
+  .usr svg { display: block; width: 100%; height: 100%; color: var(--olive-deep); }
   .side-in  { display: flex; flex-direction: column; gap: 32px; position: relative; }
   .side-tx  { display: flex; flex-direction: column; gap: 8px; color: #222320; }
   .side-tx h4 { font-weight: 500; font-size: 20px; line-height: 28px; letter-spacing: -0.45px; }
@@ -757,16 +757,21 @@ const faqs = [
 
   @media (prefers-reduced-motion: reduce) {
     .appr, .appr .explore span:last-child { transition: none; }
-    .qa-wrap, .faq-icon svg .v { transition: none; }
+    .faq-v { transition: none; }
   }
 </style>
 
 <script>
-  /* FAQ accordion */
-  document.querySelectorAll('.faq-item').forEach(function(it) {
-    if (!it.querySelector('.qa-wrap')) return;
-    (it as HTMLElement).addEventListener('click', function() {
-      it.classList.toggle('open');
+  /* FAQ accordion — one open at a time */
+  document.querySelectorAll('.faq-acc').forEach(function(acc) {
+    acc.querySelectorAll('details').forEach(function(d) {
+      d.addEventListener('toggle', function() {
+        if ((d as HTMLDetailsElement).open) {
+          acc.querySelectorAll<HTMLDetailsElement>('details').forEach(function(other) {
+            if (other !== d) other.removeAttribute('open');
+          });
+        }
+      });
     });
   });
 </script>
