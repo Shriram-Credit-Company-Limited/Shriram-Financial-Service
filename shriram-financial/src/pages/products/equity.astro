@@ -509,8 +509,6 @@ const faqs = [
 
   /* ── Hero ────────────────────────────────────────────────────────── */
   .hero {
-    min-height: 100vh;
-    min-height: 100dvh;
     padding: 0 var(--pad);
     display: flex;
     flex-direction: column;
@@ -518,7 +516,7 @@ const faqs = [
     overflow: hidden;
     background: radial-gradient(125% 210% at 100% -8%, #4f583b 0%, #363a2c 50%, #1d1d1d 100%);
   }
-  .hero-inner { padding: 120px 0; display: flex; flex-direction: column; }
+  .hero-inner { padding: clamp(80px,12vw,140px) 0 clamp(48px,6vw,80px); display: flex; flex-direction: column; }
   .hero h1 { font-weight: 500; font-size: 40px; color: #fff; line-height: 1.5; max-width: 860px; }
   .hero h1 .g { color: var(--gold-2); }
   .hero .lead { margin-top: 32px; font-weight: 400; font-size: 18px; line-height: 1.5; color: rgba(255,255,255,.74); max-width: 600px; }
@@ -735,8 +733,7 @@ const faqs = [
     :root { --pad: 16px; --container-pad: 24px; --section-y: 56px; }
     .faq-wrap { padding: 128px var(--pad); }
     .feats { padding-top: 32px; }
-    .hero { min-height: 0; }
-    .hero-inner { padding: 96px 0; }
+    .hero-inner { padding: 80px 0 48px; }
     .hero h1 { font-size: clamp(28px, 7vw, 40px); }
     .hero .lead { font-size: 16px; }
     .sec-title, .faq-title { font-size: clamp(28px, 7vw, 40px); }
