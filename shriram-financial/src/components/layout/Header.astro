@@ -5,7 +5,7 @@ const products = navigation.find(n => n.label === 'Products')!;
 const about     = navigation.find(n => n.label === 'About')!;
 ---
 
-<header id="site-header" class="sticky top-0 z-50 h-[80px] border-b border-[#f2f2f2] bg-[rgba(255,255,255,0.80)] backdrop-blur-[30px]">
+<header id="site-header" class="sticky top-0 z-50 h-[80px] border-b border-[#f2f2f2] bg-white transition-transform duration-300 ease-in-out">
   <div class="site-wrap flex h-full items-center justify-between">
 
     <!-- Logo -->
@@ -462,6 +462,19 @@ const about     = navigation.find(n => n.label === 'About')!;
 </style>
 
 <script>
+  // ── Scroll-aware sticky header ─────────────────────────────────
+  const siteHeader = document.getElementById('site-header')!;
+  let lastY = 0;
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (y > lastY && y > 80) {
+      siteHeader.style.transform = 'translateY(-100%)';
+    } else {
+      siteHeader.style.transform = 'translateY(0)';
+    }
+    lastY = y;
+  }, { passive: true });
+
   // ── Mobile drawer ──────────────────────────────────────────────
   const toggle    = document.getElementById('menu-toggle')!;
   const menu      = document.getElementById('mobile-menu')!;
