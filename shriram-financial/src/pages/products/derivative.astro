@@ -2,36 +2,12 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const advantageItems = [
-  {
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
-    title: 'Hedging & Risk Management',
-    desc: 'Protect your equity portfolio against market downturns using index put options or futures as a hedge.',
-  },
-  {
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><path d="M3 3v18h18"/><path d="m7 14 4-4 4 4 4-4"/></svg>`,
-    title: 'Leverage Your Capital',
-    desc: 'Control a large position with a fraction of the capital required in the cash market. Initial margin is typically 8–22% of contract value.',
-  },
-  {
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>`,
-    title: 'Income Generation',
-    desc: 'Sell covered calls or cash-secured puts to earn regular premium income on your existing portfolio.',
-  },
-  {
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><polyline points="3 18 10 11 16 16 25 7"/><polyline points="19 7 25 7 25 13"/></svg>`,
-    title: 'Price Discovery',
-    desc: 'F&O markets reflect future expectations, acting as a leading indicator for spot markets and helping informed decision-making.',
-  },
-  {
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><rect x="2" y="7" width="6" height="14" rx="1"/><rect x="9" y="3" width="6" height="18" rx="1"/><rect x="16" y="10" width="6" height="11" rx="1"/></svg>`,
-    title: 'High Liquidity',
-    desc: 'NIFTY and BANKNIFTY options are among the most liquid instruments globally — tight spreads and deep order books at all times.',
-  },
-  {
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><path d="M9 14l-4-4 4-4"/><path d="M5 10h11a4 4 0 0 1 0 8h-1"/></svg>`,
-    title: 'Low Transaction Costs',
-    desc: 'Flat ₹20 per executed order brokerage — no percentage-based fees. Statutory charges (STT, exchange fee) are standard across all brokers.',
-  },
+  { icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`, title: 'Hedging & Risk Management', desc: 'Protect your equity portfolio against market downturns using index put options or futures as a hedge.' },
+  { icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 14 4-4 4 4 4-4"/></svg>`, title: 'Leverage Your Capital', desc: 'Control a large position with a fraction of the capital required in the cash market. Initial margin is typically 8–22% of contract value.' },
+  { icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>`, title: 'Income Generation', desc: 'Sell covered calls or cash-secured puts to earn regular premium income on your existing portfolio.' },
+  { icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 18 10 11 16 16 25 7"/><polyline points="19 7 25 7 25 13"/></svg>`, title: 'Price Discovery', desc: 'F&O markets reflect future expectations, acting as a leading indicator for spot markets and helping informed decision-making.' },
+  { icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="6" height="14" rx="1"/><rect x="9" y="3" width="6" height="18" rx="1"/><rect x="16" y="10" width="6" height="11" rx="1"/></svg>`, title: 'High Liquidity', desc: 'NIFTY and BANKNIFTY options are among the most liquid instruments globally — tight spreads and deep order books at all times.' },
+  { icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14l-4-4 4-4"/><path d="M5 10h11a4 4 0 0 1 0 8h-1"/></svg>`, title: 'Low Transaction Costs', desc: 'Flat ₹20 per executed order brokerage — no percentage-based fees. Statutory charges (STT, exchange fee) are standard across all brokers.' },
 ];
 
 const limitationItems = [
@@ -44,26 +20,49 @@ const limitationItems = [
 ];
 
 const typeItems = [
-  { label: 'Index Futures', tag: 'Futures', desc: 'Trade NIFTY 50, BANKNIFTY, FINNIFTY futures. Cash-settled on expiry every Thursday.' },
-  { label: 'Stock Futures', tag: 'Futures', desc: 'Futures contracts on 180+ SEBI-approved stocks. Physical delivery on monthly expiry.' },
-  { label: 'Index Options', tag: 'Options', desc: 'Call & put options on NIFTY/BANKNIFTY. Most liquid derivative instruments in India.' },
-  { label: 'Stock Options', tag: 'Options', desc: 'Options on individual stocks with monthly expiry. Lower liquidity than index options.' },
-  { label: 'Currency Derivatives', tag: 'Currency', desc: 'Trade USD-INR, EUR-INR, GBP-INR pairs on NSE/BSE. Used by importers, exporters, and speculators.' },
-  { label: 'Commodity Derivatives', tag: 'Commodity', desc: 'Futures & options on gold, silver, crude oil, and agri commodities — traded on MCX and NCDEX.' },
+  { label: 'Index Futures',       tag: 'Futures',   tagClass: 'futures',   desc: 'Trade NIFTY 50, BANKNIFTY, FINNIFTY futures. Cash-settled on expiry every Thursday.' },
+  { label: 'Stock Futures',       tag: 'Futures',   tagClass: 'futures',   desc: 'Futures contracts on 180+ SEBI-approved stocks. Physical delivery on monthly expiry.' },
+  { label: 'Index Options',       tag: 'Options',   tagClass: 'options',   desc: 'Call & put options on NIFTY/BANKNIFTY. Most liquid derivative instruments in India.' },
+  { label: 'Stock Options',       tag: 'Options',   tagClass: 'options',   desc: 'Options on individual stocks with monthly expiry. Lower liquidity than index options.' },
+  { label: 'Currency Derivatives',tag: 'Currency',  tagClass: 'currency',  desc: 'Trade USD-INR, EUR-INR, GBP-INR pairs on NSE/BSE. Used by importers, exporters, and speculators.' },
+  { label: 'Commodity Derivatives',tag:'Commodity', tagClass: 'commodity', desc: 'Futures & options on gold, silver, crude oil, and agri commodities — traded on MCX and NCDEX.' },
 ];
 
-const tagColors: Record<string, string> = {
-  Futures:   'bg-[#e8f3ff] text-[#1a5caa]',
-  Options:   'bg-[var(--color-brand)]/15 text-[var(--color-brand-deep)]',
-  Currency:  'bg-[#edf6ee] text-[#1a6e2e]',
-  Commodity: 'bg-[#f3ede8] text-[#7a3a12]',
-};
-
 const steps = [
-  { n: '01', title: 'Open a Trading Account', desc: 'Register with Shriram Financial Services and open a Demat + Trading account digitally in under 10 minutes — 100% paperless.' },
-  { n: '02', title: 'Activate F&O Segment', desc: 'Request F&O segment activation from your account dashboard. Submit 6-month bank statement or ITR as income proof if required by SEBI guidelines.' },
-  { n: '03', title: 'Add Margin to Your Account', desc: 'Transfer funds to cover SPAN + Exposure margin. F&O positions require upfront margin collateral — check the margin requirement for your chosen contract.' },
-  { n: '04', title: 'Place Your First Order', desc: 'Select your underlying (NIFTY / BANKNIFTY / stock), expiry date, strike price, and order type. Start with buying options to limit downside to the premium paid.' },
+  { n: '1', title: 'Open a Trading Account', desc: 'Register with Shriram Financial Services and open a Demat + Trading account digitally in under 10 minutes — 100% paperless.' },
+  { n: '2', title: 'Activate F&O Segment', desc: 'Request F&O segment activation from your account dashboard. Submit 6-month bank statement or ITR as income proof if required by SEBI guidelines.' },
+  { n: '3', title: 'Add Margin to Your Account', desc: 'Transfer funds to cover SPAN + Exposure margin. F&O positions require upfront margin collateral — check the margin requirement for your chosen contract.' },
+  { n: '4', title: 'Place Your First Order', desc: 'Select your underlying (NIFTY / BANKNIFTY / stock), expiry date, strike price, and order type. Start with buying options to limit downside to the premium paid.' },
+];
+
+const fovRows = [
+  { feature: 'Obligation',       futures: 'Both buyer and seller must settle at expiry', options: 'Buyer has a right only; seller is obligated' },
+  { feature: 'Premium / Cost',   futures: 'No premium — margin-based',                  options: 'Buyer pays premium upfront' },
+  { feature: 'Max Loss (Buyer)', futures: 'Unlimited (mark-to-market daily)',            options: 'Limited to premium paid' },
+  { feature: 'Max Loss (Seller)',futures: 'Unlimited',                                   options: 'Unlimited for naked positions' },
+  { feature: 'Capital Required', futures: 'Higher (SPAN + Exposure margin)',             options: 'Lower (premium amount for buyers)' },
+  { feature: 'Best For',         futures: 'Strong directional bets, portfolio hedging',  options: 'Hedging, income strategies, speculation' },
+  { feature: 'Time Decay',       futures: 'No time decay',                               options: 'Theta erodes option value daily' },
+];
+
+const risks = [
+  { label: 'Leverage Risk',   desc: 'A small adverse price move can produce losses far exceeding initial margin. Manage position sizing strictly.' },
+  { label: 'Time Decay',      desc: 'Options lose time value daily (theta). Buyers must be right on direction, magnitude, AND timing.' },
+  { label: 'Volatility Risk', desc: 'Gap openings, earnings events, and macro shocks can cause large overnight losses in open futures positions.' },
+  { label: 'Margin Calls',    desc: 'Adverse moves trigger margin calls. Failure to add funds leads to forced square-off of positions.' },
+];
+
+const marginRows = [
+  { type: 'SPAN Margin',          purpose: 'Covers worst-case 1-day loss based on VaR (Value at Risk) model', range: '5–15% of contract value' },
+  { type: 'Exposure Margin',      purpose: 'Additional buffer against extreme intraday volatility',             range: '3–7% of contract value' },
+  { type: 'Total Required Margin',purpose: 'SPAN + Exposure — the amount you must have upfront',               range: '8–22% of contract value' },
+];
+
+const strategies = [
+  { label: 'Long Call',       type: 'Bullish', typeClass: 'bullish', desc: 'Buy a call option. Profit if underlying rises above strike + premium. Max loss = premium paid.' },
+  { label: 'Bull Call Spread',type: 'Bullish', typeClass: 'bullish', desc: 'Buy a lower strike call, sell a higher strike call. Limits both profit and loss. Lower cost than outright call.' },
+  { label: 'Long Put',        type: 'Bearish', typeClass: 'bearish', desc: 'Buy a put option. Profit if underlying falls below strike. Ideal hedge for existing equity positions.' },
+  { label: 'Iron Condor',     type: 'Neutral', typeClass: 'neutral', desc: 'Sell OTM call spread + OTM put spread. Profits in range-bound markets. Maximum profit = net premium received.' },
 ];
 
 const faqs = [
@@ -87,436 +86,313 @@ const faqs = [
   description="Trade derivatives in India — futures &amp; options on NSE &amp; BSE. SEBI-registered. Flat ₹20/order. Expert F&amp;O advisory, margin guidance, and dedicated research. Activate F&amp;O today."
 >
 
-  <!-- ══ S1. HERO ══════════════════════════════════════════════════════ -->
-  <section class="relative overflow-hidden bg-[var(--color-dark-800)] py-[100px] lg:py-[120px]">
-    <div class="pointer-events-none absolute -right-40 -top-40 h-[560px] w-[560px] rounded-full bg-[var(--color-brand)]/10 blur-3xl"></div>
-    <div class="pointer-events-none absolute -bottom-32 left-0 h-80 w-80 rounded-full bg-[var(--color-brand)]/5 blur-3xl"></div>
-    <div class="site-wrap relative">
-      <p class="equity-reveal text-[14px] font-medium tracking-[.04em] text-[var(--color-brand)]">Derivatives</p>
-      <h1 class="equity-reveal mt-[22px] max-w-[860px] text-[clamp(32px,4vw,54px)] font-bold leading-[1.06] text-white" style="font-family:var(--font-display)">
-        Trade Derivatives <span class="text-[var(--color-brand)]">with Confidence</span>
-      </h1>
-      <p class="equity-reveal mt-[26px] max-w-[580px] text-[18px] leading-relaxed text-white/70">
-        Access Futures &amp; Options on India's trusted platform — Shriram Financial Services. SEBI-registered, flat ₹20/order, with expert F&amp;O research from Day 1.
-      </p>
-      <div class="equity-reveal mt-[38px] flex flex-wrap gap-[14px]">
-        <a href="/about/open-demat-account/" class="btn-primary">Open Demat Account</a>
-        <a href="/about/open-demat-account/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Activate F&amp;O Segment</a>
+  <!-- ══ 1. HERO ══════════════════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">Derivatives</p>
+      <h1>Trade Derivatives <span class="g">with Confidence</span></h1>
+      <p class="lead">Access Futures &amp; Options on India's trusted platform — Shriram Financial Services. SEBI-registered, flat ₹20/order, with expert F&amp;O research from Day 1.</p>
+      <div class="cta-row">
+        <a class="btn-gold" href="/about/open-demat-account/">Open Demat Account</a>
+        <a class="btn-ghost" href="/about/open-demat-account/">Activate F&amp;O Segment</a>
       </div>
-      <div class="equity-reveal mt-[54px] flex flex-wrap gap-x-9 gap-y-3 border-t border-white/15 pt-9">
-        {['✓ SEBI-registered', '✓ Flat ₹20/order', '✓ NSE & BSE F&O', '✓ Expert F&O advisory'].map(f => (
-          <span class="text-[15px] font-medium text-white/90">{f}</span>
+      <div class="hero-feats">
+        <div class="feats">
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;SEBI-registered</span></div>
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;Flat ₹20/order</span></div>
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;NSE &amp; BSE F&amp;O</span></div>
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;Expert F&amp;O advisory</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 2. WHAT IS DERIVATIVES TRADING ══════════════════════════════ -->
+  <section class="section stack" id="sec-about" style="background:var(--sec-light);gap:56px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">What is Derivatives Trading?</p>
+      <p class="sec-lead">Derivatives trading involves financial contracts whose value is derived from an underlying asset — such as stocks, indices, commodities, or currencies. In the Indian market, these instruments are pivotal for both institutional and retail traders, enabling sophisticated risk management and speculative positioning.</p>
+      <p class="sec-lead" style="margin-top:8px">A derivative contract represents an agreement between a buyer and a seller to trade an asset at a predetermined price on a future date. For retail investors in India, derivatives are predominantly traded on the NSE and BSE through Futures and Options (F&amp;O), making India one of the largest derivative markets globally — with high daily volume and robust regulatory oversight by SEBI.</p>
+    </div>
+    <div class="term-grid">
+      {[
+        { label: 'Underlying Asset', val: 'The stock, index, commodity, or currency the contract is based on (e.g. NIFTY, RELIANCE, GOLD).' },
+        { label: 'Expiry Date',      val: 'Date the contract terminates. Weekly: every Thursday. Monthly: last Thursday of the month.' },
+        { label: 'Lot Size',         val: 'Minimum number of units per contract — e.g. 75 units for NIFTY, 35 for BANKNIFTY.' },
+        { label: 'Strike Price / Premium', val: 'Strike is the pre-agreed price for options; premium is the cost paid by the option buyer.' },
+      ].map(d => (
+        <div class="term">
+          <p class="tk-label">{d.label}</p>
+          <p class="tk-val">{d.val}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ══ 3. HOW DERIVATIVES TRADING WORKS ════════════════════════════ -->
+  <section class="section stack" style="background:var(--sec-tint);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">How Derivatives Trading Works</p>
+      <p class="sec-lead">Two contract types — each with distinct rights, obligations, and risk profiles.</p>
+    </div>
+    <div class="row-2">
+      <div class="card how-card">
+        <div class="icon-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <h3>Futures Contract</h3>
+        <p>A binding agreement to buy or sell an asset at a preset price on expiry. Both parties <strong style="color:var(--ink)">must</strong> honour the contract regardless of the market price. P&amp;L is settled daily via mark-to-market (MTM).</p>
+        <ul class="how-list">
+          {['Both buyer and seller are obligated','Daily MTM settlement','Higher margin requirement','Unlimited profit and loss potential'].map(pt => <li>{pt}</li>)}
+        </ul>
+      </div>
+      <div class="card how-card">
+        <div class="icon-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Options Contract</h3>
+        <p>The <strong style="color:var(--ink)">right — not the obligation</strong> — to buy (Call) or sell (Put) at a strike price before expiry. The buyer pays a premium; the seller (writer) collects it but takes on the obligation.</p>
+        <ul class="how-list">
+          {['Buyer has a right, not obligation','Maximum loss = premium paid (buyer)','Seller faces potentially unlimited risk','Weekly and monthly expiry cycles'].map(pt => <li>{pt}</li>)}
+        </ul>
+      </div>
+    </div>
+    <div class="example-box">
+      <p><strong>Worked Example:</strong> You expect NIFTY to rise from 24,000 to 24,500. You buy a NIFTY 24,200 Call at ₹150 premium (lot size: 75 units). Total cost = ₹150 × 75 = <strong>₹11,250</strong>. If NIFTY closes at 24,600, intrinsic value = ₹400 → profit = (₹400 − ₹150) × 75 = <strong>₹18,750</strong>. If NIFTY falls, your maximum loss is the ₹11,250 premium paid.</p>
+    </div>
+  </section>
+
+  <!-- ══ 4. TYPES OF DERIVATIVES ═════════════════════════════════════ -->
+  <section class="section stack" style="background:var(--sec-light);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Types of Derivatives</p>
+      <p class="sec-lead">Derivatives available to Indian retail investors span indices, stocks, currencies, and commodities.</p>
+    </div>
+    <div class="cat-grid cat-3">
+      {typeItems.map(t => (
+        <div class="cat">
+          <span class={`dtype-tag dtype-${t.tagClass}`}>{t.tag}</span>
+          <h4>{t.label}</h4>
+          <p>{t.desc}</p>
+        </div>
+      ))}
+    </div>
+    <a class="btn-gold" href="/about/open-demat-account/" style="align-self:center">Open Demat Account</a>
+  </section>
+
+  <!-- ══ 5. ADVANTAGES ════════════════════════════════════════════════ -->
+  <section class="section stack" style="background:var(--sec-tint);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Advantages of Derivatives Trading</p>
+      <p class="sec-lead">When used with discipline and the right strategy, derivatives offer unique advantages unavailable in the equity cash market.</p>
+    </div>
+    <div class="adv-grid">
+      {advantageItems.map(a => (
+        <div class="card adv-card">
+          <div class="icon-box" set:html={a.icon} />
+          <p class="card-h">{a.title}</p>
+          <p class="card-p">{a.desc}</p>
+        </div>
+      ))}
+    </div>
+    <a class="btn-gold" href="/about/open-demat-account/" style="align-self:center">Open Demat Account</a>
+  </section>
+
+  <!-- ══ 6. LIMITATIONS ══════════════════════════════════════════════ -->
+  <section class="section stack" style="background:var(--sec-light);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Limitations to Be Aware</p>
+      <p class="sec-lead">Derivatives carry significant risks. Understanding these limitations is essential before trading F&amp;O.</p>
+    </div>
+    <div class="faq-acc lim-acc">
+      {limitationItems.map((item, i) => (
+        <div class={`faq-item${i === 0 ? ' open' : ''}`}>
+          <div class="q">
+            <span class="qt">{item.q}</span>
+            <div class="qa-wrap"><div class="qa"><p>{item.a}</p></div></div>
+          </div>
+          <span class="faq-icon">
+            <svg viewBox="0 0 24 24" fill="none">
+              <line class="v" x1="12" y1="5" x2="12" y2="19" stroke="#404040" stroke-width="2" stroke-linecap="round"/>
+              <line x1="5" y1="12" x2="19" y2="12" stroke="#404040" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </span>
+        </div>
+      ))}
+    </div>
+    <a class="btn-gold" href="/about/support/" style="align-self:center">Read Risk Disclosure</a>
+  </section>
+
+  <!-- ══ 7. HOW TO TRADE DERIVATIVES ════════════════════════════════ -->
+  <section class="section stack" style="background:var(--sec-tint);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">How to Trade Derivatives</p>
+      <p class="sec-lead">Three prerequisites you must have before placing your first F&amp;O order on NSE or BSE.</p>
+    </div>
+    <div class="row-3">
+      {[
+        { n:'1', label:'F&O Account Activated', desc:'Request F&O segment activation on your Shriram trading account. This is a one-time, digital process.' },
+        { n:'2', label:'Sufficient Margin',      desc:'Maintain SPAN + Exposure margin in your account at all times. Your broker will alert you if the balance drops.' },
+        { n:'3', label:'Strategy Knowledge',     desc:'Start with buying options (limited risk = premium paid) before moving to selling or complex multi-leg strategies.' },
+      ].map(c => (
+        <div class="card">
+          <div class="num" style="font-size:32px;font-weight:400;color:var(--gold);line-height:34px">{c.n}</div>
+          <p class="card-h">{c.label}</p>
+          <p class="card-p">{c.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ══ 8. START YOUR F&O JOURNEY ═══════════════════════════════════ -->
+  <section class="section stack" style="background:var(--sec-light);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Start Your F&amp;O Trading Journey</p>
+      <p class="sec-lead">Four simple steps to go from zero to your first derivatives trade — fully online, no branch visit needed.</p>
+    </div>
+    <div class="steps">
+      {steps.map((s, i) => (
+        <>
+          {i > 0 && <div class="step-div"></div>}
+          <div class="step">
+            <div class="num">{s.n}</div>
+            <div class="st-body"><h4>{s.title}</h4><p>{s.desc}</p></div>
+          </div>
+        </>
+      ))}
+    </div>
+    <a class="btn-gold" href="/about/open-demat-account/" style="align-self:center">Open Demat Account</a>
+  </section>
+
+  <!-- ══ 9. FUTURES VS OPTIONS ════════════════════════════════════════ -->
+  <section class="section stack" style="background:var(--sec-tint);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Futures vs Options — Key Differences</p>
+      <p class="sec-lead">Choose the right instrument based on your strategy, capital available, and risk appetite.</p>
+    </div>
+    <div class="t-scroll">
+      <div class="table t3 bordered">
+        <div class="cell th"><p>Feature</p></div>
+        <div class="cell th"><p>Futures</p></div>
+        <div class="cell th"><p>Options</p></div>
+        {fovRows.map(r => (
+          <>
+            <div class="cell tb"><p class="k">{r.feature}</p></div>
+            <div class="cell tb"><p class="v">{r.futures}</p></div>
+            <div class="cell tb"><p class="v">{r.options}</p></div>
+          </>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- ══ S2. WHAT IS DERIVATIVES TRADING ══════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[52px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          What is <span class="text-[var(--color-brand)]">Derivatives Trading?</span>
-        </h2>
-      </div>
+  <!-- ══ 10. RISKS ════════════════════════════════════════════════════ -->
+  <section class="section stack" style="background:var(--sec-light);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Risks in Derivatives Trading</p>
+      <p class="sec-lead">Understand these risks before activating your F&amp;O segment. Knowledge is your first line of defence.</p>
+    </div>
+    <div class="risks">
+      {risks.map(r => (
+        <div class="risk"><h4>{r.label}</h4><p>{r.desc}</p></div>
+      ))}
+    </div>
+    <a class="btn-gold" href="/about/support/" style="align-self:center">Check Risk Disclosure</a>
+  </section>
 
-      <div class="equity-reveal mx-auto max-w-[860px] space-y-[22px] text-[17px] leading-[1.75] text-[var(--color-muted)]">
-        <p>Derivatives trading involves financial contracts whose value is derived from an underlying asset — such as stocks, indices, commodities, or currencies. In the Indian market context, these instruments are pivotal for both institutional and retail traders, enabling sophisticated risk management and speculative positioning.</p>
-        <p>A derivative contract represents an agreement between a buyer and a seller to trade an asset at a predetermined price on a future date. This mechanism provides a layer of certainty for businesses managing input costs while offering liquid opportunities for market participants to profit from price movements without owning the underlying asset.</p>
-        <p>For retail investors in India, derivatives are predominantly traded on the NSE and BSE through Futures and Options (F&amp;O). These segments have seen explosive growth, making India one of the largest derivative markets globally — characterised by high daily volume and robust regulatory oversight by SEBI.</p>
+  <!-- ══ 11. MARGIN ═══════════════════════════════════════════════════ -->
+  <section class="section stack" style="background:var(--sec-tint);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Margin in Derivatives — SPAN &amp; Exposure</p>
+      <p class="sec-lead">SEBI mandates two margin components for every F&amp;O position. Know what you need before you trade.</p>
+    </div>
+    <div class="t-scroll">
+      <div class="table t3 bordered">
+        <div class="cell th"><p>Margin Type</p></div>
+        <div class="cell th"><p>Purpose</p></div>
+        <div class="cell th"><p>Typical Range</p></div>
+        {marginRows.map(r => (
+          <>
+            <div class="cell tb"><p class="k">{r.type}</p></div>
+            <div class="cell tb"><p class="v">{r.purpose}</p></div>
+            <div class="cell tb"><p class="v" style="color:var(--olive-head);font-weight:500">{r.range}</p></div>
+          </>
+        ))}
       </div>
+    </div>
+    <div class="example-box">
+      <p><strong>Example:</strong> NIFTY Futures (1 lot = 75 units × ₹24,000 spot = ₹18L notional value). SPAN + Exposure ~12% → <strong>₹2.16L margin required</strong> per lot. Always verify current margins on NSE or via your broker's margin calculator before taking positions.</p>
+    </div>
+    <a class="btn-gold" href="/about/open-demat-account/" style="align-self:center">Calculate Your Margin</a>
+  </section>
 
-      <div class="equity-reveal mt-[48px] overflow-hidden rounded-[14px] border border-[var(--color-n400)] bg-[#f8f6f1]">
-        <div class="grid divide-y divide-[var(--color-n400)] sm:grid-cols-2 sm:divide-x sm:divide-y-0">
-          {[
-            { label: 'Underlying Asset', val: 'The stock, index, commodity, or currency the contract is based on (e.g. NIFTY, RELIANCE, GOLD).' },
-            { label: 'Expiry Date', val: 'Date the contract terminates. Weekly: every Thursday. Monthly: last Thursday of the month.' },
-            { label: 'Lot Size', val: 'Minimum number of units per contract — e.g. 75 units for NIFTY, 35 for BANKNIFTY.' },
-            { label: 'Strike Price / Premium', val: 'Strike is the pre-agreed price for options; premium is the cost paid by the option buyer.' },
-          ].map(d => (
-            <div class="px-[28px] py-[22px]">
-              <p class="mb-[6px] text-[13px] font-bold uppercase tracking-wide text-[var(--color-dark-olive)]">{d.label}</p>
-              <p class="text-[14.5px] leading-relaxed text-[var(--color-muted)]">{d.val}</p>
+  <!-- ══ 12. POPULAR STRATEGIES ═══════════════════════════════════════ -->
+  <section class="section stack" style="background:var(--sec-light);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Popular Derivatives Strategies</p>
+      <p class="sec-lead">From simple directional plays to sophisticated multi-leg strategies — match your strategy to your market view.</p>
+    </div>
+    <div class="strat-grid">
+      {strategies.map(s => (
+        <div class="card strat-card">
+          <span class={`strat-tag strat-${s.typeClass}`}>{s.type}</span>
+          <p class="card-h">{s.label}</p>
+          <p class="card-p">{s.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ══ 13. FAQ ══════════════════════════════════════════════════════ -->
+  <section class="faq-wrap" id="sec-faq" style="background:var(--sec-tint)">
+    <div class="faq-cols">
+      <div class="faq-left">
+        <p class="faq-title">General Questions</p>
+        <div class="faq-acc">
+          {faqs.map((item, i) => (
+            <div class={`faq-item${i === 0 ? ' open' : ''}`}>
+              <div class="q">
+                <span class="qt">{item.q}</span>
+                <div class="qa-wrap"><div class="qa"><p>{item.a}</p></div></div>
+              </div>
+              <span class="faq-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <line class="v" x1="12" y1="5" x2="12" y2="19" stroke="#404040" stroke-width="2" stroke-linecap="round"/>
+                  <line x1="5" y1="12" x2="19" y2="12" stroke="#404040" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </span>
             </div>
           ))}
         </div>
       </div>
-
-      <div class="equity-reveal mt-[44px] text-center">
-        <a href="/products/equity/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-[var(--color-n400)] px-[26px] text-[15px] font-semibold text-[var(--color-ink)] transition-colors hover:border-[var(--color-brand)]">Explore Futures &amp; Options →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ S3. HOW DERIVATIVES TRADING WORKS ════════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[52px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          How <span class="text-[var(--color-brand)]">Derivatives Trading</span> Works
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Two contract types — each with distinct rights, obligations, and risk profiles.</p>
-      </div>
-
-      <div class="equity-reveal grid gap-5 sm:grid-cols-2">
-        <div class="product-card-light px-[32px] py-[36px]">
-          <div class="mb-[18px] flex h-[52px] w-[52px] items-center justify-center rounded-[14px] bg-[var(--color-dark-olive)] text-[var(--color-brand)]">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-          </div>
-          <h3 class="mb-[12px] text-[22px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">Futures Contract</h3>
-          <p class="text-[15px] leading-relaxed text-[var(--color-muted)]">A binding agreement to buy or sell an asset at a preset price on expiry. Both parties <strong class="text-[var(--color-ink)]">must</strong> honour the contract regardless of the market price. P&amp;L is settled daily via mark-to-market (MTM).</p>
-          <ul class="mt-[18px] space-y-[8px]">
-            {['Both buyer and seller are obligated', 'Daily MTM settlement', 'Higher margin requirement', 'Unlimited profit and loss potential'].map(p => (
-              <li class="flex items-start gap-[10px] text-[13.5px] text-[var(--color-muted)]">
-                <span class="mt-[6px] h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand)]"></span>
-                {p}
-              </li>
-            ))}
-          </ul>
+      <div class="faq-side">
+        <div class="usr" aria-hidden="true">
+          <svg viewBox="0 0 131 147" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="65.5" cy="40" rx="32" ry="32" fill="currentColor"/>
+            <path d="M4 147c0-33.965 27.535-61.5 61.5-61.5S127 113.035 127 147H4Z" fill="currentColor"/>
+          </svg>
         </div>
-
-        <div class="product-card-light px-[32px] py-[36px]">
-          <div class="mb-[18px] flex h-[52px] w-[52px] items-center justify-center rounded-[14px] bg-[var(--color-dark-olive)] text-[var(--color-brand)]">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <div class="side-in">
+          <div class="side-tx">
+            <h4>Need A Clearer Direction?</h4>
+            <p>Let's get in touch on a 15-minute call where we would be able to answer any questions you may have. Our Advisor will additionally help map your wealth mix and demonstrate what a dedicated advisor would do differently.</p>
           </div>
-          <h3 class="mb-[12px] text-[22px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">Options Contract</h3>
-          <p class="text-[15px] leading-relaxed text-[var(--color-muted)]">The <strong class="text-[var(--color-ink)]">right — not the obligation</strong> — to buy (Call) or sell (Put) at a strike price before expiry. The buyer pays a premium; the seller (writer) collects it but takes on the obligation.</p>
-          <ul class="mt-[18px] space-y-[8px]">
-            {['Buyer has a right, not obligation', 'Maximum loss = premium paid (buyer)', 'Seller faces potentially unlimited risk', 'Weekly and monthly expiry cycles'].map(p => (
-              <li class="flex items-start gap-[10px] text-[13.5px] text-[var(--color-muted)]">
-                <span class="mt-[6px] h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand)]"></span>
-                {p}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-
-      <div class="equity-reveal mt-[36px] rounded-[14px] border border-[var(--color-n400)] bg-white px-[32px] py-[24px]">
-        <p class="text-[14.5px] leading-relaxed text-[var(--color-ink)]">
-          <strong>Worked Example:</strong> You expect NIFTY to rise from 24,000 to 24,500. You buy a NIFTY 24,200 Call at ₹150 premium (lot size: 75 units). Total cost = ₹150 × 75 = <strong>₹11,250</strong>. If NIFTY closes at 24,600, intrinsic value = ₹400 → profit = (₹400 − ₹150) × 75 = <strong>₹18,750</strong>. If NIFTY falls, your maximum loss is the ₹11,250 premium paid.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ S4. TYPES OF DERIVATIVES ═════════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[52px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Types of <span class="text-[var(--color-brand)]">Derivatives</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Derivatives available to Indian retail investors span indices, stocks, currencies, and commodities.</p>
-      </div>
-
-      <div class="equity-reveal grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {typeItems.map(t => (
-          <div class="product-card-light px-[28px] py-[32px]">
-            <span class={`mb-[14px] inline-flex rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-wide ${tagColors[t.tag]}`}>{t.tag}</span>
-            <h3 class="mb-[10px] text-[18px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{t.label}</h3>
-            <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">{t.desc}</p>
-          </div>
-        ))}
-      </div>
-
-      <div class="equity-reveal mt-[44px] text-center">
-        <a href="/products/equity/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-[var(--color-n400)] px-[26px] text-[15px] font-semibold text-[var(--color-ink)] transition-colors hover:border-[var(--color-brand)]">Explore Futures &amp; Options →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ S5. ADVANTAGES ═══════════════════════════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[52px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Advantages of <span class="text-[var(--color-brand)]">Derivatives Trading</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">When used with discipline and the right strategy, derivatives offer unique advantages unavailable in the equity cash market.</p>
-      </div>
-
-      <div class="equity-reveal grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {advantageItems.map(a => (
-          <div class="product-card-light px-[28px] py-[32px]">
-            <div class="mb-[16px] flex h-[48px] w-[48px] items-center justify-center rounded-[12px] bg-[var(--color-dark-olive)] text-[var(--color-brand)]" set:html={a.icon} />
-            <h3 class="mb-[10px] text-[18px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{a.title}</h3>
-            <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">{a.desc}</p>
-          </div>
-        ))}
-      </div>
-
-      <div class="equity-reveal mt-[44px] text-center">
-        <a href="/about/open-demat-account/" class="btn-primary">Open Demat Account</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ S6. LIMITATIONS TO BE AWARE ══════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[52px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Limitations to <span class="text-[var(--color-brand)]">Be Aware</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Derivatives carry significant risks. Understanding these limitations is essential before trading F&amp;O.</p>
-      </div>
-
-      <div class="equity-reveal mx-auto max-w-[860px] divide-y divide-[var(--color-n400)] overflow-hidden rounded-[20px] border border-[var(--color-n400)] bg-white">
-        {limitationItems.map(item => (
-          <details class="limit-faq group">
-            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 hover:bg-[var(--color-n100)]">
-              <span class="text-[16px] font-semibold text-[var(--color-ink)]">{item.q}</span>
-              <span class="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-[var(--color-n400)] text-[18px] leading-none text-[var(--color-brand)] transition-transform duration-300 group-open:rotate-45">+</span>
-            </summary>
-            <div class="border-t border-[var(--color-n400)] bg-[var(--color-n100)] px-6 py-5">
-              <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">{item.a}</p>
-            </div>
-          </details>
-        ))}
-      </div>
-
-      <div class="equity-reveal mt-[44px] text-center">
-        <a href="/about/support/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-[var(--color-n400)] px-[26px] text-[15px] font-semibold text-[var(--color-ink)] transition-colors hover:border-[var(--color-brand)]">Read Risk Disclosure →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ S7. HOW TO TRADE DERIVATIVES ════════════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[52px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          How to <span class="text-[var(--color-brand)]">Trade Derivatives</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Three prerequisites you must have before placing your first F&amp;O order on NSE or BSE.</p>
-      </div>
-
-      <div class="equity-reveal grid gap-5 sm:grid-cols-3">
-        {[
-          { n: '01', label: 'F&O Account Activated', desc: 'Request F&O segment activation on your Shriram trading account. This is a one-time, digital process.' },
-          { n: '02', label: 'Sufficient Margin', desc: 'Maintain SPAN + Exposure margin in your account at all times. Your broker will alert you if the balance drops.' },
-          { n: '03', label: 'Strategy Knowledge', desc: 'Start with buying options (limited risk = premium paid) before moving to selling or complex multi-leg strategies.' },
-        ].map(c => (
-          <div class="product-card-light px-[28px] py-[32px]">
-            <div class="mb-[18px] text-[34px] font-normal leading-none text-[var(--color-brand)]">{c.n}</div>
-            <h3 class="mb-[10px] text-[18px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{c.label}</h3>
-            <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">{c.desc}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ S8. START YOUR F&O JOURNEY ═══════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[52px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Start Your <span class="text-[var(--color-brand)]">F&amp;O Trading Journey</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Four simple steps to go from zero to your first derivatives trade — fully online, no branch visit needed.</p>
-      </div>
-
-      <div class="equity-reveal steps-grid overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
-        {steps.map(s => (
-          <div class="px-[30px] py-[34px]">
-            <div class="mb-[22px] text-[34px] font-normal leading-none text-[var(--color-brand)]">{s.n}</div>
-            <h4 class="mb-[10px] text-[19px] font-medium leading-[1.25] text-[var(--color-ink)]" style="font-family:var(--font-display)">{s.title}</h4>
-            <p class="text-[14.5px] leading-relaxed text-[var(--color-muted)]">{s.desc}</p>
-          </div>
-        ))}
-      </div>
-
-      <div class="equity-reveal mt-[44px] text-center">
-        <a href="/about/open-demat-account/" class="btn-primary">Open Demat Account</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ S9. FUTURES VS OPTIONS ════════════════════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[52px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          <span class="text-[var(--color-brand)]">Futures vs Options</span> — Key Differences
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Choose the right instrument based on your strategy, capital available, and risk appetite.</p>
-      </div>
-
-      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
-        <div class="overflow-x-auto">
-          <table class="w-full text-[15px]">
-            <thead>
-              <tr class="bg-[var(--color-dark-olive)]">
-                <th class="px-[26px] py-[17px] text-left text-[13px] font-semibold text-white">Feature</th>
-                <th class="px-[26px] py-[17px] text-left text-[13px] font-semibold text-[var(--color-brand)]">Futures</th>
-                <th class="px-[26px] py-[17px] text-left text-[13px] font-semibold text-[var(--color-brand)]">Options</th>
-              </tr>
-            </thead>
-            <tbody>
-              {[
-                { feature: 'Obligation', futures: 'Both buyer and seller must settle at expiry', options: 'Buyer has a right only; seller is obligated' },
-                { feature: 'Premium / Cost', futures: 'No premium — margin-based', options: 'Buyer pays premium upfront' },
-                { feature: 'Max Loss (Buyer)', futures: 'Unlimited (mark-to-market daily)', options: 'Limited to premium paid' },
-                { feature: 'Max Loss (Seller)', futures: 'Unlimited', options: 'Unlimited for naked positions' },
-                { feature: 'Capital Required', futures: 'Higher (SPAN + Exposure margin)', options: 'Lower (premium amount for buyers)' },
-                { feature: 'Best For', futures: 'Strong directional bets, portfolio hedging', options: 'Hedging, income strategies, speculation' },
-                { feature: 'Time Decay', futures: 'No time decay', options: 'Theta erodes option value daily' },
-              ].map((r, i) => (
-                <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[#f8f6f1]'}>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[15px] font-semibold text-[var(--color-ink)]">{r.feature}</td>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[15px] text-[var(--color-muted)]">{r.futures}</td>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[15px] text-[var(--color-muted)]">{r.options}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <a class="btn-gold" href="/about/support/">Book A Discovery Call</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ══ S10. RISKS IN DERIVATIVES ════════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[52px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Risks in <span class="text-[var(--color-brand)]">Derivatives Trading</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Understand these risks before activating your F&amp;O segment. Knowledge is your first line of defence.</p>
+  <!-- ══ 14. FINAL CTA ════════════════════════════════════════════════ -->
+  <section class="cta-sec" style="background:var(--sec-light)">
+    <div class="cta-box">
+      <div class="ct-tt">
+        <h3>Open F&amp;O Account — Flat ₹20 Per Order</h3>
+        <p class="ct-sub">SEBI-registered. Expert F&amp;O research. Dedicated risk management support.</p>
       </div>
-
-      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {[
-          { n: '01', label: 'Leverage Risk', desc: 'A small adverse price move can produce losses far exceeding initial margin. Manage position sizing strictly.' },
-          { n: '02', label: 'Time Decay', desc: 'Options lose time value daily (theta). Buyers must be right on direction, magnitude, AND timing.' },
-          { n: '03', label: 'Volatility Risk', desc: 'Gap openings, earnings events, and macro shocks can cause large overnight losses in open futures positions.' },
-          { n: '04', label: 'Margin Calls', desc: 'Adverse moves trigger margin calls. Failure to add funds leads to forced square-off of positions.' },
-        ].map(r => (
-          <div class="equity-reveal bg-[var(--color-dark-800)] rounded-[14px] p-[28px]">
-            <div class="mb-[14px] text-[36px] font-bold leading-none text-[var(--color-brand)]">{r.n}</div>
-            <h4 class="mb-[10px] text-[18px] font-medium text-white" style="font-family:var(--font-display)">{r.label}</h4>
-            <p class="text-[13.5px] leading-relaxed text-white/65">{r.desc}</p>
-          </div>
-        ))}
-      </div>
-
-      <div class="equity-reveal mt-[44px] text-center">
-        <a href="/about/support/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-[var(--color-n400)] px-[26px] text-[15px] font-semibold text-[var(--color-ink)] transition-colors hover:border-[var(--color-brand)]">Check Risk Disclosure →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ S11. MARGIN IN DERIVATIVES ═══════════════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[52px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Margin in Derivatives — <span class="text-[var(--color-brand)]">SPAN &amp; Exposure</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">SEBI mandates two margin components for every F&amp;O position. Know what you need before you trade.</p>
-      </div>
-
-      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
-        <div class="overflow-x-auto">
-          <table class="w-full text-[15px]">
-            <thead>
-              <tr class="bg-[var(--color-dark-olive)]">
-                <th class="px-[26px] py-[17px] text-left text-[13px] font-semibold text-white">Margin Type</th>
-                <th class="px-[26px] py-[17px] text-left text-[13px] font-semibold text-[var(--color-brand)]">Purpose</th>
-                <th class="px-[26px] py-[17px] text-left text-[13px] font-semibold text-[var(--color-brand)]">Typical Range</th>
-              </tr>
-            </thead>
-            <tbody>
-              {[
-                { type: 'SPAN Margin', purpose: 'Covers worst-case 1-day loss based on VaR (Value at Risk) model', range: '5–15% of contract value' },
-                { type: 'Exposure Margin', purpose: 'Additional buffer against extreme intraday volatility', range: '3–7% of contract value' },
-                { type: 'Total Required Margin', purpose: 'SPAN + Exposure — the amount you must have upfront', range: '8–22% of contract value' },
-              ].map((r, i) => (
-                <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[#f8f6f1]'}>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[15px] font-semibold text-[var(--color-ink)]">{r.type}</td>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[15px] text-[var(--color-muted)]">{r.purpose}</td>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[15px] font-medium text-[var(--color-dark-olive)]">{r.range}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="equity-reveal mt-[20px] rounded-[14px] border border-[var(--color-n400)] bg-white px-[28px] py-[22px]">
-        <p class="text-[14.5px] leading-relaxed text-[var(--color-ink)]">
-          <strong>Example:</strong> NIFTY Futures (1 lot = 75 units × ₹24,000 spot = ₹18L notional value). SPAN + Exposure ~12% → <strong>₹2.16L margin required</strong> per lot. Always verify current margins on NSE or via your broker's margin calculator before taking positions.
-        </p>
-      </div>
-
-      <div class="equity-reveal mt-[44px] text-center">
-        <a href="/about/open-demat-account/" class="btn-primary">Calculate Your Margin</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ S12. POPULAR STRATEGIES ══════════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[52px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Popular <span class="text-[var(--color-brand)]">Derivatives Strategies</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">From simple directional plays to sophisticated multi-leg strategies — match your strategy to your market view.</p>
-      </div>
-
-      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {[
-          { label: 'Long Call', type: 'Bullish', desc: 'Buy a call option. Profit if underlying rises above strike + premium. Max loss = premium paid.' },
-          { label: 'Bull Call Spread', type: 'Bullish', desc: 'Buy a lower strike call, sell a higher strike call. Limits both profit and loss. Lower cost than outright call.' },
-          { label: 'Long Put', type: 'Bearish', desc: 'Buy a put option. Profit if underlying falls below strike. Ideal hedge for existing equity positions.' },
-          { label: 'Iron Condor', type: 'Neutral', desc: 'Sell OTM call spread + OTM put spread. Profits in range-bound markets. Maximum profit = net premium received.' },
-        ].map((s, i) => (
-          <div class="equity-reveal product-card-light flex flex-col gap-3 px-[28px] py-[32px]">
-            <span class={`inline-flex w-fit rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-wide ${s.type === 'Bullish' ? 'bg-[#edf6ee] text-[#1a6e2e]' : s.type === 'Bearish' ? 'bg-[#fdecea] text-[#b71c1c]' : 'bg-[var(--color-brand)]/15 text-[var(--color-brand-deep)]'}`}>{s.type}</span>
-            <h3 class="text-[18px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{s.label}</h3>
-            <p class="text-[13.5px] leading-relaxed text-[var(--color-muted)]">{s.desc}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ S13. FAQs ═════════════════════════════════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[52px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Frequently Asked <span class="text-[var(--color-brand)]">Questions</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Everything you need to know about derivatives trading in India.</p>
-      </div>
-
-      <div class="equity-reveal mx-auto max-w-[860px] border-t border-[var(--color-n400)]">
-        {faqs.map(item => (
-          <details class="eq-faq group border-b border-[var(--color-n400)]">
-            <summary class="flex cursor-pointer list-none items-center justify-between gap-5 px-2 py-[22px]">
-              <span class="text-[16.5px] font-semibold text-[var(--color-ink)]">{item.q}</span>
-              <span class="shrink-0 text-[22px] leading-none text-[var(--color-brand)] transition-transform duration-300 group-open:rotate-45">+</span>
-            </summary>
-            <div class="overflow-hidden px-2 pb-0 text-[15px] leading-relaxed text-[var(--color-muted)] transition-all duration-300 group-open:pb-[24px]">
-              <p class="max-w-[720px]">{item.a}</p>
-            </div>
-          </details>
-        ))}
-      </div>
-
-      <!-- Final CTA card -->
-      <div class="equity-reveal mt-[64px] overflow-hidden rounded-[22px] bg-[var(--color-dark-800)] px-[52px] py-[60px] text-center">
-        <p class="mb-4 text-[14px] font-medium tracking-[.04em] text-[var(--color-brand)]">Still Have Questions?</p>
-        <h3 class="mx-auto max-w-[540px] text-[36px] font-bold leading-[1.12] text-white" style="font-family:var(--font-display)">Open F&amp;O Account — Flat ₹20 Per Order</h3>
-        <p class="mx-auto mt-[16px] max-w-[460px] text-[17px] leading-relaxed text-white/70">SEBI-registered. Expert F&amp;O research. Dedicated risk management support.</p>
-        <div class="mt-[32px] flex flex-wrap justify-center gap-[14px]">
-          <a href="/about/open-demat-account/" class="btn-primary">Open F&amp;O Account</a>
-          <a href="/about/support/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Contact Us</a>
-        </div>
+      <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center">
+        <a class="btn-gold" href="/about/open-demat-account/">Open F&amp;O Account</a>
+        <a class="btn-outline" href="/about/support/">Contact Us</a>
       </div>
     </div>
   </section>
@@ -524,47 +400,222 @@ const faqs = [
 </BaseLayout>
 
 <style>
-  .equity-reveal {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+  :root {
+    --page:#fcf8ef; --sec-light:#fef8ee; --sec-tint:#f6efe1; --card:#fffdf8;
+    --card-border:#e1e0db; --row-line:rgba(28,28,22,.08);
+    --olive-title:#2e3914; --olive-head:#2d3813; --olive-deep:#1b2010;
+    --ink:#1c1c16; --ink-2:#46463c; --ink-3:#595959; --muted:#73736a;
+    --gold:#e0a82e; --gold-2:#f2b83f; --gold-btn:#f3b83f; --olive-ink:#2e3914;
+    --pad:clamp(20px,8vw,144px); --container-pad:32px; --section-y:72px; --cta-w:220px;
   }
-  .equity-reveal.in-view { opacity: 1; transform: none; }
+  *,*::before,*::after{box-sizing:border-box}
+  a{color:inherit;text-decoration:none}
+  p{line-height:1.5}
 
-  .steps-grid { display: grid; grid-template-columns: repeat(2, 1fr); }
-  .steps-grid > * { border-right: 1px solid var(--color-n400); border-bottom: 1px solid var(--color-n400); }
-  .steps-grid > *:nth-child(2n) { border-right: 0; }
-  .steps-grid > *:nth-last-child(-n+2) { border-bottom: 0; }
-  @media (min-width: 1024px) {
-    .steps-grid { grid-template-columns: repeat(4, 1fr); }
-    .steps-grid > * { border-right: 1px solid var(--color-n400); border-bottom: 0; }
-    .steps-grid > *:last-child { border-right: 0; }
+  .section{padding:var(--section-y) var(--pad);min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;justify-content:center}
+  #sec-about{min-height:0}
+  .stack{display:flex;flex-direction:column}
+
+  .sec-title{font-weight:400;font-size:40px;color:var(--olive-title);text-transform:capitalize;line-height:1.5}
+  .sec-lead{font-weight:400;font-size:16px;color:var(--ink-3);line-height:1.5}
+  .card-h{font-weight:500;font-size:20px;color:var(--ink);line-height:1.5}
+  .card-p{font-weight:400;font-size:16px;color:var(--muted);line-height:1.5}
+
+  .card{background:var(--card);border:1px solid var(--card-border);border-radius:24px;padding:var(--container-pad);display:flex;flex-direction:column;gap:16px}
+
+  /* Hero */
+  .hero{min-height:100vh;min-height:100dvh;padding:0 var(--pad);display:flex;flex-direction:column;justify-content:center;overflow:hidden;background:radial-gradient(125% 210% at 100% -8%,#4f583b 0%,#363a2c 50%,#1d1d1d 100%)}
+  .hero-inner{padding:120px 0;display:flex;flex-direction:column}
+  .eyebrow{font-weight:500;font-size:14px;color:var(--gold-2);letter-spacing:.04em;line-height:1.5;margin-bottom:16px}
+  .hero h1{font-weight:500;font-size:40px;color:#fff;line-height:1.5;max-width:860px}
+  .hero h1 .g{color:var(--gold-2)}
+  .hero .lead{margin-top:32px;font-weight:400;font-size:18px;line-height:1.5;color:rgba(255,255,255,.74);max-width:600px}
+  .cta-row{margin-top:40px;display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+  .hero-feats{margin-top:40px}
+  .feats{display:flex;flex-wrap:wrap;align-items:center;gap:14px 16px;max-width:760px;padding-top:36px;border-top:1px solid rgba(255,255,255,.16)}
+  .feat{display:flex;gap:10px;align-items:center}
+  .feat .tk{color:var(--gold-2);font-weight:500;font-size:15px;width:13px}
+  .feat .lb{color:rgba(255,255,255,.9);font-weight:500;font-size:16px;line-height:1.5;white-space:nowrap}
+
+  /* Buttons */
+  .btn-gold{background:var(--gold-btn);height:40px;width:var(--cta-w);border-radius:4px;display:inline-flex;align-items:center;justify-content:center;padding:7px 20px;font-weight:500;font-size:12px;color:var(--olive-ink);white-space:nowrap;transition:opacity .2s}
+  .btn-gold:hover{opacity:.88}
+  .btn-ghost{height:40px;border-radius:9px;border:1px solid rgba(255,255,255,.4);display:inline-flex;align-items:center;justify-content:center;padding:7px 26px;font-weight:600;font-size:15px;color:#fff;transition:border-color .2s}
+  .btn-ghost:hover{border-color:#fff}
+  .btn-outline{height:40px;border-radius:9px;border:1px solid var(--card-border);display:inline-flex;align-items:center;justify-content:center;padding:7px 26px;font-weight:600;font-size:14px;color:var(--ink);transition:border-color .2s}
+  .btn-outline:hover{border-color:var(--gold)}
+
+  /* Layout */
+  .row-2{display:flex;gap:32px;align-items:stretch}
+  .row-2 .card{flex:1 0 0;min-width:0}
+  .row-3{display:flex;gap:24px;align-items:stretch}
+  .row-3 .card{flex:1 0 0;min-width:0}
+
+  /* Icon box */
+  .icon-box{width:48px;height:48px;border-radius:12px;background:var(--olive-deep);color:var(--gold-2);display:flex;align-items:center;justify-content:center;flex:none}
+  .icon-box svg{width:22px;height:22px}
+
+  /* Terminology grid */
+  .term-grid{border:1px solid var(--card-border);border-radius:24px;overflow:hidden;display:grid;grid-template-columns:repeat(2,1fr);background:var(--card)}
+  .term{padding:22px 28px;border-right:1px solid var(--card-border);border-bottom:1px solid var(--card-border);display:flex;flex-direction:column;gap:8px}
+  .term:nth-child(2n){border-right:0}
+  .term:nth-child(n+3){border-bottom:0}
+  .tk-label{font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--olive-deep)}
+  .tk-val{font-size:14px;color:var(--muted);line-height:1.5}
+
+  /* How-works contract cards */
+  .how-card{gap:16px}
+  .how-card h3{font-weight:500;font-size:24px;color:var(--ink);line-height:1.5}
+  .how-card>p{font-weight:400;font-size:16px;color:var(--muted);line-height:1.5}
+  .how-list{list-style:none;display:flex;flex-direction:column;gap:10px;padding:0;margin:0}
+  .how-list li{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--muted);line-height:1.5}
+  .how-list li::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold-2);flex:none;margin-top:7px}
+
+  /* Example box */
+  .example-box{background:var(--card);border:1px solid var(--card-border);border-left:3px solid var(--gold-2);border-radius:12px;padding:28px}
+  .example-box p{font-size:14px;color:var(--ink);line-height:1.6}
+
+  /* Cat grid */
+  .cat-grid{border:1px solid var(--card-border);border-radius:24px;overflow:hidden;display:grid;grid-template-columns:repeat(4,1fr);background:var(--card)}
+  .cat-grid.cat-3{grid-template-columns:repeat(3,1fr)}
+  .cat{background:var(--card);padding:var(--container-pad);display:flex;flex-direction:column;gap:12px;border-right:1px solid var(--card-border);border-bottom:1px solid var(--card-border)}
+  .cat-3 .cat:nth-child(3n){border-right:0}
+  .cat-3 .cat:nth-child(n+4){border-bottom:0}
+  .cat h4{font-weight:500;font-size:20px;color:var(--ink);line-height:1.5}
+  .cat p{font-weight:400;font-size:16px;color:var(--muted);line-height:1.5}
+  .dtype-tag{display:inline-flex;border-radius:99px;padding:3px 12px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;width:fit-content}
+  .dtype-futures{background:#e8f3ff;color:#1a5caa}
+  .dtype-options{background:rgba(240,185,63,.2);color:var(--olive-head)}
+  .dtype-currency{background:#edf6ee;color:#1a6e2e}
+  .dtype-commodity{background:#f3ede8;color:#7a3a12}
+
+  /* Advantages grid */
+  .adv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .adv-card{gap:16px}
+
+  /* Limitations accordion (reuses faq-item styles) */
+  .lim-acc{border-radius:24px;overflow:hidden;display:flex;flex-direction:column;gap:2px}
+
+  /* Steps */
+  .steps{background:var(--card);border:1px solid var(--card-border);border-radius:24px;overflow:hidden;display:flex;align-items:stretch;width:100%}
+  .step{flex:1 0 0;min-width:0;padding:var(--container-pad);display:flex;flex-direction:column;gap:16px}
+  .step .num{font-weight:400;font-size:32px;line-height:34px;color:var(--gold)}
+  .step .st-body{display:flex;flex-direction:column;gap:12px}
+  .step h4{font-weight:500;font-size:20px;color:var(--ink);line-height:1.5}
+  .step p{font-weight:400;font-size:16px;color:var(--ink-3);line-height:1.5}
+  .step-div{width:1px;align-self:stretch;background:var(--card-border);flex:none}
+
+  /* Tables */
+  .t-scroll{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .table{background:var(--card);border-radius:24px;overflow:hidden;display:grid}
+  .table.bordered{border:1px solid var(--card-border)}
+  .t3{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .cell{padding:16px 24px;display:flex;align-items:center;justify-content:center;text-align:center}
+  .cell p{flex:1 0 0;min-width:0;font-size:16px;line-height:1.5;overflow-wrap:break-word}
+  .th{background:var(--olive-head)}
+  .th p{font-weight:600;color:#fff}
+  .tb{border-top:1px solid var(--row-line)}
+  .tb .k{font-weight:600;color:var(--ink)}
+  .tb .v{font-weight:400;color:var(--ink-2)}
+
+  /* Risk cards */
+  .risks{display:flex;gap:24px;align-items:stretch}
+  .risk{flex:1 0 0;min-width:0;background:var(--card);border:1px solid var(--card-border);border-radius:24px;padding:var(--container-pad);display:flex;flex-direction:column;gap:12px}
+  .risk h4{font-weight:500;font-size:20px;color:var(--ink);line-height:1.5}
+  .risk p{font-weight:400;font-size:16px;color:var(--ink-3);line-height:1.5}
+
+  /* Strategy cards */
+  .strat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+  .strat-card{gap:16px}
+  .strat-tag{display:inline-flex;border-radius:99px;padding:3px 12px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;width:fit-content}
+  .strat-bullish{background:#edf6ee;color:#1a6e2e}
+  .strat-bearish{background:#fdecea;color:#b71c1c}
+  .strat-neutral{background:rgba(240,185,63,.2);color:var(--olive-head)}
+
+  /* FAQ */
+  .faq-wrap{padding:158px var(--pad);min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;justify-content:center}
+  .faq-cols{display:flex;gap:48px;align-items:stretch}
+  .faq-left{flex:1 0 0;min-width:0;display:flex;flex-direction:column;gap:48px}
+  .faq-title{font-weight:400;font-size:40px;color:var(--olive-title);text-transform:capitalize;line-height:1.5;white-space:nowrap}
+  .faq-acc{border-radius:24px;overflow:hidden;display:flex;flex-direction:column;gap:2px;width:100%}
+  .faq-item{background:var(--card);padding:24px;display:flex;gap:40px;align-items:flex-start;cursor:pointer}
+  .faq-item .q{flex:1 0 0;min-width:0;display:flex;flex-direction:column}
+  .faq-item .qt{font-weight:500;font-size:14px;color:#333;line-height:1.5}
+  .qa-wrap{display:grid;grid-template-rows:0fr;transition:grid-template-rows .38s cubic-bezier(.4,0,.2,1)}
+  .faq-item.open .qa-wrap{grid-template-rows:1fr}
+  .qa{overflow:hidden;min-height:0}
+  .qa p{padding-top:16px;font-weight:400;font-size:14px;color:#404040;line-height:1.5}
+  .faq-icon{width:24px;height:24px;flex:none}
+  .faq-icon svg{display:block;width:24px;height:24px}
+  .faq-icon svg .v{transform-box:fill-box;transform-origin:center;transition:transform .38s cubic-bezier(.4,0,.2,1),opacity .38s ease}
+  .faq-item.open .faq-icon svg .v{transform:scaleY(0);opacity:0}
+  .faq-side{width:464px;flex:none;background:var(--card);border:1px solid var(--card-border);border-radius:24px;padding:var(--container-pad);display:flex;flex-direction:column;gap:40px;justify-content:flex-end;position:relative;overflow:hidden}
+  .usr{position:absolute;left:var(--container-pad);top:64px;width:130.667px;height:147px;opacity:.1;color:var(--olive-deep)}
+  .usr svg{display:block;width:100%;height:100%}
+  .side-in{display:flex;flex-direction:column;gap:32px;position:relative}
+  .side-tx{display:flex;flex-direction:column;gap:8px;color:#222320}
+  .side-tx h4{font-weight:500;font-size:20px;line-height:28px;letter-spacing:-.45px}
+  .side-tx p{font-weight:400;font-size:14px;line-height:22px;letter-spacing:-.15px}
+
+  /* CTA */
+  .cta-sec{padding:var(--section-y) var(--pad)}
+  .cta-box{border-radius:22px;padding:64px 60px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:32px;text-align:center}
+  .ct-tt{display:flex;flex-direction:column;align-items:center;gap:16px;color:var(--olive-deep)}
+  .cta-box h3{font-weight:500;font-size:38px;line-height:42.56px;letter-spacing:-.76px}
+  .ct-sub{font-weight:400;font-size:17px;line-height:28.05px;color:var(--ink-2)}
+
+  /* Responsive */
+  @media(max-width:1024px){
+    .adv-grid{grid-template-columns:repeat(2,1fr)}
+    .strat-grid{grid-template-columns:repeat(2,1fr)}
+    .risks{flex-wrap:wrap}
+    .risk{flex:1 1 calc(50% - 12px)}
+    .faq-side .usr{display:none}
   }
-
-  @media (prefers-reduced-motion: reduce) {
-    .equity-reveal { opacity: 1; transform: none; transition: none; }
+  @media(max-width:900px){
+    .steps{flex-direction:column}
+    .step-div{display:none}
+    .step{border-bottom:1px solid var(--card-border)}
+    .step:last-child{border-bottom:0}
+    .row-2{flex-direction:column}
+    .row-3{flex-direction:column}
+    .faq-cols{flex-direction:column}
+    .faq-side{width:100%}
+    .faq-title{white-space:normal}
+  }
+  @media(max-width:768px){
+    :root{--pad:16px;--container-pad:24px;--section-y:56px}
+    .faq-wrap{padding:128px var(--pad)}
+    .hero{min-height:0}
+    .hero-inner{padding:96px 0}
+    .hero h1{font-size:clamp(28px,7vw,40px)}
+    .hero .lead{font-size:16px}
+    .sec-title,.faq-title{font-size:clamp(28px,7vw,40px)}
+    .cell{padding:12px 6px}
+    .cta-box{padding:48px}
+    .cta-box h3{font-size:clamp(24px,6.4vw,38px);line-height:1.2}
+    .ct-sub{font-size:15px;line-height:1.6}
+    .term-grid{grid-template-columns:1fr}
+    .term{border-right:0;border-bottom:1px solid var(--card-border)!important}
+    .term:last-child{border-bottom:0!important}
+  }
+  @media(max-width:560px){
+    .cat-3{grid-template-columns:1fr!important}
+    .cat-3 .cat{border-right:0!important;border-bottom:1px solid var(--card-border)!important}
+    .cat-3 .cat:last-child{border-bottom:0!important}
+    .adv-grid{grid-template-columns:1fr}
+    .strat-grid{grid-template-columns:1fr}
+    .risk{flex:1 1 100%}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .qa-wrap,.faq-icon svg .v{transition:none}
   }
 </style>
 
 <script>
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        (e.target as HTMLElement).classList.add('in-view');
-        obs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.08 });
-  document.querySelectorAll('.equity-reveal').forEach(el => obs.observe(el));
-
-  document.querySelectorAll<HTMLDetailsElement>('.eq-faq, .limit-faq').forEach(d => {
-    d.addEventListener('toggle', () => {
-      if (d.open) {
-        const cls = d.classList.contains('eq-faq') ? '.eq-faq' : '.limit-faq';
-        document.querySelectorAll<HTMLDetailsElement>(cls).forEach(o => {
-          if (o !== d) o.removeAttribute('open');
-        });
-      }
+  document.querySelectorAll('.faq-item').forEach(function(it) {
+    (it as HTMLElement).addEventListener('click', function() {
+      it.classList.toggle('open');
     });
   });
 </script>

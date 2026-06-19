@@ -1,5 +1,66 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const mfTypes = [
+  { tag: 'High Growth', label: 'Equity Funds', desc: 'Invest primarily in stocks. 5+ year horizon. Highest return potential — large-cap, mid-cap, small-cap, and flexi-cap options.' },
+  { tag: 'Low Risk', label: 'Debt Funds', desc: 'Invest in bonds, G-Secs, and money market instruments. 1–3 year horizon. Stable returns — better post-tax than FD for higher tax brackets.' },
+  { tag: 'Balanced', label: 'Hybrid Funds', desc: 'Mix of equity and debt — balanced risk-return. Balanced Advantage Funds dynamically adjust allocation based on market valuations.' },
+  { tag: 'Low Cost', label: 'Index Funds', desc: 'Passively track Nifty 50, Sensex, or other indices. Expense ratios as low as 0.1%. Outperform most active large-cap funds over 10+ years.' },
+  { tag: 'Tax Saving', label: 'ELSS Funds', desc: '3-year lock-in. Invest up to ₹1.5L per year and claim deduction under Section 80C. Shortest lock-in among all 80C instruments.' },
+  { tag: 'Park Cash', label: 'Liquid Funds', desc: 'Invest in instruments maturing within 91 days. Earn 6–7% p.a. on idle cash with same-day or T+1 redemption — better than a savings account.' },
+];
+
+const howWorksSteps = [
+  { n: '1', title: 'You invest money', desc: 'Transfer funds via SIP or lumpsum. Your money is pooled with other investors.' },
+  { n: '2', title: 'Fund manager invests', desc: 'Buys equities, bonds, or instruments per the fund\'s stated mandate and SEBI category.' },
+  { n: '3', title: 'NAV calculated daily', desc: 'Total assets minus liabilities, divided by outstanding units = today\'s NAV.' },
+  { n: '4', title: 'You redeem at NAV', desc: 'Units are redeemed at the current NAV. Gains or losses are credited to your account.' },
+];
+
+const sipRows = [
+  { feature: 'Timing Risk',           sip: 'Low — averages entry price',        ls: 'High — market timing critical' },
+  { feature: 'Min Investment',        sip: '₹500/month',                        ls: '₹1,000 one-time' },
+  { feature: 'Investment Discipline', sip: 'Auto-debit = automatic',            ls: 'Manual decision each time' },
+  { feature: 'Best For',              sip: 'Salaried investors',                ls: 'Bonus / idle surplus' },
+  { feature: 'Bear Market Benefit',   sip: 'Better returns — lower avg cost',   ls: 'Full downside exposure' },
+];
+
+const investModes = [
+  { n: '1', label: 'SWP', sub: 'Systematic Withdrawal Plan', desc: 'Withdraw a fixed amount monthly from your mutual fund. Provides regular income — ideal for retirement or supplementing salary.' },
+  { n: '2', label: 'STP', sub: 'Systematic Transfer Plan', desc: 'Transfer a fixed amount monthly from a liquid fund to an equity fund. Reduces lump-sum timing risk while staying invested.' },
+  { n: '3', label: 'Lump Sum', sub: 'One-Time Investment', desc: 'One-time large investment. Best when markets are at low valuations or when you have a sudden surplus like a bonus or inheritance.' },
+];
+
+const risks = [
+  { label: 'Market Risk',        desc: 'Equity fund NAVs fall in market downturns. Mitigate by staying invested for 5+ years.' },
+  { label: 'Fund Manager Risk',  desc: 'Active funds depend on manager decisions. A change in manager can shift risk-return profile.' },
+  { label: 'Concentration Risk', desc: 'Sectoral funds fall sharply if their sector underperforms. Diversify across fund categories.' },
+  { label: 'Liquidity Risk',     desc: 'Some debt funds hold illiquid securities. Check exit load and lock-in before investing.' },
+];
+
+const taxRows = [
+  { fundType: 'Equity MF',  stcg: '20% flat',                  ltcg: '12.5% above ₹1.25L',    holding: '12 months (LTCG)' },
+  { fundType: 'Debt MF',    stcg: 'As per income slab',        ltcg: 'As per slab (no indexation)', holding: '24 months (LTCG)' },
+  { fundType: 'ELSS',       stcg: 'N/A (3-yr lock-in)',        ltcg: '12.5% above ₹1.25L',    holding: '3-year lock-in applies' },
+  { fundType: 'Hybrid MF',  stcg: '20% flat (equity-oriented)', ltcg: '12.5% above ₹1.25L',   holding: '12 months (LTCG)' },
+];
+
+const howInvestSteps = [
+  { n: '1', title: 'Create your account',          desc: 'Visit way2wealth.com or download the app. Enter your mobile number and email to register.' },
+  { n: '2', title: 'Complete KYC',                 desc: 'Upload Aadhaar and PAN. Video KYC or Aadhaar OTP-based eKYC takes under 3 minutes.' },
+  { n: '3', title: 'Choose your fund',             desc: 'Use the fund screener to filter by category, risk, and returns. Compare direct vs regular plans.' },
+  { n: '4', title: 'Start SIP or invest lumpsum',  desc: 'Set your amount, frequency, and mandate via UPI or net banking. First unit allotted same day.' },
+];
+
+const faqs = [
+  { q: 'Is mutual fund investment safe?', a: 'Mutual funds are regulated by SEBI and are not guaranteed products. They carry market risk, but diversification and long-term investing significantly reduce risk. Debt funds carry lower risk than equity funds.' },
+  { q: 'What is NAV and how does it affect my investment?', a: 'NAV = (Total Assets − Liabilities) ÷ Units Outstanding, calculated daily after market close. You buy and sell units at the NAV applicable on your transaction date. A higher NAV does not mean a fund is expensive — what matters is its growth rate over time.' },
+  { q: 'Can I withdraw money from a mutual fund anytime?', a: 'Open-ended mutual funds allow redemption on any business day at the applicable NAV. ELSS funds have a 3-year lock-in. Some debt funds have exit loads if redeemed before the minimum holding period — always check before investing.' },
+  { q: 'What is the difference between Direct and Regular plans?', a: 'Direct plans are bought from the AMC without a distributor — lower expense ratio, higher returns. Regular plans pay commission to distributors — higher TER. Shriram offers Direct Plans at zero commission.' },
+  { q: 'Can I start a SIP with ₹500?', a: 'Yes. Most funds allow SIPs from ₹500/month. Set up auto-debit SIPs on the Antara app — no paperwork, instant activation, cancel anytime.' },
+  { q: 'Is mutual fund investment safe compared to FD?', a: 'Equity mutual funds are market-linked and not capital-guaranteed like FDs. Over 5–10 years, equity funds have historically delivered higher inflation-adjusted returns. Debt funds have lower risk but carry interest rate and credit risk.' },
+  { q: 'What is the ELSS lock-in period?', a: 'ELSS funds have a mandatory 3-year lock-in from the date of each SIP instalment. After the lock-in, you can hold or redeem. ELSS qualifies for ₹1.5L deduction under Section 80C — the shortest lock-in among all 80C instruments.' },
+];
 ---
 
 <BaseLayout
@@ -7,519 +68,299 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   description="Grow your wealth with India's best mutual funds. SEBI-registered, 25+ years of expertise, ₹18,000 Cr+ AUM. Start your SIP in under 5 minutes — no paperwork, fully online."
 >
 
-  <!-- ══ S1 HERO ════════════════════════════════════════════════════ -->
-  <section class="relative overflow-hidden bg-[var(--color-dark-800)] py-[100px] lg:py-[120px]">
-    <div class="pointer-events-none absolute -right-40 -top-40 h-[560px] w-[560px] rounded-full bg-[var(--color-brand)]/10 blur-3xl"></div>
-    <div class="pointer-events-none absolute -bottom-32 left-0 h-80 w-80 rounded-full bg-[var(--color-brand)]/5 blur-3xl"></div>
-    <div class="site-wrap relative">
-      <h1 class="equity-reveal mt-0 max-w-[880px] text-[clamp(32px,4vw,52px)] font-bold leading-[1.06] text-white" style="font-family:var(--font-display)">
-        Invest in <span class="text-[var(--color-brand)]">Mutual Funds</span> — trusted by 1M+ investors across India
-      </h1>
-      <p class="equity-reveal mt-[26px] max-w-[640px] text-[18px] leading-relaxed text-white/70">
-        Grow your wealth with India's best mutual funds. SEBI-registered, 25+ years of expertise, and ₹18,000 Cr+ AUM. Start your SIP in under 5 minutes — no paperwork, fully online.
-      </p>
-      <div class="equity-reveal mt-[38px] flex flex-wrap gap-[14px]">
-        <a href="/about/open-demat-account/" class="btn-primary">Invest Now</a>
-        <a href="/calculators/sip/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Calculate SIP Returns</a>
+  <!-- ══ 1. HERO ══════════════════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <h1>Invest in <span class="g">Mutual Funds</span> — Trusted by 1M+ Investors</h1>
+      <p class="lead">Grow your wealth with India's best mutual funds. SEBI-registered, 30+ years of expertise, and ₹18,000 Cr+ AUM. Start your SIP in under 5 minutes — no paperwork, fully online.</p>
+      <div class="cta-row">
+        <a class="btn-gold" href="/about/open-demat-account/">Invest Now</a>
+        <a class="btn-ghost" href="/calculators/sip/">Calculate SIP Returns</a>
       </div>
-      <div class="equity-reveal mt-[54px] flex flex-wrap gap-x-9 gap-y-3 border-t border-white/15 pt-9">
-        {['✓ SEBI-registered', '✓ 30+ years of trust', '✓ ₹18,000 Cr+ AUM', '✓ 1M+ investors'].map(f => (
-          <span class="text-[15px] font-medium text-white/90">{f}</span>
+      <div class="hero-feats">
+        <div class="feats">
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;SEBI-registered</span></div>
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;30+ years of trust</span></div>
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;₹18,000 Cr+ AUM</span></div>
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;1M+ investors</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 2. WHAT IS A MUTUAL FUND ════════════════════════════════════ -->
+  <section class="section stack" id="sec-about" style="background:var(--sec-light);gap:56px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">What is a Mutual Fund?</p>
+      <p class="sec-lead">A mutual fund is a SEBI-regulated investment vehicle that pools money from multiple investors to purchase a diversified portfolio of stocks, bonds, or other securities. A professional fund manager makes investment decisions on behalf of all investors.</p>
+    </div>
+    <div class="row-3">
+      <div class="card">
+        <div class="icon-box">
+          <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2h5M12 11a4 4 0 100-8 4 4 0 000 8z"/></svg>
+        </div>
+        <p class="card-h">Pooled Investment</p>
+        <p class="card-p">Thousands of investors pool capital, giving each access to a diversified portfolio they couldn't build alone.</p>
+      </div>
+      <div class="card">
+        <div class="icon-box">
+          <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+        </div>
+        <p class="card-h">Professional Management</p>
+        <p class="card-p">A SEBI-registered fund manager makes buy/sell decisions based on the fund's stated investment objective and market research.</p>
+      </div>
+      <div class="card">
+        <div class="icon-box">
+          <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+        </div>
+        <p class="card-h">SEBI-regulated</p>
+        <p class="card-p">All mutual funds in India are regulated by SEBI and offered by AMFI-registered AMCs under strict disclosure and compliance norms.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 3. HOW MUTUAL FUNDS WORK ════════════════════════════════════ -->
+  <section class="section stack" style="background:var(--sec-tint);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">How Mutual Funds Work</p>
+      <p class="sec-lead">When you invest, you purchase units of a fund at the current Net Asset Value (NAV). The NAV changes daily based on the market value of underlying securities.</p>
+    </div>
+    <div class="steps">
+      {howWorksSteps.map((s, i) => (
+        <>
+          {i > 0 && <div class="step-div"></div>}
+          <div class="step">
+            <div class="num">{s.n}</div>
+            <div class="st-body"><h4>{s.title}</h4><p>{s.desc}</p></div>
+          </div>
+        </>
+      ))}
+    </div>
+    <a class="btn-gold" href="/about/open-demat-account/" style="align-self:center">Start Investing</a>
+  </section>
+
+  <!-- ══ 4. TYPES OF MUTUAL FUNDS ════════════════════════════════════ -->
+  <section class="section stack" style="background:var(--sec-light);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Types of Mutual Funds in India</p>
+      <p class="sec-lead">SEBI classifies mutual funds into five broad categories. Each serves a different investment goal, risk profile, and time horizon.</p>
+    </div>
+    <div class="cat-grid cat-3">
+      {mfTypes.map(t => (
+        <div class="cat">
+          <span class="cat-tag">{t.tag}</span>
+          <h4>{t.label}</h4>
+          <p>{t.desc}</p>
+        </div>
+      ))}
+    </div>
+    <a class="btn-gold" href="/about/open-demat-account/" style="align-self:center">Start Investing</a>
+  </section>
+
+  <!-- ══ 5. SIP ═══════════════════════════════════════════════════════ -->
+  <section class="section stack" style="background:var(--sec-tint);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">SIP — Systematic Investment Plan</p>
+      <p class="sec-lead">A SIP lets you invest a fixed amount every month in a mutual fund. It removes the need to time the market and builds wealth through rupee cost averaging over time.</p>
+    </div>
+    <div class="t-scroll">
+      <div class="table t3 bordered">
+        <div class="cell th"><p>Feature</p></div>
+        <div class="cell th"><p>SIP</p></div>
+        <div class="cell th"><p>Lump Sum</p></div>
+        {sipRows.map(r => (
+          <>
+            <div class="cell tb"><p class="k">{r.feature}</p></div>
+            <div class="cell tb"><p class="v">{r.sip}</p></div>
+            <div class="cell tb"><p class="v">{r.ls}</p></div>
+          </>
         ))}
       </div>
     </div>
+    <a class="btn-gold" href="/calculators/sip/" style="align-self:center">Calculate SIP Returns</a>
   </section>
 
-  <!-- ══ S2 WHAT IS A MUTUAL FUND ══════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          What is a <span class="text-[var(--color-brand)]">mutual fund?</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">
-          A mutual fund is a SEBI-regulated investment vehicle that pools money from multiple investors to purchase a diversified portfolio of stocks, bonds, or other securities. A professional fund manager makes investment decisions on behalf of all investors.
-        </p>
+  <!-- ══ 6. CALCULATORS & TOOLS ═══════════════════════════════════════ -->
+  <section class="section stack" style="background:var(--sec-light);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Mutual Fund Calculators &amp; Tools</p>
+      <p class="sec-lead">Use our free calculators to estimate returns, plan withdrawals, and compare strategies — before you invest a single rupee.</p>
+    </div>
+    <div class="row-3">
+      <div class="card calc-card">
+        <div class="icon-box">
+          <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+        </div>
+        <p class="card-h">SIP Calculator</p>
+        <p class="card-p">Estimate how your monthly SIP grows over 1–30 years with compounding.</p>
+        <a class="calc-link" href="/calculators/sip/">Calculate Now →</a>
       </div>
-      <div class="grid gap-5 sm:grid-cols-3">
-        <div class="equity-reveal product-card-light px-[28px] py-[32px]">
-          <div class="mb-[16px] inline-flex h-[48px] w-[48px] items-center justify-center rounded-full bg-[var(--color-brand-light)]">
-            <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="var(--color-brand)" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2h5M12 11a4 4 0 100-8 4 4 0 000 8z"/></svg>
-          </div>
-          <h3 class="text-[22px] font-semibold text-[var(--color-ink)]" style="font-family:var(--font-display)">Pooled Investment</h3>
-          <p class="mt-[12px] text-[15px] leading-relaxed text-[var(--color-muted)]">Thousands of investors pool capital, giving each access to a diversified portfolio they couldn't build alone.</p>
+      <div class="card calc-card">
+        <div class="icon-box">
+          <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
         </div>
-        <div class="equity-reveal product-card-light px-[28px] py-[32px]">
-          <div class="mb-[16px] inline-flex h-[48px] w-[48px] items-center justify-center rounded-full bg-[var(--color-brand-light)]">
-            <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="var(--color-brand)" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-          </div>
-          <h3 class="text-[22px] font-semibold text-[var(--color-ink)]" style="font-family:var(--font-display)">Professional Management</h3>
-          <p class="mt-[12px] text-[15px] leading-relaxed text-[var(--color-muted)]">A SEBI-registered fund manager makes buy/sell decisions based on the fund's stated investment objective and market research.</p>
+        <p class="card-h">Lump Sum Calculator</p>
+        <p class="card-p">Calculate the future value of a one-time investment at any expected return rate.</p>
+        <a class="calc-link" href="/calculators/lumpsum/">Calculate Now →</a>
+      </div>
+      <div class="card calc-card">
+        <div class="icon-box">
+          <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2z"/></svg>
         </div>
-        <div class="equity-reveal product-card-light px-[28px] py-[32px]">
-          <div class="mb-[16px] inline-flex h-[48px] w-[48px] items-center justify-center rounded-full bg-[var(--color-brand-light)]">
-            <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="var(--color-brand)" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+        <p class="card-h">ELSS Tax Calculator</p>
+        <p class="card-p">See how much tax you can save under Section 80C with an ELSS investment.</p>
+        <a class="calc-link" href="/calculators/sip/">Calculate Now →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 7. SWP / STP / LUMP SUM ═════════════════════════════════════ -->
+  <section class="section stack" style="background:var(--sec-tint);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">SWP, STP &amp; Lump Sum — Other Investment Modes</p>
+      <p class="sec-lead">Beyond SIP, there are three more investment modes suited for different financial stages and goals.</p>
+    </div>
+    <div class="steps">
+      {investModes.map((m, i) => (
+        <>
+          {i > 0 && <div class="step-div"></div>}
+          <div class="step">
+            <div class="num">{m.n}</div>
+            <div class="st-body">
+              <h4>{m.label}</h4>
+              <p class="mode-sub">{m.sub}</p>
+              <p>{m.desc}</p>
+            </div>
           </div>
-          <h3 class="text-[22px] font-semibold text-[var(--color-ink)]" style="font-family:var(--font-display)">SEBI-regulated</h3>
-          <p class="mt-[12px] text-[15px] leading-relaxed text-[var(--color-muted)]">All mutual funds in India are regulated by SEBI and offered by AMFI-registered AMCs under strict disclosure and compliance norms.</p>
+        </>
+      ))}
+    </div>
+  </section>
+
+  <!-- ══ 8. RISKS & RISKOMETER ════════════════════════════════════════ -->
+  <section class="section stack" style="background:var(--sec-light);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Mutual Fund Risks &amp; Riskometer</p>
+      <p class="sec-lead">All mutual funds carry some degree of risk. SEBI mandates every fund to display a riskometer — a standardised risk scale from Low to Very High — so investors can assess suitability before investing.</p>
+    </div>
+    <div class="riskometer">
+      <div class="risk-bar">
+        <div class="rb rb-1">Low</div>
+        <div class="rb rb-2">Mod. Low</div>
+        <div class="rb rb-3">Moderate</div>
+        <div class="rb rb-4">Mod. High</div>
+        <div class="rb rb-5">High</div>
+      </div>
+      <div class="risk-funds">
+        <div class="rf">Overnight, Liquid, Money Market</div>
+        <div class="rf">Short Duration, Banking &amp; PSU Debt</div>
+        <div class="rf">Hybrid, Balanced Advantage</div>
+        <div class="rf">Large Cap, ELSS, Index Funds</div>
+        <div class="rf">Mid Cap, Small Cap, Sectoral</div>
+      </div>
+    </div>
+    <div class="risks">
+      {risks.map(r => (
+        <div class="risk"><h4>{r.label}</h4><p>{r.desc}</p></div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ══ 9. TAX BENEFITS ══════════════════════════════════════════════ -->
+  <section class="section stack" style="background:var(--sec-tint);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Tax Benefits of Mutual Funds</p>
+      <p class="sec-lead">Mutual fund taxation in India depends on the fund type and holding period. ELSS funds offer the highest tax advantage — a deduction of up to ₹1.5 lakh under Section 80C.</p>
+    </div>
+    <div class="t-scroll">
+      <div class="table t4 bordered">
+        <div class="cell th"><p>Fund Type</p></div>
+        <div class="cell th"><p>Short-Term (STCG)</p></div>
+        <div class="cell th"><p>Long-Term (LTCG)</p></div>
+        <div class="cell th"><p>Holding Period</p></div>
+        {taxRows.map(r => (
+          <>
+            <div class="cell tb"><p class="k">{r.fundType}</p></div>
+            <div class="cell tb"><p class="v">{r.stcg}</p></div>
+            <div class="cell tb"><p class="v">{r.ltcg}</p></div>
+            <div class="cell tb"><p class="v">{r.holding}</p></div>
+          </>
+        ))}
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--muted);text-align:center;margin-top:-24px">* As per Budget 2025-26. Consult a tax advisor before investing.</p>
+  </section>
+
+  <!-- ══ 10. HOW TO INVEST ONLINE ═════════════════════════════════════ -->
+  <section class="section stack" style="background:var(--sec-light);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">How to Invest in Mutual Funds Online</p>
+      <p class="sec-lead">Investing via Shriram is fully digital — no branch visit, no paperwork. Complete your KYC once and access thousands of funds instantly.</p>
+    </div>
+    <div class="steps">
+      {howInvestSteps.map((s, i) => (
+        <>
+          {i > 0 && <div class="step-div"></div>}
+          <div class="step">
+            <div class="num">{s.n}</div>
+            <div class="st-body"><h4>{s.title}</h4><p>{s.desc}</p></div>
+          </div>
+        </>
+      ))}
+    </div>
+    <a class="btn-gold" href="/about/open-demat-account/" style="align-self:center">Start Investing</a>
+  </section>
+
+  <!-- ══ 11. FAQ ══════════════════════════════════════════════════════ -->
+  <section class="faq-wrap" id="sec-faq" style="background:var(--sec-tint)">
+    <div class="faq-cols">
+      <div class="faq-left">
+        <p class="faq-title">General Questions</p>
+        <div class="faq-acc">
+          {faqs.map((item, i) => (
+            <div class={`faq-item${i === 0 ? ' open' : ''}`}>
+              <div class="q">
+                <span class="qt">{item.q}</span>
+                <div class="qa-wrap"><div class="qa"><p>{item.a}</p></div></div>
+              </div>
+              <span class="faq-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <line class="v" x1="12" y1="5" x2="12" y2="19" stroke="#404040" stroke-width="2" stroke-linecap="round"/>
+                  <line x1="5" y1="12" x2="19" y2="12" stroke="#404040" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div class="faq-side">
+        <div class="usr" aria-hidden="true">
+          <svg viewBox="0 0 131 147" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="65.5" cy="40" rx="32" ry="32" fill="currentColor"/>
+            <path d="M4 147c0-33.965 27.535-61.5 61.5-61.5S127 113.035 127 147H4Z" fill="currentColor"/>
+          </svg>
+        </div>
+        <div class="side-in">
+          <div class="side-tx">
+            <h4>Need A Clearer Direction?</h4>
+            <p>Let's get in touch on a 15-minute call where we would be able to answer any questions you may have. Our Advisor will additionally help map your wealth mix and demonstrate what a dedicated advisor would do differently.</p>
+          </div>
+          <a class="btn-gold" href="/about/support/">Book A Discovery Call</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ══ S3 HOW MUTUAL FUNDS WORK ══════════════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          How mutual funds work — <span class="text-[var(--color-brand)]">NAV, AUM &amp; fund manager</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">
-          When you invest, you purchase units of a fund at the current Net Asset Value (NAV). The NAV changes daily based on the market value of underlying securities.
-        </p>
+  <!-- ══ 12. FINAL CTA ════════════════════════════════════════════════ -->
+  <section class="cta-sec" style="background:var(--sec-light)">
+    <div class="cta-box">
+      <div class="ct-tt">
+        <h3>Start Your SIP in Mutual Funds Today</h3>
+        <p class="ct-sub">SEBI-registered. ₹18,000 Cr+ AUM. 1M+ investors trust us. Start your SIP in under 5 minutes — no paperwork, fully online.</p>
       </div>
-      <div class="equity-reveal steps-grid overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
-        <div class="px-[30px] py-[34px]">
-          <div class="mb-[22px] text-[34px] font-bold leading-none text-[var(--color-brand)]">01</div>
-          <h4 class="mb-[10px] text-[19px] font-semibold leading-[1.25] text-[var(--color-ink)]" style="font-family:var(--font-display)">You invest money</h4>
-          <p class="text-[14.5px] leading-relaxed text-[var(--color-muted)]">Transfer funds via SIP or lumpsum. Your money is pooled with other investors.</p>
-        </div>
-        <div class="px-[30px] py-[34px]">
-          <div class="mb-[22px] text-[34px] font-bold leading-none text-[var(--color-brand)]">02</div>
-          <h4 class="mb-[10px] text-[19px] font-semibold leading-[1.25] text-[var(--color-ink)]" style="font-family:var(--font-display)">Fund manager invests</h4>
-          <p class="text-[14.5px] leading-relaxed text-[var(--color-muted)]">Buys equities, bonds, or instruments per the fund's stated mandate and SEBI category.</p>
-        </div>
-        <div class="px-[30px] py-[34px]">
-          <div class="mb-[22px] text-[34px] font-bold leading-none text-[var(--color-brand)]">03</div>
-          <h4 class="mb-[10px] text-[19px] font-semibold leading-[1.25] text-[var(--color-ink)]" style="font-family:var(--font-display)">NAV calculated daily</h4>
-          <p class="text-[14.5px] leading-relaxed text-[var(--color-muted)]">Total assets minus liabilities, divided by outstanding units = today's NAV.</p>
-        </div>
-        <div class="px-[30px] py-[34px]">
-          <div class="mb-[22px] text-[34px] font-bold leading-none text-[var(--color-brand)]">04</div>
-          <h4 class="mb-[10px] text-[19px] font-semibold leading-[1.25] text-[var(--color-ink)]" style="font-family:var(--font-display)">You redeem at NAV</h4>
-          <p class="text-[14.5px] leading-relaxed text-[var(--color-muted)]">Units are redeemed at the current NAV. Gains or losses are credited to your account.</p>
-        </div>
-      </div>
-      <div class="equity-reveal mt-[40px] text-center">
-        <a href="/about/open-demat-account/" class="btn-primary">Start Investing</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ S4 TYPES OF MUTUAL FUNDS ══════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Types of <span class="text-[var(--color-brand)]">mutual funds</span> in India
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">
-          SEBI classifies mutual funds into five broad categories. Each serves a different investment goal, risk profile, and time horizon.
-        </p>
-      </div>
-      <div class="equity-reveal cat-grid">
-        <div class="product-card-light px-[28px] py-[32px]">
-          <span class="inline-block rounded-full bg-[var(--color-brand-light)] px-[12px] py-[4px] text-[12px] font-semibold text-[var(--color-brand-deep)] mb-[14px]">High Growth</span>
-          <h3 class="text-[22px] font-semibold text-[var(--color-ink)]" style="font-family:var(--font-display)">Equity Funds</h3>
-          <p class="mt-[10px] text-[14.5px] leading-relaxed text-[var(--color-muted)]">Invest primarily in stocks. 5+ year horizon. Highest return potential — large-cap, mid-cap, small-cap, and flexi-cap options.</p>
-        </div>
-        <div class="product-card-light px-[28px] py-[32px]">
-          <span class="inline-block rounded-full bg-[var(--color-brand-light)] px-[12px] py-[4px] text-[12px] font-semibold text-[var(--color-brand-deep)] mb-[14px]">Low Risk</span>
-          <h3 class="text-[22px] font-semibold text-[var(--color-ink)]" style="font-family:var(--font-display)">Debt Funds</h3>
-          <p class="mt-[10px] text-[14.5px] leading-relaxed text-[var(--color-muted)]">Invest in bonds, G-Secs, and money market instruments. 1–3 year horizon. Stable returns — better post-tax than FD for higher tax brackets.</p>
-        </div>
-        <div class="product-card-light px-[28px] py-[32px]">
-          <span class="inline-block rounded-full bg-[var(--color-brand-light)] px-[12px] py-[4px] text-[12px] font-semibold text-[var(--color-brand-deep)] mb-[14px]">Balanced</span>
-          <h3 class="text-[22px] font-semibold text-[var(--color-ink)]" style="font-family:var(--font-display)">Hybrid Funds</h3>
-          <p class="mt-[10px] text-[14.5px] leading-relaxed text-[var(--color-muted)]">Mix of equity and debt — balanced risk-return. Balanced Advantage Funds dynamically adjust allocation based on market valuations.</p>
-        </div>
-        <div class="product-card-light px-[28px] py-[32px]">
-          <span class="inline-block rounded-full bg-[var(--color-brand-light)] px-[12px] py-[4px] text-[12px] font-semibold text-[var(--color-brand-deep)] mb-[14px]">Low Cost</span>
-          <h3 class="text-[22px] font-semibold text-[var(--color-ink)]" style="font-family:var(--font-display)">Index Funds</h3>
-          <p class="mt-[10px] text-[14.5px] leading-relaxed text-[var(--color-muted)]">Passively track Nifty 50, Sensex, or other indices. Expense ratios as low as 0.1%. Outperform most active large-cap funds over 10+ years.</p>
-        </div>
-        <div class="product-card-light px-[28px] py-[32px]">
-          <span class="inline-block rounded-full bg-[var(--color-brand-light)] px-[12px] py-[4px] text-[12px] font-semibold text-[var(--color-brand-deep)] mb-[14px]">Tax Saving</span>
-          <h3 class="text-[22px] font-semibold text-[var(--color-ink)]" style="font-family:var(--font-display)">ELSS Funds</h3>
-          <p class="mt-[10px] text-[14.5px] leading-relaxed text-[var(--color-muted)]">3-year lock-in. Invest up to ₹1.5L per year and claim deduction under Section 80C. Shortest lock-in among all 80C instruments.</p>
-        </div>
-        <div class="product-card-light px-[28px] py-[32px]">
-          <span class="inline-block rounded-full bg-[var(--color-brand-light)] px-[12px] py-[4px] text-[12px] font-semibold text-[var(--color-brand-deep)] mb-[14px]">Park Cash</span>
-          <h3 class="text-[22px] font-semibold text-[var(--color-ink)]" style="font-family:var(--font-display)">Liquid Funds</h3>
-          <p class="mt-[10px] text-[14.5px] leading-relaxed text-[var(--color-muted)]">Invest in instruments maturing within 91 days. Earn 6–7% p.a. on idle cash with same-day or T+1 redemption — better than a savings account.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ S5 SIP ═════════════════════════════════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          <span class="text-[var(--color-brand)]">SIP</span> — Systematic Investment Plan
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">
-          A SIP lets you invest a fixed amount every month in a mutual fund. It removes the need to time the market and builds wealth through rupee cost averaging over time.
-        </p>
-      </div>
-      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
-        <div class="overflow-x-auto">
-          <table class="w-full text-[15.5px]">
-            <thead>
-              <tr class="bg-[var(--color-dark-olive)]">
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Feature</th>
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">SIP</th>
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Lump Sum</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="bg-white">
-                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">Timing Risk</td>
-                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">Low — averages entry price</td>
-                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">High — market timing critical</td>
-              </tr>
-              <tr class="bg-[#f8f6f1]">
-                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">Min Investment</td>
-                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">₹500/month</td>
-                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">₹1,000 one-time</td>
-              </tr>
-              <tr class="bg-white">
-                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">Investment Discipline</td>
-                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">Auto-debit = automatic</td>
-                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">Manual decision each time</td>
-              </tr>
-              <tr class="bg-[#f8f6f1]">
-                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">Best For</td>
-                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">Salaried investors</td>
-                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">Bonus / idle surplus</td>
-              </tr>
-              <tr class="bg-white">
-                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">Bear Market Benefit</td>
-                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">Better returns — lower avg cost</td>
-                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">Full downside exposure</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="equity-reveal mt-[40px] text-center">
-        <a href="/calculators/sip/" class="btn-primary">Calculate SIP Returns →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ S5b CALCULATORS ═══════════════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Mutual fund <span class="text-[var(--color-brand)]">calculators &amp; tools</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">
-          Use our free calculators to estimate returns, plan withdrawals, and compare strategies — before you invest a single rupee.
-        </p>
-      </div>
-      <div class="grid gap-5 sm:grid-cols-3">
-        <div class="equity-reveal product-card-light px-[28px] py-[32px]">
-          <div class="mb-[16px] inline-flex h-[48px] w-[48px] items-center justify-center rounded-full bg-[var(--color-brand-light)]">
-            <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="var(--color-brand)" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
-          </div>
-          <h3 class="text-[22px] font-semibold text-[var(--color-ink)]" style="font-family:var(--font-display)">SIP Calculator</h3>
-          <p class="mt-[10px] text-[14.5px] leading-relaxed text-[var(--color-muted)]">Estimate how your monthly SIP grows over 1–30 years with compounding.</p>
-          <a href="/calculators/sip/" class="mt-[20px] inline-flex items-center gap-2 text-[14px] font-semibold text-[var(--color-brand)]">Calculate Now →</a>
-        </div>
-        <div class="equity-reveal product-card-light px-[28px] py-[32px]">
-          <div class="mb-[16px] inline-flex h-[48px] w-[48px] items-center justify-center rounded-full bg-[var(--color-brand-light)]">
-            <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="var(--color-brand)" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-          </div>
-          <h3 class="text-[22px] font-semibold text-[var(--color-ink)]" style="font-family:var(--font-display)">Lump Sum Calculator</h3>
-          <p class="mt-[10px] text-[14.5px] leading-relaxed text-[var(--color-muted)]">Calculate the future value of a one-time investment at any expected return rate.</p>
-          <a href="/calculators/lumpsum/" class="mt-[20px] inline-flex items-center gap-2 text-[14px] font-semibold text-[var(--color-brand)]">Calculate Now →</a>
-        </div>
-        <div class="equity-reveal product-card-light px-[28px] py-[32px]">
-          <div class="mb-[16px] inline-flex h-[48px] w-[48px] items-center justify-center rounded-full bg-[var(--color-brand-light)]">
-            <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="var(--color-brand)" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2z"/></svg>
-          </div>
-          <h3 class="text-[22px] font-semibold text-[var(--color-ink)]" style="font-family:var(--font-display)">ELSS Tax Calculator</h3>
-          <p class="mt-[10px] text-[14.5px] leading-relaxed text-[var(--color-muted)]">See how much tax you can save under Section 80C with an ELSS investment.</p>
-          <a href="/calculators/sip/" class="mt-[20px] inline-flex items-center gap-2 text-[14px] font-semibold text-[var(--color-brand)]">Calculate Now →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ S6 SWP, STP & LUMP SUM ════════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          SWP, STP &amp; <span class="text-[var(--color-brand)]">Lump Sum</span> — other investment modes
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">
-          Beyond SIP, there are three more investment modes suited for different financial stages and goals.
-        </p>
-      </div>
-      <div class="grid gap-5 sm:grid-cols-3">
-        <div class="equity-reveal product-card-light px-[28px] py-[32px]">
-          <div class="mb-[14px] text-[34px] font-bold leading-none text-[var(--color-brand)]">01</div>
-          <h3 class="text-[22px] font-semibold text-[var(--color-ink)]" style="font-family:var(--font-display)">SWP</h3>
-          <p class="mt-[4px] text-[13px] font-semibold text-[var(--color-brand)]">Systematic Withdrawal Plan</p>
-          <p class="mt-[12px] text-[14.5px] leading-relaxed text-[var(--color-muted)]">Withdraw a fixed amount monthly from your mutual fund. Provides regular income — ideal for retirement or supplementing salary.</p>
-        </div>
-        <div class="equity-reveal product-card-light px-[28px] py-[32px]">
-          <div class="mb-[14px] text-[34px] font-bold leading-none text-[var(--color-brand)]">02</div>
-          <h3 class="text-[22px] font-semibold text-[var(--color-ink)]" style="font-family:var(--font-display)">STP</h3>
-          <p class="mt-[4px] text-[13px] font-semibold text-[var(--color-brand)]">Systematic Transfer Plan</p>
-          <p class="mt-[12px] text-[14.5px] leading-relaxed text-[var(--color-muted)]">Transfer a fixed amount monthly from a liquid fund to an equity fund. Reduces lump-sum timing risk while staying invested.</p>
-        </div>
-        <div class="equity-reveal product-card-light px-[28px] py-[32px]">
-          <div class="mb-[14px] text-[34px] font-bold leading-none text-[var(--color-brand)]">03</div>
-          <h3 class="text-[22px] font-semibold text-[var(--color-ink)]" style="font-family:var(--font-display)">Lump Sum</h3>
-          <p class="mt-[4px] text-[13px] font-semibold text-[var(--color-brand)]">One-Time Investment</p>
-          <p class="mt-[12px] text-[14.5px] leading-relaxed text-[var(--color-muted)]">One-time large investment. Best when markets are at low valuations or when you have a sudden surplus like a bonus or inheritance.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ S7 RISKS & RISKOMETER ══════════════════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Mutual fund <span class="text-[var(--color-brand)]">risks &amp; riskometer</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">
-          All mutual funds carry some degree of risk. SEBI mandates every fund to display a riskometer — a standardised risk scale from Low to Very High — so investors can assess suitability before investing.
-        </p>
-      </div>
-
-      <!-- Riskometer visual -->
-      <div class="equity-reveal mb-[56px] overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
-        <div class="grid grid-cols-5 text-center text-[13px] font-bold uppercase tracking-wide">
-          <div class="bg-emerald-600 px-3 py-[18px] text-white">Low</div>
-          <div class="bg-lime-500 px-3 py-[18px] text-white">Mod. Low</div>
-          <div class="bg-yellow-400 px-3 py-[18px] text-[var(--color-dark-800)]">Moderate</div>
-          <div class="bg-orange-500 px-3 py-[18px] text-white">Mod. High</div>
-          <div class="bg-red-600 px-3 py-[18px] text-white">High</div>
-        </div>
-        <div class="grid grid-cols-5 bg-white text-center text-[13px] leading-snug text-[var(--color-muted)]">
-          <div class="border-r border-[var(--color-n400)] px-3 py-[16px]">Overnight, Liquid, Money Market</div>
-          <div class="border-r border-[var(--color-n400)] px-3 py-[16px]">Short Duration, Banking &amp; PSU Debt</div>
-          <div class="border-r border-[var(--color-n400)] px-3 py-[16px]">Hybrid, Balanced Advantage</div>
-          <div class="border-r border-[var(--color-n400)] px-3 py-[16px]">Large Cap, ELSS, Index Funds</div>
-          <div class="px-3 py-[16px]">Mid Cap, Small Cap, Sectoral</div>
-        </div>
-      </div>
-
-      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        <div class="equity-reveal bg-[var(--color-dark-800)] rounded-[14px] p-[28px] text-white">
-          <div class="mb-[14px] text-[36px] font-bold leading-none text-[var(--color-brand)]/30">01</div>
-          <h3 class="text-[20px] font-semibold text-white" style="font-family:var(--font-display)">Market Risk</h3>
-          <p class="mt-[12px] text-[14px] leading-relaxed text-white/65">Equity fund NAVs fall in market downturns. Mitigate by staying invested for 5+ years.</p>
-        </div>
-        <div class="equity-reveal bg-[var(--color-dark-800)] rounded-[14px] p-[28px] text-white">
-          <div class="mb-[14px] text-[36px] font-bold leading-none text-[var(--color-brand)]/30">02</div>
-          <h3 class="text-[20px] font-semibold text-white" style="font-family:var(--font-display)">Fund Manager Risk</h3>
-          <p class="mt-[12px] text-[14px] leading-relaxed text-white/65">Active funds depend on manager decisions. A change in manager can shift risk-return profile.</p>
-        </div>
-        <div class="equity-reveal bg-[var(--color-dark-800)] rounded-[14px] p-[28px] text-white">
-          <div class="mb-[14px] text-[36px] font-bold leading-none text-[var(--color-brand)]/30">03</div>
-          <h3 class="text-[20px] font-semibold text-white" style="font-family:var(--font-display)">Concentration Risk</h3>
-          <p class="mt-[12px] text-[14px] leading-relaxed text-white/65">Sectoral funds fall sharply if their sector underperforms. Diversify across fund categories.</p>
-        </div>
-        <div class="equity-reveal bg-[var(--color-dark-800)] rounded-[14px] p-[28px] text-white">
-          <div class="mb-[14px] text-[36px] font-bold leading-none text-[var(--color-brand)]/30">04</div>
-          <h3 class="text-[20px] font-semibold text-white" style="font-family:var(--font-display)">Liquidity Risk</h3>
-          <p class="mt-[12px] text-[14px] leading-relaxed text-white/65">Some debt funds hold illiquid securities. Check exit load and lock-in before investing.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ S8 TAX BENEFITS ════════════════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Tax benefits of <span class="text-[var(--color-brand)]">mutual funds</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">
-          Mutual fund taxation in India depends on the fund type and holding period. ELSS funds offer the highest tax advantage — a deduction of up to ₹1.5 lakh under Section 80C.
-        </p>
-      </div>
-      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
-        <div class="overflow-x-auto">
-          <table class="w-full text-[15.5px]">
-            <thead>
-              <tr class="bg-[var(--color-dark-olive)]">
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Fund Type</th>
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Short-Term (STCG)</th>
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Long-Term (LTCG)</th>
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Holding Period</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="bg-white">
-                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">Equity MF</td>
-                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">20% flat</td>
-                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">12.5% above ₹1.25L</td>
-                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">12 months (LTCG)</td>
-              </tr>
-              <tr class="bg-[#f8f6f1]">
-                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">Debt MF</td>
-                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">As per income slab</td>
-                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">As per slab (no indexation)</td>
-                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">24 months (LTCG)</td>
-              </tr>
-              <tr class="bg-white">
-                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">ELSS</td>
-                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">N/A (3-yr lock-in)</td>
-                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">12.5% above ₹1.25L</td>
-                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">3-year lock-in applies</td>
-              </tr>
-              <tr class="bg-[#f8f6f1]">
-                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">Hybrid MF</td>
-                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">20% flat (equity-oriented)</td>
-                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">12.5% above ₹1.25L</td>
-                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">12 months (LTCG)</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <p class="mt-4 text-center text-[13px] text-[var(--color-muted)]">* As per Budget 2025-26. Consult a tax advisor before investing.</p>
-    </div>
-  </section>
-
-  <!-- ══ S9 HOW TO INVEST ONLINE ════════════════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          How to invest in <span class="text-[var(--color-brand)]">mutual funds online</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">
-          Investing via Way2Wealth is fully digital — no branch visit, no paperwork. Complete your KYC once and access thousands of funds instantly.
-        </p>
-      </div>
-      <div class="equity-reveal steps-grid overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
-        <div class="bg-white px-[30px] py-[34px]">
-          <div class="mb-[22px] text-[34px] font-bold leading-none text-[var(--color-brand)]">01</div>
-          <h4 class="mb-[10px] text-[19px] font-semibold leading-[1.25] text-[var(--color-ink)]" style="font-family:var(--font-display)">Create your account</h4>
-          <p class="text-[14.5px] leading-relaxed text-[var(--color-muted)]">Visit way2wealth.com or download the app. Enter your mobile number and email to register.</p>
-        </div>
-        <div class="bg-white px-[30px] py-[34px]">
-          <div class="mb-[22px] text-[34px] font-bold leading-none text-[var(--color-brand)]">02</div>
-          <h4 class="mb-[10px] text-[19px] font-semibold leading-[1.25] text-[var(--color-ink)]" style="font-family:var(--font-display)">Complete KYC</h4>
-          <p class="text-[14.5px] leading-relaxed text-[var(--color-muted)]">Upload Aadhaar and PAN. Video KYC or Aadhaar OTP-based eKYC takes under 3 minutes.</p>
-        </div>
-        <div class="bg-white px-[30px] py-[34px]">
-          <div class="mb-[22px] text-[34px] font-bold leading-none text-[var(--color-brand)]">03</div>
-          <h4 class="mb-[10px] text-[19px] font-semibold leading-[1.25] text-[var(--color-ink)]" style="font-family:var(--font-display)">Choose your fund</h4>
-          <p class="text-[14.5px] leading-relaxed text-[var(--color-muted)]">Use the fund screener to filter by category, risk, and returns. Compare direct vs regular plans.</p>
-        </div>
-        <div class="bg-white px-[30px] py-[34px]">
-          <div class="mb-[22px] text-[34px] font-bold leading-none text-[var(--color-brand)]">04</div>
-          <h4 class="mb-[10px] text-[19px] font-semibold leading-[1.25] text-[var(--color-ink)]" style="font-family:var(--font-display)">Start SIP or invest lumpsum</h4>
-          <p class="text-[14.5px] leading-relaxed text-[var(--color-muted)]">Set your amount, frequency, and mandate via UPI or net banking. First unit allotted same day.</p>
-        </div>
-      </div>
-      <div class="equity-reveal mt-[40px] text-center">
-        <a href="/about/open-demat-account/" class="btn-primary">Start Investing</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ S11 FAQS ═══════════════════════════════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          FAQs — <span class="text-[var(--color-brand)]">mutual funds</span>
-        </h2>
-      </div>
-      <div class="equity-reveal mx-auto max-w-[840px] border-t border-[var(--color-n400)]">
-        <details class="eq-faq group border-b border-[var(--color-n400)]" open>
-          <summary class="flex cursor-pointer list-none items-center justify-between gap-5 px-2 py-[26px]">
-            <span class="text-[18px] font-semibold text-[var(--color-ink)]">Is mutual fund investment safe?</span>
-            <span class="shrink-0 text-[22px] leading-none text-[var(--color-brand)] transition-transform duration-300 group-open:rotate-45">+</span>
-          </summary>
-          <div class="overflow-hidden px-2 pb-0 text-[16px] leading-relaxed text-[var(--color-muted)] transition-all duration-300 group-open:pb-[28px]">
-            <p class="max-w-[680px]">Mutual funds are regulated by SEBI and are not guaranteed products. They carry market risk, but diversification and long-term investing significantly reduce risk. Debt funds carry lower risk than equity funds.</p>
-          </div>
-        </details>
-        <details class="eq-faq group border-b border-[var(--color-n400)]">
-          <summary class="flex cursor-pointer list-none items-center justify-between gap-5 px-2 py-[26px]">
-            <span class="text-[18px] font-semibold text-[var(--color-ink)]">What is NAV and how does it affect my investment?</span>
-            <span class="shrink-0 text-[22px] leading-none text-[var(--color-brand)] transition-transform duration-300 group-open:rotate-45">+</span>
-          </summary>
-          <div class="overflow-hidden px-2 pb-0 text-[16px] leading-relaxed text-[var(--color-muted)] transition-all duration-300 group-open:pb-[28px]">
-            <p class="max-w-[680px]">NAV = (Total Assets − Liabilities) ÷ Units Outstanding, calculated daily after market close. You buy and sell units at the NAV applicable on your transaction date. A higher NAV does not mean a fund is expensive — what matters is its growth rate over time.</p>
-          </div>
-        </details>
-        <details class="eq-faq group border-b border-[var(--color-n400)]">
-          <summary class="flex cursor-pointer list-none items-center justify-between gap-5 px-2 py-[26px]">
-            <span class="text-[18px] font-semibold text-[var(--color-ink)]">Can I withdraw money from a mutual fund anytime?</span>
-            <span class="shrink-0 text-[22px] leading-none text-[var(--color-brand)] transition-transform duration-300 group-open:rotate-45">+</span>
-          </summary>
-          <div class="overflow-hidden px-2 pb-0 text-[16px] leading-relaxed text-[var(--color-muted)] transition-all duration-300 group-open:pb-[28px]">
-            <p class="max-w-[680px]">Open-ended mutual funds allow redemption on any business day at the applicable NAV. ELSS funds have a 3-year lock-in. Some debt funds have exit loads if redeemed before the minimum holding period — always check before investing.</p>
-          </div>
-        </details>
-        <details class="eq-faq group border-b border-[var(--color-n400)]">
-          <summary class="flex cursor-pointer list-none items-center justify-between gap-5 px-2 py-[26px]">
-            <span class="text-[18px] font-semibold text-[var(--color-ink)]">What is the difference between Direct and Regular plans?</span>
-            <span class="shrink-0 text-[22px] leading-none text-[var(--color-brand)] transition-transform duration-300 group-open:rotate-45">+</span>
-          </summary>
-          <div class="overflow-hidden px-2 pb-0 text-[16px] leading-relaxed text-[var(--color-muted)] transition-all duration-300 group-open:pb-[28px]">
-            <p class="max-w-[680px]">Direct plans are bought from the AMC without a distributor — lower expense ratio, higher returns. Regular plans pay commission to distributors — higher TER. Shriram offers Direct Plans at zero commission.</p>
-          </div>
-        </details>
-        <details class="eq-faq group border-b border-[var(--color-n400)]">
-          <summary class="flex cursor-pointer list-none items-center justify-between gap-5 px-2 py-[26px]">
-            <span class="text-[18px] font-semibold text-[var(--color-ink)]">Can I start a SIP with ₹500?</span>
-            <span class="shrink-0 text-[22px] leading-none text-[var(--color-brand)] transition-transform duration-300 group-open:rotate-45">+</span>
-          </summary>
-          <div class="overflow-hidden px-2 pb-0 text-[16px] leading-relaxed text-[var(--color-muted)] transition-all duration-300 group-open:pb-[28px]">
-            <p class="max-w-[680px]">Yes. Most funds allow SIPs from ₹500/month. Set up auto-debit SIPs on the Antara app — no paperwork, instant activation, cancel anytime.</p>
-          </div>
-        </details>
-        <details class="eq-faq group border-b border-[var(--color-n400)]">
-          <summary class="flex cursor-pointer list-none items-center justify-between gap-5 px-2 py-[26px]">
-            <span class="text-[18px] font-semibold text-[var(--color-ink)]">Is mutual fund investment safe compared to FD?</span>
-            <span class="shrink-0 text-[22px] leading-none text-[var(--color-brand)] transition-transform duration-300 group-open:rotate-45">+</span>
-          </summary>
-          <div class="overflow-hidden px-2 pb-0 text-[16px] leading-relaxed text-[var(--color-muted)] transition-all duration-300 group-open:pb-[28px]">
-            <p class="max-w-[680px]">Equity mutual funds are market-linked and not capital-guaranteed like FDs. Over 5–10 years, equity funds have historically delivered higher inflation-adjusted returns. Debt funds have lower risk but carry interest rate and credit risk.</p>
-          </div>
-        </details>
-        <details class="eq-faq group border-b border-[var(--color-n400)]">
-          <summary class="flex cursor-pointer list-none items-center justify-between gap-5 px-2 py-[26px]">
-            <span class="text-[18px] font-semibold text-[var(--color-ink)]">What is the ELSS lock-in period?</span>
-            <span class="shrink-0 text-[22px] leading-none text-[var(--color-brand)] transition-transform duration-300 group-open:rotate-45">+</span>
-          </summary>
-          <div class="overflow-hidden px-2 pb-0 text-[16px] leading-relaxed text-[var(--color-muted)] transition-all duration-300 group-open:pb-[28px]">
-            <p class="max-w-[680px]">ELSS funds have a mandatory 3-year lock-in from the date of each SIP instalment. After the lock-in, you can hold or redeem. ELSS qualifies for ₹1.5L deduction under Section 80C — the shortest lock-in among all 80C instruments.</p>
-          </div>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ S12 CTA ════════════════════════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal overflow-hidden rounded-[22px] bg-[var(--color-dark-800)] px-[60px] py-[64px] text-center">
-        <h3 class="mx-auto max-w-[560px] text-[38px] font-bold leading-[1.12] text-white" style="font-family:var(--font-display)">
-          Start Your <span class="text-[var(--color-brand)]">SIP in Mutual Funds</span> Today
-        </h3>
-        <p class="mx-auto mt-[18px] max-w-[480px] text-[17px] leading-relaxed text-white/70">SEBI-registered. ₹18,000 Cr+ AUM. 1M+ investors trust us. Start your SIP in under 5 minutes — no paperwork, fully online.</p>
-        <div class="mt-[34px] flex flex-wrap justify-center gap-[14px]">
-          <a href="/about/open-demat-account/" class="btn-primary">Invest Now</a>
-          <a href="/calculators/sip/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Calculate SIP Returns</a>
-        </div>
+      <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center">
+        <a class="btn-gold" href="/about/open-demat-account/">Invest Now</a>
+        <a class="btn-outline" href="/calculators/sip/">Calculate SIP Returns</a>
       </div>
     </div>
   </section>
@@ -527,46 +368,200 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 </BaseLayout>
 
 <style>
-  .equity-reveal {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+  :root {
+    --page:#fcf8ef; --sec-light:#fef8ee; --sec-tint:#f6efe1; --card:#fffdf8;
+    --card-border:#e1e0db; --card-border-soft:rgba(28,28,22,.13); --row-line:rgba(28,28,22,.08);
+    --olive-title:#2e3914; --olive-head:#2d3813; --olive-deep:#1b2010;
+    --ink:#1c1c16; --ink-2:#46463c; --ink-3:#595959; --muted:#73736a;
+    --gold:#e0a82e; --gold-2:#f2b83f; --gold-btn:#f3b83f; --olive-ink:#2e3914;
+    --green:#009d58;
+    --pad:clamp(20px,8vw,144px); --container-pad:32px; --section-y:72px; --cta-w:220px;
   }
-  .equity-reveal.in-view { opacity: 1; transform: none; }
+  *,*::before,*::after{box-sizing:border-box}
+  a{color:inherit;text-decoration:none}
+  p{line-height:1.5}
 
-  .steps-grid { display: grid; grid-template-columns: repeat(2, 1fr); }
-  .steps-grid > * { border-right: 1px solid var(--color-n400); border-bottom: 1px solid var(--color-n400); }
-  .steps-grid > *:nth-child(2n) { border-right: 0; }
-  .steps-grid > *:nth-last-child(-n+2) { border-bottom: 0; }
-  @media (min-width: 1024px) {
-    .steps-grid { grid-template-columns: repeat(4, 1fr); }
-    .steps-grid > * { border-right: 1px solid var(--color-n400); border-bottom: 0; }
-    .steps-grid > *:last-child { border-right: 0; }
+  .section{padding:var(--section-y) var(--pad);min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;justify-content:center}
+  #sec-about{min-height:0}
+  .stack{display:flex;flex-direction:column}
+
+  .sec-title{font-weight:400;font-size:40px;color:var(--olive-title);text-transform:capitalize;line-height:1.5}
+  .sec-lead{font-weight:400;font-size:16px;color:var(--ink-3);line-height:1.5}
+  .card-h{font-weight:500;font-size:20px;color:var(--ink);line-height:1.5}
+  .card-p{font-weight:400;font-size:16px;color:var(--muted);line-height:1.5}
+
+  .card{background:var(--card);border:1px solid var(--card-border);border-radius:24px;padding:var(--container-pad);display:flex;flex-direction:column;gap:16px}
+
+  /* Hero */
+  .hero{min-height:100vh;min-height:100dvh;padding:0 var(--pad);display:flex;flex-direction:column;justify-content:center;overflow:hidden;background:radial-gradient(125% 210% at 100% -8%,#4f583b 0%,#363a2c 50%,#1d1d1d 100%)}
+  .hero-inner{padding:120px 0;display:flex;flex-direction:column}
+  .hero h1{font-weight:500;font-size:40px;color:#fff;line-height:1.5;max-width:860px}
+  .hero h1 .g{color:var(--gold-2)}
+  .hero .lead{margin-top:32px;font-weight:400;font-size:18px;line-height:1.5;color:rgba(255,255,255,.74);max-width:600px}
+  .cta-row{margin-top:40px;display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+  .hero-feats{margin-top:40px}
+  .feats{display:flex;flex-wrap:wrap;align-items:center;gap:14px 16px;max-width:760px;padding-top:36px;border-top:1px solid rgba(255,255,255,.16)}
+  .feat{display:flex;gap:10px;align-items:center}
+  .feat .tk{color:var(--gold-2);font-weight:500;font-size:15px;width:13px}
+  .feat .lb{color:rgba(255,255,255,.9);font-weight:500;font-size:16px;line-height:1.5;white-space:nowrap}
+
+  /* Buttons */
+  .btn-gold{background:var(--gold-btn);height:40px;width:var(--cta-w);border-radius:4px;display:inline-flex;align-items:center;justify-content:center;padding:7px 20px;font-weight:500;font-size:12px;color:var(--olive-ink);white-space:nowrap;transition:opacity .2s}
+  .btn-gold:hover{opacity:.88}
+  .btn-ghost{height:40px;border-radius:9px;border:1px solid rgba(255,255,255,.4);display:inline-flex;align-items:center;justify-content:center;padding:7px 26px;font-weight:600;font-size:15px;color:#fff;transition:border-color .2s}
+  .btn-ghost:hover{border-color:#fff}
+  .btn-outline{height:40px;border-radius:9px;border:1px solid var(--card-border);display:inline-flex;align-items:center;justify-content:center;padding:7px 26px;font-weight:600;font-size:14px;color:var(--ink);transition:border-color .2s}
+  .btn-outline:hover{border-color:var(--gold)}
+
+  /* 3-col row */
+  .row-3{display:flex;gap:24px;align-items:stretch}
+  .row-3 .card{flex:1 0 0;min-width:0}
+
+  /* Icon box */
+  .icon-box{width:48px;height:48px;border-radius:12px;background:var(--olive-deep);color:var(--gold-2);display:flex;align-items:center;justify-content:center;flex:none}
+
+  /* Calc card link */
+  .calc-card{justify-content:flex-start}
+  .calc-link{margin-top:auto;font-weight:600;font-size:14px;color:var(--gold);line-height:1.5}
+
+  /* Steps */
+  .steps{background:var(--card);border:1px solid var(--card-border);border-radius:24px;overflow:hidden;display:flex;align-items:stretch;width:100%}
+  .step{flex:1 0 0;min-width:0;padding:var(--container-pad);display:flex;flex-direction:column;gap:16px}
+  .step .num{font-weight:400;font-size:32px;line-height:34px;color:var(--gold)}
+  .step .st-body{display:flex;flex-direction:column;gap:12px}
+  .step h4{font-weight:500;font-size:20px;color:var(--ink);line-height:1.5}
+  .step p{font-weight:400;font-size:16px;color:var(--ink-3);line-height:1.5}
+  .step-div{width:1px;align-self:stretch;background:var(--card-border);flex:none}
+  .mode-sub{font-size:13px;font-weight:600;color:var(--gold);line-height:1.5}
+
+  /* Cat grid */
+  .cat-grid{border:1px solid var(--card-border);border-radius:24px;overflow:hidden;display:grid;grid-template-columns:repeat(4,1fr);background:var(--card)}
+  .cat-grid.cat-3{grid-template-columns:repeat(3,1fr)}
+  .cat{background:var(--card);padding:var(--container-pad);display:flex;flex-direction:column;gap:12px;border-right:1px solid var(--card-border);border-bottom:1px solid var(--card-border)}
+  .cat-grid:not(.cat-3) .cat:nth-child(4n){border-right:0}
+  .cat-grid:not(.cat-3) .cat:nth-child(n+5){border-bottom:0}
+  .cat-3 .cat:nth-child(3n){border-right:0}
+  .cat-3 .cat:nth-child(n+4){border-bottom:0}
+  .cat h4{font-weight:500;font-size:20px;color:var(--ink);line-height:1.5}
+  .cat p{font-weight:400;font-size:16px;color:var(--muted);line-height:1.5}
+  .cat-tag{display:inline-flex;background:rgba(46,57,20,.08);border-radius:99px;padding:2px 10px;font-size:11px;font-weight:700;color:var(--olive-head);text-transform:uppercase;letter-spacing:.03em;width:fit-content}
+
+  /* Tables */
+  .t-scroll{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .table{background:var(--card);border-radius:24px;overflow:hidden;display:grid}
+  .table.bordered{border:1px solid var(--card-border)}
+  .t4{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .t3{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .cell{padding:16px 24px;display:flex;align-items:center;justify-content:center;text-align:center}
+  .cell p{flex:1 0 0;min-width:0;font-size:16px;line-height:1.5;overflow-wrap:break-word}
+  .th{background:var(--olive-head)}
+  .th p{font-weight:600;color:#fff}
+  .tb{border-top:1px solid var(--row-line)}
+  .tb .k{font-weight:600;color:var(--ink)}
+  .tb .v{font-weight:400;color:var(--ink-2)}
+
+  /* Riskometer */
+  .riskometer{border-radius:24px;overflow:hidden;border:1px solid var(--card-border)}
+  .risk-bar{display:grid;grid-template-columns:repeat(5,1fr)}
+  .rb{padding:18px 12px;text-align:center;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.03em}
+  .rb-1{background:#059669;color:#fff}
+  .rb-2{background:#84cc16;color:#fff}
+  .rb-3{background:#eab308;color:#1b2010}
+  .rb-4{background:#f97316;color:#fff}
+  .rb-5{background:#dc2626;color:#fff}
+  .risk-funds{display:grid;grid-template-columns:repeat(5,1fr);background:var(--card)}
+  .rf{border-right:1px solid var(--card-border);padding:14px 12px;text-align:center;font-size:13px;color:var(--ink-3);line-height:1.4}
+  .rf:last-child{border-right:0}
+
+  /* Risk cards */
+  .risks{display:flex;gap:24px;align-items:stretch}
+  .risk{flex:1 0 0;min-width:0;background:var(--card);border:1px solid var(--card-border);border-radius:24px;padding:var(--container-pad);display:flex;flex-direction:column;gap:12px}
+  .risk h4{font-weight:500;font-size:20px;color:var(--ink);line-height:1.5}
+  .risk p{font-weight:400;font-size:16px;color:var(--ink-3);line-height:1.5}
+
+  /* FAQ */
+  .faq-wrap{padding:158px var(--pad);min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;justify-content:center}
+  .faq-cols{display:flex;gap:48px;align-items:stretch}
+  .faq-left{flex:1 0 0;min-width:0;display:flex;flex-direction:column;gap:48px}
+  .faq-title{font-weight:400;font-size:40px;color:var(--olive-title);text-transform:capitalize;line-height:1.5;white-space:nowrap}
+  .faq-acc{border-radius:24px;overflow:hidden;display:flex;flex-direction:column;gap:2px;width:100%}
+  .faq-item{background:var(--card);padding:24px;display:flex;gap:40px;align-items:flex-start;cursor:pointer}
+  .faq-item .q{flex:1 0 0;min-width:0;display:flex;flex-direction:column}
+  .faq-item .qt{font-weight:500;font-size:14px;color:#333;line-height:1.5}
+  .qa-wrap{display:grid;grid-template-rows:0fr;transition:grid-template-rows .38s cubic-bezier(.4,0,.2,1)}
+  .faq-item.open .qa-wrap{grid-template-rows:1fr}
+  .qa{overflow:hidden;min-height:0}
+  .qa p{padding-top:16px;font-weight:400;font-size:14px;color:#404040;line-height:1.5}
+  .faq-icon{width:24px;height:24px;flex:none}
+  .faq-icon svg{display:block;width:24px;height:24px}
+  .faq-icon svg .v{transform-box:fill-box;transform-origin:center;transition:transform .38s cubic-bezier(.4,0,.2,1),opacity .38s ease}
+  .faq-item.open .faq-icon svg .v{transform:scaleY(0);opacity:0}
+  .faq-side{width:464px;flex:none;background:var(--card);border:1px solid var(--card-border);border-radius:24px;padding:var(--container-pad);display:flex;flex-direction:column;gap:40px;justify-content:flex-end;position:relative;overflow:hidden}
+  .usr{position:absolute;left:var(--container-pad);top:64px;width:130.667px;height:147px;opacity:.1;color:var(--olive-deep)}
+  .usr svg{display:block;width:100%;height:100%}
+  .side-in{display:flex;flex-direction:column;gap:32px;position:relative}
+  .side-tx{display:flex;flex-direction:column;gap:8px;color:#222320}
+  .side-tx h4{font-weight:500;font-size:20px;line-height:28px;letter-spacing:-.45px}
+  .side-tx p{font-weight:400;font-size:14px;line-height:22px;letter-spacing:-.15px}
+
+  /* Final CTA */
+  .cta-sec{padding:var(--section-y) var(--pad)}
+  .cta-box{border-radius:22px;padding:64px 60px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:32px;text-align:center}
+  .ct-tt{display:flex;flex-direction:column;align-items:center;gap:16px;color:var(--olive-deep)}
+  .cta-box h3{font-weight:500;font-size:38px;line-height:42.56px;letter-spacing:-.76px}
+  .ct-sub{font-weight:400;font-size:17px;line-height:28.05px;color:var(--ink-2)}
+
+  /* Responsive */
+  @media(max-width:1024px){
+    .cat-3 .cat:nth-child(3n){border-right:1px solid var(--card-border)}
+    .cat-3 .cat:nth-child(n+4){border-bottom:1px solid var(--card-border)}
+    .cat-3{grid-template-columns:repeat(2,1fr)!important}
+    .cat-3 .cat:nth-child(2n){border-right:0}
+    .cat-3 .cat:nth-child(n+5){border-bottom:0}
+    .risks{flex-wrap:wrap}
+    .risk{flex:1 1 calc(50% - 12px)}
+    .faq-side .usr{display:none}
   }
-
-  .cat-grid { display: grid; gap: 1.25rem; grid-template-columns: repeat(1, 1fr); }
-  @media (min-width: 640px) { .cat-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (min-width: 1024px) { .cat-grid { grid-template-columns: repeat(3, 1fr); } }
-
-  @media (prefers-reduced-motion: reduce) {
-    .equity-reveal { opacity: 1; transform: none; transition: none; }
+  @media(max-width:900px){
+    .steps{flex-direction:column}
+    .step-div{display:none}
+    .step{border-bottom:1px solid var(--card-border)}
+    .step:last-child{border-bottom:0}
+    .faq-cols{flex-direction:column}
+    .faq-side{width:100%}
+    .faq-title{white-space:normal}
+  }
+  @media(max-width:768px){
+    :root{--pad:16px;--container-pad:24px;--section-y:56px}
+    .faq-wrap{padding:128px var(--pad)}
+    .hero{min-height:0}
+    .hero-inner{padding:96px 0}
+    .hero h1{font-size:clamp(28px,7vw,40px)}
+    .hero .lead{font-size:16px}
+    .sec-title,.faq-title{font-size:clamp(28px,7vw,40px)}
+    .row-3{flex-direction:column}
+    .cell{padding:12px 6px}
+    .cta-box{padding:48px}
+    .cta-box h3{font-size:clamp(24px,6.4vw,38px);line-height:1.2}
+    .ct-sub{font-size:15px;line-height:1.6}
+    .riskometer{overflow-x:auto}
+    .risk-bar,.risk-funds{min-width:480px}
+  }
+  @media(max-width:560px){
+    .cat-3{grid-template-columns:1fr!important}
+    .cat-3 .cat{border-right:0!important;border-bottom:1px solid var(--card-border)!important}
+    .cat-3 .cat:last-child{border-bottom:0!important}
+    .risk{flex:1 1 100%}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .qa-wrap,.faq-icon svg .v{transition:none}
   }
 </style>
 
 <script>
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        (e.target as HTMLElement).classList.add('in-view');
-        obs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.10 });
-  document.querySelectorAll('.equity-reveal').forEach(el => obs.observe(el));
-
-  document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(d => {
-    d.addEventListener('toggle', () => {
-      if (d.open) document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(o => { if (o !== d) o.removeAttribute('open'); });
+  document.querySelectorAll('.faq-item').forEach(function(it) {
+    (it as HTMLElement).addEventListener('click', function() {
+      it.classList.toggle('open');
     });
   });
 </script>
