@@ -414,10 +414,7 @@ const faqs = [
 
       <div class="faq-side">
         <div class="usr" aria-hidden="true">
-          <svg viewBox="0 0 131 147" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <ellipse cx="65.5" cy="40" rx="32" ry="32" fill="currentColor"/>
-            <path d="M4 147c0-33.965 27.535-61.5 61.5-61.5S127 113.035 127 147H4Z" fill="currentColor"/>
-          </svg>
+          <img src="/user-icon.png" alt="" />
         </div>
         <div class="side-in">
           <div class="side-tx">
@@ -689,9 +686,9 @@ const faqs = [
   }
   .usr {
     position: absolute; left: var(--container-pad); top: 64px;
-    width: 130.667px; height: 147px; opacity: .1; color: var(--olive-deep);
+    width: 130.667px; height: 147px; opacity: .1;
   }
-  .usr svg { display: block; width: 100%; height: 100%; }
+  .usr img { display: block; width: 100%; height: 100%; object-fit: contain; }
   .side-in  { display: flex; flex-direction: column; gap: 32px; position: relative; }
   .side-tx  { display: flex; flex-direction: column; gap: 8px; color: #222320; }
   .side-tx h4 { font-weight: 500; font-size: 20px; line-height: 28px; letter-spacing: -0.45px; }
