@@ -96,23 +96,14 @@ const faqs = [
     </div>
     <div class="row-3">
       <div class="card">
-        <div class="icon-box">
-          <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2h5M12 11a4 4 0 100-8 4 4 0 000 8z"/></svg>
-        </div>
         <p class="card-h">Pooled Investment</p>
         <p class="card-p">Thousands of investors pool capital, giving each access to a diversified portfolio they couldn't build alone.</p>
       </div>
       <div class="card">
-        <div class="icon-box">
-          <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-        </div>
         <p class="card-h">Professional Management</p>
         <p class="card-p">A SEBI-registered fund manager makes buy/sell decisions based on the fund's stated investment objective and market research.</p>
       </div>
       <div class="card">
-        <div class="icon-box">
-          <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-        </div>
         <p class="card-h">SEBI-regulated</p>
         <p class="card-p">All mutual funds in India are regulated by SEBI and offered by AMFI-registered AMCs under strict disclosure and compliance norms.</p>
       </div>
@@ -130,7 +121,6 @@ const faqs = [
         <>
           {i > 0 && <div class="step-div"></div>}
           <div class="step">
-            <div class="num">{s.n}</div>
             <div class="st-body"><h4>{s.title}</h4><p>{s.desc}</p></div>
           </div>
         </>
@@ -148,7 +138,6 @@ const faqs = [
     <div class="cat-grid cat-3">
       {mfTypes.map(t => (
         <div class="cat">
-          <span class="cat-tag">{t.tag}</span>
           <h4>{t.label}</h4>
           <p>{t.desc}</p>
         </div>
@@ -188,25 +177,16 @@ const faqs = [
     </div>
     <div class="row-3">
       <div class="card calc-card">
-        <div class="icon-box">
-          <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
-        </div>
         <p class="card-h">SIP Calculator</p>
         <p class="card-p">Estimate how your monthly SIP grows over 1–30 years with compounding.</p>
         <a class="calc-link" href="/calculators/sip/">Calculate Now →</a>
       </div>
       <div class="card calc-card">
-        <div class="icon-box">
-          <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-        </div>
         <p class="card-h">Lump Sum Calculator</p>
         <p class="card-p">Calculate the future value of a one-time investment at any expected return rate.</p>
         <a class="calc-link" href="/calculators/lumpsum/">Calculate Now →</a>
       </div>
       <div class="card calc-card">
-        <div class="icon-box">
-          <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2z"/></svg>
-        </div>
         <p class="card-h">ELSS Tax Calculator</p>
         <p class="card-p">See how much tax you can save under Section 80C with an ELSS investment.</p>
         <a class="calc-link" href="/calculators/sip/">Calculate Now →</a>
@@ -225,7 +205,6 @@ const faqs = [
         <>
           {i > 0 && <div class="step-div"></div>}
           <div class="step">
-            <div class="num">{m.n}</div>
             <div class="st-body">
               <h4>{m.label}</h4>
               <p class="mode-sub">{m.sub}</p>
@@ -302,7 +281,6 @@ const faqs = [
         <>
           {i > 0 && <div class="step-div"></div>}
           <div class="step">
-            <div class="num">{s.n}</div>
             <div class="st-body"><h4>{s.title}</h4><p>{s.desc}</p></div>
           </div>
         </>

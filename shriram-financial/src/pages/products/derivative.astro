@@ -89,7 +89,6 @@ const faqs = [
   <!-- ══ 1. HERO ══════════════════════════════════════════════════════ -->
   <section class="hero">
     <div class="hero-inner">
-      <p class="eyebrow">Derivatives</p>
       <h1>Trade Derivatives <span class="g">with Confidence</span></h1>
       <p class="lead">Access Futures &amp; Options on India's trusted platform — Shriram Financial Services. SEBI-registered, flat ₹20/order, with expert F&amp;O research from Day 1.</p>
       <div class="cta-row">
@@ -137,9 +136,6 @@ const faqs = [
     </div>
     <div class="row-2">
       <div class="card how-card">
-        <div class="icon-box">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-        </div>
         <h3>Futures Contract</h3>
         <p>A binding agreement to buy or sell an asset at a preset price on expiry. Both parties <strong style="color:var(--ink)">must</strong> honour the contract regardless of the market price. P&amp;L is settled daily via mark-to-market (MTM).</p>
         <ul class="how-list">
@@ -147,9 +143,6 @@ const faqs = [
         </ul>
       </div>
       <div class="card how-card">
-        <div class="icon-box">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        </div>
         <h3>Options Contract</h3>
         <p>The <strong style="color:var(--ink)">right — not the obligation</strong> — to buy (Call) or sell (Put) at a strike price before expiry. The buyer pays a premium; the seller (writer) collects it but takes on the obligation.</p>
         <ul class="how-list">
@@ -171,7 +164,6 @@ const faqs = [
     <div class="cat-grid cat-3">
       {typeItems.map(t => (
         <div class="cat">
-          <span class={`dtype-tag dtype-${t.tagClass}`}>{t.tag}</span>
           <h4>{t.label}</h4>
           <p>{t.desc}</p>
         </div>
@@ -189,7 +181,6 @@ const faqs = [
     <div class="adv-grid">
       {advantageItems.map(a => (
         <div class="card adv-card">
-          <div class="icon-box" set:html={a.icon} />
           <p class="card-h">{a.title}</p>
           <p class="card-p">{a.desc}</p>
         </div>
@@ -236,7 +227,6 @@ const faqs = [
         { n:'3', label:'Strategy Knowledge',     desc:'Start with buying options (limited risk = premium paid) before moving to selling or complex multi-leg strategies.' },
       ].map(c => (
         <div class="card">
-          <div class="num" style="font-size:32px;font-weight:400;color:var(--gold);line-height:34px">{c.n}</div>
           <p class="card-h">{c.label}</p>
           <p class="card-p">{c.desc}</p>
         </div>
@@ -255,7 +245,6 @@ const faqs = [
         <>
           {i > 0 && <div class="step-div"></div>}
           <div class="step">
-            <div class="num">{s.n}</div>
             <div class="st-body"><h4>{s.title}</h4><p>{s.desc}</p></div>
           </div>
         </>
