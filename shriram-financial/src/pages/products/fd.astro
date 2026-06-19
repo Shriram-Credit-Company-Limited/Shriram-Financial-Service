@@ -1,135 +1,78 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-
-const fdTypes = [
-  { label: 'Regular Fixed Deposit', desc: 'Guaranteed interest on a lump-sum investment for a fixed tenure. Choose cumulative (interest at maturity) or non-cumulative (monthly/quarterly payouts).', tag: 'Most Popular' },
-  { label: 'Tax-Saving FD (ELSS FD)', desc: '5-year lock-in FD eligible for ₹1.5 lakh deduction under Section 80C. Interest is taxable; no premature withdrawal allowed during the lock-in.', tag: '80C Eligible' },
-  { label: 'Senior Citizen FD', desc: 'Extra 0.25%–0.50% interest rate for investors aged 60+. Ideal for generating regular post-retirement income.', tag: 'Age 60+' },
-  { label: 'Corporate FD', desc: 'NBFCs like Shriram Finance offer 0.5%–1.5% higher rates than bank FDs. Rated by CRISIL/ICRA — higher yield with assessed credit quality.', tag: 'Higher Yields' },
-];
-
-const rateRows = [
-  { tenure: '7 – 45 days', general: '3.50%', senior: '4.00%' },
-  { tenure: '46 – 179 days', general: '5.50%', senior: '6.00%' },
-  { tenure: '180 – 364 days', general: '6.25%', senior: '6.75%' },
-  { tenure: '1 – 2 years', general: '7.00%', senior: '7.50%' },
-  { tenure: '2 – 3 years', general: '7.15%', senior: '7.65%' },
-  { tenure: '3 – 5 years', general: '7.25%', senior: '7.75%' },
-  { tenure: 'Above 5 years', general: '7.00%', senior: '7.50%' },
-];
-
-const vsRows = [
-  { feature: 'Returns', fd: '6.5%–8% p.a. (guaranteed)', equity: '10%–15% (historical, not guaranteed)', mf: '7%–12% (varies by fund type)' },
-  { feature: 'Risk', fd: 'Very low (guaranteed capital)', equity: 'High (market-linked)', mf: 'Low to High (depends on fund)' },
-  { feature: 'Liquidity', fd: 'Low (premature withdrawal penalty)', equity: 'High (same-day)', mf: 'Medium (T+1 to T+3)' },
-  { feature: 'Tax Efficiency', fd: 'Low (TDS on interest)', equity: '12.5% LTCG after ₹1.25L', mf: 'Varies by fund type' },
-  { feature: 'Best For', fd: 'Capital protection, regular income', equity: 'Long-term wealth creation', mf: 'Goal-based diversified investing' },
-];
-
-const steps = [
-  { n: '01', title: 'Choose FD Type & Issuer', desc: 'Select between bank FD, NBFC FD, or corporate FD based on your risk tolerance, tenure, and required interest rate.' },
-  { n: '02', title: 'Select Tenure & Payout', desc: 'Choose tenure from 7 days to 10 years. Select cumulative (interest at maturity) or non-cumulative (monthly/quarterly payouts).' },
-  { n: '03', title: 'Submit KYC & Apply', desc: 'Submit PAN, Aadhaar, and bank details digitally on the Shriram platform. Application is reviewed and approved in 1–2 days.' },
-  { n: '04', title: 'Receive FD Certificate', desc: 'Your FD receipt is issued digitally. Track maturity dates, interest accrual, and renewal options from the Antara app.' },
-];
-
-const faqs = [
-  { q: 'Is FD interest taxable?', a: 'Yes. Interest is taxed per your slab. TDS at 10% is deducted if annual interest exceeds ₹40,000 (₹50,000 for senior citizens). Submit Form 15G or 15H if your income is below the taxable threshold to avoid TDS.' },
-  { q: 'Can I withdraw my FD before maturity?', a: 'Most FDs allow premature withdrawal with a 0.5%–1% interest penalty. Tax-saving (80C) FDs cannot be broken before the 5-year lock-in. Consider a loan against FD as a penalty-free alternative.' },
-  { q: 'Is a corporate FD safer than a bank FD?', a: 'Bank FDs are DICGC-insured up to ₹5 lakh. Corporate FDs aren\'t covered but offer higher rates. AAA/AA+ rated NBFCs like Shriram Finance have strong track records — assess the rating before investing.' },
-  { q: 'What is the difference between cumulative and non-cumulative FD?', a: 'Cumulative FDs reinvest interest and pay principal + interest at maturity — ideal for wealth building. Non-cumulative FDs pay interest monthly or quarterly — best for regular income seekers like retirees.' },
-  { q: 'Can I take a loan against my FD?', a: 'Yes. Borrow up to 70–90% of FD value at 1–2% above the FD rate. Your FD keeps earning interest while you access liquidity — smarter than premature withdrawal.' },
-];
 ---
 
 <BaseLayout
-  title="Fixed Deposit in India — Best FD Rates 2025 | Shriram"
-  description="Book a fixed deposit in India with up to 8.5% p.a. guaranteed interest. Special senior citizen rates, 80C eligible FD, and flexible tenures. Apply with Shriram today."
+  title="Fixed Deposit in India — FD Interest Rates 2025 | Shriram"
+  description="Invest in fixed deposit in India. Compare FD interest rates 2025, types of FD, FD calculator, tax on FD returns. Open FD online with Shriram Financial Services."
 >
 
-  <!-- ══ 1. HERO ═══════════════════════════════════════════════════ -->
-  <section class="relative overflow-hidden bg-[var(--color-dark-800)]">
+  <!-- ══ S1. HERO ══════════════════════════════════════════════════════ -->
+  <section class="relative overflow-hidden bg-[var(--color-dark-800)] py-[100px] lg:py-[120px]">
     <div class="pointer-events-none absolute -right-40 -top-40 h-[560px] w-[560px] rounded-full bg-[var(--color-brand)]/10 blur-3xl"></div>
     <div class="pointer-events-none absolute -bottom-32 left-0 h-80 w-80 rounded-full bg-[var(--color-brand)]/5 blur-3xl"></div>
-    <div class="site-wrap relative py-[120px]">
-      <p class="equity-reveal text-[14px] font-medium tracking-[.04em] text-[var(--color-brand)]">Fixed Deposits</p>
-      <h1 class="equity-reveal mt-[22px] max-w-[880px] text-[clamp(32px,4vw,52px)] font-bold leading-[1.06] text-white" style="font-family:var(--font-display)">
-        <span class="text-[var(--color-brand)]">Fixed Deposit in India</span> — Earn Guaranteed Returns
+    <div class="site-wrap relative">
+      <h1 class="equity-reveal max-w-[880px] text-[clamp(32px,4vw,52px)] font-bold leading-[1.06] text-white" style="font-family:var(--font-display)">
+        Invest in <span class="text-[var(--color-brand)]">Fixed Deposit</span> in India — Guaranteed Returns
       </h1>
       <p class="equity-reveal mt-[26px] max-w-[600px] text-[18px] leading-relaxed text-white/70">
-        Invest in Fixed Deposits and earn up to 8.5% p.a. guaranteed interest. Safe, predictable, and flexible — with special rates for senior citizens and 80C tax-saving options.
+        Earn guaranteed returns on your savings with FDs. DICGC-insured bank FDs and competitive NBFC FD rates. Compare FD rates and invest online in minutes.
       </p>
       <div class="equity-reveal mt-[38px] flex flex-wrap gap-[14px]">
-        <a href="/about/open-demat-account/" class="btn-primary">Book a Fixed Deposit</a>
-        <a href="/about/support/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Talk to RM</a>
+        <a href="/about/open-demat-account/" class="btn-primary">Open Fixed Deposit</a>
+        <a href="/about/open-demat-account/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Compare FD Rates</a>
       </div>
       <div class="equity-reveal mt-[54px] flex flex-wrap gap-x-9 gap-y-3 border-t border-white/15 pt-9">
-        {['✓ Up to 8.5% p.a.', '✓ Capital guaranteed', '✓ Senior citizen extra rate', '✓ 80C eligible FD'].map(f => (
-          <span class="text-[15px] font-medium text-white/90">
-            <span class="mr-2 text-[var(--color-brand)]">{f.slice(0,1)}</span>{f.slice(1)}
-          </span>
+        {['✓ DICGC-insured (bank FDs)', '✓ Guaranteed returns', '✓ Flexible tenure', '✓ Senior citizen benefits'].map(f => (
+          <span class="text-[15px] font-medium text-white/90">{f}</span>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- ══ 2. WHAT ARE FDs ════════════════════════════════════════════ -->
+  <!-- ══ S2. WHAT IS FIXED DEPOSIT? ═══════════════════════════════════ -->
   <section class="bg-white py-[104px]">
     <div class="site-wrap">
-      <div class="equity-reveal mx-auto grid max-w-[1000px] items-start gap-[72px] lg:grid-cols-[5fr_7fr]">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
         <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Types of <span class="text-[var(--color-brand)]">Fixed Deposits</span>
+          What is <span class="text-[var(--color-brand)]">Fixed Deposit?</span> — Definition &amp; Meaning
         </h2>
-        <div class="space-y-5 text-[17px] leading-relaxed text-[var(--color-muted)]">
-          <p>A Fixed Deposit (FD) is a safe, guaranteed-return investment where you deposit a lump sum with a bank or NBFC for a fixed period at a predetermined interest rate.</p>
-          <p>Unlike market-linked instruments, FDs offer capital protection and predictable income — making them ideal for conservative investors and short-to-medium-term goals.</p>
-        </div>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">
+          A Fixed Deposit (FD) is a savings instrument where you deposit a lump sum for a fixed tenure at a pre-agreed interest rate. Your principal and returns are fully guaranteed.
+        </p>
       </div>
-      <div class="equity-reveal mx-auto mt-[76px] max-w-[1000px] border-t border-[var(--color-n400)] pt-[60px]">
-        <div class="grid gap-5 sm:grid-cols-2">
-          {fdTypes.map((t, i) => (
-            <div class="product-card-light flex flex-col gap-3 p-[34px]" style={`animation-delay:${i*60}ms`}>
-              <span class="inline-flex w-fit rounded-full bg-[var(--color-brand)]/15 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-[var(--color-brand-deep)]">{t.tag}</span>
-              <h3 class="text-[17px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{t.label}</h3>
-              <p class="text-[13px] leading-relaxed text-[var(--color-muted)]">{t.desc}</p>
-            </div>
-          ))}
-        </div>
+      <div class="equity-reveal grid gap-5 sm:grid-cols-3">
+        {[
+          { title: 'Guaranteed Returns', desc: 'Interest rate fixed at the time of deposit — not market-linked.' },
+          { title: 'Capital Safety', desc: 'Bank FDs insured by DICGC up to ₹5 lakh per bank.' },
+          { title: 'Flexible Tenure', desc: 'Choose from 7 days to 10 years based on your financial goal.' },
+        ].map(c => (
+          <div class="product-card-light px-[28px] py-[32px]">
+            <h3 class="mb-3 text-[17px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{c.title}</h3>
+            <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">{c.desc}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
 
-  <!-- ══ 3. INTEREST RATES ══════════════════════════════════════════ -->
+  <!-- ══ S3. HOW FIXED DEPOSITS WORK ══════════════════════════════════ -->
   <section class="bg-[#f8f6f1] py-[104px]">
     <div class="site-wrap">
       <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
         <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          FD Interest <span class="text-[var(--color-brand)]">Rate Structure</span>
+          How <span class="text-[var(--color-brand)]">Fixed Deposits</span> Work — Compounding &amp; Interest
         </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Indicative rates (p.a.). Actual rates may vary. Senior citizens receive an additional 0.50% on all tenures.</p>
-      </div>
-      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
-        <div class="overflow-x-auto"><table class="w-full text-[15.5px]">
-          <thead><tr class="bg-[var(--color-dark-olive)]"><th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Tenure</th><th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">General Investors</th><th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Senior Citizens</th></tr></thead>
-          <tbody>{rateRows.map((r,i) => (<tr class={i%2===0?'bg-white':'bg-[#f8f6f1]'}><td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">{r.tenure}</td><td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.general}</td><td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-medium text-[var(--color-dark-olive)]">{r.senior}</td></tr>))}</tbody>
-        </table></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ 4. HOW TO OPEN ════════════════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          How to Open a <span class="text-[var(--color-brand)]">Fixed Deposit</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Four simple steps from choosing your FD to receiving your digital certificate.</p>
       </div>
       <div class="equity-reveal steps-grid overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
-        {steps.map(s => (
+        {[
+          { n: '01', title: 'Choose FD', desc: 'Select bank/NBFC, tenure (e.g., 1 year), and payout type (cumulative or non-cumulative).' },
+          { n: '02', title: 'Deposit Amount', desc: 'Transfer the principal amount. Min deposit: ₹1,000 (varies by institution).' },
+          { n: '03', title: 'Interest Accrues', desc: 'Interest compounds quarterly (cumulative) or pays out monthly/quarterly (non-cumulative).' },
+          { n: '04', title: 'Maturity Payout', desc: 'On maturity, receive principal + interest. Auto-renew or withdraw as needed.' },
+        ].map(s => (
           <div class="px-[30px] py-[34px]">
-            <div class="mb-[22px] font-display text-[34px] font-normal leading-none text-[var(--color-brand)]">{s.n}</div>
+            <div class="mb-[22px] text-[34px] font-bold leading-none text-[var(--color-brand)]">{s.n}</div>
             <h4 class="mb-[10px] text-[19px] font-medium leading-[1.25] text-[var(--color-ink)]" style="font-family:var(--font-display)">{s.title}</h4>
             <p class="text-[14.5px] leading-relaxed text-[var(--color-muted)]">{s.desc}</p>
           </div>
@@ -138,128 +81,215 @@ const faqs = [
     </div>
   </section>
 
-  <!-- ══ 5. FD VS EQUITY VS MF ════════════════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          FD vs Equity vs <span class="text-[var(--color-brand)]">Mutual Funds</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Compare your options across the factors that matter most for your financial goals.</p>
-      </div>
-      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
-        <div class="overflow-x-auto"><table class="w-full text-[15.5px]">
-          <thead><tr class="bg-[var(--color-dark-olive)]"><th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Feature</th><th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Fixed Deposit</th><th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Equity</th><th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Mutual Funds</th></tr></thead>
-          <tbody>{vsRows.map((r,i) => (<tr class={i%2===0?'bg-white':'bg-[#f8f6f1]'}><td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">{r.feature}</td><td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.fd}</td><td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.equity}</td><td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.mf}</td></tr>))}</tbody>
-        </table></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ 5b. FD INTEREST RATES 2025 COMPARISON ════════════════════ -->
+  <!-- ══ S4. FD INTEREST RATES — CURRENT RATES 2025 ════════════════════ -->
   <section class="bg-white py-[104px]">
     <div class="site-wrap">
       <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
         <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          FD Interest Rates 2025 — <span class="text-[var(--color-brand)]">Top Banks Compared</span>
+          FD Interest Rates — <span class="text-[var(--color-brand)]">Current Rates 2025</span>
         </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Indicative rates for 1–3 year tenures. NBFCs like Shriram Finance typically offer 0.5%–1.5% higher than bank FDs. Check the platform for current rates.</p>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">
+          Indicative FD rates for general citizens and senior citizens.
+        </p>
       </div>
       <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
         <div class="overflow-x-auto">
           <table class="w-full text-[15.5px]">
             <thead>
               <tr class="bg-[var(--color-dark-olive)]">
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Bank / NBFC</th>
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">General (1–3yr)</th>
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Senior Citizen</th>
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">DICGC Insured</th>
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Institution</th>
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Tenure</th>
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">General Rate (p.a.)</th>
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Senior Citizen Rate (p.a.)</th>
               </tr>
             </thead>
             <tbody>
               {[
-                { bank: 'SBI', general: '6.50–7.50%', senior: '7.00–8.00%', insured: 'Yes (₹5L)' },
-                { bank: 'HDFC Bank', general: '7.00–7.75%', senior: '7.50–8.25%', insured: 'Yes (₹5L)' },
-                { bank: 'ICICI Bank', general: '6.90–7.75%', senior: '7.40–8.25%', insured: 'Yes (₹5L)' },
-                { bank: 'Axis Bank', general: '7.00–7.75%', senior: '7.75–8.50%', insured: 'Yes (₹5L)' },
-                { bank: 'Shriram Finance (NBFC)', general: '7.50–8.50%', senior: '8.00–9.00%', insured: 'No (CRISIL rated)' },
+                { inst: 'SBI', tenure: '1 Year', general: '6.80%', senior: '7.30%' },
+                { inst: 'HDFC Bank', tenure: '1 Year', general: '7.10%', senior: '7.60%' },
+                { inst: 'ICICI Bank', tenure: '1 Year', general: '7.10%', senior: '7.60%' },
+                { inst: 'Axis Bank', tenure: '1 Year', general: '7.10%', senior: '7.85%' },
+                { inst: 'Small Finance Bank', tenure: '1 Year', general: '7.75–9.00%', senior: '8.25–9.50%' },
+                { inst: 'Shriram Finance NBFC', tenure: '1–5 Year', general: '8.50–9.40%', senior: '8.95–9.90%' },
               ].map((r, i) => (
                 <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[#f8f6f1]'}>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">{r.bank}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">{r.inst}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.tenure}</td>
                   <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.general}</td>
                   <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-medium text-[var(--color-dark-olive)]">{r.senior}</td>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.insured}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
       </div>
-      <p class="mt-4 text-center text-[13px] text-[var(--color-muted)]">*Indicative rates as of mid-2025. Actual rates vary by bank and product. Verify on respective websites.</p>
+      <p class="mt-4 text-[13px] text-[var(--color-muted)]">* Rates are indicative as of June 2025. Verify current rates before investing.</p>
     </div>
   </section>
 
-  <!-- ══ 5c. PREMATURE WITHDRAWAL & LOAN AGAINST FD ════════════════ -->
+  <!-- ══ S5. TYPES OF FIXED DEPOSITS ══════════════════════════════════ -->
   <section class="bg-[#f8f6f1] py-[104px]">
     <div class="site-wrap">
       <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
         <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          FD Premature Withdrawal &amp; <span class="text-[var(--color-brand)]">Loan Against FD</span>
+          Types of <span class="text-[var(--color-brand)]">Fixed Deposits</span> in India
         </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Need money before your FD matures? You have two options — break it early (with a penalty) or borrow against it.</p>
       </div>
-      <div class="equity-reveal grid gap-6 sm:grid-cols-2">
-        <div class="product-card-light p-[34px]">
-          <h3 class="mb-4 text-[22px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">Premature Withdrawal</h3>
-          <div class="space-y-4">
-            <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">Most FDs allow early withdrawal, but at a cost. Banks deduct 0.5%–1% from the applicable rate to calculate the penalty.</p>
-            <div class="rounded-[12px] border border-[var(--color-n400)] bg-[#f8f6f1] p-5">
-              <div class="mb-3 text-[13px] font-bold text-[var(--color-ink)]">Example Calculation</div>
-              <div class="space-y-1.5 text-[13px] text-[var(--color-muted)]">
-                <div><span class="font-medium text-[var(--color-ink)]">FD Booked at:</span> 7.50% p.a. for 3 years</div>
-                <div><span class="font-medium text-[var(--color-ink)]">Broken after:</span> 1 year</div>
-                <div><span class="font-medium text-[var(--color-ink)]">Rate for 1 year:</span> 7.00% p.a. (original 1-yr rate)</div>
-                <div><span class="font-medium text-[var(--color-ink)]">Penalty deducted:</span> 0.50%</div>
-                <div class="font-semibold text-[var(--color-dark-olive)]">Effective rate paid: 6.50% p.a.</div>
-              </div>
-            </div>
-            <p class="text-[12px] text-[var(--color-muted)]">Tax-Saving FDs (80C) cannot be broken before the 5-year lock-in period under any circumstances.</p>
-          </div>
-        </div>
-        <div class="product-card-light p-[34px]">
-          <h3 class="mb-4 text-[22px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">Loan Against FD</h3>
-          <div class="space-y-4">
-            <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">A smarter alternative — borrow against your FD while it continues to earn interest.</p>
-            <div class="space-y-3">
+      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
+        <div class="overflow-x-auto">
+          <table class="w-full text-[14.5px]">
+            <thead>
+              <tr class="bg-[var(--color-dark-olive)]">
+                <th class="px-[20px] py-[16px] text-left text-[13px] font-semibold text-white">FD Type</th>
+                <th class="px-[20px] py-[16px] text-left text-[13px] font-semibold text-[var(--color-brand)]">Interest</th>
+                <th class="px-[20px] py-[16px] text-left text-[13px] font-semibold text-[var(--color-brand)]">Tenure</th>
+                <th class="px-[20px] py-[16px] text-left text-[13px] font-semibold text-[var(--color-brand)]">Tax</th>
+                <th class="px-[20px] py-[16px] text-left text-[13px] font-semibold text-[var(--color-brand)]">Best For</th>
+              </tr>
+            </thead>
+            <tbody>
               {[
-                { label: 'Loan Amount', value: 'Up to 70–90% of FD value' },
-                { label: 'Loan Interest Rate', value: 'FD rate + 1–2% p.a.' },
-                { label: 'Your FD Keeps Earning', value: 'Full interest continues' },
-                { label: 'Net Cost', value: 'Only 1–2% over FD rate' },
-                { label: 'Processing Fee', value: 'Nil to minimal (most banks)' },
-              ].map(d => (
-                <div class="flex justify-between border-b border-[var(--color-n400)]/50 pb-2 last:border-0 last:pb-0 text-[13px]">
-                  <span class="font-medium text-[var(--color-ink)]">{d.label}</span>
-                  <span class="text-[var(--color-muted)]">{d.value}</span>
-                </div>
+                { type: 'Cumulative FD', interest: 'Compounded, paid at maturity', tenure: '7 days – 10 years', tax: 'TDS on interest', best: 'Long-term savings' },
+                { type: 'Non-Cumulative FD', interest: 'Paid monthly/quarterly', tenure: '7 days – 10 years', tax: 'TDS on interest', best: 'Regular income needs' },
+                { type: 'Tax Saving FD', interest: '~7% (banks)', tenure: '5 years (lock-in)', tax: '80C deduction ₹1.5L', best: 'Tax-saving under 80C' },
+                { type: 'Senior Citizen FD', interest: 'Extra 0.25–0.50% over general', tenure: 'Same as regular', tax: 'TDS applies', best: 'Retired investors' },
+                { type: 'NRI FD (NRE/FCNR)', interest: 'Market rate', tenure: '1–5 years', tax: 'Tax-free in India (NRE)', best: 'NRI investors' },
+              ].map((r, i) => (
+                <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[#f8f6f1]'}>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[20px] py-[15px] font-semibold text-[var(--color-ink)]">{r.type}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[20px] py-[15px] text-[var(--color-muted)]">{r.interest}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[20px] py-[15px] text-[var(--color-muted)]">{r.tenure}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[20px] py-[15px] text-[var(--color-muted)]">{r.tax}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[20px] py-[15px] text-[var(--color-muted)]">{r.best}</td>
+                </tr>
               ))}
-            </div>
-          </div>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ══ 6. FAQ ════════════════════════════════════════════════════ -->
+  <!-- ══ S6. FD INTEREST CALCULATOR ═══════════════════════════════════ -->
   <section class="bg-white py-[104px]">
     <div class="site-wrap">
       <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
         <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Frequently Asked <span class="text-[var(--color-brand)]">Questions</span>
+          FD <span class="text-[var(--color-brand)]">Interest Calculator</span> — Calculate Maturity Amount
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">
+          Use our FD calculator to estimate your maturity amount based on deposit amount, rate, and tenure.
+        </p>
+      </div>
+      <div class="equity-reveal mx-auto max-w-[760px]">
+        <div class="product-card-light px-[28px] py-[32px]">
+          <div class="mb-6 rounded-[10px] bg-[#f8f6f1] p-5 font-mono text-[15px] text-[var(--color-ink)]">
+            <div class="mb-2 font-bold">Maturity Amount (Cumulative) = P × (1 + r/n)^(n×t)</div>
+            <div class="mt-3 space-y-1 text-[13px] text-[var(--color-muted)]">
+              <div><strong class="text-[var(--color-ink)]">P</strong> = Principal</div>
+              <div><strong class="text-[var(--color-ink)]">r</strong> = Annual Interest Rate</div>
+              <div><strong class="text-[var(--color-ink)]">n</strong> = Compounding frequency (4 for quarterly)</div>
+              <div><strong class="text-[var(--color-ink)]">t</strong> = Tenure in years</div>
+            </div>
+          </div>
+          <p class="mb-6 text-[14px] leading-relaxed text-[var(--color-muted)]">
+            <strong class="text-[var(--color-ink)]">Example:</strong> ₹1,00,000 at 8.50% for 2 years (quarterly) = <strong class="text-[var(--color-dark-olive)]">₹1,18,197 at maturity</strong>
+          </p>
+          <a href="/calculators/" class="btn-primary inline-flex items-center gap-2">Calculate FD Returns →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ S7. FD BENEFITS & FEATURES ═══════════════════════════════════ -->
+  <section class="bg-[#f8f6f1] py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          FD <span class="text-[var(--color-brand)]">Benefits &amp; Features</span> — Why Invest in Fixed Deposit
+        </h2>
+      </div>
+      <div class="equity-reveal grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {[
+          { title: 'Capital Safety', desc: 'Bank FDs up to ₹5 lakh protected by DICGC insurance. NBFC FDs are uninsured but RBI-regulated.' },
+          { title: 'Predictable Returns', desc: 'Interest rate locked at deposit — no market risk. Know exactly what you earn.' },
+          { title: 'Loan Against FD', desc: 'Get up to 90% of FD amount as an overdraft. No need to break your FD early.' },
+          { title: 'Senior Citizen Benefits', desc: 'Extra 0.25–0.50% over general rates. Special senior citizen deposit schemes available.' },
+        ].map(c => (
+          <div class="product-card-light px-[28px] py-[32px]">
+            <h3 class="mb-3 text-[17px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{c.title}</h3>
+            <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">{c.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ S8. PREMATURE WITHDRAWAL & LOAN AGAINST FD ════════════════════ -->
+  <section class="bg-white py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          FD <span class="text-[var(--color-brand)]">Premature Withdrawal</span> &amp; Loan Against FD
+        </h2>
+      </div>
+      <div class="equity-reveal grid gap-5 sm:grid-cols-2">
+        <div class="product-card-light px-[28px] py-[32px]">
+          <h3 class="mb-3 text-[20px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">Premature Withdrawal</h3>
+          <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">Break your FD before maturity at a penalty (typically 0.50–1.00% below applicable rate). Example: ₹1L FD at 7.5% for 2 years, broken at 18 months → earns ~6.5–7.0% for 18 months only.</p>
+        </div>
+        <div class="product-card-light px-[28px] py-[32px]">
+          <h3 class="mb-3 text-[20px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">Loan Against FD</h3>
+          <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">Get an overdraft facility of up to 90% of FD value at FD rate + 1–2%. Better than breaking FD since your FD continues to earn interest while you use the loan.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ S9. HOW TO OPEN A FIXED DEPOSIT ONLINE ════════════════════════ -->
+  <section class="bg-[#f8f6f1] py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          How to <span class="text-[var(--color-brand)]">Open Fixed Deposit</span> Online — Step by Step
+        </h2>
+      </div>
+      <div class="equity-reveal steps-grid overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
+        {[
+          { n: '01', title: 'Choose Institution', desc: 'Compare FD rates. Select bank or NBFC based on rate and safety.' },
+          { n: '02', title: 'Complete KYC', desc: 'One-time PAN + Aadhaar-based digital KYC.' },
+          { n: '03', title: 'Choose Tenure & Amount', desc: 'Select deposit amount, tenure, and payout type (cumulative or non-cumulative).' },
+          { n: '04', title: 'Fund Your FD', desc: 'Transfer funds via net banking or UPI. Receive FD receipt (digital or physical).' },
+        ].map(s => (
+          <div class="px-[30px] py-[34px]">
+            <div class="mb-[22px] text-[34px] font-bold leading-none text-[var(--color-brand)]">{s.n}</div>
+            <h4 class="mb-[10px] text-[19px] font-medium leading-[1.25] text-[var(--color-ink)]" style="font-family:var(--font-display)">{s.title}</h4>
+            <p class="text-[14.5px] leading-relaxed text-[var(--color-muted)]">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ S10. FAQs — FIXED DEPOSIT INDIA ══════════════════════════════ -->
+  <section class="bg-white py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          FAQs — <span class="text-[var(--color-brand)]">Fixed Deposit</span> India
         </h2>
       </div>
       <div class="equity-reveal mx-auto max-w-[840px] border-t border-[var(--color-n400)]">
-        {faqs.map(item => (
+        {[
+          { q: 'Is FD safe in India?', a: 'Bank FDs up to ₹5 lakh per bank are insured by DICGC (Deposit Insurance & Credit Guarantee Corporation). NBFC FDs are not DICGC-insured but regulated by RBI.' },
+          { q: 'Is FD interest taxable?', a: 'Yes. FD interest is added to your income and taxed at your income slab rate. TDS at 10% is deducted by the bank if interest exceeds ₹40,000 (₹50,000 for senior citizens) per year.' },
+          { q: 'What is the maximum FD insurance amount?', a: 'DICGC insures up to ₹5 lakh per depositor per bank — including principal and interest across all accounts at that bank.' },
+          { q: 'Can I break FD before maturity?', a: 'Yes, with a premature withdrawal penalty of 0.50–1.00% below the applicable rate for the period held.' },
+          { q: 'What is a Tax Saving FD?', a: 'A 5-year lock-in FD eligible for ₹1.5 lakh deduction under Section 80C. Interest is taxable. Premature withdrawal not allowed.' },
+          { q: 'What is the difference between cumulative and non-cumulative FD?', a: 'Cumulative FD pays out principal + compounded interest at maturity. Non-cumulative FD pays interest monthly/quarterly — better for regular income.' },
+          { q: 'Is senior citizen FD rate higher?', a: 'Yes. Senior citizens (60+ years) get 0.25–0.50% higher rate than the regular rate on most FDs.' },
+          { q: 'Can NRIs invest in FDs in India?', a: 'Yes — through NRE FDs (interest tax-free in India, fully repatriable) or NRO FDs (interest taxable). FCNR FDs are denominated in foreign currency.' },
+        ].map(item => (
           <details class="eq-faq group border-b border-[var(--color-n400)]">
             <summary class="flex cursor-pointer list-none items-center justify-between gap-5 py-[26px] px-2">
               <span class="text-[18px] font-semibold text-[var(--color-ink)]">{item.q}</span>
@@ -271,18 +301,13 @@ const faqs = [
           </details>
         ))}
       </div>
-    </div>
-  </section>
 
-  <!-- ══ 7. FINAL CTA ══════════════════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal overflow-hidden rounded-[22px] bg-[var(--color-dark-800)] px-[60px] py-[64px] text-center">
-        <h3 class="mx-auto max-w-[560px] text-[38px] font-bold leading-[1.12] text-white" style="font-family:var(--font-display)">Secure Your Savings with a Fixed Deposit</h3>
-        <p class="mx-auto mt-[18px] max-w-[480px] text-[17px] leading-relaxed text-white/70">Book an FD with Shriram Financial Services — up to 8.5% p.a., fully digital, and with special rates for senior citizens.</p>
+      <!-- Dark CTA block after FAQs -->
+      <div class="equity-reveal mt-[56px] overflow-hidden rounded-[22px] bg-[var(--color-dark-800)] px-[60px] py-[64px] text-center">
+        <h3 class="mx-auto max-w-[560px] text-[38px] font-bold leading-[1.12] text-white" style="font-family:var(--font-display)">Open Fixed Deposit Online — Guaranteed Returns</h3>
         <div class="mt-[34px] flex flex-wrap justify-center gap-[14px]">
-          <a href="/about/open-demat-account/" class="btn-primary">Book FD Now</a>
-          <a href="/about/support/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Talk to an RM</a>
+          <a href="/about/open-demat-account/" class="btn-primary">Open FD</a>
+          <a href="/about/open-demat-account/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Compare Rates</a>
         </div>
       </div>
     </div>

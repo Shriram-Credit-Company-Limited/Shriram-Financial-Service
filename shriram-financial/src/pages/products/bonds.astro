@@ -264,7 +264,127 @@ const faqs = [
     </div>
   </section>
 
-  <!-- ══ 9. FINAL CTA ════════════════════════════════════════════════ -->
+  <!-- ══ 9. HOW TO EVALUATE A BOND ════════════════════════════════════ -->
+  <section class="bg-[var(--color-n100)] py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          How to Evaluate a Bond — <span class="text-[var(--color-brand)]">Practical Checklist</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Before buying any bond, run through this six-point checklist to assess risk, return, and suitability.</p>
+      </div>
+      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
+        <table class="w-full text-[15px]">
+          <thead>
+            <tr class="bg-[var(--color-dark-olive)]">
+              <th class="px-[24px] py-[16px] text-left text-[13px] font-semibold text-white">Evaluation Factor</th>
+              <th class="px-[24px] py-[16px] text-left text-[13px] font-semibold text-[var(--color-brand)]">What to Check</th>
+              <th class="px-[24px] py-[16px] text-left text-[13px] font-semibold text-[var(--color-brand)]">Green Flag</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              { factor: 'Credit Rating', check: 'CRISIL / ICRA / CARE rating of issuer', flag: 'AA or above — AAA is safest' },
+              { factor: 'Issuer Analysis', check: 'Revenue, profit, debt/equity ratio of issuer', flag: 'Consistent profitability, low leverage' },
+              { factor: 'Coupon Rate vs YTM', check: 'Compare stated coupon to Yield-to-Maturity', flag: 'YTM above comparable FD rates' },
+              { factor: 'Tenor & Maturity Date', check: 'Does the maturity date match your financial goal?', flag: 'Bond matures at/before goal date' },
+              { factor: 'Liquidity', check: 'Is the bond listed and actively traded on NSE/BSE?', flag: 'Daily volume > ₹1 crore face value' },
+              { factor: 'Callable / Puttable Features', check: 'Can the issuer redeem early (callable) or can you put it back?', flag: 'Non-callable for stable income planning' },
+            ].map((r, i) => (
+              <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[var(--color-n100)]'}>
+                <td class="border-t border-[var(--color-n400)]/50 px-[24px] py-[14px] font-semibold text-[var(--color-ink)]">{r.factor}</td>
+                <td class="border-t border-[var(--color-n400)]/50 px-[24px] py-[14px] text-[var(--color-muted)]">{r.check}</td>
+                <td class="border-t border-[var(--color-n400)]/50 px-[24px] py-[14px] text-emerald-700 font-medium">{r.flag}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 10. PRACTICAL EXAMPLES & CALCULATOR ═══════════════════════ -->
+  <section class="bg-white py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          Practical Examples & <span class="text-[var(--color-brand)]">Return Calculator</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Understand bond returns with a real-world YTM example — then use our calculator to estimate your scenario.</p>
+      </div>
+      <div class="grid gap-6 lg:grid-cols-2">
+        <div class="equity-reveal product-card-light p-[40px]">
+          <h3 class="mb-4 text-[22px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">YTM Example — 7% G-Sec, 10 Years</h3>
+          <div class="space-y-3 text-[14px]">
+            {[
+              { label: 'Face Value', val: '₹10,000' },
+              { label: 'Coupon Rate', val: '7% p.a. (semi-annual)' },
+              { label: 'Purchase Price (Secondary Market)', val: '₹9,500 (at discount)' },
+              { label: 'Years to Maturity', val: '10 years' },
+              { label: 'Yield-to-Maturity (YTM)', val: '~7.6% p.a.' },
+              { label: 'Annual Interest Earned', val: '₹700' },
+              { label: 'Capital Gain at Maturity', val: '₹500 (face − purchase)' },
+              { label: 'Total Return (10 years)', val: '~₹7,500 coupon + ₹500 gain' },
+            ].map(row => (
+              <div class="flex justify-between border-b border-[var(--color-n400)]/50 pb-3">
+                <span class="text-[var(--color-muted)]">{row.label}</span>
+                <span class="font-semibold text-[var(--color-ink)]">{row.val}</span>
+              </div>
+            ))}
+          </div>
+          <p class="mt-4 text-[12px] text-[var(--color-muted)]">Note: YTM is higher than coupon rate because the bond was bought at a discount. Held-to-maturity investors receive ₹10,000 at redemption.</p>
+        </div>
+        <div class="equity-reveal product-card-light p-[40px]">
+          <h3 class="mb-4 text-[22px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">Bond Return vs FD Comparison</h3>
+          <div class="space-y-3 text-[14px] mb-6">
+            {[
+              { asset: 'SBI 10-Yr G-Sec', ret: '7.6% YTM', tax: 'Per slab (interest)', liquidity: 'High (NSE listed)' },
+              { asset: 'HDFC Bank FD (5 yr)', ret: '7.25% p.a.', tax: 'Per slab (TDS 10%)', liquidity: 'Low (penalty to break)' },
+              { asset: 'AA+ Corporate Bond', ret: '8.5–9% YTM', tax: 'Per slab (interest)', liquidity: 'Medium (depends on volume)' },
+              { asset: 'Debt Mutual Fund', ret: '6–8% p.a.', tax: 'Per slab', liquidity: 'High (T+1)' },
+            ].map((r, i) => (
+              <div class={`rounded-[10px] p-[14px] ${i === 0 ? 'bg-[var(--color-brand-light)]' : 'bg-[var(--color-n100)]'}`}>
+                <div class="font-semibold text-[var(--color-ink)] mb-1">{r.asset}</div>
+                <div class="flex gap-4 text-[var(--color-muted)]">
+                  <span>Return: <strong class="text-[var(--color-ink)]">{r.ret}</strong></span>
+                  <span>Liquidity: {r.liquidity}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+          <a href="/calculators/sip/" class="btn-primary w-full text-center block">Use Bond Return Calculator</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 11. RISKS & WARNING SIGNS ════════════════════════════════════ -->
+  <section class="bg-[var(--color-n100)] py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          Bond Risks & <span class="text-[var(--color-brand)]">Investor Warning Signs</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Bonds are not risk-free. Understand these warning signs before adding bonds to your portfolio.</p>
+      </div>
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {[
+          { n: '01', label: 'Rating Downgrade', desc: 'A credit rating downgrade from AA to A or below signals deteriorating issuer health. Bond prices fall sharply post-downgrade — exit early if issuer fundamentals weaken.' },
+          { n: '02', label: 'Unusually High Yield', desc: 'If a bond offers 12%+ yield when similar-rated bonds offer 9%, it signals hidden risk — potential fraud, liquidity crisis, or impending default. High yield = high danger.' },
+          { n: '03', label: 'Unlisted / Unrated Bonds', desc: 'Bonds not listed on NSE/BSE and lacking SEBI-registered ratings are extremely high risk. No exit market, no price discovery, and no regulatory oversight.' },
+          { n: '04', label: 'Liquidity Crunch', desc: 'When an NBFC or corporate bond issuer faces a funding crisis (like ILFS 2018, DHFL 2019), even AA-rated bonds can see prices crash. Diversify across issuers.' },
+        ].map((r, i) => (
+          <div class="equity-reveal rounded-[14px] bg-[var(--color-dark-800)] p-[28px]" style={`animation-delay:${i*80}ms`}>
+            <div class="mb-3 text-[32px] font-bold leading-none text-[var(--color-brand)]">{r.n}</div>
+            <h4 class="mb-2 text-[17px] font-semibold text-white" style="font-family:var(--font-display)">{r.label}</h4>
+            <p class="text-[13px] leading-relaxed text-white/60">{r.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 12. FINAL CTA ════════════════════════════════════════════════ -->
   <section class="bg-white py-[104px]">
     <div class="site-wrap">
       <div class="equity-reveal overflow-hidden rounded-[22px] bg-[var(--color-dark-800)] px-[60px] py-[64px] text-center">

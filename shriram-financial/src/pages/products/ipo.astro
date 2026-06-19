@@ -1,276 +1,536 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-
-const ipoTypes = [
-  { label: 'Mainboard IPO', desc: 'Large companies (₹10 crore+ paid-up capital) listing on NSE/BSE under full SEBI disclosure norms, typically well-covered by analysts.', tag: 'Large Cap' },
-  { label: 'SME IPO', desc: 'SMEs with ₹1–25 crore paid-up capital list on NSE Emerge or BSE SME. Higher growth potential — requires thorough due diligence.', tag: 'High Growth' },
-  { label: 'Offer for Sale (OFS)', desc: 'Promoters or PE investors sell existing stakes — no new capital raised by the company. Shares transfer directly from seller to buyer.', tag: 'Secondary' },
-];
-
-const steps = [
-  { n: '01', title: 'Check Upcoming IPOs', desc: 'Browse all live and upcoming IPOs on the Shriram platform. Read the DRHP, review financials, and check GMP and subscription trends.' },
-  { n: '02', title: 'Enter Bid Details', desc: 'Choose the price band, lot size, and bid quantity. You can bid at the cut-off price or a specific price within the band.' },
-  { n: '03', title: 'ASBA / UPI Mandate', desc: 'Funds are blocked in your bank account via ASBA or UPI mandate — no outflow until allotment. Blocked amounts earn interest.' },
-  { n: '04', title: 'Allotment & Listing', desc: 'Allotment is done by lottery (if oversubscribed). Shares are credited to your Demat before listing day. Non-allotment amounts are unblocked immediately.' },
-];
-
-const timeline = [
-  { label: 'IPO Open Date', desc: 'Issue opens for bidding — typically 3 days. Price band and lot size are fixed.' },
-  { label: 'IPO Close Date', desc: 'Last day to place bids. Revisions or cancellations must be done before close time (typically 5 PM).' },
-  { label: 'Basis of Allotment', desc: 'Published 6 days after close. Check allotment status on BSE/NSE or Shriram platform.' },
-  { label: 'Refund / Unblocking', desc: 'Non-allotted UPI mandates are released within T+1 day of allotment. ASBA amounts are also unblocked.' },
-  { label: 'Demat Credit', desc: 'Shares credited to your Demat account one day before listing, typically T+5 or T+6 from close date.' },
-  { label: 'Listing Day', desc: 'Stock begins trading on NSE/BSE. You can hold for the long term or book profits on listing day.' },
-];
-
-const risks = [
-  { n: '01', label: 'Overvaluation Risk', desc: 'IPO prices are set by investment bankers favouring the issuer. Some IPOs list at or below issue price — always analyse fundamentals before applying.' },
-  { n: '02', label: 'Non-Allotment Risk', desc: 'Oversubscribed IPOs allocate by lottery in the retail category. You may bid and receive nothing — your funds are simply unblocked.' },
-  { n: '03', label: 'Listing Volatility', desc: 'Stocks can swing wildly on listing day — listing high then crashing, or opening below issue price. Market sentiment dominates day-one price action.' },
-  { n: '04', label: 'Lock-In Risk', desc: 'Anchor and promoter shares are locked for 30–90 days. Selling pressure after lock-in expiry can sharply depress the post-listing price.' },
-];
-
-const faqs = [
-  { q: 'What is ASBA in an IPO application?', a: 'ASBA (Application Supported by Blocked Amount) blocks your bid amount in your bank account instead of transferring it. Interest keeps accruing; the amount is debited only on allotment and immediately unblocked if you don\'t get shares.' },
-  { q: 'Can I apply for IPO through Shriram Financial Services?', a: 'Yes. Apply via the Antara app or web portal using UPI or ASBA. View upcoming IPOs, track allotment status, and receive Demat credit — all in one place.' },
-  { q: 'What is the minimum lot size for IPO applications?', a: 'SEBI sets 1 lot as the retail minimum — typically ₹10,000–₹15,000 per lot (10–200 shares). HNI/Non-Institutional Investors must bid a minimum of ₹2 lakh.' },
-  { q: 'Is there a GMP (Grey Market Premium) and should I trust it?', a: 'GMP reflects unofficial pre-listing demand but is unregulated and unreliable. Use it as one data point only — always analyse the company\'s fundamentals before applying.' },
-  { q: 'How many IPO applications can I submit?', a: 'One application per PAN card in the Retail category. Duplicate PAN applications are rejected entirely. Family members with separate PANs can each apply independently.' },
-];
 ---
 
 <BaseLayout
-  title="IPO 2026 — Apply Online ASBA UPI Upcoming IPOs India | Shriram"
-  description="Apply for upcoming IPO 2026 online via ASBA or UPI on Shriram Financial Services. Track allotment, get Demat credit T+5/T+6, and zero brokerage on application. Start today."
+  title="IPO 2026 — Apply for IPO Online | Shriram Financial Services"
+  description="Apply for IPO 2026 online with Shriram. View open IPOs, upcoming IPO calendar, GMP today, allotment status, and step-by-step IPO application guide. SEBI-registered."
 >
 
-  <!-- ══ 1. HERO ═══════════════════════════════════════════════════ -->
-  <section class="relative overflow-hidden bg-[var(--color-dark-800)]">
+  <!-- ══ S1 HERO ════════════════════════════════════════════════════ -->
+  <section class="relative overflow-hidden bg-[var(--color-dark-800)] py-[100px] lg:py-[120px]">
     <div class="pointer-events-none absolute -right-40 -top-40 h-[560px] w-[560px] rounded-full bg-[var(--color-brand)]/10 blur-3xl"></div>
     <div class="pointer-events-none absolute -bottom-32 left-0 h-80 w-80 rounded-full bg-[var(--color-brand)]/5 blur-3xl"></div>
-    <div class="site-wrap relative py-[120px]">
-      <p class="equity-reveal text-[14px] font-medium tracking-[.04em] text-[var(--color-brand)]">Initial Public Offering</p>
-      <h1 class="equity-reveal mt-[22px] max-w-[880px] text-[clamp(32px,4vw,52px)] font-bold leading-[1.06] text-white" style="font-family:var(--font-display)">
-        Apply for <span class="text-[var(--color-brand)]">IPO 2026</span> — Before They Hit the Market
+    <div class="site-wrap relative">
+      <h1 class="equity-reveal mt-0 max-w-[880px] text-[clamp(32px,4vw,52px)] font-bold leading-[1.06] text-white" style="font-family:var(--font-display)">
+        Apply for <span class="text-[var(--color-brand)]">IPO 2026</span> — Open &amp; Upcoming IPOs in India
       </h1>
       <p class="equity-reveal mt-[26px] max-w-[600px] text-[18px] leading-relaxed text-white/70">
-        Access all upcoming Mainboard and SME IPOs through the Shriram platform. Apply via UPI or ASBA, track allotment, and receive shares directly to your Demat.
+        SEBI-regulated IPO application platform. Zero brokerage on IPO. Apply via UPI/ASBA. Open a Demat account to apply for IPOs in minutes.
       </p>
       <div class="equity-reveal mt-[38px] flex flex-wrap gap-[14px]">
-        <a href="/about/open-demat-account/" class="btn-primary">Apply for IPO Now</a>
-        <a href="/about/support/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Talk to RM</a>
+        <a href="/about/open-demat-account/" class="btn-primary">Apply for IPO</a>
+        <a href="/about/open-demat-account/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Open Demat Account</a>
       </div>
       <div class="equity-reveal mt-[54px] flex flex-wrap gap-x-9 gap-y-3 border-t border-white/15 pt-9">
-        {['✓ Zero brokerage on application', '✓ UPI & ASBA support', '✓ Real-time allotment tracking', '✓ Demat credit T+5/T+6'].map(f => (
-          <span class="text-[15px] font-medium text-white/90">
-            <span class="mr-2 text-[var(--color-brand)]">{f.slice(0,1)}</span>{f.slice(1)}
-          </span>
+        {['✓ SEBI-regulated', '✓ Zero IPO brokerage', '✓ NSE & BSE listed', '✓ UPI/ASBA supported'].map(f => (
+          <span class="text-[15px] font-medium text-white/90">{f}</span>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- ══ 2. WHAT IS AN IPO ══════════════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto grid max-w-[1000px] items-start gap-[72px] lg:grid-cols-[5fr_7fr]">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Types of IPO &amp; <span class="text-[var(--color-brand)]">Offer for Sale</span>
-        </h2>
-        <div class="space-y-5 text-[17px] leading-relaxed text-[var(--color-muted)]">
-          <p>Not all public offerings are the same. Understanding the type helps you evaluate risk, pricing, and post-listing behaviour.</p>
-          <p>Mainboard IPOs follow full SEBI disclosure norms while SME IPOs offer higher growth potential. Offer for Sale (OFS) involves promoters selling existing stakes without raising new capital.</p>
-        </div>
-      </div>
-      <div class="equity-reveal mx-auto mt-[76px] max-w-[1000px] border-t border-[var(--color-n400)] pt-[60px]">
-        <div class="grid gap-5 sm:grid-cols-3">
-          {ipoTypes.map((t, i) => (
-            <div class="product-card-light flex flex-col gap-4 p-[34px]" style={`animation-delay:${i*60}ms`}>
-              <span class="inline-flex w-fit rounded-full bg-[var(--color-brand)]/15 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-[var(--color-brand-deep)]">{t.tag}</span>
-              <h3 class="text-[17px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{t.label}</h3>
-              <p class="text-[13px] leading-relaxed text-[var(--color-muted)]">{t.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ 3. HOW TO APPLY ════════════════════════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          How to <span class="text-[var(--color-brand)]">Apply for an IPO</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Four steps from browsing to your Demat credit on allotment day.</p>
-      </div>
-      <div class="equity-reveal steps-grid overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
-        {steps.map(s => (
-          <div class="px-[30px] py-[34px]">
-            <div class="mb-[22px] font-display text-[34px] font-normal leading-none text-[var(--color-brand)]">{s.n}</div>
-            <h4 class="mb-[10px] text-[19px] font-medium leading-[1.25] text-[var(--color-ink)]" style="font-family:var(--font-display)">{s.title}</h4>
-            <p class="text-[14.5px] leading-relaxed text-[var(--color-muted)]">{s.desc}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ 4. TIMELINE ════════════════════════════════════════════════ -->
+  <!-- ══ S2 WHAT IS AN IPO ═════════════════════════════════════════ -->
   <section class="bg-white py-[104px]">
     <div class="site-wrap">
       <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
         <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          IPO Timeline — Application <span class="text-[var(--color-brand)]">to Listing</span>
+          What is an <span class="text-[var(--color-brand)]">IPO?</span> — Meaning &amp; Definition
         </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">From the day the IPO opens to the moment shares list on exchange — every key milestone.</p>
-      </div>
-      <div class="equity-reveal space-y-3">
-        {timeline.map((t, i) => (
-          <div class="flex items-start gap-5 rounded-[16px] border border-[var(--color-n400)] bg-[#f8f6f1] p-5" style={`animation-delay:${i*40}ms`}>
-            <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[var(--color-dark-olive)] text-[11px] font-bold text-[var(--color-brand)]">{i+1}</span>
-            <div>
-              <h3 class="text-[14px] font-semibold text-[var(--color-ink)]">{t.label}</h3>
-              <p class="mt-1 text-[13px] text-[var(--color-muted)]">{t.desc}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ 4b. IPO GLOSSARY ══════════════════════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          IPO Glossary — <span class="text-[var(--color-brand)]">8 Key Terms Explained</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Know your IPO terminology before you apply — from GMP to DRHP to Kostak.</p>
-      </div>
-      <div class="equity-reveal grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {[
-          { term: 'GMP', full: 'Grey Market Premium', def: 'Unofficial pre-listing price premium trading in the informal grey market. Unreliable but widely tracked as a sentiment indicator.' },
-          { term: 'Lot Size', full: 'Minimum Bid Quantity', def: 'The minimum number of shares you must apply for. SEBI sets this so retail bids fall between ₹10,000–₹15,000.' },
-          { term: 'Price Band', full: 'Price Range for Bidding', def: 'The lower and upper price limits within which you can bid. You can bid at the cut-off price to accept whatever price the company sets.' },
-          { term: 'QIB', full: 'Qualified Institutional Buyer', def: 'SEBI-defined institutions (mutual funds, FPIs, banks) that get 50% of mainboard IPO allocation reserved for them.' },
-          { term: 'NII', full: 'Non-Institutional Investor', def: 'HNIs and corporates bidding ₹2 lakh or more. Get 15% of mainboard IPO allocation. No lottery — proportionate allotment.' },
-          { term: 'DRHP', full: 'Draft Red Herring Prospectus', def: 'The full IPO document filed with SEBI before the issue. Contains company financials, risk factors, objects of the issue, and promoter details.' },
-          { term: 'Allotment', full: 'Share Allocation', def: 'The process of assigning shares to applicants. Retail is by lottery if oversubscribed; NII is proportionate to bid size.' },
-          { term: 'Kostak', full: 'Application Premium', def: 'Amount paid by one investor to buy another\'s IPO application in the grey market — purely speculative and legally unenforceable.' },
-        ].map((g, i) => (
-          <div class="product-card-light flex flex-col gap-3 p-[28px]" style={`animation-delay:${i*40}ms`}>
-            <div class="flex h-10 w-auto min-w-[60px] items-center justify-center rounded-[10px] bg-[var(--color-dark-olive)] px-3 self-start">
-              <span class="text-[12px] font-bold text-[var(--color-brand)]">{g.term}</span>
-            </div>
-            <h4 class="text-[15px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{g.full}</h4>
-            <p class="text-[12.5px] leading-relaxed text-[var(--color-muted)]">{g.def}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ 4c. LISTED IPO PERFORMANCE ════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Recent IPO Listing <span class="text-[var(--color-brand)]">Performance</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Illustrative data showing how recently listed IPOs performed on their listing day. Past performance is not indicative of future results.</p>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">
+          An IPO (Initial Public Offering) is when a private company raises capital by selling shares to the public for the first time on NSE or BSE.
+        </p>
       </div>
       <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
         <div class="overflow-x-auto">
           <table class="w-full text-[15.5px]">
             <thead>
               <tr class="bg-[var(--color-dark-olive)]">
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Company</th>
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Sector</th>
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Issue Price</th>
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Listing Price</th>
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Listing Gain</th>
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Term</th>
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Meaning</th>
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Example</th>
               </tr>
             </thead>
             <tbody>
-              {[
-                { co: 'TechVenture Ltd*', sector: 'Technology', issue: '₹420', listing: '₹612', gain: '+45.7%' },
-                { co: 'HealthCare Systems*', sector: 'Healthcare', issue: '₹280', listing: '₹336', gain: '+20.0%' },
-                { co: 'FinServ Capital*', sector: 'Financial Services', issue: '₹560', listing: '₹504', gain: '-10.0%' },
-                { co: 'GreenEnergy Corp*', sector: 'Renewable Energy', issue: '₹190', listing: '₹247', gain: '+30.0%' },
-                { co: 'RetailChain Ltd*', sector: 'FMCG / Retail', issue: '₹340', listing: '₹388', gain: '+14.1%' },
-              ].map((r, i) => (
-                <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[#f8f6f1]'}>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">{r.co}</td>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.sector}</td>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.issue}</td>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.listing}</td>
-                  <td class={`border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold ${r.gain.startsWith('+') ? 'text-green-700' : 'text-red-600'}`}>{r.gain}</td>
-                </tr>
-              ))}
+              <tr class="bg-white">
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">IPO</td>
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">Company's first sale of shares to the public</td>
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">Tata Capital IPO 2025</td>
+              </tr>
+              <tr class="bg-[#f8f6f1]">
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">Price Band</td>
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">Min &amp; max offer price range</td>
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">₹120–₹130 per share</td>
+              </tr>
+              <tr class="bg-white">
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">Lot Size</td>
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">Minimum shares you must apply for</td>
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">1 lot = 115 shares</td>
+              </tr>
+              <tr class="bg-[#f8f6f1]">
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">GMP</td>
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">Grey Market Premium — unofficial pre-listing indicator</td>
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">₹+45 above issue price</td>
+              </tr>
+              <tr class="bg-white">
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">QIB</td>
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">Qualified Institutional Buyers (banks, MFs, FIIs)</td>
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">Reserve 50% of issue</td>
+              </tr>
+              <tr class="bg-[#f8f6f1]">
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">Retail</td>
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">Individual investors applying below ₹2L</td>
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">Reserve 35% of issue</td>
+              </tr>
             </tbody>
           </table>
         </div>
       </div>
-      <p class="mt-4 text-center text-[13px] text-[var(--color-muted)]">*Illustrative placeholder companies. Not real IPO data. Consult Shriram Research for live IPO analysis.</p>
     </div>
   </section>
 
-  <!-- ══ 5. RISKS ════════════════════════════════════════════════════ -->
+  <!-- ══ S3 HOW THE IPO PROCESS WORKS ══════════════════════════════ -->
   <section class="bg-[#f8f6f1] py-[104px]">
     <div class="site-wrap">
       <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
         <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Risks of <span class="text-[var(--color-brand)]">IPO Investing</span>
+          How the <span class="text-[var(--color-brand)]">IPO Process</span> Works — Step by Step
         </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Understand what can move against you before you apply.</p>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">From SEBI filing to exchange listing — understand the 5-stage IPO lifecycle.</p>
       </div>
-      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {risks.map(r => (
-          <div class="equity-reveal rounded-[18px] bg-[var(--color-dark-800)] p-[36px]">
-            <div class="mb-[18px] text-[48px] font-bold leading-none text-[var(--color-brand)]/25">{r.n}</div>
-            <h4 class="mb-3 text-[20px] font-medium text-white" style="font-family:var(--font-display)">{r.label}</h4>
-            <p class="text-[14.5px] leading-relaxed text-white/60">{r.desc}</p>
-          </div>
-        ))}
+      <div class="equity-reveal steps-grid-5 overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
+        <div class="px-[30px] py-[34px]">
+          <div class="mb-[22px] text-[34px] font-bold leading-none text-[var(--color-brand)]">01</div>
+          <h4 class="mb-[10px] text-[19px] font-medium leading-[1.25] text-[var(--color-ink)]" style="font-family:var(--font-display)">SEBI Filing</h4>
+          <p class="text-[14.5px] leading-relaxed text-[var(--color-muted)]">Company files DRHP (Draft Red Herring Prospectus) with SEBI for approval.</p>
+        </div>
+        <div class="px-[30px] py-[34px]">
+          <div class="mb-[22px] text-[34px] font-bold leading-none text-[var(--color-brand)]">02</div>
+          <h4 class="mb-[10px] text-[19px] font-medium leading-[1.25] text-[var(--color-ink)]" style="font-family:var(--font-display)">DRHP Approval</h4>
+          <p class="text-[14.5px] leading-relaxed text-[var(--color-muted)]">SEBI reviews and approves the offer document within 30 days.</p>
+        </div>
+        <div class="px-[30px] py-[34px]">
+          <div class="mb-[22px] text-[34px] font-bold leading-none text-[var(--color-brand)]">03</div>
+          <h4 class="mb-[10px] text-[19px] font-medium leading-[1.25] text-[var(--color-ink)]" style="font-family:var(--font-display)">Subscription Window</h4>
+          <p class="text-[14.5px] leading-relaxed text-[var(--color-muted)]">IPO opens for 3 days. Apply via UPI ASBA through your broker.</p>
+        </div>
+        <div class="px-[30px] py-[34px]">
+          <div class="mb-[22px] text-[34px] font-bold leading-none text-[var(--color-brand)]">04</div>
+          <h4 class="mb-[10px] text-[19px] font-medium leading-[1.25] text-[var(--color-ink)]" style="font-family:var(--font-display)">Allotment</h4>
+          <p class="text-[14.5px] leading-relaxed text-[var(--color-muted)]">Shares allotted based on subscription. Refund for unallotted applications.</p>
+        </div>
+        <div class="px-[30px] py-[34px]">
+          <div class="mb-[22px] text-[34px] font-bold leading-none text-[var(--color-brand)]">05</div>
+          <h4 class="mb-[10px] text-[19px] font-medium leading-[1.25] text-[var(--color-ink)]" style="font-family:var(--font-display)">Listing Day</h4>
+          <p class="text-[14.5px] leading-relaxed text-[var(--color-muted)]">Shares list on NSE/BSE on T+6 day. Start trading from listing price.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ══ 6. FAQ ════════════════════════════════════════════════════ -->
+  <!-- ══ S4 OPEN IPOS ════════════════════════════════════════════════ -->
   <section class="bg-white py-[104px]">
     <div class="site-wrap">
       <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
         <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Frequently Asked <span class="text-[var(--color-brand)]">Questions</span>
+          Open <span class="text-[var(--color-brand)]">IPOs</span> — Apply Now
         </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Check the Shriram platform for currently open IPOs. Apply directly via UPI mandate.</p>
       </div>
-      <div class="equity-reveal mx-auto max-w-[840px] border-t border-[var(--color-n400)]">
-        {faqs.map(item => (
-          <details class="eq-faq group border-b border-[var(--color-n400)]">
-            <summary class="flex cursor-pointer list-none items-center justify-between gap-5 py-[26px] px-2">
-              <span class="text-[18px] font-semibold text-[var(--color-ink)]">{item.q}</span>
-              <span class="shrink-0 text-[22px] leading-none text-[var(--color-brand)] transition-transform duration-300 group-open:rotate-45">+</span>
-            </summary>
-            <div class="overflow-hidden px-2 pb-0 text-[16px] leading-relaxed text-[var(--color-muted)] transition-all duration-300 group-open:pb-[28px]">
-              <p class="max-w-[680px]">{item.a}</p>
-            </div>
-          </details>
-        ))}
+      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
+        <div class="overflow-x-auto">
+          <table class="w-full text-[15.5px]">
+            <thead>
+              <tr class="bg-[var(--color-dark-olive)]">
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">IPO Name</th>
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Open Date</th>
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Close Date</th>
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Price Band</th>
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Lot Size</th>
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">CTA</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="bg-white">
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">ABC Technologies Ltd</td>
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">18 Jun 2026</td>
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">20 Jun 2026</td>
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">₹210–₹230</td>
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">65 shares</td>
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px]"><a href="/about/open-demat-account/" class="text-[14px] font-semibold text-[var(--color-brand)]">Apply Now →</a></td>
+              </tr>
+              <tr class="bg-[#f8f6f1]">
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">XYZ Infrastructure Ltd</td>
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">17 Jun 2026</td>
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">19 Jun 2026</td>
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">₹85–₹90</td>
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">166 shares</td>
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px]"><a href="/about/open-demat-account/" class="text-[14px] font-semibold text-[var(--color-brand)]">Apply Now →</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="mt-4 text-[13px] text-[var(--color-muted)]">* Sample data. Visit Shriram platform for live IPO listings.</p>
+      <div class="equity-reveal mt-[40px] text-center">
+        <a href="/about/open-demat-account/" class="btn-primary">View All Open IPOs →</a>
       </div>
     </div>
   </section>
 
-  <!-- ══ 7. FINAL CTA ══════════════════════════════════════════════ -->
+  <!-- ══ S5 UPCOMING IPOS ════════════════════════════════════════════ -->
+  <section class="bg-[#f8f6f1] py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          Upcoming <span class="text-[var(--color-brand)]">IPOs 2026</span> — Full Calendar
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Stay ahead of the market with our upcoming IPO calendar. New IPOs added weekly.</p>
+      </div>
+      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
+        <div class="overflow-x-auto">
+          <table class="w-full text-[15.5px]">
+            <thead>
+              <tr class="bg-[var(--color-dark-olive)]">
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">IPO Name</th>
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Expected Open</th>
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Price Band (Est.)</th>
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Issue Size</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="bg-white">
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">PQR Pharma Ltd</td>
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">Jul 2026</td>
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">₹350–₹380</td>
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">₹2,400 Cr</td>
+              </tr>
+              <tr class="bg-[#f8f6f1]">
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">LMN Fintech Ltd</td>
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">Jul 2026</td>
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">₹200–₹220</td>
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">₹1,100 Cr</td>
+              </tr>
+              <tr class="bg-white">
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">RST Renewables</td>
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">Aug 2026</td>
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">₹120–₹140</td>
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">₹800 Cr</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="mt-4 text-[13px] text-[var(--color-muted)]">* Indicative dates. Subject to SEBI approval.</p>
+    </div>
+  </section>
+
+  <!-- ══ S6 GMP ══════════════════════════════════════════════════════ -->
+  <section class="bg-white py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          IPO <span class="text-[var(--color-brand)]">GMP Today</span> — Grey Market Premium Explained
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">GMP (Grey Market Premium) is the unofficial premium at which IPO shares trade before listing. It is NOT a guarantee of listing price.</p>
+      </div>
+      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
+        <div class="overflow-x-auto">
+          <table class="w-full text-[15.5px]">
+            <thead>
+              <tr class="bg-[var(--color-dark-olive)]">
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Term</th>
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Meaning</th>
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Example</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="bg-white">
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">GMP</td>
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">Unofficial premium above issue price</td>
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">GMP ₹+50 on ₹200 IPO = expected listing ~₹250</td>
+              </tr>
+              <tr class="bg-[#f8f6f1]">
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">Kostak Rate</td>
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">Price at which application is bought/sold</td>
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">₹500 kostak = ₹500 per lot regardless of allotment</td>
+              </tr>
+              <tr class="bg-white">
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">Subject to Sauda</td>
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">Deal where only allotted applications are traded</td>
+                <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">Higher risk than kostak</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="mt-4 text-[13px] text-[var(--color-muted)]">Grey market trading is unofficial and unregulated. Do not make investment decisions solely based on GMP.</p>
+    </div>
+  </section>
+
+  <!-- ══ S7 HOW TO APPLY ════════════════════════════════════════════ -->
+  <section class="bg-[#f8f6f1] py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          How to <span class="text-[var(--color-brand)]">Apply for an IPO</span> — Step by Step
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Apply for any IPO in under 5 minutes using UPI ASBA.</p>
+      </div>
+      <div class="equity-reveal steps-grid-5 overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
+        <div class="px-[30px] py-[34px]">
+          <div class="mb-[22px] text-[34px] font-bold leading-none text-[var(--color-brand)]">01</div>
+          <h4 class="mb-[10px] text-[19px] font-medium leading-[1.25] text-[var(--color-ink)]" style="font-family:var(--font-display)">Open Demat</h4>
+          <p class="text-[14.5px] leading-relaxed text-[var(--color-muted)]">You need an active Demat + Trading account with Shriram to apply for IPOs.</p>
+        </div>
+        <div class="px-[30px] py-[34px]">
+          <div class="mb-[22px] text-[34px] font-bold leading-none text-[var(--color-brand)]">02</div>
+          <h4 class="mb-[10px] text-[19px] font-medium leading-[1.25] text-[var(--color-ink)]" style="font-family:var(--font-display)">Login &amp; Select IPO</h4>
+          <p class="text-[14.5px] leading-relaxed text-[var(--color-muted)]">Log in to Antara app. Go to IPO section. Choose the open IPO.</p>
+        </div>
+        <div class="px-[30px] py-[34px]">
+          <div class="mb-[22px] text-[34px] font-bold leading-none text-[var(--color-brand)]">03</div>
+          <h4 class="mb-[10px] text-[19px] font-medium leading-[1.25] text-[var(--color-ink)]" style="font-family:var(--font-display)">Enter Lot Size &amp; Bid</h4>
+          <p class="text-[14.5px] leading-relaxed text-[var(--color-muted)]">Enter number of lots and your bid price (within price band).</p>
+        </div>
+        <div class="px-[30px] py-[34px]">
+          <div class="mb-[22px] text-[34px] font-bold leading-none text-[var(--color-brand)]">04</div>
+          <h4 class="mb-[10px] text-[19px] font-medium leading-[1.25] text-[var(--color-ink)]" style="font-family:var(--font-display)">Submit UPI Mandate</h4>
+          <p class="text-[14.5px] leading-relaxed text-[var(--color-muted)]">Approve the payment block on your UPI app. Funds are NOT debited until allotment.</p>
+        </div>
+        <div class="px-[30px] py-[34px]">
+          <div class="mb-[22px] text-[34px] font-bold leading-none text-[var(--color-brand)]">05</div>
+          <h4 class="mb-[10px] text-[19px] font-medium leading-[1.25] text-[var(--color-ink)]" style="font-family:var(--font-display)">Check Allotment</h4>
+          <p class="text-[14.5px] leading-relaxed text-[var(--color-muted)]">Check allotment status on T+6. Shares credited to Demat if allotted.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ S8 ALLOTMENT STATUS ════════════════════════════════════════ -->
+  <section class="bg-white py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          IPO <span class="text-[var(--color-brand)]">Allotment Status</span> — How to Check
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Allotment results are available on T+6 from IPO close date.</p>
+      </div>
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="equity-reveal product-card-light px-[28px] py-[32px]">
+          <h3 class="text-[26px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">Check on Registrar</h3>
+          <p class="mt-[12px] text-[15px] leading-relaxed text-[var(--color-muted)]">KFinTech, Link Intime, Bigshare — enter PAN or application number.</p>
+        </div>
+        <div class="equity-reveal product-card-light px-[28px] py-[32px]">
+          <h3 class="text-[26px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">Check via BSE</h3>
+          <p class="mt-[12px] text-[15px] leading-relaxed text-[var(--color-muted)]">Visit bseindia.com → IPO → Allotment Status.</p>
+        </div>
+        <div class="equity-reveal product-card-light px-[28px] py-[32px]">
+          <h3 class="text-[26px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">Check via NSE</h3>
+          <p class="mt-[12px] text-[15px] leading-relaxed text-[var(--color-muted)]">Visit nseindia.com → IPO section.</p>
+        </div>
+        <div class="equity-reveal product-card-light px-[28px] py-[32px]">
+          <h3 class="text-[26px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">Check via Shriram App</h3>
+          <p class="mt-[12px] text-[15px] leading-relaxed text-[var(--color-muted)]">Login to Antara app → IPO → Allotment tab.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ S9 RISKS ═══════════════════════════════════════════════════ -->
+  <section class="bg-[#f8f6f1] py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          IPO <span class="text-[var(--color-brand)]">Risks</span> — What Every Investor Must Know
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">IPOs can deliver strong listing gains — but not always. Understand these risks before applying.</p>
+      </div>
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="equity-reveal bg-[var(--color-dark-800)] rounded-[14px] p-[28px] text-white">
+          <div class="mb-[14px] text-[36px] font-bold leading-none text-[var(--color-brand)]/30">01</div>
+          <h3 class="text-[26px] font-medium text-white" style="font-family:var(--font-display)">Listing Below Issue Price</h3>
+          <p class="mt-[12px] text-[14px] leading-relaxed text-white/65">Not all IPOs list at a premium. Check fundamentals, not just GMP.</p>
+        </div>
+        <div class="equity-reveal bg-[var(--color-dark-800)] rounded-[14px] p-[28px] text-white">
+          <div class="mb-[14px] text-[36px] font-bold leading-none text-[var(--color-brand)]/30">02</div>
+          <h3 class="text-[26px] font-medium text-white" style="font-family:var(--font-display)">Overvaluation Risk</h3>
+          <p class="mt-[12px] text-[14px] leading-relaxed text-white/65">Companies may price IPOs at aggressive valuations. Compare with sector peers.</p>
+        </div>
+        <div class="equity-reveal bg-[var(--color-dark-800)] rounded-[14px] p-[28px] text-white">
+          <div class="mb-[14px] text-[36px] font-bold leading-none text-[var(--color-brand)]/30">03</div>
+          <h3 class="text-[26px] font-medium text-white" style="font-family:var(--font-display)">SME IPO Liquidity Risk</h3>
+          <p class="mt-[12px] text-[14px] leading-relaxed text-white/65">SME IPOs have lower volumes — harder to exit at desired price post-listing.</p>
+        </div>
+        <div class="equity-reveal bg-[var(--color-dark-800)] rounded-[14px] p-[28px] text-white">
+          <div class="mb-[14px] text-[36px] font-bold leading-none text-[var(--color-brand)]/30">04</div>
+          <h3 class="text-[26px] font-medium text-white" style="font-family:var(--font-display)">Grey Market Manipulation</h3>
+          <p class="mt-[12px] text-[14px] leading-relaxed text-white/65">GMP is unofficial. Do not treat it as listing price guarantee.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ S10 GLOSSARY ════════════════════════════════════════════════ -->
+  <section class="bg-white py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          IPO <span class="text-[var(--color-brand)]">Glossary</span> — Key Terms Explained
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">8 essential IPO terms every investor must know.</p>
+      </div>
+      <div class="equity-reveal cat-grid-4">
+        <div class="product-card-light px-[28px] py-[32px]">
+          <h3 class="text-[26px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">GMP</h3>
+          <p class="mt-[12px] text-[15px] leading-relaxed text-[var(--color-muted)]">Grey Market Premium — unofficial pre-listing price premium.</p>
+        </div>
+        <div class="product-card-light px-[28px] py-[32px]">
+          <h3 class="text-[26px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">Lot Size</h3>
+          <p class="mt-[12px] text-[15px] leading-relaxed text-[var(--color-muted)]">Minimum shares you must apply for in one application.</p>
+        </div>
+        <div class="product-card-light px-[28px] py-[32px]">
+          <h3 class="text-[26px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">Price Band</h3>
+          <p class="mt-[12px] text-[15px] leading-relaxed text-[var(--color-muted)]">Range within which you can bid (e.g., ₹120–₹130).</p>
+        </div>
+        <div class="product-card-light px-[28px] py-[32px]">
+          <h3 class="text-[26px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">QIB</h3>
+          <p class="mt-[12px] text-[15px] leading-relaxed text-[var(--color-muted)]">Qualified Institutional Buyers — banks, mutual funds, FIIs.</p>
+        </div>
+        <div class="product-card-light px-[28px] py-[32px]">
+          <h3 class="text-[26px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">NII</h3>
+          <p class="mt-[12px] text-[15px] leading-relaxed text-[var(--color-muted)]">Non-Institutional Investors — applying above ₹2 lakh.</p>
+        </div>
+        <div class="product-card-light px-[28px] py-[32px]">
+          <h3 class="text-[26px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">DRHP</h3>
+          <p class="mt-[12px] text-[15px] leading-relaxed text-[var(--color-muted)]">Draft Red Herring Prospectus — IPO application document filed with SEBI.</p>
+        </div>
+        <div class="product-card-light px-[28px] py-[32px]">
+          <h3 class="text-[26px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">Allotment</h3>
+          <p class="mt-[12px] text-[15px] leading-relaxed text-[var(--color-muted)]">Shares assigned to you after subscription lottery.</p>
+        </div>
+        <div class="product-card-light px-[28px] py-[32px]">
+          <h3 class="text-[26px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">Kostak</h3>
+          <p class="mt-[12px] text-[15px] leading-relaxed text-[var(--color-muted)]">Price paid to buy an IPO application in the grey market.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ S11 FAQS ════════════════════════════════════════════════════ -->
+  <section class="bg-[#f8f6f1] py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          FAQs — <span class="text-[var(--color-brand)]">IPO Investing</span> in India
+        </h2>
+      </div>
+      <div class="equity-reveal mx-auto max-w-[840px] border-t border-[var(--color-n400)]">
+        <details class="eq-faq group border-b border-[var(--color-n400)]">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-5 py-[26px] px-2">
+            <span class="text-[18px] font-semibold text-[var(--color-ink)]">What is an IPO?</span>
+            <span class="shrink-0 text-[22px] leading-none text-[var(--color-brand)] transition-transform duration-300 group-open:rotate-45">+</span>
+          </summary>
+          <div class="overflow-hidden px-2 pb-0 text-[16px] leading-relaxed text-[var(--color-muted)] transition-all duration-300 group-open:pb-[28px]">
+            <p class="max-w-[680px]">An IPO is when a company lists on NSE/BSE for the first time and sells shares to the public to raise capital.</p>
+          </div>
+        </details>
+        <details class="eq-faq group border-b border-[var(--color-n400)]">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-5 py-[26px] px-2">
+            <span class="text-[18px] font-semibold text-[var(--color-ink)]">Do I need a Demat account for IPO?</span>
+            <span class="shrink-0 text-[22px] leading-none text-[var(--color-brand)] transition-transform duration-300 group-open:rotate-45">+</span>
+          </summary>
+          <div class="overflow-hidden px-2 pb-0 text-[16px] leading-relaxed text-[var(--color-muted)] transition-all duration-300 group-open:pb-[28px]">
+            <p class="max-w-[680px]">Yes. A Demat account is mandatory to apply for and receive IPO shares.</p>
+          </div>
+        </details>
+        <details class="eq-faq group border-b border-[var(--color-n400)]">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-5 py-[26px] px-2">
+            <span class="text-[18px] font-semibold text-[var(--color-ink)]">What is ASBA in IPO?</span>
+            <span class="shrink-0 text-[22px] leading-none text-[var(--color-brand)] transition-transform duration-300 group-open:rotate-45">+</span>
+          </summary>
+          <div class="overflow-hidden px-2 pb-0 text-[16px] leading-relaxed text-[var(--color-muted)] transition-all duration-300 group-open:pb-[28px]">
+            <p class="max-w-[680px]">ASBA (Application Supported by Blocked Amount) blocks your bid amount in your bank account — it is NOT debited until allotment.</p>
+          </div>
+        </details>
+        <details class="eq-faq group border-b border-[var(--color-n400)]">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-5 py-[26px] px-2">
+            <span class="text-[18px] font-semibold text-[var(--color-ink)]">How is IPO allotment decided?</span>
+            <span class="shrink-0 text-[22px] leading-none text-[var(--color-brand)] transition-transform duration-300 group-open:rotate-45">+</span>
+          </summary>
+          <div class="overflow-hidden px-2 pb-0 text-[16px] leading-relaxed text-[var(--color-muted)] transition-all duration-300 group-open:pb-[28px]">
+            <p class="max-w-[680px]">If the IPO is oversubscribed, allotment is done by lottery for retail investors. Institutional allotment is proportional.</p>
+          </div>
+        </details>
+        <details class="eq-faq group border-b border-[var(--color-n400)]">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-5 py-[26px] px-2">
+            <span class="text-[18px] font-semibold text-[var(--color-ink)]">What is IPO GMP?</span>
+            <span class="shrink-0 text-[22px] leading-none text-[var(--color-brand)] transition-transform duration-300 group-open:rotate-45">+</span>
+          </summary>
+          <div class="overflow-hidden px-2 pb-0 text-[16px] leading-relaxed text-[var(--color-muted)] transition-all duration-300 group-open:pb-[28px]">
+            <p class="max-w-[680px]">GMP is the unofficial grey market premium. It indicates market sentiment but is NOT a reliable listing predictor.</p>
+          </div>
+        </details>
+        <details class="eq-faq group border-b border-[var(--color-n400)]">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-5 py-[26px] px-2">
+            <span class="text-[18px] font-semibold text-[var(--color-ink)]">Can I apply for multiple IPOs at the same time?</span>
+            <span class="shrink-0 text-[22px] leading-none text-[var(--color-brand)] transition-transform duration-300 group-open:rotate-45">+</span>
+          </summary>
+          <div class="overflow-hidden px-2 pb-0 text-[16px] leading-relaxed text-[var(--color-muted)] transition-all duration-300 group-open:pb-[28px]">
+            <p class="max-w-[680px]">Yes, you can apply to multiple open IPOs simultaneously using different Demat accounts if you have more than one.</p>
+          </div>
+        </details>
+        <details class="eq-faq group border-b border-[var(--color-n400)]">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-5 py-[26px] px-2">
+            <span class="text-[18px] font-semibold text-[var(--color-ink)]">Is there brokerage on IPO?</span>
+            <span class="shrink-0 text-[22px] leading-none text-[var(--color-brand)] transition-transform duration-300 group-open:rotate-45">+</span>
+          </summary>
+          <div class="overflow-hidden px-2 pb-0 text-[16px] leading-relaxed text-[var(--color-muted)] transition-all duration-300 group-open:pb-[28px]">
+            <p class="max-w-[680px]">No. Shriram charges zero brokerage on IPO applications.</p>
+          </div>
+        </details>
+        <details class="eq-faq group border-b border-[var(--color-n400)]">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-5 py-[26px] px-2">
+            <span class="text-[18px] font-semibold text-[var(--color-ink)]">What is the difference between SME and Mainboard IPO?</span>
+            <span class="shrink-0 text-[22px] leading-none text-[var(--color-brand)] transition-transform duration-300 group-open:rotate-45">+</span>
+          </summary>
+          <div class="overflow-hidden px-2 pb-0 text-[16px] leading-relaxed text-[var(--color-muted)] transition-all duration-300 group-open:pb-[28px]">
+            <p class="max-w-[680px]">Mainboard IPOs are larger companies listing on NSE/BSE mainboard. SME IPOs are smaller companies listing on NSE Emerge or BSE SME — higher risk and lower liquidity.</p>
+          </div>
+        </details>
+        <details class="eq-faq group border-b border-[var(--color-n400)]">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-5 py-[26px] px-2">
+            <span class="text-[18px] font-semibold text-[var(--color-ink)]">How to check IPO allotment?</span>
+            <span class="shrink-0 text-[22px] leading-none text-[var(--color-brand)] transition-transform duration-300 group-open:rotate-45">+</span>
+          </summary>
+          <div class="overflow-hidden px-2 pb-0 text-[16px] leading-relaxed text-[var(--color-muted)] transition-all duration-300 group-open:pb-[28px]">
+            <p class="max-w-[680px]">Visit the registrar's website (KFinTech, Link Intime) with your PAN number, or check via the Shriram Antara app.</p>
+          </div>
+        </details>
+        <details class="eq-faq group border-b border-[var(--color-n400)]">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-5 py-[26px] px-2">
+            <span class="text-[18px] font-semibold text-[var(--color-ink)]">What happens if I am not allotted shares?</span>
+            <span class="shrink-0 text-[22px] leading-none text-[var(--color-brand)] transition-transform duration-300 group-open:rotate-45">+</span>
+          </summary>
+          <div class="overflow-hidden px-2 pb-0 text-[16px] leading-relaxed text-[var(--color-muted)] transition-all duration-300 group-open:pb-[28px]">
+            <p class="max-w-[680px]">Your blocked funds are released/refunded within 6 working days of the IPO close date.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ S12 CTA ════════════════════════════════════════════════════ -->
   <section class="bg-white py-[104px]">
     <div class="site-wrap">
       <div class="equity-reveal overflow-hidden rounded-[22px] bg-[var(--color-dark-800)] px-[60px] py-[64px] text-center">
-        <h3 class="mx-auto max-w-[560px] text-[38px] font-bold leading-[1.12] text-white" style="font-family:var(--font-display)">Don't Miss the Next Big IPO</h3>
-        <p class="mx-auto mt-[18px] max-w-[480px] text-[17px] leading-relaxed text-white/70">Open your Demat account and be ready for every upcoming IPO. Zero commission. Instant UPI application. Fast allotment tracking.</p>
+        <h3 class="mx-auto max-w-[560px] text-[38px] font-bold leading-[1.12] text-white" style="font-family:var(--font-display)">
+          Open Free Demat Account &amp; <span class="text-[var(--color-brand)]">Apply for IPO 2026</span>
+        </h3>
+        <p class="mx-auto mt-[18px] max-w-[480px] text-[17px] leading-relaxed text-white/70">Zero IPO brokerage. UPI/ASBA supported. SEBI-registered.</p>
         <div class="mt-[34px] flex flex-wrap justify-center gap-[14px]">
-          <a href="/about/open-demat-account/" class="btn-primary">Open Demat Account</a>
-          <a href="/about/support/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Talk to an RM</a>
+          <a href="/about/open-demat-account/" class="btn-primary">Apply for IPO</a>
+          <a href="/about/open-demat-account/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Open Demat Account</a>
         </div>
       </div>
     </div>
@@ -295,6 +555,20 @@ const faqs = [
     .steps-grid > * { border-right: 1px solid var(--color-n400); border-bottom: 0; }
     .steps-grid > *:last-child { border-right: 0; }
   }
+
+  .steps-grid-5 { display: grid; grid-template-columns: repeat(2, 1fr); }
+  .steps-grid-5 > * { border-right: 1px solid var(--color-n400); border-bottom: 1px solid var(--color-n400); }
+  .steps-grid-5 > *:nth-child(2n) { border-right: 0; }
+  .steps-grid-5 > *:nth-last-child(-n+1) { border-bottom: 0; }
+  @media (min-width: 1024px) {
+    .steps-grid-5 { grid-template-columns: repeat(5, 1fr); }
+    .steps-grid-5 > * { border-bottom: 0; border-right: 1px solid var(--color-n400); }
+    .steps-grid-5 > *:last-child { border-right: 0; }
+  }
+
+  .cat-grid-4 { display: grid; gap: 1.25rem; grid-template-columns: repeat(1, 1fr); }
+  @media (min-width: 640px) { .cat-grid-4 { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .cat-grid-4 { grid-template-columns: repeat(4, 1fr); } }
 
   @media (prefers-reduced-motion: reduce) {
     .equity-reveal { opacity: 1; transform: none; transition: none; }

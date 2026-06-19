@@ -282,7 +282,120 @@ const faqs = [
     </div>
   </section>
 
-  <!-- ══ 10. FINAL CTA ══════════════════════════════════════════════ -->
+  <!-- ══ 10. MTF INTEREST CALCULATOR ════════════════════════════════ -->
+  <section class="bg-white py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          MTF Interest <span class="text-[var(--color-brand)]">Calculator</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Estimate your daily MTF interest cost before placing a leveraged trade. Know your break-even before you buy.</p>
+      </div>
+      <div class="equity-reveal mx-auto max-w-[800px]">
+        <div class="product-card-light p-[40px]">
+          <div class="grid gap-6 sm:grid-cols-3 text-center mb-[36px]">
+            <div class="rounded-[12px] bg-[var(--color-n100)] p-[24px]">
+              <div class="text-[13px] font-semibold uppercase tracking-wide text-[var(--color-muted)] mb-2">MTF Interest Rate</div>
+              <div class="text-[28px] font-bold text-[var(--color-brand)]">12–18%</div>
+              <div class="text-[12px] text-[var(--color-muted)]">per annum (charged daily)</div>
+            </div>
+            <div class="rounded-[12px] bg-[var(--color-n100)] p-[24px]">
+              <div class="text-[13px] font-semibold uppercase tracking-wide text-[var(--color-muted)] mb-2">Daily Interest (at 15%)</div>
+              <div class="text-[28px] font-bold text-[var(--color-brand)]">0.041%</div>
+              <div class="text-[12px] text-[var(--color-muted)]">per day on funded amount</div>
+            </div>
+            <div class="rounded-[12px] bg-[var(--color-n100)] p-[24px]">
+              <div class="text-[13px] font-semibold uppercase tracking-wide text-[var(--color-muted)] mb-2">30-Day Cost (₹1L funded)</div>
+              <div class="text-[28px] font-bold text-[var(--color-brand)]">₹1,233</div>
+              <div class="text-[12px] text-[var(--color-muted)]">at 15% p.a. for 30 days</div>
+            </div>
+          </div>
+          <p class="text-center text-[14px] text-[var(--color-muted)] mb-[28px]">Example: ₹1,00,000 funded at 15% p.a. → Daily interest ≈ ₹41 → 30-day cost ≈ ₹1,233. The stock must gain more than the interest to be profitable.</p>
+          <div class="text-center">
+            <a href="/about/support/" class="btn-primary">Calculate Your MTF Cost</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 11. BEST MTF BROKERS COMPARISON ════════════════════════════ -->
+  <section class="bg-[var(--color-n100)] py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          MTF Brokers in India — <span class="text-[var(--color-brand)]">Rate Comparison</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Compare key MTF parameters across leading SEBI-registered brokers.</p>
+      </div>
+      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
+        <div class="overflow-x-auto">
+          <table class="w-full text-[15px]">
+            <thead>
+              <tr class="bg-[var(--color-dark-olive)]">
+                <th class="px-[24px] py-[16px] text-left text-[13px] font-semibold text-white">Broker</th>
+                <th class="px-[24px] py-[16px] text-left text-[13px] font-semibold text-[var(--color-brand)]">MTF Interest Rate</th>
+                <th class="px-[24px] py-[16px] text-left text-[13px] font-semibold text-[var(--color-brand)]">Min Margin</th>
+                <th class="px-[24px] py-[16px] text-left text-[13px] font-semibold text-[var(--color-brand)]">Max Leverage</th>
+                <th class="px-[24px] py-[16px] text-left text-[13px] font-semibold text-[var(--color-brand)]">Brokerage on MTF</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { broker: 'Shriram Financial Services', rate: '12–15% p.a.', margin: '20–25%', leverage: 'Up to 4×', brok: '₹20 per order' },
+                { broker: 'Zerodha', rate: '0.05% per day (~18% p.a.)', margin: '20–30%', leverage: 'Up to 4×', brok: '₹20 per order' },
+                { broker: 'Angel One', rate: '12–18% p.a.', margin: '20–25%', leverage: 'Up to 4×', brok: '₹20 per order' },
+                { broker: 'HDFC Securities', rate: '10.75–16.75% p.a.', margin: '20–25%', leverage: 'Up to 4×', brok: '₹20 per order' },
+                { broker: 'ICICI Direct', rate: '12.5–16.5% p.a.', margin: '20–30%', leverage: 'Up to 4×', brok: 'As per plan' },
+              ].map((r, i) => (
+                <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[var(--color-n100)]'}>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[24px] py-[16px] font-semibold text-[var(--color-ink)]">{r.broker}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[24px] py-[16px] text-[var(--color-muted)]">{r.rate}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[24px] py-[16px] text-[var(--color-muted)]">{r.margin}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[24px] py-[16px] text-[var(--color-muted)]">{r.leverage}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[24px] py-[16px] text-[var(--color-muted)]">{r.brok}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="equity-reveal mt-4 text-center text-[12px] text-[var(--color-muted)]">Rates are indicative and subject to change. Verify current rates with your broker before trading.</p>
+    </div>
+  </section>
+
+  <!-- ══ 12. MTF SEBI REGULATIONS ═══════════════════════════════════ -->
+  <section class="bg-white py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto grid max-w-[1000px] items-start gap-[60px] lg:grid-cols-[5fr_7fr]">
+        <div>
+          <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+            MTF SEBI <span class="text-[var(--color-brand)]">Regulations & Compliance</span>
+          </h2>
+          <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Is MTF legal in India? Yes — it is fully SEBI-regulated under the Securities and Exchange Board of India (Stock Brokers) Regulations. All MTF activity on NSE and BSE is monitored and reported.</p>
+        </div>
+        <div class="space-y-4">
+          {[
+            { title: 'SEBI Circular CIR/MRD/DP/54/2017', desc: 'Governs the Margin Trading Facility framework — defines eligible stocks, margin requirements, pledging mechanism, and broker obligations.' },
+            { title: 'SEBI-Approved Stock List', desc: 'Only stocks from the SEBI-approved MTF list (generally Nifty 500 constituents meeting liquidity criteria) can be purchased under MTF.' },
+            { title: 'Daily Interest Disclosure', desc: 'Brokers must clearly disclose the MTF interest rate and debit it daily from the client\'s trading ledger. No hidden charges are permitted.' },
+            { title: 'Pledging via Depositories', desc: 'All MTF pledges are executed through CDSL/NSDL — creating a regulatory lien. The client retains beneficial ownership until square-off.' },
+            { title: 'Margin Shortfall Reporting', desc: 'Margin shortfalls must be reported to the exchange within prescribed timelines. Repeated shortfalls can restrict the client\'s MTF access.' },
+          ].map((item, i) => (
+            <div class="equity-reveal flex gap-4 rounded-[12px] border border-[var(--color-n400)] p-[20px]" style={`animation-delay:${i*60}ms`}>
+              <span class="shrink-0 mt-1 text-[var(--color-brand)] text-[18px]">✓</span>
+              <div>
+                <h4 class="text-[15px] font-semibold text-[var(--color-ink)]" style="font-family:var(--font-display)">{item.title}</h4>
+                <p class="mt-1 text-[13px] leading-relaxed text-[var(--color-muted)]">{item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 13. FINAL CTA ══════════════════════════════════════════════ -->
   <section class="bg-white py-[104px]">
     <div class="site-wrap">
       <div class="equity-reveal overflow-hidden rounded-[22px] bg-[var(--color-dark-800)] px-[60px] py-[64px] text-center">

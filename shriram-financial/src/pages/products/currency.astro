@@ -1,129 +1,94 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-
-const pairs = [
-  { pair: 'USD/INR', full: 'US Dollar / Indian Rupee', desc: 'India\'s most liquid currency pair. Moves on RBI interventions, US Fed policy, and India\'s trade balance data.', lot: '1,000 USD', tick: '0.25 paise' },
-  { pair: 'EUR/INR', full: 'Euro / Indian Rupee', desc: 'Driven by ECB policy and Eurozone data. Second most traded INR pair on NSE.', lot: '1,000 EUR', tick: '0.25 paise' },
-  { pair: 'GBP/INR', full: 'British Pound / Indian Rupee', desc: 'Reacts to Bank of England decisions and UK economic indicators.', lot: '1,000 GBP', tick: '0.25 paise' },
-  { pair: 'JPY/INR', full: 'Japanese Yen / Indian Rupee', desc: 'Driven by Bank of Japan policy and risk-on/risk-off flows. Priced per 100 JPY.', lot: '1,00,000 JPY', tick: '0.25 paise' },
-];
-
-const steps = [
-  { n: '01', title: 'Enable Currency Segment', desc: 'Add the currency derivatives segment to your Shriram trading account — fully digital, no branch visit required.' },
-  { n: '02', title: 'Add Trading Margin', desc: 'Transfer the required SPAN + Exposure margin. Currency futures require relatively low margins compared to equity F&O.' },
-  { n: '03', title: 'Choose Pair & Expiry', desc: 'Select your currency pair (USD/INR, EUR/INR, etc.) and the contract expiry — monthly contracts settling on the last business day.' },
-  { n: '04', title: 'Trade & Hedge', desc: 'Place orders, monitor your P&L in real time, and use the position to either speculate or hedge your forex exposure.' },
-];
-
-const chargeRows = [
-  { label: 'Brokerage', value: '₹20 per executed order' },
-  { label: 'STT', value: 'Nil (not applicable on currency derivatives)' },
-  { label: 'GST', value: '18% on brokerage + exchange charges' },
-  { label: 'Exchange Charges (NSE Currency)', value: '0.00035%' },
-  { label: 'SEBI Turnover Fee', value: '₹1 per crore' },
-];
-
-const vsRows = [
-  { feature: 'Purpose', currency: 'Hedge forex risk or speculate on exchange rates', equity: 'Invest in company ownership' },
-  { feature: 'Underlying', currency: 'Currency pair (USD/INR, EUR/INR, etc.)', equity: 'Stocks, indices' },
-  { feature: 'Lot Size', currency: '1,000 units of foreign currency', equity: 'Varies per contract' },
-  { feature: 'Settlement', currency: 'Cash settlement in INR at RBI reference rate', equity: 'Physical or cash settlement' },
-  { feature: 'Margin Required', currency: 'Low (2–4% of contract value)', equity: 'Higher (5–15%)' },
-  { feature: 'Trading Hours', currency: '9:00 AM – 5:00 PM (Mon–Fri)', equity: '9:15 AM – 3:30 PM' },
-];
-
-const risks = [
-  { n: '01', label: 'Exchange Rate Risk', desc: 'Currency prices are highly sensitive to central bank policy, macroeconomic data releases, and geopolitical events — causing sudden, large moves.' },
-  { n: '02', label: 'RBI Intervention Risk', desc: 'The Reserve Bank of India actively intervenes in the INR market to curb excess volatility — creating sharp, unpredictable counter-trend moves.' },
-  { n: '03', label: 'Leverage Risk', desc: 'Currency futures are leveraged instruments. A small adverse rate movement can result in margin calls and losses exceeding your initial deposit.' },
-  { n: '04', label: 'Liquidity Risk', desc: 'EUR/INR, GBP/INR, and JPY/INR pairs have significantly lower liquidity than USD/INR — making it harder to exit large positions at fair prices.' },
-];
-
-const faqs = [
-  { q: 'Who should trade currency derivatives in India?', a: 'Exporters and importers hedge forex receivables/payables. Portfolio investors hedge foreign asset exposure. Retail traders with macro knowledge can speculate on exchange rate movements.' },
-  { q: 'Is RBI approval required for currency trading?', a: 'No special approval is needed for residents trading on NSE/BSE. For speculative USD/INR positions up to $100 million, no underlying forex exposure is required.' },
-  { q: 'How is currency futures settlement done?', a: 'Currency futures are cash-settled in INR. On expiry (last business day of the month), settlement uses the RBI reference rate published at 12:30 PM. No physical forex delivery occurs.' },
-  { q: 'What is the USDINR lot size?', a: 'One USD/INR lot = 1,000 USD, with a notional value of ~₹83,000–₹85,000 at current rates. Non-bank entities can hold up to 6 million USD in open positions.' },
-  { q: 'Can NRIs trade currency derivatives in India?', a: 'No. Only persons resident in India as defined by FEMA are eligible. NRIs are currently not permitted to participate in Indian currency futures and options markets.' },
-];
 ---
 
 <BaseLayout
-  title="Currency Trading in India — USD INR Forex Futures NSE | Shriram"
-  description="Start currency trading in India on NSE. Trade USD/INR, EUR/INR, GBP/INR, and JPY/INR futures. Flat ₹20 brokerage, low margin, expert guidance. Enable forex trading today."
+  title="Currency Trading in India — NSE & BSE Currency Futures | Shriram"
+  description="Trade currency in India — USDINR, EURINR, GBPINR futures & options on NSE & BSE. SEBI & RBI compliant. Flat ₹20/order. Open currency trading account today."
 >
 
-  <!-- ══ 1. HERO ═══════════════════════════════════════════════════ -->
-  <section class="relative overflow-hidden bg-[var(--color-dark-800)]">
+  <!-- ══ S1. HERO ══════════════════════════════════════════════════════ -->
+  <section class="relative overflow-hidden bg-[var(--color-dark-800)] py-[100px] lg:py-[120px]">
     <div class="pointer-events-none absolute -right-40 -top-40 h-[560px] w-[560px] rounded-full bg-[var(--color-brand)]/10 blur-3xl"></div>
     <div class="pointer-events-none absolute -bottom-32 left-0 h-80 w-80 rounded-full bg-[var(--color-brand)]/5 blur-3xl"></div>
-    <div class="site-wrap relative py-[120px]">
-      <p class="equity-reveal text-[14px] font-medium tracking-[.04em] text-[var(--color-brand)]">Currency</p>
-      <h1 class="equity-reveal mt-[22px] max-w-[880px] text-[clamp(32px,4vw,52px)] font-bold leading-[1.06] text-white" style="font-family:var(--font-display)">
-        <span class="text-[var(--color-brand)]">Currency Trading in India</span> — Hedge Forex Risk on NSE
+    <div class="site-wrap relative">
+      <h1 class="equity-reveal max-w-[880px] text-[clamp(32px,4vw,52px)] font-bold leading-[1.06] text-white" style="font-family:var(--font-display)">
+        <span class="text-[var(--color-brand)]">Currency Trading</span> in India — USDINR, EURINR on NSE &amp; BSE
       </h1>
       <p class="equity-reveal mt-[26px] max-w-[600px] text-[18px] leading-relaxed text-white/70">
-        Access all four INR currency pairs — USD, EUR, GBP, and JPY — with live pricing, low margin requirements, and expert guidance from Shriram Financial Services.
+        Trade currency futures and options on NSE &amp; BSE. SEBI &amp; RBI-compliant. Flat ₹20/order. Hedge forex risk or speculate on exchange rate movements.
       </p>
       <div class="equity-reveal mt-[38px] flex flex-wrap gap-[14px]">
-        <a href="/about/open-demat-account/" class="btn-primary">Enable Currency Trading</a>
-        <a href="/about/support/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Talk to RM</a>
+        <a href="/about/open-demat-account/" class="btn-primary">Open Currency Account</a>
+        <a href="/about/open-demat-account/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Start Trading</a>
       </div>
       <div class="equity-reveal mt-[54px] flex flex-wrap gap-x-9 gap-y-3 border-t border-white/15 pt-9">
-        {['✓ NSE Currency Segment', '✓ Flat ₹20/order', '✓ Low margin requirements', '✓ Live RBI rate alerts'].map(f => (
-          <span class="text-[15px] font-medium text-white/90">
-            <span class="mr-2 text-[var(--color-brand)]">{f.slice(0,1)}</span>{f.slice(1)}
-          </span>
+        {['✓ SEBI & RBI-compliant', '✓ NSE & BSE listed', '✓ Flat ₹20/order', '✓ FEMA-compliant'].map(f => (
+          <span class="text-[15px] font-medium text-white/90">{f}</span>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- ══ 2. CURRENCY PAIRS ═══════════════════════════════════════════ -->
+  <!-- ══ S2. WHAT IS CURRENCY TRADING? ════════════════════════════════ -->
   <section class="bg-white py-[104px]">
     <div class="site-wrap">
-      <div class="equity-reveal mx-auto grid max-w-[1000px] items-start gap-[72px] lg:grid-cols-[5fr_7fr]">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
         <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Currency Pairs <span class="text-[var(--color-brand)]">Available on NSE</span>
+          What is <span class="text-[var(--color-brand)]">Currency Trading?</span> — Meaning &amp; Basics
         </h2>
-        <div class="space-y-5 text-[17px] leading-relaxed text-[var(--color-muted)]">
-          <p>India's NSE offers futures and options on four INR-based currency pairs. All are cash-settled in INR at the RBI reference rate on expiry.</p>
-          <p>Each pair has distinct drivers — from US Fed policy to Bank of Japan interventions — making currency derivatives a powerful diversification and hedging tool.</p>
-        </div>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">
+          Currency trading in India means trading exchange-rate derivatives (futures and options) on NSE and BSE — NOT spot forex trading. SEBI and RBI regulate all currency derivatives.
+        </p>
       </div>
-      <div class="equity-reveal mx-auto mt-[76px] max-w-[1000px] border-t border-[var(--color-n400)] pt-[60px]">
-        <div class="grid gap-5 sm:grid-cols-2">
-          {pairs.map((p, i) => (
-            <div class="product-card-light p-[34px]" style={`animation-delay:${i*60}ms`}>
-              <div class="mb-4 flex h-11 w-auto min-w-[60px] items-center justify-center rounded-[10px] bg-[var(--color-dark-olive)] px-3 self-start">
-                <span class="text-[13px] font-bold text-[var(--color-brand)]">{p.pair}</span>
-              </div>
-              <h3 class="text-[17px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{p.full}</h3>
-              <p class="mt-2 text-[13px] leading-relaxed text-[var(--color-muted)]">{p.desc}</p>
-              <div class="mt-4 flex gap-6 text-[12px]">
-                <div><span class="font-semibold text-[var(--color-ink)]">Lot: </span><span class="text-[var(--color-muted)]">{p.lot}</span></div>
-                <div><span class="font-semibold text-[var(--color-ink)]">Tick: </span><span class="text-[var(--color-muted)]">{p.tick}</span></div>
-              </div>
-            </div>
-          ))}
+      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
+        <div class="overflow-x-auto">
+          <table class="w-full text-[15.5px]">
+            <thead>
+              <tr class="bg-[var(--color-dark-olive)]">
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Feature</th>
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">India Currency Trading</th>
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Offshore Forex</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { feature: 'Exchange', india: 'NSE / BSE (SEBI-regulated)', offshore: 'OTC / unregulated platforms' },
+                { feature: 'Regulator', india: 'SEBI + RBI', offshore: 'Unregulated (illegal for Indians)' },
+                { feature: 'Products', india: 'Futures & Options on 7 pairs', offshore: 'Spot and CFD forex' },
+                { feature: 'Legal Status', india: 'Fully legal', offshore: 'Illegal under FEMA for Indians' },
+                { feature: 'Settlement', india: 'Cash settlement in INR', offshore: 'USD or other currency' },
+              ].map((r, i) => (
+                <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[#f8f6f1]'}>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">{r.feature}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.india}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.offshore}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ══ 3. HOW TO START ════════════════════════════════════════════ -->
+  <!-- ══ S3. HOW CURRENCY TRADING WORKS (NSE & BSE) ════════════════════ -->
   <section class="bg-[#f8f6f1] py-[104px]">
     <div class="site-wrap">
       <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
         <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          How to Start <span class="text-[var(--color-brand)]">Currency Trading</span>
+          How <span class="text-[var(--color-brand)]">Currency Trading</span> Works — NSE &amp; BSE
         </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Four steps from enabling your segment to placing your first currency order.</p>
       </div>
       <div class="equity-reveal steps-grid overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
-        {steps.map(s => (
+        {[
+          { n: '01', title: 'Choose Currency Pair', desc: 'Select from USDINR, EURINR, GBPINR, or JPYINR.' },
+          { n: '02', title: 'Select Contract Month', desc: 'Currency futures expire on the last business day of each month.' },
+          { n: '03', title: 'Place Order', desc: 'Buy (go long) or sell (go short) based on your exchange rate view.' },
+          { n: '04', title: 'Cash Settlement', desc: 'Positions are cash-settled in INR at RBI reference rate on expiry.' },
+        ].map(s => (
           <div class="px-[30px] py-[34px]">
-            <div class="mb-[22px] font-display text-[34px] font-normal leading-none text-[var(--color-brand)]">{s.n}</div>
+            <div class="mb-[22px] text-[34px] font-bold leading-none text-[var(--color-brand)]">{s.n}</div>
             <h4 class="mb-[10px] text-[19px] font-medium leading-[1.25] text-[var(--color-ink)]" style="font-family:var(--font-display)">{s.title}</h4>
             <p class="text-[14.5px] leading-relaxed text-[var(--color-muted)]">{s.desc}</p>
           </div>
@@ -132,128 +97,221 @@ const faqs = [
     </div>
   </section>
 
-  <!-- ══ 4. CHARGES ════════════════════════════════════════════════ -->
+  <!-- ══ S4. CURRENCY PAIRS AVAILABLE IN INDIA ════════════════════════ -->
   <section class="bg-white py-[104px]">
     <div class="site-wrap">
       <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
         <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Brokerage &amp; <span class="text-[var(--color-brand)]">Charges</span>
+          <span class="text-[var(--color-brand)]">Currency Pairs</span> Available in India — NSE &amp; BSE
         </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">A complete breakdown of all costs involved in currency futures trading.</p>
       </div>
       <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
-        <div class="overflow-x-auto"><table class="w-full text-[15.5px]">
-          <thead><tr class="bg-[var(--color-dark-olive)]"><th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Charge Type</th><th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Amount / Rate</th></tr></thead>
-          <tbody>{chargeRows.map((r,i) => (<tr class={i%2===0?'bg-white':'bg-[#f8f6f1]'}><td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">{r.label}</td><td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.value}</td></tr>))}</tbody>
-        </table></div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-[14.5px]">
+            <thead>
+              <tr class="bg-[var(--color-dark-olive)]">
+                <th class="px-[20px] py-[16px] text-left text-[13px] font-semibold text-white">Currency Pair</th>
+                <th class="px-[20px] py-[16px] text-left text-[13px] font-semibold text-[var(--color-brand)]">Lot Size</th>
+                <th class="px-[20px] py-[16px] text-left text-[13px] font-semibold text-[var(--color-brand)]">Tick Size</th>
+                <th class="px-[20px] py-[16px] text-left text-[13px] font-semibold text-[var(--color-brand)]">Exchange</th>
+                <th class="px-[20px] py-[16px] text-left text-[13px] font-semibold text-[var(--color-brand)]">Segment</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { pair: 'USDINR', lot: 'USD 1,000', tick: '₹0.0025', ex: 'NSE & BSE', seg: 'Futures & Options' },
+                { pair: 'EURINR', lot: 'EUR 1,000', tick: '₹0.0025', ex: 'NSE & BSE', seg: 'Futures & Options' },
+                { pair: 'GBPINR', lot: 'GBP 1,000', tick: '₹0.0025', ex: 'NSE & BSE', seg: 'Futures & Options' },
+                { pair: 'JPYINR', lot: 'JPY 100,000', tick: '₹0.0025', ex: 'NSE & BSE', seg: 'Futures & Options' },
+                { pair: 'EURUSD', lot: 'EUR 1,000', tick: 'USD 0.0001', ex: 'NSE', seg: 'Futures only (cross currency)' },
+                { pair: 'GBPUSD', lot: 'GBP 1,000', tick: 'USD 0.0001', ex: 'NSE', seg: 'Futures only (cross currency)' },
+                { pair: 'USDJPY', lot: 'USD 1,000', tick: 'JPY 0.01', ex: 'NSE', seg: 'Futures only (cross currency)' },
+              ].map((r, i) => (
+                <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[#f8f6f1]'}>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[20px] py-[15px] font-semibold text-[var(--color-ink)]">{r.pair}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[20px] py-[15px] text-[var(--color-muted)]">{r.lot}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[20px] py-[15px] text-[var(--color-muted)]">{r.tick}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[20px] py-[15px] font-medium text-[var(--color-dark-olive)]">{r.ex}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[20px] py-[15px] text-[var(--color-muted)]">{r.seg}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ══ 5. COMPARISON TABLE ═══════════════════════════════════════ -->
+  <!-- ══ S5. CURRENCY FUTURES VS OPTIONS ══════════════════════════════ -->
   <section class="bg-[#f8f6f1] py-[104px]">
     <div class="site-wrap">
       <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
         <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Currency vs <span class="text-[var(--color-brand)]">Equity Derivatives</span>
+          <span class="text-[var(--color-brand)]">Currency Futures vs Options</span> — Key Differences
         </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">How currency futures compare to equity futures across key dimensions.</p>
       </div>
       <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
-        <div class="overflow-x-auto"><table class="w-full text-[15.5px]">
-          <thead><tr class="bg-[var(--color-dark-olive)]"><th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Feature</th><th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Currency Derivatives</th><th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Equity Derivatives</th></tr></thead>
-          <tbody>{vsRows.map((r,i) => (<tr class={i%2===0?'bg-white':'bg-[#f8f6f1]'}><td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">{r.feature}</td><td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.currency}</td><td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.equity}</td></tr>))}</tbody>
-        </table></div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-[15.5px]">
+            <thead>
+              <tr class="bg-[var(--color-dark-olive)]">
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Feature</th>
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Currency Futures</th>
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Currency Options</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { feature: 'Obligation', fut: 'Must settle at expiry', opt: 'Right only (buyer)' },
+                { feature: 'Premium', fut: 'No premium — margin', opt: 'Buyer pays premium' },
+                { feature: 'Max Loss (Buyer)', fut: 'Unlimited (MTM daily)', opt: 'Limited to premium' },
+                { feature: 'Use Case', fut: 'Speculation, hedging', opt: 'Hedging, premium income' },
+                { feature: 'Capital Required', fut: 'SPAN + Exposure margin', opt: 'Premium amount' },
+              ].map((r, i) => (
+                <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[#f8f6f1]'}>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">{r.feature}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.fut}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.opt}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ══ 6. RISKS ════════════════════════════════════════════════════ -->
+  <!-- ══ S6. IS CURRENCY TRADING LEGAL IN INDIA? ══════════════════════ -->
   <section class="bg-white py-[104px]">
     <div class="site-wrap">
       <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
         <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Risks of <span class="text-[var(--color-brand)]">Currency Trading</span>
+          Is <span class="text-[var(--color-brand)]">Currency Trading Legal</span> in India? — RBI &amp; SEBI Rules
         </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Understand what can move against you before entering the forex market.</p>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">
+          Yes — on SEBI-regulated exchanges. Trading unregulated offshore forex platforms is ILLEGAL under FEMA.
+        </p>
       </div>
-      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {risks.map(r => (
-          <div class="equity-reveal rounded-[18px] bg-[var(--color-dark-800)] p-[36px]">
-            <div class="mb-[18px] text-[48px] font-bold leading-none text-[var(--color-brand)]/25">{r.n}</div>
-            <h4 class="mb-3 text-[20px] font-medium text-white" style="font-family:var(--font-display)">{r.label}</h4>
-            <p class="text-[14.5px] leading-relaxed text-white/60">{r.desc}</p>
+      <div class="equity-reveal grid gap-5 sm:grid-cols-2">
+        <div class="product-card-light px-[28px] py-[32px]">
+          <h3 class="mb-3 text-[20px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">Legal ✓</h3>
+          <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">Trade USDINR, EURINR, GBPINR, JPYINR futures &amp; options on NSE/BSE through a SEBI-registered broker. Regulated by RBI (FEMA) and SEBI. Shriram is SEBI-registered: INE231103833.</p>
+        </div>
+        <div class="product-card-light px-[28px] py-[32px]">
+          <h3 class="mb-3 text-[20px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">Illegal ✗</h3>
+          <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">Using offshore 'forex' or 'CFD' platforms (MT4/MT5 based, USD-funded) is illegal under FEMA for Indian residents. SEBI has issued multiple warnings against such platforms.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ S7. TAXATION ON CURRENCY TRADING ═════════════════════════════ -->
+  <section class="bg-[#f8f6f1] py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          Taxation on <span class="text-[var(--color-brand)]">Currency Trading</span> Profits
+        </h2>
+      </div>
+      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
+        <div class="overflow-x-auto">
+          <table class="w-full text-[15.5px]">
+            <thead>
+              <tr class="bg-[var(--color-dark-olive)]">
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Income Type</th>
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Tax Treatment</th>
+                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">ITR Form</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { type: 'Currency F&O profits', tax: 'Non-speculative business income (not capital gains)', itr: 'ITR-3' },
+                { type: 'Currency F&O losses', tax: 'Offset against business income; carry forward 8 years', itr: 'ITR-3' },
+                { type: 'Brokerage & charges', tax: 'Deductible as business expense', itr: 'ITR-3' },
+                { type: 'GST on brokerage', tax: '18% on brokerage (not on trade value)', itr: '—' },
+              ].map((r, i) => (
+                <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[#f8f6f1]'}>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">{r.type}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.tax}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.itr}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="mt-4 text-[13px] text-[var(--color-muted)]">Maintain detailed trade logs and consult a CA for ITR filing.</p>
+    </div>
+  </section>
+
+  <!-- ══ S8. HOW TO START CURRENCY TRADING ════════════════════════════ -->
+  <section class="bg-white py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          How to Start <span class="text-[var(--color-brand)]">Currency Trading</span> in India
+        </h2>
+      </div>
+      <div class="equity-reveal steps-grid overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
+        {[
+          { n: '01', title: 'Open Trading Account', desc: 'Open Demat + Trading account with Shriram. 100% digital, 10 minutes.' },
+          { n: '02', title: 'Activate Currency Segment', desc: 'Request currency derivatives segment activation. Submit KYC and income proof.' },
+          { n: '03', title: 'Add Margin', desc: 'Transfer SPAN + Exposure margin (typically ₹2,000–₹4,000 per USDINR lot).' },
+          { n: '04', title: 'Trade & Monitor', desc: 'Select pair, expiry, execute orders. Monitor rate using RBI reference rate and global forex data.' },
+        ].map(s => (
+          <div class="px-[30px] py-[34px]">
+            <div class="mb-[22px] text-[34px] font-bold leading-none text-[var(--color-brand)]">{s.n}</div>
+            <h4 class="mb-[10px] text-[19px] font-medium leading-[1.25] text-[var(--color-ink)]" style="font-family:var(--font-display)">{s.title}</h4>
+            <p class="text-[14.5px] leading-relaxed text-[var(--color-muted)]">{s.desc}</p>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- ══ 6b. IS CURRENCY TRADING LEGAL IN INDIA? ═══════════════════ -->
+  <!-- ══ S9. CURRENCY TRADING STRATEGIES FOR BEGINNERS ════════════════ -->
   <section class="bg-[#f8f6f1] py-[104px]">
     <div class="site-wrap">
       <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
         <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Is Currency Trading Legal in India? <span class="text-[var(--color-brand)]">RBI, SEBI &amp; FEMA Rules</span>
+          <span class="text-[var(--color-brand)]">Currency Trading Strategies</span> for Beginners
         </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Yes — currency futures and options trading on recognised exchanges is fully legal in India. Offshore forex (OTC) trading is not.</p>
       </div>
-      <div class="equity-reveal grid gap-5 sm:grid-cols-2">
-        <div class="product-card-light p-[34px]">
-          <div class="mb-4 flex h-11 w-auto min-w-[80px] items-center justify-center rounded-[10px] bg-[var(--color-dark-olive)] px-4 self-start">
-            <span class="text-[12px] font-bold text-[var(--color-brand)]">LEGAL</span>
+      <div class="equity-reveal grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {[
+          { title: 'USDINR Directional', desc: 'Trade based on RBI policy, Fed rate decisions, and India CAD/trade balance data.' },
+          { title: 'Hedging for Importers', desc: 'If you import USD-priced goods, buy USDINR futures to lock in exchange rate.' },
+          { title: 'Technical Strategy', desc: 'Use RSI, pivot points, and 9/21 EMA crossovers on USDINR 15-minute chart.' },
+          { title: 'Calendar Spread', desc: 'Buy near-month, sell far-month USDINR contracts. Benefits from time decay differential.' },
+        ].map(c => (
+          <div class="product-card-light px-[28px] py-[32px]">
+            <h3 class="mb-3 text-[17px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{c.title}</h3>
+            <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">{c.desc}</p>
           </div>
-          <h3 class="mb-3 text-[20px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">What Is Permitted</h3>
-          <div class="space-y-3 text-[13.5px] text-[var(--color-muted)]">
-            {[
-              'Currency futures and options on NSE, BSE, and MSE — fully SEBI regulated',
-              'INR-based pairs only: USD/INR, EUR/INR, GBP/INR, JPY/INR',
-              'Speculative positions up to $100 million without underlying forex exposure',
-              'Hedging forex payables/receivables from import-export business',
-            ].map(item => (
-              <div class="flex items-start gap-2.5">
-                <span class="shrink-0 text-[14px] font-bold text-[var(--color-brand)]">✓</span>
-                <span>{item}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div class="product-card-light p-[34px]">
-          <div class="mb-4 flex h-11 w-auto min-w-[80px] items-center justify-center rounded-[10px] bg-red-800/80 px-4 self-start">
-            <span class="text-[12px] font-bold text-white">ILLEGAL</span>
-          </div>
-          <h3 class="mb-3 text-[20px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">What Is Not Permitted</h3>
-          <div class="space-y-3 text-[13.5px] text-[var(--color-muted)]">
-            {[
-              'Offshore forex brokers (e.g., MetaTrader platforms offering FX on margin) — prohibited under FEMA',
-              'Derivatives on cross-currency pairs (e.g., EUR/USD) — not permitted for Indian residents',
-              'NRI participation in Indian currency futures (currently not allowed)',
-              'Leveraged OTC forex with unregulated brokers — SEBI classifies this as illegal',
-            ].map(item => (
-              <div class="flex items-start gap-2.5">
-                <span class="shrink-0 text-[14px] font-bold text-red-600">✗</span>
-                <span>{item}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-      <div class="equity-reveal mt-[28px] rounded-[18px] bg-[var(--color-dark-800)] p-[28px] text-[14px] leading-relaxed text-white/70">
-        <strong class="text-[var(--color-brand)]">Key regulation:</strong> All currency derivatives in India are governed by SEBI and the RBI, with the overarching framework set by FEMA 1999. Shriram Financial Services is a SEBI-registered broker with NSE currency segment membership — all trades are exchange-cleared, transparent, and legally compliant.
+        ))}
       </div>
     </div>
   </section>
 
-  <!-- ══ 7. FAQ ════════════════════════════════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-[104px]">
+  <!-- ══ S10. FAQs — CURRENCY TRADING INDIA ═══════════════════════════ -->
+  <section class="bg-white py-[104px]">
     <div class="site-wrap">
       <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
         <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Frequently Asked <span class="text-[var(--color-brand)]">Questions</span>
+          FAQs — <span class="text-[var(--color-brand)]">Currency Trading</span> India
         </h2>
       </div>
       <div class="equity-reveal mx-auto max-w-[840px] border-t border-[var(--color-n400)]">
-        {faqs.map(item => (
+        {[
+          { q: 'What is currency derivatives trading in India?', a: 'Exchange-traded contracts on currency pairs (USDINR, EURINR, etc.) on NSE/BSE. It is NOT spot forex trading — it is regulated by SEBI and RBI.' },
+          { q: 'Is currency trading legal in India?', a: 'Yes — on SEBI-regulated exchanges NSE and BSE. Trading offshore forex/CFD platforms is illegal under FEMA for Indian residents.' },
+          { q: 'What is the minimum capital to trade USDINR?', a: 'One USDINR futures lot (USD 1,000) requires approximately ₹2,000–₹4,000 in SPAN + Exposure margin.' },
+          { q: 'What are trading hours for currency derivatives?', a: '9 AM to 5 PM (INR pairs). Cross-currency pairs (EURUSD, GBPUSD, USDJPY) trade until 7:30 PM on NSE.' },
+          { q: 'How is currency F&O settled?', a: 'Currency derivatives are cash-settled in INR at the RBI reference rate on the last business day of the expiry month.' },
+          { q: 'What is the tax on currency trading profits?', a: 'Currency F&O profits are non-speculative business income — taxed as per your income slab. File ITR-3. Losses can be carried forward for 8 years.' },
+          { q: 'Can NRIs trade currency derivatives in India?', a: 'NRIs can trade currency derivatives through RBI-approved brokers using NRE/NRO accounts, subject to FEMA guidelines.' },
+          { q: 'What is the difference between USDINR futures and spot forex?', a: 'USDINR futures are exchange-traded, SEBI-regulated, cash-settled contracts. Spot forex is OTC and unregulated — illegal for Indian residents under FEMA.' },
+        ].map(item => (
           <details class="eq-faq group border-b border-[var(--color-n400)]">
             <summary class="flex cursor-pointer list-none items-center justify-between gap-5 py-[26px] px-2">
               <span class="text-[18px] font-semibold text-[var(--color-ink)]">{item.q}</span>
@@ -265,18 +323,12 @@ const faqs = [
           </details>
         ))}
       </div>
-    </div>
-  </section>
 
-  <!-- ══ 8. FINAL CTA ══════════════════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal overflow-hidden rounded-[22px] bg-[var(--color-dark-800)] px-[60px] py-[64px] text-center">
-        <h3 class="mx-auto max-w-[560px] text-[38px] font-bold leading-[1.12] text-white" style="font-family:var(--font-display)">Trade Currency Derivatives Today</h3>
-        <p class="mx-auto mt-[18px] max-w-[480px] text-[17px] leading-relaxed text-white/70">Hedge your forex exposure or speculate on exchange rates. Flat ₹20 brokerage, live pricing, and expert support.</p>
+      <!-- Dark CTA block after FAQs -->
+      <div class="equity-reveal mt-[56px] overflow-hidden rounded-[22px] bg-[var(--color-dark-800)] px-[60px] py-[64px] text-center">
+        <h3 class="mx-auto max-w-[560px] text-[38px] font-bold leading-[1.12] text-white" style="font-family:var(--font-display)">Open Currency Trading Account — NSE &amp; BSE</h3>
         <div class="mt-[34px] flex flex-wrap justify-center gap-[14px]">
-          <a href="/about/open-demat-account/" class="btn-primary">Get Started</a>
-          <a href="/about/support/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Talk to an RM</a>
+          <a href="/about/open-demat-account/" class="btn-primary">Open Account</a>
         </div>
       </div>
     </div>

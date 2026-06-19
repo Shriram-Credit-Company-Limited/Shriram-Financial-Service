@@ -66,7 +66,35 @@ const faqs = [
     </div>
   </section>
 
-  <!-- ══ 2. MARKETS YOU CAN ACCESS ═════════════════════════════════ -->
+  <!-- ══ 2. WHAT IS GLOBAL INVESTING? ═════════════════════════════════ -->
+  <section class="bg-white py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto grid max-w-[1000px] items-start gap-[72px] lg:grid-cols-[5fr_7fr]">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          What is <span class="text-[var(--color-brand)]">Global Investing?</span>
+        </h2>
+        <div class="space-y-5 text-[17px] leading-relaxed text-[var(--color-muted)]">
+          <p>Global investing means allocating a portion of your portfolio to financial assets outside India — primarily US stocks, international ETFs, global mutual funds (fund-of-funds), or direct foreign securities — to benefit from global economic growth and currency diversification.</p>
+          <p>For Indian investors, global investing is legally permitted under FEMA's Liberalised Remittance Scheme (LRS) — up to USD 250,000 (~₹2.1 crore) per financial year. A simpler route requires no LRS at all: India-listed international ETFs and fund-of-funds track global indices like the S&P 500 and Nasdaq 100 and are bought like any domestic mutual fund.</p>
+        </div>
+      </div>
+      <div class="equity-reveal mx-auto mt-[64px] max-w-[1000px] grid gap-5 sm:grid-cols-3">
+        {[
+          { label: 'Why Diversify Globally?', desc: 'Indian markets (Nifty 50) and US markets (S&P 500) are not correlated — when one falls, the other often holds. A 10–20% global allocation smooths overall portfolio volatility.', tag: 'Diversification' },
+          { label: 'Currency Hedge', desc: 'The Indian rupee has historically depreciated ~4% per year against the USD. Investing in USD-denominated assets provides a natural hedge against INR weakness.', tag: 'INR Protection' },
+          { label: 'Access to Global Leaders', desc: 'India has no equivalent of Apple, NVIDIA, Microsoft, or Amazon. Global investing lets you own the world\'s most innovative companies — unavailable on Indian exchanges.', tag: 'Global Exposure' },
+        ].map((c, i) => (
+          <div class="equity-reveal product-card-light flex flex-col gap-3 p-[30px]" style={`animation-delay:${i*80}ms`}>
+            <span class="inline-flex w-fit rounded-full bg-[var(--color-brand)]/15 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-[var(--color-dark-olive)]">{c.tag}</span>
+            <h3 class="text-[19px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{c.label}</h3>
+            <p class="text-[13px] leading-relaxed text-[var(--color-muted)]">{c.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 3. MARKETS YOU CAN ACCESS ═════════════════════════════════ -->
   <section class="bg-white py-[104px]">
     <div class="site-wrap">
       <div class="equity-reveal mx-auto grid max-w-[1000px] items-start gap-[72px] lg:grid-cols-[5fr_7fr]">
@@ -120,7 +148,49 @@ const faqs = [
     </div>
   </section>
 
-  <!-- ══ 4. HOW TO START ════════════════════════════════════════════ -->
+  <!-- ══ 4b. GLOBAL INVESTING VS INDIA INVESTING ════════════════════ -->
+  <section class="bg-white py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          Global Investing vs <span class="text-[var(--color-brand)]">Indian Investing</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">How do US and Indian markets compare across returns, risk, currency, and access? Use this to decide your right allocation.</p>
+      </div>
+      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
+        <div class="overflow-x-auto">
+          <table class="w-full text-[15px]">
+            <thead>
+              <tr class="bg-[var(--color-dark-olive)]">
+                <th class="px-[24px] py-[16px] text-left text-[13px] font-semibold text-white">Factor</th>
+                <th class="px-[24px] py-[16px] text-left text-[13px] font-semibold text-[var(--color-brand)]">US Markets (S&P 500)</th>
+                <th class="px-[24px] py-[16px] text-left text-[13px] font-semibold text-[var(--color-brand)]">Indian Markets (Nifty 50)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { factor: '10-Year CAGR (USD / INR)', us: '~12–14% USD CAGR', india: '~11–13% INR CAGR' },
+                { factor: 'Currency', us: 'USD — appreciates vs INR (avg ~4%/yr)', india: 'INR — depreciates vs USD historically' },
+                { factor: 'Volatility', us: 'Lower (deepest market globally)', india: 'Higher (emerging market premium)' },
+                { factor: 'Sectors Represented', us: 'Tech, AI, Healthcare, Consumer, Financials', india: 'Financials, IT, Energy, FMCG, Industrials' },
+                { factor: 'Liquidity', us: 'Extremely high — $30T+ market cap', india: 'High — but smaller universe' },
+                { factor: 'Correlation with Indian Stocks', us: 'Low-to-moderate (diversification benefit)', india: 'Full — no diversification within India' },
+                { factor: 'Recommended Allocation', us: '10–30% of total equity portfolio', india: '70–90% of total equity portfolio' },
+              ].map((r, i) => (
+                <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[var(--color-n100)]'}>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[24px] py-[14px] font-semibold text-[var(--color-ink)]">{r.factor}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[24px] py-[14px] text-[var(--color-muted)]">{r.us}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[24px] py-[14px] text-[var(--color-muted)]">{r.india}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 5. HOW TO START ════════════════════════════════════════════ -->
   <section class="bg-white py-[104px]">
     <div class="site-wrap">
       <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
@@ -141,7 +211,78 @@ const faqs = [
     </div>
   </section>
 
-  <!-- ══ 5. RISKS ════════════════════════════════════════════════════ -->
+  <!-- ══ 5b. US STOCKS FOR INDIANS — DEEP DIVE ════════════════════ -->
+  <section class="bg-[var(--color-n100)] py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          US Stocks for Indians — <span class="text-[var(--color-brand)]">What You Need to Know</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">From opening a foreign brokerage account to understanding fractional shares — here's the complete guide.</p>
+      </div>
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {[
+          { title: 'Fractional Shares', desc: 'Buy a fraction of expensive US stocks like Amazon (₹1,50,000+) or Google. Many platforms allow investments from as little as $1, making global giants accessible to all.', tag: 'Low Minimums' },
+          { title: 'Top US Sectors', desc: 'Technology (Apple, NVIDIA, Microsoft), Healthcare (Pfizer, UnitedHealth), Consumer (Amazon, Meta), Financials (JPMorgan). Pick sectors India doesn\'t offer.', tag: 'Sector Access' },
+          { title: 'S&P 500 vs Nasdaq 100', desc: 'S&P 500 covers the 500 largest US companies (diversified). Nasdaq 100 concentrates on top 100 tech/growth stocks (higher risk, higher growth potential). Most beginners start with S&P 500.', tag: 'Index Choice' },
+          { title: 'Dividend Stocks vs Growth', desc: 'US dividend stocks (Coca-Cola, J&J, AT&T) yield 2–5% USD annually — useful for USD income. Growth stocks (Tesla, NVIDIA) pay no dividend but offer capital appreciation.', tag: 'Strategy' },
+        ].map((c, i) => (
+          <div class="equity-reveal product-card-light flex flex-col gap-3 p-[28px]" style={`animation-delay:${i*80}ms`}>
+            <span class="inline-flex w-fit rounded-full bg-[var(--color-brand)]/15 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-[var(--color-dark-olive)]">{c.tag}</span>
+            <h3 class="text-[18px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{c.title}</h3>
+            <p class="text-[13px] leading-relaxed text-[var(--color-muted)]">{c.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 5c. GLOBAL MUTUAL FUNDS & ETFS ═══════════════════════════ -->
+  <section class="bg-white py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          Global Mutual Funds & <span class="text-[var(--color-brand)]">International ETFs</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">The simplest way to invest globally from India — no LRS, no forex conversion, same process as buying a domestic mutual fund.</p>
+      </div>
+      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
+        <div class="overflow-x-auto">
+          <table class="w-full text-[15px]">
+            <thead>
+              <tr class="bg-[var(--color-dark-olive)]">
+                <th class="px-[24px] py-[16px] text-left text-[13px] font-semibold text-white">Fund Type</th>
+                <th class="px-[24px] py-[16px] text-left text-[13px] font-semibold text-[var(--color-brand)]">What It Tracks</th>
+                <th class="px-[24px] py-[16px] text-left text-[13px] font-semibold text-[var(--color-brand)]">LRS Required?</th>
+                <th class="px-[24px] py-[16px] text-left text-[13px] font-semibold text-[var(--color-brand)]">Tax Treatment</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { type: 'India-listed S&P 500 ETF', tracks: 'Top 500 US companies', lrs: 'No', tax: 'As per slab (debt fund rules)' },
+                { type: 'India-listed Nasdaq 100 ETF', tracks: 'Top 100 US tech/growth stocks', lrs: 'No', tax: 'As per slab' },
+                { type: 'International Fund-of-Funds', tracks: 'Global ETFs via feeder structure', lrs: 'No', tax: 'As per slab' },
+                { type: 'Direct US Stock (LRS)', tracks: 'Individual US stocks/ETFs', lrs: 'Yes (up to $250K/yr)', tax: 'STCG/LTCG + US WHT' },
+                { type: 'Regional Funds (Europe, Asia)', tracks: 'European or Asian markets', lrs: 'No', tax: 'As per slab' },
+              ].map((r, i) => (
+                <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[var(--color-n100)]'}>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[24px] py-[14px] font-semibold text-[var(--color-ink)]">{r.type}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[24px] py-[14px] text-[var(--color-muted)]">{r.tracks}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[24px] py-[14px] text-[var(--color-muted)]">{r.lrs}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[24px] py-[14px] text-[var(--color-muted)]">{r.tax}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="equity-reveal mt-[32px] text-center">
+        <a href="/about/open-demat-account/" class="btn-primary">Start with India-listed International ETFs</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 6. RISKS ════════════════════════════════════════════════════ -->
   <section class="bg-[#f8f6f1] py-[104px]">
     <div class="site-wrap">
       <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
@@ -257,7 +398,32 @@ const faqs = [
     </div>
   </section>
 
-  <!-- ══ 6. FAQ ════════════════════════════════════════════════════ -->
+  <!-- ══ 5d. GLOBAL INVESTING CALCULATORS & TOOLS ═════════════════ -->
+  <section class="bg-[var(--color-n100)] py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          Global Investing <span class="text-[var(--color-brand)]">Calculators & Tools</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Estimate your global portfolio returns, currency impact, and tax before investing a single rupee.</p>
+      </div>
+      <div class="grid gap-5 sm:grid-cols-3">
+        {[
+          { title: 'Currency Impact Calculator', desc: 'See how INR/USD movements affect your actual returns in rupee terms. A 10% USD appreciation adds ~10% to your INR return on top of the underlying stock gain.', cta: 'Calculate Currency Impact', href: '/calculators/sip/' },
+          { title: 'US vs India Return Comparison', desc: 'Compare S&P 500 CAGR vs Nifty 50 CAGR over 5, 10, and 20-year periods with INR adjustment. Understand the real diversification benefit in rupee-adjusted terms.', cta: 'Compare Returns', href: '/calculators/sip/' },
+          { title: 'LRS Tax (TCS) Calculator', desc: 'Estimate your 20% TCS liability on LRS remittances above ₹7 lakh. Know your temporary cash outflow and when to expect the refund via ITR.', cta: 'Estimate TCS', href: '/calculators/sip/' },
+        ].map((c, i) => (
+          <div class="equity-reveal product-card-light flex flex-col gap-4 p-[34px]" style={`animation-delay:${i*80}ms`}>
+            <h3 class="text-[20px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{c.title}</h3>
+            <p class="text-[14px] leading-relaxed text-[var(--color-muted)] flex-1">{c.desc}</p>
+            <a href={c.href} class="inline-flex items-center text-[14px] font-semibold text-[var(--color-brand)] hover:underline">{c.cta} →</a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 7. FAQ ════════════════════════════════════════════════════ -->
   <section class="bg-white py-[104px]">
     <div class="site-wrap">
       <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
