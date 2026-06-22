@@ -1,41 +1,497 @@
 ---
-import ResearchTemplate from '../../layouts/ResearchTemplate.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const contents = [
+  'Daily support, resistance and pivot levels for key indices and commodities',
+  'Candlestick and pattern reads — rounding tops, trend reversals, breakouts',
+  'Derivatives strategy notes built for F&O traders',
+  'Intraday and positional trade ideas, with entry, target and stop-loss',
+  'A level that would make us review the call — stated upfront, not after',
+];
+
 const reports = [
-  {
-    title: 'Daily Market View — Nifty & Bank Nifty',
-    meta: 'Published Pre-Market',
-    summary: 'Every trading day before 8:30 AM: key levels, momentum indicators (RSI, MACD, Supertrend), and 3 intraday/short-term trade ideas with precise entry, stop-loss, and target levels.'
-  },
-  {
-    title: 'Weekly Positional Trade Report',
-    meta: 'Published Every Monday',
-    summary: 'Swing trading setups across 5–8 stocks with 5 to 20-day holding targets. Uses weekly chart patterns, volume analysis, and sector rotation signals to identify strong risk-reward opportunities.'
-  },
-  {
-    title: 'F&O Open Interest Analysis',
-    meta: 'Options & Futures',
-    summary: 'Daily OI buildup, PCR ratio, max pain analysis, and implied volatility rankings — helping derivatives traders understand institutional positioning before placing trades.'
-  },
-  {
-    title: 'Sector & Index Heatmap',
-    meta: 'Market Overview',
-    summary: 'Weekly sector performance heatmap showing which market segments are leading, lagging, and rotating — crucial intelligence for both short-term traders and portfolio rebalancers.'
-  },
-  {
-    title: 'Option Chain Insights',
-    meta: 'Expiry Week Special',
-    summary: 'Expiry-week analysis of Nifty and Bank Nifty option chains — key support/resistance from max OI strikes, unusual activity alerts, and recommended option strategies for expiry week.'
-  },
-  {
-    title: 'Monthly Chart Outlook',
-    meta: 'Long-Term Technical',
-    summary: 'Monthly candlestick analysis of major indices and blue-chip stocks — identifying macro trend direction, major inflection points, and long-term support/resistance for investor decision-making.'
-  },
+  { title: 'Daily Market View — Nifty & Bank Nifty', desc: 'Every trading day before 8:30 AM: key levels, momentum indicators (RSI, MACD, Supertrend), and 3 intraday/short-term trade ideas with precise entry, stop-loss, and target levels.' },
+  { title: 'Weekly Positional Trade Report',          desc: 'Swing trading setups across 5–8 stocks with 5 to 20-day holding targets. Uses weekly chart patterns, volume analysis, and sector rotation signals to identify strong risk-reward opportunities.' },
+  { title: 'F&O Open Interest Analysis',              desc: 'Daily OI buildup, PCR ratio, max pain analysis, and implied volatility rankings — helping derivatives traders understand institutional positioning before placing trades.' },
+  { title: 'Sector & Index Heatmap',                  desc: 'Weekly sector performance heatmap showing which market segments are leading, lagging, and rotating — crucial intelligence for short-term traders and portfolio rebalancers.' },
+  { title: 'Option Chain Insights',                   desc: 'Expiry-week analysis of Nifty and Bank Nifty option chains — max OI strikes, unusual activity alerts, and recommended option strategies for expiry week.' },
+  { title: 'Monthly Chart Outlook',                   desc: 'Monthly candlestick analysis of major indices and blue-chip stocks — identifying macro trend direction, major inflection points, and long-term support/resistance.' },
+];
+
+const faqs = [
+  { q: 'What is Shriram Research?',                           a: 'Shriram Research is the equity and commodity research division of Shriram Financial Services. We publish daily technical trend reports, fundamental stock analysis, and monthly mutual fund industry reviews — all produced by SEBI-registered analysts.' },
+  { q: 'What types of research reports are available?',       a: 'We publish daily technical views (pre-market), weekly positional trade reports, F&O open interest analysis, sector heatmaps, option chain insights, and monthly chart outlooks across indices and stocks.' },
+  { q: 'Do I need to login to read the reports?',             a: 'Report titles and overviews are public. To read the complete analysis, download PDFs, and receive daily alerts, login or open your free demat account.' },
+  { q: 'How do I open a demat account to access research?',   a: 'Opening a demat account with Shriram is fully digital and takes under 10 minutes. You need your PAN, Aadhaar, and a cancelled cheque or bank statement. No branch visit required.' },
+  { q: 'Is the research free for clients?',                   a: 'Yes. All research reports and trading ideas are free for clients with an active Shriram demat or trading account.' },
+  { q: 'How often are reports published?',                    a: 'Technical views are published pre-market every trading day. Weekly positional reports arrive every Monday. Option chain insights publish during expiry week. Monthly outlooks are released at the end of each calendar month.' },
 ];
 ---
-<ResearchTemplate
-  title="Technical Research — Trade with Precision"
-  lead="Chart patterns, momentum indicators, and price action signals — all interpreted by our experienced technical analysts to give you clear entry and exit levels across equities and derivatives. No guesswork. Only discipline."
-  reports={reports}
-  description="Shriram Financial Services technical research — daily Nifty and Bank Nifty views, short-term trade ideas, F&O analysis, and chart-based investment signals by SEBI-registered analysts."
-/>
+
+<BaseLayout
+  title="Technical Research — Daily Nifty Views & Trade Ideas | Shriram Financial"
+  description="Access daily pre-market technical views, intraday trade ideas, F&O analysis, and chart-based signals from Shriram Financial Services' SEBI-registered technical research team."
+>
+
+  <!-- ══ 1. HERO ══════════════════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <a class="breadcrumb" href="/research/">← Back to Research Hub</a>
+      <div class="hero-badge">TR</div>
+      <h1>Technical Research</h1>
+      <p class="lead">Where price is the only fundamental that matters today.</p>
+      <div class="cta-row">
+        <a class="btn-gold" href="/about/open-demat-account/">Open Demat Account</a>
+        <a class="btn-ghost" href="/about/antara-web-login/">Login to Antara</a>
+      </div>
+      <div class="hero-feats">
+        <div class="feats">
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;Published pre-market</span></div>
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;SEBI-registered analysts</span></div>
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;Equities &amp; F&amp;O</span></div>
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;Free with Demat account</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 2. WHAT IS TECHNICAL RESEARCH ════════════════════════════════ -->
+  <section class="section stack" id="sec-about" style="background:var(--sec-light);gap:56px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">What is Technical Research?</p>
+      <p class="sec-lead">Technical Research reads the chart, not the balance sheet — price action, volume, moving averages and the patterns they form, across equity indices, individual stocks, currencies and commodities. The output is short and dated: today's support and resistance, the level that would change the view, and what we're watching the chart for next.</p>
+    </div>
+  </section>
+
+  <!-- ══ 3. WHAT IT CONTAINS ══════════════════════════════════════════ -->
+  <section class="section stack" id="sec-contains" style="background:var(--sec-tint);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">What Technical Research Contains</p>
+      <p class="sec-lead">Every report is structured around five deliverables — so you always know what you're getting, and when.</p>
+    </div>
+    <div class="card check-card">
+      <div class="check-list">
+        {contents.map((item, i) => (
+          <>
+            {i > 0 && <div class="check-sep"></div>}
+            <div class="check-row"><span class="ck">✓</span><p class="tx">{item}</p></div>
+          </>
+        ))}
+      </div>
+    </div>
+    <a class="btn-gold" href="/about/open-demat-account/" style="align-self:center">Access Research Free</a>
+  </section>
+
+  <!-- ══ 4. REPORT TYPES ══════════════════════════════════════════════ -->
+  <section class="section stack" id="sec-reports" style="background:var(--sec-light);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Technical Research Notes all in One Place</p>
+      <p class="sec-lead">Six report formats published on a fixed cadence — intraday, weekly, expiry-week, and monthly — so every type of market participant finds their edge.</p>
+    </div>
+    <div class="cat-grid">
+      {reports.map(r => (
+        <div class="cat">
+          <h4>{r.title}</h4>
+          <p>{r.desc}</p>
+        </div>
+      ))}
+    </div>
+    <a class="btn-gold" href="/about/open-demat-account/" style="align-self:center">Open Demat Account</a>
+  </section>
+
+  <!-- ══ 5. ACCESS PREVIEW ════════════════════════════════════════════ -->
+  <section class="section stack" id="sec-access" style="background:var(--sec-tint);gap:56px;justify-content:center;align-items:center">
+    <div class="stack" style="gap:16px;width:100%">
+      <p class="sec-title">Today's Technical Note is Ready</p>
+      <p class="sec-lead">Login to read live levels and trade ideas, or open a demat account to get started.</p>
+    </div>
+    <div class="access-card">
+      <div class="access-inner">
+        <div class="access-icon" aria-hidden="true">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" width="40" height="40">
+            <rect width="40" height="40" rx="10" fill="var(--olive-deep)"/>
+            <path d="M10 28 L18 18 L24 24 L30 14" stroke="var(--gold-2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="18" cy="18" r="2" fill="var(--gold-2)"/>
+            <circle cx="24" cy="24" r="2" fill="var(--gold-2)"/>
+            <circle cx="30" cy="14" r="2" fill="var(--gold-2)"/>
+          </svg>
+        </div>
+        <p class="access-title">Today's Technical Note is ready.</p>
+        <p class="access-sub">Login to read live levels and trade ideas, or open a demat account to get started.</p>
+        <div class="access-btns">
+          <a class="btn-ghost-dark" href="/about/antara-web-login/">Login</a>
+          <a class="btn-gold" href="/about/open-demat-account/">Open Demat Account</a>
+        </div>
+      </div>
+      <div class="report-preview" aria-hidden="true">
+        <div class="preview-header">
+          <div class="preview-tag">Chart-Based Intelligence for Active Traders</div>
+          <div class="preview-stat">50 Nifty · MCX</div>
+        </div>
+        <div class="preview-cards">
+          {[
+            { name: 'Daily EQ Trend', sub: 'Nifty — Recovery from Demand Zone' },
+            { name: 'Daily Commodity', sub: 'Crude near 10 DEMA' },
+            { name: 'Bank Nifty', sub: '61.8% Fib Support' },
+          ].map(c => (
+            <div class="preview-card">
+              <div class="preview-chart"></div>
+              <p class="preview-name">{c.name}</p>
+              <p class="preview-sub">{c.sub}</p>
+              <span class="preview-link">Open Demat to Unlock Full Report</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 6. DARK CTA ══════════════════════════════════════════════════ -->
+  <section class="unlock-sec">
+    <div class="unlock-inner">
+      <div class="unlock-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" width="28" height="28">
+          <rect x="3" y="11" width="18" height="11" rx="2"/>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+      </div>
+      <h2>Unlock All Reports + Trading Ideas</h2>
+      <p>Open your Shriram Demat account and get free, unlimited access to all research PDFs, pivot tables, analyst webinars, and model portfolios.</p>
+      <div class="unlock-btns">
+        <a class="btn-gold" href="/about/open-demat-account/">Open Demat Account — Free</a>
+        <a class="btn-ghost" href="/about/antara-web-login/">Login to Existing Account</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 7. FAQ ════════════════════════════════════════════════════════ -->
+  <section class="faq-wrap" id="sec-faq" style="background:var(--sec-light)">
+    <div class="faq-cols">
+      <div class="faq-left">
+        <p class="faq-title">Frequently Asked Questions</p>
+        <div class="faq-acc">
+          {faqs.map((item, i) => (
+            <details class="faq-item" open={i === 0}>
+              <summary class="faq-sum">
+                <span class="qt">{item.q}</span>
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="faq-icon">
+                  <path d="M2 8h12"/>
+                  <path class="faq-v" d="M8 2v12"/>
+                </svg>
+              </summary>
+              <div class="qa"><p>{item.a}</p></div>
+            </details>
+          ))}
+        </div>
+      </div>
+
+      <div class="faq-side">
+        <div class="usr" aria-hidden="true">
+          <svg viewBox="0 0 120 135" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="60" cy="37" r="29"/>
+            <path d="M0 135a60 60 0 0 1 120 0H0z"/>
+          </svg>
+        </div>
+        <div class="side-in">
+          <div class="side-tx">
+            <h4>Want Expert Guidance?</h4>
+            <p>Book a free 15-minute call with one of our SEBI-registered technical analysts. We'll walk you through the reports, explain our chart methodology, and show you how to use trade ideas in your portfolio.</p>
+          </div>
+          <a class="btn-gold" href="/about/support/">Book A Discovery Call</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 8. FINAL CTA ══════════════════════════════════════════════════ -->
+  <section class="cta-sec" id="sec-final-cta" style="background:var(--sec-tint)">
+    <div class="cta-box">
+      <div class="ct-tt">
+        <h3>Trade with Precision, Starting Today</h3>
+        <p class="ct-sub">Open a free Demat account and get access to daily pre-market technical views, trade ideas, and F&amp;O analysis — all from SEBI-registered analysts.</p>
+      </div>
+      <a class="btn-gold" href="/about/open-demat-account/">Open Demat Account</a>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  /* ── Design tokens ─────────────────────────────────────────────── */
+  :root {
+    --page: #fcf8ef;
+    --sec-light: #fef8ee;
+    --sec-tint: #f6efe1;
+    --card: #fffdf8;
+    --card-border: #e1e0db;
+    --card-border-soft: rgba(28,28,22,.13);
+    --row-line: rgba(28,28,22,.08);
+    --olive-title: #2e3914;
+    --olive-head: #2d3813;
+    --olive-deep: #1b2010;
+    --ink: #1c1c16;
+    --ink-2: #46463c;
+    --ink-3: #595959;
+    --muted: #73736a;
+    --muted-2: #9a9a8e;
+    --gold: #e0a82e;
+    --gold-2: #f2b83f;
+    --gold-btn: #f3b83f;
+    --gold-ink: #231a06;
+    --olive-ink: #2e3914;
+    --green: #009d58;
+    --pad: clamp(20px, 8vw, 144px);
+    --container-pad: 32px;
+    --section-y: 72px;
+    --cta-w: 220px;
+  }
+
+  /* ── Base ─────────────────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; }
+  a { color: inherit; text-decoration: none; }
+  p { line-height: 1.5; }
+
+  /* ── Section shell ────────────────────────────────────────────── */
+  .section {
+    padding: var(--section-y) var(--pad);
+    min-height: 100vh; min-height: 100dvh;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  #sec-about { min-height: 0; }
+  .stack { display: flex; flex-direction: column; }
+
+  /* ── Typography ───────────────────────────────────────────────── */
+  .sec-title { font-weight: 400; font-size: 40px; color: var(--olive-title); text-transform: capitalize; line-height: 1.5; }
+  .sec-lead  { font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.5; }
+  .card-h    { font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.5; }
+  .card-p    { font-weight: 400; font-size: 16px; color: var(--muted); line-height: 1.5; }
+
+  /* ── Hero ─────────────────────────────────────────────────────── */
+  .hero {
+    padding: 0 var(--pad);
+    display: flex; flex-direction: column; justify-content: center;
+    overflow: hidden;
+    background: radial-gradient(125% 210% at 100% -8%, #4f583b 0%, #363a2c 50%, #1d1d1d 100%);
+  }
+  .hero-inner { padding: clamp(80px,12vw,140px) 0 clamp(48px,6vw,80px); display: flex; flex-direction: column; }
+  .breadcrumb { font-size: 13px; font-weight: 500; color: rgba(255,255,255,.55); margin-bottom: 28px; transition: color .2s; width: fit-content; }
+  .breadcrumb:hover { color: rgba(255,255,255,.9); }
+  .hero-badge {
+    width: 48px; height: 48px; border-radius: 10px;
+    background: var(--olive-head);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 14px; color: var(--gold-2);
+    letter-spacing: .04em; margin-bottom: 20px;
+  }
+  .hero h1 { font-weight: 500; font-size: 40px; color: #fff; line-height: 1.3; max-width: 680px; }
+  .hero .lead { margin-top: 16px; font-weight: 400; font-size: 18px; line-height: 1.5; color: rgba(255,255,255,.65); max-width: 560px; }
+  .cta-row { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .hero-feats { margin-top: 40px; }
+  .feats { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 16px; max-width: 760px; padding-top: 36px; border-top: 1px solid rgba(255,255,255,.16); }
+  .feat { display: flex; gap: 10px; align-items: center; }
+  .feat .tk { color: var(--gold-2); font-weight: 500; font-size: 15px; width: 13px; }
+  .feat .lb { color: rgba(255,255,255,.9); font-weight: 500; font-size: 16px; line-height: 1.5; white-space: nowrap; }
+
+  /* ── Buttons ──────────────────────────────────────────────────── */
+  .btn-gold {
+    background: var(--gold-btn); height: 40px; width: var(--cta-w);
+    border-radius: 4px; display: inline-flex; align-items: center; justify-content: center;
+    padding: 7px 20px; font-weight: 500; font-size: 12px; color: var(--olive-ink);
+    white-space: nowrap; transition: opacity .2s;
+  }
+  .btn-gold:hover { opacity: .88; }
+  .btn-ghost {
+    height: 40px; border-radius: 9px; border: 1px solid rgba(255,255,255,.4);
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 7px 26px; font-weight: 600; font-size: 15px; color: #fff; transition: border-color .2s;
+  }
+  .btn-ghost:hover { border-color: #fff; }
+  .btn-ghost-dark {
+    height: 40px; border-radius: 4px; border: 1px solid var(--card-border);
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 7px 26px; font-weight: 500; font-size: 12px; color: var(--ink); background: var(--card);
+    white-space: nowrap; transition: border-color .2s, background .2s;
+  }
+  .btn-ghost-dark:hover { border-color: var(--olive-head); }
+
+  /* ── Card base ────────────────────────────────────────────────── */
+  .card {
+    background: var(--card); border: 1px solid var(--card-border);
+    border-radius: 24px; padding: var(--container-pad);
+    display: flex; flex-direction: column; gap: 16px;
+  }
+
+  /* ── Checklist card ───────────────────────────────────────────── */
+  .check-card { display: flex; flex-direction: column; gap: 32px; }
+  .check-list { display: flex; flex-direction: column; gap: 24px; }
+  .check-row  { display: flex; gap: 14px; align-items: flex-start; }
+  .check-row .ck { color: var(--green); font-weight: 700; font-size: 15px; line-height: 25.5px; width: 13px; flex: none; }
+  .check-row .tx { flex: 1 0 0; min-width: 0; font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.5; }
+  .check-sep  { height: 1px; background: var(--row-line); width: 100%; }
+
+  /* ── Category grid (report types) ────────────────────────────── */
+  .cat-grid {
+    border: 1px solid var(--card-border); border-radius: 24px;
+    overflow: hidden; display: grid; grid-template-columns: repeat(3, 1fr);
+    background: var(--card);
+  }
+  .cat {
+    background: var(--card); padding: var(--container-pad);
+    display: flex; flex-direction: column; gap: 12px;
+    border-right: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border);
+  }
+  .cat:nth-child(3n)  { border-right: 0; }
+  .cat:nth-child(n+4) { border-bottom: 0; }
+  .cat h4 { font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.5; }
+  .cat p  { font-weight: 400; font-size: 16px; color: var(--muted); line-height: 1.5; }
+
+  /* ── Access / preview card ────────────────────────────────────── */
+  .access-card {
+    width: 100%; background: var(--card);
+    border: 1px solid var(--card-border); border-radius: 24px;
+    overflow: hidden; display: flex; flex-direction: column;
+  }
+  .access-inner {
+    padding: 48px var(--container-pad) 40px;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 16px; text-align: center; border-bottom: 1px solid var(--card-border);
+  }
+  .access-icon { margin-bottom: 4px; }
+  .access-title { font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.4; }
+  .access-sub   { font-weight: 400; font-size: 15px; color: var(--muted); line-height: 1.5; max-width: 400px; }
+  .access-btns  { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 8px; }
+
+  /* report preview strip */
+  .report-preview { padding: 28px var(--container-pad); display: flex; flex-direction: column; gap: 16px; }
+  .preview-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .preview-tag  { font-weight: 600; font-size: 13px; color: var(--ink); }
+  .preview-stat { font-size: 12px; font-weight: 500; color: var(--muted); }
+  .preview-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .preview-card {
+    background: var(--sec-tint); border: 1px solid var(--card-border);
+    border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 8px;
+  }
+  .preview-chart {
+    width: 100%; height: 72px; border-radius: 8px;
+    background: linear-gradient(135deg, rgba(46,57,20,.08) 0%, rgba(46,57,20,.04) 100%);
+    position: relative; overflow: hidden;
+  }
+  .preview-chart::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 48'%3E%3Cpolyline points='0,40 20,30 40,35 60,18 80,25 100,12 120,20' fill='none' stroke='%232d3813' stroke-width='1.5' stroke-opacity='0.25'/%3E%3C/svg%3E") center/contain no-repeat;
+  }
+  .preview-name { font-weight: 600; font-size: 11px; color: var(--ink); }
+  .preview-sub  { font-weight: 400; font-size: 11px; color: var(--muted); }
+  .preview-link { font-size: 10px; font-weight: 500; color: var(--gold); margin-top: 4px; }
+
+  /* ── Unlock (dark CTA) ────────────────────────────────────────── */
+  .unlock-sec {
+    background: var(--olive-deep);
+    padding: 80px var(--pad);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .unlock-inner {
+    max-width: 620px; text-align: center;
+    display: flex; flex-direction: column; align-items: center; gap: 20px;
+  }
+  .unlock-icon { color: var(--gold-2); margin-bottom: 4px; }
+  .unlock-inner h2 { font-weight: 500; font-size: 32px; color: #fff; line-height: 1.3; }
+  .unlock-inner p  { font-weight: 400; font-size: 15px; color: rgba(255,255,255,.65); line-height: 1.6; }
+  .unlock-btns { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 8px; }
+
+  /* ── FAQ ──────────────────────────────────────────────────────── */
+  .faq-wrap {
+    padding: 158px var(--pad); min-height: 100vh; min-height: 100dvh;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .faq-cols  { display: flex; gap: 48px; align-items: stretch; }
+  .faq-left  { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; gap: 48px; }
+  .faq-title { font-weight: 400; font-size: 40px; color: var(--olive-title); text-transform: capitalize; line-height: 1.5; white-space: nowrap; }
+  .faq-acc   { border-radius: 24px; overflow: hidden; display: flex; flex-direction: column; gap: 2px; width: 100%; }
+  .faq-item  { background: var(--card); list-style: none; }
+  .faq-sum   { display: flex; align-items: flex-start; justify-content: space-between; gap: 40px; padding: 24px; cursor: pointer; list-style: none; }
+  .faq-sum::-webkit-details-marker { display: none; }
+  .faq-item .qt { font-weight: 500; font-size: 14px; color: #333; line-height: 1.5; flex: 1; }
+  .faq-item[open] .qt { font-weight: 600; }
+  .faq-icon  { width: 16px; height: 16px; flex: none; color: #404040; }
+  .faq-v     { transition: opacity .28s ease; }
+  .faq-item[open] .faq-v { opacity: 0; }
+  .qa { padding: 0 24px 20px; }
+  .qa p { font-weight: 400; font-size: 14px; color: #404040; line-height: 1.5; }
+  .faq-side {
+    width: 464px; flex: none; background: var(--card); border: 1px solid var(--card-border);
+    border-radius: 24px; padding: var(--container-pad);
+    display: flex; flex-direction: column; gap: 40px; justify-content: flex-end;
+    position: relative; overflow: hidden;
+  }
+  .usr { position: absolute; left: var(--container-pad); top: 64px; width: 130.667px; height: 147px; opacity: .1; }
+  .usr svg { display: block; width: 100%; height: 100%; color: var(--olive-deep); }
+  .side-in  { display: flex; flex-direction: column; gap: 32px; position: relative; }
+  .side-tx  { display: flex; flex-direction: column; gap: 8px; color: #222320; }
+  .side-tx h4 { font-weight: 500; font-size: 20px; line-height: 28px; letter-spacing: -0.45px; }
+  .side-tx p  { font-weight: 400; font-size: 14px; color: var(--ink-3); line-height: 1.5; }
+
+  /* ── Final CTA ────────────────────────────────────────────────── */
+  .cta-sec { padding: var(--section-y) var(--pad); display: flex; align-items: center; justify-content: center; }
+  .cta-box {
+    width: 100%; max-width: 860px; border-radius: 22px; padding: 64px 60px;
+    display: flex; flex-direction: column; align-items: center; gap: 32px; text-align: center;
+  }
+  .ct-tt { display: flex; flex-direction: column; align-items: center; gap: 16px; color: var(--olive-deep); }
+  .cta-box h3 { font-weight: 500; font-size: 38px; line-height: 42.56px; letter-spacing: -0.76px; }
+  .ct-sub { font-weight: 400; font-size: 17px; line-height: 28.05px; color: var(--ink-2); }
+
+  /* ── Responsive ───────────────────────────────────────────────── */
+  @media (max-width: 1024px) {
+    .cat-grid { grid-template-columns: repeat(2, 1fr); }
+    .cat:nth-child(3n)   { border-right: 1px solid var(--card-border); }
+    .cat:nth-child(2n)   { border-right: 0; }
+    .cat:nth-child(n+4)  { border-bottom: 1px solid var(--card-border); }
+    .cat:nth-child(n+5)  { border-bottom: 0; }
+    .usr { display: none; }
+    .preview-cards { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 900px) {
+    .faq-cols  { flex-direction: column; }
+    .faq-side  { width: 100%; }
+    .faq-title { white-space: normal; }
+  }
+
+  @media (max-width: 768px) {
+    :root { --pad: 16px; --container-pad: 24px; --section-y: 56px; }
+    .faq-wrap { padding: 128px var(--pad); }
+    .hero-inner { padding: 80px 0 48px; }
+    .hero h1 { font-size: clamp(28px, 7vw, 40px); }
+    .hero .lead { font-size: 16px; }
+    .sec-title, .faq-title { font-size: clamp(28px, 7vw, 40px); }
+    .cat-grid { grid-template-columns: 1fr; }
+    .cat { border-right: 0 !important; border-bottom: 1px solid var(--card-border) !important; }
+    .cat:last-child { border-bottom: 0 !important; }
+    .preview-cards { grid-template-columns: 1fr; }
+    .cta-box { padding: 48px 24px; }
+    .cta-box h3 { font-size: clamp(24px, 6.4vw, 38px); line-height: 1.2; }
+    .ct-sub { font-size: 15px; line-height: 1.6; }
+    .unlock-inner h2 { font-size: clamp(24px, 6vw, 32px); }
+    .sec-lead, .card-p, .cat p, .check-row .tx, .access-sub { font-size: 14px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .faq-v { transition: none; }
+  }
+</style>
+
+<script>
+  document.querySelectorAll('.faq-acc').forEach(function(acc) {
+    acc.querySelectorAll('details').forEach(function(d) {
+      d.addEventListener('toggle', function() {
+        if ((d as HTMLDetailsElement).open) {
+          acc.querySelectorAll<HTMLDetailsElement>('details').forEach(function(other) {
+            if (other !== d) other.removeAttribute('open');
+          });
+        }
+      });
+    });
+  });
+</script>
