@@ -1,7 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 
-interface ReportCard { title: string; meta: string; summary: string; }
+interface ReportCard { title: string; meta?: string; summary: string; }
 interface Props {
   title: string;
   description?: string;
@@ -51,8 +51,7 @@ const tabs = [
       <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {reports.map(r => (
           <a href="/about/antara-web-login/" class="product-card-light group flex flex-col p-7">
-            <span class="self-start rounded bg-[var(--color-brand-pale)] px-3 py-1 text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">{r.meta}</span>
-            <h3 class="mt-4 text-[18px] font-semibold text-[var(--color-n900)]" style="font-family:var(--font-display)">{r.title}</h3>
+            <h3 class="text-[18px] font-semibold text-[var(--color-n900)]" style="font-family:var(--font-display)">{r.title}</h3>
             <p class="mt-3 flex-1 text-[14px] leading-relaxed text-[var(--color-muted)]">{r.summary}</p>
             <span class="mt-6 flex items-center gap-1.5 text-[13px] font-semibold text-[var(--color-brand)] transition-transform group-hover:translate-x-1">
               Read Full Report
