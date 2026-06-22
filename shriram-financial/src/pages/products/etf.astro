@@ -2,551 +2,445 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const etfTypes = [
-  { label: 'Index ETFs', desc: 'Track benchmark indices like NIFTY 50, SENSEX, NIFTY Next 50. Low cost, broad diversification, and zero manager risk.' },
-  { label: 'Gold ETFs', desc: 'Invest in physical gold stored in vaults. Each unit = 1 gram of gold. No storage hassle, no purity risk, tradeable like stocks.' },
-  { label: 'Sectoral ETFs', desc: 'Track sector-specific indices: Bank Nifty, NIFTY IT, NIFTY Pharma, NIFTY FMCG. Concentrated exposure to a single industry.' },
-  { label: 'Debt ETFs', desc: 'Track fixed-income indices (government securities, corporate bonds). Lower volatility than equity ETFs, better liquidity than bond funds.' },
-  { label: 'International ETFs', desc: 'Exposure to global markets (US S&P 500, Nasdaq 100, MSCI World) through India-listed ETFs. Currency diversification built in.' },
-  { label: 'Smart Beta ETFs', desc: 'Factor-based strategies (Momentum, Low Volatility, Quality, Equal Weight) that go beyond simple index replication.' },
+  { label: 'Equity ETF',       desc: 'Track stock market indices like Nifty 50, Sensex and Nifty Midcap — broad market exposure at very low cost.' },
+  { label: 'Gold ETF',         desc: 'Track domestic gold price. 1 unit ≈ 1 gram of 99.5% pure gold. No storage risk, tradeable like a stock.' },
+  { label: 'Silver ETF',       desc: 'Track domestic silver price on NSE/BSE. Convenient way to hold silver without physical delivery.' },
+  { label: 'Debt / Bond ETF',  desc: 'Track G-Sec or corporate bond indices. Lower volatility than equity ETFs, better liquidity than bond funds.' },
+  { label: 'Sectoral ETF',     desc: 'Track sectors: Banking (BANKBEES), IT, Pharma, FMCG. Concentrated exposure to a single industry.' },
+  { label: 'International ETF',desc: 'Track global indices — Nasdaq 100, S&P 500, MSCI World — from India. Currency diversification built in.' },
+  { label: 'Smart Beta ETF',   desc: 'Factor-based strategies — Momentum, Low Volatility, Quality, Equal Weight — that go beyond simple index replication.' },
 ];
 
-const vsRows = [
-  { feature: 'Trading', etf: 'Real-time throughout the day (like stocks)', mf: 'Once per day at end-of-day NAV' },
-  { feature: 'Minimum Investment', etf: 'Price of 1 unit (as low as ₹30)', mf: '₹500 (SIP) or ₹1,000 (lump sum)' },
-  { feature: 'Expense Ratio', etf: '0.04% to 0.40% (very low)', mf: '0.5% to 2.5% (higher for active funds)' },
-  { feature: 'Manager Risk', etf: 'None (passive, index-tracking)', mf: 'High for active funds; none for index funds' },
-  { feature: 'Dividends', etf: 'Paid directly to investor or reinvested', mf: 'Dividend option or growth option' },
-  { feature: 'Tax Efficiency', etf: 'More tax-efficient (no internal churn)', mf: 'Less efficient for active funds (internal trading)' },
-  { feature: 'Demat Account', etf: 'Required', mf: 'Not required (can invest via AMC directly)' },
+const howWorksSteps = [
+  { n: '01', title: 'AP Assembles Basket', desc: 'Authorised Participant assembles the underlying securities basket that mirrors the index.' },
+  { n: '02', title: 'Fund House Issues Units', desc: 'Fund house issues ETF units to the AP in exchange for the underlying basket ("creation").' },
+  { n: '03', title: 'Listed on Exchange', desc: 'Units are listed and traded live on NSE/BSE at real-time market price throughout the day.' },
+  { n: '04', title: 'Investors Buy & Sell', desc: 'You buy/sell freely at live market price via your Demat and trading account, just like stocks.' },
+  { n: '05', title: 'iNAV Published Intraday', desc: 'Indicative NAV is published every 15 seconds, keeping ETF price anchored to fair value.' },
+  { n: '06', title: 'AP Redeems Units', desc: 'AP redeems large blocks for the underlying basket, balancing supply/demand and keeping price tight.' },
 ];
 
-const steps = [
-  { n: '01', title: 'Open Demat Account', desc: 'Open with Shriram — 100% online, paperless, 10 minutes.' },
-  { n: '02', title: 'Search ETF Ticker', desc: 'Search by ETF code on NSE/BSE (e.g., NIFTYBEES, GOLDBEES).' },
-  { n: '03', title: 'Place Buy Order', desc: 'Market or limit order — just like buying a stock.' },
-  { n: '04', title: 'Units Credited', desc: 'ETF units credited to your Demat account on T+1 settlement.' },
+const howInvestSteps = [
+  { n: '01', title: 'Open Demat Account',     desc: 'Open with Shriram — 100% online, paperless, in under 10 minutes. PAN + Aadhaar + bank details.' },
+  { n: '02', title: 'Activate Trading Account', desc: 'Your trading account is linked automatically. Fund it via UPI or NEFT to start investing.' },
+  { n: '03', title: 'Search ETF Ticker',       desc: 'Search by ETF code on NSE/BSE (e.g., NIFTYBEES for Nifty 50, GOLDBEES for Gold ETF).' },
+  { n: '04', title: 'Place Buy Order',          desc: 'Market or limit order — just like buying a stock. Zero delivery brokerage with Shriram.' },
+  { n: '05', title: 'Units Credited T+1',       desc: 'ETF units are credited to your Demat account on T+1 settlement, same as equity.' },
+  { n: '06', title: 'Track via App',            desc: 'Monitor holdings, returns, and NAV via the Antara app or your portfolio dashboard.' },
+];
+
+const vsMfRows = [
+  { feature: 'Trading',           etf: 'Real-time on exchange all day',         mf: 'Once per day at end-of-day NAV' },
+  { feature: 'Expense Ratio',     etf: '0.05–0.50% per annum',                 mf: '0.5–2.5% (active funds higher)' },
+  { feature: 'SIP Availability',  etf: 'Manual trigger required',               mf: 'Auto-debit fully automated' },
+  { feature: 'Demat Required',    etf: 'Yes',                                    mf: 'No — can invest via AMC directly' },
+  { feature: 'Min Investment',    etf: 'Price of 1 unit (as low as ₹30)',       mf: '₹500 per instalment (SIP)' },
+  { feature: 'Transparency',      etf: 'Portfolio disclosed daily',              mf: 'Monthly portfolio disclosure' },
+  { feature: 'Manager Risk',      etf: 'None — passive, index-tracking',        mf: 'Yes for active funds; none for index' },
+  { feature: 'Tax Treatment',     etf: 'Same as equity mutual fund',             mf: 'Same as equity mutual fund' },
+];
+
+const sipRows = [
+  { feature: 'Execution',  etf: 'Manual buy order on exchange',       mf: 'Auto-debit via AMC mandate' },
+  { feature: 'Automation', etf: 'Requires manual action each month',  mf: 'Fully automated after one-time setup' },
+  { feature: 'Price',      etf: 'Real-time live market price',        mf: 'End-of-day NAV' },
+  { feature: 'Best For',   etf: 'Investors who want price control',   mf: 'Passive investors who want automation' },
+];
+
+const chargesRows = [
+  { charge: 'Expense Ratio (TER)',   amount: '0.05–0.50% p.a.',          notes: 'Deducted from NAV daily — no separate bill' },
+  { charge: 'Brokerage',            amount: '₹0 delivery / ₹20 intraday', notes: 'Shriram flat-fee structure' },
+  { charge: 'STT',                  amount: '0.1% on sell (delivery)',    notes: 'Government securities transaction tax' },
+  { charge: 'GST',                  amount: '18% on brokerage',           notes: 'On brokerage amount only' },
+  { charge: 'DP Charges',           amount: '₹15.93 per scrip on sell',   notes: 'CDSL charge on debit from Demat' },
+  { charge: 'Impact Cost',          amount: '0.01–0.10%',                 notes: 'Bid-ask spread on exchange — varies by liquidity' },
+];
+
+const taxRows = [
+  { type: 'Equity ETF',      stcg: '20% flat (< 12 months)',                ltcg: '12.5% on gains above ₹1.25L',      holding: '> 12 months for LTCG' },
+  { type: 'Gold ETF',        stcg: 'Slab rate (< 24 months)',               ltcg: '12.5% flat',                        holding: '> 24 months for LTCG' },
+  { type: 'Silver ETF',      stcg: 'Slab rate (< 24 months)',               ltcg: '12.5% flat',                        holding: '> 24 months for LTCG' },
+  { type: 'Debt / Bond ETF', stcg: 'Slab rate (any period)',                ltcg: 'Slab rate — no indexation post Apr 2023', holding: 'Any holding period' },
+];
+
+const topEtfRows = [
+  { cat: 'Large Cap Equity', name: 'Nifty 50 ETF (NIFTYBEES)',      aum: '₹25,000 Cr+', er: '0.05–0.10%', ret: '14–18%' },
+  { cat: 'Banking',          name: 'Nifty Bank ETF (BANKBEES)',     aum: '₹8,000 Cr+',  er: '0.05–0.12%', ret: '10–15%' },
+  { cat: 'Gold',             name: 'Gold ETF (GOLDBEES)',           aum: '₹10,000 Cr+', er: '0.50–0.65%', ret: '12–18%' },
+  { cat: 'Mid Cap',          name: 'Nifty Midcap 150 ETF',         aum: '₹3,000 Cr+',  er: '0.20–0.30%', ret: '18–25%' },
+  { cat: 'International',    name: 'Nasdaq 100 ETF (MO N100)',      aum: '₹5,000 Cr+',  er: '0.40–0.60%', ret: '20–30%' },
 ];
 
 const risks = [
-  { n: '01', label: 'Tracking Error', desc: 'Small gaps between the ETF\'s return and the index it tracks can erode performance over time. Lower tracking error = better index replication.' },
-  { n: '02', label: 'Liquidity Risk', desc: 'Sectoral and debt ETFs can have thin trading volumes and wide bid-ask spreads, making large trades expensive. Stick to high-volume ETFs for easier entry and exit.' },
-  { n: '03', label: 'Market Risk', desc: 'Equity ETFs fall when the market falls — there is no active downside buffer. Use debt or hybrid ETFs to balance overall portfolio risk.' },
-  { n: '04', label: 'Low AUM Risk', desc: 'ETFs with AUM below ₹100 Cr may be wound up by the AMC. Always check AUM before investing.' },
+  { label: 'Tracking Error',   desc: 'Small gaps between the ETF\'s return and the index it tracks can erode performance over time. Choose ETFs with lower tracking error.' },
+  { label: 'Liquidity Risk',   desc: 'Sectoral and debt ETFs can have thin trading volumes and wide bid-ask spreads. Stick to high-volume ETFs for easier entry and exit.' },
+  { label: 'Market Risk',      desc: 'Equity ETFs fall when markets fall — no active downside buffer. Use debt or gold ETFs to balance overall portfolio risk.' },
+  { label: 'Low AUM Risk',     desc: 'ETFs with AUM below ₹100 Cr may be wound up by the AMC. Always verify AUM before investing in niche or sector ETFs.' },
+];
+
+const whoShouldInvest = [
+  { label: 'Beginner Investor', desc: 'Start with a Nifty 50 ETF — broad diversification, very low cost, and easy to understand as a first investment.' },
+  { label: 'Salaried Investor', desc: 'Manual monthly buys of a Nifty 50 ETF mimic a SIP and build long-term wealth at a fraction of active fund costs.' },
+  { label: 'Active Trader',     desc: 'Use sectoral ETFs (Banking, IT, Pharma) for tactical short-term bets without individual stock-picking risk.' },
+  { label: 'HNI / NRI',        desc: 'Nasdaq 100 and S&P 500 ETFs give global diversification within LRS limits — convenient from an Indian account.' },
+];
+
+const docs = [
+  'PAN card — mandatory for all investors',
+  'Aadhaar card — address proof and e-KYC',
+  'Cancelled cheque or recent bank statement',
+  'Passport-size photograph (digital JPEG)',
+  'Valid mobile number and email address',
 ];
 
 const faqs = [
-  { q: 'What is an ETF in simple terms?', a: 'An ETF is a basket of securities (stocks, bonds, gold) that trades on NSE/BSE like a single stock. It passively tracks an index and has very low annual fees.' },
-  { q: 'What is the minimum investment in an ETF?', a: 'You can buy a single unit of an ETF. Most Nifty 50 ETFs are priced between ₹200–₹300 per unit. GOLDBEES is priced around ₹50–₹60 per unit.' },
-  { q: 'Can I do SIP in ETF?', a: 'Yes, but unlike mutual fund SIPs, ETF SIPs require a manual buy order each month. There is no auto-debit facility for ETF SIPs.' },
-  { q: 'What is tracking error in ETF?', a: 'Tracking error is the difference between the ETF\'s returns and the benchmark index returns. A lower tracking error means the ETF mirrors its index more accurately.' },
-  { q: 'Is ETF better than mutual fund?', a: 'ETFs have lower costs and real-time trading. Mutual funds offer automated SIP and professional management. ETFs are better for cost-conscious passive investors; active MFs suit those wanting stock selection.' },
-  { q: 'How is ETF taxed?', a: 'Equity ETFs are taxed at 20% STCG (held under 12 months) and 12.5% LTCG on gains above ₹1.25L. Gold ETFs are taxed at slab rate for STCG and 12.5% for LTCG after 24 months.' },
-  { q: 'What is the difference between Nifty 50 ETF and Nifty 50 Index Fund?', a: 'Both track the Nifty 50. ETFs trade on exchange in real time; index funds transact at end-of-day NAV. Both have similar low expense ratios.' },
-  { q: 'Is a Demat account required for ETF?', a: 'Yes. ETF units are held in your Demat account like shares.' },
-  { q: 'What is AUM in ETF?', a: 'AUM (Assets Under Management) is the total value of all units in the ETF. Higher AUM generally means better liquidity on the exchange.' },
-  { q: 'What is a Gold ETF?', a: 'A Gold ETF tracks the domestic gold price. 1 unit ≈ 0.01 grams of 99.5% pure gold. You invest in gold without physical storage risk.' },
+  { q: 'What is an ETF in simple terms?',                            a: 'An ETF (Exchange Traded Fund) is a basket of securities — stocks, gold, or bonds — that trades on NSE/BSE like a single stock. It passively tracks an index and has very low annual fees.' },
+  { q: 'Is ETF safe to invest in?',                                  a: 'ETFs are regulated by SEBI and are as safe as the underlying assets they track. Equity ETFs carry market risk; debt ETFs carry interest-rate and credit risk. Always match the ETF category to your risk appetite.' },
+  { q: 'Can I do a SIP in ETFs?',                                    a: 'Yes, but unlike mutual fund SIPs there is no auto-debit. You place a manual buy order each month. Some brokers offer a scheduled order feature that automates this for you.' },
+  { q: 'What is the minimum investment in an ETF?',                  a: 'You can buy a single unit of an ETF. Nifty 50 ETFs are typically priced ₹200–₹300 per unit; GOLDBEES trades around ₹50–₹60 per unit. There is no minimum beyond the price of one unit.' },
+  { q: 'What is tracking error in ETF?',                             a: 'Tracking error is the difference between the ETF\'s actual returns and its benchmark index. A lower tracking error means the ETF mirrors its index more accurately and is generally preferred.' },
+  { q: 'Is ETF better than mutual fund?',                            a: 'ETFs have lower costs and real-time trading. Mutual funds offer automated SIP and professional management. ETFs suit cost-conscious passive investors; active mutual funds suit those wanting stock selection and full automation.' },
+  { q: 'How is ETF taxed in India?',                                 a: 'Equity ETFs: 20% STCG (< 12 months) and 12.5% LTCG on gains above ₹1.25L (> 12 months). Gold/Silver ETFs: slab rate STCG (< 24 months) and 12.5% LTCG (> 24 months). Debt ETFs are taxed at slab rate regardless of holding period.' },
+  { q: 'What is the difference between Nifty 50 ETF and Nifty 50 Index Fund?', a: 'Both track the Nifty 50. The ETF trades in real time on the exchange; the index fund transacts once at end-of-day NAV and does not require a Demat account. Both have similarly low expense ratios.' },
+  { q: 'Is a Demat account required for ETF?',                       a: 'Yes. ETF units are held in your Demat account just like shares. You need a Demat and trading account to buy or sell ETFs on NSE/BSE.' },
+  { q: 'What is AUM in ETF?',                                        a: 'AUM (Assets Under Management) is the total market value of all units in the ETF. Higher AUM generally means better liquidity on the exchange and a tighter bid-ask spread.' },
 ];
 ---
 
 <BaseLayout
-  title="ETF in India — Invest in Exchange Traded Funds | Shriram"
-  description="Invest in ETF in India on NSE &amp; BSE. Nifty 50 ETF, Gold ETF, Debt ETF, Sectoral ETF. Zero delivery brokerage. SEBI-registered. Start ETF investing today with Shriram."
+  title="ETF Investing India — Exchange Traded Funds on NSE &amp; BSE | Shriram"
+  description="Invest in ETFs in India with Shriram Financial Services. Nifty 50 ETF, Gold ETF, Debt ETF, Sectoral ETF — zero delivery brokerage, SEBI-registered broker, 100+ ETFs."
 >
 
-  <!-- ══ S1. HERO ══════════════════════════════════════════════════════ -->
-  <section class="relative overflow-hidden bg-[var(--color-dark-800)] py-[100px] lg:py-[120px]">
-    <div class="pointer-events-none absolute -right-40 -top-40 h-[560px] w-[560px] rounded-full bg-[var(--color-brand)]/10 blur-3xl"></div>
-    <div class="pointer-events-none absolute -bottom-32 left-0 h-80 w-80 rounded-full bg-[var(--color-brand)]/5 blur-3xl"></div>
-    <div class="site-wrap relative">
-      <p class="equity-reveal text-[14px] font-medium tracking-[.04em] text-[var(--color-brand)]">Exchange Traded Funds</p>
-      <h1 class="equity-reveal mt-[22px] max-w-[880px] text-[clamp(32px,4vw,52px)] font-bold leading-[1.06] text-white" style="font-family:var(--font-display)">
-        Invest in <span class="text-[var(--color-brand)]">ETF in India</span> — Exchange Traded Funds on NSE &amp; BSE
-      </h1>
-      <p class="equity-reveal mt-[26px] max-w-[600px] text-[18px] leading-relaxed text-white/70">
-        Buy Nifty 50 ETFs, Gold ETFs, Debt ETFs, and Sectoral ETFs with zero delivery brokerage. SEBI-registered broker. Start ETF investing in India today.
-      </p>
-      <div class="equity-reveal mt-[38px] flex flex-wrap gap-[14px]">
-        <a href="/about/open-demat-account/" class="btn-primary">Open Demat Account</a>
-        <a href="/about/open-demat-account/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Start Investing in ETFs</a>
+  <!-- ══ 1. HERO ══════════════════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <h1>Invest in <span class="g">ETFs in India</span> — Exchange Traded Funds on NSE &amp; BSE</h1>
+      <p class="lead">An ETF is a basket of securities that trades like a stock, combining mutual-fund diversification with stock-like liquidity. With Shriram — SEBI-registered, 40+ years of trust — invest in 100+ ETFs across equity, gold, debt, sectoral and international categories.</p>
+      <div class="cta-row">
+        <a class="btn-gold" href="/about/open-demat-account/">Open Demat Account</a>
+        <a class="btn-ghost" href="/about/support/">Talk to an Expert</a>
       </div>
-      <div class="equity-reveal mt-[54px] flex flex-wrap gap-x-9 gap-y-3 border-t border-white/15 pt-9">
-        {['✓ SEBI-registered', '✓ Zero delivery brokerage', '✓ 100+ ETFs on NSE/BSE', '✓ Real-time trading'].map(f => (
-          <span class="text-[15px] font-medium text-white/90">{f}</span>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ S2. WHAT IS AN ETF ════════════════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          What is an <span class="text-[var(--color-brand)]">ETF?</span> — Meaning &amp; Definition
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">An ETF (Exchange Traded Fund) is a basket of securities that trades on NSE/BSE like a stock, while tracking an underlying index or asset.</p>
-      </div>
-      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
-        <div class="overflow-x-auto">
-          <table class="w-full text-[15.5px]">
-            <thead>
-              <tr class="bg-[var(--color-dark-olive)]">
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Feature</th>
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">ETF</th>
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Explanation</th>
-              </tr>
-            </thead>
-            <tbody>
-              {[
-                { feature: 'Trading', etf: 'Real-time on NSE/BSE', explanation: 'Buy/sell anytime during market hours' },
-                { feature: 'Benchmark', etf: 'Tracks Nifty 50, Gold, etc.', explanation: 'NAV mirrors underlying index' },
-                { feature: 'Expense Ratio', etf: '0.05–0.50%', explanation: 'Much lower than active mutual funds' },
-                { feature: 'Min Investment', etf: 'Price of 1 unit (~₹50–₹500)', explanation: 'No minimum lot size for most ETFs' },
-                { feature: 'Demat Required', etf: 'Yes', explanation: 'Units held in Demat account' },
-              ].map((r, i) => (
-                <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[#f8f6f1]'}>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">{r.feature}</td>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.etf}</td>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.explanation}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      <div class="hero-feats">
+        <div class="feats">
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;SEBI-registered</span></div>
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;Zero delivery brokerage</span></div>
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;100+ ETFs on NSE/BSE</span></div>
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;Real-time trading</span></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ══ S3. HOW ETFS WORK ═════════════════════════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          How <span class="text-[var(--color-brand)]">ETFs Work</span> — Creation &amp; Redemption Mechanism
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">ETFs are created and redeemed by Authorised Participants (APs) who keep the ETF price in line with its NAV.</p>
+  <!-- ══ 2. WHAT IS AN ETF ════════════════════════════════════════════ -->
+  <section class="section stack" id="sec-what" style="background:var(--sec-light);gap:56px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">What is an ETF? — Meaning &amp; Definition</p>
+      <p class="sec-lead">An ETF is a basket of securities that trades on NSE/BSE like a stock — pooling investor money into a fund that mirrors an index, with units traded live on the exchange throughout market hours. Unlike a mutual fund (priced once daily), an ETF gives you real-time pricing, intraday liquidity, and very low annual cost. You need a Demat account to hold ETF units.</p>
+    </div>
+    <div class="row-2">
+      <div class="card">
+        <p class="card-h">How it differs from a stock</p>
+        <p class="card-p">A stock represents one company. An ETF holds dozens or hundreds of securities, giving you instant diversification in a single buy order — with the same ease of trading as a stock.</p>
       </div>
-      <div class="equity-reveal steps-grid overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
-        {[
-          { n: '01', title: 'AP Creates Units', desc: 'Authorised Participant assembles the index basket and submits to the AMC.' },
-          { n: '02', title: 'AMC Issues Units', desc: 'AMC creates ETF units and delivers them to the AP.' },
-          { n: '03', title: 'Listed on Exchange', desc: 'Units are listed and traded on NSE/BSE at real-time market price.' },
-          { n: '04', title: 'Redemption', desc: 'AP can redeem large blocks for the underlying basket, keeping ETF price close to iNAV.' },
-        ].map(s => (
-          <div class="px-[30px] py-[34px]">
-            <div class="mb-[22px] font-display text-[34px] font-normal leading-none text-[var(--color-brand)]">{s.n}</div>
-            <h4 class="mb-[10px] text-[19px] font-medium leading-[1.25] text-[var(--color-ink)]" style="font-family:var(--font-display)">{s.title}</h4>
-            <p class="text-[14.5px] leading-relaxed text-[var(--color-muted)]">{s.desc}</p>
+      <div class="card">
+        <p class="card-h">How it differs from a mutual fund</p>
+        <p class="card-p">A mutual fund is priced once at end of day. An ETF trades at live market prices all day. ETFs are almost always passively managed, keeping costs far lower than active mutual funds.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 3. HOW ETFS WORK ═════════════════════════════════════════════ -->
+  <section class="section stack" id="sec-how-works" style="background:var(--sec-tint);gap:56px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">How ETFs Work — Creation &amp; Redemption Mechanism</p>
+      <p class="sec-lead">ETFs are created and redeemed by Authorised Participants (APs) who keep the ETF price in line with its underlying NAV. Understanding this mechanism helps explain why ETF prices stay close to fair value even during volatile sessions.</p>
+    </div>
+    <div class="num-grid">
+      {howWorksSteps.map(s => (
+        <div class="num-item">
+          <span class="num-n">{s.n}</span>
+          <h4>{s.title}</h4>
+          <p>{s.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ══ 4. TYPES OF ETFS ═════════════════════════════════════════════ -->
+  <section class="section stack" id="sec-types" style="background:var(--sec-light);gap:56px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Types of ETFs Available in India</p>
+      <p class="sec-lead">Seven ETF categories are available on Indian exchanges, covering equity, commodities, debt and global markets — each serving a different investment objective.</p>
+    </div>
+    <div class="cat-grid cat-4">
+      {etfTypes.map(t => (
+        <div class="cat"><h4>{t.label}</h4><p>{t.desc}</p></div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ══ 5. ETF VS MUTUAL FUND ════════════════════════════════════════ -->
+  <section class="section stack" id="sec-vs-mf" style="background:var(--sec-tint);gap:56px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">ETF vs Mutual Fund — Key Differences</p>
+      <p class="sec-lead">Both pool money across securities and offer SEBI-regulated diversification. The key differences are trading mechanism, cost, and the level of automation available.</p>
+    </div>
+    <div class="t-scroll">
+      <div class="table t3">
+        <div class="cell th"><p>Feature</p></div>
+        <div class="cell th"><p>ETF</p></div>
+        <div class="cell th"><p>Mutual Fund</p></div>
+        {vsMfRows.map(r => (
+          <>
+            <div class="cell tb"><p class="k">{r.feature}</p></div>
+            <div class="cell tb"><p class="v">{r.etf}</p></div>
+            <div class="cell tb"><p class="v">{r.mf}</p></div>
+          </>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 6. HOW TO INVEST ═════════════════════════════════════════════ -->
+  <section class="section stack" id="sec-invest" style="background:var(--sec-light);gap:56px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">How to Invest in ETFs with Shriram</p>
+      <p class="sec-lead">Six steps from account opening to buying your first ETF unit — entirely online, no physical paperwork required.</p>
+    </div>
+    <div class="num-grid">
+      {howInvestSteps.map(s => (
+        <div class="num-item">
+          <span class="num-n">{s.n}</span>
+          <h4>{s.title}</h4>
+          <p>{s.desc}</p>
+        </div>
+      ))}
+    </div>
+    <a class="btn-gold" href="/about/open-demat-account/" style="align-self:center">Start Buying ETFs</a>
+  </section>
+
+  <!-- ══ 7. ETF SIP ═══════════════════════════════════════════════════ -->
+  <section class="section stack" id="sec-sip" style="background:var(--sec-tint);gap:56px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">ETF SIP — Can You Do a Systematic Investment in an ETF?</p>
+      <p class="sec-lead">Yes — but unlike a mutual fund SIP, it isn't auto-debit. You (or a scheduled-order tool) place a recurring manual buy order each month. The advantage: you buy at the live market price and pay near-zero brokerage with Shriram.</p>
+    </div>
+    <div class="t-scroll">
+      <div class="table t3">
+        <div class="cell th"><p>Feature</p></div>
+        <div class="cell th"><p>ETF SIP</p></div>
+        <div class="cell th"><p>Mutual Fund SIP</p></div>
+        {sipRows.map(r => (
+          <>
+            <div class="cell tb"><p class="k">{r.feature}</p></div>
+            <div class="cell tb"><p class="v">{r.etf}</p></div>
+            <div class="cell tb"><p class="v">{r.mf}</p></div>
+          </>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 8. ETF CHARGES ═══════════════════════════════════════════════ -->
+  <section class="section stack" id="sec-charges" style="background:var(--sec-light);gap:56px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">ETF Charges &amp; Expense Ratio — What You Actually Pay</p>
+      <p class="sec-lead">The total annual cost of owning a passive Nifty 50 ETF works out to roughly 0.10–0.30%, compared to 1–2.25% for an actively managed equity mutual fund — a meaningful difference over a long horizon once compounding is factored in.</p>
+    </div>
+    <div class="t-scroll">
+      <div class="table t3">
+        <div class="cell th"><p>Charge</p></div>
+        <div class="cell th"><p>Amount</p></div>
+        <div class="cell th"><p>Notes</p></div>
+        {chargesRows.map(r => (
+          <>
+            <div class="cell tb"><p class="k">{r.charge}</p></div>
+            <div class="cell tb"><p class="v">{r.amount}</p></div>
+            <div class="cell tb"><p class="v">{r.notes}</p></div>
+          </>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 9. ETF TAXATION ══════════════════════════════════════════════ -->
+  <section class="section stack" id="sec-tax" style="background:var(--sec-tint);gap:56px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">ETF Taxation — LTCG, STCG &amp; How to File</p>
+      <p class="sec-lead">ETF taxation in India depends on the underlying asset class. Capital gains from ETF sales must be reported under "Capital Gains" in your ITR, with equity and non-equity gains disclosed separately.</p>
+    </div>
+    <div class="t-scroll">
+      <div class="table t4">
+        <div class="cell th"><p>ETF Type</p></div>
+        <div class="cell th"><p>Short-Term (STCG)</p></div>
+        <div class="cell th"><p>Long-Term (LTCG)</p></div>
+        <div class="cell th"><p>Holding Period</p></div>
+        {taxRows.map(r => (
+          <>
+            <div class="cell tb"><p class="k">{r.type}</p></div>
+            <div class="cell tb"><p class="v">{r.stcg}</p></div>
+            <div class="cell tb"><p class="v">{r.ltcg}</p></div>
+            <div class="cell tb"><p class="v">{r.holding}</p></div>
+          </>
+        ))}
+      </div>
+    </div>
+    <div class="card" style="border-color:var(--card-border-soft)">
+      <p class="card-h" style="font-size:16px">Important: Finance Act 2023</p>
+      <p class="card-p">Indexation benefit for debt mutual funds and debt ETFs was removed for units purchased on or after 1 April 2023. Gains are taxed at your income slab rate regardless of holding period. Keep records of purchase price, sale price, and holding period for each transaction.</p>
+    </div>
+  </section>
+
+  <!-- ══ 10. TOP ETFS ══════════════════════════════════════════════════ -->
+  <section class="section stack" id="sec-top" style="background:var(--sec-light);gap:56px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Top ETFs to Consider — Nifty 50, Gold, Banking &amp; More</p>
+      <p class="sec-lead">Rather than a definitive ranking, here's a curated look at category-leading ETFs based on AUM, cost, and trading liquidity. When comparing ETFs within the same category, prioritise lower tracking error, higher AUM, and a tighter bid-ask spread over chasing the highest recent return.</p>
+    </div>
+    <div class="t-scroll">
+      <div class="table t5">
+        <div class="cell th"><p>Category</p></div>
+        <div class="cell th"><p>ETF Name (example)</p></div>
+        <div class="cell th"><p>AUM (approx)</p></div>
+        <div class="cell th"><p>Expense Ratio</p></div>
+        <div class="cell th"><p>1Y Return (approx)</p></div>
+        {topEtfRows.map(r => (
+          <>
+            <div class="cell tb"><p class="k">{r.cat}</p></div>
+            <div class="cell tb"><p class="v">{r.name}</p></div>
+            <div class="cell tb"><p class="v">{r.aum}</p></div>
+            <div class="cell tb"><p class="v">{r.er}</p></div>
+            <div class="cell tb"><p class="v">{r.ret}</p></div>
+          </>
+        ))}
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--muted-2)">* Indicative data. Verify current figures before investing. Past performance is not a guarantee of future returns.</p>
+  </section>
+
+  <!-- ══ 11. PORTFOLIO CONSTRUCTION ═══════════════════════════════════ -->
+  <section class="section stack" id="sec-portfolio" style="background:var(--sec-tint);gap:56px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">ETF Portfolio Construction — Build a Passive Portfolio</p>
+      <p class="sec-lead">ETFs are versatile building blocks for a low-cost, diversified portfolio. Your ideal mix depends on age, goals, and risk appetite — younger investors can afford a higher equity allocation, while those nearing a goal may tilt toward debt and gold for stability.</p>
+    </div>
+    <div class="row-2">
+      <div class="card">
+        <p class="card-h">Beginner 3-ETF Portfolio</p>
+        <p class="card-p">70% Nifty 50 ETF + 20% Gold ETF + 10% Short Duration Debt ETF. Simple, broadly diversified, very low cost (~0.10% blended TER). Ideal for investors starting out.</p>
+      </div>
+      <div class="card">
+        <p class="card-h">Advanced Core-Satellite</p>
+        <p class="card-p">60% Nifty 50 ETF (core) + 20% Nifty Midcap ETF + 10% Nasdaq 100 ETF + 10% Gold ETF. Higher growth potential with moderate diversification across geographies and market caps.</p>
+      </div>
+    </div>
+    <a class="btn-gold" href="/about/open-demat-account/" style="align-self:center">Build Your ETF Portfolio</a>
+  </section>
+
+  <!-- ══ 12. RISKS ═════════════════════════════════════════════════════ -->
+  <section class="section stack" id="sec-risks" style="background:var(--sec-light);gap:56px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Risks of Investing in ETFs — What to Watch Out For</p>
+      <p class="sec-lead">ETFs are generally a lower-cost, transparent way to invest — but like any market-linked product, they carry risks worth understanding before you commit capital.</p>
+    </div>
+    <div class="cat-grid cat-4">
+      {risks.map(r => (
+        <div class="cat risk-cat">
+          <h4>{r.label}</h4>
+          <p>{r.desc}</p>
+        </div>
+      ))}
+    </div>
+    <p class="risk-disc">Investments in securities markets are subject to market risk. Please read all scheme-related and exchange documents carefully before investing.</p>
+  </section>
+
+  <!-- ══ 13. WHO SHOULD INVEST ══════════════════════════════════════════ -->
+  <section class="section stack" id="sec-who" style="background:var(--sec-tint);gap:56px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Who Should Invest in ETFs? — Suitability &amp; Investor Profiles</p>
+      <p class="sec-lead">ETFs work well for almost every investor type because of their flexibility and low cost. The right starting point depends on your goals, time horizon, and comfort with active monitoring.</p>
+    </div>
+    <div class="cat-grid cat-4">
+      {whoShouldInvest.map(p => (
+        <div class="cat"><h4>{p.label}</h4><p>{p.desc}</p></div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ══ 14. DOCUMENTS & ELIGIBILITY ═══════════════════════════════════ -->
+  <section class="section stack" id="sec-docs" style="background:var(--sec-light);gap:56px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Documents &amp; Eligibility — Open a Demat Account</p>
+      <p class="sec-lead">Any resident Indian adult (18+) with a valid PAN and Aadhaar can open a Demat account online. NRIs can also invest subject to FEMA and RBI guidelines using an NRO/NRE-linked trading account.</p>
+    </div>
+    <div class="row-2">
+      <div class="card check-card">
+        <p class="ch-title">Documents Required</p>
+        <div class="check-list">
+          {docs.map((item, i) => (
+            <>
+              {i > 0 && <div class="check-sep"></div>}
+              <div class="check-row"><span class="ck">✓</span><p class="tx">{item}</p></div>
+            </>
+          ))}
+        </div>
+      </div>
+      <div class="card check-card">
+        <p class="ch-title">Eligibility Criteria</p>
+        <div class="check-list">
+          {['Indian resident (NRIs via NRO/NRE route)', 'Valid PAN card — mandatory for all investors', 'Active savings bank account in your name', 'Completed KYC as per SEBI regulations', '18+ years of age (minors via guardian)'].map((item, i) => (
+            <>
+              {i > 0 && <div class="check-sep"></div>}
+              <div class="check-row"><span class="ck">✓</span><p class="tx">{item}</p></div>
+            </>
+          ))}
+        </div>
+      </div>
+    </div>
+    <a class="btn-gold" href="/about/open-demat-account/" style="align-self:center">Open Demat Account &amp; Start Investing</a>
+  </section>
+
+  <!-- ══ 15. FAQ ════════════════════════════════════════════════════════ -->
+  <section class="faq-wrap" style="background:var(--sec-tint)">
+    <div class="faq-cols">
+      <div class="faq-left">
+        <h2 class="faq-title">Frequently asked<br>questions.</h2>
+        <div class="faq-acc" role="list">
+          {faqs.map(f => (
+            <details class="faq-item" role="listitem">
+              <summary class="faq-sum">
+                <span class="qt">{f.q}</span>
+                <svg class="faq-icon faq-v" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8" class="faq-h"/></svg>
+              </summary>
+              <div class="qa"><p>{f.a}</p></div>
+            </details>
+          ))}
+        </div>
+      </div>
+      <div class="faq-side">
+        <div class="usr" aria-hidden="true">
+          <svg viewBox="0 0 131 147" fill="none"><circle cx="65.5" cy="42" r="34" stroke="currentColor" stroke-width="2"/><path d="M4 147c0-34 27.6-61.5 61.5-61.5S127 113 127 147" stroke="currentColor" stroke-width="2"/></svg>
+        </div>
+        <div class="side-in">
+          <div class="side-tx">
+            <h4>Ready to Invest in ETFs?</h4>
+            <p>Open your Demat account with Shriram in under 10 minutes. Zero delivery brokerage. 100+ ETFs on NSE/BSE. SEBI-registered.</p>
           </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ S4. TYPES OF ETFS ═════════════════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Types of <span class="text-[var(--color-brand)]">ETFs</span> Available in India — All Categories
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">7 ETF categories available on Indian exchanges.</p>
-      </div>
-      <div class="equity-reveal cat-grid">
-        {[
-          { label: 'Equity ETF', desc: 'Track stock market indices like Nifty 50, Sensex, Nifty Midcap.' },
-          { label: 'Gold ETF', desc: 'Track domestic gold price. 1 unit ≈ 1/100th gram of 99.5% pure gold.' },
-          { label: 'Silver ETF', desc: 'Track domestic silver price. Trade on NSE/BSE.' },
-          { label: 'Debt / Bond ETF', desc: 'Track G-Sec or corporate bond indices. Lower risk.' },
-          { label: 'Sectoral ETF', desc: 'Track sectors: banking (BANKBEES), IT, pharma, consumption.' },
-          { label: 'International ETF', desc: 'Track global indices: Nasdaq 100, S&P 500 from India.' },
-          { label: 'Smart Beta ETF', desc: 'Track factor-based indices: low volatility, equal weight, quality.' },
-        ].map(t => (
-          <div class="product-card-light px-[28px] py-[32px]">
-            <h3 class="mb-[10px] text-[18px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{t.label}</h3>
-            <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">{t.desc}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ S5. ETF VS MUTUAL FUND ════════════════════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          <span class="text-[var(--color-brand)]">ETF vs Mutual Fund</span> — Key Differences
-        </h2>
-      </div>
-      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
-        <div class="overflow-x-auto">
-          <table class="w-full text-[15.5px]">
-            <thead>
-              <tr class="bg-[var(--color-dark-olive)]">
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Feature</th>
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">ETF</th>
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Mutual Fund</th>
-              </tr>
-            </thead>
-            <tbody>
-              {[
-                { feature: 'Trading', etf: 'Real-time on exchange', mf: 'End-of-day at NAV' },
-                { feature: 'Expense Ratio', etf: '0.05–0.50%', mf: '0.50–2.00% (active funds)' },
-                { feature: 'SIP Availability', etf: 'Manual trigger', mf: 'Auto-debit SIP' },
-                { feature: 'Demat Required', etf: 'Yes', mf: 'No (MF direct)' },
-                { feature: 'Minimum Investment', etf: 'Price of 1 unit', mf: '₹500 per instalment' },
-                { feature: 'Transparency', etf: 'Portfolio disclosed daily', mf: 'Monthly portfolio disclosure' },
-                { feature: 'Tax Treatment', etf: 'Same as equity MF', mf: 'Same as equity MF' },
-                { feature: 'Fund Manager Risk', etf: 'No (passive)', mf: 'Yes (for active funds)' },
-              ].map((r, i) => (
-                <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[#f8f6f1]'}>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">{r.feature}</td>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.etf}</td>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.mf}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <a class="btn-gold" href="/about/open-demat-account/" style="align-self:flex-start">Open Demat Account</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ══ S6. HOW TO INVEST IN ETFS ════════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          How to <span class="text-[var(--color-brand)]">Invest in ETFs</span> — Step by Step
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Six steps from account opening to buying your first ETF unit.</p>
-      </div>
-      <div class="equity-reveal steps-grid overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
-        {steps.map(s => (
-          <div class="px-[30px] py-[34px]">
-            <div class="mb-[22px] font-display text-[34px] font-normal leading-none text-[var(--color-brand)]">{s.n}</div>
-            <h4 class="mb-[10px] text-[19px] font-medium leading-[1.25] text-[var(--color-ink)]" style="font-family:var(--font-display)">{s.title}</h4>
-            <p class="text-[14.5px] leading-relaxed text-[var(--color-muted)]">{s.desc}</p>
-          </div>
-        ))}
-      </div>
-      <div class="equity-reveal mt-[34px] text-center">
-        <a href="/about/open-demat-account/" class="btn-primary">Open Demat &amp; Start Buying ETFs</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ S7. ETF SIP ═══════════════════════════════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          ETF SIP — Can You Do <span class="text-[var(--color-brand)]">Systematic Investment</span> in an ETF?
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Yes — but ETF SIPs work differently from mutual fund SIPs.</p>
-      </div>
-      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
-        <div class="overflow-x-auto">
-          <table class="w-full text-[15.5px]">
-            <thead>
-              <tr class="bg-[var(--color-dark-olive)]">
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Feature</th>
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">ETF SIP</th>
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Mutual Fund SIP</th>
-              </tr>
-            </thead>
-            <tbody>
-              {[
-                { feature: 'Execution', etf: 'Manual buy on exchange each month', mf: 'Auto-debit via AMC' },
-                { feature: 'Automation', etf: 'Requires manual action', mf: 'Fully automated' },
-                { feature: 'Price', etf: 'Real-time market price', mf: 'End-of-day NAV' },
-                { feature: 'SIP Start', etf: 'No auto-SIP mandate', mf: 'One-time mandate setup' },
-                { feature: 'Best For', etf: 'Active investors who want control', mf: 'Passive investors who want automation' },
-              ].map((r, i) => (
-                <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[#f8f6f1]'}>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">{r.feature}</td>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.etf}</td>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.mf}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ S8. ETF RETURNS CALCULATOR ═══════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          ETF <span class="text-[var(--color-brand)]">Returns Calculator</span> — Estimate Wealth Growth
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Use our return calculator to project your ETF investment growth.</p>
-      </div>
-      <div class="equity-reveal mx-auto max-w-[640px]">
-        <div class="product-card-light px-[28px] py-[32px] text-center">
-          <h3 class="mb-[10px] text-[22px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">ETF Return Estimator</h3>
-          <p class="mb-[24px] text-[15px] leading-relaxed text-[var(--color-muted)]">Input your monthly amount, tenure, and expected CAGR. Project your wealth with passive ETF investing.</p>
-          <a href="/calculators/sip/" class="btn-primary">Calculate My Returns →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ S9. ETF CHARGES ═══════════════════════════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          ETF Charges &amp; <span class="text-[var(--color-brand)]">Expense Ratio</span> — What You Actually Pay
-        </h2>
-      </div>
-      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
-        <div class="overflow-x-auto">
-          <table class="w-full text-[15.5px]">
-            <thead>
-              <tr class="bg-[var(--color-dark-olive)]">
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Charge</th>
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Amount</th>
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Notes</th>
-              </tr>
-            </thead>
-            <tbody>
-              {[
-                { charge: 'Expense Ratio (TER)', amount: '0.05–0.50% per annum', notes: 'Deducted from NAV daily — no separate payment' },
-                { charge: 'Brokerage', amount: '₹0 delivery / ₹20 intraday', notes: 'Shriram flat fee' },
-                { charge: 'STT', amount: '0.1% on sell (delivery)', notes: 'Government tax' },
-                { charge: 'GST', amount: '18% on brokerage', notes: 'On brokerage amount only' },
-                { charge: 'DP Charges', amount: '₹15.93 per scrip on sell', notes: 'CDSL charge' },
-                { charge: 'Impact Cost', amount: '0.01–0.10%', notes: 'Bid-ask spread on exchange' },
-                { charge: 'Active MF (comparison)', amount: '1.50–2.00% TER', notes: 'Much higher annual cost' },
-              ].map((r, i) => (
-                <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[#f8f6f1]'}>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">{r.charge}</td>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.amount}</td>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.notes}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ S10. ETF TAXATION ═════════════════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          ETF <span class="text-[var(--color-brand)]">Taxation</span> — LTCG, STCG &amp; How to File
-        </h2>
-      </div>
-      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
-        <div class="overflow-x-auto">
-          <table class="w-full text-[15.5px]">
-            <thead>
-              <tr class="bg-[var(--color-dark-olive)]">
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">ETF Type</th>
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Short-Term (STCG)</th>
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Long-Term (LTCG)</th>
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Holding Period</th>
-              </tr>
-            </thead>
-            <tbody>
-              {[
-                { type: 'Equity ETF', stcg: '20% flat', ltcg: '12.5% above ₹1.25L exempt', holding: 'More than 12 months' },
-                { type: 'Gold ETF', stcg: 'Added to income, slab rate', ltcg: '12.5% flat', holding: 'More than 24 months' },
-                { type: 'Silver ETF', stcg: 'Added to income, slab rate', ltcg: '12.5% flat', holding: 'More than 24 months' },
-                { type: 'Debt/Bond ETF', stcg: 'Added to income, slab rate', ltcg: 'Added to income, slab rate (no indexation post Apr 2023)', holding: 'Any holding period' },
-              ].map((r, i) => (
-                <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[#f8f6f1]'}>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">{r.type}</td>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.stcg}</td>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.ltcg}</td>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.holding}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ S11. TOP ETFS ═════════════════════════════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Top ETFs to Consider — <span class="text-[var(--color-brand)]">Nifty 50, Gold, Banking</span> &amp; More
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">A curated reference list by category. Past performance is indicative only.</p>
-      </div>
-      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
-        <div class="overflow-x-auto">
-          <table class="w-full text-[15.5px]">
-            <thead>
-              <tr class="bg-[var(--color-dark-olive)]">
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Category</th>
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">ETF Name (example)</th>
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">AUM (approx)</th>
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Expense Ratio</th>
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">1Y Return (approx)</th>
-              </tr>
-            </thead>
-            <tbody>
-              {[
-                { category: 'Large Cap Equity', name: 'Nifty 50 ETF', aum: '₹25,000 Cr+', er: '0.05–0.10%', ret: '14–18%' },
-                { category: 'Banking ETF', name: 'Nifty Bank ETF', aum: '₹8,000 Cr+', er: '0.05–0.12%', ret: '10–15%' },
-                { category: 'Gold ETF', name: 'Gold ETF', aum: '₹10,000 Cr+', er: '0.50–0.65%', ret: '12–18%' },
-                { category: 'Mid Cap ETF', name: 'Nifty Midcap 150 ETF', aum: '₹3,000 Cr+', er: '0.20–0.30%', ret: '18–25%' },
-                { category: 'International', name: 'Nasdaq 100 ETF (FoF)', aum: '₹5,000 Cr+', er: '0.40–0.60%', ret: '20–30%' },
-              ].map((r, i) => (
-                <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[#f8f6f1]'}>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">{r.category}</td>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.name}</td>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.aum}</td>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.er}</td>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.ret}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <p class="equity-reveal mt-[16px] text-[13px] text-[var(--color-muted)]">* Indicative data. Verify current figures before investing.</p>
-    </div>
-  </section>
-
-  <!-- ══ S12. ETF PORTFOLIO CONSTRUCTION ══════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          ETF <span class="text-[var(--color-brand)]">Portfolio Construction</span> — Build a Passive Portfolio
-        </h2>
-      </div>
-      <div class="equity-reveal grid gap-6 sm:grid-cols-2">
-        <div class="product-card-light px-[28px] py-[32px]">
-          <h3 class="mb-[12px] text-[22px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">Beginner 3-ETF Portfolio</h3>
-          <p class="text-[15px] leading-relaxed text-[var(--color-muted)]">70% Nifty 50 ETF + 20% Gold ETF + 10% Short Duration Debt ETF. Simple, diversified, low cost (~0.10% blended TER).</p>
-        </div>
-        <div class="product-card-light px-[28px] py-[32px]">
-          <h3 class="mb-[12px] text-[22px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">Advanced Core-Satellite</h3>
-          <p class="text-[15px] leading-relaxed text-[var(--color-muted)]">60% Nifty 50 ETF (core) + 20% Nifty Midcap ETF + 10% Nasdaq 100 ETF + 10% Gold ETF. Higher growth potential, moderate active exposure.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ S13. RISKS ════════════════════════════════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Risks of Investing in <span class="text-[var(--color-brand)]">ETFs</span> — What to Watch
-        </h2>
-      </div>
-      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {risks.map(r => (
-          <div class="equity-reveal bg-[var(--color-dark-800)] rounded-[14px] p-[28px] text-white">
-            <div class="mb-[14px] text-[36px] font-bold leading-none text-[var(--color-brand)]">{r.n}</div>
-            <h4 class="mb-[10px] text-[18px] font-medium text-white" style="font-family:var(--font-display)">{r.label}</h4>
-            <p class="text-[13.5px] leading-relaxed text-white/65">{r.desc}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ S14. WHO SHOULD INVEST ════════════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Who Should <span class="text-[var(--color-brand)]">Invest in ETFs?</span> — Suitability &amp; Profiles
-        </h2>
-      </div>
-      <div class="equity-reveal grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {[
-          { label: 'Beginner Investor', desc: 'Start with Nifty 50 ETF — broad diversification, low cost, easy to understand.' },
-          { label: 'Salaried Investor', desc: 'Use SIP-like manual monthly buys of Nifty 50 ETF as a long-term wealth builder.' },
-          { label: 'Active Trader', desc: 'Use sectoral ETFs for tactical bets without stock picking risk.' },
-          { label: 'HNI / NRI', desc: 'International ETFs (Nasdaq 100, S&P 500) for global diversification within LRS limits.' },
-        ].map(p => (
-          <div class="product-card-light px-[28px] py-[32px]">
-            <h3 class="mb-[10px] text-[18px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{p.label}</h3>
-            <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">{p.desc}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ S15. DOCUMENTS & ELIGIBILITY ═════════════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Documents &amp; Eligibility — <span class="text-[var(--color-brand)]">Open a Demat Account</span>
-        </h2>
-      </div>
-      <div class="equity-reveal cat-grid">
-        {[
-          { label: 'PAN Card', desc: 'Mandatory for all investors. Identity verification.' },
-          { label: 'Aadhaar Card', desc: 'Address proof and e-KYC.' },
-          { label: 'Bank Proof', desc: 'Cancelled cheque or statement.' },
-          { label: 'Passport Photo', desc: 'For account opening — can be a digital photo.' },
-        ].map(d => (
-          <div class="product-card-light px-[28px] py-[32px]">
-            <h3 class="mb-[10px] text-[18px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{d.label}</h3>
-            <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">{d.desc}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ S16. FAQs ═════════════════════════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          FAQs — <span class="text-[var(--color-brand)]">ETF Investing</span> with Shriram
-        </h2>
-      </div>
-      <div class="equity-reveal mx-auto max-w-[840px] border-t border-[var(--color-n400)]">
-        {faqs.map(item => (
-          <details class="eq-faq group border-b border-[var(--color-n400)]">
-            <summary class="flex cursor-pointer list-none items-center justify-between gap-5 px-2 py-[26px]">
-              <span class="text-[18px] font-semibold text-[var(--color-ink)]">{item.q}</span>
-              <span class="shrink-0 text-[22px] leading-none text-[var(--color-brand)] transition-transform duration-300 group-open:rotate-45">+</span>
-            </summary>
-            <div class="overflow-hidden px-2 pb-0 text-[16px] leading-relaxed text-[var(--color-muted)] transition-all duration-300 group-open:pb-[28px]">
-              <p class="max-w-[680px]">{item.a}</p>
-            </div>
-          </details>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ S17. FINAL CTA ════════════════════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal overflow-hidden rounded-[22px] bg-[var(--color-dark-800)] px-[60px] py-[64px] text-center">
-        <h3 class="mx-auto max-w-[600px] text-[38px] font-bold leading-[1.12] text-white" style="font-family:var(--font-display)">
-          Open Demat Account &amp; Start Investing in <span class="text-[var(--color-brand)]">ETF in India</span>
-        </h3>
-        <p class="mx-auto mt-[18px] max-w-[480px] text-[17px] leading-relaxed text-white/70">0 account opening fee. Zero delivery brokerage. SEBI-registered.</p>
-        <div class="mt-[34px] flex flex-wrap justify-center gap-[14px]">
-          <a href="/about/open-demat-account/" class="btn-primary">Open Demat Account</a>
-          <a href="/about/open-demat-account/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Start ETF Investing</a>
-        </div>
+  <!-- ══ 16. FINAL CTA ═════════════════════════════════════════════════ -->
+  <section class="cta-sec" style="background:var(--sec-light)">
+    <div class="cta-box">
+      <h2 class="cta-h">Start investing in <span class="g">ETFs in India</span> — zero delivery brokerage.</h2>
+      <p class="cta-sub">0 account opening fee. SEBI-registered. 40+ years of trust.</p>
+      <div class="cta-row">
+        <a class="btn-gold" href="/about/open-demat-account/">Open Demat Account</a>
+        <a class="btn-ghost-dark" href="/about/support/">Talk to an Expert</a>
       </div>
     </div>
   </section>
@@ -554,47 +448,223 @@ const faqs = [
 </BaseLayout>
 
 <style>
-  .equity-reveal {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+  /* ── Design tokens ─────────────────────────────────────────────── */
+  :root {
+    --sec-light: #fef8ee;
+    --sec-tint: #f6efe1;
+    --card: #fffdf8;
+    --card-border: #e1e0db;
+    --card-border-soft: rgba(28,28,22,.13);
+    --row-line: rgba(28,28,22,.08);
+    --olive-title: #2e3914;
+    --olive-head: #2d3813;
+    --olive-deep: #1b2010;
+    --ink: #1c1c16;
+    --ink-2: #46463c;
+    --ink-3: #595959;
+    --muted: #73736a;
+    --muted-2: #9a9a8e;
+    --gold: #e0a82e;
+    --gold-2: #f2b83f;
+    --gold-btn: #f3b83f;
+    --olive-ink: #2e3914;
+    --green: #009d58;
+    --pad: clamp(20px, 8vw, 144px);
+    --container-pad: 32px;
+    --section-y: 72px;
+    --cta-w: 220px;
   }
-  .equity-reveal.in-view { opacity: 1; transform: none; }
 
-  .steps-grid { display: grid; grid-template-columns: repeat(2, 1fr); }
-  .steps-grid > * { border-right: 1px solid var(--color-n400); border-bottom: 1px solid var(--color-n400); }
-  .steps-grid > *:nth-child(2n) { border-right: 0; }
-  .steps-grid > *:nth-last-child(-n+2) { border-bottom: 0; }
-  @media (min-width: 1024px) {
-    .steps-grid { grid-template-columns: repeat(4, 1fr); }
-    .steps-grid > * { border-right: 1px solid var(--color-n400); border-bottom: 0; }
-    .steps-grid > *:last-child { border-right: 0; }
-  }
+  *, *::before, *::after { box-sizing: border-box; }
+  a { color: inherit; text-decoration: none; }
+  p { line-height: 1.5; }
 
-  .cat-grid { display: grid; gap: 1.25rem; grid-template-columns: repeat(2, 1fr); }
-  @media (min-width: 1024px) {
-    .cat-grid { grid-template-columns: repeat(4, 1fr); }
+  /* ── Section shell ───────────────────────────────────────────────── */
+  .section {
+    padding: var(--section-y) var(--pad);
+    min-height: 100vh; min-height: 100dvh;
+    display: flex; flex-direction: column; justify-content: center;
   }
+  #sec-what { min-height: 0; }
+  .stack { display: flex; flex-direction: column; }
 
-  @media (prefers-reduced-motion: reduce) {
-    .equity-reveal { opacity: 1; transform: none; transition: none; }
+  /* ── Typography ──────────────────────────────────────────────────── */
+  .sec-title { font-weight: 400; font-size: 40px; color: var(--olive-title); text-transform: capitalize; line-height: 1.5; }
+  .sec-lead  { font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.6; }
+  .sub-title { font-weight: 500; font-size: 24px; color: var(--ink); line-height: 1.5; }
+  .card-h    { font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.5; }
+  .card-p    { font-weight: 400; font-size: 16px; color: var(--muted); line-height: 1.5; }
+
+  /* ── Hero ─────────────────────────────────────────────────────────── */
+  .hero {
+    padding: 0 var(--pad);
+    display: flex; flex-direction: column; justify-content: center; overflow: hidden;
+    background: radial-gradient(125% 210% at 100% -8%, #4f583b 0%, #363a2c 50%, #1d1d1d 100%);
   }
+  .hero-inner { padding: clamp(80px,12vw,140px) 0 clamp(48px,6vw,80px); display: flex; flex-direction: column; }
+  .hero h1   { font-weight: 500; font-size: 40px; color: #fff; line-height: 1.5; max-width: 860px; }
+  .hero h1 .g { color: var(--gold-2); }
+  .hero .lead { margin-top: 32px; font-size: 18px; line-height: 1.5; color: rgba(255,255,255,.74); max-width: 640px; }
+  .cta-row   { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .hero-feats { margin-top: 40px; }
+  .feats { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 16px; max-width: 760px; padding-top: 36px; border-top: 1px solid rgba(255,255,255,.16); }
+  .feat  { display: flex; gap: 10px; align-items: center; }
+  .feat .tk { color: var(--gold-2); font-weight: 500; font-size: 15px; width: 13px; }
+  .feat .lb { color: rgba(255,255,255,.9); font-weight: 500; font-size: 16px; line-height: 1.5; white-space: nowrap; }
+
+  /* ── Buttons ─────────────────────────────────────────────────────── */
+  .btn-gold {
+    background: var(--gold-btn); height: 40px; width: var(--cta-w);
+    border-radius: 4px; display: inline-flex; align-items: center; justify-content: center;
+    padding: 7px 20px; font-weight: 500; font-size: 12px; color: var(--olive-ink);
+    white-space: nowrap; transition: opacity .2s;
+  }
+  .btn-gold:hover { opacity: .88; }
+  .btn-ghost {
+    height: 40px; border-radius: 9px; border: 1px solid rgba(255,255,255,.4);
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 7px 26px; font-weight: 600; font-size: 15px; color: #fff;
+    transition: border-color .2s;
+  }
+  .btn-ghost:hover { border-color: #fff; }
+  .btn-ghost-dark {
+    height: 40px; border-radius: 4px; border: 1px solid rgba(27,32,16,.35);
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 7px 26px; font-weight: 500; font-size: 12px; color: var(--olive-deep);
+    transition: border-color .2s;
+  }
+  .btn-ghost-dark:hover { border-color: var(--olive-deep); }
+
+  /* ── Cards ───────────────────────────────────────────────────────── */
+  .card {
+    background: var(--card); border: 1px solid var(--card-border);
+    border-radius: 24px; padding: var(--container-pad);
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .row-2 { display: flex; gap: 32px; align-items: stretch; }
+  .row-2 .card { flex: 1 0 0; min-width: 0; }
+
+  /* ── Category grid ───────────────────────────────────────────────── */
+  .cat-grid {
+    border: 1px solid var(--card-border); border-radius: 24px;
+    overflow: hidden; display: grid; background: var(--card);
+  }
+  .cat-4 { grid-template-columns: repeat(4, 1fr); }
+  .cat {
+    background: var(--card); padding: var(--container-pad);
+    display: flex; flex-direction: column; gap: 12px;
+    border-right: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border);
+  }
+  .cat-4 .cat:nth-child(4n)   { border-right: 0; }
+  .cat-4 .cat:nth-child(n+5)  { border-bottom: 0; }
+  .cat-4 .cat:last-child      { border-right: 0; }
+  .cat h4 { font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.5; }
+  .cat p  { font-weight: 400; font-size: 16px; color: var(--muted); line-height: 1.5; }
+  .risk-cat h4 { color: var(--olive-deep); }
+
+  /* ── Numbered 6-step grid ────────────────────────────────────────── */
+  .num-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    background: var(--card); border: 1px solid var(--card-border);
+    border-radius: 24px; overflow: hidden;
+  }
+  .num-item {
+    padding: var(--container-pad);
+    display: flex; flex-direction: column; gap: 12px;
+    border-right: 1px solid var(--card-border);
+    border-bottom: 1px solid var(--card-border);
+  }
+  .num-item:nth-child(3n)       { border-right: 0; }
+  .num-item:nth-last-child(-n+3){ border-bottom: 0; }
+  .num-n { font-weight: 400; font-size: 36px; color: var(--gold-2); line-height: 1; display: block; }
+  .num-item h4 { font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.4; }
+  .num-item p  { font-weight: 400; font-size: 15px; color: var(--ink-3); line-height: 1.5; }
+
+  /* ── Checklist cards ─────────────────────────────────────────────── */
+  .check-card { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; gap: 32px; }
+  .ch-title   { font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.5; }
+  .check-list { display: flex; flex-direction: column; gap: 24px; }
+  .check-row  { display: flex; gap: 14px; align-items: flex-start; }
+  .check-row .ck { color: var(--green); font-weight: 700; font-size: 15px; line-height: 25.5px; width: 13px; flex: none; }
+  .check-row .tx { flex: 1 0 0; min-width: 0; font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.5; }
+  .check-sep  { height: 1px; background: var(--row-line); width: 100%; }
+
+  /* ── Tables ──────────────────────────────────────────────────────── */
+  .t-scroll { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .table    { background: var(--card); border-radius: 24px; overflow: hidden; display: grid; }
+  .t3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+  .t4 { grid-template-columns: repeat(4, minmax(0,1fr)); }
+  .t5 { grid-template-columns: repeat(5, minmax(0,1fr)); }
+  .cell { padding: 16px 24px; display: flex; align-items: center; justify-content: center; text-align: center; }
+  .cell p { flex: 1 0 0; min-width: 0; font-size: 16px; line-height: 1.5; overflow-wrap: break-word; }
+  .th { background: var(--olive-head); }
+  .th p { font-weight: 600; color: #fff; }
+  .tb { border-top: 1px solid var(--row-line); }
+  .tb .k { font-weight: 600; color: var(--ink); }
+  .tb .v { font-weight: 400; color: var(--ink-2); }
+
+  /* ── Risk disclaimer ─────────────────────────────────────────────── */
+  .risk-disc { font-size: 13px; font-style: italic; color: var(--muted-2); line-height: 1.5; }
+
+  /* ── FAQ ─────────────────────────────────────────────────────────── */
+  .faq-wrap {
+    padding: 158px var(--pad);
+    min-height: 100vh; min-height: 100dvh;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .faq-cols  { display: flex; gap: 48px; align-items: stretch; }
+  .faq-left  { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; gap: 48px; }
+  .faq-title { font-weight: 400; font-size: 40px; color: var(--olive-title); text-transform: capitalize; line-height: 1.5; white-space: nowrap; }
+  .faq-acc   { border-radius: 24px; overflow: hidden; display: flex; flex-direction: column; gap: 2px; width: 100%; }
+  .faq-item  { background: var(--card); list-style: none; }
+  .faq-sum   { display: flex; align-items: flex-start; justify-content: space-between; gap: 40px; padding: 24px; cursor: pointer; list-style: none; }
+  .faq-sum::-webkit-details-marker { display: none; }
+  .faq-item .qt { font-weight: 500; font-size: 14px; color: #333; line-height: 1.5; flex: 1; }
+  .faq-item[open] .qt { font-weight: 600; }
+  .faq-icon  { width: 16px; height: 16px; flex: none; color: #404040; margin-top: 2px; }
+  .faq-v     { transition: opacity .28s ease; }
+  .faq-h     { transition: opacity .28s ease; }
+  .faq-item[open] .faq-h { opacity: 0; }
+  .qa { padding: 0 24px 20px; }
+  .qa p { font-weight: 400; font-size: 14px; color: #404040; line-height: 1.5; }
+  .faq-side {
+    width: 464px; flex: none;
+    background: var(--card); border: 1px solid var(--card-border);
+    border-radius: 24px; padding: var(--container-pad);
+    display: flex; flex-direction: column; gap: 40px; justify-content: flex-end;
+    position: relative; overflow: hidden;
+  }
+  .usr {
+    position: absolute; left: var(--container-pad); top: 64px;
+    width: 130.667px; height: 147px; opacity: .1;
+  }
+  .usr svg { display: block; width: 100%; height: 100%; color: var(--olive-deep); }
+  .side-in  { display: flex; flex-direction: column; gap: 32px; position: relative; }
+  .side-tx  { display: flex; flex-direction: column; gap: 8px; color: #222320; }
+  .side-tx h4 { font-weight: 500; font-size: 20px; line-height: 28px; letter-spacing: -.45px; }
+  .side-tx p  { font-weight: 400; font-size: 14px; line-height: 22px; letter-spacing: -.15px; }
+
+  /* ── Final CTA ───────────────────────────────────────────────────── */
+  .cta-sec { padding: var(--section-y) var(--pad); }
+  .cta-box {
+    border-radius: 22px; padding: 64px 60px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 20px; text-align: center;
+    background: var(--olive-deep);
+  }
+  .cta-h   { font-weight: 400; font-size: 36px; color: #fff; line-height: 1.4; max-width: 640px; }
+  .cta-h .g { color: var(--gold-2); }
+  .cta-sub { font-size: 16px; color: rgba(255,255,255,.65); line-height: 1.5; }
+  .cta-box .cta-row { margin-top: 8px; }
+  .cta-box .btn-gold { width: auto; }
 </style>
 
 <script>
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        (e.target as HTMLElement).classList.add('in-view');
-        obs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.10 });
-  document.querySelectorAll('.equity-reveal').forEach(el => obs.observe(el));
-
-  document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(d => {
-    d.addEventListener('toggle', () => {
-      if (d.open) document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(o => { if (o !== d) o.removeAttribute('open'); });
+  document.querySelectorAll('.faq-acc').forEach(acc => {
+    acc.addEventListener('click', e => {
+      const item = e.target instanceof Element ? e.target.closest('details') : null;
+      if (!item) return;
+      acc.querySelectorAll('details[open]').forEach(d => { if (d !== item) d.removeAttribute('open'); });
     });
   });
 </script>
