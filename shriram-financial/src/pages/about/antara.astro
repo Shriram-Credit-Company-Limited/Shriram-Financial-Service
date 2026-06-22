@@ -1,0 +1,973 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const features = [
+  {
+    num: '01',
+    title: 'Smart dashboards',
+    desc: 'Your markets, watchlists, positions and portfolio — organised exactly how you trade.',
+    items: [
+      'Live watchlists across all segments',
+      'Holdings & positions at a glance',
+      'Personalised market snapshot',
+    ],
+    imgLeft: false,
+  },
+  {
+    num: '02',
+    title: 'Advanced orders & option chain',
+    desc: 'Set GTT triggers, place Cover and Bracket orders, and buy or sell options right from the chain.',
+    items: [
+      'GTT triggers valid up to 365 days',
+      'Cover & Bracket orders, AMO, SL / SL-M',
+      'Buy/sell options direct from the chain',
+    ],
+    imgLeft: true,
+  },
+  {
+    num: '03',
+    title: 'Watchlists, depth & price alerts',
+    desc: 'Build multiple custom watchlists, read live market depth on any scrip, and set price alerts.',
+    items: [
+      'Multiple named watchlists + index tracking',
+      'Live market depth on any scrip',
+      'Email / SMS price alerts with quick order',
+    ],
+    imgLeft: false,
+  },
+  {
+    num: '04',
+    title: 'IPOs, start to allotment',
+    desc: 'Browse live and upcoming IPOs, apply in minutes with UPI, and track allotment in one place.',
+    items: [
+      'Browse live, upcoming & recently listed IPOs',
+      'One-tap apply with UPI — no cheques needed',
+      'Track application status & allotment',
+    ],
+    imgLeft: true,
+  },
+];
+
+const recos = [
+  { init: 'AD', name: 'ADF FOODS',  type: 'MOST · INTRADAY',    reco: '296.00',   target: '302.00',   ret: '2.03%' },
+  { init: 'JR', name: 'JAIN REC',   type: 'MOST · INTRADAY',    reco: '370.95',   target: '383.75',   ret: '3.45%' },
+  { init: 'MS', name: 'MSTC LTD',   type: 'MOST · INTRADAY',    reco: '735.20',   target: '794.30',   ret: '1.82%' },
+  { init: 'NI', name: 'NIIT LTD',   type: 'QUANT · BTST',       reco: '182.50',   target: '189.40',   ret: '3.78%' },
+  { init: 'TI', name: 'TITAGARH',   type: 'QUANT · POSITIONAL', reco: '1,043.00', target: '1,118.00', ret: '7.19%' },
+];
+
+const baskets = [
+  { title: 'Diwali Picks 2025',       meta: 'Samvat 2082 · Equity · 12 stocks' },
+  { title: 'Smart Beta Indices ETFs', meta: 'Factor-based · ETF · 8 stocks'     },
+  { title: 'Regular Indices ETFs',    meta: 'Broad market · ETF · 5 stocks'     },
+  { title: 'Gold & Silver Basket',    meta: 'Precious metals · 4 stocks'        },
+];
+
+const faqs = [
+  {
+    q: 'Do I need to log in to see recommendations?',
+    a: 'Yes. Expert stock recommendations — intraday calls, BTST picks and positional ideas — are available only after logging in to your Antara account. A quick OTP login is all it takes.',
+  },
+  {
+    q: 'What is an Investment Box?',
+    a: 'An Investment Box is a curated, thematic basket of stocks — for example "Diwali Picks 2025" or "Gold & Silver Basket." Each basket has a defined risk level, minimum investment, and can be scheduled as a recurring SIP with one click.',
+  },
+  {
+    q: 'Which order types does Antara support?',
+    a: 'Antara supports Market, Limit, SL, SL-M, After Market Orders (AMO), Cover Orders (CO), Bracket Orders (BO), and Good Till Triggered (GTT) orders valid up to 365 days.',
+  },
+  {
+    q: 'How is my account kept secure?',
+    a: 'Your account is protected by bank-grade encryption, TOTP-based two-factor authentication, and SEBI-mandated safety protocols. All trades are settled through NSCCL / ICCL clearing corporations under strict regulatory oversight.',
+  },
+];
+---
+
+<BaseLayout title="Antara — Smart Trading App | Shriram Financial Services" description="Invest and trade across equities, derivatives, commodities and IPOs with Antara — Shriram Financial Services' powerful trading app. Expert research built in.">
+
+  <!-- ══ 1. HERO ══════════════════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-split">
+        <div class="hero-text">
+          <div class="hero-pill">
+            <span class="pill-dot"></span>
+            <span>Invest &amp; trade in one app</span>
+          </div>
+          <h1>Smart trading,<br>one powerful app.</h1>
+          <p class="lead">Antara is Shriram Financial Services' app to invest and trade across equities, derivatives, commodities and IPOs — with expert research built in.</p>
+          <p class="trust-line">Trusted by 10 Lakh+ Investors &nbsp;·&nbsp; SEBI Regulated &nbsp;·&nbsp; Pan-India Presence</p>
+          <div class="store-btns">
+            <a class="store-btn" href="https://play.google.com/store/apps/details?id=com.shriraminsight.antara" target="_blank" rel="noopener noreferrer">
+              <svg class="store-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.18 23.76a2 2 0 0 0 2.18-.22l.1-.08 10.87-10.87-3.23-3.23L3.18 23.76zm15.33-13.6L15.6 12l2.9 2.9 3.27-1.84a1.4 1.4 0 0 0 0-2.47l-3.26-1.43zM2.01 1.12A1.4 1.4 0 0 0 1.6 2.2v19.6c0 .42.17.82.41 1.08l.06.06 10.98-10.98v-.24L2.07 1.06l-.06.06zm11.09 11.14 3.33 3.34-10.87 6.1 7.54-9.44z"/></svg>
+              <div class="store-text">
+                <span class="store-small">Get it on</span>
+                <span class="store-bold">Google Play</span>
+              </div>
+            </a>
+            <a class="store-btn" href="https://apps.apple.com/in/app/antara-by-shriram-securities/id6446060024" target="_blank" rel="noopener noreferrer">
+              <svg class="store-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98l-.09.06c-.22.14-2.2 1.28-2.18 3.83.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.35 2.75M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+              <div class="store-text">
+                <span class="store-small">Download on the</span>
+                <span class="store-bold">App Store</span>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="hero-mock" aria-hidden="true">
+          <div class="mock-phone">
+            <div class="mock-screen">
+              <div class="mock-bar"></div>
+              <div class="mock-chart"></div>
+              <div class="mock-row"></div>
+              <div class="mock-row" style="width:70%"></div>
+              <div class="mock-row" style="width:85%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 2. RECOMMENDATIONS ════════════════════════════════════════════ -->
+  <section class="section reco-sec" id="sec-reco" style="background:var(--sec-light)">
+    <div class="reco-hd">
+      <div class="reco-hd-left">
+        <h2 class="sec-title">Expert stock recommendations.</h2>
+      </div>
+      <p class="reco-hd-right">Daily Intraday, Options and long-term calls with rate, price, target and potential return. Log in to unlock the full Research feed.</p>
+    </div>
+    <div class="reco-grid">
+      {recos.map(r => (
+        <div class="reco-card">
+          <div class="reco-top">
+            <div class="reco-left">
+              <div class="reco-avatar">{r.init}</div>
+              <div class="reco-name-wrap">
+                <span class="reco-name">{r.name}</span>
+                <span class="reco-type">{r.type}</span>
+              </div>
+            </div>
+            <span class="reco-buy">BUY</span>
+          </div>
+          <div class="reco-prices">
+            <div class="reco-price-col">
+              <span class="reco-label">Reco Price</span>
+              <span class="reco-val">₹{r.reco}</span>
+            </div>
+            <div class="reco-price-col" style="align-items:flex-end">
+              <span class="reco-label">Target</span>
+              <span class="reco-val">₹{r.target}</span>
+            </div>
+          </div>
+          <div class="reco-ret">
+            <span class="reco-label">Return</span>
+            <span class="reco-ret-val">{r.ret}</span>
+          </div>
+          <div class="reco-blur-overlay" aria-hidden="true">
+            <div class="reco-lock">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="4" y="9" width="12" height="9" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M7 9V6a3 3 0 0 1 6 0v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+    <div class="reco-unlock">
+      <div class="unlock-left">
+        <div class="unlock-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="4" y="10" width="14" height="10" rx="2.5" stroke="currentColor" stroke-width="1.5"/><path d="M7.5 10V7a3.5 3.5 0 0 1 7 0v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <p class="unlock-title">Unlock the recommendations</p>
+          <p class="unlock-sub">Log in to unlock all expert calls with full target details and potential returns.</p>
+        </div>
+      </div>
+      <a class="unlock-btn" href="https://antara.way2wealth.com/login" target="_blank" rel="noopener noreferrer">Log in to view all →</a>
+    </div>
+  </section>
+
+  <!-- ══ 3. WHY ANTARA — INTRO ════════════════════════════════════════ -->
+  <section class="section why-intro" id="sec-why" style="background:var(--sec-tint)">
+    <div class="why-hd">
+      <div class="why-hd-left">
+        <p class="eyebrow">Why Antara</p>
+        <h2 class="sec-title">Built for serious traders &amp; investors.</h2>
+      </div>
+      <p class="why-hd-right">Four pillars that make Antara the most complete trading platform for Indian markets.</p>
+    </div>
+  </section>
+
+  <!-- ══ 4–7. FEATURE SECTIONS ════════════════════════════════════════ -->
+  {features.map((f, i) => (
+    <section class="section feat-sec" style={`background:${i % 2 === 0 ? 'var(--sec-light)' : 'var(--sec-tint)'}`}>
+      <div class={`feat-row${f.imgLeft ? ' feat-row--rev' : ''}`}>
+        <div class="feat-text">
+          <span class="feat-num">{f.num}</span>
+          <h3 class="feat-h3">{f.title}</h3>
+          <p class="feat-desc">{f.desc}</p>
+          <ul class="feat-list">
+            {f.items.map(item => (
+              <li class="feat-item">
+                <span class="feat-ck">✓</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="feat-img" aria-hidden="true">
+          <div class="img-ph">
+            <div class="ph-inner">
+              <div class="ph-bar" style="width:60%"></div>
+              <div class="ph-bar" style="width:40%;height:40px;border-radius:12px"></div>
+              <div class="ph-bar" style="width:80%"></div>
+              <div class="ph-bar" style="width:55%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <!-- ══ 8. INVESTMENT BOX ════════════════════════════════════════════ -->
+  <section class="section" id="sec-baskets" style="background:var(--sec-light)">
+    <div class="basket-wrap">
+      <div class="basket-left">
+        <p class="eyebrow">Invest in baskets</p>
+        <h3 class="sub-title">Investment Box — curated thematic baskets.</h3>
+        <p class="sec-lead">Invest in a ready-made, risk-rated basket of stocks curated by experts. Set once, let it run automatically.</p>
+        <ul class="feat-list">
+          <li class="feat-item"><span class="feat-ck">✓</span><span>Themed baskets with a clear risk level &amp; minimum investment</span></li>
+          <li class="feat-item"><span class="feat-ck">✓</span><span>Scheduled SIP that runs automatically</span></li>
+          <li class="feat-item"><span class="feat-ck">✓</span><span>One-click invest, auto-rebalancing &amp; one-tap exit</span></li>
+        </ul>
+        <a class="btn-gold basket-cta" href="https://antara.way2wealth.com/login" target="_blank" rel="noopener noreferrer">Explore all baskets →</a>
+      </div>
+      <div class="basket-grid">
+        {baskets.map(b => (
+          <div class="basket-card">
+            <div class="basket-icon" aria-hidden="true">
+              <svg width="21" height="21" viewBox="0 0 21 21" fill="none"><rect x="1" y="8" width="19" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M6 8V6a4.5 4.5 0 0 1 9 0v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M7 12h7M7 15h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </div>
+            <p class="basket-name">{b.title}</p>
+            <p class="basket-meta">{b.meta}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 9. DARK CTA / JOURNEY BAND ══════════════════════════════════ -->
+  <section class="journey-band">
+    <div class="journey-inner">
+      <div class="journey-text">
+        <p class="eyebrow-light">Start your journey</p>
+        <h2 class="journey-h2">One app for equities, derivatives, commodities and IPOs.</h2>
+        <p class="journey-sub">Backed by expert research and bank-grade security. Join 16 Lakh+ investors already on Antara.</p>
+      </div>
+      <a class="btn-gold journey-btn" href="/about/open-demat-account/">Open Demat Account</a>
+    </div>
+  </section>
+
+  <!-- ══ 10. PLATFORMS ════════════════════════════════════════════════ -->
+  <section class="section" id="sec-platforms" style="background:var(--sec-tint)">
+    <div class="plat-wrap">
+      <div class="plat-hd">
+        <p class="eyebrow">Anywhere you are</p>
+        <h2 class="sec-title">Android, iPhone, or the browser.</h2>
+      </div>
+      <div class="plat-grid">
+        <a class="plat-card" href="https://play.google.com/store/apps/details?id=com.shriraminsight.antara" target="_blank" rel="noopener noreferrer">
+          <div class="plat-icon" aria-hidden="true">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76a2 2 0 0 0 2.18-.22l.1-.08 10.87-10.87-3.23-3.23L3.18 23.76zm15.33-13.6L15.6 12l2.9 2.9 3.27-1.84a1.4 1.4 0 0 0 0-2.47l-3.26-1.43zM2.01 1.12A1.4 1.4 0 0 0 1.6 2.2v19.6c0 .42.17.82.41 1.08l.06.06 10.98-10.98v-.24L2.07 1.06l-.06.06zm11.09 11.14 3.33 3.34-10.87 6.1 7.54-9.44z"/></svg>
+          </div>
+          <h4 class="plat-name">Android</h4>
+          <p class="plat-sub">Get it on Google Play.</p>
+        </a>
+        <a class="plat-card" href="https://apps.apple.com/in/app/antara-by-shriram-securities/id6446060024" target="_blank" rel="noopener noreferrer">
+          <div class="plat-icon" aria-hidden="true">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98l-.09.06c-.22.14-2.2 1.28-2.18 3.83.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.35 2.75M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          </div>
+          <h4 class="plat-name">iPhone &amp; iPad</h4>
+          <p class="plat-sub">Download on the App Store.</p>
+        </a>
+        <a class="plat-card" href="https://antara.way2wealth.com/login" target="_blank" rel="noopener noreferrer">
+          <div class="plat-icon" aria-hidden="true">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <h4 class="plat-name">Web</h4>
+          <p class="plat-sub">Trade from any browser.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 11. FAQ ══════════════════════════════════════════════════════ -->
+  <section class="section" id="sec-faq" style="background:var(--sec-light)">
+    <div class="faq-c">
+      <div class="faq-hd">
+        <p class="eyebrow">Good to know</p>
+        <h2 class="sec-title">Frequently asked questions.</h2>
+      </div>
+      <div class="faq-acc" role="list">
+        {faqs.map(f => (
+          <details class="faq-item" role="listitem">
+            <summary class="faq-sum">
+              <span class="qt">{f.q}</span>
+              <svg class="faq-icon faq-v" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8" class="faq-h"/></svg>
+            </summary>
+            <div class="qa"><p>{f.a}</p></div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  /* ── Design tokens ─────────────────────────────────────────────── */
+  :root {
+    --page: #fcf8ef;
+    --sec-light: #fef8ee;
+    --sec-tint: #f6efe1;
+    --card: #fffdf8;
+    --card-border: #e1e0db;
+    --card-border-soft: rgba(28,28,22,.13);
+    --row-line: rgba(28,28,22,.08);
+    --olive-title: #2e3914;
+    --olive-head: #2d3813;
+    --olive-deep: #1b2010;
+    --ink: #1c1c16;
+    --ink-2: #46463c;
+    --ink-3: #595959;
+    --muted: #73736a;
+    --muted-2: #9a9a8e;
+    --gold: #e0a82e;
+    --gold-2: #f2b83f;
+    --gold-btn: #f3b83f;
+    --gold-ink: #231a06;
+    --olive-ink: #2e3914;
+    --green: #009d58;
+    --pad: clamp(20px, 8vw, 144px);
+    --container-pad: 32px;
+    --section-y: 72px;
+    --cta-w: 220px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  a { color: inherit; text-decoration: none; }
+  ul { list-style: none; margin: 0; padding: 0; }
+
+  .section {
+    padding: var(--section-y) var(--pad);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .eyebrow {
+    font-weight: 400;
+    font-size: 14px;
+    color: var(--muted);
+    letter-spacing: .6px;
+    text-transform: uppercase;
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+  .eyebrow-light {
+    font-weight: 400;
+    font-size: 14px;
+    color: rgba(255,255,255,.55);
+    letter-spacing: .6px;
+    text-transform: uppercase;
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+  .sec-title {
+    font-weight: 400;
+    font-size: clamp(28px, 3.5vw, 40px);
+    color: var(--olive-title);
+    line-height: 1.35;
+  }
+  .sub-title {
+    font-weight: 500;
+    font-size: 24px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+  .sec-lead {
+    font-weight: 400;
+    font-size: 16px;
+    color: var(--ink-3);
+    line-height: 1.6;
+  }
+
+  /* ── Buttons ─────────────────────────────────────────────────────── */
+  .btn-gold {
+    background: var(--gold-btn);
+    height: 48px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 28px;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--olive-ink);
+    white-space: nowrap;
+    transition: opacity .2s;
+  }
+  .btn-gold:hover { opacity: .88; }
+
+  /* ── Hero ─────────────────────────────────────────────────────────── */
+  .hero {
+    padding: 0 var(--pad);
+    background: radial-gradient(125% 210% at 100% -8%, #4f583b 0%, #363a2c 50%, #1d1d1d 100%);
+    overflow: hidden;
+  }
+  .hero-inner {
+    padding: clamp(72px,10vw,120px) 0 clamp(48px,6vw,80px);
+  }
+  .hero-split {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+  }
+  .hero-text {
+    flex: 1 0 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .hero-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    font-size: 14px;
+    color: rgba(255,255,255,.7);
+    margin-bottom: 20px;
+  }
+  .pill-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--gold-2);
+    flex: none;
+  }
+  .hero-text h1 {
+    font-weight: 500;
+    font-size: clamp(32px, 4vw, 52px);
+    color: #fff;
+    line-height: 1.2;
+  }
+  .hero-text .lead {
+    margin-top: 24px;
+    font-size: 17px;
+    line-height: 1.65;
+    color: rgba(255,255,255,.72);
+    max-width: 480px;
+  }
+  .trust-line {
+    margin-top: 20px;
+    font-size: 13px;
+    color: rgba(255,255,255,.5);
+    line-height: 1.5;
+  }
+  .store-btns {
+    margin-top: 36px;
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .store-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 10px;
+    padding: 10px 18px;
+    color: #fff;
+    transition: background .2s, border-color .2s;
+  }
+  .store-btn:hover { background: rgba(255,255,255,.14); border-color: rgba(255,255,255,.32); }
+  .store-icon { width: 22px; height: 22px; flex: none; }
+  .store-text { display: flex; flex-direction: column; gap: 1px; }
+  .store-small { font-size: 11px; opacity: .65; }
+  .store-bold  { font-size: 15px; font-weight: 600; line-height: 1.2; }
+
+  /* Phone mockup */
+  .hero-mock {
+    flex: 0 0 260px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .mock-phone {
+    width: 210px;
+    height: 390px;
+    background: rgba(255,255,255,.06);
+    border: 1.5px solid rgba(255,255,255,.14);
+    border-radius: 32px;
+    padding: 24px 18px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .mock-screen {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .mock-bar {
+    height: 8px;
+    border-radius: 4px;
+    background: rgba(255,255,255,.15);
+    width: 100%;
+  }
+  .mock-chart {
+    height: 80px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, rgba(243,184,63,.2) 0%, rgba(243,184,63,.05) 100%);
+    border: 1px solid rgba(243,184,63,.15);
+  }
+  .mock-row {
+    height: 7px;
+    border-radius: 4px;
+    background: rgba(255,255,255,.1);
+    width: 90%;
+  }
+
+  /* ── Recommendations ─────────────────────────────────────────────── */
+  .reco-sec {
+    gap: 32px;
+    min-height: 0;
+  }
+  .reco-hd {
+    display: flex;
+    gap: 48px;
+    align-items: flex-end;
+  }
+  .reco-hd-left { flex: 0 0 auto; }
+  .reco-hd-right {
+    flex: 1 0 0;
+    min-width: 0;
+    font-size: 16px;
+    color: var(--ink-3);
+    line-height: 1.6;
+    padding-bottom: 4px;
+  }
+  .reco-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+  }
+  .reco-card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 19px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    position: relative;
+    overflow: hidden;
+  }
+  .reco-card:nth-child(n+3) .reco-blur-overlay { display: flex; }
+  .reco-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .reco-left { display: flex; align-items: flex-start; gap: 10px; }
+  .reco-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--olive-deep);
+    color: rgba(255,255,255,.9);
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    margin-top: 4px;
+  }
+  .reco-name-wrap { display: flex; flex-direction: column; gap: 2px; }
+  .reco-name { font-weight: 600; font-size: 15px; color: var(--ink); line-height: 1.3; }
+  .reco-type { font-size: 11px; color: var(--muted); line-height: 1.4; }
+  .reco-buy {
+    background: #e8f8ee;
+    color: var(--green);
+    font-weight: 700;
+    font-size: 12px;
+    border-radius: 6px;
+    padding: 4px 10px;
+    flex: none;
+  }
+  .reco-prices {
+    display: flex;
+    justify-content: space-between;
+  }
+  .reco-price-col {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .reco-label { font-size: 11px; color: var(--muted); }
+  .reco-val { font-weight: 600; font-size: 16px; color: var(--ink); }
+  .reco-ret {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 10px;
+    border-top: 1px solid var(--row-line);
+  }
+  .reco-ret-val {
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--green);
+  }
+  .reco-blur-overlay {
+    display: none;
+    position: absolute;
+    inset: 0;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    background: rgba(255,253,248,.45);
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+  }
+  .reco-lock {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+  }
+  .reco-unlock {
+    background: var(--olive-deep);
+    border-radius: 20px;
+    padding: 23px 28px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    justify-content: space-between;
+  }
+  .unlock-left {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .unlock-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,.7);
+    flex: none;
+  }
+  .unlock-title {
+    font-weight: 600;
+    font-size: 17px;
+    color: #fff;
+    line-height: 1.4;
+  }
+  .unlock-sub {
+    font-size: 14px;
+    color: rgba(255,255,255,.6);
+    line-height: 1.5;
+    margin-top: 2px;
+  }
+  .unlock-btn {
+    background: var(--gold-btn);
+    color: var(--olive-ink);
+    font-weight: 600;
+    font-size: 15px;
+    border-radius: 8px;
+    padding: 12px 24px;
+    white-space: nowrap;
+    transition: opacity .2s;
+    flex: none;
+  }
+  .unlock-btn:hover { opacity: .88; }
+
+  /* ── Why Antara intro ───────────────────────────────────────────── */
+  .why-intro { min-height: 0; padding-bottom: 0; }
+  .why-hd {
+    display: flex;
+    gap: 64px;
+    align-items: flex-end;
+  }
+  .why-hd-left { flex: 0 0 auto; max-width: 560px; }
+  .why-hd-right {
+    flex: 1 0 0;
+    min-width: 0;
+    font-size: 16px;
+    color: var(--ink-3);
+    line-height: 1.65;
+    padding-bottom: 6px;
+  }
+
+  /* ── Feature sections ────────────────────────────────────────────── */
+  .feat-sec { min-height: 0; padding-top: 64px; padding-bottom: 64px; }
+  .feat-row {
+    display: flex;
+    gap: 64px;
+    align-items: center;
+  }
+  .feat-row--rev { flex-direction: row-reverse; }
+  .feat-text {
+    flex: 1 0 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .feat-num {
+    font-weight: 400;
+    font-size: 48px;
+    color: var(--gold-2);
+    line-height: 1;
+    display: block;
+    margin-bottom: 16px;
+    opacity: .6;
+  }
+  .feat-h3 {
+    font-weight: 500;
+    font-size: clamp(22px, 2.5vw, 30px);
+    color: var(--ink);
+    line-height: 1.35;
+    margin-bottom: 16px;
+  }
+  .feat-desc {
+    font-size: 16px;
+    color: var(--ink-3);
+    line-height: 1.65;
+    margin-bottom: 24px;
+  }
+  .feat-list { display: flex; flex-direction: column; gap: 14px; }
+  .feat-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 16px;
+    color: var(--ink-3);
+    line-height: 1.5;
+  }
+  .feat-ck {
+    color: var(--green);
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 25px;
+    flex: none;
+    width: 14px;
+  }
+  .feat-img {
+    flex: 0 0 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .img-ph {
+    width: 100%;
+    height: 340px;
+    background: var(--card);
+    border: 1.5px solid var(--card-border);
+    border-radius: 28px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .ph-inner { display: flex; flex-direction: column; gap: 14px; flex: 1; justify-content: center; }
+  .ph-bar {
+    height: 12px;
+    border-radius: 6px;
+    background: var(--card-border);
+    opacity: .7;
+  }
+
+  /* ── Investment Box ───────────────────────────────────────────────── */
+  .basket-wrap {
+    display: flex;
+    gap: 64px;
+    align-items: flex-start;
+  }
+  .basket-left {
+    flex: 0 0 480px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .basket-cta {
+    align-self: flex-start;
+    height: 46px;
+    padding: 0 24px;
+    font-size: 15px;
+    border-radius: 8px;
+    margin-top: 4px;
+  }
+  .basket-grid {
+    flex: 1 0 0;
+    min-width: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .basket-card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: var(--container-pad);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .basket-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: rgba(27,32,16,.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--olive-deep);
+  }
+  .basket-name { font-weight: 600; font-size: 17px; color: var(--ink); line-height: 1.4; }
+  .basket-meta { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+  /* ── Journey band ────────────────────────────────────────────────── */
+  .journey-band {
+    background: var(--olive-deep);
+    padding: 80px var(--pad);
+  }
+  .journey-inner {
+    display: flex;
+    align-items: center;
+    gap: 64px;
+    justify-content: space-between;
+  }
+  .journey-text {
+    flex: 1 0 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .journey-h2 {
+    font-weight: 400;
+    font-size: clamp(24px, 3vw, 36px);
+    color: #fff;
+    line-height: 1.35;
+    margin-top: 8px;
+    margin-bottom: 16px;
+    max-width: 560px;
+  }
+  .journey-sub {
+    font-size: 16px;
+    color: rgba(255,255,255,.6);
+    line-height: 1.6;
+    max-width: 460px;
+  }
+  .journey-btn { flex: none; }
+
+  /* ── Platforms ────────────────────────────────────────────────────── */
+  .plat-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    align-items: center;
+  }
+  .plat-hd {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .plat-grid {
+    display: flex;
+    gap: 24px;
+    width: 100%;
+    align-items: stretch;
+  }
+  .plat-card {
+    flex: 1 0 0;
+    min-width: 0;
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 24px;
+    padding: 36px var(--container-pad);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+    transition: box-shadow .2s, transform .2s;
+  }
+  .plat-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,.08); transform: translateY(-3px); }
+  .plat-icon { color: var(--olive-deep); margin-bottom: 4px; }
+  .plat-name { font-weight: 600; font-size: 20px; color: var(--ink); line-height: 1.3; }
+  .plat-sub  { font-size: 14px; color: var(--muted); line-height: 1.5; }
+
+  /* ── FAQ ─────────────────────────────────────────────────────────── */
+  .faq-c {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+  }
+  .faq-hd {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .faq-acc {
+    width: 100%;
+    max-width: 800px;
+    border-radius: 24px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .faq-item  { background: var(--card); list-style: none; }
+  .faq-sum   { display: flex; align-items: flex-start; justify-content: space-between; gap: 40px; padding: 24px; cursor: pointer; list-style: none; }
+  .faq-sum::-webkit-details-marker { display: none; }
+  .faq-item .qt { font-weight: 500; font-size: 15px; color: #333; line-height: 1.5; flex: 1; }
+  .faq-item[open] .qt { font-weight: 600; }
+  .faq-icon  { width: 16px; height: 16px; flex: none; color: #404040; margin-top: 2px; }
+  .faq-v     { transition: opacity .28s ease; }
+  .faq-h     { transition: opacity .28s ease; }
+  .faq-item[open] .faq-h { opacity: 0; }
+  .qa { padding: 0 24px 22px; }
+  .qa p { font-weight: 400; font-size: 14px; color: #404040; line-height: 1.65; }
+</style>
+
+<script>
+  // One-open-at-a-time FAQ
+  document.querySelectorAll('.faq-acc').forEach(acc => {
+    acc.addEventListener('click', e => {
+      const item = e.target instanceof Element ? e.target.closest('details') : null;
+      if (!item) return;
+      acc.querySelectorAll('details[open]').forEach(d => { if (d !== item) d.removeAttribute('open'); });
+    });
+  });
+</script>
