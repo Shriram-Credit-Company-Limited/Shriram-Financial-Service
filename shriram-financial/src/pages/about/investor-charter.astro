@@ -532,27 +532,20 @@ const documents: Document[] = [
 >
 
   <!-- ══ HERO ═══════════════════════════════════════════════════════ -->
-  <section class="relative overflow-hidden bg-[var(--color-dark-800)]">
-    <div class="pointer-events-none absolute -right-40 -top-40 h-[520px] w-[520px] rounded-full bg-[var(--color-brand)]/8 blur-3xl"></div>
-    <div class="pointer-events-none absolute -bottom-20 left-0 h-64 w-64 rounded-full bg-[var(--color-brand)]/5 blur-3xl"></div>
-    <div class="site-wrap relative py-[80px] lg:py-[96px]">
-      <p class="ic-reveal text-[14px] font-medium tracking-[.04em] text-[var(--color-brand)]">Regulatory & Compliance</p>
-      <h1 class="ic-reveal mt-[18px] max-w-[680px] text-[clamp(28px,4vw,48px)] font-bold leading-[1.1] text-white" style="font-family:var(--font-display)">
-        Investor Charter &amp; <span class="text-[var(--color-brand)]">Regulatory Documents</span>
-      </h1>
-      <p class="ic-reveal mt-[20px] max-w-[560px] text-[17px] leading-relaxed text-white/70">
-        All mandatory disclosures, investor rights, grievance mechanisms, and compliance documents — in one place. View online or download as PDF.
-      </p>
-      <div class="ic-reveal mt-[36px] flex flex-wrap gap-6 border-t border-white/15 pt-8 text-[14px] text-white/60">
+  <section class="hero">
+    <div class="hero-inner">
+      <h1>Investor Charter &amp; <span class="g">Regulatory Documents</span></h1>
+      <p class="lead">All mandatory disclosures, investor rights, grievance mechanisms, and compliance documents — in one place. View online or download as PDF.</p>
+      <div class="hero-regs">
         {[
           { label: 'SEBI Registered', val: 'Stockbroker & RA' },
           { label: 'CDSL DP', val: 'IN-DP-165-2015' },
           { label: 'AMFI Registered', val: 'ARN 29483' },
           { label: 'PFRDA Registered', val: 'NPS POP' },
         ].map(b => (
-          <div>
-            <div class="text-[12px] font-semibold uppercase tracking-wide text-[var(--color-brand)]">{b.label}</div>
-            <div class="mt-0.5">{b.val}</div>
+          <div class="reg-item">
+            <div class="reg-label">{b.label}</div>
+            <div class="reg-val">{b.val}</div>
           </div>
         ))}
       </div>
@@ -560,134 +553,110 @@ const documents: Document[] = [
   </section>
 
   <!-- ══ DOCUMENT LIBRARY ══════════════════════════════════════════ -->
-  <section class="bg-white py-[72px]">
-    <div class="site-wrap">
-      <div class="flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-10">
+  <section class="section doc-section" style="background:var(--sec-light)">
+    <div class="doc-layout">
 
-        <!-- Sidebar: Category Filters -->
-        <aside class="shrink-0 lg:sticky lg:top-[100px] lg:w-[220px]">
-          <div class="rounded-[16px] border border-[var(--color-n400)] bg-[#f8f6f1] p-4">
-            <p class="mb-3 px-2 text-[11px] font-bold uppercase tracking-widest text-[var(--color-muted)]">Filter by Type</p>
-            <ul class="space-y-1" role="list">
-              {categories.map(cat => (
-                <li>
-                  <button
-                    class="ic-filter-btn flex w-full items-center justify-between rounded-[10px] px-3 py-2.5 text-left text-[14px] font-medium transition-all"
-                    data-filter={cat.id}
-                    aria-pressed={cat.id === 'all' ? 'true' : 'false'}
-                  >
-                    <span>{cat.label}</span>
-                    <span class="rounded-full bg-white px-2 py-0.5 text-[11px] font-semibold text-[var(--color-muted)] shadow-sm">{cat.count}</span>
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <!-- Stats -->
-          <div class="mt-4 rounded-[16px] border border-[var(--color-n400)] bg-[var(--color-dark-800)] p-5 text-center">
-            <div class="text-[28px] font-bold text-[var(--color-brand)]">{documents.length}</div>
-            <div class="mt-1 text-[12px] text-white/60">Documents Available</div>
-            <div class="mt-3 h-px bg-white/10"></div>
-            <div class="mt-3 text-[11px] leading-relaxed text-white/50">All documents updated in compliance with SEBI, NSE, BSE, CDSL, and AMFI mandates.</div>
-          </div>
-        </aside>
-
-        <!-- Document Grid -->
-        <div class="flex-1">
-          <!-- Search bar -->
-          <div class="mb-6 flex items-center gap-3 rounded-[12px] border border-[var(--color-n400)] bg-[#f8f6f1] px-4 py-3">
-            <svg class="h-4 w-4 shrink-0 text-[var(--color-muted)]" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="9" r="6"/><path d="m15 15 3 3"/></svg>
-            <input
-              id="ic-search"
-              type="text"
-              placeholder="Search documents…"
-              class="flex-1 bg-transparent text-[14px] text-[var(--color-ink)] placeholder:text-[var(--color-muted)] focus:outline-none"
-              autocomplete="off"
-            />
-          </div>
-
-          <!-- Document cards -->
-          <div id="ic-doc-grid" class="grid gap-4">
-            {documents.map(doc => (
-              <div
-                class="ic-doc-card group overflow-hidden rounded-[16px] border border-[var(--color-n400)] bg-white transition-shadow hover:shadow-[0_4px_24px_rgba(0,0,0,0.08)]"
-                data-category={doc.category}
-                data-title={doc.title.toLowerCase()}
-              >
-                <div class="flex flex-col gap-4 p-5 sm:flex-row sm:items-start sm:justify-between">
-                  <!-- Left: doc info -->
-                  <div class="min-w-0 flex-1">
-                    <div class="mb-2 flex flex-wrap items-center gap-2">
-                      <span class="rounded-[6px] bg-[var(--color-brand-light)] px-2.5 py-0.5 text-[11px] font-semibold text-[var(--color-brand-deep)]">{doc.categoryLabel}</span>
-                      {doc.badge && (
-                        <span class="rounded-[6px] border border-[var(--color-n400)] px-2.5 py-0.5 text-[11px] font-medium text-[var(--color-muted)]">{doc.badge}</span>
-                      )}
-                    </div>
-                    <h3 class="text-[16px] font-semibold leading-[1.3] text-[var(--color-ink)]" style="font-family:var(--font-display)">{doc.title}</h3>
-                    <p class="mt-1 text-[13px] text-[var(--color-muted)]">{doc.subtitle}</p>
-                    <div class="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-[12px] text-[var(--color-muted)]">
-                      <span class="flex items-center gap-1.5">
-                        <svg class="h-3 w-3" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="12" height="11" rx="2"/><path d="M5 1v4M11 1v4M2 8h12"/></svg>
-                        {doc.date}
-                      </span>
-                      <span class="flex items-center gap-1.5 opacity-60">
-                        <svg class="h-3 w-3" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M8 2l4 4-4 4"/></svg>
-                        Ref: {doc.ref}
-                      </span>
-                    </div>
-                  </div>
-
-                  <!-- Right: actions -->
-                  <div class="flex shrink-0 items-center gap-2 sm:flex-col sm:items-end">
-                    <button
-                      class="ic-view-btn flex items-center gap-2 rounded-[9px] border border-[var(--color-brand)] bg-[var(--color-brand-light)] px-4 py-2 text-[13px] font-semibold text-[var(--color-brand-deep)] transition-colors hover:bg-[var(--color-brand)] hover:text-white"
-                      data-doc-id={doc.id}
-                      aria-label={`View ${doc.title}`}
-                    >
-                      <svg class="h-3.5 w-3.5" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 8s3-5 7-5 7 5 7 5-3 5-7 5-7-5-7-5z"/><circle cx="8" cy="8" r="2"/></svg>
-                      View
-                    </button>
-                    <button
-                      class="ic-dl-btn flex items-center gap-2 rounded-[9px] border border-[var(--color-n400)] bg-white px-4 py-2 text-[13px] font-semibold text-[var(--color-ink)] transition-colors hover:border-[var(--color-ink)] hover:bg-[var(--color-n100)]"
-                      data-doc-id={doc.id}
-                      aria-label={`Download ${doc.title}`}
-                    >
-                      <svg class="h-3.5 w-3.5" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2v8M5 7l3 3 3-3"/><path d="M3 13h10"/></svg>
-                      Download
-                    </button>
-                  </div>
-                </div>
-
-                <!-- Bottom strip: section count -->
-                <div class="border-t border-[var(--color-n400)] bg-[#f8f6f1] px-5 py-2.5 text-[11px] text-[var(--color-muted)]">
-                  {doc.content.sections.length} sections · PDF available · SEBI mandated disclosure
-                </div>
-              </div>
+      <!-- Sidebar: Category Filters -->
+      <aside class="doc-sidebar">
+        <div class="filter-card">
+          <p class="filter-head">Filter by Type</p>
+          <ul class="filter-list" role="list">
+            {categories.map(cat => (
+              <li>
+                <button
+                  class="filter-btn"
+                  data-filter={cat.id}
+                  aria-pressed={cat.id === 'all' ? 'true' : 'false'}
+                >
+                  <span>{cat.label}</span>
+                  <span class="filter-count">{cat.count}</span>
+                </button>
+              </li>
             ))}
-          </div>
-
-          <!-- Empty state -->
-          <div id="ic-empty" class="hidden py-16 text-center">
-            <div class="mx-auto mb-3 grid h-12 w-12 place-items-center rounded-full bg-[var(--color-n100)]">
-              <svg class="h-5 w-5 text-[var(--color-muted)]" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="9" r="6"/><path d="m15 15 3 3"/></svg>
-            </div>
-            <p class="text-[15px] font-medium text-[var(--color-ink)]">No documents match your search</p>
-            <p class="mt-1 text-[13px] text-[var(--color-muted)]">Try a different keyword or category.</p>
-          </div>
+          </ul>
         </div>
 
+        <div class="doc-stats">
+          <div class="doc-count">{documents.length}</div>
+          <div class="doc-count-lbl">Documents Available</div>
+          <div class="doc-stats-sep"></div>
+          <p class="doc-stats-tx">All documents updated in compliance with SEBI, NSE, BSE, CDSL, and AMFI mandates.</p>
+        </div>
+      </aside>
+
+      <!-- Document Grid -->
+      <div class="doc-main">
+        <div class="search-bar">
+          <svg class="search-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="9" r="6"/><path d="m15 15 3 3"/></svg>
+          <input
+            id="ic-search"
+            type="text"
+            placeholder="Search documents…"
+            class="search-inp"
+            autocomplete="off"
+          />
+        </div>
+
+        <div id="ic-doc-grid" class="doc-grid">
+          {documents.map(doc => (
+            <div
+              class="ic-doc-card doc-card"
+              data-category={doc.category}
+              data-title={doc.title.toLowerCase()}
+            >
+              <div class="doc-card-body">
+                <div class="doc-info">
+                  <div class="doc-badges">
+                    <span class="badge-cat">{doc.categoryLabel}</span>
+                    {doc.badge && <span class="badge-reg">{doc.badge}</span>}
+                  </div>
+                  <h3 class="doc-title">{doc.title}</h3>
+                  <p class="doc-sub">{doc.subtitle}</p>
+                  <div class="doc-meta">
+                    <span class="meta-item">
+                      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px"><rect x="2" y="3" width="12" height="11" rx="2"/><path d="M5 1v4M11 1v4M2 8h12"/></svg>
+                      {doc.date}
+                    </span>
+                    <span class="meta-item meta-ref">
+                      Ref: {doc.ref}
+                    </span>
+                  </div>
+                </div>
+                <div class="doc-actions">
+                  <button class="ic-view-btn btn-view" data-doc-id={doc.id} aria-label={`View ${doc.title}`}>
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><path d="M1 8s3-5 7-5 7 5 7 5-3 5-7 5-7-5-7-5z"/><circle cx="8" cy="8" r="2"/></svg>
+                    View
+                  </button>
+                  <button class="ic-dl-btn btn-dl" data-doc-id={doc.id} aria-label={`Download ${doc.title}`}>
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><path d="M8 2v8M5 7l3 3 3-3"/><path d="M3 13h10"/></svg>
+                    Download
+                  </button>
+                </div>
+              </div>
+              <div class="doc-footer-strip">
+                {doc.content.sections.length} sections · PDF available · SEBI mandated disclosure
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div id="ic-empty" class="empty-state" style="display:none">
+          <div class="empty-icon">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" style="width:20px;height:20px"><circle cx="9" cy="9" r="6"/><path d="m15 15 3 3"/></svg>
+          </div>
+          <p class="empty-h">No documents match your search</p>
+          <p class="empty-sub">Try a different keyword or category.</p>
+        </div>
       </div>
+
     </div>
   </section>
 
   <!-- ══ LEGAL DISCLAIMER ══════════════════════════════════════════ -->
-  <section class="border-t border-[var(--color-n400)] bg-[#f8f6f1] py-[48px]">
-    <div class="site-wrap">
-      <p class="text-[12px] leading-relaxed text-[var(--color-muted)]">
-        <strong class="text-[var(--color-ink)]">Important Disclosure:</strong> Investments in securities markets are subject to market risks. Read all related documents carefully before investing. Shriram Financial Services Limited is registered with SEBI as a Stockbroker (Registration Nos. INB231103833, INB011103839), Research Analyst (INH200009624), and CDSL Depository Participant (IN-DP-165-2015). AMFI-registered Mutual Fund Distributor: ARN 29483. PFRDA-registered NPS Point of Presence. CIN: U65110TN1974PLC006603. Registered Office: Shriram House, No. 4, Burkit Road, T. Nagar, Chennai – 600 017.
-      </p>
-    </div>
+  <section class="section disc-section" style="background:var(--sec-tint)">
+    <p class="disc-tx">
+      <strong>Important Disclosure:</strong> Investments in securities markets are subject to market risks. Read all related documents carefully before investing. Shriram Financial Services Limited is registered with SEBI as a Stockbroker (Registration Nos. INB231103833, INB011103839), Research Analyst (INH200009624), and CDSL Depository Participant (IN-DP-165-2015). AMFI-registered Mutual Fund Distributor: ARN 29483. PFRDA-registered NPS Point of Presence. CIN: U65110TN1974PLC006603. Registered Office: Shriram House, No. 4, Burkit Road, T. Nagar, Chennai – 600 017.
+    </p>
   </section>
 
 </BaseLayout>
@@ -701,10 +670,7 @@ const documents: Document[] = [
   aria-modal="true"
   aria-labelledby="ic-modal-title"
 >
-  <!-- Modal shell -->
   <div class="ic-modal-shell relative mx-auto my-6 flex h-[calc(100vh-3rem)] w-full max-w-[820px] flex-col overflow-hidden rounded-[20px] bg-white shadow-[0_32px_80px_rgba(0,0,0,0.35)]">
-
-    <!-- Toolbar -->
     <div class="flex shrink-0 items-center justify-between border-b border-[var(--color-n400)] bg-[var(--color-dark-800)] px-5 py-3">
       <div class="flex items-center gap-3">
         <div class="flex h-7 w-7 items-center justify-center rounded-[6px] bg-[var(--color-brand)]/20">
@@ -713,29 +679,17 @@ const documents: Document[] = [
         <span id="ic-modal-title-bar" class="text-[13px] font-semibold text-white/80">Document Viewer</span>
       </div>
       <div class="flex items-center gap-2">
-        <button
-          id="ic-print-btn"
-          class="flex items-center gap-2 rounded-[8px] bg-[var(--color-brand)] px-3 py-1.5 text-[12px] font-bold text-[#202318] transition-opacity hover:opacity-90"
-        >
+        <button id="ic-print-btn" class="flex items-center gap-2 rounded-[8px] bg-[var(--color-brand)] px-3 py-1.5 text-[12px] font-bold text-[#202318] transition-opacity hover:opacity-90">
           <svg class="h-3.5 w-3.5" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6V2h8v4M4 11H2V6h12v5h-2M4 9h8v5H4z"/></svg>
           Download PDF
         </button>
-        <button
-          id="ic-close-btn"
-          class="grid h-8 w-8 place-items-center rounded-[8px] text-white/60 transition-colors hover:bg-white/10 hover:text-white"
-          aria-label="Close document viewer"
-        >
+        <button id="ic-close-btn" class="grid h-8 w-8 place-items-center rounded-[8px] text-white/60 transition-colors hover:bg-white/10 hover:text-white" aria-label="Close document viewer">
           <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4"><path d="M12 4 4 12M4 4l8 8"/></svg>
         </button>
       </div>
     </div>
-
-    <!-- Scrollable document content -->
     <div class="flex-1 overflow-y-auto bg-[#e8e5de] p-4 sm:p-8">
-      <!-- A4 Paper -->
       <div id="ic-doc-paper" class="ic-paper mx-auto min-h-[1000px] w-full max-w-[700px] rounded-[4px] bg-white px-[52px] py-[56px] shadow-[0_4px_24px_rgba(0,0,0,0.18)]">
-
-        <!-- Document header -->
         <div class="mb-[36px] border-b border-[var(--color-n400)] pb-[24px]">
           <div class="mb-3 flex items-center justify-between">
             <img src="/images/logo-component6.png" alt="Shriram Financial Services" class="h-[44px] w-auto object-contain" />
@@ -753,11 +707,7 @@ const documents: Document[] = [
           </div>
           <div class="mt-3 h-[3px] w-[48px] rounded-full bg-[var(--color-brand)]"></div>
         </div>
-
-        <!-- Dynamic sections -->
         <div id="ic-modal-body" class="space-y-[28px] text-[13.5px] leading-[1.7]"></div>
-
-        <!-- Document footer -->
         <div class="mt-[44px] border-t border-[var(--color-n400)] pt-[20px]">
           <p id="ic-modal-footer" class="text-[11px] italic leading-relaxed text-[var(--color-muted)]"></p>
           <div class="mt-4 flex items-center justify-between text-[10px] text-[var(--color-muted)]">
@@ -765,77 +715,163 @@ const documents: Document[] = [
             <span>www.shriramfinancialservices.com</span>
           </div>
         </div>
-
       </div>
     </div>
-
   </div>
 </div>
 
-<!-- Document data (JSON embedded for JS) -->
 <script id="ic-data" type="application/json" set:html={JSON.stringify(documents)}></script>
 
 <style>
-  /* ── Scroll reveal ──────────────────────────────────────── */
-  .ic-reveal {
-    opacity: 0;
-    transform: translateY(18px);
-    transition: opacity 0.6s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+  :root {
+    --sec-light: #fef8ee;
+    --sec-tint: #f6efe1;
+    --card: #fffdf8;
+    --card-border: #e1e0db;
+    --olive-title: #2e3914;
+    --olive-deep: #1b2010;
+    --ink: #1c1c16;
+    --ink-3: #595959;
+    --muted: #73736a;
+    --gold-2: #f2b83f;
+    --gold-btn: #f3b83f;
+    --olive-ink: #2e3914;
+    --green: #009d58;
+    --pad: clamp(20px, 8vw, 144px);
+    --section-y: 72px;
   }
-  .ic-reveal.in-view { opacity: 1; transform: none; }
+  *, *::before, *::after { box-sizing: border-box; }
+  a { color: inherit; text-decoration: none; }
 
-  /* ── Sidebar filter buttons ─────────────────────────────── */
-  .ic-filter-btn { color: var(--color-muted); }
-  .ic-filter-btn:hover { background: var(--color-n400); color: var(--color-ink); }
-  .ic-filter-btn[aria-pressed="true"] { background: var(--color-dark-800); color: #fff; }
-  .ic-filter-btn[aria-pressed="true"] span:last-child { background: var(--color-brand); color: #202318; }
+  /* Hero */
+  .hero {
+    padding: 0 var(--pad);
+    background: radial-gradient(125% 210% at 100% -8%, #4f583b 0%, #363a2c 50%, #1d1d1d 100%);
+    display: flex; flex-direction: column; justify-content: center; overflow: hidden;
+  }
+  .hero-inner { padding: clamp(80px,10vw,120px) 0 clamp(48px,6vw,80px); display: flex; flex-direction: column; gap: 32px; }
+  .hero h1 { font-weight: 500; font-size: clamp(28px,4vw,48px); color: #fff; line-height: 1.15; max-width: 680px; }
+  .hero h1 .g { color: var(--gold-2); }
+  .lead { font-size: 17px; line-height: 1.6; color: rgba(255,255,255,.74); max-width: 560px; }
+  .hero-regs { display: flex; flex-wrap: wrap; gap: 24px 40px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,.16); }
+  .reg-item { display: flex; flex-direction: column; gap: 4px; }
+  .reg-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--gold-2); }
+  .reg-val   { font-size: 14px; color: rgba(255,255,255,.65); }
 
-  /* ── Hidden doc card ────────────────────────────────────── */
-  .ic-doc-card.hidden { display: none; }
+  /* Section */
+  .section { padding: var(--section-y) var(--pad); }
+  .doc-section { padding-top: 56px; padding-bottom: 64px; }
+  .disc-section { padding-top: 40px; padding-bottom: 48px; }
 
-  /* ── Modal backdrop click area ──────────────────────────── */
-  #ic-modal { cursor: default; }
+  /* Doc layout */
+  .doc-layout { display: flex; gap: 40px; align-items: flex-start; }
 
-  /* ── Print styles ───────────────────────────────────────── */
+  /* Sidebar */
+  .doc-sidebar { flex: none; width: 220px; position: sticky; top: 100px; display: flex; flex-direction: column; gap: 16px; }
+  .filter-card { background: var(--card); border: 1px solid var(--card-border); border-radius: 16px; padding: 16px; }
+  .filter-head { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); padding: 0 8px; margin-bottom: 12px; }
+  .filter-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 2px; }
+  .filter-btn {
+    width: 100%; display: flex; align-items: center; justify-content: space-between;
+    padding: 8px 12px; border-radius: 10px; font-size: 14px; font-weight: 500;
+    color: var(--muted); background: transparent; border: none; cursor: pointer;
+    transition: background .15s, color .15s;
+  }
+  .filter-btn:hover { background: var(--sec-tint); color: var(--ink); }
+  .filter-btn[aria-pressed="true"] { background: var(--olive-deep); color: #fff; }
+  .filter-btn[aria-pressed="true"] .filter-count { background: var(--gold-btn); color: var(--olive-ink); }
+  .filter-count { background: #fff; border-radius: 99px; padding: 2px 8px; font-size: 11px; font-weight: 600; color: var(--muted); }
+
+  .doc-stats {
+    background: var(--olive-deep); border-radius: 16px; padding: 20px;
+    text-align: center; display: flex; flex-direction: column; gap: 8px;
+  }
+  .doc-count { font-size: 28px; font-weight: 700; color: var(--gold-2); }
+  .doc-count-lbl { font-size: 12px; color: rgba(255,255,255,.6); }
+  .doc-stats-sep { height: 1px; background: rgba(255,255,255,.1); }
+  .doc-stats-tx { font-size: 11px; line-height: 1.7; color: rgba(255,255,255,.5); }
+
+  /* Doc main */
+  .doc-main { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; gap: 16px; }
+
+  .search-bar {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--card); border: 1px solid var(--card-border);
+    border-radius: 12px; padding: 10px 16px;
+  }
+  .search-icon { width: 16px; height: 16px; flex: none; color: var(--muted); }
+  .search-inp { flex: 1; background: transparent; border: none; outline: none; font-size: 14px; color: var(--ink); }
+  .search-inp::placeholder { color: var(--muted); }
+
+  .doc-grid { display: flex; flex-direction: column; gap: 12px; }
+  .doc-card {
+    background: var(--card); border: 1px solid var(--card-border);
+    border-radius: 16px; overflow: hidden;
+    transition: box-shadow .2s;
+  }
+  .doc-card:hover { box-shadow: 0 4px 24px rgba(0,0,0,.08); }
+  .doc-card.hidden { display: none; }
+  .doc-card-body { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; padding: 20px; }
+  .doc-info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+  .doc-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 4px; }
+  .badge-cat { background: rgba(242,184,63,.15); color: var(--olive-ink); font-size: 11px; font-weight: 600; padding: 2px 10px; border-radius: 6px; }
+  .badge-reg { background: var(--card); border: 1px solid var(--card-border); color: var(--muted); font-size: 11px; font-weight: 500; padding: 2px 10px; border-radius: 6px; }
+  .doc-title { font-size: 16px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .doc-sub   { font-size: 13px; color: var(--muted); }
+  .doc-meta  { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 4px; }
+  .meta-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
+  .meta-ref  { opacity: .6; }
+  .doc-actions { display: flex; flex-direction: column; gap: 8px; flex: none; }
+  .btn-view {
+    display: flex; align-items: center; gap: 8px; padding: 7px 16px;
+    border-radius: 9px; font-size: 13px; font-weight: 600;
+    background: rgba(242,184,63,.12); border: 1px solid var(--gold-2);
+    color: var(--olive-ink); cursor: pointer; transition: background .15s;
+  }
+  .btn-view:hover { background: var(--gold-btn); }
+  .btn-dl {
+    display: flex; align-items: center; gap: 8px; padding: 7px 16px;
+    border-radius: 9px; font-size: 13px; font-weight: 600;
+    background: var(--card); border: 1px solid var(--card-border);
+    color: var(--ink); cursor: pointer; transition: background .15s, border-color .15s;
+  }
+  .btn-dl:hover { background: var(--sec-tint); border-color: var(--muted); }
+  .doc-footer-strip { background: var(--sec-tint); border-top: 1px solid var(--card-border); padding: 8px 20px; font-size: 11px; color: var(--muted); }
+
+  /* Empty state */
+  .empty-state { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 64px 0; text-align: center; }
+  .empty-icon { width: 48px; height: 48px; border-radius: 50%; background: var(--sec-tint); display: flex; align-items: center; justify-content: center; }
+  .empty-h   { font-size: 15px; font-weight: 500; color: var(--ink); }
+  .empty-sub { font-size: 13px; color: var(--muted); }
+
+  /* Disclaimer */
+  .disc-tx { font-size: 12px; line-height: 1.9; color: var(--muted); }
+  .disc-tx strong { color: var(--ink); }
+
+  /* Print */
   @media print {
     body > *:not(#ic-modal) { display: none !important; }
-    #ic-modal {
-      display: flex !important;
-      position: static !important;
-      background: none !important;
-      backdrop-filter: none !important;
-    }
-    .ic-modal-shell {
-      box-shadow: none !important;
-      border-radius: 0 !important;
-      height: auto !important;
-      max-width: 100% !important;
-      margin: 0 !important;
-    }
-    .ic-modal-shell > *:first-child { display: none !important; } /* hide toolbar */
+    #ic-modal { display: flex !important; position: static !important; background: none !important; backdrop-filter: none !important; }
+    .ic-modal-shell { box-shadow: none !important; border-radius: 0 !important; height: auto !important; max-width: 100% !important; margin: 0 !important; }
+    .ic-modal-shell > *:first-child { display: none !important; }
     #ic-doc-paper { box-shadow: none !important; padding: 0 !important; }
     #ic-modal > div > div:nth-child(2) { background: white !important; padding: 0 !important; overflow: visible !important; }
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .ic-reveal { opacity: 1; transform: none; transition: none; }
+  @media (max-width: 900px) {
+    .doc-layout { flex-direction: column; }
+    .doc-sidebar { width: 100%; position: static; }
+    .filter-list { flex-direction: row; flex-wrap: wrap; gap: 4px; }
+    .hero h1 { font-size: 28px; }
   }
 </style>
 
 <script>
-  /* ── Scroll reveal ─────────────────────────────────────────── */
-  const revObs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { (e.target as HTMLElement).classList.add('in-view'); revObs.unobserve(e.target); } });
-  }, { threshold: 0.08 });
-  document.querySelectorAll('.ic-reveal').forEach(el => revObs.observe(el));
-
-  /* ── Load document data ────────────────────────────────────── */
   type Section = { heading: string; items: string[] };
   type DocData = { id: string; category: string; title: string; subtitle: string; date: string; ref: string; content: { sections: Section[]; footer?: string } };
   const docs: DocData[] = JSON.parse(document.getElementById('ic-data')!.textContent!);
   const docMap = new Map(docs.map(d => [d.id, d]));
 
-  /* ── Category filter ────────────────────────────────────────── */
   const cards = document.querySelectorAll<HTMLElement>('.ic-doc-card');
   const emptyState = document.getElementById('ic-empty')!;
   let activeFilter = 'all';
@@ -850,12 +886,12 @@ const documents: Document[] = [
       card.classList.toggle('hidden', !show);
       if (show) visible++;
     });
-    emptyState.classList.toggle('hidden', visible > 0);
+    emptyState.style.display = visible > 0 ? 'none' : 'flex';
   }
 
-  document.querySelectorAll<HTMLButtonElement>('.ic-filter-btn').forEach(btn => {
+  document.querySelectorAll<HTMLButtonElement>('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      document.querySelectorAll<HTMLButtonElement>('.ic-filter-btn').forEach(b => b.setAttribute('aria-pressed', 'false'));
+      document.querySelectorAll<HTMLButtonElement>('.filter-btn').forEach(b => b.setAttribute('aria-pressed', 'false'));
       btn.setAttribute('aria-pressed', 'true');
       activeFilter = btn.dataset.filter ?? 'all';
       applyFilters();
@@ -864,7 +900,6 @@ const documents: Document[] = [
 
   document.getElementById('ic-search')!.addEventListener('input', applyFilters);
 
-  /* ── PDF Modal ─────────────────────────────────────────────── */
   const modal     = document.getElementById('ic-modal')!;
   const closeBtn  = document.getElementById('ic-close-btn')!;
   const printBtn  = document.getElementById('ic-print-btn')!;
@@ -879,14 +914,12 @@ const documents: Document[] = [
   function openDoc(id: string) {
     const doc = docMap.get(id);
     if (!doc) return;
-
     titleEl.textContent    = doc.title;
     titleBar.textContent   = doc.title;
     subtitleEl.textContent = doc.subtitle;
     dateEl.textContent     = doc.date;
     refEl.textContent      = `Ref: ${doc.ref}`;
     footerEl.textContent   = doc.content.footer ?? '';
-
     bodyEl.innerHTML = doc.content.sections.map(sec => `
       <div>
         <h2 style="font-size:14px;font-weight:700;color:#1a2010;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #ddd;font-family:var(--font-display)">${sec.heading}</h2>
@@ -900,7 +933,6 @@ const documents: Document[] = [
         </ul>
       </div>
     `).join('');
-
     modal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
     (modal.querySelector('.ic-modal-shell') as HTMLElement)?.scrollTo({ top: 0 });
@@ -914,22 +946,11 @@ const documents: Document[] = [
   document.querySelectorAll<HTMLButtonElement>('.ic-view-btn').forEach(btn => {
     btn.addEventListener('click', () => openDoc(btn.dataset.docId!));
   });
-
   document.querySelectorAll<HTMLButtonElement>('.ic-dl-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      openDoc(btn.dataset.docId!);
-      setTimeout(() => window.print(), 400);
-    });
+    btn.addEventListener('click', () => { openDoc(btn.dataset.docId!); setTimeout(() => window.print(), 400); });
   });
-
   closeBtn.addEventListener('click', closeModal);
   printBtn.addEventListener('click', () => window.print());
-
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) closeModal();
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.style.display !== 'none') closeModal();
-  });
+  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.style.display !== 'none') closeModal(); });
 </script>

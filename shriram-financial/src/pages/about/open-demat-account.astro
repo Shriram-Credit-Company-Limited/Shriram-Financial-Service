@@ -50,110 +50,81 @@ const faqs = [
 >
 
   <!-- ══ 1. HERO ═══════════════════════════════════════════════════ -->
-  <section class="relative overflow-hidden bg-[var(--color-dark-800)]">
-    <div class="pointer-events-none absolute -right-40 -top-40 h-[560px] w-[560px] rounded-full bg-[var(--color-brand)]/10 blur-3xl"></div>
-    <div class="pointer-events-none absolute -bottom-32 left-0 h-80 w-80 rounded-full bg-[var(--color-brand)]/5 blur-3xl"></div>
-
-    <div class="site-wrap relative py-[100px] lg:py-[120px]">
-      <div class="grid items-center gap-[52px] lg:grid-cols-[1fr_400px]">
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-grid">
 
         <!-- Left: copy -->
-        <div>
-          <p class="demat-reveal text-[14px] font-medium tracking-[.04em] text-[var(--color-brand)]">Open a Demat Account</p>
-          <h1 class="demat-reveal mt-[22px] max-w-[680px] text-[clamp(28px,4vw,50px)] font-bold leading-[1.08] text-white" style="font-family:var(--font-display)">
-            Open a Demat Account in Minutes —&nbsp;<span class="text-[var(--color-brand)]">100% Online, Zero Paperwork</span>
-          </h1>
-          <p class="demat-reveal mt-[24px] max-w-[540px] text-[18px] leading-relaxed text-white/70">
-            Hold stocks, bonds, ETFs, and mutual fund units digitally. SEBI-registered, CDSL-partnered, fully paperless — start investing today.
-          </p>
-          <div class="demat-reveal mt-[38px] flex flex-wrap gap-[14px]">
-            <a href="https://ekyc.shriraminsight.com/" class="btn-primary" target="_blank" rel="noopener noreferrer">Start Opening Now</a>
-            <a href="/about/support/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Talk to an Expert</a>
+        <div class="hero-copy">
+          <h1>Open a Demat Account in Minutes — <span class="g">100% Online, Zero Paperwork</span></h1>
+          <p class="lead">Hold stocks, bonds, ETFs, and mutual fund units digitally. SEBI-registered, CDSL-partnered, fully paperless — start investing today.</p>
+          <div class="cta-row">
+            <a href="https://ekyc.shriraminsight.com/" class="btn-gold" target="_blank" rel="noopener noreferrer">Start Opening Now</a>
+            <a href="/about/support/" class="btn-ghost">Talk to an Expert</a>
           </div>
-          <div class="demat-reveal mt-[54px] flex flex-wrap gap-x-9 gap-y-3 border-t border-white/15 pt-9">
-            {['✓ SEBI-registered', '✓ CDSL-partnered', '✓ Zero brokerage', '✓ Free research'].map(f => (
-              <span class="text-[15px] font-medium text-white/90">
-                <span class="mr-2 text-[var(--color-brand)]">{f.slice(0,1)}</span>{f.slice(1)}
-              </span>
-            ))}
+          <div class="hero-feats">
+            <div class="feats">
+              <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;SEBI-registered</span></div>
+              <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;CDSL-partnered</span></div>
+              <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;Zero brokerage</span></div>
+              <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;Free research</span></div>
+            </div>
           </div>
         </div>
 
-        <!-- Right: open demat form -->
-        <div class="demat-reveal">
-          <div class="overflow-hidden rounded-[20px] bg-[var(--color-dark-olive)] p-[34px]">
-
-            <!-- Title + badges -->
-            <div class="flex flex-col gap-4">
-              <h2 class="text-[26px] font-bold leading-tight text-white" style="font-family:var(--font-display)">
-                Open a Demat Account
-              </h2>
-              <div class="flex flex-wrap items-center gap-x-4 gap-y-1.5">
+        <!-- Right: form card -->
+        <div class="form-card">
+          <div class="form-card-inner">
+            <div class="form-head">
+              <h2 class="form-title">Open a Demat Account</h2>
+              <div class="form-badges">
                 {['100% Digital & Paperless', 'Open Within Minutes', 'SEBI-Regulated'].map((t, i) => (
-                  <div class="flex items-center gap-4">
-                    {i > 0 && <span class="h-1 w-1 rounded-full bg-white/30"></span>}
-                    <span class="text-[12px] font-medium text-white/70">{t}</span>
+                  <div class="badge-row">
+                    {i > 0 && <span class="badge-dot"></span>}
+                    <span class="badge-tx">{t}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            <!-- Form -->
-            <div class="mt-8 flex flex-col gap-5">
-              <div id="demat-form-fields">
-                <!-- Mobile input -->
-                <div class="flex h-[48px] items-center gap-3 rounded-[8px] border border-white/15 bg-white/10 py-3 pl-4 pr-3.5">
-                  <span class="h-[18px] w-[18px] shrink-0 overflow-hidden rounded-full">
-                    <img src="/images/india-flag.png" alt="India" class="h-full w-full object-cover" />
-                  </span>
-                  <span class="h-6 w-px shrink-0 bg-white/20"></span>
-                  <div class="flex min-w-0 flex-1 flex-col justify-center gap-[2px]">
-                    <label for="demat-mobile" class="text-[10px] font-medium leading-[1.2] text-white/50">Mobile Number</label>
-                    <div class="flex items-center gap-1">
-                      <span class="text-[14px] font-medium leading-[1.4] text-white">+91</span>
-                      <input
-                        id="demat-mobile"
-                        type="tel"
-                        placeholder="00000 00000"
-                        maxlength="10"
-                        autocomplete="tel"
-                        class="min-w-0 flex-1 border-none bg-transparent text-[14px] font-medium leading-[1.4] text-white outline-none placeholder:font-normal placeholder:text-white/30"
-                      />
-                    </div>
+            <div class="form-fields" id="demat-form-fields">
+              <div class="mobile-input">
+                <span class="flag-wrap">
+                  <img src="/images/india-flag.png" alt="India" class="flag-img" />
+                </span>
+                <span class="divider"></span>
+                <div class="mobile-inner">
+                  <label for="demat-mobile" class="mobile-lbl">Mobile Number</label>
+                  <div class="mobile-row">
+                    <span class="code">+91</span>
+                    <input
+                      id="demat-mobile"
+                      type="tel"
+                      placeholder="00000 00000"
+                      maxlength="10"
+                      autocomplete="tel"
+                      class="mobile-inp"
+                    />
                   </div>
                 </div>
-
-                <!-- Consent -->
-                <p class="mt-4 text-[12px] font-medium leading-[1.5] text-white/60">
-                  By continuing, I agree to receive a quick OTP verification and updates via SMS/WhatsApp.
-                </p>
-
-                <!-- CTA -->
-                <div class="mt-5 flex flex-col gap-4">
-                  <button
-                    id="demat-submit"
-                    class="inline-flex h-[48px] w-[200px] items-center justify-center rounded-[6px] bg-[var(--color-brand)] text-[13px] font-semibold text-[#202318] transition-colors hover:opacity-90"
-                  >
-                    Get Started Now
-                  </button>
-                  <p class="text-[12px] font-medium text-white/50">
-                    Already a part of us?{' '}
-                    <a href="https://antara.way2wealth.com/login" target="_blank" rel="noopener noreferrer" class="text-[#2f7ef4] hover:underline">Login Here.</a>
-                  </p>
-                </div>
               </div>
-
-              <!-- Success state -->
-              <div id="demat-success" class="hidden py-6 text-center">
-                <div class="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-[var(--color-brand)]/15">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-brand)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><polyline points="20 6 9 17 4 12"/></svg>
-                </div>
-                <h3 class="text-[20px] font-bold text-white" style="font-family:var(--font-display)">Request Submitted!</h3>
-                <p class="mt-2 text-[14px] text-white/55">Our executive will contact you shortly.</p>
-                <p class="mt-3 text-[22px] font-bold text-[var(--color-brand)]">Thank You.</p>
+              <p class="consent-tx">By continuing, I agree to receive a quick OTP verification and updates via SMS/WhatsApp.</p>
+              <div class="form-actions">
+                <button id="demat-submit" class="btn-gold" style="width:200px">Get Started Now</button>
+                <p class="login-tx">Already a part of us?{' '}
+                  <a href="https://antara.way2wealth.com/login" target="_blank" rel="noopener noreferrer" class="login-link">Login Here.</a>
+                </p>
               </div>
             </div>
 
+            <div id="demat-success" class="success-state" style="display:none">
+              <div class="success-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold-2)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:28px;height:28px"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <h3 class="success-h">Request Submitted!</h3>
+              <p class="success-p">Our executive will contact you shortly.</p>
+              <p class="success-ty">Thank You.</p>
+            </div>
           </div>
         </div>
 
@@ -162,160 +133,132 @@ const faqs = [
   </section>
 
   <!-- ══ 2. WHAT IS A DEMAT ACCOUNT ════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="demat-reveal mx-auto grid max-w-[1000px] items-start gap-[72px] lg:grid-cols-[5fr_7fr]">
-        <h2 class="text-[40px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          What Is a <span class="text-[var(--color-brand)]">Demat Account?</span>
-        </h2>
-        <div class="space-y-5 text-[17px] leading-relaxed text-[var(--color-muted)]">
-          <p>An electronic account that holds your financial securities — stocks, bonds, ETFs, mutual fund units, and government securities — in digital form instead of physical certificates.</p>
-          <p>It is maintained by CDSL or NSDL through a SEBI-registered Depository Participant like Shriram Financial Services. Combined with a Trading account (opened simultaneously), it gives you the ability to buy and sell securities on NSE and BSE instantly.</p>
+  <section class="section stack" style="background:var(--sec-light);gap:48px">
+    <div class="row-2">
+      <div class="stack" style="gap:16px;justify-content:center">
+        <p class="sec-title">What Is a Demat Account?</p>
+      </div>
+      <div class="stack" style="gap:20px;justify-content:center">
+        <p class="sec-lead">An electronic account that holds your financial securities — stocks, bonds, ETFs, mutual fund units, and government securities — in digital form instead of physical certificates.</p>
+        <p class="sec-lead">It is maintained by CDSL or NSDL through a SEBI-registered Depository Participant like Shriram Financial Services. Combined with a Trading account (opened simultaneously), it gives you the ability to buy and sell securities on NSE and BSE instantly.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 3. WHY OPEN WITH SHRIRAM ══════════════════════════════════ -->
+  <section class="section stack" style="background:var(--sec-tint);gap:48px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Why Open a Demat Account With Shriram?</p>
+      <p class="sec-lead">Everything you need to invest professionally — at zero or flat-fee costs, with expert guidance from Day 1.</p>
+    </div>
+    <div class="cat-grid cat-3">
+      {benefits.map(b => (
+        <div class="cat">
+          <h4>{b.title}</h4>
+          <p>{b.desc}</p>
         </div>
-      </div>
+      ))}
     </div>
   </section>
 
-  <!-- ══ 3. WHY OPEN A DEMAT ACCOUNT ══════════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-[104px]">
-    <div class="site-wrap">
-      <div class="demat-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Why Open a Demat Account <span class="text-[var(--color-brand)]">With Shriram?</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Everything you need to invest professionally — at zero or flat-fee costs, with expert guidance from Day 1.</p>
-      </div>
-
-      <div class="demat-reveal benefits-grid overflow-hidden rounded-[14px] border-l border-t border-[var(--color-n400)]">
-        {benefits.map(b => (
-          <div class="border-b border-r border-[var(--color-n400)] bg-white px-[28px] py-[32px]">
-            <h4 class="mb-[9px] text-[19px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">{b.title}</h4>
-            <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">{b.desc}</p>
-          </div>
-        ))}
-      </div>
+  <!-- ══ 4. DOCUMENTS REQUIRED ══════════════════════════════════════ -->
+  <section class="section stack" style="background:var(--sec-light);gap:48px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Documents Required</p>
+      <p class="sec-lead">Just four documents — all uploaded digitally from your phone or laptop. No physical copies, no branch visit.</p>
     </div>
+    <div class="cat-grid cat-4">
+      {documents.map((d, i) => (
+        <div class="cat">
+          <span class="num-n">{String(i + 1).padStart(2, '0')}</span>
+          <h4>{d.label}</h4>
+          <p>{d.desc}</p>
+        </div>
+      ))}
+    </div>
+    <a class="btn-gold" href="https://ekyc.shriraminsight.com/" target="_blank" rel="noopener noreferrer" style="align-self:center">Open a Demat Account</a>
   </section>
 
-  <!-- ══ 4. DOCUMENTS REQUIRED ═════════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="demat-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Documents <span class="text-[var(--color-brand)]">Required</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Just four documents — all uploaded digitally from your phone or laptop. No physical copies, no branch visit.</p>
-      </div>
-
-      <div class="demat-reveal mx-auto grid max-w-[900px] gap-5 sm:grid-cols-2">
-        {documents.map((d, i) => (
-          <div class="product-card-light p-[34px]">
-            <h4 class="mb-5 flex items-center gap-3 text-[22px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">
-              <span class="grid h-[34px] w-[34px] shrink-0 place-items-center rounded-[8px] border border-[var(--color-n400)] text-[13px] font-bold text-[var(--color-dark-olive)]">0{i + 1}</span>
-              {d.label}
-            </h4>
-            <p class="text-[15px] leading-relaxed text-[var(--color-muted)]">{d.desc}</p>
-          </div>
-        ))}
-      </div>
-
-      <div class="demat-reveal mt-[52px] text-center">
-        <a href="https://ekyc.shriraminsight.com/" class="btn-primary" target="_blank" rel="noopener noreferrer">Open a Demat Account</a>
-      </div>
+  <!-- ══ 5. HOW TO OPEN — STEP BY STEP ══════════════════════════════ -->
+  <section class="section stack" style="background:var(--sec-tint);gap:48px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">How to Open a Demat Account — Step by Step</p>
+      <p class="sec-lead">Five simple steps. Fully digital. Complete on your phone in under 10 minutes.</p>
     </div>
+    <div class="num-grid">
+      {steps.map(s => (
+        <div class="num-item">
+          <span class="num-n">{s.n}</span>
+          <h4>{s.title}</h4>
+          <p>{s.desc}</p>
+        </div>
+      ))}
+    </div>
+    <a class="btn-gold" href="https://ekyc.shriraminsight.com/" target="_blank" rel="noopener noreferrer" style="align-self:center">Open My Demat Account</a>
   </section>
 
-  <!-- ══ 5. HOW TO OPEN — STEP BY STEP ═════════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-[104px]">
-    <div class="site-wrap">
-      <div class="demat-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          How to Open a Demat Account — <span class="text-[var(--color-brand)]">Step by Step</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Five simple steps. Fully digital. Complete on your phone in under 10 minutes.</p>
-      </div>
-
-      <div class="demat-reveal steps-grid overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
-        {steps.map(s => (
-          <div class="px-[30px] py-[34px]">
-            <div class="mb-[22px] text-[34px] font-normal leading-none text-[var(--color-brand)]">{s.n}</div>
-            <h4 class="mb-[10px] text-[19px] font-medium leading-[1.25] text-[var(--color-ink)]" style="font-family:var(--font-display)">{s.title}</h4>
-            <p class="text-[14.5px] leading-relaxed text-[var(--color-muted)]">{s.desc}</p>
-          </div>
-        ))}
-      </div>
-
-      <div class="demat-reveal mt-[52px] text-center">
-        <a href="https://ekyc.shriraminsight.com/" class="btn-primary" target="_blank" rel="noopener noreferrer">Open My Demat Account</a>
-      </div>
+  <!-- ══ 6. AM I READY? ═════════════════════════════════════════════ -->
+  <section class="section stack" style="background:var(--sec-light);gap:48px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Am I Ready to Open a Demat Account?</p>
+      <p class="sec-lead">If you can tick all five boxes below, you are ready to open your account right now.</p>
     </div>
-  </section>
-
-  <!-- ══ 6. AM I READY? ════════════════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="demat-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Am I Ready to Open a <span class="text-[var(--color-brand)]">Demat Account?</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">If you can tick all five boxes below, you are ready to open your account right now.</p>
-      </div>
-
-      <div class="demat-reveal mx-auto max-w-[720px] space-y-[14px]">
+    <div class="card check-card-full">
+      <div class="check-list">
         {readiness.map((item, i) => (
-          <div class="flex items-start gap-5 rounded-[14px] border border-[var(--color-n400)] bg-[#f8f6f1] px-[28px] py-[22px]">
-            <span class="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full bg-[var(--color-dark-olive)] text-[13px] font-bold text-[var(--color-brand)]">0{i + 1}</span>
-            <span class="text-[16px] leading-[1.7] text-[var(--color-ink)]">{item}</span>
-          </div>
-        ))}
-      </div>
-
-      <div class="demat-reveal mt-[52px] text-center">
-        <a href="https://ekyc.shriraminsight.com/" class="btn-primary" target="_blank" rel="noopener noreferrer">Open a Demat Account</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ 8. FAQ ════════════════════════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="demat-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Frequently Asked <span class="text-[var(--color-brand)]">Questions</span>
-        </h2>
-      </div>
-
-      <div class="demat-reveal mx-auto max-w-[860px] divide-y divide-[var(--color-n400)] overflow-hidden rounded-[24px] border border-[var(--color-n400)] bg-white">
-        {faqs.map(item => (
-          <details class="demat-faq group">
-            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 hover:bg-[var(--color-n100)]">
-              <span class="text-[15px] font-medium text-[var(--color-ink)]">{item.q}</span>
-              <span class="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-[var(--color-n400)] transition-transform group-open:rotate-45">
-                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" class="h-3 w-3"><path d="M6 2v8M2 6h8"/></svg>
-              </span>
-            </summary>
-            <div class="border-t border-[var(--color-n400)] bg-[var(--color-n100)] px-6 py-5">
-              <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">{item.a}</p>
-            </div>
-          </details>
+          <>
+            {i > 0 && <div class="check-sep"></div>}
+            <div class="check-row"><span class="ck">✓</span><p class="tx">{item}</p></div>
+          </>
         ))}
       </div>
     </div>
+    <a class="btn-gold" href="https://ekyc.shriraminsight.com/" target="_blank" rel="noopener noreferrer" style="align-self:center">Open a Demat Account</a>
   </section>
 
-  <!-- ══ 9. FINAL CTA ══════════════════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="demat-reveal overflow-hidden rounded-[22px] bg-[var(--color-dark-800)] px-[60px] py-[64px] text-center">
-        <p class="mb-4 text-[14px] font-medium tracking-[.04em] text-[var(--color-brand)]">Still Have Questions?</p>
-        <h3 class="mx-auto max-w-[560px] text-[38px] font-bold leading-[1.12] text-white" style="font-family:var(--font-display)">Call Our Experts for Quick Assistance</h3>
-        <p class="mx-auto mt-[18px] max-w-[480px] text-[17px] leading-relaxed text-white/70">
-          Reach us on <strong class="text-[var(--color-brand)]">1800 103 1212</strong> (Toll-Free) — or start your application online in under 10 minutes.
-        </p>
-        <div class="mt-[34px] flex flex-wrap justify-center gap-[14px]">
-          <a href="https://ekyc.shriraminsight.com/" class="btn-primary" target="_blank" rel="noopener noreferrer">Open Demat Account</a>
-          <a href="/about/support/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Talk to an Expert</a>
+  <!-- ══ 7. FAQ ══════════════════════════════════════════════════════ -->
+  <section class="faq-wrap" style="background:var(--sec-tint)">
+    <div class="faq-cols">
+      <div class="faq-left">
+        <h2 class="faq-title">Frequently asked<br>questions.</h2>
+        <div class="faq-acc" role="list">
+          {faqs.map(item => (
+            <details class="faq-item" role="listitem">
+              <summary class="faq-sum">
+                <span class="qt">{item.q}</span>
+                <svg class="faq-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8" class="faq-h"/></svg>
+              </summary>
+              <div class="qa"><p>{item.a}</p></div>
+            </details>
+          ))}
         </div>
+      </div>
+      <div class="faq-side">
+        <div class="usr" aria-hidden="true">
+          <svg viewBox="0 0 131 147" fill="none"><circle cx="65.5" cy="42" r="34" stroke="currentColor" stroke-width="2"/><path d="M4 147c0-34 27.6-61.5 61.5-61.5S127 113 127 147" stroke="currentColor" stroke-width="2"/></svg>
+        </div>
+        <div class="side-in">
+          <div class="side-tx">
+            <h4>Still Have Questions?</h4>
+            <p>Call our experts on <strong>1800 103 1212</strong> (Toll-Free) or start your application online in under 10 minutes.</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px;align-self:flex-start">
+            <a class="btn-gold" href="https://ekyc.shriraminsight.com/" target="_blank" rel="noopener noreferrer">Open Demat Account</a>
+            <a class="btn-ghost-dark" href="/about/support/">Talk to an Expert</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 8. FINAL CTA ═══════════════════════════════════════════════ -->
+  <section class="cta-sec" style="background:var(--sec-light)">
+    <div class="cta-box">
+      <h2 class="cta-h">Open a Demat Account and <span class="g">Start Investing Today</span></h2>
+      <p class="cta-sub">Free account opening · Zero delivery brokerage · CDSL-backed · 100% paperless · SEBI-registered.</p>
+      <div class="cta-row">
+        <a class="btn-gold" href="https://ekyc.shriraminsight.com/" target="_blank" rel="noopener noreferrer">Open Demat Account</a>
+        <a class="btn-ghost-dark-cta" href="/about/support/">Talk to an Expert</a>
       </div>
     </div>
   </section>
@@ -323,44 +266,252 @@ const faqs = [
 </BaseLayout>
 
 <style>
-  .demat-reveal {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+  :root {
+    --sec-light: #fef8ee;
+    --sec-tint: #f6efe1;
+    --card: #fffdf8;
+    --card-border: #e1e0db;
+    --row-line: rgba(28,28,22,.08);
+    --olive-title: #2e3914;
+    --olive-head: #2d3813;
+    --olive-deep: #1b2010;
+    --ink: #1c1c16;
+    --ink-3: #595959;
+    --muted: #73736a;
+    --gold-2: #f2b83f;
+    --gold-btn: #f3b83f;
+    --olive-ink: #2e3914;
+    --green: #009d58;
+    --pad: clamp(20px, 8vw, 144px);
+    --section-y: 72px;
+    --cta-w: 220px;
   }
-  .demat-reveal.in-view { opacity: 1; transform: none; }
+  *, *::before, *::after { box-sizing: border-box; }
+  a { color: inherit; text-decoration: none; }
+  p { line-height: 1.5; }
 
-  /* Steps: 2-col mobile → 5-col desktop with connected internal borders */
-  .steps-grid { display: grid; grid-template-columns: repeat(2, 1fr); }
-  .steps-grid > * { border-right: 1px solid var(--color-n400); border-bottom: 1px solid var(--color-n400); }
-  .steps-grid > *:nth-child(2n) { border-right: 0; }
-  .steps-grid > *:nth-last-child(-n+1) { border-bottom: 0; }
-  @media (min-width: 1024px) {
-    .steps-grid { grid-template-columns: repeat(5, 1fr); }
-    .steps-grid > * { border-right: 1px solid var(--color-n400); border-bottom: 0; }
-    .steps-grid > *:last-child { border-right: 0; }
+  .section { padding: var(--section-y) var(--pad); display: flex; flex-direction: column; }
+  .stack { display: flex; flex-direction: column; }
+
+  .sec-title { font-weight: 400; font-size: 40px; color: var(--olive-title); text-transform: capitalize; line-height: 1.5; }
+  .sec-lead  { font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.6; }
+
+  /* Hero */
+  .hero {
+    padding: 0 var(--pad);
+    background: radial-gradient(125% 210% at 100% -8%, #4f583b 0%, #363a2c 50%, #1d1d1d 100%);
+    display: flex; flex-direction: column; justify-content: center; overflow: hidden;
   }
+  .hero-inner { padding: clamp(80px,12vw,140px) 0 clamp(60px,8vw,100px); }
+  .hero-grid { display: grid; grid-template-columns: 1fr 400px; gap: 52px; align-items: center; }
+  .hero-copy { display: flex; flex-direction: column; }
+  .hero h1   { font-weight: 500; font-size: clamp(28px,4vw,44px); color: #fff; line-height: 1.15; max-width: 680px; }
+  .hero h1 .g { color: var(--gold-2); }
+  .lead      { margin-top: 24px; font-size: 18px; line-height: 1.5; color: rgba(255,255,255,.74); max-width: 540px; }
+  .cta-row   { margin-top: 38px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .hero-feats { margin-top: 54px; }
+  .feats { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; max-width: 760px; padding-top: 36px; border-top: 1px solid rgba(255,255,255,.16); }
+  .feat  { display: flex; gap: 10px; align-items: center; }
+  .feat .tk { color: var(--gold-2); font-weight: 500; font-size: 15px; }
+  .feat .lb { color: rgba(255,255,255,.9); font-weight: 500; font-size: 16px; white-space: nowrap; }
 
-  /* Benefits: 2-col mobile → 3-col desktop */
-  .benefits-grid { display: grid; grid-template-columns: repeat(2, 1fr); }
-  @media (min-width: 1024px) { .benefits-grid { grid-template-columns: repeat(3, 1fr); } }
+  /* Form card */
+  .form-card { background: var(--olive-deep); border-radius: 20px; padding: 34px; }
+  .form-card-inner { display: flex; flex-direction: column; gap: 32px; }
+  .form-head { display: flex; flex-direction: column; gap: 12px; }
+  .form-title { font-size: 24px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .form-badges { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 4px; }
+  .badge-row { display: flex; align-items: center; gap: 8px; }
+  .badge-dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,.3); }
+  .badge-tx  { font-size: 12px; font-weight: 500; color: rgba(255,255,255,.7); }
+  .form-fields { display: flex; flex-direction: column; gap: 16px; }
+  .mobile-input { display: flex; align-items: center; gap: 12px; height: 48px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.15); border-radius: 8px; padding: 0 12px; }
+  .flag-wrap { width: 18px; height: 18px; border-radius: 50%; overflow: hidden; flex: none; }
+  .flag-img { width: 100%; height: 100%; object-fit: cover; }
+  .divider { width: 1px; height: 24px; background: rgba(255,255,255,.2); flex: none; }
+  .mobile-inner { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
+  .mobile-lbl { font-size: 10px; font-weight: 500; color: rgba(255,255,255,.5); line-height: 1.2; }
+  .mobile-row { display: flex; align-items: center; gap: 4px; }
+  .code { font-size: 14px; font-weight: 500; color: #fff; }
+  .mobile-inp { flex: 1; background: transparent; border: none; outline: none; font-size: 14px; font-weight: 500; color: #fff; }
+  .mobile-inp::placeholder { color: rgba(255,255,255,.3); font-weight: 400; }
+  .consent-tx { font-size: 12px; font-weight: 500; color: rgba(255,255,255,.6); line-height: 1.5; }
+  .form-actions { display: flex; flex-direction: column; gap: 12px; }
+  .login-tx { font-size: 12px; font-weight: 500; color: rgba(255,255,255,.5); }
+  .login-link { color: #2f7ef4; }
+  .login-link:hover { text-decoration: underline; }
+  .success-state { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px; padding: 24px 0; }
+  .success-icon { width: 56px; height: 56px; border-radius: 50%; background: rgba(242,184,63,.15); display: flex; align-items: center; justify-content: center; }
+  .success-h { font-size: 20px; font-weight: 600; color: #fff; }
+  .success-p { font-size: 14px; color: rgba(255,255,255,.55); }
+  .success-ty { font-size: 22px; font-weight: 700; color: var(--gold-2); }
 
-  @media (prefers-reduced-motion: reduce) {
-    .demat-reveal { opacity: 1; transform: none; transition: none; }
+  /* Buttons */
+  .btn-gold {
+    background: var(--gold-btn); height: 40px; width: var(--cta-w);
+    border-radius: 4px; display: inline-flex; align-items: center; justify-content: center;
+    padding: 7px 20px; font-weight: 500; font-size: 12px; color: var(--olive-ink);
+    white-space: nowrap; transition: opacity .2s; text-decoration: none;
+  }
+  .btn-gold:hover { opacity: .88; }
+  .btn-ghost {
+    height: 40px; border-radius: 9px; border: 1px solid rgba(255,255,255,.4);
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 7px 26px; font-weight: 600; font-size: 15px; color: #fff;
+    transition: border-color .2s; text-decoration: none;
+  }
+  .btn-ghost:hover { border-color: #fff; }
+  .btn-ghost-dark {
+    height: 40px; border-radius: 4px; border: 1px solid rgba(27,32,16,.35);
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 7px 26px; font-weight: 500; font-size: 12px; color: var(--olive-deep);
+    transition: border-color .2s; text-decoration: none;
+  }
+  .btn-ghost-dark:hover { border-color: var(--olive-deep); }
+  .btn-ghost-dark-cta {
+    height: 40px; border-radius: 4px; border: 1px solid rgba(255,255,255,.4);
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 7px 26px; font-weight: 500; font-size: 12px; color: #fff;
+    transition: border-color .2s; text-decoration: none;
+  }
+  .btn-ghost-dark-cta:hover { border-color: #fff; }
+
+  /* Row 2 */
+  .row-2 { display: grid; grid-template-columns: 1fr 1.4fr; gap: 72px; align-items: start; }
+
+  /* Cards */
+  .card { background: var(--card); border: 1px solid var(--card-border); border-radius: 24px; padding: 32px; }
+  .check-card-full { background: var(--card); border: 1px solid var(--card-border); border-radius: 24px; padding: 32px; }
+  .check-list { display: flex; flex-direction: column; gap: 20px; }
+  .check-row  { display: flex; gap: 14px; align-items: flex-start; }
+  .check-row .ck { color: var(--green); font-weight: 700; font-size: 15px; line-height: 25.5px; width: 13px; flex: none; }
+  .check-row .tx { flex: 1 0 0; min-width: 0; font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.5; }
+  .check-sep  { height: 1px; background: var(--row-line); width: 100%; }
+
+  /* Cat grid */
+  .cat-grid {
+    border: 1px solid var(--card-border); border-radius: 24px;
+    overflow: hidden; display: grid; background: var(--card);
+  }
+  .cat-3 { grid-template-columns: repeat(3, 1fr); }
+  .cat-4 { grid-template-columns: repeat(4, 1fr); }
+  .cat {
+    background: var(--card); padding: 32px;
+    display: flex; flex-direction: column; gap: 12px;
+    border-right: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border);
+  }
+  .cat-3 .cat:nth-child(3n)  { border-right: 0; }
+  .cat-3 .cat:nth-child(n+4) { border-bottom: 0; }
+  .cat-3 .cat:last-child     { border-right: 0; }
+  .cat-4 .cat:nth-child(4n)  { border-right: 0; }
+  .cat-4 .cat:nth-child(n+5) { border-bottom: 0; }
+  .cat-4 .cat:last-child     { border-right: 0; }
+  .cat h4 { font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.5; }
+  .cat p  { font-weight: 400; font-size: 16px; color: var(--muted); line-height: 1.5; }
+
+  /* Num grid */
+  .num-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    background: var(--card); border: 1px solid var(--card-border);
+    border-radius: 24px; overflow: hidden;
+  }
+  .num-item {
+    padding: 32px; display: flex; flex-direction: column; gap: 12px;
+    border-right: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border);
+  }
+  .num-item:nth-child(3n)        { border-right: 0; }
+  .num-item:nth-last-child(-n+3) { border-bottom: 0; }
+  .num-item:last-child           { border-right: 0; }
+  .num-n { font-weight: 400; font-size: 36px; color: var(--gold-2); line-height: 1; display: block; }
+  .num-item h4 { font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.4; }
+  .num-item p  { font-weight: 400; font-size: 15px; color: var(--ink-3); line-height: 1.5; }
+
+  /* FAQ */
+  .faq-wrap { padding: 100px var(--pad); display: flex; flex-direction: column; justify-content: center; }
+  .faq-cols  { display: flex; gap: 48px; align-items: stretch; }
+  .faq-left  { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; gap: 48px; }
+  .faq-title { font-weight: 400; font-size: 40px; color: var(--olive-title); text-transform: capitalize; line-height: 1.5; }
+  .faq-acc   { border-radius: 24px; overflow: hidden; display: flex; flex-direction: column; gap: 2px; }
+  .faq-item  { background: var(--card); list-style: none; }
+  .faq-sum   { display: flex; align-items: flex-start; justify-content: space-between; gap: 40px; padding: 24px; cursor: pointer; list-style: none; }
+  .faq-sum::-webkit-details-marker { display: none; }
+  .faq-item .qt { font-weight: 500; font-size: 14px; color: #333; line-height: 1.5; flex: 1; }
+  .faq-item[open] .qt { font-weight: 600; }
+  .faq-icon  { width: 16px; height: 16px; flex: none; color: #404040; margin-top: 2px; }
+  .faq-h     { transition: opacity .28s ease; }
+  .faq-item[open] .faq-h { opacity: 0; }
+  .qa { padding: 0 24px 20px; }
+  .qa p { font-weight: 400; font-size: 14px; color: #404040; line-height: 1.5; }
+  .faq-side {
+    width: 400px; flex: none;
+    background: var(--card); border: 1px solid var(--card-border);
+    border-radius: 24px; padding: 32px;
+    display: flex; flex-direction: column; gap: 40px; justify-content: flex-end;
+    position: relative; overflow: hidden;
+  }
+  .usr { position: absolute; left: 32px; top: 48px; width: 130px; height: 147px; opacity: .1; }
+  .usr svg { display: block; width: 100%; height: 100%; color: var(--olive-deep); }
+  .side-in  { display: flex; flex-direction: column; gap: 32px; position: relative; }
+  .side-tx  { display: flex; flex-direction: column; gap: 8px; color: #222320; }
+  .side-tx h4 { font-weight: 500; font-size: 20px; line-height: 28px; }
+  .side-tx p  { font-weight: 400; font-size: 14px; line-height: 22px; }
+
+  /* CTA */
+  .cta-sec { padding: var(--section-y) var(--pad); }
+  .cta-box {
+    border-radius: 22px; padding: 64px 60px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 20px; text-align: center; background: var(--olive-deep);
+  }
+  .cta-h   { font-weight: 400; font-size: 36px; color: #fff; line-height: 1.4; max-width: 640px; }
+  .cta-h .g { color: var(--gold-2); }
+  .cta-sub { font-size: 16px; color: rgba(255,255,255,.65); line-height: 1.5; }
+  .cta-box .cta-row { margin-top: 8px; }
+  .cta-box .btn-gold { width: auto; }
+
+  @media (max-width: 1024px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+    .hero h1 { font-size: 32px; }
+    .row-2 { grid-template-columns: 1fr; gap: 32px; }
+    .faq-side { width: 320px; }
+    .cat-4 { grid-template-columns: repeat(2, 1fr); }
+    .cat-4 .cat:nth-child(4n) { border-right: inherit; }
+    .cat-4 .cat:nth-child(n+5) { border-bottom: inherit; }
+    .cat-4 .cat:nth-child(2n) { border-right: 0; }
+    .cat-4 .cat:nth-last-child(-n+2) { border-bottom: 0; }
+    .cat-4 .cat:last-child { border-right: 0; border-bottom: 0; }
+  }
+  @media (max-width: 768px) {
+    .faq-cols { flex-direction: column; }
+    .faq-side { width: 100%; }
+    .cat-3 { grid-template-columns: 1fr 1fr; }
+    .cat-3 .cat:nth-child(3n) { border-right: inherit; }
+    .cat-3 .cat:nth-child(n+4) { border-bottom: inherit; }
+    .cat-3 .cat:nth-child(2n) { border-right: 0; }
+    .cat-3 .cat:nth-last-child(-n+2) { border-bottom: 0; }
+    .cat-3 .cat:last-child { border-right: 0; border-bottom: 0; }
+    .num-grid { grid-template-columns: repeat(2, 1fr); }
+    .num-item:nth-child(3n) { border-right: inherit; }
+    .num-item:nth-last-child(-n+3) { border-bottom: inherit; }
+    .num-item:nth-child(2n) { border-right: 0; }
+    .sec-title { font-size: 28px; }
+    .faq-title { font-size: 28px; white-space: normal; }
+    .cta-box { padding: 40px 24px; }
+    .cta-h { font-size: 26px; }
+  }
+  @media (max-width: 480px) {
+    .cat-3 { grid-template-columns: 1fr; }
+    .cat-3 .cat { border-right: 0; border-bottom: 1px solid var(--card-border); }
+    .cat-3 .cat:last-child { border-bottom: 0; }
+    .cat-4 { grid-template-columns: 1fr; }
+    .cat-4 .cat { border-right: 0; border-bottom: 1px solid var(--card-border); }
+    .cat-4 .cat:last-child { border-bottom: 0; }
+    .num-grid { grid-template-columns: 1fr; }
+    .num-item { border-right: 0; }
   }
 </style>
 
 <script>
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        (e.target as HTMLElement).classList.add('in-view');
-        obs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.08 });
-  document.querySelectorAll('.demat-reveal').forEach(el => obs.observe(el));
-
   document.getElementById('demat-submit')?.addEventListener('click', () => {
     const mobile = (document.getElementById('demat-mobile') as HTMLInputElement).value.trim();
     if (mobile.replace(/\D/g, '').length < 10) {
@@ -369,15 +520,15 @@ const faqs = [
     }
     const formFields = document.getElementById('demat-form-fields');
     const success = document.getElementById('demat-success');
-    if (formFields) formFields.classList.add('hidden');
-    if (success) success.classList.remove('hidden');
+    if (formFields) formFields.style.display = 'none';
+    if (success) success.style.display = 'flex';
   });
 
-  document.querySelectorAll<HTMLDetailsElement>('.demat-faq').forEach(d => {
-    d.addEventListener('toggle', () => {
-      if (d.open) document.querySelectorAll<HTMLDetailsElement>('.demat-faq').forEach(o => {
-        if (o !== d) o.removeAttribute('open');
-      });
+  document.querySelectorAll('.faq-acc').forEach(acc => {
+    acc.addEventListener('click', e => {
+      const item = e.target instanceof Element ? e.target.closest('details') : null;
+      if (!item) return;
+      acc.querySelectorAll('details[open]').forEach(d => { if (d !== item) d.removeAttribute('open'); });
     });
   });
 </script>

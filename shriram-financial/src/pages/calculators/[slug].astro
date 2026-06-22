@@ -225,211 +225,206 @@ const { slug, title, subtitle, inputs, whatIs, howHelps, howWorks, advantages, f
   description={subtitle}
 >
 
-  <!-- ══ 1. HERO + CALCULATOR ═══════════════════════════════════════ -->
-  <section class="border-b border-[var(--color-n400)] bg-[#faf8f4] py-12 lg:py-16">
-    <div class="site-wrap">
-
-      <h1 class="reveal reveal-1 mb-8 text-[28px] font-bold text-[var(--color-ink)] sm:text-[34px]" style="font-family:var(--font-display)">
-        {title}
-      </h1>
-
-      <div class="grid gap-6 lg:grid-cols-[1fr_280px]">
-
-        <!-- Calculator panel -->
-        <div class="rounded-[20px] border border-[var(--color-n400)] bg-white p-6 shadow-sm lg:p-8">
-          <div class="grid gap-8 md:grid-cols-[1fr_260px]">
-
-            <!-- Inputs -->
-            <div class="space-y-7">
-              {inputs.map((inp: any) => (
-                <div>
-                  <div class="mb-2 flex items-center justify-between">
-                    <label for={inp.id} class="text-[13px] font-semibold text-[var(--color-ink)]">{inp.label}</label>
-                    <span id={`${inp.id}-display`} class="text-[14px] font-bold text-[var(--color-dark-olive)]">
-                      {inp.prefix ?? ''}{inp.value.toLocaleString('en-IN')}{inp.suffix ?? ''}
-                    </span>
-                  </div>
-                  <input
-                    type="range"
-                    id={inp.id}
-                    min={inp.min}
-                    max={inp.max}
-                    step={inp.step}
-                    value={inp.value}
-                    class="calc-slider w-full"
-                    data-prefix={inp.prefix ?? ''}
-                    data-suffix={inp.suffix ?? ''}
-                  />
-                  <div class="mt-1 flex justify-between text-[11px] text-[var(--color-subtle)]">
-                    <span>{inp.prefix ?? ''}{inp.min.toLocaleString('en-IN')}{inp.suffix ?? ''}</span>
-                    <span>{inp.prefix ?? ''}{inp.max.toLocaleString('en-IN')}{inp.suffix ?? ''}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <!-- Results -->
-            <div class="flex flex-col gap-4">
-              <div class="flex flex-1 items-center justify-center">
-                <div class="relative h-40 w-40">
-                  <svg viewBox="0 0 120 120" class="h-full w-full -rotate-90">
-                    <circle cx="60" cy="60" r="50" fill="none" stroke="var(--color-n400)" stroke-width="12"/>
-                    <circle id="donut-returns" cx="60" cy="60" r="50" fill="none" stroke="var(--color-brand)" stroke-width="12" stroke-dasharray="314 314" stroke-dashoffset="157" stroke-linecap="round"/>
-                  </svg>
-                  <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
-                    <div class="text-[10px] text-[var(--color-muted)]">Total Value</div>
-                    <div id="calc-total" class="text-[16px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">₹0</div>
-                  </div>
-                </div>
-              </div>
-              <div class="space-y-2.5">
-                <div class="flex items-center justify-between rounded-xl bg-[var(--color-n100)] px-4 py-3">
-                  <div class="flex items-center gap-2 text-[12px] text-[var(--color-muted)]">
-                    <span class="h-2.5 w-2.5 rounded-full bg-[var(--color-n400)]"></span>
-                    <span id="calc-invested-label">Invested Amount</span>
-                  </div>
-                  <span id="calc-invested" class="text-[13px] font-bold text-[var(--color-ink)]">₹0</span>
-                </div>
-                <div class="flex items-center justify-between rounded-xl bg-[var(--color-brand-light)] px-4 py-3">
-                  <div class="flex items-center gap-2 text-[12px] text-[var(--color-muted)]">
-                    <span class="h-2.5 w-2.5 rounded-full bg-[var(--color-brand)]"></span>
-                    <span id="calc-gains-label">Estimated Returns</span>
-                  </div>
-                  <span id="calc-gains" class="text-[13px] font-bold text-[var(--color-brand-deep)]">₹0</span>
-                </div>
-              </div>
-            </div>
-
-          </div>
+  <!-- ══ 1. HERO ════════════════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <h1>{title} — <span class="g">Free Online Tool</span></h1>
+      <p class="lead">{subtitle}</p>
+      <div class="cta-row">
+        <a class="btn-gold" href="/about/open-demat-account/">Open Demat Account</a>
+        <a class="btn-ghost" href="/calculators/">All Calculators</a>
+      </div>
+      <div class="hero-feats">
+        <div class="feats">
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;100% Free</span></div>
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;No Sign-Up Required</span></div>
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;Instant Results</span></div>
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;Indian Market Benchmarks</span></div>
         </div>
-
-        <!-- CTA card -->
-        <div class="flex flex-col justify-between rounded-[20px] bg-[var(--color-dark-800)] p-6 lg:p-8">
-          <div>
-            <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Get Started</p>
-            <h2 class="mt-3 text-[20px] font-bold leading-snug text-white lg:text-[22px]" style="font-family:var(--font-display)">
-              Ready to build your future?
-            </h2>
-            <p class="mt-3 text-[13px] leading-relaxed text-white/60">
-              Open a free Demat account and start investing in minutes — completely paperless.
-            </p>
-          </div>
-          <a
-            href="/about/open-demat-account/"
-            class="mt-8 flex h-11 w-full items-center justify-center rounded-[6px] bg-[var(--color-brand)] text-[13px] font-bold text-[var(--color-dark-800)] transition-colors hover:bg-[var(--color-brand-hover)]"
-          >
-            Open Demat Account
-          </a>
-        </div>
-
       </div>
     </div>
   </section>
 
-  <!-- ══ 2. WHAT IS ════════════════════════════════════════════════ -->
-  <section class="bg-white py-14 lg:py-20">
-    <div class="site-wrap max-w-4xl">
-      <h2 class="text-center text-[24px] font-bold text-[var(--color-ink)] lg:text-[32px]" style="font-family:var(--font-display)">
-        What is {title}
-      </h2>
-      <p class="mt-6 text-[15px] leading-relaxed text-[var(--color-muted)] lg:text-[16px]">{whatIs}</p>
+  <!-- ══ 2. CALCULATOR PANEL ════════════════════════════════════════ -->
+  <section class="section stack calc-section" style="background:var(--sec-light);gap:32px">
+    <div class="calc-grid">
+
+      <!-- Calculator card -->
+      <div class="calc-card">
+        <div class="calc-inner">
+
+          <!-- Inputs -->
+          <div class="calc-inputs">
+            {inputs.map((inp: any) => (
+              <div class="inp-wrap">
+                <div class="inp-header">
+                  <label for={inp.id} class="inp-label">{inp.label}</label>
+                  <span id={`${inp.id}-display`} class="inp-val">
+                    {inp.prefix ?? ''}{inp.value.toLocaleString('en-IN')}{inp.suffix ?? ''}
+                  </span>
+                </div>
+                <input
+                  type="range"
+                  id={inp.id}
+                  min={inp.min}
+                  max={inp.max}
+                  step={inp.step}
+                  value={inp.value}
+                  class="calc-slider"
+                  data-prefix={inp.prefix ?? ''}
+                  data-suffix={inp.suffix ?? ''}
+                />
+                <div class="inp-range">
+                  <span>{inp.prefix ?? ''}{inp.min.toLocaleString('en-IN')}{inp.suffix ?? ''}</span>
+                  <span>{inp.prefix ?? ''}{inp.max.toLocaleString('en-IN')}{inp.suffix ?? ''}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <!-- Results -->
+          <div class="calc-results">
+            <div class="donut-wrap">
+              <div class="donut-ring">
+                <svg viewBox="0 0 120 120" class="donut-svg">
+                  <circle cx="60" cy="60" r="50" fill="none" stroke="var(--card-border)" stroke-width="12"/>
+                  <circle id="donut-returns" cx="60" cy="60" r="50" fill="none" stroke="var(--gold-2)" stroke-width="12" stroke-dasharray="314 314" stroke-dashoffset="157" stroke-linecap="round"/>
+                </svg>
+                <div class="donut-center">
+                  <div class="donut-lbl">Total Value</div>
+                  <div id="calc-total" class="donut-val">₹0</div>
+                </div>
+              </div>
+            </div>
+            <div class="result-stats">
+              <div class="stat-row stat-invested">
+                <div class="stat-left">
+                  <span class="stat-dot stat-dot-inv"></span>
+                  <span id="calc-invested-label" class="stat-name">Invested Amount</span>
+                </div>
+                <span id="calc-invested" class="stat-amt">₹0</span>
+              </div>
+              <div class="stat-row stat-gains">
+                <div class="stat-left">
+                  <span class="stat-dot stat-dot-ret"></span>
+                  <span id="calc-gains-label" class="stat-name">Estimated Returns</span>
+                </div>
+                <span id="calc-gains" class="stat-amt stat-amt-gold">₹0</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- CTA card -->
+      <div class="cta-aside">
+        <div class="cta-aside-in">
+          <h2 class="cta-aside-h">Ready to build your future?</h2>
+          <p class="cta-aside-p">Open a free Demat account and start investing in minutes — completely paperless, SEBI-registered.</p>
+        </div>
+        <a class="btn-gold" href="/about/open-demat-account/">Open Demat Account</a>
+      </div>
+
     </div>
   </section>
 
-  <!-- ══ 3. HOW IT HELPS ══════════════════════════════════════════ -->
-  <section class="bg-[#f5f5f5] py-14 lg:py-20">
-    <div class="site-wrap max-w-4xl">
-      <h2 class="text-center text-[24px] font-bold text-[var(--color-ink)] lg:text-[32px]" style="font-family:var(--font-display)">
-        How Can {title} Help You
-      </h2>
-      <p class="mt-6 text-[15px] leading-relaxed text-[var(--color-muted)] lg:text-[16px]">{howHelps.body}</p>
-      <ul class="mt-5 space-y-3">
-        {howHelps.points.map((p: string) => (
-          <li class="flex items-start gap-3 text-[15px] text-[var(--color-muted)]">
-            <span class="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-[var(--color-brand)]"></span>
-            {p}
-          </li>
+  <!-- ══ 3. WHAT IS ═════════════════════════════════════════════════ -->
+  <section class="section stack" style="background:var(--sec-tint);gap:32px">
+    <p class="sec-title">What is {title}?</p>
+    <p class="sec-lead">{whatIs}</p>
+  </section>
+
+  <!-- ══ 4. HOW IT HELPS ════════════════════════════════════════════ -->
+  <section class="section stack" style="background:var(--sec-light);gap:48px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">How Can {title} Help You?</p>
+      <p class="sec-lead">{howHelps.body}</p>
+    </div>
+    <div class="card check-card-full">
+      <div class="check-list">
+        {howHelps.points.map((p: string, i: number) => (
+          <>
+            {i > 0 && <div class="check-sep"></div>}
+            <div class="check-row"><span class="ck">✓</span><p class="tx">{p}</p></div>
+          </>
         ))}
-      </ul>
+      </div>
     </div>
   </section>
 
-  <!-- ══ 4. HOW IT WORKS ══════════════════════════════════════════ -->
-  <section class="bg-white py-14 lg:py-20">
-    <div class="site-wrap max-w-4xl">
-      <h2 class="text-center text-[24px] font-bold text-[var(--color-ink)] lg:text-[32px]" style="font-family:var(--font-display)">
-        How Does {title} Work
-      </h2>
-      <p class="mt-6 text-[15px] leading-relaxed text-[var(--color-muted)] lg:text-[16px]">{howWorks}</p>
-    </div>
+  <!-- ══ 5. HOW IT WORKS ════════════════════════════════════════════ -->
+  <section class="section stack" style="background:var(--sec-tint);gap:32px">
+    <p class="sec-title">How Does {title} Work?</p>
+    <p class="sec-lead">{howWorks}</p>
   </section>
 
-  <!-- ══ 5. ADVANTAGES ════════════════════════════════════════════ -->
-  <section class="bg-[#f5f5f5] py-14 lg:py-20">
-    <div class="site-wrap max-w-4xl">
-      <h2 class="text-center text-[24px] font-bold text-[var(--color-ink)] lg:text-[32px]" style="font-family:var(--font-display)">
-        Advantages of {title}
-      </h2>
-      <p class="mt-6 text-[15px] leading-relaxed text-[var(--color-muted)] lg:text-[16px]">{advantages.body}</p>
-      <ul class="mt-5 space-y-3">
-        {advantages.points.map((p: string) => (
-          <li class="flex items-start gap-3 text-[15px] text-[var(--color-muted)]">
-            <span class="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-[var(--color-brand)]"></span>
-            {p}
-          </li>
+  <!-- ══ 6. ADVANTAGES ══════════════════════════════════════════════ -->
+  <section class="section stack" style="background:var(--sec-light);gap:48px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Advantages of {title}</p>
+      <p class="sec-lead">{advantages.body}</p>
+    </div>
+    <div class="card check-card-full">
+      <div class="check-list">
+        {advantages.points.map((p: string, i: number) => (
+          <>
+            {i > 0 && <div class="check-sep"></div>}
+            <div class="check-row"><span class="ck">✓</span><p class="tx">{p}</p></div>
+          </>
         ))}
-      </ul>
+      </div>
     </div>
   </section>
 
-  <!-- ══ 6. EXPLORE MORE ══════════════════════════════════════════ -->
-  <section class="bg-[#f5f5f5] py-14 lg:py-20">
-    <div class="site-wrap">
-      <h2 class="mb-10 text-center text-[24px] font-bold text-[var(--color-ink)] lg:text-[32px]" style="font-family:var(--font-display)">
-        Explore More
-      </h2>
-      <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-        {relatedCalcs.map((c: any) => (
-          <a
-            href={`/calculators/${c.slug}/`}
-            class="group flex flex-col items-start justify-between rounded-[16px] border border-[var(--color-n400)] bg-white p-5 transition-all hover:-translate-y-1 hover:border-[var(--color-brand)]/30 hover:shadow-md"
-            style="min-height: 120px;"
-          >
-            <h3 class="text-[15px] font-bold text-[var(--color-ink)] group-hover:text-[var(--color-dark-olive)]" style="font-family:var(--font-display)">{c.title}</h3>
-            <span class="mt-4 text-[12px] font-semibold text-[var(--color-brand)]">Calculate →</span>
-          </a>
-        ))}
-        <a
-          href="/calculators/sip/"
-          class="group flex flex-col items-start justify-between rounded-[16px] border border-dashed border-[var(--color-n400)] bg-white/50 p-5 transition-all hover:-translate-y-1"
-          style="min-height: 120px;"
-        >
-          <h3 class="text-[15px] font-bold text-[var(--color-muted)]">All Calculators</h3>
-          <span class="mt-4 text-[12px] font-semibold text-[var(--color-muted)]">View Hub →</span>
+  <!-- ══ 7. EXPLORE MORE ════════════════════════════════════════════ -->
+  <section class="section stack" style="background:var(--sec-tint);gap:48px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Explore More Calculators</p>
+      <p class="sec-lead">Use these free calculators to plan every aspect of your financial life — from monthly SIP investing to retirement income planning.</p>
+    </div>
+    <div class="cat-grid cat-3">
+      {relatedCalcs.map((c: any) => (
+        <a href={`/calculators/${c.slug}/`} class="cat calc-cat">
+          <h3>{c.title}</h3>
+          <span class="calc-go">Calculate →</span>
         </a>
-      </div>
+      ))}
+      <a href="/calculators/" class="cat calc-cat">
+        <h3 style="color:var(--muted)">All Calculators</h3>
+        <span class="calc-go" style="color:var(--muted)">View Hub →</span>
+      </a>
     </div>
   </section>
 
-  <!-- ══ 7. FAQ ════════════════════════════════════════════════════ -->
-  <section class="bg-white py-14 lg:py-20">
-    <div class="site-wrap max-w-3xl">
-      <h2 class="text-center text-[24px] font-bold text-[var(--color-ink)] lg:text-[32px]" style="font-family:var(--font-display)">
-        Frequently Asked Questions
-      </h2>
-      <p class="mt-2 text-center text-[14px] text-[var(--color-brand)]">Got Questions?</p>
-      <div class="mt-8 rounded-[16px] border border-[var(--color-n400)] bg-white" id="faq-block">
-        {faqs.map((faq: any, i: number) => (
-          <details class={`faq-row group px-6 ${i < faqs.length - 1 ? 'border-b border-[var(--color-n400)]' : ''}`}>
-            <summary class="flex cursor-pointer items-center justify-between py-5 text-[15px] font-semibold text-[var(--color-ink)]">
-              {faq.q}
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="h-4 w-4 flex-shrink-0 text-[var(--color-muted)] transition-transform group-open:rotate-180">
-                <path d="M6 9l6 6 6-6"/>
-              </svg>
-            </summary>
-            <p class="pb-5 text-[14px] leading-relaxed text-[var(--color-muted)]">{faq.a}</p>
-          </details>
-        ))}
+  <!-- ══ 8. FAQ ════════════════════════════════════════════════════ -->
+  <section class="faq-wrap" style="background:var(--sec-light)">
+    <div class="faq-cols">
+      <div class="faq-left">
+        <h2 class="faq-title">Frequently asked<br>questions.</h2>
+        <div class="faq-acc" role="list">
+          {faqs.map((faq: any) => (
+            <details class="faq-item" role="listitem">
+              <summary class="faq-sum">
+                <span class="qt">{faq.q}</span>
+                <svg class="faq-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8" class="faq-h"/></svg>
+              </summary>
+              <div class="qa"><p>{faq.a}</p></div>
+            </details>
+          ))}
+        </div>
+      </div>
+      <div class="faq-side">
+        <div class="usr" aria-hidden="true">
+          <svg viewBox="0 0 131 147" fill="none"><circle cx="65.5" cy="42" r="34" stroke="currentColor" stroke-width="2"/><path d="M4 147c0-34 27.6-61.5 61.5-61.5S127 113 127 147" stroke="currentColor" stroke-width="2"/></svg>
+        </div>
+        <div class="side-in">
+          <div class="side-tx">
+            <h4>Start Investing Today</h4>
+            <p>Open a free Demat account with Shriram and put your calculations into action — zero delivery brokerage, SEBI-registered.</p>
+          </div>
+          <a class="btn-gold" href="/about/open-demat-account/" style="align-self:flex-start">Open Demat Account</a>
+        </div>
       </div>
     </div>
   </section>
@@ -437,34 +432,217 @@ const { slug, title, subtitle, inputs, whatIs, howHelps, howWorks, advantages, f
 </BaseLayout>
 
 <style>
+  :root {
+    --sec-light: #fef8ee;
+    --sec-tint: #f6efe1;
+    --card: #fffdf8;
+    --card-border: #e1e0db;
+    --row-line: rgba(28,28,22,.08);
+    --olive-title: #2e3914;
+    --olive-deep: #1b2010;
+    --ink: #1c1c16;
+    --ink-2: #46463c;
+    --ink-3: #595959;
+    --muted: #73736a;
+    --gold-2: #f2b83f;
+    --gold-btn: #f3b83f;
+    --olive-ink: #2e3914;
+    --green: #009d58;
+    --pad: clamp(20px, 8vw, 144px);
+    --section-y: 72px;
+    --cta-w: 220px;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  a { color: inherit; text-decoration: none; }
+  p { line-height: 1.5; }
+
+  .section { padding: var(--section-y) var(--pad); display: flex; flex-direction: column; }
+  .stack { display: flex; flex-direction: column; }
+
+  .sec-title { font-weight: 400; font-size: 40px; color: var(--olive-title); text-transform: capitalize; line-height: 1.5; }
+  .sec-lead  { font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.6; }
+
+  /* Hero */
+  .hero {
+    padding: 0 var(--pad);
+    background: radial-gradient(125% 210% at 100% -8%, #4f583b 0%, #363a2c 50%, #1d1d1d 100%);
+    display: flex; flex-direction: column; justify-content: center; overflow: hidden;
+  }
+  .hero-inner { padding: clamp(80px,12vw,140px) 0 clamp(48px,6vw,80px); display: flex; flex-direction: column; }
+  .hero h1   { font-weight: 500; font-size: 40px; color: #fff; line-height: 1.5; max-width: 800px; }
+  .hero h1 .g { color: var(--gold-2); }
+  .hero .lead { margin-top: 32px; font-size: 18px; line-height: 1.5; color: rgba(255,255,255,.74); max-width: 620px; }
+  .cta-row   { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .hero-feats { margin-top: 40px; }
+  .feats { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 16px; max-width: 760px; padding-top: 36px; border-top: 1px solid rgba(255,255,255,.16); }
+  .feat  { display: flex; gap: 10px; align-items: center; }
+  .feat .tk { color: var(--gold-2); font-weight: 500; font-size: 15px; width: 13px; }
+  .feat .lb { color: rgba(255,255,255,.9); font-weight: 500; font-size: 16px; white-space: nowrap; }
+
+  /* Buttons */
+  .btn-gold {
+    background: var(--gold-btn); height: 40px; width: var(--cta-w);
+    border-radius: 4px; display: inline-flex; align-items: center; justify-content: center;
+    padding: 7px 20px; font-weight: 500; font-size: 12px; color: var(--olive-ink);
+    white-space: nowrap; transition: opacity .2s;
+  }
+  .btn-gold:hover { opacity: .88; }
+  .btn-ghost {
+    height: 40px; border-radius: 9px; border: 1px solid rgba(255,255,255,.4);
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 7px 26px; font-weight: 600; font-size: 15px; color: #fff;
+    transition: border-color .2s;
+  }
+  .btn-ghost:hover { border-color: #fff; }
+
+  /* Calculator section */
+  .calc-section { gap: 0; padding-top: var(--section-y); padding-bottom: var(--section-y); }
+  .calc-grid { display: grid; grid-template-columns: 1fr 260px; gap: 24px; align-items: start; }
+  .calc-card {
+    background: var(--card); border: 1px solid var(--card-border);
+    border-radius: 24px; padding: 32px;
+  }
+  .calc-inner { display: grid; grid-template-columns: 1fr 240px; gap: 32px; align-items: start; }
+  .calc-inputs { display: flex; flex-direction: column; gap: 28px; }
+  .inp-wrap { display: flex; flex-direction: column; gap: 6px; }
+  .inp-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+  .inp-label { font-weight: 600; font-size: 13px; color: var(--ink); }
+  .inp-val   { font-weight: 700; font-size: 14px; color: var(--olive-title); }
+  .inp-range { display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .calc-results { display: flex; flex-direction: column; gap: 16px; }
+  .donut-wrap { display: flex; align-items: center; justify-content: center; }
+  .donut-ring { position: relative; width: 160px; height: 160px; }
+  .donut-svg  { width: 100%; height: 100%; transform: rotate(-90deg); display: block; }
+  .donut-center {
+    position: absolute; inset: 0; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; text-align: center;
+  }
+  .donut-lbl { font-size: 10px; color: var(--muted); }
+  .donut-val { font-size: 16px; font-weight: 700; color: var(--ink); }
+  .result-stats { display: flex; flex-direction: column; gap: 8px; }
+  .stat-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; border-radius: 10px; }
+  .stat-left { display: flex; align-items: center; gap: 8px; }
+  .stat-dot { width: 10px; height: 10px; border-radius: 50%; flex: none; }
+  .stat-dot-inv { background: var(--card-border); }
+  .stat-dot-ret { background: var(--gold-2); }
+  .stat-name { font-size: 12px; color: var(--muted); }
+  .stat-amt  { font-size: 13px; font-weight: 700; color: var(--ink); }
+  .stat-amt-gold { color: var(--olive-title); }
+  .stat-invested { background: var(--sec-tint); }
+  .stat-gains { background: rgba(242,184,63,.12); }
+
+  /* CTA aside */
+  .cta-aside {
+    background: var(--olive-deep); border-radius: 24px; padding: 32px;
+    display: flex; flex-direction: column; gap: 32px; justify-content: space-between;
+    min-height: 280px;
+  }
+  .cta-aside-in { display: flex; flex-direction: column; gap: 12px; }
+  .cta-aside-h { font-weight: 500; font-size: 20px; color: #fff; line-height: 1.4; }
+  .cta-aside-p { font-size: 14px; color: rgba(255,255,255,.65); line-height: 1.5; }
+  .cta-aside .btn-gold { width: 100%; }
+
+  /* Slider */
   .calc-slider {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 100%;
-    height: 4px;
-    border-radius: 2px;
-    outline: none;
-    cursor: pointer;
+    -webkit-appearance: none; appearance: none;
+    width: 100%; height: 4px; border-radius: 2px; outline: none; cursor: pointer;
   }
   .calc-slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: var(--color-brand);
-    cursor: pointer;
-    border: 2px solid #fff;
-    box-shadow: 0 1px 6px rgba(0,0,0,0.18);
+    -webkit-appearance: none; appearance: none;
+    width: 20px; height: 20px; border-radius: 50%;
+    background: var(--gold-btn); cursor: pointer;
+    border: 2px solid #fff; box-shadow: 0 1px 6px rgba(0,0,0,.18);
   }
   .calc-slider::-moz-range-thumb {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: var(--color-brand);
-    cursor: pointer;
-    border: 2px solid #fff;
-    box-shadow: 0 1px 6px rgba(0,0,0,0.18);
+    width: 20px; height: 20px; border-radius: 50%;
+    background: var(--gold-btn); cursor: pointer;
+    border: 2px solid #fff; box-shadow: 0 1px 6px rgba(0,0,0,.18);
+  }
+
+  /* Cards & check */
+  .card { background: var(--card); border: 1px solid var(--card-border); border-radius: 24px; padding: 32px; }
+  .check-card-full { background: var(--card); border: 1px solid var(--card-border); border-radius: 24px; padding: 32px; }
+  .check-list { display: flex; flex-direction: column; gap: 20px; }
+  .check-row  { display: flex; gap: 14px; align-items: flex-start; }
+  .check-row .ck { color: var(--green); font-weight: 700; font-size: 15px; line-height: 25.5px; width: 13px; flex: none; }
+  .check-row .tx { flex: 1 0 0; min-width: 0; font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.5; }
+  .check-sep  { height: 1px; background: var(--row-line); width: 100%; }
+
+  /* Cat grid */
+  .cat-grid {
+    border: 1px solid var(--card-border); border-radius: 24px;
+    overflow: hidden; display: grid; background: var(--card);
+  }
+  .cat-3 { grid-template-columns: repeat(3, 1fr); }
+  .cat {
+    background: var(--card); padding: 32px;
+    display: flex; flex-direction: column; gap: 12px;
+    border-right: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border);
+  }
+  .cat-3 .cat:nth-child(3n)  { border-right: 0; }
+  .cat-3 .cat:nth-child(n+4) { border-bottom: 0; }
+  .cat-3 .cat:last-child     { border-right: 0; }
+  .cat h3 { font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.5; }
+  .calc-cat { text-decoration: none; transition: background .15s; }
+  .calc-cat:hover { background: var(--sec-light); }
+  .calc-go { font-weight: 600; font-size: 13px; color: var(--gold-2); }
+
+  /* FAQ */
+  .faq-wrap { padding: 100px var(--pad); background: var(--sec-light); display: flex; flex-direction: column; justify-content: center; }
+  .faq-cols  { display: flex; gap: 48px; align-items: stretch; }
+  .faq-left  { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; gap: 48px; }
+  .faq-title { font-weight: 400; font-size: 40px; color: var(--olive-title); text-transform: capitalize; line-height: 1.5; }
+  .faq-acc   { border-radius: 24px; overflow: hidden; display: flex; flex-direction: column; gap: 2px; }
+  .faq-item  { background: var(--card); list-style: none; }
+  .faq-sum   { display: flex; align-items: flex-start; justify-content: space-between; gap: 40px; padding: 24px; cursor: pointer; list-style: none; }
+  .faq-sum::-webkit-details-marker { display: none; }
+  .faq-item .qt { font-weight: 500; font-size: 14px; color: #333; line-height: 1.5; flex: 1; }
+  .faq-item[open] .qt { font-weight: 600; }
+  .faq-icon  { width: 16px; height: 16px; flex: none; color: #404040; margin-top: 2px; }
+  .faq-h     { transition: opacity .28s ease; }
+  .faq-item[open] .faq-h { opacity: 0; }
+  .qa { padding: 0 24px 20px; }
+  .qa p { font-weight: 400; font-size: 14px; color: #404040; line-height: 1.5; }
+  .faq-side {
+    width: 400px; flex: none;
+    background: var(--card); border: 1px solid var(--card-border);
+    border-radius: 24px; padding: 32px;
+    display: flex; flex-direction: column; gap: 40px; justify-content: flex-end;
+    position: relative; overflow: hidden;
+  }
+  .usr { position: absolute; left: 32px; top: 48px; width: 130px; height: 147px; opacity: .1; }
+  .usr svg { display: block; width: 100%; height: 100%; color: var(--olive-deep); }
+  .side-in  { display: flex; flex-direction: column; gap: 32px; position: relative; }
+  .side-tx  { display: flex; flex-direction: column; gap: 8px; color: #222320; }
+  .side-tx h4 { font-weight: 500; font-size: 20px; line-height: 28px; }
+  .side-tx p  { font-weight: 400; font-size: 14px; line-height: 22px; }
+
+  @media (max-width: 1024px) {
+    .calc-grid { grid-template-columns: 1fr; }
+    .cta-aside { min-height: 0; flex-direction: row; align-items: center; gap: 24px; }
+    .cta-aside-in { flex: 1; }
+    .cta-aside .btn-gold { width: auto; }
+    .faq-side { width: 320px; }
+  }
+  @media (max-width: 768px) {
+    .calc-inner { grid-template-columns: 1fr; }
+    .faq-cols { flex-direction: column; }
+    .faq-side { width: 100%; min-height: 200px; }
+    .cat-3 { grid-template-columns: 1fr 1fr; }
+    .cat-3 .cat:nth-child(3n) { border-right: inherit; }
+    .cat-3 .cat:nth-child(n+4) { border-bottom: inherit; }
+    .cat-3 .cat:nth-child(2n) { border-right: 0; }
+    .cat-3 .cat:nth-last-child(-n+2) { border-bottom: 0; }
+    .cat-3 .cat:last-child { border-right: 0; border-bottom: 0; }
+    .hero h1 { font-size: 28px; }
+    .sec-title { font-size: 28px; }
+    .faq-title { font-size: 28px; white-space: normal; }
+  }
+  @media (max-width: 480px) {
+    .calc-inner { grid-template-columns: 1fr; }
+    .cat-3 { grid-template-columns: 1fr; }
+    .cat-3 .cat { border-right: 0; border-bottom: 1px solid var(--card-border); }
+    .cat-3 .cat:last-child { border-bottom: 0; }
   }
 </style>
 
@@ -473,11 +651,10 @@ const { slug, title, subtitle, inputs, whatIs, howHelps, howWorks, advantages, f
   const fmtRaw = (v: number, prefix: string, suffix: string) =>
     `${prefix}${v.toLocaleString('en-IN')}${suffix}`;
 
-  /* ── Slider fill + display sync ── */
   function syncSlider(input: HTMLInputElement) {
     const min = +input.min, max = +input.max, val = +input.value;
     const pct = ((val - min) / (max - min)) * 100;
-    input.style.background = `linear-gradient(to right, var(--color-brand) ${pct}%, var(--color-n400) ${pct}%)`;
+    input.style.background = `linear-gradient(to right, var(--gold-btn) ${pct}%, var(--card-border) ${pct}%)`;
     const display = document.getElementById(`${input.id}-display`);
     if (display) {
       const prefix = input.dataset.prefix ?? '';
@@ -491,7 +668,6 @@ const { slug, title, subtitle, inputs, whatIs, howHelps, howWorks, advantages, f
     slider.addEventListener('input', () => { syncSlider(slider); calc(); });
   });
 
-  /* ── Donut chart ── */
   function updateDonut(invested: number, total: number) {
     const arc = document.getElementById('donut-returns');
     if (!arc) return;
@@ -501,14 +677,12 @@ const { slug, title, subtitle, inputs, whatIs, howHelps, howWorks, advantages, f
     arc.style.strokeDashoffset = String(offset);
   }
 
-  /* ── Calculator logic — detect which page we're on by available inputs ── */
   function calc() {
     const get = (id: string) => {
       const el = document.getElementById(id) as HTMLInputElement | null;
       return el ? parseFloat(el.value) || 0 : null;
     };
 
-    /* SIP */
     const sipAmount = get('sip-amount'), sipRate = get('sip-rate'), sipYears = get('sip-years');
     if (sipAmount !== null && sipRate !== null && sipYears !== null) {
       const r = sipRate / 100 / 12, n = sipYears * 12;
@@ -519,7 +693,6 @@ const { slug, title, subtitle, inputs, whatIs, howHelps, howWorks, advantages, f
       return;
     }
 
-    /* Lumpsum */
     const lsAmount = get('ls-amount'), lsRate = get('ls-rate'), lsYears = get('ls-years');
     if (lsAmount !== null && lsRate !== null && lsYears !== null) {
       const fv = lsAmount * Math.pow(1 + lsRate / 100, lsYears);
@@ -527,7 +700,6 @@ const { slug, title, subtitle, inputs, whatIs, howHelps, howWorks, advantages, f
       return;
     }
 
-    /* FD */
     const fdAmount = get('fd-amount'), fdRate = get('fd-rate'), fdYears = get('fd-years');
     if (fdAmount !== null && fdRate !== null && fdYears !== null) {
       const fv = fdAmount * Math.pow(1 + fdRate / 100 / 4, 4 * fdYears);
@@ -535,7 +707,6 @@ const { slug, title, subtitle, inputs, whatIs, howHelps, howWorks, advantages, f
       return;
     }
 
-    /* SWP */
     const corpus = get('swp-corpus'), monthly = get('swp-withdrawal'), swpRate = get('swp-rate');
     if (corpus !== null && monthly !== null && swpRate !== null) {
       const r = swpRate / 100 / 12;
@@ -558,7 +729,6 @@ const { slug, title, subtitle, inputs, whatIs, howHelps, howWorks, advantages, f
       return;
     }
 
-    /* NPS */
     const npsAge = get('nps-age'), npsRetire = get('nps-retire'), npsAmount = get('nps-amount');
     const npsRate = get('nps-rate'), npsAnnuityPct = get('nps-annuity-pct'), npsAnnuityRate = get('nps-annuity-rate');
     if (npsAge !== null && npsRetire !== null && npsAmount !== null) {
@@ -601,4 +771,12 @@ const { slug, title, subtitle, inputs, whatIs, howHelps, howWorks, advantages, f
   }
 
   calc();
+
+  document.querySelectorAll('.faq-acc').forEach(acc => {
+    acc.addEventListener('click', e => {
+      const item = e.target instanceof Element ? e.target.closest('details') : null;
+      if (!item) return;
+      acc.querySelectorAll('details[open]').forEach(d => { if (d !== item) d.removeAttribute('open'); });
+    });
+  });
 </script>
