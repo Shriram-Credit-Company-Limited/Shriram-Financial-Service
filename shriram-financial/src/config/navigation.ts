@@ -68,7 +68,7 @@ export const navigation: NavSection[] = [
       { label: 'Support',           href: '/about/support/' },
       { label: 'Investor Charter',   href: '/about/investor-charter/' },
       { label: 'Regulatory',        href: '/about/regulatory/' },
-      { label: 'Antara Web Login',  href: '/about/antara-web-login/' },
+      { label: 'Explore Antara',    href: '/about/antara/' },
       { label: 'Sitemap',           href: '/about/sitemap/' },
     ],
   },
