@@ -1,41 +1,395 @@
 ---
-import ResearchTemplate from '../../layouts/ResearchTemplate.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const contents = [
+  'Company-level financial modelling — income statement, balance sheet, and cash flow analysis',
+  'Valuation across multiple frameworks — DCF, P/E, EV/EBITDA, and peer comparisons',
+  'Management quality assessment, governance flags, and promoter track record',
+  '12-month price targets with Buy / Neutral / Sell ratings and stated risk factors',
+  'Sector positioning — how each company fits within the broader industry landscape',
+];
+
 const reports = [
-  {
-    title: 'Initiating Coverage Reports',
-    meta: 'New Coverage',
-    summary: '30–40 page deep dives into companies we initiate coverage on — business model, competitive moat, management quality, financial analysis, valuation (DCF + P/E + EV/EBITDA), and 12-month price target with Buy/Neutral/Sell rating.'
-  },
-  {
-    title: 'Quarterly Earnings Updates',
-    meta: 'Result Season',
-    summary: 'Within 24 hours of every Q1/Q2/Q3/Q4 result announcement for our coverage universe — revenue, EBITDA, PAT vs. estimates, management commentary synthesis, and immediate target price revision if warranted.'
-  },
-  {
-    title: 'Sector Reports',
-    meta: 'Thematic Deep Dives',
-    summary: 'Comprehensive sector-level analysis — regulatory landscape, demand drivers, margin dynamics, competitive intensity, and stock picks across large-cap and mid-cap companies in the sector.'
-  },
-  {
-    title: 'Annual Conviction Picks',
-    meta: 'Best Ideas',
-    summary: 'Our highest-conviction portfolio of 10–12 stocks published at the start of each calendar year — companies with durable moats, strong balance sheets, and compelling 2–3 year growth visibility.'
-  },
-  {
-    title: 'IPO Research Notes',
-    meta: 'IPO Analysis',
-    summary: 'Independent evaluation of every mainboard IPO — business quality assessment, valuation relative to listed peers, promoter background, GMP interpretation, and clear Subscribe/Neutral/Avoid recommendation.'
-  },
-  {
-    title: 'Macro & Economy Views',
-    meta: 'Big Picture',
-    summary: 'Quarterly macroeconomic outlook — RBI policy impact, GDP growth trajectory, inflation trends, FII/DII flows, and implications for equity portfolio positioning by market capitalisation segment.'
-  },
+  { title: 'Initiating Coverage Reports',  desc: '30–40 page deep dives into companies we initiate coverage on — business model, competitive moat, management quality, financial analysis, valuation (DCF + P/E + EV/EBITDA), and 12-month price target with Buy/Neutral/Sell rating.' },
+  { title: 'Quarterly Earnings Updates',   desc: 'Within 24 hours of every Q1/Q2/Q3/Q4 result announcement for our coverage universe — revenue, EBITDA, PAT vs. estimates, management commentary synthesis, and immediate target price revision if warranted.' },
+  { title: 'Sector Reports',               desc: 'Comprehensive sector-level analysis — regulatory landscape, demand drivers, margin dynamics, competitive intensity, and stock picks across large-cap and mid-cap companies in the sector.' },
+  { title: 'Annual Conviction Picks',      desc: 'Our highest-conviction portfolio of 10–12 stocks published at the start of each calendar year — companies with durable moats, strong balance sheets, and compelling 2–3 year growth visibility.' },
+  { title: 'IPO Research Notes',           desc: 'Independent evaluation of every mainboard IPO — business quality assessment, valuation relative to listed peers, promoter background, GMP interpretation, and clear Subscribe/Neutral/Avoid recommendation.' },
+  { title: 'Macro & Economy Views',        desc: 'Quarterly macroeconomic outlook — RBI policy impact, GDP growth trajectory, inflation trends, FII/DII flows, and implications for equity portfolio positioning by market capitalisation segment.' },
+];
+
+const faqs = [
+  { q: 'What is fundamental research?',                          a: 'Fundamental research analyses a company\'s financial health, business model, management quality, and competitive positioning to determine its intrinsic value. Our SEBI-registered analysts (INH200009624) produce reports that help investors make evidence-based decisions rather than market-noise-driven ones.' },
+  { q: 'How are companies selected for coverage?',               a: 'We prioritise companies with strong earnings visibility, institutional interest, and relevance to our clients\' portfolios. Coverage spans large-cap, mid-cap, and select small-cap names across sectors including financials, IT, FMCG, pharma, and industrials.' },
+  { q: 'How quickly are earnings updates published?',            a: 'Quarterly earnings updates are published within 24 hours of a result announcement for every company in our coverage universe — including revised price targets if warranted by the numbers.' },
+  { q: 'How do I access the full research reports?',             a: 'Full reports are available to clients with an active Shriram demat or trading account. Opening an account is free, fully digital, and takes under 10 minutes. Report summaries are publicly visible.' },
+  { q: 'Are IPO recommendations independent?',                   a: 'Yes. Our IPO research is produced independently by our SEBI-registered research analysts. We evaluate business quality, promoter background, valuation vs. listed peers, and GMP — and issue a clear Subscribe, Neutral, or Avoid call.' },
+  { q: 'What is an initiating coverage report?',                 a: 'An initiating coverage report is a comprehensive first-look at a company we begin formally tracking — typically 30–40 pages covering the business model, financial history, management quality, valuation, and a 12-month price target.' },
 ];
 ---
-<ResearchTemplate
-  title="Fundamental Research — Invest with Conviction"
-  lead="Long-term wealth is built by owning great businesses at the right price. Our SEBI-registered fundamental research team (INH200009624) provides deep-dive analysis that separates enduring businesses from market noise — giving you the conviction to hold through volatility."
-  reports={reports}
+
+<BaseLayout
+  title="Fundamental Research — Invest with Conviction | Shriram Financial"
   description="Shriram Financial Services fundamental research — SEBI-registered equity research reports, earnings updates, sector analysis, and IPO evaluations for long-term investors."
-/>
+>
+
+  <!-- ══ 1. HERO ══════════════════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <a class="breadcrumb" href="/research/">← Back to Research Hub</a>
+      <div class="hero-badge">FR</div>
+      <h1>Fundamental Research</h1>
+      <p class="lead">Long-term wealth is built by owning great businesses at the right price.</p>
+      <div class="cta-row">
+        <a class="btn-gold" href="/about/open-demat-account/">Open Demat Account</a>
+        <a class="btn-ghost" href="/about/antara-web-login/">Login to Antara</a>
+      </div>
+      <div class="hero-feats">
+        <div class="feats">
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;SEBI-registered analysts (INH200009624)</span></div>
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;30–40 page deep dives</span></div>
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;Earnings updates in 24 hours</span></div>
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;Free with Demat account</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 2. WHAT IS FUNDAMENTAL RESEARCH ══════════════════════════════ -->
+  <section class="section stack" id="sec-about" style="background:var(--sec-light);gap:56px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">What is Fundamental Research?</p>
+      <p class="sec-lead">Fundamental Research reads the balance sheet, not the chart — analysing a company's financial health, business model, competitive moat, and management quality to determine its intrinsic worth. The output is a considered view: a price target, a rating, and a clearly stated reason to own or avoid a stock over a 12-month horizon. We cover equities across sectors and market caps, produced by analysts who are SEBI-registered and regulation-compliant.</p>
+    </div>
+  </section>
+
+  <!-- ══ 3. WHAT IT CONTAINS ══════════════════════════════════════════ -->
+  <section class="section stack" id="sec-contains" style="background:var(--sec-tint);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">What Fundamental Research Contains</p>
+      <p class="sec-lead">Every report is built around five analytical pillars — so the basis for every recommendation is visible and verifiable.</p>
+    </div>
+    <div class="card check-card">
+      <div class="check-list">
+        {contents.map((item, i) => (
+          <>
+            {i > 0 && <div class="check-sep"></div>}
+            <div class="check-row"><span class="ck">✓</span><p class="tx">{item}</p></div>
+          </>
+        ))}
+      </div>
+    </div>
+    <a class="btn-gold" href="/about/open-demat-account/" style="align-self:center">Access Research Free</a>
+  </section>
+
+  <!-- ══ 4. REPORT TYPES ══════════════════════════════════════════════ -->
+  <section class="section stack" id="sec-reports" style="background:var(--sec-light);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Fundamental Research Reports all in One Place</p>
+      <p class="sec-lead">Six report formats covering every phase of the investment decision — from first look to earnings season to annual conviction calls.</p>
+    </div>
+    <div class="cat-grid">
+      {reports.map(r => (
+        <div class="cat">
+          <h4>{r.title}</h4>
+          <p>{r.desc}</p>
+        </div>
+      ))}
+    </div>
+    <a class="btn-gold" href="/about/open-demat-account/" style="align-self:center">Open Demat Account</a>
+  </section>
+
+  <!-- ══ 5. ACCESS PREVIEW ════════════════════════════════════════════ -->
+  <section class="section stack" id="sec-access" style="background:var(--sec-tint);gap:56px;justify-content:center;align-items:center">
+    <div class="stack" style="gap:16px;width:100%">
+      <p class="sec-title">Today's Fundamental Report is Ready</p>
+      <p class="sec-lead">Login to read the latest coverage reports and earnings updates, or open a demat account to get started.</p>
+    </div>
+    <div class="access-card">
+      <div class="access-inner">
+        <div class="access-icon" aria-hidden="true">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" width="40" height="40">
+            <rect width="40" height="40" rx="10" fill="var(--olive-deep)"/>
+            <path d="M12 28V14h10l6 6v8H12z" stroke="var(--gold-2)" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M22 14v6h6" stroke="var(--gold-2)" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M16 20h8M16 24h6" stroke="var(--gold-2)" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <p class="access-title">Today's Fundamental Report is ready.</p>
+        <p class="access-sub">Login to read the latest initiating coverage, earnings updates, and sector reports — or open your free demat account.</p>
+        <div class="access-btns">
+          <a class="btn-ghost-dark" href="/about/antara-web-login/">Login</a>
+          <a class="btn-gold" href="/about/open-demat-account/">Open Demat Account</a>
+        </div>
+      </div>
+      <div class="report-preview" aria-hidden="true">
+        <div class="preview-header">
+          <div class="preview-tag">Deep-Dive Equity Research for Long-Term Investors</div>
+          <div class="preview-stat">INH200009624</div>
+        </div>
+        <div class="preview-cards">
+          {[
+            { name: 'Initiating Coverage', sub: 'Business model · Valuation · Target' },
+            { name: 'Earnings Update',      sub: 'Q4 result — PAT vs. estimates' },
+            { name: 'Sector Report',        sub: 'Banking sector — margin dynamics' },
+          ].map(c => (
+            <div class="preview-card">
+              <div class="preview-doc"></div>
+              <p class="preview-name">{c.name}</p>
+              <p class="preview-sub">{c.sub}</p>
+              <span class="preview-link">Open Demat to Unlock Full Report</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 6. DARK CTA ══════════════════════════════════════════════════ -->
+  <section class="unlock-sec">
+    <div class="unlock-inner">
+      <div class="unlock-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" width="28" height="28">
+          <rect x="3" y="11" width="18" height="11" rx="2"/>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+      </div>
+      <h2>Unlock All Reports + Conviction Picks</h2>
+      <p>Open your Shriram Demat account and get free, unlimited access to all fundamental research PDFs, earnings updates, IPO notes, and annual conviction portfolios.</p>
+      <div class="unlock-btns">
+        <a class="btn-gold" href="/about/open-demat-account/">Open Demat Account — Free</a>
+        <a class="btn-ghost" href="/about/antara-web-login/">Login to Existing Account</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 7. FAQ ════════════════════════════════════════════════════════ -->
+  <section class="faq-wrap" id="sec-faq" style="background:var(--sec-light)">
+    <div class="faq-cols">
+      <div class="faq-left">
+        <p class="faq-title">Frequently Asked Questions</p>
+        <div class="faq-acc">
+          {faqs.map((item, i) => (
+            <details class="faq-item" open={i === 0}>
+              <summary class="faq-sum">
+                <span class="qt">{item.q}</span>
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="faq-icon">
+                  <path d="M2 8h12"/>
+                  <path class="faq-v" d="M8 2v12"/>
+                </svg>
+              </summary>
+              <div class="qa"><p>{item.a}</p></div>
+            </details>
+          ))}
+        </div>
+      </div>
+
+      <div class="faq-side">
+        <div class="usr" aria-hidden="true">
+          <svg viewBox="0 0 120 135" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="60" cy="37" r="29"/>
+            <path d="M0 135a60 60 0 0 1 120 0H0z"/>
+          </svg>
+        </div>
+        <div class="side-in">
+          <div class="side-tx">
+            <h4>Want Expert Guidance?</h4>
+            <p>Book a free 15-minute call with one of our SEBI-registered fundamental analysts. We'll walk you through our methodology, explain a live coverage report, and help you evaluate stocks with conviction.</p>
+          </div>
+          <a class="btn-gold" href="/about/support/">Book A Discovery Call</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 8. FINAL CTA ══════════════════════════════════════════════════ -->
+  <section class="cta-sec" id="sec-final-cta" style="background:var(--sec-tint)">
+    <div class="cta-box">
+      <div class="ct-tt">
+        <h3>Invest with the Conviction of Expert Research</h3>
+        <p class="ct-sub">Open a free Demat account and get access to initiating coverage reports, earnings updates, IPO notes, and annual conviction picks — all from SEBI-registered analysts.</p>
+      </div>
+      <a class="btn-gold" href="/about/open-demat-account/">Open Demat Account</a>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  :root {
+    --page: #fcf8ef;
+    --sec-light: #fef8ee;
+    --sec-tint: #f6efe1;
+    --card: #fffdf8;
+    --card-border: #e1e0db;
+    --row-line: rgba(28,28,22,.08);
+    --olive-title: #2e3914;
+    --olive-head: #2d3813;
+    --olive-deep: #1b2010;
+    --ink: #1c1c16;
+    --ink-2: #46463c;
+    --ink-3: #595959;
+    --muted: #73736a;
+    --gold: #e0a82e;
+    --gold-2: #f2b83f;
+    --gold-btn: #f3b83f;
+    --olive-ink: #2e3914;
+    --green: #009d58;
+    --pad: clamp(20px, 8vw, 144px);
+    --container-pad: 32px;
+    --section-y: 72px;
+    --cta-w: 220px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  a { color: inherit; text-decoration: none; }
+  p { line-height: 1.5; }
+
+  .section { padding: var(--section-y) var(--pad); min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; justify-content: center; }
+  #sec-about { min-height: 0; }
+  .stack { display: flex; flex-direction: column; }
+
+  .sec-title { font-weight: 400; font-size: 40px; color: var(--olive-title); text-transform: capitalize; line-height: 1.5; }
+  .sec-lead  { font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.5; }
+
+  .hero { padding: 0 var(--pad); display: flex; flex-direction: column; justify-content: center; overflow: hidden; background: radial-gradient(125% 210% at 100% -8%, #4f583b 0%, #363a2c 50%, #1d1d1d 100%); }
+  .hero-inner { padding: clamp(80px,12vw,140px) 0 clamp(48px,6vw,80px); display: flex; flex-direction: column; }
+  .breadcrumb { font-size: 13px; font-weight: 500; color: rgba(255,255,255,.55); margin-bottom: 28px; transition: color .2s; width: fit-content; }
+  .breadcrumb:hover { color: rgba(255,255,255,.9); }
+  .hero-badge { width: 48px; height: 48px; border-radius: 10px; background: var(--olive-head); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; color: var(--gold-2); letter-spacing: .04em; margin-bottom: 20px; }
+  .hero h1 { font-weight: 500; font-size: 40px; color: #fff; line-height: 1.3; max-width: 680px; }
+  .hero .lead { margin-top: 16px; font-weight: 400; font-size: 18px; line-height: 1.5; color: rgba(255,255,255,.65); max-width: 560px; }
+  .cta-row { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .hero-feats { margin-top: 40px; }
+  .feats { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 16px; max-width: 760px; padding-top: 36px; border-top: 1px solid rgba(255,255,255,.16); }
+  .feat { display: flex; gap: 10px; align-items: center; }
+  .feat .tk { color: var(--gold-2); font-weight: 500; font-size: 15px; width: 13px; }
+  .feat .lb { color: rgba(255,255,255,.9); font-weight: 500; font-size: 16px; line-height: 1.5; white-space: nowrap; }
+
+  .btn-gold { background: var(--gold-btn); height: 40px; width: var(--cta-w); border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; padding: 7px 20px; font-weight: 500; font-size: 12px; color: var(--olive-ink); white-space: nowrap; transition: opacity .2s; }
+  .btn-gold:hover { opacity: .88; }
+  .btn-ghost { height: 40px; border-radius: 9px; border: 1px solid rgba(255,255,255,.4); display: inline-flex; align-items: center; justify-content: center; padding: 7px 26px; font-weight: 600; font-size: 15px; color: #fff; transition: border-color .2s; }
+  .btn-ghost:hover { border-color: #fff; }
+  .btn-ghost-dark { height: 40px; border-radius: 4px; border: 1px solid var(--card-border); display: inline-flex; align-items: center; justify-content: center; padding: 7px 26px; font-weight: 500; font-size: 12px; color: var(--ink); background: var(--card); white-space: nowrap; transition: border-color .2s; }
+  .btn-ghost-dark:hover { border-color: var(--olive-head); }
+
+  .card { background: var(--card); border: 1px solid var(--card-border); border-radius: 24px; padding: var(--container-pad); display: flex; flex-direction: column; gap: 16px; }
+  .check-card { display: flex; flex-direction: column; gap: 32px; }
+  .check-list { display: flex; flex-direction: column; gap: 24px; }
+  .check-row  { display: flex; gap: 14px; align-items: flex-start; }
+  .check-row .ck { color: var(--green); font-weight: 700; font-size: 15px; line-height: 25.5px; width: 13px; flex: none; }
+  .check-row .tx { flex: 1 0 0; min-width: 0; font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.5; }
+  .check-sep  { height: 1px; background: var(--row-line); width: 100%; }
+
+  .cat-grid { border: 1px solid var(--card-border); border-radius: 24px; overflow: hidden; display: grid; grid-template-columns: repeat(3, 1fr); background: var(--card); }
+  .cat { background: var(--card); padding: var(--container-pad); display: flex; flex-direction: column; gap: 12px; border-right: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border); }
+  .cat:nth-child(3n)  { border-right: 0; }
+  .cat:nth-child(n+4) { border-bottom: 0; }
+  .cat h4 { font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.5; }
+  .cat p  { font-weight: 400; font-size: 16px; color: var(--muted); line-height: 1.5; }
+
+  .access-card { width: 100%; background: var(--card); border: 1px solid var(--card-border); border-radius: 24px; overflow: hidden; display: flex; flex-direction: column; }
+  .access-inner { padding: 48px var(--container-pad) 40px; display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; border-bottom: 1px solid var(--card-border); }
+  .access-icon { margin-bottom: 4px; }
+  .access-title { font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.4; }
+  .access-sub   { font-weight: 400; font-size: 15px; color: var(--muted); line-height: 1.5; max-width: 400px; }
+  .access-btns  { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 8px; }
+
+  .report-preview { padding: 28px var(--container-pad); display: flex; flex-direction: column; gap: 16px; }
+  .preview-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .preview-tag  { font-weight: 600; font-size: 13px; color: var(--ink); }
+  .preview-stat { font-size: 12px; font-weight: 500; color: var(--muted); }
+  .preview-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .preview-card { background: var(--sec-tint); border: 1px solid var(--card-border); border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 8px; }
+  .preview-doc { width: 100%; height: 72px; border-radius: 8px; background: linear-gradient(135deg, rgba(46,57,20,.08) 0%, rgba(46,57,20,.04) 100%); position: relative; overflow: hidden; }
+  .preview-doc::after { content: ''; position: absolute; left: 16px; top: 12px; right: 16px; bottom: 12px; background: repeating-linear-gradient(0deg, rgba(46,57,20,.12) 0px, rgba(46,57,20,.12) 1px, transparent 1px, transparent 10px); }
+  .preview-name { font-weight: 600; font-size: 11px; color: var(--ink); }
+  .preview-sub  { font-weight: 400; font-size: 11px; color: var(--muted); }
+  .preview-link { font-size: 10px; font-weight: 500; color: var(--gold); margin-top: 4px; }
+
+  .unlock-sec { background: var(--olive-deep); padding: 80px var(--pad); display: flex; align-items: center; justify-content: center; }
+  .unlock-inner { max-width: 620px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+  .unlock-icon { color: var(--gold-2); margin-bottom: 4px; }
+  .unlock-inner h2 { font-weight: 500; font-size: 32px; color: #fff; line-height: 1.3; }
+  .unlock-inner p  { font-weight: 400; font-size: 15px; color: rgba(255,255,255,.65); line-height: 1.6; }
+  .unlock-btns { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 8px; }
+
+  .faq-wrap { padding: 158px var(--pad); min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; justify-content: center; }
+  .faq-cols  { display: flex; gap: 48px; align-items: stretch; }
+  .faq-left  { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; gap: 48px; }
+  .faq-title { font-weight: 400; font-size: 40px; color: var(--olive-title); text-transform: capitalize; line-height: 1.5; white-space: nowrap; }
+  .faq-acc   { border-radius: 24px; overflow: hidden; display: flex; flex-direction: column; gap: 2px; width: 100%; }
+  .faq-item  { background: var(--card); list-style: none; }
+  .faq-sum   { display: flex; align-items: flex-start; justify-content: space-between; gap: 40px; padding: 24px; cursor: pointer; list-style: none; }
+  .faq-sum::-webkit-details-marker { display: none; }
+  .faq-item .qt { font-weight: 500; font-size: 14px; color: #333; line-height: 1.5; flex: 1; }
+  .faq-item[open] .qt { font-weight: 600; }
+  .faq-icon  { width: 16px; height: 16px; flex: none; color: #404040; }
+  .faq-v     { transition: opacity .28s ease; }
+  .faq-item[open] .faq-v { opacity: 0; }
+  .qa { padding: 0 24px 20px; }
+  .qa p { font-weight: 400; font-size: 14px; color: #404040; line-height: 1.5; }
+  .faq-side { width: 464px; flex: none; background: var(--card); border: 1px solid var(--card-border); border-radius: 24px; padding: var(--container-pad); display: flex; flex-direction: column; gap: 40px; justify-content: flex-end; position: relative; overflow: hidden; }
+  .usr { position: absolute; left: var(--container-pad); top: 64px; width: 130.667px; height: 147px; opacity: .1; }
+  .usr svg { display: block; width: 100%; height: 100%; color: var(--olive-deep); }
+  .side-in  { display: flex; flex-direction: column; gap: 32px; position: relative; }
+  .side-tx  { display: flex; flex-direction: column; gap: 8px; color: #222320; }
+  .side-tx h4 { font-weight: 500; font-size: 20px; line-height: 28px; letter-spacing: -0.45px; }
+  .side-tx p  { font-weight: 400; font-size: 14px; color: var(--ink-3); line-height: 1.5; }
+
+  .cta-sec { padding: var(--section-y) var(--pad); display: flex; align-items: center; justify-content: center; }
+  .cta-box { width: 100%; max-width: 860px; border-radius: 22px; padding: 64px 60px; display: flex; flex-direction: column; align-items: center; gap: 32px; text-align: center; }
+  .ct-tt { display: flex; flex-direction: column; align-items: center; gap: 16px; color: var(--olive-deep); }
+  .cta-box h3 { font-weight: 500; font-size: 38px; line-height: 42.56px; letter-spacing: -0.76px; }
+  .ct-sub { font-weight: 400; font-size: 17px; line-height: 28.05px; color: var(--ink-2); }
+
+  @media (max-width: 1024px) {
+    .cat-grid { grid-template-columns: repeat(2, 1fr); }
+    .cat:nth-child(3n)   { border-right: 1px solid var(--card-border); }
+    .cat:nth-child(2n)   { border-right: 0; }
+    .cat:nth-child(n+4)  { border-bottom: 1px solid var(--card-border); }
+    .cat:nth-child(n+5)  { border-bottom: 0; }
+    .usr { display: none; }
+    .preview-cards { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 900px) {
+    .faq-cols { flex-direction: column; }
+    .faq-side { width: 100%; }
+    .faq-title { white-space: normal; }
+  }
+
+  @media (max-width: 768px) {
+    :root { --pad: 16px; --container-pad: 24px; --section-y: 56px; }
+    .faq-wrap { padding: 128px var(--pad); }
+    .hero-inner { padding: 80px 0 48px; }
+    .hero h1 { font-size: clamp(28px, 7vw, 40px); }
+    .hero .lead { font-size: 16px; }
+    .sec-title, .faq-title { font-size: clamp(28px, 7vw, 40px); }
+    .cat-grid { grid-template-columns: 1fr; }
+    .cat { border-right: 0 !important; border-bottom: 1px solid var(--card-border) !important; }
+    .cat:last-child { border-bottom: 0 !important; }
+    .preview-cards { grid-template-columns: 1fr; }
+    .cta-box { padding: 48px 24px; }
+    .cta-box h3 { font-size: clamp(24px, 6.4vw, 38px); line-height: 1.2; }
+    .ct-sub { font-size: 15px; line-height: 1.6; }
+    .unlock-inner h2 { font-size: clamp(24px, 6vw, 32px); }
+    .sec-lead, .cat p, .check-row .tx, .access-sub { font-size: 14px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) { .faq-v { transition: none; } }
+</style>
+
+<script>
+  document.querySelectorAll('.faq-acc').forEach(function(acc) {
+    acc.querySelectorAll('details').forEach(function(d) {
+      d.addEventListener('toggle', function() {
+        if ((d as HTMLDetailsElement).open) {
+          acc.querySelectorAll<HTMLDetailsElement>('details').forEach(function(other) {
+            if (other !== d) other.removeAttribute('open');
+          });
+        }
+      });
+    });
+  });
+</script>
