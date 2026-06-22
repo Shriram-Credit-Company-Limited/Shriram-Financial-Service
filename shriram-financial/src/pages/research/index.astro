@@ -1,41 +1,438 @@
 ---
-import ResearchTemplate from '../../layouts/ResearchTemplate.astro';
-const reports = [
-  {
-    title: 'Daily Technical View',
-    meta: 'Updated Daily',
-    summary: 'Pre-market analysis of Nifty 50 and Bank Nifty with key support/resistance, momentum signals, and 3 actionable trade ideas for the session ahead.'
-  },
-  {
-    title: 'Company Deep Dive',
-    meta: 'Equity Research',
-    summary: 'Initiating coverage reports on quality companies with buy/sell targets backed by DCF and relative valuation — written by SEBI-registered analysts (INH200009624).'
-  },
-  {
-    title: 'Mutual Fund Star Picks',
-    meta: 'Fund Research',
-    summary: 'Our AMFI-certified advisors shortlist the top 3 funds in each category every quarter — based on risk-adjusted returns, fund manager tenure, and portfolio quality.'
-  },
-  {
-    title: 'F&O Strategy Report',
-    meta: 'Derivatives',
-    summary: 'Weekly positional options strategies — straddles, spreads, and directional setups — with defined entry, exit, and max-loss levels for disciplined derivatives traders.'
-  },
-  {
-    title: 'Sector Spotlight',
-    meta: 'Thematic Research',
-    summary: 'In-depth sector reports covering structural tailwinds, key players, valuation frameworks, and stock ideas for investors looking to build thematic positions.'
-  },
-  {
-    title: 'Earnings Result Update',
-    meta: 'Quarterly Earnings',
-    summary: 'Post-result analysis of coverage companies within 24 hours of earnings publication — revised earnings estimates, target price changes, and buy/sell/hold updates.'
-  },
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const pillars = [
+  { n: '1', title: 'Technical Analysis', desc: 'Chart patterns, momentum indicators, and price-action signals interpreted by experienced analysts — clear entry and exit levels across equities and derivatives.' },
+  { n: '2', title: 'Fundamental Research', desc: 'Deep-dive company reports, earnings updates, sector analysis, and IPO evaluations by SEBI-registered analysts (INH200009624) for long-term conviction.' },
+  { n: '3', title: 'Mutual Fund Research', desc: 'AMFI-certified fund picks, goal-based SIP portfolios, NFO analysis, and debt fund guidance — cutting through 1,500+ schemes to the ones that earn their returns.' },
+];
+
+const techReports = [
+  { meta: 'Pre-Market Daily',    title: 'Daily Market View — Nifty & Bank Nifty', desc: 'Key levels, momentum indicators (RSI, MACD, Supertrend) and 3 intraday/short-term trade ideas with precise entry, stop-loss, and target levels — published before 8:30 AM every trading day.' },
+  { meta: 'Every Monday',        title: 'Weekly Positional Trade Report',          desc: 'Swing trading setups across 5–8 stocks with 5–20 day holding targets. Uses weekly chart patterns, volume analysis, and sector rotation signals to identify strong risk-reward opportunities.' },
+  { meta: 'Options & Futures',   title: 'F&O Open Interest Analysis',              desc: 'Daily OI buildup, PCR ratio, max pain analysis, and implied volatility rankings — helping derivatives traders understand institutional positioning before placing trades.' },
+  { meta: 'Market Overview',     title: 'Sector & Index Heatmap',                  desc: 'Weekly sector performance heatmap showing which segments are leading, lagging, and rotating — crucial intelligence for short-term traders and portfolio rebalancers alike.' },
+  { meta: 'Expiry Week Special', title: 'Option Chain Insights',                   desc: 'Expiry-week analysis of Nifty and Bank Nifty option chains — max OI strikes, unusual activity alerts, and recommended option strategies for expiry week.' },
+  { meta: 'Long-Term Technical', title: 'Monthly Chart Outlook',                   desc: 'Monthly candlestick analysis of major indices and blue-chip stocks — identifying macro trend direction, major inflection points, and long-term support/resistance.' },
+];
+
+const fundReports = [
+  { meta: 'New Coverage',       title: 'Initiating Coverage Reports',  desc: '30–40 page deep dives into companies we initiate coverage on — business model, competitive moat, management quality, valuation (DCF + P/E + EV/EBITDA), and 12-month price target with Buy/Neutral/Sell rating.' },
+  { meta: 'Result Season',      title: 'Quarterly Earnings Updates',   desc: 'Within 24 hours of every Q1–Q4 result: revenue, EBITDA, PAT vs. estimates, management commentary synthesis, and immediate target price revision if warranted.' },
+  { meta: 'Thematic',          title: 'Sector Reports',                desc: 'Comprehensive sector-level analysis — regulatory landscape, demand drivers, margin dynamics, competitive intensity, and stock picks across large-cap and mid-cap companies.' },
+  { meta: 'Best Ideas',         title: 'Annual Conviction Picks',      desc: 'Our highest-conviction portfolio of 10–12 stocks published at the start of each calendar year — durable moats, strong balance sheets, and compelling 2–3 year growth visibility.' },
+  { meta: 'IPO Analysis',       title: 'IPO Research Notes',           desc: 'Independent evaluation of every mainboard IPO — business quality, valuation relative to listed peers, promoter background, GMP interpretation, and clear Subscribe/Neutral/Avoid recommendation.' },
+  { meta: 'Big Picture',        title: 'Macro & Economy Views',        desc: 'Quarterly macroeconomic outlook — RBI policy impact, GDP trajectory, inflation trends, FII/DII flows, and implications for equity portfolio positioning by market capitalisation segment.' },
+];
+
+const mfReports = [
+  { meta: 'Every Quarter',       title: 'Top Fund Picks — Quarterly Review',    desc: 'Our AMFI-certified advisors shortlist the top 3 funds in each SEBI category — large-cap, mid-cap, ELSS, hybrid, liquid — ranked by risk-adjusted returns, consistency, and fund manager tenure.' },
+  { meta: 'Goal-Based',          title: 'SIP Portfolios for Every Goal',         desc: 'Ready-made SIP portfolios for Retirement (20+ yr), Children\'s Education (10 yr), Wealth Building (7 yr), and Emergency Corpus — each with fund allocation and monthly SIP amounts.' },
+  { meta: 'New Fund Offers',     title: 'NFO Analysis — Subscribe or Avoid?',    desc: 'Every NFO analysed before the subscription window closes — fund house track record, manager credentials, mandate uniqueness vs. existing funds, and a clear Subscribe/Neutral/Avoid call.' },
+  { meta: 'Fixed Income',        title: 'Debt Fund Yield Compass',               desc: 'Monthly analysis of the debt fund landscape — current yield-to-maturity across categories, duration risk assessment, credit quality review, and recommended funds for each risk profile.' },
+  { meta: 'People Behind Funds', title: 'Fund Manager Watch',                    desc: 'Quarterly profiles of key fund managers — performance attribution, portfolio changes, and how fund manager transitions affect your existing investments.' },
+  { meta: 'Portfolio Health',    title: 'Category Review — When to Switch?',    desc: 'Identifies underperforming funds in your portfolio against category peers and benchmarks — with specific switch recommendations to better-performing alternatives in the same category.' },
+];
+
+const processSteps = [
+  { n: '1', title: 'Market Monitoring',        desc: 'Analysts track live market data, macro events, company filings, and global cues around the clock to identify research opportunities before they become obvious.' },
+  { n: '2', title: 'Expert Analysis',          desc: 'SEBI-registered analysts apply quantitative models, technical frameworks, and qualitative assessments to produce objective, evidence-based recommendations.' },
+  { n: '3', title: 'Peer Review & Compliance', desc: 'Every report is reviewed by a senior analyst before publication — ensuring accuracy, consistency, and compliance with SEBI Research Analyst Regulations.' },
+  { n: '4', title: 'You Invest with Conviction', desc: 'Reports are published on Antara app and web with clear buy/sell signals, price targets, and risk parameters — so you act without second-guessing.' },
+];
+
+const faqs = [
+  { q: 'Is the research free to access?',                    a: 'All research reports are available free to Shriram Financial Services customers with an active Demat or trading account. Opening an account is free and fully digital — takes under 10 minutes.' },
+  { q: 'Who publishes the research?',                        a: 'Our research is published by SEBI-registered research analysts (Registration No. INH200009624) and AMFI-certified mutual fund advisors. All recommendations comply with SEBI (Research Analyst) Regulations 2014.' },
+  { q: 'How often are the reports updated?',                 a: 'Technical reports are published daily (pre-market). Fundamental earnings updates come within 24 hours of a result. Mutual fund picks are reviewed quarterly. Sector and macro reports are published monthly.' },
+  { q: 'Can I access research on the Antara app?',           a: 'Yes. All reports are available on the Antara mobile app and web platform. Push notifications alert you when a new report relevant to your portfolio or watchlist is published.' },
+  { q: 'Do I need a Demat account to read reports?',         a: 'You need an active account with Shriram Financial Services to access full reports. You can open a free Demat account online in under 10 minutes — no branch visit needed.' },
+  { q: 'How is this different from tips or stock calls?',    a: 'Our research is fundamentals-driven or technically rigorous — not speculative tips. Every report includes rationale, risk disclosures, and price targets backed by data, not guesswork or paid promotions.' },
 ];
 ---
-<ResearchTemplate
-  title="Research That Gives You Conviction"
-  lead="India's capital markets reward informed investors. Our SEBI-registered research team publishes daily, weekly, and quarterly insights across equities, derivatives, and mutual funds — giving you the edge to invest with confidence, not speculation."
-  reports={reports}
-  description="Shriram Financial Services research hub — SEBI-registered equity research, technical analysis, F&O strategies, and mutual fund recommendations for Indian investors."
-/>
+
+<BaseLayout
+  title="Research Hub — SEBI-Registered Market Research | Shriram Financial"
+  description="Access daily technical views, fundamental equity research, and mutual fund picks from Shriram Financial Services — India's SEBI-registered research team."
+>
+<style>
+  :root {
+    --page: #fcf8ef;
+    --sec-light: #fef8ee;
+    --sec-tint: #f6efe1;
+    --card: #fffdf8;
+    --card-border: #e1e0db;
+    --card-border-soft: rgba(28,28,22,.13);
+    --row-line: rgba(28,28,22,.08);
+    --olive-title: #2e3914;
+    --olive-head: #2d3813;
+    --olive-deep: #1b2010;
+    --ink: #1c1c16;
+    --ink-2: #46463c;
+    --ink-3: #595959;
+    --muted: #73736a;
+    --muted-2: #9a9a8e;
+    --gold: #e0a82e;
+    --gold-2: #f2b83f;
+    --gold-btn: #f3b83f;
+    --gold-ink: #231a06;
+    --olive-ink: #2e3914;
+    --green: #009d58;
+    --pad: clamp(20px, 8vw, 144px);
+    --container-pad: 32px;
+    --section-y: 72px;
+    --cta-w: 220px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { overflow-x: clip; }
+  a { color: inherit; text-decoration: none; }
+  p { line-height: 1.5; }
+
+  /* ── Section shell ── */
+  .section { padding: var(--section-y) var(--pad); min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; justify-content: center; }
+  #sec-about { min-height: 0; }
+  .stack { display: flex; flex-direction: column; }
+
+  /* ── Typography ── */
+  .sec-title { font-weight: 400; font-size: 40px; color: var(--olive-title); text-transform: capitalize; line-height: 1.5; }
+  .sec-lead  { font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.5; }
+  .card-h    { font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.5; }
+  .card-p    { font-weight: 400; font-size: 16px; color: var(--muted); line-height: 1.5; }
+
+  /* ── Cards ── */
+  .card { background: var(--card); border: 1px solid var(--card-border); border-radius: 24px; padding: var(--container-pad); display: flex; flex-direction: column; gap: 16px; }
+
+  /* ── Hero ── */
+  .hero { padding: 0 var(--pad); display: flex; flex-direction: column; justify-content: center; overflow: hidden; background: radial-gradient(125% 210% at 100% -8%, #4f583b 0%, #363a2c 50%, #1d1d1d 100%); }
+  .hero-inner { padding: clamp(80px,12vw,140px) 0 clamp(48px,6vw,80px); display: flex; flex-direction: column; }
+  .hero h1 { font-weight: 500; font-size: 40px; color: #fff; line-height: 1.5; max-width: 860px; }
+  .hero h1 .g { color: var(--gold-2); }
+  .hero .lead { margin-top: 32px; font-weight: 400; font-size: 18px; line-height: 1.5; color: rgba(255,255,255,.74); max-width: 620px; }
+  .cta-row { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .hero-feats { margin-top: 40px; }
+  .feats { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 16px; max-width: 760px; padding-top: 36px; border-top: 1px solid rgba(255,255,255,.16); }
+  .feat { display: flex; gap: 10px; align-items: center; }
+  .feat .tk { color: var(--gold-2); font-weight: 500; font-size: 15px; width: 13px; }
+  .feat .lb { color: rgba(255,255,255,.9); font-weight: 500; font-size: 16px; line-height: 1.5; white-space: nowrap; }
+
+  /* ── Research nav tabs (inside hero) ── */
+  .res-tabs { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 10px; }
+  .res-tab { display: inline-flex; height: 38px; align-items: center; border-radius: 4px; border: 1px solid rgba(255,255,255,.3); padding: 0 20px; font-size: 13px; font-weight: 600; color: #fff; transition: background .2s, border-color .2s; }
+  .res-tab:hover { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.6); }
+
+  /* ── Buttons ── */
+  .btn-gold { background: var(--gold-btn); height: 40px; width: var(--cta-w); border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; padding: 7px 20px; font-weight: 500; font-size: 12px; color: var(--olive-ink); white-space: nowrap; transition: opacity .2s; }
+  .btn-gold:hover { opacity: .88; }
+  .btn-ghost { height: 40px; border-radius: 9px; border: 1px solid rgba(255,255,255,.4); display: inline-flex; align-items: center; justify-content: center; padding: 7px 26px; font-weight: 600; font-size: 15px; color: #fff; transition: border-color .2s; }
+  .btn-ghost:hover { border-color: #fff; }
+
+  /* ── 3-col row ── */
+  .row-3 { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 24px; }
+
+  /* ── Steps ── */
+  .steps { background: var(--card); border: 1px solid var(--card-border); border-radius: 24px; overflow: hidden; display: flex; align-items: stretch; width: 100%; }
+  .step { flex: 1 0 0; min-width: 0; padding: var(--container-pad); display: flex; flex-direction: column; gap: 16px; }
+  .step-div { width: 1px; background: var(--card-border); flex: none; }
+  .step .st-body { display: flex; flex-direction: column; gap: 12px; }
+  .step h4 { font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.5; }
+  .step p { font-weight: 400; font-size: 16px; color: var(--muted); line-height: 1.5; }
+
+  /* ── Report grid (cat-grid pattern, 3-col) ── */
+  .rep-grid { background: var(--card); border: 1px solid var(--card-border); border-radius: 24px; overflow: hidden; display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); }
+  .rep { padding: 28px var(--container-pad); border-right: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border); display: flex; flex-direction: column; gap: 10px; }
+  .rep:nth-child(3n) { border-right: 0; }
+  .rep:nth-child(4), .rep:nth-child(5), .rep:nth-child(6) { border-bottom: 0; }
+  .rep-meta { display: inline-flex; background: rgba(46,57,20,.08); border-radius: 99px; padding: 2px 10px; font-size: 11px; font-weight: 700; color: var(--olive-head); text-transform: uppercase; letter-spacing: .03em; width: fit-content; }
+  .rep h4 { font-weight: 500; font-size: 18px; color: var(--ink); line-height: 1.4; }
+  .rep p  { font-weight: 400; font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+  /* ── Dark research cards (appr pattern) ── */
+  .appr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
+  .appr { background: var(--olive-deep); border: 1px solid rgba(255,255,255,.07); border-radius: 24px; padding: 32px; display: flex; flex-direction: column; gap: 12px; transition: background .25s ease, border-color .25s ease, transform .25s ease, box-shadow .25s ease; }
+  .appr:hover { background: #243018; border-color: rgba(255,255,255,.13); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,.35); }
+  .appr-meta { font-size: 11px; font-weight: 700; color: var(--gold-2); text-transform: uppercase; letter-spacing: .06em; }
+  .appr h4 { font-weight: 500; font-size: 18px; color: #fff; line-height: 1.4; }
+  .appr p  { font-weight: 400; font-size: 14px; color: rgba(255,255,255,.65); line-height: 1.6; }
+
+  /* ── FAQ ── */
+  .faq-wrap { padding: 158px var(--pad); min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; justify-content: center; }
+  .faq-cols  { display: flex; gap: 48px; align-items: stretch; }
+  .faq-left  { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; gap: 48px; }
+  .faq-title { font-weight: 400; font-size: 40px; color: var(--olive-title); text-transform: capitalize; line-height: 1.5; white-space: nowrap; }
+  .faq-acc   { border-radius: 24px; overflow: hidden; display: flex; flex-direction: column; gap: 2px; width: 100%; }
+  .faq-item  { background: var(--card); list-style: none; }
+  .faq-sum   { display: flex; align-items: flex-start; justify-content: space-between; gap: 40px; padding: 24px; cursor: pointer; list-style: none; }
+  .faq-sum::-webkit-details-marker { display: none; }
+  .faq-item .qt { font-weight: 500; font-size: 14px; color: #333; line-height: 1.5; flex: 1; }
+  .faq-item[open] .qt { font-weight: 600; }
+  .faq-icon  { width: 16px; height: 16px; flex: none; color: #404040; }
+  .faq-v     { transition: opacity .28s ease; }
+  .faq-item[open] .faq-v { opacity: 0; }
+  .qa { padding: 0 24px 20px; }
+  .qa p { font-weight: 400; font-size: 14px; color: #404040; line-height: 1.5; }
+  .faq-side { width: 464px; flex: none; background: var(--card); border: 1px solid var(--card-border); border-radius: 24px; padding: var(--container-pad); display: flex; flex-direction: column; gap: 40px; justify-content: flex-end; position: relative; overflow: hidden; }
+  .usr { position: absolute; left: var(--container-pad); top: 64px; width: 130.667px; height: 147px; opacity: .1; }
+  .usr svg { display: block; width: 100%; height: 100%; color: var(--olive-deep); }
+  .side-in  { display: flex; flex-direction: column; gap: 32px; position: relative; }
+  .side-tx  { display: flex; flex-direction: column; gap: 8px; color: #222320; }
+  .side-tx h4 { font-weight: 500; font-size: 20px; line-height: 28px; letter-spacing: -0.45px; }
+  .side-tx p  { font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.5; }
+
+  /* ── Final CTA ── */
+  .cta-sec { padding: var(--section-y) var(--pad); display: flex; align-items: center; justify-content: center; }
+  .cta-box { width: 100%; max-width: 860px; border-radius: 22px; padding: 64px 60px; display: flex; flex-direction: column; align-items: center; gap: 32px; text-align: center; }
+  .ct-tt { display: flex; flex-direction: column; gap: 16px; }
+  .ct-tt h3 { font-weight: 500; font-size: 38px; color: var(--olive-deep); line-height: 1.3; }
+  .ct-sub   { font-weight: 400; font-size: 16px; color: var(--ink-3); }
+
+  /* ── Responsive ── */
+  @media (max-width: 1024px) {
+    .rep-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .rep:nth-child(3n)   { border-right: 1px solid var(--card-border); }
+    .rep:nth-child(2n)   { border-right: 0; }
+    .rep:nth-child(4), .rep:nth-child(5), .rep:nth-child(6) { border-bottom: 1px solid var(--card-border); }
+    .rep:nth-child(5), .rep:nth-child(6) { border-bottom: 0; }
+    .usr { display: none; }
+  }
+
+  @media (max-width: 900px) {
+    .steps { flex-direction: column; }
+    .step  { border-bottom: 1px solid var(--card-border); }
+    .step:last-child { border-bottom: 0; }
+    .step-div { display: none; }
+    .faq-cols  { flex-direction: column; }
+    .faq-side  { width: 100%; }
+    .faq-title { white-space: normal; }
+    .row-3 { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    :root { --pad: 16px; --container-pad: 24px; --section-y: 56px; }
+    .faq-wrap { padding: 128px var(--pad); }
+    .hero-inner { padding: 80px 0 48px; }
+    .hero h1 { font-size: clamp(28px, 7vw, 40px); }
+    .hero .lead { font-size: 16px; }
+    .sec-title, .faq-title { font-size: clamp(28px, 7vw, 40px); }
+    .ct-tt h3 { font-size: clamp(24px, 6.4vw, 38px); }
+    .cta-box { padding: 48px 24px; }
+    .rep-grid { grid-template-columns: 1fr; }
+    .rep:nth-child(n) { border-right: 0 !important; border-bottom: 1px solid var(--card-border) !important; }
+    .rep:last-child { border-bottom: 0 !important; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .appr, .faq-v { transition: none; }
+  }
+</style>
+
+  <!-- ══ 1. HERO ══════════════════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <h1>Research That Gives You <span class="g">Conviction</span></h1>
+      <p class="lead">India's capital markets reward informed investors. Our SEBI-registered research team publishes daily, weekly, and quarterly insights across equities, derivatives, and mutual funds — giving you the edge to invest with confidence, not speculation.</p>
+      <div class="cta-row">
+        <a class="btn-gold" href="/about/open-demat-account/">Access Research Free</a>
+        <a class="btn-ghost" href="/about/support/">Talk to an Analyst</a>
+      </div>
+      <div class="hero-feats">
+        <div class="feats">
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;SEBI-registered analysts</span></div>
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;Published daily</span></div>
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;Equities · F&amp;O · Mutual Funds</span></div>
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;Free with Demat account</span></div>
+        </div>
+      </div>
+      <div class="res-tabs">
+        <a class="res-tab" href="/research/technical/">Technical Analysis</a>
+        <a class="res-tab" href="/research/fundamental/">Fundamental Research</a>
+        <a class="res-tab" href="/research/mutual-funds/">Mutual Fund Research</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 2. WHAT IS THE RESEARCH HUB? ════════════════════════════════ -->
+  <section class="section stack" id="sec-about" style="background:var(--sec-light);gap:56px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">What is the Research Hub?</p>
+      <p class="sec-lead">The Shriram Financial Services Research Hub is your single destination for SEBI-registered market intelligence. Whether you trade intraday or invest for 10 years, our analysts give you the data, analysis, and recommendations to act with confidence — not guesswork.</p>
+    </div>
+    <div class="row-3">
+      <div class="card">
+        <p class="card-h">SEBI-Registered Analysts</p>
+        <p class="card-p">All equity research is published by SEBI-registered research analysts (INH200009624). Every recommendation is backed by documented rationale and full risk disclosure as required by regulation.</p>
+      </div>
+      <div class="card">
+        <p class="card-h">Published Every Trading Day</p>
+        <p class="card-p">Technical views are published pre-market every trading day. Earnings updates arrive within 24 hours of a result. Quarterly fund picks, monthly sector reports — always timely, never stale.</p>
+      </div>
+      <div class="card">
+        <p class="card-h">Equities, F&amp;O &amp; Mutual Funds</p>
+        <p class="card-p">Unlike single-asset research platforms, Shriram covers technical analysis, fundamental equity research, and mutual fund guidance in one place — built for investors who hold all three.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 3. THREE PILLARS ═════════════════════════════════════════════ -->
+  <section class="section stack" style="background:var(--sec-tint);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Three Pillars of Research</p>
+      <p class="sec-lead">Our research is structured around three distinct disciplines — each with its own team, methodology, and publication cadence.</p>
+    </div>
+    <div class="steps">
+      {pillars.map((p, i) => (
+        <>
+          {i > 0 && <div class="step-div"></div>}
+          <div class="step">
+            <div class="st-body">
+              <h4>{p.title}</h4>
+              <p>{p.desc}</p>
+            </div>
+          </div>
+        </>
+      ))}
+    </div>
+    <a class="btn-gold" href="/about/open-demat-account/" style="align-self:center">Access All Research</a>
+  </section>
+
+  <!-- ══ 4. TECHNICAL RESEARCH ════════════════════════════════════════ -->
+  <section class="section stack" style="background:var(--sec-light);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Technical Analysis</p>
+      <p class="sec-lead">Chart patterns, momentum indicators, and price-action signals interpreted daily by our technical analysts — with clear entry, stop-loss, and target levels across equities and derivatives.</p>
+    </div>
+    <div class="rep-grid">
+      {techReports.map(r => (
+        <div class="rep">
+          <span class="rep-meta">{r.meta}</span>
+          <h4>{r.title}</h4>
+          <p>{r.desc}</p>
+        </div>
+      ))}
+    </div>
+    <a class="btn-gold" href="/research/technical/" style="align-self:center">View Technical Reports</a>
+  </section>
+
+  <!-- ══ 5. FUNDAMENTAL RESEARCH ══════════════════════════════════════ -->
+  <section class="section stack" style="background:var(--sec-tint);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Fundamental Research</p>
+      <p class="sec-lead">Long-term wealth is built by owning great businesses at the right price. Our SEBI-registered fundamental team delivers deep-dive analysis that separates enduring businesses from market noise.</p>
+    </div>
+    <div class="appr-grid">
+      {fundReports.map(r => (
+        <div class="appr">
+          <span class="appr-meta">{r.meta}</span>
+          <h4>{r.title}</h4>
+          <p>{r.desc}</p>
+        </div>
+      ))}
+    </div>
+    <a class="btn-gold" href="/research/fundamental/" style="align-self:center">View Fundamental Reports</a>
+  </section>
+
+  <!-- ══ 6. MUTUAL FUND RESEARCH ══════════════════════════════════════ -->
+  <section class="section stack" style="background:var(--sec-light);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Mutual Fund Research</p>
+      <p class="sec-lead">With over 1,500 funds and 45+ SEBI categories, choosing the right mutual fund is overwhelming without expert guidance. Our AMFI-certified research cuts through the noise.</p>
+    </div>
+    <div class="rep-grid">
+      {mfReports.map(r => (
+        <div class="rep">
+          <span class="rep-meta">{r.meta}</span>
+          <h4>{r.title}</h4>
+          <p>{r.desc}</p>
+        </div>
+      ))}
+    </div>
+    <a class="btn-gold" href="/research/mutual-funds/" style="align-self:center">View MF Research</a>
+  </section>
+
+  <!-- ══ 7. HOW RESEARCH WORKS ════════════════════════════════════════ -->
+  <section class="section stack" style="background:var(--sec-tint);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">How Our Research Works</p>
+      <p class="sec-lead">From live market monitoring to a published report on your screen — every recommendation follows a rigorous four-step process designed to protect your capital and inform your decisions.</p>
+    </div>
+    <div class="steps">
+      {processSteps.map((s, i) => (
+        <>
+          {i > 0 && <div class="step-div"></div>}
+          <div class="step">
+            <div class="st-body">
+              <h4>{s.title}</h4>
+              <p>{s.desc}</p>
+            </div>
+          </div>
+        </>
+      ))}
+    </div>
+  </section>
+
+  <!-- ══ 8. FAQ ════════════════════════════════════════════════════════ -->
+  <section class="faq-wrap" id="sec-faq" style="background:var(--sec-light)">
+    <div class="faq-cols">
+      <div class="faq-left">
+        <p class="faq-title">General Questions</p>
+        <div class="faq-acc">
+          {faqs.map((item, i) => (
+            <details class="faq-item" open={i === 0}>
+              <summary class="faq-sum">
+                <span class="qt">{item.q}</span>
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="faq-icon">
+                  <path d="M2 8h12"/>
+                  <path class="faq-v" d="M8 2v12"/>
+                </svg>
+              </summary>
+              <div class="qa"><p>{item.a}</p></div>
+            </details>
+          ))}
+        </div>
+      </div>
+
+      <div class="faq-side">
+        <div class="usr" aria-hidden="true">
+          <svg viewBox="0 0 120 135" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="60" cy="37" r="29"/>
+            <path d="M0 135a60 60 0 0 1 120 0H0z"/>
+          </svg>
+        </div>
+        <div class="side-in">
+          <div class="side-tx">
+            <h4>Want Expert Guidance?</h4>
+            <p>Book a free 15-minute call with one of our SEBI-registered analysts. We'll walk you through the research, explain our methodology, and show you how to use our reports in your portfolio.</p>
+          </div>
+          <a class="btn-gold" href="/about/support/">Book A Discovery Call</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 9. FINAL CTA ══════════════════════════════════════════════════ -->
+  <section class="cta-sec" style="background:var(--sec-tint)">
+    <div class="cta-box">
+      <div class="ct-tt">
+        <h3>Turn Research Into Returns</h3>
+        <p class="ct-sub">Open a free Demat account to access full research reports and invest with the conviction of SEBI-registered analysis. Fully digital — no branch visit needed.</p>
+      </div>
+      <a class="btn-gold" href="/about/open-demat-account/" style="width:var(--cta-w)">Open Demat Account</a>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<script>
+  /* FAQ accordion — one open at a time */
+  document.querySelectorAll('.faq-acc').forEach(function(acc) {
+    acc.querySelectorAll('details').forEach(function(d) {
+      d.addEventListener('toggle', function() {
+        if ((d as HTMLDetailsElement).open) {
+          acc.querySelectorAll<HTMLDetailsElement>('details').forEach(function(other) {
+            if (other !== d) other.removeAttribute('open');
+          });
+        }
+      });
+    });
+  });
+</script>
