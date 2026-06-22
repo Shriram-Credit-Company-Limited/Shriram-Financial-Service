@@ -1,378 +1,586 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const pairs = [
+  { pair: 'USDINR', underlying: 'US Dollar / Indian rupee',      lot: '1,000 USD', tick: '₹0.0025' },
+  { pair: 'EURINR', underlying: 'Euro / Indian rupee',           lot: '1,000 EUR', tick: '₹0.0025' },
+  { pair: 'GBPINR', underlying: 'British pound / Indian rupee',  lot: '1,000 GBP', tick: '₹0.0025' },
+  { pair: 'JPYINR', underlying: 'Japanese yen / Indian rupee',   lot: '100,000 JPY', tick: '₹0.0025' },
+  { pair: 'GBPUSD', underlying: 'British pound / US dollar — cross pair', lot: '1,000 GBP', tick: 'USD 0.0001' },
+  { pair: 'EURUSD', underlying: 'Euro / US dollar — cross pair',  lot: '1,000 EUR', tick: 'USD 0.0001' },
+  { pair: 'USDJPY', underlying: 'US dollar / Japanese yen — cross pair', lot: '1,000 USD', tick: 'JPY 0.01' },
+];
+
+const vsRows = [
+  { feature: 'Obligation',       fut: 'Buyer and seller both obligated to settle',   opt: 'Buyer has no obligation; seller is obligated' },
+  { feature: 'Upfront cost',     fut: 'Margin only; no premium',                     opt: 'Buyer pays a premium; seller receives it and posts margin' },
+  { feature: 'Maximum loss',     fut: 'Theoretically unlimited if the market moves against you', opt: 'Capped at the premium paid' },
+  { feature: 'Use case',         fut: 'Directional trades; hedging known exposure',  opt: 'Defined-risk speculation; hedging with optionality' },
+  { feature: 'Typical use',      fut: 'Premium cost is small; margin controls a full lot', opt: 'Defined-risk speculation; hedging with optionality' },
+  { feature: 'Expiry cycle',     fut: 'Monthly contracts; some months listed at once', opt: 'Monthly; expiry, generally on USDINR, EURINR, GBPINR, JPYINR' },
+];
+
+const taxRows = [
+  { type: 'Currency F&O profits', tax: 'Non-speculative business income — not capital gains', itr: 'ITR-3' },
+  { type: 'Currency F&O losses',  tax: 'Offset against business income; carry forward 8 years', itr: 'ITR-3' },
+  { type: 'Brokerage & charges',  tax: 'Deductible as business expense', itr: 'ITR-3' },
+  { type: 'GST on brokerage',     tax: '18% on brokerage amount (not on trade value)', itr: '—' },
+];
+
+const steps = [
+  { n: '1', title: 'Open or use your existing trading and demat account with a SEBI-registered broker', desc: 'Currency needs a separate demat account with Shriram among strict one-size currency brokers bundle the segment with your standard account.' },
+  { n: '2', title: 'Activate the currency derivatives segment', desc: 'This is usually a one-time request through your broker\'s app or website — an additional KYC step beyond your equity segment activation, sometimes requiring income proof.' },
+  { n: '3', title: 'Fund your trading account in rupees', desc: 'There\'s no need to hold foreign currency; margin is collected and losses settled in rupees.' },
+  { n: '4', title: 'Pick a pair and contract', desc: 'Start with USDINR for the tightest spreads and deepest liquidity while you\'re learning how margin and settlement work.' },
+  { n: '5', title: 'Place your first order', desc: 'Through your broker\'s terminal, choosing futures or options, your strike or contract month, and lot size. Margin is blocked instantly and your position appears in your portfolio.' },
+  { n: '6', title: 'Track daily mark-to-market and manage your position', desc: 'Through equity to export your position through to expiry or square it off earlier — daily traders track it to the final settlement date.' },
+];
+
+const indicators = [
+  { title: 'RSI (Relative Strength Index)', desc: 'Measures whether the currency has moved enough in a short time. Currency traders use 14-period RSI on USDINR on an intraday basis — a reading above 70 often confirms a short-term overbought condition.' },
+  { title: 'MACD', desc: 'Tracks the relationship between two moving averages to highlight momentum building or fading — often used to confirm a breakout in USDINR before entering a long or short trade.' },
+  { title: 'Pivot Points', desc: 'Calculated from the prior session\'s high, low and close; pivot points give intraday traders fixed support and resistance levels to watch — resistance at R1/R2 and support at S1/S2.' },
+];
+
+const faqs = [
+  { q: 'What is the minimum amount needed to start currency trading in India?',  a: 'There is no regulatory minimum, but you need margin for at least one lot of your chosen pair — typically a few thousand rupees for a single USDINR lot, depending on current margin requirements.' },
+  { q: 'Can I trade currency without a demat account?',                          a: 'No. You need an active demat and trading account with a SEBI-registered broker that has the currency derivatives segment activated. Opening one is free and fully digital.' },
+  { q: 'What are the margin requirements for currency futures?',                  a: 'SPAN + Exposure margin together typically range from ₹2,000–₹4,000 per USDINR lot (USD 1,000). Cross-currency pair margins differ. Your broker\'s margin calculator shows live requirements.' },
+  { q: 'Is currency trading legal in India?',                                     a: 'Yes — on SEBI-regulated exchanges NSE and BSE. Trading offshore forex or CFD platforms is illegal under FEMA for Indian residents. All Shriram currency trading is exchange-traded and SEBI/RBI compliant.' },
+  { q: 'What are the trading hours for currency derivatives?',                    a: '9:00 AM to 5:00 PM for INR pairs (USDINR, EURINR, GBPINR, JPYINR). Cross-currency pairs (EURUSD, GBPUSD, USDJPY) trade until 7:30 PM on NSE.' },
+  { q: 'How is currency F&O taxed in India?',                                     a: 'Profits are treated as non-speculative business income — taxed at your income slab rate, not as capital gains. File ITR-3. Losses can be carried forward for 8 years and offset against business income.' },
+];
 ---
 
 <BaseLayout
-  title="Currency Trading in India — NSE & BSE Currency Futures | Shriram"
-  description="Trade currency in India — USDINR, EURINR, GBPINR futures & options on NSE & BSE. SEBI & RBI compliant. Flat ₹20/order. Open currency trading account today."
+  title="Currency Trading in India — USDINR, EURINR Futures & Options | Shriram"
+  description="Trade currency futures and options on NSE & BSE — USDINR, EURINR, GBPINR, JPYINR. SEBI & RBI-compliant. Flat ₹20/order. Open a currency trading account with Shriram Financial Services."
 >
 
-  <!-- ══ S1. HERO ══════════════════════════════════════════════════════ -->
-  <section class="relative overflow-hidden bg-[var(--color-dark-800)] py-[100px] lg:py-[120px]">
-    <div class="pointer-events-none absolute -right-40 -top-40 h-[560px] w-[560px] rounded-full bg-[var(--color-brand)]/10 blur-3xl"></div>
-    <div class="pointer-events-none absolute -bottom-32 left-0 h-80 w-80 rounded-full bg-[var(--color-brand)]/5 blur-3xl"></div>
-    <div class="site-wrap relative">
-      <h1 class="equity-reveal max-w-[880px] text-[clamp(32px,4vw,52px)] font-bold leading-[1.06] text-white" style="font-family:var(--font-display)">
-        <span class="text-[var(--color-brand)]">Currency Trading</span> in India — USDINR, EURINR on NSE &amp; BSE
-      </h1>
-      <p class="equity-reveal mt-[26px] max-w-[600px] text-[18px] leading-relaxed text-white/70">
-        Trade currency futures and options on NSE &amp; BSE. SEBI &amp; RBI-compliant. Flat ₹20/order. Hedge forex risk or speculate on exchange rate movements.
-      </p>
-      <div class="equity-reveal mt-[38px] flex flex-wrap gap-[14px]">
-        <a href="/about/open-demat-account/" class="btn-primary">Open Currency Account</a>
-        <a href="/about/open-demat-account/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Start Trading</a>
+  <!-- ══ 1. HERO ══════════════════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <h1>Currency Trading in India, <span class="g">Explained from the First Trade to the Last Expiry</span></h1>
+      <p class="lead">Trade USDINR, EURINR, GBPINR, JPYINR on NSE-regulated exchanges with margins that start in the low single digits of exposure — no offshore platforms, no FEMA risk, just exchange-traded currency derivatives settled in rupees.</p>
+      <div class="cta-row">
+        <a class="btn-gold" href="/about/open-demat-account/">Open Demat Account</a>
+        <a class="btn-ghost" href="/about/support/">Talk to RM</a>
       </div>
-      <div class="equity-reveal mt-[54px] flex flex-wrap gap-x-9 gap-y-3 border-t border-white/15 pt-9">
-        {['✓ SEBI & RBI-compliant', '✓ NSE & BSE listed', '✓ Flat ₹20/order', '✓ FEMA-compliant'].map(f => (
-          <span class="text-[15px] font-medium text-white/90">{f}</span>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ S2. WHAT IS CURRENCY TRADING? ════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          What is <span class="text-[var(--color-brand)]">Currency Trading?</span> — Meaning &amp; Basics
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">
-          Currency trading in India means trading exchange-rate derivatives (futures and options) on NSE and BSE — NOT spot forex trading. SEBI and RBI regulate all currency derivatives.
-        </p>
-      </div>
-      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
-        <div class="overflow-x-auto">
-          <table class="w-full text-[15.5px]">
-            <thead>
-              <tr class="bg-[var(--color-dark-olive)]">
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Feature</th>
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">India Currency Trading</th>
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Offshore Forex</th>
-              </tr>
-            </thead>
-            <tbody>
-              {[
-                { feature: 'Exchange', india: 'NSE / BSE (SEBI-regulated)', offshore: 'OTC / unregulated platforms' },
-                { feature: 'Regulator', india: 'SEBI + RBI', offshore: 'Unregulated (illegal for Indians)' },
-                { feature: 'Products', india: 'Futures & Options on 7 pairs', offshore: 'Spot and CFD forex' },
-                { feature: 'Legal Status', india: 'Fully legal', offshore: 'Illegal under FEMA for Indians' },
-                { feature: 'Settlement', india: 'Cash settlement in INR', offshore: 'USD or other currency' },
-              ].map((r, i) => (
-                <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[#f8f6f1]'}>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">{r.feature}</td>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.india}</td>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.offshore}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      <div class="hero-feats">
+        <div class="feats">
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;SEBI &amp; RBI-compliant</span></div>
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;NSE &amp; BSE listed</span></div>
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;Flat ₹20/order</span></div>
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;FEMA-compliant, no offshore site</span></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ══ S3. HOW CURRENCY TRADING WORKS (NSE & BSE) ════════════════════ -->
-  <section class="bg-[#f8f6f1] py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          How <span class="text-[var(--color-brand)]">Currency Trading</span> Works — NSE &amp; BSE
-        </h2>
-      </div>
-      <div class="equity-reveal steps-grid overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
+  <!-- ══ 2. WHAT IS CURRENCY TRADING? ════════════════════════════════ -->
+  <section class="section stack" id="sec-about" style="background:var(--sec-light);gap:56px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">What is Currency Trading?</p>
+      <p class="sec-lead">Currency trading is the buying and selling of one currency against another with the aim of profiting from changes in the exchange rate, or to lock in a future rate against a known exposure. In India, this happens almost entirely through currency derivatives — exchange-traded futures and options contracts on currency pairs — rather than through an offline over-the-counter market that most people associate with the word "forex."</p>
+      <p class="sec-lead">That distinction matters. Globally, "forex trading" usually means trading spot currency directly with a broker, often through an offshore MT4 platform, with no formal exchange involved. In India, retail participants trade currency derivatives — contracts that derive their value from an underlying exchange rate — through the National Stock Exchange (NSE) and the Bombay Stock Exchange (BSE), cleared through a recognised clearing corporation, in the same way equity futures and options work.</p>
+    </div>
+    <div class="t-scroll">
+      <div class="table t3 bordered">
+        <div class="cell th"><p>Feature</p></div>
+        <div class="cell th"><p>India Currency Trading</p></div>
+        <div class="cell th"><p>Offshore Forex</p></div>
         {[
-          { n: '01', title: 'Choose Currency Pair', desc: 'Select from USDINR, EURINR, GBPINR, or JPYINR.' },
-          { n: '02', title: 'Select Contract Month', desc: 'Currency futures expire on the last business day of each month.' },
-          { n: '03', title: 'Place Order', desc: 'Buy (go long) or sell (go short) based on your exchange rate view.' },
-          { n: '04', title: 'Cash Settlement', desc: 'Positions are cash-settled in INR at RBI reference rate on expiry.' },
-        ].map(s => (
-          <div class="px-[30px] py-[34px]">
-            <div class="mb-[22px] text-[34px] font-bold leading-none text-[var(--color-brand)]">{s.n}</div>
-            <h4 class="mb-[10px] text-[19px] font-medium leading-[1.25] text-[var(--color-ink)]" style="font-family:var(--font-display)">{s.title}</h4>
-            <p class="text-[14.5px] leading-relaxed text-[var(--color-muted)]">{s.desc}</p>
+          { feature: 'Exchange',     india: 'NSE / BSE (SEBI-regulated)',       offshore: 'OTC / unregulated platforms' },
+          { feature: 'Regulator',    india: 'SEBI + RBI (FEMA)',                 offshore: 'Unregulated — illegal for Indian residents' },
+          { feature: 'Products',     india: 'Futures & Options on 7 pairs',      offshore: 'Spot forex and CFD' },
+          { feature: 'Legal Status', india: 'Fully legal',                        offshore: 'Illegal under FEMA for Indian residents' },
+          { feature: 'Settlement',   india: 'Cash settlement in INR at RBI rate', offshore: 'USD or other foreign currency' },
+        ].map(r => (
+          <>
+            <div class="cell tb"><p class="k">{r.feature}</p></div>
+            <div class="cell tb"><p class="v">{r.india}</p></div>
+            <div class="cell tb"><p class="v">{r.offshore}</p></div>
+          </>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 3. HOW CURRENCY TRADING WORKS ════════════════════════════════ -->
+  <section class="section stack" id="sec-how" style="background:var(--sec-tint);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">How Currency Trading Works on the NSE and BSE</p>
+      <p class="sec-lead">Every trade passes through three layers: the exchange that matches orders, the clearing corporation that guarantees settlement, and the broker that holds the margin.</p>
+    </div>
+    <div class="row-2">
+      <div class="card">
+        <p class="card-h">Exchange</p>
+        <p class="card-p">NSE and BSE run separate currency derivatives segments. Prices are quoted and matched electronically, for the same strike and expiry, on the same central order book used for equity futures.</p>
+      </div>
+      <div class="card">
+        <p class="card-h">Clearing Corporation</p>
+        <p class="card-p">Once a trade is matched, the clearing corporation becomes the legal counterparty to both the buyer and seller and guarantees settlement even if one party defaults.</p>
+      </div>
+    </div>
+    <div class="cat-grid" style="grid-template-columns:repeat(2,1fr)">
+      <div class="cat">
+        <h4>Daily Settlement</h4>
+        <p>Open positions are marked to market every trading day — gains are credited to your account daily, rather than waiting until the contract expires.</p>
+      </div>
+      <div class="cat">
+        <h4>Expiry &amp; Settlement</h4>
+        <p>Most contracts expire on the last working day of the month. Settlement prices are based on the RBI reference rate — the 5% reference rate is set in rupees, and the difference is paid in rupees.</p>
+      </div>
+      <div class="cat">
+        <h4>Open Positions</h4>
+        <p>Wait for the contract to expire, or square off your position before expiry. Waiting until expiry means cash settlement at RBI reference rate with no foreign currency changing hands.</p>
+      </div>
+      <div class="cat">
+        <h4>Trading Hours</h4>
+        <p>Trading on the segment generally runs from 9:00 AM to 5:00 PM (IST), longer than the equity cash market, which lets traders react to global events and European and US market data after the local market close.</p>
+      </div>
+    </div>
+    <a class="btn-gold" href="/about/open-demat-account/" style="align-self:center">Start Options Trading</a>
+  </section>
+
+  <!-- ══ 4. CURRENCY PAIRS AVAILABLE IN INDIA ═════════════════════════ -->
+  <section class="section stack" id="sec-pairs" style="background:var(--sec-light);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Currency Pairs Available in India</p>
+      <p class="sec-lead">Four rupee pairs carry the bulk of volume. A smaller set of cross-currency pairs — where neither leg is the rupee — lets traders take a view on global currency movements without an INR component.</p>
+    </div>
+    <div class="t-scroll">
+      <div class="table bordered" style="grid-template-columns:repeat(4,minmax(0,1fr))">
+        <div class="cell th"><p>Pair</p></div>
+        <div class="cell th"><p>Underlying</p></div>
+        <div class="cell th"><p>Lot Size</p></div>
+        <div class="cell th"><p>Tick Size</p></div>
+        {pairs.map(r => (
+          <>
+            <div class="cell tb"><p class="k">{r.pair}</p></div>
+            <div class="cell tb"><p class="v">{r.underlying}</p></div>
+            <div class="cell tb"><p class="v">{r.lot}</p></div>
+            <div class="cell tb"><p class="v">{r.tick}</p></div>
+          </>
+        ))}
+      </div>
+    </div>
+    <p class="note">Lot sizes and tick sizes are set by the exchange and revised periodically — always confirm current contract specifications before placing an order.</p>
+  </section>
+
+  <!-- ══ 5. CURRENCY FUTURES VS OPTIONS ═══════════════════════════════ -->
+  <section class="section stack" id="sec-vs" style="background:var(--sec-tint);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Currency Futures vs. Options</p>
+      <p class="sec-lead">Futures and options solve different problems. Futures give direct exposure with no upfront premium; options let you define your maximum loss in advance, at the cost of paying a premium.</p>
+    </div>
+    <div class="row-2" style="align-items:stretch">
+      <div class="card" style="background:var(--card);flex:1">
+        <p class="sub-title" style="font-size:18px">Currency Futures</p>
+        <div class="check-list" style="margin-top:8px">
+          {[
+            'Buyer and seller both obligated to settle',
+            'Margin only — no premium cost',
+            'Theoretically unlimited if the market moves against you',
+            'Directional trades; hedging known exposure',
+            'Monthly contracts, several months listed at once',
+          ].map((item, i) => (
+            <>
+              {i > 0 && <div class="check-sep"></div>}
+              <div class="check-row"><span class="ck">→</span><p class="tx">{item}</p></div>
+            </>
+          ))}
+        </div>
+      </div>
+      <div class="card" style="background:var(--olive-deep);border-color:var(--olive-deep);flex:1">
+        <p class="sub-title" style="font-size:18px;color:#fff">Currency Options</p>
+        <div class="check-list" style="margin-top:8px">
+          {[
+            'Buyer has no obligation; seller is obligated',
+            'Buyer pays a premium; seller receives it and posts margin',
+            'Capped at the premium paid (for buyers)',
+            'Defined-risk speculation; hedging with optionality',
+            'Monthly; expiry generally on USDINR, EURINR, GBPINR, JPYINR',
+          ].map((item, i) => (
+            <>
+              {i > 0 && <div class="check-sep" style="background:rgba(255,255,255,.1)"></div>}
+              <div class="check-row"><span class="ck" style="color:var(--gold-2)">→</span><p class="tx" style="color:rgba(255,255,255,.75)">{item}</p></div>
+            </>
+          ))}
+        </div>
+      </div>
+    </div>
+    <p class="note">A call option gives the buyer the right to buy the underlying pair at the strike price; a put gives the right to sell. Options lose value as expiry approaches if the market doesn't move in the buyer's favour — a characteristic known as time decay — which is why option buying and option selling carry very different risk profiles even though they sit on opposite sides of the same contract.</p>
+    <a class="btn-gold" href="/about/open-demat-account/" style="align-self:center">Start Options Trading</a>
+  </section>
+
+  <!-- ══ 6. IS CURRENCY TRADING LEGAL IN INDIA? ═══════════════════════ -->
+  <section class="section stack" id="sec-legal" style="background:var(--sec-light);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Is Currency Trading Legal in India?</p>
+      <p class="sec-lead">Yes — through the right channel. Exchange-traded currency derivatives on NSE and BSE are fully legal and regulated. The illegal grey area exists entirely on the offshore side.</p>
+    </div>
+    <div class="row-2">
+      <div class="card legal-card">
+        <p class="card-h" style="color:var(--green)">Legal ✓</p>
+        <p class="card-p">Currency futures and options traded through a SEBI-registered broker on NSE or BSE, cleared through a recognised clearing corporation, is legal. Shriram Financial Services is a SEBI-registered exchange member broker.</p>
+      </div>
+      <div class="card restricted-card">
+        <p class="card-h" style="color:#c0392b">Restricted ✗</p>
+        <p class="card-p">Spot forex trading through offshore or unregistered platforms (MT4/MT5 brokers) is what Indian residents must retail from transactions to specifically permitted cross-border activities. SEBI classifies spot forex trading as an overseas broker generally falls under illegal activity.</p>
+      </div>
+    </div>
+    <div class="card" style="background:var(--sec-tint);border-color:var(--card-border)">
+      <p class="card-p">The Reserve Bank of India and SEBI jointly oversee the currency derivatives ecosystem — RBI from a capital-account and exchange-rate-management standpoint, SEBI as the market regulator for exchanges, brokers, and clearing members. Neither regulator has published the public domain about legitimate offshore forex platforms that solicit Indian residents directly, many of which operate outside any regulatory framework that an Indian trader could appeal to in a dispute.</p>
+    </div>
+  </section>
+
+  <!-- ══ 7. TAXATION ON CURRENCY TRADING ══════════════════════════════ -->
+  <section class="section stack" id="sec-tax" style="background:var(--sec-tint);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Taxation on Currency Trading</p>
+      <p class="sec-lead">How your gains are taxed depends on how you classify your trading activity — and that classification is yours to own by maintaining the right trade records.</p>
+      <p class="sec-lead">Income from exchange-traded currency derivatives is generally treated as non-speculative business income. This means profits are subject to the Income Tax Act, since these are derivative contracts settled through a recognised exchange — unlike intraday equity trades, which are classified as speculative. This means profits are added to your other business income and taxed at your applicable income slab rate, while losses can be set off against most other heads of income and carried forward.</p>
+    </div>
+    <div class="t-scroll">
+      <div class="table t3 bordered">
+        <div class="cell th"><p>Income Type</p></div>
+        <div class="cell th"><p>Tax Treatment</p></div>
+        <div class="cell th"><p>ITR Form</p></div>
+        {taxRows.map(r => (
+          <>
+            <div class="cell tb"><p class="k">{r.type}</p></div>
+            <div class="cell tb"><p class="v">{r.tax}</p></div>
+            <div class="cell tb"><p class="v">{r.itr}</p></div>
+          </>
+        ))}
+      </div>
+    </div>
+    <p class="note">Maintain detailed trade logs and consult a CA for ITR filing.</p>
+  </section>
+
+  <!-- ══ 8. HOW TO START CURRENCY TRADING ═════════════════════════════ -->
+  <section class="section stack" id="sec-start" style="background:var(--sec-light);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">How to Start Currency Trading</p>
+    </div>
+    <div class="num-grid">
+      {steps.map(s => (
+        <div class="num-card">
+          <span class="num">{s.n}</span>
+          <div class="num-body">
+            <h4>{s.title}</h4>
+            <p>{s.desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+    <a class="btn-gold" href="/about/open-demat-account/" style="align-self:center">Start Currency Trading</a>
+  </section>
+
+  <!-- ══ 9. STRATEGIES FOR BEGINNERS ══════════════════════════════════ -->
+  <section class="section stack" id="sec-strategies" style="background:var(--sec-tint);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Currency Trading Strategies for Beginners</p>
+      <p class="sec-lead">Most beginner strategies fall into three buckets: reading price action with indicators, hedging a real exposure, and managing risk through position sizing rather than prediction.</p>
+    </div>
+    <div class="cat-grid">
+      <div class="cat">
+        <h4>USDINR Directional</h4>
+        <p>Trade based on RBI policy decisions, Fed rate announcements, and India's current account deficit and trade balance data — the macro drivers that move USDINR most reliably.</p>
+      </div>
+      <div class="cat">
+        <h4>Hedging for Importers</h4>
+        <p>If you import USD-priced goods, buy USDINR futures to lock in exchange rate. A rise in USDINR (rupee weakens) increases your import cost — the futures gain offsets it.</p>
+      </div>
+      <div class="cat">
+        <h4>Technical Strategy</h4>
+        <p>Use RSI, pivot points, and 9/21 EMA crossovers on the USDINR 15-minute chart. Currency markets have clear intraday rhythms tied to RBI fix time and the European open.</p>
+      </div>
+      <div class="cat">
+        <h4>Calendar Spread</h4>
+        <p>Buy the near-month and sell the far-month USDINR contract. Benefits from time decay differential and convergence — a market-neutral approach for range-bound periods.</p>
+      </div>
+      <div class="cat">
+        <h4>Options Hedging</h4>
+        <p>Buy USDINR call options to hedge import exposure with capped premium cost. The option lapses if the rupee strengthens — you benefit from the favourable rate instead.</p>
+      </div>
+      <div class="cat">
+        <h4>Pairs Trading</h4>
+        <p>Trade EURUSD or GBPUSD cross-currency pairs during European hours. These pairs are more sensitive to ECB and BOE decisions and offer different volatility profiles from INR pairs.</p>
+      </div>
+    </div>
+
+    <div class="stack" style="gap:32px">
+      <div class="stack" style="gap:16px">
+        <p class="sub-title">Technical Indicators Traders Lean On</p>
+      </div>
+      <div class="risks">
+        {indicators.map(r => (
+          <div class="risk">
+            <h4>{r.title}</h4>
+            <p>{r.desc}</p>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- ══ S4. CURRENCY PAIRS AVAILABLE IN INDIA ════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          <span class="text-[var(--color-brand)]">Currency Pairs</span> Available in India — NSE &amp; BSE
-        </h2>
-      </div>
-      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
-        <div class="overflow-x-auto">
-          <table class="w-full text-[14.5px]">
-            <thead>
-              <tr class="bg-[var(--color-dark-olive)]">
-                <th class="px-[20px] py-[16px] text-left text-[13px] font-semibold text-white">Currency Pair</th>
-                <th class="px-[20px] py-[16px] text-left text-[13px] font-semibold text-[var(--color-brand)]">Lot Size</th>
-                <th class="px-[20px] py-[16px] text-left text-[13px] font-semibold text-[var(--color-brand)]">Tick Size</th>
-                <th class="px-[20px] py-[16px] text-left text-[13px] font-semibold text-[var(--color-brand)]">Exchange</th>
-                <th class="px-[20px] py-[16px] text-left text-[13px] font-semibold text-[var(--color-brand)]">Segment</th>
-              </tr>
-            </thead>
-            <tbody>
-              {[
-                { pair: 'USDINR', lot: 'USD 1,000', tick: '₹0.0025', ex: 'NSE & BSE', seg: 'Futures & Options' },
-                { pair: 'EURINR', lot: 'EUR 1,000', tick: '₹0.0025', ex: 'NSE & BSE', seg: 'Futures & Options' },
-                { pair: 'GBPINR', lot: 'GBP 1,000', tick: '₹0.0025', ex: 'NSE & BSE', seg: 'Futures & Options' },
-                { pair: 'JPYINR', lot: 'JPY 100,000', tick: '₹0.0025', ex: 'NSE & BSE', seg: 'Futures & Options' },
-                { pair: 'EURUSD', lot: 'EUR 1,000', tick: 'USD 0.0001', ex: 'NSE', seg: 'Futures only (cross currency)' },
-                { pair: 'GBPUSD', lot: 'GBP 1,000', tick: 'USD 0.0001', ex: 'NSE', seg: 'Futures only (cross currency)' },
-                { pair: 'USDJPY', lot: 'USD 1,000', tick: 'JPY 0.01', ex: 'NSE', seg: 'Futures only (cross currency)' },
-              ].map((r, i) => (
-                <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[#f8f6f1]'}>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[20px] py-[15px] font-semibold text-[var(--color-ink)]">{r.pair}</td>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[20px] py-[15px] text-[var(--color-muted)]">{r.lot}</td>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[20px] py-[15px] text-[var(--color-muted)]">{r.tick}</td>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[20px] py-[15px] font-medium text-[var(--color-dark-olive)]">{r.ex}</td>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[20px] py-[15px] text-[var(--color-muted)]">{r.seg}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+  <!-- ══ 10. FAQ ═══════════════════════════════════════════════════════ -->
+  <section class="faq-wrap" id="sec-faq" style="background:var(--sec-light)">
+    <div class="faq-cols">
+      <div class="faq-left">
+        <p class="faq-title">FAQs — Currency Trading</p>
+        <div class="faq-acc">
+          {faqs.map(item => (
+            <details class="faq-item">
+              <summary class="faq-sum">
+                <span class="qt">{item.q}</span>
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="faq-icon">
+                  <path d="M2 8h12"/>
+                  <path class="faq-v" d="M8 2v12"/>
+                </svg>
+              </summary>
+              <div class="qa"><p>{item.a}</p></div>
+            </details>
+          ))}
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- ══ S5. CURRENCY FUTURES VS OPTIONS ══════════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          <span class="text-[var(--color-brand)]">Currency Futures vs Options</span> — Key Differences
-        </h2>
-      </div>
-      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
-        <div class="overflow-x-auto">
-          <table class="w-full text-[15.5px]">
-            <thead>
-              <tr class="bg-[var(--color-dark-olive)]">
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Feature</th>
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Currency Futures</th>
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Currency Options</th>
-              </tr>
-            </thead>
-            <tbody>
-              {[
-                { feature: 'Obligation', fut: 'Must settle at expiry', opt: 'Right only (buyer)' },
-                { feature: 'Premium', fut: 'No premium — margin', opt: 'Buyer pays premium' },
-                { feature: 'Max Loss (Buyer)', fut: 'Unlimited (MTM daily)', opt: 'Limited to premium' },
-                { feature: 'Use Case', fut: 'Speculation, hedging', opt: 'Hedging, premium income' },
-                { feature: 'Capital Required', fut: 'SPAN + Exposure margin', opt: 'Premium amount' },
-              ].map((r, i) => (
-                <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[#f8f6f1]'}>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">{r.feature}</td>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.fut}</td>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.opt}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      <div class="faq-side">
+        <div class="usr" aria-hidden="true">
+          <svg viewBox="0 0 120 135" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="60" cy="37" r="29"/>
+            <path d="M0 135a60 60 0 0 1 120 0H0z"/>
+          </svg>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ S6. IS CURRENCY TRADING LEGAL IN INDIA? ══════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Is <span class="text-[var(--color-brand)]">Currency Trading Legal</span> in India? — RBI &amp; SEBI Rules
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">
-          Yes — on SEBI-regulated exchanges. Trading unregulated offshore forex platforms is ILLEGAL under FEMA.
-        </p>
-      </div>
-      <div class="equity-reveal grid gap-5 sm:grid-cols-2">
-        <div class="product-card-light px-[28px] py-[32px]">
-          <h3 class="mb-3 text-[20px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">Legal ✓</h3>
-          <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">Trade USDINR, EURINR, GBPINR, JPYINR futures &amp; options on NSE/BSE through a SEBI-registered broker. Regulated by RBI (FEMA) and SEBI. Shriram is SEBI-registered: INE231103833.</p>
-        </div>
-        <div class="product-card-light px-[28px] py-[32px]">
-          <h3 class="mb-3 text-[20px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">Illegal ✗</h3>
-          <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">Using offshore 'forex' or 'CFD' platforms (MT4/MT5 based, USD-funded) is illegal under FEMA for Indian residents. SEBI has issued multiple warnings against such platforms.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ S7. TAXATION ON CURRENCY TRADING ═════════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Taxation on <span class="text-[var(--color-brand)]">Currency Trading</span> Profits
-        </h2>
-      </div>
-      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
-        <div class="overflow-x-auto">
-          <table class="w-full text-[15.5px]">
-            <thead>
-              <tr class="bg-[var(--color-dark-olive)]">
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Income Type</th>
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Tax Treatment</th>
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">ITR Form</th>
-              </tr>
-            </thead>
-            <tbody>
-              {[
-                { type: 'Currency F&O profits', tax: 'Non-speculative business income (not capital gains)', itr: 'ITR-3' },
-                { type: 'Currency F&O losses', tax: 'Offset against business income; carry forward 8 years', itr: 'ITR-3' },
-                { type: 'Brokerage & charges', tax: 'Deductible as business expense', itr: 'ITR-3' },
-                { type: 'GST on brokerage', tax: '18% on brokerage (not on trade value)', itr: '—' },
-              ].map((r, i) => (
-                <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[#f8f6f1]'}>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">{r.type}</td>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.tax}</td>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.itr}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <p class="mt-4 text-[13px] text-[var(--color-muted)]">Maintain detailed trade logs and consult a CA for ITR filing.</p>
-    </div>
-  </section>
-
-  <!-- ══ S8. HOW TO START CURRENCY TRADING ════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          How to Start <span class="text-[var(--color-brand)]">Currency Trading</span> in India
-        </h2>
-      </div>
-      <div class="equity-reveal steps-grid overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
-        {[
-          { n: '01', title: 'Open Trading Account', desc: 'Open Demat + Trading account with Shriram. 100% digital, 10 minutes.' },
-          { n: '02', title: 'Activate Currency Segment', desc: 'Request currency derivatives segment activation. Submit KYC and income proof.' },
-          { n: '03', title: 'Add Margin', desc: 'Transfer SPAN + Exposure margin (typically ₹2,000–₹4,000 per USDINR lot).' },
-          { n: '04', title: 'Trade & Monitor', desc: 'Select pair, expiry, execute orders. Monitor rate using RBI reference rate and global forex data.' },
-        ].map(s => (
-          <div class="px-[30px] py-[34px]">
-            <div class="mb-[22px] text-[34px] font-bold leading-none text-[var(--color-brand)]">{s.n}</div>
-            <h4 class="mb-[10px] text-[19px] font-medium leading-[1.25] text-[var(--color-ink)]" style="font-family:var(--font-display)">{s.title}</h4>
-            <p class="text-[14.5px] leading-relaxed text-[var(--color-muted)]">{s.desc}</p>
+        <div class="side-in">
+          <div class="side-tx">
+            <h4>Need A Clearer Direction?</h4>
+            <p>Book a free 15-minute call with a Shriram currency derivatives specialist. We'll explain margin requirements, walk through a live trade on USDINR, and answer any compliance questions you have.</p>
           </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ S9. CURRENCY TRADING STRATEGIES FOR BEGINNERS ════════════════ -->
-  <section class="bg-[#f8f6f1] py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          <span class="text-[var(--color-brand)]">Currency Trading Strategies</span> for Beginners
-        </h2>
-      </div>
-      <div class="equity-reveal grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {[
-          { title: 'USDINR Directional', desc: 'Trade based on RBI policy, Fed rate decisions, and India CAD/trade balance data.' },
-          { title: 'Hedging for Importers', desc: 'If you import USD-priced goods, buy USDINR futures to lock in exchange rate.' },
-          { title: 'Technical Strategy', desc: 'Use RSI, pivot points, and 9/21 EMA crossovers on USDINR 15-minute chart.' },
-          { title: 'Calendar Spread', desc: 'Buy near-month, sell far-month USDINR contracts. Benefits from time decay differential.' },
-        ].map(c => (
-          <div class="product-card-light px-[28px] py-[32px]">
-            <h3 class="mb-3 text-[17px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{c.title}</h3>
-            <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">{c.desc}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ S10. FAQs — CURRENCY TRADING INDIA ═══════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          FAQs — <span class="text-[var(--color-brand)]">Currency Trading</span> India
-        </h2>
-      </div>
-      <div class="equity-reveal mx-auto max-w-[840px] border-t border-[var(--color-n400)]">
-        {[
-          { q: 'What is currency derivatives trading in India?', a: 'Exchange-traded contracts on currency pairs (USDINR, EURINR, etc.) on NSE/BSE. It is NOT spot forex trading — it is regulated by SEBI and RBI.' },
-          { q: 'Is currency trading legal in India?', a: 'Yes — on SEBI-regulated exchanges NSE and BSE. Trading offshore forex/CFD platforms is illegal under FEMA for Indian residents.' },
-          { q: 'What is the minimum capital to trade USDINR?', a: 'One USDINR futures lot (USD 1,000) requires approximately ₹2,000–₹4,000 in SPAN + Exposure margin.' },
-          { q: 'What are trading hours for currency derivatives?', a: '9 AM to 5 PM (INR pairs). Cross-currency pairs (EURUSD, GBPUSD, USDJPY) trade until 7:30 PM on NSE.' },
-          { q: 'How is currency F&O settled?', a: 'Currency derivatives are cash-settled in INR at the RBI reference rate on the last business day of the expiry month.' },
-          { q: 'What is the tax on currency trading profits?', a: 'Currency F&O profits are non-speculative business income — taxed as per your income slab. File ITR-3. Losses can be carried forward for 8 years.' },
-          { q: 'Can NRIs trade currency derivatives in India?', a: 'NRIs can trade currency derivatives through RBI-approved brokers using NRE/NRO accounts, subject to FEMA guidelines.' },
-          { q: 'What is the difference between USDINR futures and spot forex?', a: 'USDINR futures are exchange-traded, SEBI-regulated, cash-settled contracts. Spot forex is OTC and unregulated — illegal for Indian residents under FEMA.' },
-        ].map(item => (
-          <details class="eq-faq group border-b border-[var(--color-n400)]">
-            <summary class="flex cursor-pointer list-none items-center justify-between gap-5 py-[26px] px-2">
-              <span class="text-[18px] font-semibold text-[var(--color-ink)]">{item.q}</span>
-              <span class="shrink-0 text-[22px] leading-none text-[var(--color-brand)] transition-transform duration-300 group-open:rotate-45">+</span>
-            </summary>
-            <div class="overflow-hidden px-2 pb-0 text-[16px] leading-relaxed text-[var(--color-muted)] transition-all duration-300 group-open:pb-[28px]">
-              <p class="max-w-[680px]">{item.a}</p>
-            </div>
-          </details>
-        ))}
-      </div>
-
-      <!-- Dark CTA block after FAQs -->
-      <div class="equity-reveal mt-[56px] overflow-hidden rounded-[22px] bg-[var(--color-dark-800)] px-[60px] py-[64px] text-center">
-        <h3 class="mx-auto max-w-[560px] text-[38px] font-bold leading-[1.12] text-white" style="font-family:var(--font-display)">Open Currency Trading Account — NSE &amp; BSE</h3>
-        <div class="mt-[34px] flex flex-wrap justify-center gap-[14px]">
-          <a href="/about/open-demat-account/" class="btn-primary">Open Account</a>
+          <a class="btn-gold" href="/about/support/">Book A Discovery Call</a>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ══ 11. FINAL CTA ═════════════════════════════════════════════════ -->
+  <section class="cta-sec" id="sec-final-cta" style="background:var(--sec-tint)">
+    <div class="cta-box">
+      <div class="ct-tt">
+        <h3>Open Currency Trading Account — NSE &amp; BSE</h3>
+        <p class="ct-sub">Start trading USDINR, EURINR and cross-currency pairs with flat ₹20/order brokerage, full SEBI &amp; RBI compliance, and zero offshore risk.</p>
+      </div>
+      <a class="btn-gold" href="/about/open-demat-account/">Open Demat Account</a>
     </div>
   </section>
 
 </BaseLayout>
 
 <style>
-  .equity-reveal {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+  :root {
+    --page: #fcf8ef;
+    --sec-light: #fef8ee;
+    --sec-tint: #f6efe1;
+    --card: #fffdf8;
+    --card-border: #e1e0db;
+    --card-border-soft: rgba(28,28,22,.13);
+    --row-line: rgba(28,28,22,.08);
+    --olive-title: #2e3914;
+    --olive-head: #2d3813;
+    --olive-deep: #1b2010;
+    --ink: #1c1c16;
+    --ink-2: #46463c;
+    --ink-3: #595959;
+    --muted: #73736a;
+    --muted-2: #9a9a8e;
+    --gold: #e0a82e;
+    --gold-2: #f2b83f;
+    --gold-btn: #f3b83f;
+    --gold-ink: #231a06;
+    --olive-ink: #2e3914;
+    --green: #009d58;
+    --pad: clamp(20px, 8vw, 144px);
+    --container-pad: 32px;
+    --section-y: 72px;
+    --cta-w: 220px;
   }
-  .equity-reveal.in-view { opacity: 1; transform: none; }
 
-  .steps-grid { display: grid; grid-template-columns: repeat(2, 1fr); }
-  .steps-grid > * { border-right: 1px solid var(--color-n400); border-bottom: 1px solid var(--color-n400); }
-  .steps-grid > *:nth-child(2n) { border-right: 0; }
-  .steps-grid > *:nth-last-child(-n+2) { border-bottom: 0; }
-  @media (min-width: 1024px) {
-    .steps-grid { grid-template-columns: repeat(4, 1fr); }
-    .steps-grid > * { border-right: 1px solid var(--color-n400); border-bottom: 0; }
-    .steps-grid > *:last-child { border-right: 0; }
+  *, *::before, *::after { box-sizing: border-box; }
+  a { color: inherit; text-decoration: none; }
+  p { line-height: 1.5; }
+
+  .section { padding: var(--section-y) var(--pad); min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; justify-content: center; }
+  #sec-about { min-height: 0; }
+  .stack { display: flex; flex-direction: column; }
+
+  /* ── Typography ── */
+  .sec-title  { font-weight: 400; font-size: 40px; color: var(--olive-title); text-transform: capitalize; line-height: 1.5; }
+  .sec-lead   { font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.5; }
+  .sub-title  { font-weight: 500; font-size: 24px; color: var(--ink); line-height: 1.5; }
+  .card-h     { font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.5; }
+  .card-p     { font-weight: 400; font-size: 16px; color: var(--muted); line-height: 1.5; }
+  .note       { font-weight: 400; font-size: 13px; color: var(--muted-2); line-height: 1.5; }
+
+  /* ── Hero ── */
+  .hero { padding: 0 var(--pad); display: flex; flex-direction: column; justify-content: center; overflow: hidden; background: radial-gradient(125% 210% at 100% -8%, #4f583b 0%, #363a2c 50%, #1d1d1d 100%); }
+  .hero-inner { padding: clamp(80px,12vw,140px) 0 clamp(48px,6vw,80px); display: flex; flex-direction: column; }
+  .hero h1 { font-weight: 500; font-size: 40px; color: #fff; line-height: 1.3; max-width: 860px; }
+  .hero h1 .g { color: var(--gold-2); }
+  .hero .lead { margin-top: 32px; font-weight: 400; font-size: 18px; line-height: 1.5; color: rgba(255,255,255,.74); max-width: 620px; }
+  .cta-row { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .hero-feats { margin-top: 40px; }
+  .feats { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 16px; max-width: 760px; padding-top: 36px; border-top: 1px solid rgba(255,255,255,.16); }
+  .feat { display: flex; gap: 10px; align-items: center; }
+  .feat .tk { color: var(--gold-2); font-weight: 500; font-size: 15px; width: 13px; }
+  .feat .lb { color: rgba(255,255,255,.9); font-weight: 500; font-size: 16px; line-height: 1.5; white-space: nowrap; }
+
+  /* ── Buttons ── */
+  .btn-gold { background: var(--gold-btn); height: 40px; width: var(--cta-w); border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; padding: 7px 20px; font-weight: 500; font-size: 12px; color: var(--olive-ink); white-space: nowrap; transition: opacity .2s; }
+  .btn-gold:hover { opacity: .88; }
+  .btn-ghost { height: 40px; border-radius: 9px; border: 1px solid rgba(255,255,255,.4); display: inline-flex; align-items: center; justify-content: center; padding: 7px 26px; font-weight: 600; font-size: 15px; color: #fff; transition: border-color .2s; }
+  .btn-ghost:hover { border-color: #fff; }
+
+  /* ── Card ── */
+  .card { background: var(--card); border: 1px solid var(--card-border); border-radius: 24px; padding: var(--container-pad); display: flex; flex-direction: column; gap: 16px; }
+
+  /* ── Two-card row ── */
+  .row-2 { display: flex; gap: 32px; align-items: stretch; }
+  .row-2 .card { flex: 1 0 0; min-width: 0; }
+
+  /* ── Category / info grid ── */
+  .cat-grid { border: 1px solid var(--card-border); border-radius: 24px; overflow: hidden; display: grid; grid-template-columns: repeat(3, 1fr); background: var(--card); }
+  .cat { background: var(--card); padding: var(--container-pad); display: flex; flex-direction: column; gap: 12px; border-right: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border); }
+  .cat:nth-child(3n)  { border-right: 0; }
+  .cat:nth-child(n+4) { border-bottom: 0; }
+  .cat h4 { font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.5; }
+  .cat p  { font-weight: 400; font-size: 16px; color: var(--muted); line-height: 1.5; }
+
+  /* 2-col cat-grid override */
+  .cat-grid[style*="repeat(2"] .cat:nth-child(2n)  { border-right: 0; }
+  .cat-grid[style*="repeat(2"] .cat:nth-child(3n)  { border-right: 1px solid var(--card-border); }
+  .cat-grid[style*="repeat(2"] .cat:nth-child(n+3) { border-bottom: 0; }
+  .cat-grid[style*="repeat(2"] .cat:nth-child(n+4) { border-bottom: 1px solid var(--card-border); }
+
+  /* ── Tables ── */
+  .t-scroll { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .table { background: var(--card); border-radius: 24px; overflow: hidden; display: grid; }
+  .table.bordered { border: 1px solid var(--card-border); }
+  .t3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+  .cell { padding: 16px 24px; display: flex; align-items: center; justify-content: center; text-align: center; }
+  .cell p { flex: 1 0 0; min-width: 0; font-size: 15px; line-height: 1.5; overflow-wrap: break-word; }
+  .th { background: var(--olive-head); }
+  .th p { font-weight: 600; color: #fff; }
+  .tb { border-top: 1px solid var(--row-line); }
+  .tb .k { font-weight: 600; color: var(--ink); text-align: left; }
+  .tb .v { font-weight: 400; color: var(--ink-2); text-align: left; }
+
+  /* ── Numbered steps grid ── */
+  .num-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .num-card { background: var(--card); border: 1px solid var(--card-border); border-radius: 24px; padding: var(--container-pad); display: flex; gap: 20px; align-items: flex-start; }
+  .num { font-weight: 400; font-size: 32px; line-height: 34px; color: var(--gold); flex: none; width: 36px; }
+  .num-body { display: flex; flex-direction: column; gap: 10px; }
+  .num-body h4 { font-weight: 500; font-size: 17px; color: var(--ink); line-height: 1.4; }
+  .num-body p  { font-weight: 400; font-size: 15px; color: var(--ink-3); line-height: 1.5; }
+
+  /* ── Checklist (inside vs cards) ── */
+  .check-list { display: flex; flex-direction: column; gap: 20px; }
+  .check-row  { display: flex; gap: 14px; align-items: flex-start; }
+  .check-row .ck { font-weight: 700; font-size: 15px; line-height: 25.5px; width: 13px; flex: none; color: var(--green); }
+  .check-row .tx { flex: 1 0 0; min-width: 0; font-weight: 400; font-size: 15px; color: var(--ink-3); line-height: 1.5; }
+  .check-sep  { height: 1px; background: var(--row-line); width: 100%; }
+
+  /* ── Risk / indicator cards ── */
+  .risks { display: flex; gap: 24px; align-items: stretch; }
+  .risk  { flex: 1 0 0; min-width: 0; background: var(--card); border: 1px solid var(--card-border); border-radius: 24px; padding: var(--container-pad); display: flex; flex-direction: column; gap: 12px; }
+  .risk h4 { font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.5; }
+  .risk p  { font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.5; }
+
+  /* ── FAQ ── */
+  .faq-wrap { padding: 158px var(--pad); min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; justify-content: center; }
+  .faq-cols  { display: flex; gap: 48px; align-items: stretch; }
+  .faq-left  { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; gap: 48px; }
+  .faq-title { font-weight: 400; font-size: 40px; color: var(--olive-title); text-transform: capitalize; line-height: 1.5; white-space: nowrap; }
+  .faq-acc   { border-radius: 24px; overflow: hidden; display: flex; flex-direction: column; gap: 2px; width: 100%; }
+  .faq-item  { background: var(--card); list-style: none; }
+  .faq-sum   { display: flex; align-items: flex-start; justify-content: space-between; gap: 40px; padding: 24px; cursor: pointer; list-style: none; }
+  .faq-sum::-webkit-details-marker { display: none; }
+  .faq-item .qt { font-weight: 500; font-size: 14px; color: #333; line-height: 1.5; flex: 1; }
+  .faq-item[open] .qt { font-weight: 600; }
+  .faq-icon  { width: 16px; height: 16px; flex: none; color: #404040; }
+  .faq-v     { transition: opacity .28s ease; }
+  .faq-item[open] .faq-v { opacity: 0; }
+  .qa { padding: 0 24px 20px; }
+  .qa p { font-weight: 400; font-size: 14px; color: #404040; line-height: 1.5; }
+  .faq-side { width: 464px; flex: none; background: var(--card); border: 1px solid var(--card-border); border-radius: 24px; padding: var(--container-pad); display: flex; flex-direction: column; gap: 40px; justify-content: flex-end; position: relative; overflow: hidden; }
+  .usr { position: absolute; left: var(--container-pad); top: 64px; width: 130.667px; height: 147px; opacity: .1; }
+  .usr svg { display: block; width: 100%; height: 100%; color: var(--olive-deep); }
+  .side-in  { display: flex; flex-direction: column; gap: 32px; position: relative; }
+  .side-tx  { display: flex; flex-direction: column; gap: 8px; color: #222320; }
+  .side-tx h4 { font-weight: 500; font-size: 20px; line-height: 28px; letter-spacing: -0.45px; }
+  .side-tx p  { font-weight: 400; font-size: 14px; color: var(--ink-3); line-height: 1.5; }
+
+  /* ── Final CTA ── */
+  .cta-sec { padding: var(--section-y) var(--pad); display: flex; align-items: center; justify-content: center; }
+  .cta-box { width: 100%; max-width: 860px; border-radius: 22px; padding: 64px 60px; display: flex; flex-direction: column; align-items: center; gap: 32px; text-align: center; }
+  .ct-tt { display: flex; flex-direction: column; align-items: center; gap: 16px; color: var(--olive-deep); }
+  .cta-box h3 { font-weight: 500; font-size: 38px; line-height: 42.56px; letter-spacing: -0.76px; }
+  .ct-sub { font-weight: 400; font-size: 17px; line-height: 28.05px; color: var(--ink-2); }
+
+  /* ── Responsive ── */
+  @media (max-width: 1024px) {
+    .cat-grid { grid-template-columns: repeat(2, 1fr); }
+    .cat:nth-child(3n) { border-right: 1px solid var(--card-border); }
+    .cat:nth-child(2n) { border-right: 0; }
+    .cat:nth-child(n+4) { border-bottom: 1px solid var(--card-border); }
+    .cat:nth-child(n+5) { border-bottom: 0; }
+    .risks { flex-wrap: wrap; }
+    .risk  { flex: 1 1 calc(50% - 12px); }
+    .usr   { display: none; }
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .equity-reveal { opacity: 1; transform: none; transition: none; }
+  @media (max-width: 900px) {
+    .row-2 { flex-direction: column; }
+    .faq-cols { flex-direction: column; }
+    .faq-side { width: 100%; }
+    .faq-title { white-space: normal; }
+    .num-grid { grid-template-columns: 1fr; }
   }
+
+  @media (max-width: 768px) {
+    :root { --pad: 16px; --container-pad: 24px; --section-y: 56px; }
+    .faq-wrap { padding: 128px var(--pad); }
+    .hero-inner { padding: 80px 0 48px; }
+    .hero h1 { font-size: clamp(28px, 7vw, 40px); }
+    .hero .lead { font-size: 16px; }
+    .sec-title, .faq-title { font-size: clamp(28px, 7vw, 40px); }
+    .sub-title { font-size: clamp(20px, 5.4vw, 24px); }
+    .cat-grid { grid-template-columns: 1fr; }
+    .cat { border-right: 0 !important; border-bottom: 1px solid var(--card-border) !important; }
+    .cat:last-child { border-bottom: 0 !important; }
+    .cell { padding: 12px 8px; }
+    .cell p { font-size: 13px; }
+    .cta-box { padding: 48px 24px; }
+    .cta-box h3 { font-size: clamp(24px, 6.4vw, 38px); line-height: 1.2; }
+    .ct-sub { font-size: 15px; line-height: 1.6; }
+    .sec-lead, .card-p, .cat p, .check-row .tx, .risk p { font-size: 14px; }
+    .risks { flex-direction: column; }
+    .risk  { flex: 1 1 100%; }
+  }
+
+  @media (prefers-reduced-motion: reduce) { .faq-v { transition: none; } }
 </style>
 
 <script>
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        (e.target as HTMLElement).classList.add('in-view');
-        obs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.10 });
-  document.querySelectorAll('.equity-reveal').forEach(el => obs.observe(el));
-
-  document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(d => {
-    d.addEventListener('toggle', () => {
-      if (d.open) document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(o => { if (o !== d) o.removeAttribute('open'); });
+  document.querySelectorAll('.faq-acc').forEach(function(acc) {
+    acc.querySelectorAll('details').forEach(function(d) {
+      d.addEventListener('toggle', function() {
+        if ((d as HTMLDetailsElement).open) {
+          acc.querySelectorAll<HTMLDetailsElement>('details').forEach(function(other) {
+            if (other !== d) other.removeAttribute('open');
+          });
+        }
+      });
     });
   });
 </script>
