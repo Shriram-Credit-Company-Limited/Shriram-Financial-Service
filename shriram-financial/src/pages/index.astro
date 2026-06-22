@@ -375,12 +375,14 @@ const faqs = [
                 <path d="M7 17L17 7M17 7H7M17 7v10"/>
               </svg>
             </div>
-            <!-- Content centered; slides up on hover as View More reveals (per 8-card video) -->
+            <!-- Content: small at rest, expands to full size on hover -->
             <div class="relative z-10 flex h-full flex-col justify-center">
-              <img src={p.img} alt="" class="h-[44px] w-[44px] shrink-0 object-contain" />
-              <h3 class="mt-6 text-[16px] font-bold leading-snug text-white" style="font-family:var(--font-display)">{p.label}</h3>
-              <p class="mt-2 text-[13px] leading-[1.6] text-white/70">{p.sub}</p>
-              <span class="block max-h-0 overflow-hidden text-[12px] font-medium text-white/80 opacity-0 transition-all duration-300 group-hover:mt-5 group-hover:max-h-[24px] group-hover:opacity-100">View More</span>
+              <img src={p.img} alt=""
+                   class="h-7 w-7 shrink-0 object-contain transition-all duration-300 ease-out group-hover:h-11 group-hover:w-11" />
+              <h3 class="mt-3 text-[13px] font-medium leading-snug text-white transition-all duration-300 ease-out group-hover:mt-6 group-hover:text-[16px] group-hover:font-bold"
+                  style="font-family:var(--font-display)">{p.label}</h3>
+              <p class="max-h-0 overflow-hidden text-[13px] leading-[1.6] text-white/70 opacity-0 transition-all duration-300 ease-out group-hover:mt-2 group-hover:max-h-24 group-hover:opacity-100">{p.sub}</p>
+              <span class="block max-h-0 overflow-hidden text-[12px] font-medium text-white/80 opacity-0 transition-all duration-300 group-hover:mt-5 group-hover:max-h-6 group-hover:opacity-100">View More</span>
             </div>
           </a>
         ))}
