@@ -318,7 +318,7 @@ const faqs = [
   </section>
 
   <!-- ══ 11. FAQ ═══════════════════════════════════════════════════════ -->
-  <section class="faq-wrap" style="background:var(--sec-tint)">
+  <section class="faq-wrap">
     <div class="faq-cols">
       <div class="faq-left">
         <h2 class="faq-title">Frequently asked<br>questions.</h2>
@@ -335,9 +335,7 @@ const faqs = [
         </div>
       </div>
       <div class="faq-side">
-        <div class="usr" aria-hidden="true">
-          <svg viewBox="0 0 131 147" fill="none"><circle cx="65.5" cy="42" r="34" stroke="currentColor" stroke-width="2"/><path d="M4 147c0-34 27.6-61.5 61.5-61.5S127 113 127 147" stroke="currentColor" stroke-width="2"/></svg>
-        </div>
+        <img src="/images/advisor-avatar.png" alt="" class="usr-img" width="140" height="140">
         <div class="side-in">
           <div class="side-tx">
             <h4>Ready to Invest in NFOs?</h4>
@@ -466,28 +464,29 @@ const faqs = [
   .tb .k { font-weight: 600; color: var(--ink); }
   .tb .v { font-weight: 400; color: var(--ink-2); }
 
-  .faq-wrap { padding: 158px var(--pad); min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; justify-content: center; }
+  .faq-wrap { padding: var(--section-y) var(--pad); background: #FFFCF3; display: flex; flex-direction: column; justify-content: center; }
   .faq-cols  { display: flex; gap: 48px; align-items: stretch; }
-  .faq-left  { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; gap: 48px; }
-  .faq-title { font-weight: 400; font-size: 40px; color: var(--olive-title); text-transform: capitalize; line-height: 1.5; white-space: nowrap; }
-  .faq-acc   { border-radius: 24px; overflow: hidden; display: flex; flex-direction: column; gap: 2px; width: 100%; }
-  .faq-item  { background: var(--card); list-style: none; }
-  .faq-sum   { display: flex; align-items: flex-start; justify-content: space-between; gap: 40px; padding: 24px; cursor: pointer; list-style: none; }
+  .faq-left  { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; gap: 32px; }
+  .faq-title { font-weight: 700; font-size: 38px; color: #222320; line-height: 1.3; }
+  .faq-acc   { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+  .faq-item  { background: #f8f4e8; list-style: none; border-radius: 0; }
+  .faq-item:first-child { border-radius: 24px 24px 0 0; }
+  .faq-item:last-child  { border-radius: 0 0 24px 24px; }
+  .faq-sum   { display: flex; align-items: flex-start; justify-content: space-between; gap: 40px; padding: 20px 24px; cursor: pointer; list-style: none; }
   .faq-sum::-webkit-details-marker { display: none; }
-  .faq-item .qt { font-weight: 500; font-size: 14px; color: #333; line-height: 1.5; flex: 1; }
+  .faq-item .qt { font-weight: 500; font-size: 15px; color: #222320; line-height: 1.5; flex: 1; }
   .faq-item[open] .qt { font-weight: 600; }
-  .faq-icon  { width: 16px; height: 16px; flex: none; color: #404040; margin-top: 2px; }
+  .faq-icon  { width: 16px; height: 16px; flex: none; color: #222320; }
   .faq-h     { transition: opacity .28s ease; }
   .faq-item[open] .faq-h { opacity: 0; }
   .qa { padding: 0 24px 20px; }
-  .qa p { font-weight: 400; font-size: 14px; color: #404040; line-height: 1.5; }
-  .faq-side { width: 464px; flex: none; background: var(--card); border: 1px solid var(--card-border); border-radius: 24px; padding: var(--container-pad); display: flex; flex-direction: column; gap: 40px; justify-content: flex-end; position: relative; overflow: hidden; }
-  .usr { position: absolute; left: var(--container-pad); top: 64px; width: 130.667px; height: 147px; opacity: .1; }
-  .usr svg { display: block; width: 100%; height: 100%; color: var(--olive-deep); }
-  .side-in  { display: flex; flex-direction: column; gap: 32px; position: relative; }
-  .side-tx  { display: flex; flex-direction: column; gap: 8px; color: #222320; }
-  .side-tx h4 { font-weight: 500; font-size: 20px; line-height: 28px; letter-spacing: -.45px; }
-  .side-tx p  { font-weight: 400; font-size: 14px; line-height: 22px; letter-spacing: -.15px; }
+  .qa p { font-weight: 400; font-size: 14px; color: #5a5a5a; line-height: 1.6; }
+  .faq-side { width: 360px; flex: none; background: #4f583b; border: 1px solid rgba(255,255,255,.12); border-radius: 24px; padding: 32px; display: flex; flex-direction: column; overflow: hidden; }
+  .usr-img { width: 140px; height: 140px; object-fit: contain; flex: none; }
+  .side-in  { margin-top: auto; padding-top: 40px; display: flex; flex-direction: column; gap: 16px; }
+  .side-tx  { display: flex; flex-direction: column; gap: 8px; color: #fff; }
+  .side-tx h4 { font-weight: 600; font-size: 20px; line-height: 28px; }
+  .side-tx p  { font-weight: 400; font-size: 14px; line-height: 1.6; color: rgba(255,255,255,.74); }
 
   .cta-sec { padding: var(--section-y) var(--pad); }
   .cta-box { border-radius: 22px; padding: 64px 60px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; text-align: center; background: var(--olive-deep); }
