@@ -235,20 +235,33 @@ const faqs = [
   <!-- ══ 8. START YOUR F&O JOURNEY ═══════════════════════════════════ -->
   <section class="section stack" style="background:var(--sec-light);gap:56px;justify-content:center">
     <div class="stack" style="gap:16px">
-      <p class="sec-title">Start Your F&amp;O Trading Journey</p>
-      <p class="sec-lead">Four simple steps to go from zero to your first derivatives trade — fully online, no branch visit needed.</p>
+      <p class="sec-title">How to Trade Derivatives — Step by Step</p>
+      <p class="sec-lead">Five steps from account opening to your first F&amp;O order — fully online, no branch visit needed.</p>
     </div>
-    <div class="steps">
-      {steps.map((s, i) => (
-        <>
-          {i > 0 && <div class="step-div"></div>}
-          <div class="step">
-            <div class="st-body"><h4>{s.title}</h4><p>{s.desc}</p></div>
-          </div>
-        </>
+    <div class="num-grid">
+      {[
+        { n: '01', title: 'Open a Demat Trading Account',   desc: 'Register with Shriram Financial Services and open a Demat + Trading account digitally in under 10 minutes — 100% paperless with Aadhaar OTP.' },
+        { n: '02', title: 'Activate F&O Segment',            desc: 'Request F&O segment activation from your account dashboard. Submit a 6-month bank statement or ITR as income proof if required by SEBI guidelines.' },
+        { n: '03', title: 'Add Margin Funds',                desc: 'Transfer SPAN + Exposure margin to your trading account. F&O positions require upfront margin — the margin requirement is displayed per contract before placement.' },
+        { n: '04', title: 'Choose Strategy and Contract',   desc: 'Select your underlying (NIFTY / BANKNIFTY / stock), expiry date, strike price, and order type. Start with buying options to cap your maximum loss at the premium paid.' },
+        { n: '05', title: 'Place and Manage Your Order',    desc: 'Place a market or limit order. Set a stop-loss immediately after entry. Monitor your open P&L and margin utilisation — square off before expiry to avoid delivery obligations.' },
+      ].map(s => (
+        <div class="num-item">
+          <span class="num-n">{s.n}</span>
+          <h4>{s.title}</h4>
+          <p>{s.desc}</p>
+        </div>
       ))}
     </div>
-    <a class="btn-gold" href="/about/open-demat-account/" style="align-self:center">Open Demat Account</a>
+  </section>
+
+  <!-- ══ 8b. MID-PAGE CTA ═════════════════════════════════════════════ -->
+  <section style="background:var(--sec-tint);padding:var(--section-y) var(--pad);display:flex;align-items:center;justify-content:center">
+    <div style="background:var(--olive-deep);border-radius:22px;padding:48px 60px;display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center;width:100%;max-width:800px">
+      <p style="font-weight:500;font-size:32px;color:#fff;line-height:1.4;max-width:560px">Open Your Demat Account &amp; <span style="color:var(--gold-2)">Activate F&amp;O Today</span></p>
+      <p style="font-size:15px;color:rgba(255,255,255,.65)">Zero brokerage on IPO &middot; Flat ₹20/order for F&amp;O &middot; NSE &amp; BSE &middot; SEBI-registered &middot; Expert advisory from Day 1</p>
+      <a class="btn-gold" href="/about/open-demat-account/" style="width:auto;margin-top:4px">Open the Demat Account</a>
+    </div>
   </section>
 
   <!-- ══ 9. FUTURES VS OPTIONS ════════════════════════════════════════ -->
@@ -473,6 +486,16 @@ const faqs = [
   .dtype-options{background:rgba(240,185,63,.2);color:var(--olive-head)}
   .dtype-currency{background:#edf6ee;color:#1a6e2e}
   .dtype-commodity{background:#f3ede8;color:#7a3a12}
+
+  /* Num grid (steps) */
+  .num-grid{display:grid;grid-template-columns:repeat(3,1fr);background:var(--card);border:1px solid var(--card-border);border-radius:24px;overflow:hidden}
+  .num-item{padding:var(--container-pad);display:flex;flex-direction:column;gap:12px;border-right:1px solid var(--card-border);border-bottom:1px solid var(--card-border)}
+  .num-grid .num-item:nth-child(3n){border-right:0}
+  .num-grid .num-item:nth-last-child(-n+3){border-bottom:0}
+  .num-item:last-child{border-right:0}
+  .num-n{font-weight:400;font-size:36px;color:var(--gold-2);line-height:1;display:block}
+  .num-item h4{font-weight:500;font-size:20px;color:var(--ink);line-height:1.4}
+  .num-item p{font-weight:400;font-size:15px;color:var(--ink-3);line-height:1.5}
 
   /* Advantages grid */
   .adv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}

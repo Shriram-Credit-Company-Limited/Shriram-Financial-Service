@@ -60,11 +60,28 @@ const taxRows = [
   { type: 'Losses (F&O)',           treatment: 'Set off vs business income',        ctt: '—',               itr: 'ITR-3 (audit if > ₹1 Cr)' },
 ];
 
+const disadvantages = [
+  { n: '01', title: 'Leverage Amplifies Losses',      desc: 'The same leverage that boosts gains can magnify losses rapidly. A 5% adverse move on a crude oil contract can wipe out your entire margin if position sizing is poor.' },
+  { n: '02', title: 'No Ownership of Asset',          desc: 'Commodity derivatives give price exposure — not ownership. You cannot take physical delivery unless you specifically have a warehouse account and opt for delivery settlement.' },
+  { n: '03', title: 'High Volatility',                desc: 'Commodity prices are sensitive to geopolitical events, weather, and global supply chains. Unexpected news can cause large gap openings and intraday swings within minutes.' },
+  { n: '04', title: 'Expiry and Rollover Risk',       desc: 'Futures contracts expire every month. Rolling to the next contract incurs rollover cost (spread between near and far month). Failing to roll before expiry triggers forced delivery/settlement.' },
+  { n: '05', title: 'Requires Active Monitoring',     desc: 'Commodity prices react to events outside Indian market hours — OPEC announcements, US inventory data, and LME metals prices. Positions left unmonitored overnight carry significant gap risk.' },
+  { n: '06', title: 'Tax Complexity',                 desc: 'Commodity F&O profits are taxed as business income, requiring ITR-3 filing, turnover calculation, and potentially a tax audit if turnover exceeds ₹1 crore. Not as simple as equity capital gains.' },
+];
+
 const strategies = [
   { label: 'Trend Following',          desc: 'Use 20-day and 50-day moving averages on Gold and Crude Oil charts to identify directional momentum. Trade with the trend, not against it.' },
   { label: 'Spread Trading',           desc: 'Go long near-month and short far-month (calendar spread) to capture basis differentials — lower risk than outright directional bets.' },
   { label: 'Seasonal Gold Strategy',   desc: 'Gold historically strengthens Oct–Feb driven by festive demand and central bank buying. Monitor USD Index and FOMC rate decisions.' },
   { label: 'Agri-Monsoon Play',        desc: 'NCDEX agri prices are highly sensitive to monsoon rainfall data. Build positions before IMD forecasts and exit after the sowing season.' },
+];
+
+const riskRules = [
+  { n: '01', title: 'Always Use a Stop-Loss',            desc: 'Set a stop-loss for every commodity trade to limit potential losses and protect your trading capital from unexpected market movements — especially overnight gaps.' },
+  { n: '02', title: 'Avoid Overleveraging',              desc: 'Trade within your financial capacity. Avoid positions that require more than 20–25% of your total capital in a single commodity — leverage amplifies both gains and losses.' },
+  { n: '03', title: 'Diversify Across Commodities',     desc: 'Avoid concentrating all your capital in a single commodity or segment. Spread exposure across metals, energy, and agri to reduce correlation risk.' },
+  { n: '04', title: 'Risk Only What You Can Afford',    desc: 'Allocate only a small portion of your trading capital per trade. Never commit funds meant for essential expenses or long-term goals to speculative commodity positions.' },
+  { n: '05', title: 'Follow a Pre-Defined Trading Plan', desc: 'Enter trades with pre-set entry, target, and exit levels. Avoid making emotional decisions based on short-term price fluctuations or news headlines.' },
 ];
 
 const faqs = [
@@ -169,7 +186,24 @@ const faqs = [
     <a class="btn-gold" href="/about/open-demat-account/" style="align-self:center">Start Commodity Trading</a>
   </section>
 
-  <!-- ══ 6. HOW COMMODITY TRADING WORKS ══════════════════════════════ -->
+  <!-- ══ 6. DISADVANTAGES OF COMMODITY TRADING ═══════════════════════ -->
+  <section class="section stack" id="sec-dis" style="background:var(--sec-light);gap:48px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Disadvantage of Commodity Trading</p>
+      <p class="sec-lead">Commodity derivatives carry risks that are distinct from equity investing. Understanding these six structural disadvantages helps you plan position sizes, stop-losses, and risk controls before placing your first trade.</p>
+    </div>
+    <div class="num-grid">
+      {disadvantages.map(d => (
+        <div class="num-item">
+          <span class="num-n">{d.n}</span>
+          <h4>{d.title}</h4>
+          <p>{d.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ══ 7. HOW COMMODITY TRADING WORKS ══════════════════════════════ -->
   <section class="section stack" id="sec-how" style="background:var(--sec-light);gap:48px">
     <div class="stack" style="gap:16px">
       <p class="sec-title">How Commodity Trading Works — MCX &amp; NCDEX</p>
@@ -292,7 +326,25 @@ const faqs = [
     </div>
   </section>
 
-  <!-- ══ 12. FAQ ════════════════════════════════════════════════════════ -->
+  <!-- ══ 12. ESSENTIAL RISK MANAGEMENT RULES ════════════════════════════ -->
+  <section class="section stack" id="sec-risk" style="background:var(--sec-light);gap:48px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Essential Rules for Risk Management</p>
+      <p class="sec-lead">Effective risk management is the single most important factor separating long-term successful commodity traders from those who blow up accounts. Follow these five rules consistently — especially as a beginner.</p>
+    </div>
+    <div class="num-grid">
+      {riskRules.map(r => (
+        <div class="num-item">
+          <span class="num-n">{r.n}</span>
+          <h4>{r.title}</h4>
+          <p>{r.desc}</p>
+        </div>
+      ))}
+    </div>
+    <a class="btn-gold" href="/about/open-demat-account/" style="align-self:center">Start Trading with Shriram</a>
+  </section>
+
+  <!-- ══ 13. FAQ ════════════════════════════════════════════════════════ -->
   <section class="faq-wrap" style="background:var(--sec-light)">
     <div class="faq-cols">
       <div class="faq-left">
