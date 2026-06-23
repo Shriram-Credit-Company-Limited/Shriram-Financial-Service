@@ -7,7 +7,7 @@ import node from '@astrojs/node';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://www.shriramfinancialservices.com',
-  output: 'hybrid',
+  output: 'static',
   adapter: node({ mode: 'middleware' }),
   // Static assets live outside the project in /assets (images + videos).
   // Astro copies this folder to dist/ as-is, preserving the same URL paths.

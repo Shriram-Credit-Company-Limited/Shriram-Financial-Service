@@ -3,61 +3,91 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const bondTypes = [
   { label: 'Government Securities (G-Secs)', desc: 'Sovereign bonds issued by the Government of India. Zero credit risk — backed by the full faith of the government. Traded on NSE/BSE via RBI Retail Direct or through brokers.', tag: 'Zero Credit Risk' },
-  { label: 'Sovereign Gold Bonds (SGBs)', desc: 'RBI-issued bonds denominated in grams of gold. Earn 2.5% p.a. fixed interest + gold price appreciation. Capital gains on maturity (8 years) are fully tax-exempt.', tag: 'Gold-Linked' },
-  { label: 'Treasury Bills (T-Bills)', desc: 'Short-term government instruments — 91-day, 182-day, and 364-day. Issued at discount and redeemed at face value. Zero coupon; ideal for short-term parking of funds.', tag: 'Short-Term' },
-  { label: 'Corporate Bonds', desc: 'Debt instruments issued by companies (private and public) to raise funds. Higher yield than G-Secs but carries credit risk. Rated by CRISIL/ICRA — stick to AA+ or above for safety.', tag: 'Higher Yield' },
-  { label: 'Non-Convertible Debentures (NCDs)', desc: 'Debt instruments issued by NBFCs and corporates. Cannot be converted to equity. Offer 8–11% yields but require careful credit assessment. SEBI-regulated, listed on exchanges.', tag: 'NBFC / Corporate' },
-  { label: 'PSU Bonds', desc: 'Bonds issued by Public Sector Undertakings (NTPC, NHAI, REC, PFC). Quasi-sovereign — near-zero credit risk with yields 0.5–1% above G-Secs. Eligible for 54EC tax exemption (certain bonds).', tag: 'PSU Backed' },
+  { label: 'Sovereign Gold Bonds (SGBs)',     desc: "RBI-issued bonds denominated in grams of gold. Earn 2.5% p.a. fixed interest plus gold price appreciation. Capital gains on maturity (8 years) are fully tax-exempt.", tag: 'Gold-Linked' },
+  { label: 'Treasury Bills (T-Bills)',         desc: 'Short-term government instruments — 91-day, 182-day, and 364-day. Issued at discount, redeemed at face value. Zero coupon; ideal for short-term parking of funds.', tag: 'Short-Term' },
+  { label: 'Corporate Bonds',                  desc: "Debt instruments issued by companies to raise funds. Higher yield than G-Secs but carries credit risk. Rated by CRISIL/ICRA — stick to AA+ or above for safety.", tag: 'Higher Yield' },
+  { label: 'Non-Convertible Debentures (NCDs)', desc: "Debt issued by NBFCs and corporates. Cannot be converted to equity. Offer 8–11% yields but require careful credit assessment. SEBI-regulated, listed on exchanges.", tag: 'NBFC / Corporate' },
+  { label: 'PSU Bonds',                         desc: 'Bonds issued by Public Sector Undertakings (NTPC, NHAI, REC, PFC). Quasi-sovereign — near-zero credit risk with yields 0.5–1% above G-Secs. Eligible for 54EC tax exemption.', tag: 'PSU Backed' },
 ];
 
-const risks = [
-  { n: '01', label: 'Interest Rate Risk', desc: 'When interest rates rise, existing bond prices fall (inverse relationship). Longer-duration bonds are more sensitive to rate changes — a 1% rate rise can drop a 10-year bond price by ~8–10%.' },
-  { n: '02', label: 'Credit Risk', desc: 'Corporate and NCD issuers may default on interest or principal. Always check the credit rating (CRISIL/ICRA/CARE). AA and above means high safety; below BBB is speculative grade.' },
-  { n: '03', label: 'Liquidity Risk', desc: 'Most bonds outside G-Secs have thin secondary market trading. If you need to sell before maturity, you may get a price below fair value — or find no buyers at all for lower-rated bonds.' },
-  { n: '04', label: 'Inflation Risk', desc: 'Fixed coupon bonds lose real value in high inflation environments. If inflation runs at 6% and your bond pays 7%, your real return is just 1% — barely above zero.' },
+const bondTerms = [
+  { term: 'Face Value', def: 'The principal amount repaid at maturity — usually ₹1,000 or ₹10,000 per bond unit.' },
+  { term: 'Coupon Rate', def: "The annual interest rate paid on face value. A 7.5% coupon on ₹10,000 = ₹750/year in interest." },
+  { term: 'Maturity Date', def: 'When the issuer repays the face value. Ranges from 91 days (T-Bills) to 40 years (long-dated G-Secs).' },
+  { term: 'Yield to Maturity', def: 'The effective return considering current market price. If price < face value, yield > coupon rate.' },
+];
+
+const priceDrivers = [
+  { n: '01', label: 'Interest Rate Risk', desc: "When interest rates rise, existing bond prices fall. Longer-duration bonds are more sensitive — a 1% rate rise can drop a 10-year bond price by 8–10%." },
+  { n: '02', label: 'Credit Risk',        desc: "Corporate and NCD issuers may default. Always check the rating (CRISIL/ICRA/CARE). AA and above signals high safety; below BBB is speculative grade." },
+  { n: '03', label: 'Liquidity Risk',     desc: "Most bonds outside G-Secs have thin secondary market trading. Selling before maturity may result in a price below fair value — or no buyers at all." },
+  { n: '04', label: 'Inflation Risk',     desc: "Fixed coupon bonds lose real value in high inflation. If inflation runs at 6% and your bond pays 7%, your real return is just 1% — barely above zero." },
+];
+
+const evaluateRows = [
+  { factor: 'Credit Rating',              check: 'CRISIL / ICRA / CARE rating of issuer',                       flag: 'AA or above — AAA is safest' },
+  { factor: 'Issuer Analysis',            check: 'Revenue, profit, debt-to-equity ratio of issuer',             flag: 'Consistent profitability, low leverage' },
+  { factor: 'Coupon Rate vs YTM',         check: 'Compare stated coupon to Yield-to-Maturity at current price', flag: 'YTM above comparable FD rates' },
+  { factor: 'Tenor & Maturity Date',      check: 'Does maturity date match your financial goal?',               flag: 'Bond matures at or before goal date' },
+  { factor: 'Liquidity',                  check: 'Is the bond listed and actively traded on NSE/BSE?',          flag: 'Daily volume above ₹1 crore face value' },
+  { factor: 'Callable / Puttable',        check: "Can the issuer redeem early (callable) or can you put it back?", flag: 'Non-callable preferred for income planning' },
 ];
 
 const investSteps = [
-  { n: '01', title: 'Open Demat Account', desc: 'Bonds require a Demat account for holding in dematerialised form. Open one digitally with Shriram in under 10 minutes.' },
-  { n: '02', title: 'Fund Your Account', desc: 'Transfer funds to your trading account. For G-Secs, you can also use the RBI Retail Direct portal directly. For listed bonds, use your broker account.' },
-  { n: '03', title: 'Choose Your Bond', desc: 'Decide between G-Secs (zero credit risk), Corporate Bonds (higher yield), or NCDs (highest yield but more risk). Consider tenor, rating, and yield vs your FD alternatives.' },
-  { n: '04', title: 'Place Order on NSE / BSE', desc: 'Place a buy order for listed bonds on NSE or BSE through the Shriram platform. For G-Secs, also accessible via RBI Retail Direct or Shriram platform.' },
+  { n: '01', title: 'Open Demat Account',         desc: 'Bonds require a Demat account. Open one digitally with Shriram in under 10 minutes — fully online, paperless, and SEBI-regulated.' },
+  { n: '02', title: 'Fund Your Account',           desc: 'Transfer funds to your trading account. For G-Secs, use RBI Retail Direct or your broker. For listed bonds, use the Shriram trading platform.' },
+  { n: '03', title: 'Choose Your Bond Type',       desc: 'Decide between G-Secs (zero credit risk), Corporate Bonds (higher yield), or NCDs. Consider tenor, rating, and yield versus your FD alternatives.' },
+  { n: '04', title: 'Place Order on NSE / BSE',    desc: 'Place a buy order for listed bonds on NSE or BSE through Shriram. For G-Secs, accessible via RBI Retail Direct or directly on the Shriram platform.' },
+  { n: '05', title: 'Receive Coupon & Hold',       desc: "Interest is credited to your bank account on coupon dates. Hold to maturity to receive the face value back, or sell on the exchange if you need liquidity." },
 ];
 
 const strategies = [
   {
-    title: 'Bond Laddering',
+    label: 'Bond Laddering',
     desc: 'Spread investments across bonds maturing at different dates (1yr, 3yr, 5yr, 7yr, 10yr). As each bond matures, reinvest at prevailing rates. Reduces interest rate and reinvestment risk simultaneously.',
     tag: 'Reduce Rate Risk',
   },
   {
-    title: 'Barbell Strategy',
-    desc: 'Invest at two extremes — short-term bonds (T-Bills) for liquidity + long-term bonds (G-Secs 15yr+) for yield. Avoid mid-duration bonds. Works well in uncertain rate environments.',
+    label: 'Barbell Strategy',
+    desc: "Invest at two extremes — short-term bonds (T-Bills) for liquidity plus long-term bonds (G-Secs 15yr+) for yield. Avoid mid-duration bonds. Works well in uncertain rate environments.",
     tag: 'Yield + Liquidity',
   },
   {
-    title: 'Bullet Strategy',
-    desc: 'Concentrate all bond maturities at a single target date aligned with a specific financial goal (e.g., child\'s education in 7 years). Minimises reinvestment risk for goal-based investors.',
+    label: 'Bullet Strategy',
+    desc: "Concentrate all bond maturities at a single target date aligned with a specific financial goal (e.g., child's education in 7 years). Minimises reinvestment risk for goal-based investors.",
     tag: 'Goal-Based',
   },
 ];
 
 const vsRows = [
-  { feature: 'Return Range', bonds: '6–11% (varies by type and rating)', fd: '6.5–8.5% p.a. (bank) / 7.5–9% (NBFC)', mf: '6–14% (varies by fund type)' },
-  { feature: 'Capital Safety', bonds: 'G-Secs: Full. Corp/NCD: Rating-dependent', fd: 'DICGC insured up to ₹5L (bank)', mf: 'Market-linked — not guaranteed' },
-  { feature: 'Liquidity', bonds: 'Listed bonds: High. Unlisted: Low', fd: 'Low (premature withdrawal penalty)', mf: 'Medium-High (T+1 to T+3)' },
-  { feature: 'Tax on Returns', bonds: 'Interest: Per slab. LTCG: 10% (no index)', fd: 'Interest: Per slab (TDS 10%)', mf: 'Debt MF: Per slab (no LTCG benefit from Apr 2023)' },
-  { feature: 'Minimum Investment', bonds: '₹1,000 (G-Secs) / varies (Corp bonds)', fd: '₹1,000 (most banks/NBFCs)', mf: '₹500 (SIP) / ₹1,000 (lump sum)' },
-  { feature: 'Best For', bonds: 'Regular income, portfolio diversification', fd: 'Capital protection, guaranteed income', mf: 'Long-term goal-based diversified investing' },
+  { feature: 'Return Range',        bonds: '6–11% (varies by type and rating)',              fd: '6.5–8.5% p.a. bank / 7.5–9% NBFC', mf: '6–14% (varies by fund type)' },
+  { feature: 'Capital Safety',      bonds: 'G-Secs: Full. Corp/NCD: Rating-dependent',      fd: 'DICGC insured up to ₹5L (bank)',     mf: 'Market-linked — not guaranteed' },
+  { feature: 'Liquidity',           bonds: 'Listed bonds: High. Unlisted: Low',             fd: 'Low — premature withdrawal penalty',  mf: 'Medium-High (T+1 to T+3)' },
+  { feature: 'Tax on Returns',      bonds: 'Interest per slab. LTCG: 10% (no indexation)',  fd: 'Interest per slab (TDS 10%)',        mf: 'Per slab — no LTCG benefit from Apr 2023' },
+  { feature: 'Minimum Investment',  bonds: '₹1,000 (G-Secs) / varies (Corp bonds)',         fd: '₹1,000 (most banks and NBFCs)',      mf: '₹500 (SIP) / ₹1,000 (lump sum)' },
+  { feature: 'Best For',            bonds: 'Regular income, portfolio diversification',      fd: 'Capital protection, guaranteed income', mf: 'Long-term goal-based investing' },
+];
+
+const warningRows = [
+  { n: '01', label: 'Rating Downgrade',        desc: 'A credit rating downgrade from AA to A or below signals deteriorating issuer health. Bond prices fall sharply post-downgrade — exit early if issuer fundamentals weaken.' },
+  { n: '02', label: 'Unusually High Yield',    desc: "If a bond offers 12%+ yield when similar-rated bonds offer 9%, it signals hidden risk — potential fraud, liquidity crisis, or impending default. High yield equals high danger." },
+  { n: '03', label: 'Unlisted / Unrated',      desc: 'Bonds not listed on NSE/BSE and lacking SEBI-registered ratings are extremely high risk. No exit market, no price discovery, and no regulatory oversight.' },
+  { n: '04', label: 'Liquidity Crunch',        desc: 'When an NBFC or corporate bond issuer faces a funding crisis (like ILFS 2018, DHFL 2019), even AA-rated bonds can see prices crash. Diversify across issuers.' },
 ];
 
 const faqs = [
-  { q: 'What is the difference between a bond and a fixed deposit?', a: 'An FD is a fixed-term deposit with a bank or NBFC — guaranteed return, DICGC insured (banks up to ₹5L), and no secondary market. A bond is a marketable debt instrument that can be bought and sold on exchanges before maturity. Bonds offer potentially higher yields but carry liquidity and credit risks FDs don\'t have.' },
-  { q: 'Are government bonds (G-Secs) safe?', a: 'G-Secs are considered zero credit risk — they are backed by the sovereign guarantee of the Government of India. The only risk is interest rate risk: if rates rise, the market price of existing G-Secs falls. If held to maturity, you receive the full face value + all promised coupons.' },
-  { q: 'What is the minimum investment in G-Secs?', a: 'G-Secs can be bought in multiples of ₹10,000 via RBI Retail Direct or through SEBI-registered brokers. Some platforms allow smaller ticket sizes. T-Bills start at ₹10,000 per unit.' },
-  { q: 'How are bond returns taxed in India?', a: 'Coupon (interest) payments are taxed per your income tax slab. Capital gains on bond sale/maturity: STCG (held under 12 months for listed bonds) per slab; LTCG (12+ months) at 10% without indexation. SGBs held to maturity (8 years) are fully capital gains tax exempt.' },
-  { q: 'What is an NCD and how is it different from a corporate bond?', a: 'NCDs (Non-Convertible Debentures) are a type of corporate bond that cannot be converted into equity. All NCDs are bonds, but not all corporate bonds are NCDs. NCDs are typically issued by NBFCs, are SEBI-regulated, listed on exchanges, and offer higher yields than bank FDs at the cost of credit risk.' },
-  { q: 'Can I invest in US or international bonds from India?', a: 'Yes — via LRS (up to USD 250,000/year) or India-listed international bond funds. Options include US Treasury ETFs, global aggregate bond funds, and INR-denominated Masala Bonds issued by Indian entities abroad.' },
+  { q: 'What is the difference between a bond and a fixed deposit?',
+    a: "An FD is a fixed-term deposit with a bank or NBFC — guaranteed return, DICGC insured (banks up to ₹5L), and no secondary market. A bond is a marketable debt instrument that can be bought and sold on exchanges before maturity. Bonds offer potentially higher yields but carry liquidity and credit risks that FDs do not." },
+  { q: 'Are government bonds (G-Secs) safe?',
+    a: "G-Secs carry zero credit risk — backed by the sovereign guarantee of the Government of India. The only risk is interest rate risk: if rates rise, the market price of existing G-Secs falls. If held to maturity, you receive the full face value plus all promised coupons." },
+  { q: 'What is the minimum investment in G-Secs?',
+    a: "G-Secs can be bought in multiples of ₹10,000 via RBI Retail Direct or through SEBI-registered brokers. Some platforms allow smaller ticket sizes. T-Bills start at ₹10,000 per unit." },
+  { q: 'How are bond returns taxed in India?',
+    a: "Coupon (interest) payments are taxed per your income tax slab. Capital gains on bond sale/maturity: STCG (held under 12 months for listed bonds) per slab; LTCG (12+ months) at 10% without indexation. SGBs held to maturity (8 years) are fully capital gains tax exempt." },
+  { q: 'What is an NCD and how is it different from a corporate bond?',
+    a: "NCDs (Non-Convertible Debentures) are a type of corporate bond that cannot be converted into equity. All NCDs are bonds, but not all corporate bonds are NCDs. NCDs are typically issued by NBFCs, are SEBI-regulated, listed on exchanges, and offer higher yields than bank FDs at the cost of credit risk." },
+  { q: 'Can I invest in US or international bonds from India?',
+    a: "Yes — via LRS (up to USD 250,000/year) or India-listed international bond funds. Options include US Treasury ETFs, global aggregate bond funds, and INR-denominated Masala Bonds issued by Indian entities abroad." },
 ];
 ---
 
@@ -66,334 +96,260 @@ const faqs = [
   description="Complete guide to bonds in India. Invest in G-Secs, Sovereign Gold Bonds, NCDs, and Corporate Bonds. Compare returns vs FD, tax rules, and how to invest with Shriram."
 >
 
-  <!-- ══ 1. HERO ═══════════════════════════════════════════════════ -->
-  <section class="relative overflow-hidden bg-[var(--color-dark-800)]">
-    <div class="pointer-events-none absolute -right-40 -top-40 h-[560px] w-[560px] rounded-full bg-[var(--color-brand)]/10 blur-3xl"></div>
-    <div class="pointer-events-none absolute -bottom-32 left-0 h-80 w-80 rounded-full bg-[var(--color-brand)]/5 blur-3xl"></div>
-    <div class="site-wrap relative py-[120px]">
-      <p class="equity-reveal text-[14px] font-medium tracking-[.04em] text-[var(--color-brand)]">Bonds</p>
-      <h1 class="equity-reveal mt-[22px] max-w-[880px] text-[clamp(32px,4vw,52px)] font-bold leading-[1.06] text-white" style="font-family:var(--font-display)">
-        Invest in Bonds — Complete Guide to <span class="text-[var(--color-brand)]">Bonds in India</span>
-      </h1>
-      <p class="equity-reveal mt-[26px] max-w-[600px] text-[18px] leading-relaxed text-white/70">
-        From zero-risk G-Secs to high-yield NCDs — bonds in India offer predictable income, portfolio diversification, and an alternative to bank FDs. Invest through Shriram with expert guidance.
-      </p>
-      <div class="equity-reveal mt-[38px] flex flex-wrap gap-[14px]">
-        <a href="/about/open-demat-account/" class="btn-primary">Invest in Bonds</a>
-        <a href="/about/support/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Talk to RM</a>
+  <!-- ══ 1. HERO ══════════════════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <h1>Complete Guide to <span class="g">Bonds in India</span></h1>
+      <p class="lead">Everything you need to understand, evaluate, and invest in bonds — from Government Securities and Sovereign Gold Bonds to Corporate NCDs and Debt Mutual Funds. Written for Indian retail and HNI investors.</p>
+      <div class="cta-row">
+        <a class="btn-gold" href="/about/open-demat-account/">Open Demat Account</a>
+        <a class="btn-ghost" href="/about/support/">Talk to an Expert</a>
       </div>
-      <div class="equity-reveal mt-[54px] flex flex-wrap gap-x-9 gap-y-3 border-t border-white/15 pt-9">
-        {['✓ G-Secs from ₹10,000', '✓ SGBs via RBI', '✓ Listed on NSE / BSE', '✓ SEBI regulated'].map(f => (
-          <span class="text-[15px] font-medium text-white/90">
-            <span class="mr-2 text-[var(--color-brand)]">{f.slice(0,1)}</span>{f.slice(1)}
-          </span>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ 2. WHAT IS A BOND ══════════════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto grid max-w-[1000px] items-start gap-[72px] lg:grid-cols-[5fr_7fr]">
-        <h2 class="text-[40px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          What Is a <span class="text-[var(--color-brand)]">Bond?</span>
-        </h2>
-        <div class="space-y-5 text-[17px] leading-relaxed text-[var(--color-muted)]">
-          <p>A bond is a debt instrument where the issuer (government or company) borrows money from investors and promises to pay periodic interest (the coupon) and return the principal on the maturity date.</p>
-          <p>Four key bond terms you must understand:</p>
-          <div class="grid gap-3 sm:grid-cols-2">
-            {[
-              { term: 'Face Value', def: 'The principal amount repaid at maturity (usually ₹1,000 or ₹10,000)' },
-              { term: 'Coupon', def: 'The annual interest rate paid on the face value — e.g., 7.5% coupon on ₹10,000 face value = ₹750/year' },
-              { term: 'Maturity', def: 'The date when the issuer repays the face value — can range from 91 days (T-Bills) to 40 years (G-Secs)' },
-              { term: 'Yield', def: 'The effective return considering current market price. If price < face value, yield > coupon. If price > face value, yield < coupon.' },
-            ].map(t => (
-              <div class="rounded-[10px] border border-[var(--color-n400)] bg-[#f8f6f1] p-4">
-                <div class="mb-1 text-[13px] font-bold text-[var(--color-ink)]">{t.term}</div>
-                <div class="text-[12.5px] leading-relaxed text-[var(--color-muted)]">{t.def}</div>
-              </div>
-            ))}
-          </div>
+      <div class="hero-feats">
+        <div class="feats">
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;G-Secs from ₹10,000</span></div>
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;SGBs via RBI</span></div>
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;Listed on NSE / BSE</span></div>
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;SEBI Regulated</span></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ══ 3. TYPES OF BONDS ══════════════════════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Types of <span class="text-[var(--color-brand)]">Bonds in India</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Six major bond categories available to Indian retail investors — from sovereign to corporate.</p>
+  <!-- ══ 2. WHAT IS A BOND? ════════════════════════════════════════════ -->
+  <section class="section stack" id="sec-what" style="background:var(--sec-light);gap:48px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">What is a Bond? How Bonds Work</p>
+      <p class="sec-lead">A bond is a debt instrument through which an issuer — a government, municipality, or corporation — borrows money from investors for a defined period at an agreed interest rate. When you buy a bond, you become a creditor; the issuer is legally obligated to pay you periodic interest (the coupon) and return your principal on the maturity date.</p>
+    </div>
+    <div class="cat-grid cat-4">
+      {bondTerms.map(t => (
+        <div class="cat">
+          <h4>{t.term}</h4>
+          <p>{t.def}</p>
+        </div>
+      ))}
+    </div>
+    <div class="row-2">
+      <div class="card">
+        <p class="card-h">Bond vs Fixed Deposit</p>
+        <p class="card-p">An FD is a bank product — guaranteed returns, insured up to ₹5L, but illiquid. A bond is a marketable security you can buy and sell on NSE/BSE before maturity. Bonds typically offer higher yields for accepting market price risk.</p>
       </div>
-      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {bondTypes.map((t, i) => (
-          <div class="equity-reveal product-card-light flex flex-col gap-3 p-[30px]" style={`animation-delay:${i*60}ms`}>
-            <span class="inline-flex w-fit rounded-full bg-[var(--color-brand)]/15 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-[var(--color-dark-olive)]">{t.tag}</span>
-            <h3 class="text-[16px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{t.label}</h3>
-            <p class="text-[13px] leading-relaxed text-[var(--color-muted)]">{t.desc}</p>
-          </div>
+      <div class="card">
+        <p class="card-h">Bond vs Equity</p>
+        <p class="card-p">Equities offer unlimited upside but no guaranteed income. Bonds offer predictable coupon income and principal return at maturity. In a portfolio, bonds reduce overall volatility and provide a cushion during equity market downturns.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 3. TYPES OF BONDS ════════════════════════════════════════════ -->
+  <section class="section stack" id="sec-types" style="background:var(--sec-tint);gap:48px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Types of Bonds Available in India</p>
+      <p class="sec-lead">India's fixed income market spans sovereign, quasi-sovereign, and private issuers. Each category carries a distinct risk-return profile. Understanding the differences lets you build a portfolio calibrated to your goals, horizon, and risk appetite.</p>
+    </div>
+    <div class="cat-grid cat-3">
+      {bondTypes.map(t => (
+        <div class="cat">
+          <span class="bond-tag">{t.tag}</span>
+          <h4>{t.label}</h4>
+          <p>{t.desc}</p>
+        </div>
+      ))}
+    </div>
+    <div class="t-scroll">
+      <div class="table t4">
+        <div class="cell th"><p>Bond Type</p></div>
+        <div class="cell th"><p>Min Investment</p></div>
+        <div class="cell th"><p>Yield Range</p></div>
+        <div class="cell th"><p>Tax Treatment</p></div>
+        <div class="cell tb"><p class="k">G-Secs</p></div>
+        <div class="cell tb"><p class="v">₹10,000</p></div>
+        <div class="cell tb"><p class="v">6.5–7.5%</p></div>
+        <div class="cell tb"><p class="v">Interest taxable per slab; LTCG 10%</p></div>
+        <div class="cell tb"><p class="k">Sovereign Gold Bonds</p></div>
+        <div class="cell tb"><p class="v">1 gram of gold</p></div>
+        <div class="cell tb"><p class="v">2.5% + gold appreciation</p></div>
+        <div class="cell tb"><p class="v">Maturity gains fully exempt (8yr hold)</p></div>
+        <div class="cell tb"><p class="k">T-Bills</p></div>
+        <div class="cell tb"><p class="v">₹10,000</p></div>
+        <div class="cell tb"><p class="v">6.5–7.2% (discount basis)</p></div>
+        <div class="cell tb"><p class="v">Short-term capital gains per slab</p></div>
+        <div class="cell tb"><p class="k">Corporate Bonds</p></div>
+        <div class="cell tb"><p class="v">Varies (₹1,000–₹10,000)</p></div>
+        <div class="cell tb"><p class="v">7.5–10%</p></div>
+        <div class="cell tb"><p class="v">Interest per slab; LTCG 10%</p></div>
+        <div class="cell tb"><p class="k">NCDs</p></div>
+        <div class="cell tb"><p class="v">₹1,000–₹10,000</p></div>
+        <div class="cell tb"><p class="v">8–11%</p></div>
+        <div class="cell tb"><p class="v">Interest per slab; LTCG 10%</p></div>
+        <div class="cell tb"><p class="k">PSU Bonds</p></div>
+        <div class="cell tb"><p class="v">₹1,000–₹10,000</p></div>
+        <div class="cell tb"><p class="v">7–8.5%</p></div>
+        <div class="cell tb"><p class="v">54EC eligible bonds: LTCG exempt up to ₹50L</p></div>
+      </div>
+    </div>
+    <a class="btn-gold" href="/about/open-demat-account/" style="align-self:center">Open Demat Account</a>
+  </section>
+
+  <!-- ══ 4. HOW BOND PRICES MOVE ════════════════════════════════════ -->
+  <section class="section stack" id="sec-prices" style="background:var(--sec-light);gap:48px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">How Bond Prices Move (Risk Drivers)</p>
+      <p class="sec-lead">Bond prices are not fixed — they fluctuate based on four key risk factors. Understanding these drivers helps you choose the right bond type for your risk tolerance and investment horizon.</p>
+    </div>
+    <div class="cat-grid cat-4">
+      {priceDrivers.map(r => (
+        <div class="cat risk-cat">
+          <span class="num-n" style="font-size:36px">{r.n}</span>
+          <h4>{r.label}</h4>
+          <p>{r.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ══ 5. HOW TO EVALUATE A BOND ══════════════════════════════════ -->
+  <section class="section stack" id="sec-evaluate" style="background:var(--sec-tint);gap:48px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">How to Evaluate a Bond</p>
+      <p class="sec-lead">Before buying any bond, run through this six-point checklist to assess credit quality, return potential, liquidity, and suitability for your portfolio.</p>
+    </div>
+    <div class="t-scroll">
+      <div class="table t3">
+        <div class="cell th"><p>Evaluation Factor</p></div>
+        <div class="cell th"><p>What to Check</p></div>
+        <div class="cell th"><p>Green Flag</p></div>
+        {evaluateRows.map(r => (
+          <>
+            <div class="cell tb"><p class="k">{r.factor}</p></div>
+            <div class="cell tb"><p class="v">{r.check}</p></div>
+            <div class="cell tb"><p class="v green-flag">{r.flag}</p></div>
+          </>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- ══ 4. HOW BOND PRICES MOVE — RISKS ═══════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          How Bond Prices Move — <span class="text-[var(--color-brand)]">Key Risks</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Bond prices are not fixed — they fluctuate based on these four key risk factors.</p>
-      </div>
-      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {risks.map(r => (
-          <div class="equity-reveal rounded-[18px] bg-[var(--color-dark-800)] p-[36px]">
-            <div class="mb-[18px] text-[48px] font-bold leading-none text-[var(--color-brand)]/25">{r.n}</div>
-            <h4 class="mb-3 text-[20px] font-medium text-white" style="font-family:var(--font-display)">{r.label}</h4>
-            <p class="text-[14.5px] leading-relaxed text-white/60">{r.desc}</p>
-          </div>
+  <!-- ══ 6. HOW TO INVEST IN BONDS ══════════════════════════════════ -->
+  <section class="section stack" id="sec-invest" style="background:var(--sec-light);gap:48px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">How to Invest in Bonds in India (Step-by-step)</p>
+      <p class="sec-lead">Five simple steps from opening your Demat account to receiving coupon payments and holding bonds to maturity through the Shriram platform.</p>
+    </div>
+    <div class="num-grid">
+      {investSteps.map(s => (
+        <div class="num-item">
+          <span class="num-n">{s.n}</span>
+          <h4>{s.title}</h4>
+          <p>{s.desc}</p>
+        </div>
+      ))}
+    </div>
+    <a class="btn-gold" href="/about/open-demat-account/" style="align-self:center">Start Investing in Bonds</a>
+  </section>
+
+  <!-- ══ 7. BOND INVESTMENT STRATEGIES ══════════════════════════════ -->
+  <section class="section stack" id="sec-strategy" style="background:var(--sec-tint);gap:48px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Bond Investment Strategies</p>
+      <p class="sec-lead">Experienced investors move beyond single-bond selection to portfolio-level strategies that manage duration, income timing, and reinvestment risk simultaneously.</p>
+    </div>
+    <div class="cat-grid cat-3">
+      {strategies.map(s => (
+        <div class="cat">
+          <span class="bond-tag">{s.tag}</span>
+          <h4>{s.label}</h4>
+          <p>{s.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ══ 8. BONDS vs FD vs DEBT MF ══════════════════════════════════ -->
+  <section class="section stack" id="sec-vs" style="background:var(--sec-light);gap:48px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Bonds vs Fixed Deposit vs Debt Mutual Funds</p>
+      <p class="sec-lead">Compare India's three major fixed-income investment options across returns, capital safety, liquidity, and tax treatment — so you can allocate correctly based on your goals.</p>
+    </div>
+    <div class="t-scroll">
+      <div class="table t4">
+        <div class="cell th"><p>Feature</p></div>
+        <div class="cell th"><p>Bonds</p></div>
+        <div class="cell th"><p>Fixed Deposit</p></div>
+        <div class="cell th"><p>Debt Mutual Fund</p></div>
+        {vsRows.map(r => (
+          <>
+            <div class="cell tb"><p class="k">{r.feature}</p></div>
+            <div class="cell tb"><p class="v">{r.bonds}</p></div>
+            <div class="cell tb"><p class="v">{r.fd}</p></div>
+            <div class="cell tb"><p class="v">{r.mf}</p></div>
+          </>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- ══ 5. HOW TO INVEST IN BONDS ══════════════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          How to <span class="text-[var(--color-brand)]">Invest in Bonds</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Four steps from opening your account to placing your first bond order.</p>
-      </div>
-      <div class="equity-reveal steps-grid overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
-        {investSteps.map(s => (
-          <div class="px-[30px] py-[34px]">
-            <div class="mb-[22px] font-display text-[34px] font-normal leading-none text-[var(--color-brand)]">{s.n}</div>
-            <h4 class="mb-[10px] text-[19px] font-medium leading-[1.25] text-[var(--color-ink)]" style="font-family:var(--font-display)">{s.title}</h4>
-            <p class="text-[14.5px] leading-relaxed text-[var(--color-muted)]">{s.desc}</p>
-          </div>
-        ))}
-      </div>
+  <!-- ══ 9. RISKS AND WARNING SIGNS ════════════════════════════════ -->
+  <section class="section stack" id="sec-risks" style="background:var(--sec-tint);gap:48px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Risks and Warning Signs</p>
+      <p class="sec-lead">Bonds are not risk-free. These four warning signs are the most common red flags retail investors miss — understanding them protects your capital before a problem becomes a loss.</p>
+    </div>
+    <div class="cat-grid cat-4">
+      {warningRows.map(r => (
+        <div class="cat risk-cat">
+          <span class="num-n" style="font-size:36px">{r.n}</span>
+          <h4>{r.label}</h4>
+          <p>{r.desc}</p>
+        </div>
+      ))}
+    </div>
+    <div class="card risk-disc-card">
+      <p class="card-p" style="font-size:14px">⚠ <strong>Risk Disclaimer:</strong> Bond investments are subject to credit risk, interest rate risk, and liquidity risk. Past credit ratings do not guarantee future performance. Investors are advised to read all offer documents carefully and consult a SEBI-registered investment adviser before investing.</p>
     </div>
   </section>
 
-  <!-- ══ 6. BOND INVESTMENT STRATEGIES ═════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Bond Investment <span class="text-[var(--color-brand)]">Strategies</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Three proven portfolio strategies used by bond investors to manage risk and optimise returns.</p>
+  <!-- ══ 10. FAQ ══════════════════════════════════════════════════════ -->
+  <section class="faq-wrap" style="background:var(--sec-light)">
+    <div class="faq-cols">
+      <div class="faq-left">
+        <h2 class="faq-title">Frequently asked<br>questions.</h2>
+        <div class="faq-acc" role="list">
+          {faqs.map(f => (
+            <details class="faq-item" role="listitem">
+              <summary class="faq-sum">
+                <span class="qt">{f.q}</span>
+                <svg class="faq-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8" class="faq-h"/></svg>
+              </summary>
+              <div class="qa"><p>{f.a}</p></div>
+            </details>
+          ))}
+        </div>
       </div>
-      <div class="grid gap-5 sm:grid-cols-3">
-        {strategies.map((s, i) => (
-          <div class="equity-reveal rounded-[18px] bg-[var(--color-dark-800)] p-[40px]" style={`animation-delay:${i*80}ms`}>
-            <span class="inline-flex w-fit rounded-full border border-[var(--color-brand)]/30 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-[var(--color-brand)]">{s.tag}</span>
-            <h3 class="mt-5 mb-4 text-[22px] font-medium text-white" style="font-family:var(--font-display)">{s.title}</h3>
-            <p class="text-[14px] leading-relaxed text-white/65">{s.desc}</p>
+      <div class="faq-side">
+        <div class="usr" aria-hidden="true">
+          <svg viewBox="0 0 131 147" fill="none"><circle cx="65.5" cy="42" r="34" stroke="currentColor" stroke-width="2"/><path d="M4 147c0-34 27.6-61.5 61.5-61.5S127 113 127 147" stroke="currentColor" stroke-width="2"/></svg>
+        </div>
+        <div class="side-in">
+          <div class="side-tx">
+            <h4>Ready to Build a Bond Portfolio?</h4>
+            <p>Access G-Secs, SGBs, Corporate Bonds, and NCDs through Shriram. Expert guidance, transparent pricing, and seamless Demat integration.</p>
           </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ 7. BONDS VS FD VS DEBT MF ══════════════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Bonds vs FD vs <span class="text-[var(--color-brand)]">Debt Mutual Funds</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Compare India's three major fixed-income investment options across returns, risk, liquidity, and tax treatment.</p>
-      </div>
-      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
-        <div class="overflow-x-auto">
-          <table class="w-full text-[15.5px]">
-            <thead>
-              <tr class="bg-[var(--color-dark-olive)]">
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Feature</th>
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Bonds</th>
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Fixed Deposit</th>
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Debt Mutual Fund</th>
-              </tr>
-            </thead>
-            <tbody>
-              {vsRows.map((r, i) => (
-                <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[#f8f6f1]'}>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">{r.feature}</td>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.bonds}</td>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.fd}</td>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.mf}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <a class="btn-gold" href="/about/open-demat-account/" style="align-self:flex-start">Open Demat Account</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ══ 8. FAQ ══════════════════════════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Frequently Asked <span class="text-[var(--color-brand)]">Questions</span>
-        </h2>
-      </div>
-      <div class="equity-reveal mx-auto max-w-[840px] border-t border-[var(--color-n400)]">
-        {faqs.map(item => (
-          <details class="eq-faq group border-b border-[var(--color-n400)]">
-            <summary class="flex cursor-pointer list-none items-center justify-between gap-5 py-[26px] px-2">
-              <span class="text-[18px] font-semibold text-[var(--color-ink)]">{item.q}</span>
-              <span class="shrink-0 text-[22px] leading-none text-[var(--color-brand)] transition-transform duration-300 group-open:rotate-45">+</span>
-            </summary>
-            <div class="overflow-hidden px-2 pb-0 text-[16px] leading-relaxed text-[var(--color-muted)] transition-all duration-300 group-open:pb-[28px]">
-              <p class="max-w-[680px]">{item.a}</p>
-            </div>
-          </details>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ 9. HOW TO EVALUATE A BOND ════════════════════════════════════ -->
-  <section class="bg-[var(--color-n100)] py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          How to Evaluate a Bond — <span class="text-[var(--color-brand)]">Practical Checklist</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Before buying any bond, run through this six-point checklist to assess risk, return, and suitability.</p>
-      </div>
-      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
-        <table class="w-full text-[15px]">
-          <thead>
-            <tr class="bg-[var(--color-dark-olive)]">
-              <th class="px-[24px] py-[16px] text-left text-[13px] font-semibold text-white">Evaluation Factor</th>
-              <th class="px-[24px] py-[16px] text-left text-[13px] font-semibold text-[var(--color-brand)]">What to Check</th>
-              <th class="px-[24px] py-[16px] text-left text-[13px] font-semibold text-[var(--color-brand)]">Green Flag</th>
-            </tr>
-          </thead>
-          <tbody>
-            {[
-              { factor: 'Credit Rating', check: 'CRISIL / ICRA / CARE rating of issuer', flag: 'AA or above — AAA is safest' },
-              { factor: 'Issuer Analysis', check: 'Revenue, profit, debt/equity ratio of issuer', flag: 'Consistent profitability, low leverage' },
-              { factor: 'Coupon Rate vs YTM', check: 'Compare stated coupon to Yield-to-Maturity', flag: 'YTM above comparable FD rates' },
-              { factor: 'Tenor & Maturity Date', check: 'Does the maturity date match your financial goal?', flag: 'Bond matures at/before goal date' },
-              { factor: 'Liquidity', check: 'Is the bond listed and actively traded on NSE/BSE?', flag: 'Daily volume > ₹1 crore face value' },
-              { factor: 'Callable / Puttable Features', check: 'Can the issuer redeem early (callable) or can you put it back?', flag: 'Non-callable for stable income planning' },
-            ].map((r, i) => (
-              <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[var(--color-n100)]'}>
-                <td class="border-t border-[var(--color-n400)]/50 px-[24px] py-[14px] font-semibold text-[var(--color-ink)]">{r.factor}</td>
-                <td class="border-t border-[var(--color-n400)]/50 px-[24px] py-[14px] text-[var(--color-muted)]">{r.check}</td>
-                <td class="border-t border-[var(--color-n400)]/50 px-[24px] py-[14px] text-emerald-700 font-medium">{r.flag}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ 10. PRACTICAL EXAMPLES & CALCULATOR ═══════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Practical Examples & <span class="text-[var(--color-brand)]">Return Calculator</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Understand bond returns with a real-world YTM example — then use our calculator to estimate your scenario.</p>
-      </div>
-      <div class="grid gap-6 lg:grid-cols-2">
-        <div class="equity-reveal product-card-light p-[40px]">
-          <h3 class="mb-4 text-[22px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">YTM Example — 7% G-Sec, 10 Years</h3>
-          <div class="space-y-3 text-[14px]">
-            {[
-              { label: 'Face Value', val: '₹10,000' },
-              { label: 'Coupon Rate', val: '7% p.a. (semi-annual)' },
-              { label: 'Purchase Price (Secondary Market)', val: '₹9,500 (at discount)' },
-              { label: 'Years to Maturity', val: '10 years' },
-              { label: 'Yield-to-Maturity (YTM)', val: '~7.6% p.a.' },
-              { label: 'Annual Interest Earned', val: '₹700' },
-              { label: 'Capital Gain at Maturity', val: '₹500 (face − purchase)' },
-              { label: 'Total Return (10 years)', val: '~₹7,500 coupon + ₹500 gain' },
-            ].map(row => (
-              <div class="flex justify-between border-b border-[var(--color-n400)]/50 pb-3">
-                <span class="text-[var(--color-muted)]">{row.label}</span>
-                <span class="font-semibold text-[var(--color-ink)]">{row.val}</span>
-              </div>
-            ))}
-          </div>
-          <p class="mt-4 text-[12px] text-[var(--color-muted)]">Note: YTM is higher than coupon rate because the bond was bought at a discount. Held-to-maturity investors receive ₹10,000 at redemption.</p>
-        </div>
-        <div class="equity-reveal product-card-light p-[40px]">
-          <h3 class="mb-4 text-[22px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">Bond Return vs FD Comparison</h3>
-          <div class="space-y-3 text-[14px] mb-6">
-            {[
-              { asset: 'SBI 10-Yr G-Sec', ret: '7.6% YTM', tax: 'Per slab (interest)', liquidity: 'High (NSE listed)' },
-              { asset: 'HDFC Bank FD (5 yr)', ret: '7.25% p.a.', tax: 'Per slab (TDS 10%)', liquidity: 'Low (penalty to break)' },
-              { asset: 'AA+ Corporate Bond', ret: '8.5–9% YTM', tax: 'Per slab (interest)', liquidity: 'Medium (depends on volume)' },
-              { asset: 'Debt Mutual Fund', ret: '6–8% p.a.', tax: 'Per slab', liquidity: 'High (T+1)' },
-            ].map((r, i) => (
-              <div class={`rounded-[10px] p-[14px] ${i === 0 ? 'bg-[var(--color-brand-light)]' : 'bg-[var(--color-n100)]'}`}>
-                <div class="font-semibold text-[var(--color-ink)] mb-1">{r.asset}</div>
-                <div class="flex gap-4 text-[var(--color-muted)]">
-                  <span>Return: <strong class="text-[var(--color-ink)]">{r.ret}</strong></span>
-                  <span>Liquidity: {r.liquidity}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-          <a href="/calculators/sip/" class="btn-primary w-full text-center block">Use Bond Return Calculator</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ 11. RISKS & WARNING SIGNS ════════════════════════════════════ -->
-  <section class="bg-[var(--color-n100)] py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Bond Risks & <span class="text-[var(--color-brand)]">Investor Warning Signs</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Bonds are not risk-free. Understand these warning signs before adding bonds to your portfolio.</p>
-      </div>
-      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {[
-          { n: '01', label: 'Rating Downgrade', desc: 'A credit rating downgrade from AA to A or below signals deteriorating issuer health. Bond prices fall sharply post-downgrade — exit early if issuer fundamentals weaken.' },
-          { n: '02', label: 'Unusually High Yield', desc: 'If a bond offers 12%+ yield when similar-rated bonds offer 9%, it signals hidden risk — potential fraud, liquidity crisis, or impending default. High yield = high danger.' },
-          { n: '03', label: 'Unlisted / Unrated Bonds', desc: 'Bonds not listed on NSE/BSE and lacking SEBI-registered ratings are extremely high risk. No exit market, no price discovery, and no regulatory oversight.' },
-          { n: '04', label: 'Liquidity Crunch', desc: 'When an NBFC or corporate bond issuer faces a funding crisis (like ILFS 2018, DHFL 2019), even AA-rated bonds can see prices crash. Diversify across issuers.' },
-        ].map((r, i) => (
-          <div class="equity-reveal rounded-[14px] bg-[var(--color-dark-800)] p-[28px]" style={`animation-delay:${i*80}ms`}>
-            <div class="mb-3 text-[32px] font-bold leading-none text-[var(--color-brand)]">{r.n}</div>
-            <h4 class="mb-2 text-[17px] font-semibold text-white" style="font-family:var(--font-display)">{r.label}</h4>
-            <p class="text-[13px] leading-relaxed text-white/60">{r.desc}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ 12. FINAL CTA ════════════════════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal overflow-hidden rounded-[22px] bg-[var(--color-dark-800)] px-[60px] py-[64px] text-center">
-        <h3 class="mx-auto max-w-[560px] text-[38px] font-bold leading-[1.12] text-white" style="font-family:var(--font-display)">Start Building Your Bond Portfolio</h3>
-        <p class="mx-auto mt-[18px] max-w-[480px] text-[17px] leading-relaxed text-white/70">Access G-Secs, SGBs, Corporate Bonds, and NCDs through Shriram Financial Services. Expert guidance, transparent pricing, and seamless Demat integration.</p>
-        <div class="mt-[34px] flex flex-wrap justify-center gap-[14px]">
-          <a href="/about/open-demat-account/" class="btn-primary">Open Demat Account</a>
-          <a href="/about/support/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Talk to an RM</a>
-        </div>
+  <!-- ══ 11. FINAL CTA ════════════════════════════════════════════════ -->
+  <section class="cta-sec" style="background:var(--sec-tint)">
+    <div class="cta-box">
+      <h2 class="cta-h">Start Investing in <span class="g">Bonds Today</span></h2>
+      <p class="cta-sub">G-Secs from ₹10,000 · Sovereign Gold Bonds · Corporate Bonds · NCDs · 40+ years of trust.</p>
+      <div class="cta-row">
+        <a class="btn-gold" href="/about/open-demat-account/">Open Demat Account</a>
+        <a class="btn-ghost-dark" href="/about/support/">Talk to an RM</a>
       </div>
     </div>
   </section>
@@ -401,42 +357,225 @@ const faqs = [
 </BaseLayout>
 
 <style>
-  .equity-reveal {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+  /* ── Design tokens ─────────────────────────────────────────────── */
+  :root {
+    --sec-light: #fef8ee;
+    --sec-tint: #f6efe1;
+    --card: #fffdf8;
+    --card-border: #e1e0db;
+    --card-border-soft: rgba(28,28,22,.13);
+    --row-line: rgba(28,28,22,.08);
+    --olive-title: #2e3914;
+    --olive-head: #2d3813;
+    --olive-deep: #1b2010;
+    --ink: #1c1c16;
+    --ink-2: #46463c;
+    --ink-3: #595959;
+    --muted: #73736a;
+    --muted-2: #9a9a8e;
+    --gold-2: #f2b83f;
+    --gold-btn: #f3b83f;
+    --olive-ink: #2e3914;
+    --green: #009d58;
+    --pad: clamp(20px, 8vw, 144px);
+    --container-pad: 32px;
+    --section-y: 72px;
+    --cta-w: 220px;
   }
-  .equity-reveal.in-view { opacity: 1; transform: none; }
 
-  .steps-grid { display: grid; grid-template-columns: repeat(2, 1fr); }
-  .steps-grid > * { border-right: 1px solid var(--color-n400); border-bottom: 1px solid var(--color-n400); }
-  .steps-grid > *:nth-child(2n) { border-right: 0; }
-  .steps-grid > *:nth-last-child(-n+2) { border-bottom: 0; }
-  @media (min-width: 1024px) {
-    .steps-grid { grid-template-columns: repeat(4, 1fr); }
-    .steps-grid > * { border-right: 1px solid var(--color-n400); border-bottom: 0; }
-    .steps-grid > *:last-child { border-right: 0; }
+  *, *::before, *::after { box-sizing: border-box; }
+  a { color: inherit; text-decoration: none; }
+  p { line-height: 1.5; }
+
+  /* ── Section shell ───────────────────────────────────────────────── */
+  .section {
+    padding: var(--section-y) var(--pad);
+    min-height: 100vh; min-height: 100dvh;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  #sec-what { min-height: 0; }
+  .stack { display: flex; flex-direction: column; }
+
+  /* ── Typography ──────────────────────────────────────────────────── */
+  .sec-title { font-weight: 400; font-size: 40px; color: var(--olive-title); text-transform: capitalize; line-height: 1.5; }
+  .sec-lead  { font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.6; }
+  .card-h    { font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.5; }
+  .card-p    { font-weight: 400; font-size: 16px; color: var(--muted); line-height: 1.5; }
+
+  /* ── Hero ─────────────────────────────────────────────────────────── */
+  .hero {
+    padding: 0 var(--pad);
+    display: flex; flex-direction: column; justify-content: center; overflow: hidden;
+    background: radial-gradient(125% 210% at 100% -8%, #4f583b 0%, #363a2c 50%, #1d1d1d 100%);
+  }
+  .hero-inner { padding: clamp(80px,12vw,140px) 0 clamp(48px,6vw,80px); display: flex; flex-direction: column; }
+  .hero h1   { font-weight: 500; font-size: 40px; color: #fff; line-height: 1.5; max-width: 860px; }
+  .hero h1 .g { color: var(--gold-2); }
+  .hero .lead { margin-top: 32px; font-size: 18px; line-height: 1.5; color: rgba(255,255,255,.74); max-width: 640px; }
+  .cta-row   { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .hero-feats { margin-top: 40px; }
+  .feats { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 16px; max-width: 760px; padding-top: 36px; border-top: 1px solid rgba(255,255,255,.16); }
+  .feat  { display: flex; gap: 10px; align-items: center; }
+  .feat .tk { color: var(--gold-2); font-weight: 500; font-size: 15px; width: 13px; }
+  .feat .lb { color: rgba(255,255,255,.9); font-weight: 500; font-size: 16px; line-height: 1.5; white-space: nowrap; }
+
+  /* ── Buttons ─────────────────────────────────────────────────────── */
+  .btn-gold {
+    background: var(--gold-btn); height: 40px; width: var(--cta-w);
+    border-radius: 4px; display: inline-flex; align-items: center; justify-content: center;
+    padding: 7px 20px; font-weight: 500; font-size: 12px; color: var(--olive-ink);
+    white-space: nowrap; transition: opacity .2s;
+  }
+  .btn-gold:hover { opacity: .88; }
+  .btn-ghost {
+    height: 40px; border-radius: 9px; border: 1px solid rgba(255,255,255,.4);
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 7px 26px; font-weight: 600; font-size: 15px; color: #fff;
+    transition: border-color .2s;
+  }
+  .btn-ghost:hover { border-color: #fff; }
+  .btn-ghost-dark {
+    height: 40px; border-radius: 4px; border: 1px solid rgba(27,32,16,.35);
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 7px 26px; font-weight: 500; font-size: 12px; color: var(--olive-deep);
+    transition: border-color .2s;
+  }
+  .btn-ghost-dark:hover { border-color: var(--olive-deep); }
+
+  /* ── Cards ───────────────────────────────────────────────────────── */
+  .card {
+    background: var(--card); border: 1px solid var(--card-border);
+    border-radius: 24px; padding: var(--container-pad);
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .row-2 { display: flex; gap: 32px; align-items: stretch; }
+  .row-2 .card { flex: 1 0 0; min-width: 0; }
+
+  /* ── Category grid ───────────────────────────────────────────────── */
+  .cat-grid {
+    border: 1px solid var(--card-border); border-radius: 24px;
+    overflow: hidden; display: grid; background: var(--card);
+  }
+  .cat-3 { grid-template-columns: repeat(3, 1fr); }
+  .cat-4 { grid-template-columns: repeat(4, 1fr); }
+  .cat {
+    background: var(--card); padding: var(--container-pad);
+    display: flex; flex-direction: column; gap: 12px;
+    border-right: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border);
+  }
+  .cat-3 .cat:nth-child(3n)  { border-right: 0; }
+  .cat-3 .cat:nth-child(n+4) { border-bottom: 0; }
+  .cat-3 .cat:last-child     { border-right: 0; }
+  .cat-4 .cat:nth-child(4n)  { border-right: 0; }
+  .cat-4 .cat:nth-child(n+5) { border-bottom: 0; }
+  .cat-4 .cat:last-child     { border-right: 0; }
+  .cat h4 { font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.5; }
+  .cat p  { font-weight: 400; font-size: 16px; color: var(--muted); line-height: 1.5; }
+  .risk-cat h4 { color: var(--olive-deep); }
+
+  /* ── Bond tag ────────────────────────────────────────────────────── */
+  .bond-tag {
+    display: inline-flex; width: fit-content;
+    background: rgba(242,184,63,.18); border-radius: 100px;
+    padding: 4px 12px; font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .04em; color: var(--olive-deep);
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .equity-reveal { opacity: 1; transform: none; transition: none; }
+  /* ── Numbered grid ───────────────────────────────────────────────── */
+  .num-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    background: var(--card); border: 1px solid var(--card-border);
+    border-radius: 24px; overflow: hidden;
   }
+  .num-item {
+    padding: var(--container-pad);
+    display: flex; flex-direction: column; gap: 12px;
+    border-right: 1px solid var(--card-border);
+    border-bottom: 1px solid var(--card-border);
+  }
+  .num-item:nth-child(3n)        { border-right: 0; }
+  .num-item:nth-last-child(-n+3) { border-bottom: 0; }
+  .num-item:last-child           { border-right: 0; }
+  .num-n { font-weight: 400; font-size: 36px; color: var(--gold-2); line-height: 1; display: block; }
+  .num-item h4 { font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.4; }
+  .num-item p  { font-weight: 400; font-size: 15px; color: var(--ink-3); line-height: 1.5; }
+
+  /* ── Tables ──────────────────────────────────────────────────────── */
+  .t-scroll { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .table    { background: var(--card); border-radius: 24px; overflow: hidden; display: grid; }
+  .t3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+  .t4 { grid-template-columns: repeat(4, minmax(0,1fr)); }
+  .cell { padding: 16px 24px; display: flex; align-items: center; justify-content: center; text-align: center; }
+  .cell p { flex: 1 0 0; min-width: 0; font-size: 16px; line-height: 1.5; overflow-wrap: break-word; }
+  .th { background: var(--olive-head); }
+  .th p { font-weight: 600; color: #fff; }
+  .tb { border-top: 1px solid var(--row-line); }
+  .tb .k { font-weight: 600; color: var(--ink); }
+  .tb .v { font-weight: 400; color: var(--ink-2); }
+  .green-flag { color: var(--green) !important; font-weight: 500 !important; }
+
+  /* ── Risk disclaimer card ────────────────────────────────────────── */
+  .risk-disc-card { border-color: rgba(200,60,60,.2); background: rgba(255,245,245,.6); }
+  .risk-disc-card .card-p { color: var(--ink-3); }
+
+  /* ── FAQ ─────────────────────────────────────────────────────────── */
+  .faq-wrap {
+    padding: 158px var(--pad);
+    min-height: 100vh; min-height: 100dvh;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .faq-cols  { display: flex; gap: 48px; align-items: stretch; }
+  .faq-left  { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; gap: 48px; }
+  .faq-title { font-weight: 400; font-size: 40px; color: var(--olive-title); text-transform: capitalize; line-height: 1.5; white-space: nowrap; }
+  .faq-acc   { border-radius: 24px; overflow: hidden; display: flex; flex-direction: column; gap: 2px; width: 100%; }
+  .faq-item  { background: var(--card); list-style: none; }
+  .faq-sum   { display: flex; align-items: flex-start; justify-content: space-between; gap: 40px; padding: 24px; cursor: pointer; list-style: none; }
+  .faq-sum::-webkit-details-marker { display: none; }
+  .faq-item .qt { font-weight: 500; font-size: 14px; color: #333; line-height: 1.5; flex: 1; }
+  .faq-item[open] .qt { font-weight: 600; }
+  .faq-icon  { width: 16px; height: 16px; flex: none; color: #404040; margin-top: 2px; }
+  .faq-h     { transition: opacity .28s ease; }
+  .faq-item[open] .faq-h { opacity: 0; }
+  .qa { padding: 0 24px 20px; }
+  .qa p { font-weight: 400; font-size: 14px; color: #404040; line-height: 1.5; }
+  .faq-side {
+    width: 464px; flex: none;
+    background: var(--card); border: 1px solid var(--card-border);
+    border-radius: 24px; padding: var(--container-pad);
+    display: flex; flex-direction: column; gap: 40px; justify-content: flex-end;
+    position: relative; overflow: hidden;
+  }
+  .usr {
+    position: absolute; left: var(--container-pad); top: 64px;
+    width: 130.667px; height: 147px; opacity: .1;
+  }
+  .usr svg { display: block; width: 100%; height: 100%; color: var(--olive-deep); }
+  .side-in  { display: flex; flex-direction: column; gap: 32px; position: relative; }
+  .side-tx  { display: flex; flex-direction: column; gap: 8px; color: #222320; }
+  .side-tx h4 { font-weight: 500; font-size: 20px; line-height: 28px; letter-spacing: -.45px; }
+  .side-tx p  { font-weight: 400; font-size: 14px; line-height: 22px; letter-spacing: -.15px; }
+
+  /* ── Final CTA ───────────────────────────────────────────────────── */
+  .cta-sec { padding: var(--section-y) var(--pad); }
+  .cta-box {
+    border-radius: 22px; padding: 64px 60px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 20px; text-align: center;
+    background: var(--olive-deep);
+  }
+  .cta-h   { font-weight: 400; font-size: 36px; color: #fff; line-height: 1.4; max-width: 640px; }
+  .cta-h .g { color: var(--gold-2); }
+  .cta-sub { font-size: 16px; color: rgba(255,255,255,.65); line-height: 1.5; }
+  .cta-box .cta-row { margin-top: 8px; }
+  .cta-box .btn-gold { width: auto; }
 </style>
 
 <script>
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        (e.target as HTMLElement).classList.add('in-view');
-        obs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.10 });
-  document.querySelectorAll('.equity-reveal').forEach(el => obs.observe(el));
-
-  document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(d => {
-    d.addEventListener('toggle', () => {
-      if (d.open) document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(o => { if (o !== d) o.removeAttribute('open'); });
+  document.querySelectorAll('.faq-acc').forEach(acc => {
+    acc.addEventListener('click', e => {
+      const item = e.target instanceof Element ? e.target.closest('details') : null;
+      if (!item) return;
+      acc.querySelectorAll('details[open]').forEach(d => { if (d !== item) d.removeAttribute('open'); });
     });
   });
 </script>
