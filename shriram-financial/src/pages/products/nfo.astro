@@ -1,422 +1,362 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-const nfoTypes = [
-  { label: 'Open-Ended NFO', desc: 'After the initial subscription period, the fund remains open for ongoing purchase and redemption at NAV. Most equity and debt NFOs fall in this category.', tag: 'Most Common' },
-  { label: 'Close-Ended NFO', desc: 'Fixed maturity — subscriptions are accepted only during the NFO period. Units are listed on exchanges for secondary trading after the NFO closes.', tag: 'Fixed Term' },
-  { label: 'ELSS NFO', desc: 'New Equity Linked Saving Scheme fund launch. Offers 80C tax deduction of up to ₹1.5 lakh per year with a mandatory 3-year lock-in period.', tag: 'Tax Saving' },
-  { label: 'Sectoral / Thematic NFO', desc: 'Focused on a specific sector (IT, pharma) or theme (ESG, manufacturing). Higher risk — only suited for investors with a clear sectoral view.', tag: 'Concentrated' },
-];
-
 const nfoSteps = [
-  { n: '01', title: 'AMC Files with SEBI', desc: 'The Asset Management Company files a Scheme Information Document (SID) with SEBI describing the fund objective, strategy, and expense ratio.' },
-  { n: '02', title: 'SEBI Approves', desc: 'SEBI reviews and approves the NFO. The AMC can proceed to open subscriptions after SEBI observation. Approval does not imply recommendation.' },
-  { n: '03', title: 'NFO Opens', desc: 'The subscription period opens — typically 15–30 days (maximum 30 days per SEBI rules). Investors apply via their broker or AMC portal.' },
-  { n: '04', title: 'Subscription Period', desc: 'Investors subscribe at the face value of ₹10 per unit regardless of future NAV. All subscription money is pooled.' },
-  { n: '05', title: 'Units Allotted at ₹10', desc: 'After close, units are allotted at ₹10/unit to all investors. The fund then deploys the corpus per its stated investment strategy.' },
+  { n: '01', title: 'AMC Files SID with SEBI',      desc: "The Asset Management Company submits the Scheme Information Document and Statement of Additional Information to SEBI for review and approval." },
+  { n: '02', title: 'SEBI Approves the NFO',         desc: "SEBI reviews and issues a launch window (typically 30 days). Approval confirms regulatory compliance — it does not imply a recommendation to invest." },
+  { n: '03', title: 'Subscription Opens at ₹10/unit',desc: 'Investors apply during the subscription window. All subscribers get the same fixed entry price of ₹10 per unit regardless of when they apply.' },
+  { n: '04', title: 'Subscription Window Closes',    desc: 'Subscriptions close after the NFO period. Allotment of units happens within 5 business days. The corpus is then deployed as per the stated strategy.' },
+  { n: '05', title: 'NAV Declared — Fund Goes Live', desc: 'For open-ended funds, regular purchase and redemption begins at market-linked NAV. The fund is now available for ongoing SIP or lump-sum investment.' },
 ];
 
-const vsRows = [
-  { feature: 'Track Record', nfo: 'None — new fund, no performance history', sip: 'Established fund with 3–5 year return data' },
-  { feature: 'NAV at Entry', nfo: 'Fixed ₹10 (no advantage — NAV is just a price)', sip: 'Current NAV (higher, but proportional units)' },
-  { feature: 'Fund Manager Risk', nfo: 'Higher — untested strategy and team execution', sip: 'Known track record of manager decisions' },
-  { feature: 'Strategy Clarity', nfo: 'Stated in SID — needs careful evaluation', sip: 'Demonstrated portfolio visible via fact sheets' },
-  { feature: 'Lock-In', nfo: 'ELSS: 3 years; others: typically none (open-end)', sip: 'ELSS: 3 years per instalment; others: none' },
-  { feature: 'Best For', nfo: 'Unique strategy not covered by existing funds', sip: 'Regular disciplined wealth building over 5–10 years' },
+const keyFeatures = [
+  { label: 'Entry Price',         val: '₹10 / unit',   desc: 'All subscribers enter at the same fixed face value. The low price is not a discount — units are simply new with no track record.' },
+  { label: 'Subscription Window', val: '15–30 days',    desc: 'SEBI permits a maximum 30-day window. Most NFOs run 15–21 days. Close-ended NFOs do not reopen after the window.' },
+  { label: 'Min Investment',      val: '₹500–₹5,000',  desc: "Minimum subscription varies by scheme — specified in each fund's SID. Most retail-oriented NFOs start at ₹500–₹1,000." },
+  { label: 'Lock-In',             val: 'ELSS: 3 years', desc: 'Standard equity NFOs have no lock-in. ELSS NFOs carry a mandatory 3-year lock-in per Section 80C — earliest exit 36 months from unit allotment.' },
+];
+
+const nfoTypes = [
+  { label: 'Open-Ended NFO',          desc: 'After the subscription period, the fund stays open for ongoing purchase and redemption at NAV. Most equity and debt NFOs are open-ended.', tag: 'Most Common' },
+  { label: 'Close-Ended NFO',          desc: 'Fixed maturity — subscriptions accepted only during the NFO period. Units are listed on exchanges for secondary trading after closure.', tag: 'Fixed Term' },
+  { label: 'ELSS NFO',                 desc: "New Equity Linked Saving Scheme fund launch. Offers 80C tax deduction up to ₹1.5 lakh/year with a mandatory 3-year lock-in.", tag: 'Tax Saving' },
+  { label: 'Sectoral / Thematic NFO', desc: 'Focused on a specific sector (IT, pharma) or theme (ESG, manufacturing). Higher concentration risk — only suited for investors with a clear sectoral conviction.', tag: 'Concentrated' },
+];
+
+const onlineSteps = [
+  { n: '01', title: 'Log In to Shriram Platform',  desc: 'Log in to the Shriram investor portal or mobile app. Navigate to Mutual Funds and select the Current NFOs section.' },
+  { n: '02', title: 'Select the NFO Scheme',        desc: 'Review the scheme objective, AMC track record, and SID summary. Choose the NFO that matches your investment goal and risk profile.' },
+  { n: '03', title: 'Enter Investment Amount',      desc: "Enter your investment amount. Minimum is typically ₹500–₹5,000 depending on the scheme's SID. SIP can be set up post-allotment for open-ended NFOs." },
+  { n: '04', title: 'Choose Payment Mode',          desc: 'Pay via Net Banking, UPI, or Debit Card. Confirm the transaction after reviewing the order summary and scheme details.' },
+  { n: '05', title: 'Receive Allotment Confirmation', desc: 'Allotment confirmation sent via email and SMS within 5 business days after NFO closure. Units appear in your demat account at ₹10/unit.' },
+];
+
+const nfoBenefits = [
+  "Access to unique investment strategies and asset classes not yet available in existing funds.",
+  "Entry at ₹10 face value — a clear, predictable starting NAV for easy return tracking.",
+  "Opportunity to invest in emerging themes (EV, defence, manufacturing) at fund launch.",
+  "Open-ended NFOs allow SIP setup immediately after allotment — no lock-in for most types.",
+  "ELSS NFOs provide Section 80C deduction of up to ₹1.5 lakh with only a 3-year lock-in.",
+];
+
+const nfoRisks = [
+  "No performance track record — unlike existing funds, there is zero historical return data to evaluate.",
+  "Fund manager execution risk — strategy stated in SID may not be implemented as expected.",
+  "Sectoral/thematic NFOs carry concentration risk — one sector downturn can hurt significantly.",
+  "Most NFOs offer strategies already available via existing funds — the novelty is often overstated.",
+  "Exit load of 1% typically applies if redeemed within 1 year — check the SID before investing.",
 ];
 
 const evalChecklist = [
-  { n: '01', label: 'AMC Reputation', desc: 'Choose NFOs from established AMCs with strong track records — HDFC, SBI, ICICI Prudential, Nippon, Axis. Avoid lesser-known AMCs launching their first fund.' },
-  { n: '02', label: 'Fund Objective', desc: 'Read the Scheme Information Document (SID) carefully. Ensure the fund strategy is unique and not already covered by an existing fund in your portfolio.' },
-  { n: '03', label: 'Expense Ratio', desc: 'The NFO\'s stated expense ratio should be competitive vs similar existing funds. High TER (above 1.5% for equity) erodes returns over time.' },
-  { n: '04', label: 'Asset Allocation', desc: 'Understand the benchmark, stock universe, and sectoral concentration. A diversified fund NFO carries less risk than a thematic NFO in a niche sector.' },
+  { n: '01', label: 'AMC Reputation',  desc: "Choose NFOs from established AMCs — HDFC, SBI, ICICI Prudential, Nippon, Axis. Avoid lesser-known AMCs launching their first fund without a track record." },
+  { n: '02', label: 'Fund Objective',  desc: "Read the SID carefully. The NFO strategy must be genuinely unique — not already covered by an existing fund. If a similar fund exists, choose the one with performance data." },
+  { n: '03', label: 'Expense Ratio',   desc: "The NFO's stated expense ratio should be competitive vs similar existing funds. A high TER (above 1.5% for equity) erodes long-term returns significantly." },
+  { n: '04', label: 'Asset Allocation',desc: 'Understand the benchmark, stock universe, and sectoral concentration. A diversified equity NFO carries far less risk than a thematic NFO in a single niche sector.' },
+];
+
+const vsRows = [
+  { feature: 'Track Record',       nfo: 'None — brand new fund, zero history',              sip: 'Established fund with 3–5+ year return data' },
+  { feature: 'NAV at Entry',       nfo: 'Fixed ₹10 — no real advantage over higher NAV',    sip: 'Current NAV, proportional units allotted' },
+  { feature: 'Manager Risk',       nfo: 'Higher — untested strategy and team execution',     sip: 'Known fund manager track record visible' },
+  { feature: 'Strategy Clarity',   nfo: 'Stated in SID — must be evaluated before entry',   sip: 'Demonstrated portfolio visible via fact sheets' },
+  { feature: 'Lock-In',            nfo: 'ELSS: 3 years; others: none (open-end)',           sip: 'ELSS: 3 years per instalment; others: none' },
+  { feature: 'Best For',           nfo: 'Unique strategy not in any existing fund',          sip: 'Regular disciplined wealth building over 5–10 years' },
 ];
 
 const taxRows = [
-  { type: 'Equity NFO (held under 12 months)', rate: '20% flat (STCG)', note: 'Same as existing equity mutual funds post-budget 2024' },
-  { type: 'Equity NFO (held over 12 months)', rate: '12.5% (LTCG above ₹1.25 lakh)', note: 'No indexation benefit' },
-  { type: 'Debt NFO (held under 24 months)', rate: 'As per income slab', note: 'Post April 2023 — no LTCG benefit for debt funds' },
-  { type: 'Debt NFO (held over 24 months)', rate: 'As per income slab', note: 'Indexation removed from April 2023' },
-  { type: 'ELSS NFO', rate: '12.5% LTCG on gains above ₹1.25 lakh', note: '3-year mandatory lock-in; 80C benefit on contribution' },
+  { type: 'Equity NFO — under 12 months',  rate: '20% flat (STCG)',                           note: 'Post-Budget 2024 rate' },
+  { type: 'Equity NFO — over 12 months',   rate: '12.5% on gains above ₹1.25 lakh (LTCG)',   note: 'No indexation benefit' },
+  { type: 'Debt NFO — under 24 months',    rate: 'As per income slab',                         note: 'Post April 2023 — no LTCG benefit for debt funds' },
+  { type: 'Debt NFO — over 24 months',     rate: 'As per income slab',                         note: 'Indexation removed from April 2023' },
+  { type: 'ELSS NFO',                       rate: '12.5% LTCG on gains above ₹1.25 lakh',     note: '3-year mandatory lock-in; 80C benefit up to ₹1.5 lakh' },
 ];
 
 const faqs = [
-  { q: 'What is an NFO in mutual funds?', a: 'An NFO (New Fund Offer) is the initial launch of a new mutual fund scheme by an Asset Management Company (AMC). Like an IPO for shares, an NFO allows investors to subscribe to a new fund at the face value of ₹10 per unit during a limited subscription window.' },
-  { q: 'Is it better to invest in an NFO or an existing fund?', a: 'For most investors, existing funds with established track records are lower risk. An NFO makes sense only if it offers a genuinely unique strategy or asset class not covered by existing funds. The ₹10 NAV is NOT an advantage — all that matters is future performance, not the entry price.' },
-  { q: 'Can I do an SIP in an NFO?', a: 'You can subscribe during the NFO period. Once the fund is open-ended and operational, you can set up regular SIPs like any other mutual fund. Close-ended NFOs do not allow SIP after the NFO closes.' },
-  { q: 'How long does an NFO subscription period last?', a: 'SEBI mandates a maximum 30-day subscription period for open-ended funds. Most NFOs run for 15–21 days. Close-ended fund NFOs may have shorter windows.' },
-  { q: 'Is there an exit load in an NFO?', a: 'Yes — most equity NFOs carry an exit load of 1% if units are redeemed within 1 year of purchase. This is declared upfront in the SID. ELSS NFOs have a 3-year lock-in instead of exit load.' },
-  { q: 'How do I apply for an NFO through Shriram?', a: 'Log in to the Shriram platform, navigate to Mutual Funds, and look for the active NFO section. Select the scheme, choose the amount, and complete payment via your linked bank account. Units are allotted at ₹10 after the NFO closes.' },
+  { q: 'What is an NFO in mutual funds?',
+    a: "An NFO (New Fund Offer) is the initial launch of a new mutual fund scheme by an Asset Management Company. Like an IPO for shares, an NFO lets investors subscribe at ₹10 per unit during a limited window — after which the fund is managed and NAV moves with portfolio performance." },
+  { q: 'Is it better to invest in an NFO or an existing mutual fund?',
+    a: "For most investors, existing funds with established track records are lower risk. An NFO makes sense only if it offers a genuinely unique strategy not covered by any existing fund. The ₹10 NAV is NOT an advantage — what matters is future performance, not the entry price." },
+  { q: 'What is the minimum investment in an NFO?',
+    a: "Most NFOs allow a minimum of ₹500–₹5,000 for lump sum and ₹500 per instalment for SIP. The exact minimum amount is specified in each scheme's SID (Scheme Information Document)." },
+  { q: 'Can I invest in an NFO via SIP?',
+    a: "You can subscribe during the NFO period. Once the fund is open-ended and operational, you can set up regular SIPs just like any other mutual fund. Close-ended NFOs do not allow SIPs after the NFO closes." },
+  { q: 'Is NFO better than existing mutual funds?',
+    a: "Not necessarily. An NFO only makes sense if the fund strategy is unique and cannot be replicated by existing funds. Never invest in an NFO simply because the NAV is ₹10 — that offers no mathematical advantage over a fund with a NAV of ₹100 or ₹500." },
+  { q: 'How do I apply for an NFO through Shriram?',
+    a: "Log in to the Shriram platform, navigate to Mutual Funds, and look for the active NFO section. Select the scheme, choose your amount, and complete payment via your linked bank account. Units are allotted at ₹10 after the NFO closes." },
 ];
 ---
 
 <BaseLayout
   title="NFO Mutual Fund Guide 2026 — New Fund Offer India | Shriram"
-  description="Complete guide to NFO mutual fund investments in India 2026. Learn how NFOs work, how to evaluate them vs SIP, tax rules, and apply through Shriram Financial Services."
+  description="Complete guide to NFO mutual fund investments in India 2026. Learn how NFOs work, types, how to evaluate and invest, and tax rules — with Shriram Financial Services."
 >
 
-  <!-- ══ 1. HERO ═══════════════════════════════════════════════════ -->
-  <section class="relative overflow-hidden bg-[var(--color-dark-800)]">
-    <div class="pointer-events-none absolute -right-40 -top-40 h-[560px] w-[560px] rounded-full bg-[var(--color-brand)]/10 blur-3xl"></div>
-    <div class="pointer-events-none absolute -bottom-32 left-0 h-80 w-80 rounded-full bg-[var(--color-brand)]/5 blur-3xl"></div>
-    <div class="site-wrap relative py-[120px]">
-      <p class="equity-reveal text-[14px] font-medium tracking-[.04em] text-[var(--color-brand)]">New Fund Offer</p>
-      <h1 class="equity-reveal mt-[22px] max-w-[880px] text-[clamp(32px,4vw,52px)] font-bold leading-[1.06] text-white" style="font-family:var(--font-display)">
-        <span class="text-[var(--color-brand)]">NFO</span> — New Fund Offer Guide 2026
-      </h1>
-      <p class="equity-reveal mt-[26px] max-w-[600px] text-[18px] leading-relaxed text-white/70">
-        An NFO mutual fund is the initial subscription window for a new scheme at ₹10 per unit. Understand how NFOs work, when to invest, and how to evaluate them before committing capital.
-      </p>
-      <div class="equity-reveal mt-[38px] flex flex-wrap gap-[14px]">
-        <a href="/about/open-demat-account/" class="btn-primary">Explore Active NFOs</a>
-        <a href="/about/support/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Talk to RM</a>
+  <!-- ══ 1. HERO ══════════════════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <h1>Complete Guide to <span class="g">NFO in Mutual Funds 2026</span></h1>
+      <p class="lead">India's mutual fund landscape is growing rapidly, and New Fund Offers (NFOs) are at the heart of this expansion. From what NFOs are and how they work, to evaluating them before investing — this comprehensive guide covers everything for Indian retail and HNI investors.</p>
+      <div class="cta-row">
+        <a class="btn-gold" href="/about/open-demat-account/">Start Investing</a>
+        <a class="btn-ghost" href="/about/support/">Talk to an Expert</a>
       </div>
-      <div class="equity-reveal mt-[54px] flex flex-wrap gap-x-9 gap-y-3 border-t border-white/15 pt-9">
-        {['✓ ₹10 per unit entry price', '✓ SEBI-approved only', '✓ 0% commission (Direct)', '✓ Compare vs existing funds'].map(f => (
-          <span class="text-[15px] font-medium text-white/90">
-            <span class="mr-2 text-[var(--color-brand)]">{f.slice(0,1)}</span>{f.slice(1)}
-          </span>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ 2. WHAT IS AN NFO ══════════════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto grid max-w-[1000px] items-start gap-[72px] lg:grid-cols-[5fr_7fr]">
-        <h2 class="text-[40px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          What Is an <span class="text-[var(--color-brand)]">NFO?</span>
-        </h2>
-        <div class="space-y-5 text-[17px] leading-relaxed text-[var(--color-muted)]">
-          <p>An NFO (New Fund Offer) is the first time an Asset Management Company (AMC) makes a new mutual fund scheme available for public subscription. Think of it as an IPO — but for mutual funds instead of shares.</p>
-          <p>During an NFO, investors can buy units at the face value of ₹10 per unit. After the NFO window closes (maximum 30 days), the fund begins investing the collected corpus per its stated strategy. NAV then moves based on performance.</p>
-          <p>Importantly, the ₹10 entry price is NOT a discount or advantage — it simply reflects that the fund has no performance history. What matters is what the fund does with your money after launch.</p>
+      <div class="hero-feats">
+        <div class="feats">
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;₹10 per unit entry</span></div>
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;SEBI-approved only</span></div>
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;0% commission (Direct)</span></div>
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;Compare vs existing funds</span></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ══ 3. HOW NFO WORKS ══════════════════════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          How NFO <span class="text-[var(--color-brand)]">Works</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">From AMC filing with SEBI to units being allotted to your account — five key stages.</p>
+  <!-- ══ 2. WHAT IS NFO ════════════════════════════════════════════════ -->
+  <section class="section stack" id="sec-what" style="background:var(--sec-light);gap:48px;min-height:0">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">What is NFO? — New Fund Offer</p>
+      <p class="sec-lead">An NFO (New Fund Offer) is the first-ever subscription offer for a mutual fund scheme launched by an AMC. Similar to an IPO in the stock market, it allows investors to buy units of a new scheme at a fixed price — typically ₹10 per unit — during a limited subscription window.</p>
+      <p class="sec-lead">NFOs are regulated by SEBI under the SEBI Mutual Fund Regulations. The subscription period generally lasts 1–30 days, after which the scheme either closes (close-ended) or opens for regular SIP and lump-sum investment (open-ended). The ₹10 entry price is simply a starting point — it carries no mathematical advantage over a fund at a higher NAV.</p>
+    </div>
+    <div class="row-2">
+      <div class="card">
+        <p class="card-h">NFO Full Form in Mutual Funds</p>
+        <p class="card-p">NFO stands for New Fund Offer. It is the initial launch period during which an AMC offers units of a new scheme to the public for the first time. The price is fixed at ₹10 per unit during this window — regardless of when you subscribe.</p>
       </div>
-      <div class="equity-reveal space-y-4">
-        {nfoSteps.map((s, i) => (
-          <div class="flex items-start gap-5 rounded-[16px] border border-[var(--color-n400)] bg-white p-6">
-            <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--color-dark-olive)] text-[13px] font-bold text-[var(--color-brand)]">{i+1}</span>
-            <div>
-              <h3 class="mb-1 text-[17px] font-semibold text-[var(--color-ink)]" style="font-family:var(--font-display)">{s.title}</h3>
-              <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">{s.desc}</p>
-            </div>
-          </div>
-        ))}
+      <div class="card">
+        <p class="card-h">NFO vs IPO — Key Difference</p>
+        <p class="card-p">An IPO lists existing shares of a company on an exchange. An NFO creates a brand-new mutual fund scheme. Both have a fixed-price subscription window, but in an NFO there is no secondary price discovery — everyone gets ₹10 per unit.</p>
       </div>
     </div>
   </section>
 
-  <!-- ══ 4. TYPES OF NFOS ══════════════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Types of <span class="text-[var(--color-brand)]">NFOs</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Four categories of NFOs — each with different liquidity, tax treatment, and investor suitability.</p>
-      </div>
-      <div class="grid gap-5 sm:grid-cols-2">
-        {nfoTypes.map((t, i) => (
-          <div class="equity-reveal product-card-light flex flex-col gap-3 p-[34px]" style={`animation-delay:${i*60}ms`}>
-            <span class="inline-flex w-fit rounded-full bg-[var(--color-brand)]/15 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-[var(--color-dark-olive)]">{t.tag}</span>
-            <h3 class="text-[19px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{t.label}</h3>
-            <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">{t.desc}</p>
-          </div>
-        ))}
-      </div>
+  <!-- ══ 3. HOW NFO WORKS ══════════════════════════════════════════════ -->
+  <section class="section stack" id="sec-how" style="background:var(--sec-tint);gap:48px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">How NFO Works (Similar to IPO)</p>
+      <p class="sec-lead">Every NFO goes through a five-stage regulatory and subscription process governed by SEBI. Understanding this sequence helps you time your entry correctly and avoid common mistakes.</p>
+    </div>
+    <div class="num-grid">
+      {nfoSteps.map(s => (
+        <div class="num-item">
+          <span class="num-n">{s.n}</span>
+          <h4>{s.title}</h4>
+          <p>{s.desc}</p>
+        </div>
+      ))}
     </div>
   </section>
 
-  <!-- ══ 5. HOW TO EVALUATE AN NFO ══════════════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          How to Evaluate <span class="text-[var(--color-brand)]">an NFO</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Four-point checklist before committing capital to any new fund offer.</p>
-      </div>
-      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {evalChecklist.map(e => (
-          <div class="equity-reveal product-card-light flex flex-col gap-3 p-[30px]">
-            <div class="mb-[14px] text-[15px] font-medium tracking-[.05em] text-[var(--color-brand)]">{e.n}</div>
-            <h4 class="mb-[10px] text-[19px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">{e.label}</h4>
-            <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">{e.desc}</p>
-          </div>
-        ))}
-      </div>
+  <!-- ══ 4. KEY FEATURES ══════════════════════════════════════════════ -->
+  <section class="section stack" id="sec-features" style="background:var(--sec-light);gap:48px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Key Features of NFO</p>
+      <p class="sec-lead">Four defining characteristics distinguish an NFO from investing in an existing mutual fund — understanding these helps you set the right expectations before subscribing.</p>
+    </div>
+    <div class="cat-grid cat-4">
+      {keyFeatures.map(f => (
+        <div class="cat metric-cat">
+          <span class="metric-val">{f.val}</span>
+          <h4>{f.label}</h4>
+          <p>{f.desc}</p>
+        </div>
+      ))}
     </div>
   </section>
 
-  <!-- ══ 6. NFO VS SIP ══════════════════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          NFO vs <span class="text-[var(--color-brand)]">SIP in Existing Fund</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">For most investors, a SIP in an established fund with proven performance is more reliable than an unproven NFO.</p>
+  <!-- ══ 5. TYPES OF NFOS ══════════════════════════════════════════════ -->
+  <section class="section stack" id="sec-types" style="background:var(--sec-tint);gap:48px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Types of NFOs</p>
+      <p class="sec-lead">Not all NFOs are the same. Understanding each type helps you choose one aligned with your investment horizon, risk profile, and tax goals.</p>
+    </div>
+    <div class="cat-grid cat-4">
+      {nfoTypes.map(t => (
+        <div class="cat">
+          <span class="nfo-tag">{t.tag}</span>
+          <h4>{t.label}</h4>
+          <p>{t.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ══ 6. HOW TO INVEST ══════════════════════════════════════════════ -->
+  <section class="section stack" id="sec-invest" style="background:var(--sec-light);gap:48px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">How to Invest in NFO</p>
+      <p class="sec-lead">Five simple steps to subscribe to an active NFO through the Shriram platform. The entire process is digital, paperless, and takes under 10 minutes if your KYC is complete.</p>
+    </div>
+    <div class="num-grid">
+      {onlineSteps.map(s => (
+        <div class="num-item">
+          <span class="num-n">{s.n}</span>
+          <h4>{s.title}</h4>
+          <p>{s.desc}</p>
+        </div>
+      ))}
+    </div>
+    <div class="row-2">
+      <div class="card">
+        <p class="card-h">Offline Process</p>
+        <p class="card-p">Visit your nearest Shriram branch or the AMC office. Collect the NFO application form, fill in personal and investment details, and submit with a cheque or DD payable to the fund scheme name. Collect your acknowledgement receipt.</p>
       </div>
-      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
-        <div class="overflow-x-auto">
-          <table class="w-full text-[15.5px]">
-            <thead>
-              <tr class="bg-[var(--color-dark-olive)]">
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Feature</th>
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">NFO</th>
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">SIP in Existing Fund</th>
-              </tr>
-            </thead>
-            <tbody>
-              {vsRows.map((r, i) => (
-                <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[#f8f6f1]'}>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">{r.feature}</td>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.nfo}</td>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.sip}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      <div class="card">
+        <p class="card-h">Documents Required</p>
+        <div class="check-list" style="margin-top:4px">
+          {[
+            'PAN card — mandatory for investments above ₹50,000',
+            'Aadhaar or government-issued photo ID',
+            'Address proof (Aadhaar, Passport, or Utility Bill)',
+            'Cancelled cheque or bank passbook',
+            'eKYC via SEBI-registered KRA (done digitally on the app)',
+          ].map((item, i) => (
+            <>
+              {i > 0 && <div class="check-sep"></div>}
+              <div class="check-row"><span class="ck">✓</span><p class="tx">{item}</p></div>
+            </>
+          ))}
+        </div>
+      </div>
+    </div>
+    <a class="btn-gold" href="/about/open-demat-account/" style="align-self:center">Start Investing</a>
+  </section>
+
+  <!-- ══ 7. BENEFITS & RISKS ════════════════════════════════════════ -->
+  <section class="section stack" id="sec-benrisk" style="background:var(--sec-tint);gap:48px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">NFO Benefits &amp; Risks</p>
+      <p class="sec-lead">Every investment carries a risk-reward profile. Here is a balanced view before you subscribe to any NFO — weigh both sides carefully before committing capital.</p>
+    </div>
+    <div class="row-2">
+      <div class="card">
+        <p class="card-h">Benefits</p>
+        <div class="check-list">
+          {nfoBenefits.map((item, i) => (
+            <>
+              {i > 0 && <div class="check-sep"></div>}
+              <div class="check-row"><span class="ck">✓</span><p class="tx">{item}</p></div>
+            </>
+          ))}
+        </div>
+      </div>
+      <div class="card risk-disc-card">
+        <p class="card-h" style="color:var(--olive-deep)">Risks to Understand</p>
+        <div class="check-list">
+          {nfoRisks.map((item, i) => (
+            <>
+              {i > 0 && <div class="check-sep"></div>}
+              <div class="check-row"><span class="ck" style="color:#c84444">✗</span><p class="tx">{item}</p></div>
+            </>
+          ))}
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ══ 7. NFO TAXATION ════════════════════════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          NFO <span class="text-[var(--color-brand)]">Taxation</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">NFOs are taxed identically to existing mutual funds — based on fund type and holding period.</p>
+  <!-- ══ 8. HOW TO EVALUATE ════════════════════════════════════════════ -->
+  <section class="section stack" id="sec-eval" style="background:var(--sec-light);gap:48px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">How to Evaluate an NFO Before Investing</p>
+      <p class="sec-lead">Since NFOs lack historical data, use this four-point framework from Shriram Financial Services before committing capital to any new fund offer.</p>
+    </div>
+    <div class="cat-grid cat-4">
+      {evalChecklist.map(e => (
+        <div class="cat risk-cat">
+          <span class="num-n" style="font-size:36px">{e.n}</span>
+          <h4>{e.label}</h4>
+          <p>{e.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ══ 9. NFO vs SIP ═════════════════════════════════════════════════ -->
+  <section class="section stack" id="sec-vs" style="background:var(--sec-tint);gap:48px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">NFO vs Existing Mutual Fund (SIP)</p>
+      <p class="sec-lead">Choosing between an NFO and an existing fund is one of the most common investor questions. This comparison will help you decide when an NFO genuinely adds value versus when an existing fund is the better choice.</p>
+    </div>
+    <div class="t-scroll">
+      <div class="table t3">
+        <div class="cell th"><p>Factor</p></div>
+        <div class="cell th"><p>NFO (New Fund)</p></div>
+        <div class="cell th"><p>Existing Fund (SIP)</p></div>
+        {vsRows.map(r => (
+          <>
+            <div class="cell tb"><p class="k">{r.feature}</p></div>
+            <div class="cell tb"><p class="v">{r.nfo}</p></div>
+            <div class="cell tb"><p class="v">{r.sip}</p></div>
+          </>
+        ))}
       </div>
-      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
-        <div class="overflow-x-auto">
-          <table class="w-full text-[15.5px]">
-            <thead>
-              <tr class="bg-[var(--color-dark-olive)]">
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Fund Type &amp; Holding</th>
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Tax Rate</th>
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Note</th>
-              </tr>
-            </thead>
-            <tbody>
-              {taxRows.map((r, i) => (
-                <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[#f8f6f1]'}>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">{r.type}</td>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-medium text-[var(--color-dark-olive)]">{r.rate}</td>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.note}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+    </div>
+  </section>
+
+  <!-- ══ 10. NFO TAXATION ══════════════════════════════════════════════ -->
+  <section class="section stack" id="sec-tax" style="background:var(--sec-light);gap:48px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">NFO Taxation</p>
+      <p class="sec-lead">NFO taxation follows the same rules as existing mutual funds of the same category. Tax rates depend on the fund type (equity vs debt) and your holding period from the date of unit allotment.</p>
+    </div>
+    <div class="t-scroll">
+      <div class="table t3">
+        <div class="cell th"><p>Fund Type &amp; Holding Period</p></div>
+        <div class="cell th"><p>Tax Rate</p></div>
+        <div class="cell th"><p>Notes</p></div>
+        {taxRows.map(r => (
+          <>
+            <div class="cell tb"><p class="k">{r.type}</p></div>
+            <div class="cell tb"><p class="v">{r.rate}</p></div>
+            <div class="cell tb"><p class="v">{r.note}</p></div>
+          </>
+        ))}
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--muted-2)">Tax rules are subject to change. Consult a SEBI-registered tax adviser for personalised tax planning on mutual fund investments.</p>
+  </section>
+
+  <!-- ══ 11. FAQ ═══════════════════════════════════════════════════════ -->
+  <section class="faq-wrap" style="background:var(--sec-tint)">
+    <div class="faq-cols">
+      <div class="faq-left">
+        <h2 class="faq-title">Frequently asked<br>questions.</h2>
+        <div class="faq-acc" role="list">
+          {faqs.map(f => (
+            <details class="faq-item" role="listitem">
+              <summary class="faq-sum">
+                <span class="qt">{f.q}</span>
+                <svg class="faq-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8" class="faq-h"/></svg>
+              </summary>
+              <div class="qa"><p>{f.a}</p></div>
+            </details>
+          ))}
+        </div>
+      </div>
+      <div class="faq-side">
+        <div class="usr" aria-hidden="true">
+          <svg viewBox="0 0 131 147" fill="none"><circle cx="65.5" cy="42" r="34" stroke="currentColor" stroke-width="2"/><path d="M4 147c0-34 27.6-61.5 61.5-61.5S127 113 127 147" stroke="currentColor" stroke-width="2"/></svg>
+        </div>
+        <div class="side-in">
+          <div class="side-tx">
+            <h4>Ready to Invest in NFOs?</h4>
+            <p>Get timely NFO alerts, fund analysis, and expert guidance — open your Shriram account and invest at ₹10/unit before the window closes.</p>
+          </div>
+          <a class="btn-gold" href="/about/open-demat-account/" style="align-self:flex-start">Start Investing</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ══ 8. NFO KEY FEATURES ══════════════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Key Features of <span class="text-[var(--color-brand)]">NFO</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">What makes an NFO structurally different from investing in an existing mutual fund.</p>
-      </div>
-      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {[
-          { label: '₹10 Per Unit', tag: 'Fixed Entry', desc: 'All investors buy at face value of ₹10 per unit — regardless of when they subscribe. This is NOT a discount; the fund has no NAV history.' },
-          { label: 'Max 30-Day Window', tag: 'SEBI Mandated', desc: 'SEBI restricts the NFO subscription period to a maximum of 30 days. Most NFOs run 15–21 days. After close, the fund is not open for new subscriptions (for close-ended funds).' },
-          { label: 'Clear Investment Mandate', tag: 'SID Filed', desc: 'Each NFO comes with a Scheme Information Document (SID) detailing the investment objective, benchmark, universe, and strategy. Read this before investing.' },
-          { label: 'Lock-in (for Close-ended)', tag: 'ELSS & FMPs', desc: 'Open-ended NFOs have no lock-in after launch. Close-ended NFOs (like FMPs) and ELSS NFOs have lock-ins of 3+ years. Check the SID carefully.' },
-        ].map((f, i) => (
-          <div class="equity-reveal product-card-light flex flex-col gap-3 p-[30px]" style={`animation-delay:${i*60}ms`}>
-            <span class="inline-flex w-fit rounded-full bg-[var(--color-brand)]/15 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-[var(--color-dark-olive)]">{f.tag}</span>
-            <h3 class="text-[19px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{f.label}</h3>
-            <p class="text-[13px] leading-relaxed text-[var(--color-muted)]">{f.desc}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ 9. HOW TO APPLY FOR NFO ════════════════════════════════════ -->
-  <section class="bg-[var(--color-n100)] py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          How to Apply for an <span class="text-[var(--color-brand)]">NFO — Step by Step</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Apply for an NFO through Shriram Financial Services in 4 simple steps — 100% digital.</p>
-      </div>
-      <div class="equity-reveal steps-grid mx-auto max-w-[1000px]">
-        {[
-          { n: '01', title: 'Log In to Shriram Platform', desc: 'Open the Shriram app or web platform. Navigate to Mutual Funds → NFOs.' },
-          { n: '02', title: 'Browse Active NFOs', desc: 'View the list of currently open NFOs. Click on a fund to read the SID, objective, and key details.' },
-          { n: '03', title: 'Enter Investment Amount', desc: 'Select the NFO, enter your investment amount (minimum as specified in SID), and choose growth or dividend option.' },
-          { n: '04', title: 'Pay & Confirm', desc: 'Complete payment via UPI or net banking from your linked bank account. Units are allotted at ₹10 after the NFO closes.' },
-        ].map((s, i) => (
-          <div class="equity-reveal flex flex-col gap-3 p-[30px]" style={`animation-delay:${i*80}ms`}>
-            <div class="text-[34px] font-bold leading-none text-[var(--color-brand)]">{s.n}</div>
-            <h4 class="text-[19px] font-medium text-[var(--color-ink)]" style="font-family:var(--font-display)">{s.title}</h4>
-            <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">{s.desc}</p>
-          </div>
-        ))}
-      </div>
-      <div class="equity-reveal mt-[40px] text-center">
-        <a href="/about/open-demat-account/" class="btn-primary">Apply for Active NFOs</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ 10. NFO BENEFITS & RISKS ═══════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          NFO Benefits <span class="text-[var(--color-brand)]">& Risks</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Weigh the potential upside against the structural risks before investing in any NFO.</p>
-      </div>
-      <div class="grid gap-6 lg:grid-cols-2">
-        <div>
-          <h3 class="equity-reveal mb-5 text-[22px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">Benefits</h3>
-          <div class="space-y-4">
-            {[
-              { label: 'Access to Unique Strategies', desc: 'NFOs can offer exposure to themes or sectors not covered by existing funds — e.g., a new AI-focused thematic fund or a specific international market.' },
-              { label: 'Early Entry in Promising Themes', desc: 'Investing at launch in a thematic NFO with long-term tailwinds (e.g., manufacturing, clean energy) can generate superior returns over 5–10 years.' },
-              { label: 'Portfolio Diversification', desc: 'A well-chosen NFO with a distinct mandate adds diversification beyond your existing fund portfolio, reducing correlated risk.' },
-            ].map((b, i) => (
-              <div class="equity-reveal flex gap-3 rounded-[12px] border border-[var(--color-n400)] p-[20px]" style={`animation-delay:${i*60}ms`}>
-                <span class="shrink-0 text-[var(--color-brand)] text-[20px]">✓</span>
-                <div>
-                  <h4 class="text-[15px] font-semibold text-[var(--color-ink)]">{b.label}</h4>
-                  <p class="mt-1 text-[13px] text-[var(--color-muted)]">{b.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div>
-          <h3 class="equity-reveal mb-5 text-[22px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">Risks</h3>
-          <div class="space-y-4">
-            {[
-              { n: '01', label: 'No Performance History', desc: 'You cannot evaluate past returns. The fund manager\'s strategy is untested in the specific context of this fund\'s mandate.' },
-              { n: '02', label: 'Liquidity Risk (Close-ended)', desc: 'Close-ended NFOs are listed on exchanges but may have thin trading volumes — selling before maturity at fair price can be difficult.' },
-              { n: '03', label: 'Fund Manager & Strategy Risk', desc: 'The SID describes intentions, not outcomes. A new fund has no real-world proof of its strategy execution.' },
-            ].map((r, i) => (
-              <div class="equity-reveal rounded-[14px] bg-[var(--color-dark-800)] p-[28px]" style={`animation-delay:${i*60}ms`}>
-                <div class="mb-3 text-[28px] font-bold leading-none text-[var(--color-brand)]">{r.n}</div>
-                <h4 class="mb-2 text-[17px] font-semibold text-white" style="font-family:var(--font-display)">{r.label}</h4>
-                <p class="text-[13px] leading-relaxed text-white/60">{r.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ 11. NFO RETURNS & PERFORMANCE ══════════════════════════════ -->
-  <section class="bg-[var(--color-n100)] py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          NFO Returns & <span class="text-[var(--color-brand)]">Performance Tracking</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Once listed, NFO performance can be tracked via NAV. Here's what to watch for post-listing.</p>
-      </div>
-      <div class="grid gap-5 sm:grid-cols-3">
-        {[
-          { label: 'NAV After NFO Launch', desc: 'After the NFO closes, the fund deploys capital. NAV moves daily based on portfolio performance — it may drop below ₹10 if initial purchases fall in value.', tag: 'Post-Launch' },
-          { label: 'Compare to Benchmark', desc: 'Track whether the fund beats its stated benchmark (e.g., Nifty 50 or Nifty 500). Consistent benchmark underperformance signals fund manager or strategy issues.', tag: 'Benchmark Check' },
-          { label: 'Expense Ratio Impact', desc: 'A high expense ratio (above 1.5% for equity) directly erodes returns over time. Compare the NFO TER vs similar existing funds before making a long-term commitment.', tag: 'Cost Matters' },
-        ].map((p, i) => (
-          <div class="equity-reveal product-card-light flex flex-col gap-3 p-[34px]" style={`animation-delay:${i*80}ms`}>
-            <span class="inline-flex w-fit rounded-full bg-[var(--color-brand)]/15 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-[var(--color-dark-olive)]">{p.tag}</span>
-            <h3 class="text-[19px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{p.label}</h3>
-            <p class="text-[13px] leading-relaxed text-[var(--color-muted)]">{p.desc}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ 12. NFO CALCULATORS & TOOLS ════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          NFO Calculators & <span class="text-[var(--color-brand)]">Tools</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Use our tools to estimate post-NFO returns and compare scenarios before subscribing.</p>
-      </div>
-      <div class="grid gap-5 sm:grid-cols-3">
-        {[
-          { title: 'NFO Returns Calculator', desc: 'Input investment amount, expected CAGR, and holding period to project future corpus. Compare NFO vs SIP scenarios side by side.', href: '/calculators/sip/', cta: 'Calculate Returns' },
-          { title: 'NFO vs SIP Calculator', desc: 'Compare lump sum NFO investment at ₹10 NAV vs monthly SIP in an established fund with proven returns.', href: '/calculators/sip/', cta: 'Compare Scenarios' },
-          { title: 'Tax Liability Calculator', desc: 'Estimate your STCG or LTCG tax on NFO units based on your holding period and gains. Plan your exit for optimal tax efficiency.', href: '/calculators/sip/', cta: 'Estimate Tax' },
-        ].map((c, i) => (
-          <div class="equity-reveal product-card-light flex flex-col gap-4 p-[34px]" style={`animation-delay:${i*80}ms`}>
-            <h3 class="text-[20px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{c.title}</h3>
-            <p class="text-[14px] leading-relaxed text-[var(--color-muted)] flex-1">{c.desc}</p>
-            <a href={c.href} class="inline-flex items-center text-[14px] font-semibold text-[var(--color-brand)] hover:underline">{c.cta} →</a>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ 13. FAQ ══════════════════════════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Frequently Asked <span class="text-[var(--color-brand)]">Questions</span>
-        </h2>
-      </div>
-      <div class="equity-reveal mx-auto max-w-[840px] border-t border-[var(--color-n400)]">
-        {faqs.map(item => (
-          <details class="eq-faq group border-b border-[var(--color-n400)]">
-            <summary class="flex cursor-pointer list-none items-center justify-between gap-5 py-[26px] px-2">
-              <span class="text-[18px] font-semibold text-[var(--color-ink)]">{item.q}</span>
-              <span class="shrink-0 text-[22px] leading-none text-[var(--color-brand)] transition-transform duration-300 group-open:rotate-45">+</span>
-            </summary>
-            <div class="overflow-hidden px-2 pb-0 text-[16px] leading-relaxed text-[var(--color-muted)] transition-all duration-300 group-open:pb-[28px]">
-              <p class="max-w-[680px]">{item.a}</p>
-            </div>
-          </details>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ 9. FINAL CTA ════════════════════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal overflow-hidden rounded-[22px] bg-[var(--color-dark-800)] px-[60px] py-[64px] text-center">
-        <h3 class="mx-auto max-w-[560px] text-[38px] font-bold leading-[1.12] text-white" style="font-family:var(--font-display)">Don't Miss the Next NFO Opportunity</h3>
-        <p class="mx-auto mt-[18px] max-w-[480px] text-[17px] leading-relaxed text-white/70">Browse live and upcoming NFOs on the Shriram platform. Expert analysis, zero commission on direct plans, and instant digital subscription.</p>
-        <div class="mt-[34px] flex flex-wrap justify-center gap-[14px]">
-          <a href="/about/open-demat-account/" class="btn-primary">Explore NFOs</a>
-          <a href="/about/support/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Talk to an RM</a>
-        </div>
+  <!-- ══ 12. FINAL CTA ════════════════════════════════════════════════ -->
+  <section class="cta-sec" style="background:var(--sec-light)">
+    <div class="cta-box">
+      <h2 class="cta-h">Invest in the <span class="g">Next NFO with Shriram</span></h2>
+      <p class="cta-sub">Timely NFO alerts · Expert analysis · ₹10/unit entry · SEBI-regulated · 40+ years of trust.</p>
+      <div class="cta-row">
+        <a class="btn-gold" href="/about/open-demat-account/">Open Account &amp; Invest</a>
+        <a class="btn-ghost-dark" href="/about/support/">Talk to an RM</a>
       </div>
     </div>
   </section>
@@ -424,42 +364,146 @@ const faqs = [
 </BaseLayout>
 
 <style>
-  .equity-reveal {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+  :root {
+    --sec-light: #fef8ee;
+    --sec-tint: #f6efe1;
+    --card: #fffdf8;
+    --card-border: #e1e0db;
+    --card-border-soft: rgba(28,28,22,.13);
+    --row-line: rgba(28,28,22,.08);
+    --olive-title: #2e3914;
+    --olive-head: #2d3813;
+    --olive-deep: #1b2010;
+    --ink: #1c1c16;
+    --ink-2: #46463c;
+    --ink-3: #595959;
+    --muted: #73736a;
+    --muted-2: #9a9a8e;
+    --gold-2: #f2b83f;
+    --gold-btn: #f3b83f;
+    --olive-ink: #2e3914;
+    --green: #009d58;
+    --pad: clamp(20px, 8vw, 144px);
+    --container-pad: 32px;
+    --section-y: 72px;
+    --cta-w: 220px;
   }
-  .equity-reveal.in-view { opacity: 1; transform: none; }
+  *, *::before, *::after { box-sizing: border-box; }
+  a { color: inherit; text-decoration: none; }
+  p { line-height: 1.5; }
 
-  .steps-grid { display: grid; grid-template-columns: repeat(2, 1fr); }
-  .steps-grid > * { border-right: 1px solid var(--color-n400); border-bottom: 1px solid var(--color-n400); }
-  .steps-grid > *:nth-child(2n) { border-right: 0; }
-  .steps-grid > *:nth-last-child(-n+2) { border-bottom: 0; }
-  @media (min-width: 1024px) {
-    .steps-grid { grid-template-columns: repeat(4, 1fr); }
-    .steps-grid > * { border-right: 1px solid var(--color-n400); border-bottom: 0; }
-    .steps-grid > *:last-child { border-right: 0; }
-  }
+  .section { padding: var(--section-y) var(--pad); min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; justify-content: center; }
+  .stack { display: flex; flex-direction: column; }
+  .sec-title { font-weight: 400; font-size: 40px; color: var(--olive-title); text-transform: capitalize; line-height: 1.5; }
+  .sec-lead  { font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.6; }
+  .card-h    { font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.5; }
+  .card-p    { font-weight: 400; font-size: 16px; color: var(--muted); line-height: 1.5; }
 
-  @media (prefers-reduced-motion: reduce) {
-    .equity-reveal { opacity: 1; transform: none; transition: none; }
-  }
+  .hero { padding: 0 var(--pad); display: flex; flex-direction: column; justify-content: center; overflow: hidden; background: radial-gradient(125% 210% at 100% -8%, #4f583b 0%, #363a2c 50%, #1d1d1d 100%); }
+  .hero-inner { padding: clamp(80px,12vw,140px) 0 clamp(48px,6vw,80px); display: flex; flex-direction: column; }
+  .hero h1   { font-weight: 500; font-size: 40px; color: #fff; line-height: 1.5; max-width: 860px; }
+  .hero h1 .g { color: var(--gold-2); }
+  .hero .lead { margin-top: 32px; font-size: 18px; line-height: 1.5; color: rgba(255,255,255,.74); max-width: 640px; }
+  .cta-row   { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .hero-feats { margin-top: 40px; }
+  .feats { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 16px; max-width: 760px; padding-top: 36px; border-top: 1px solid rgba(255,255,255,.16); }
+  .feat  { display: flex; gap: 10px; align-items: center; }
+  .feat .tk { color: var(--gold-2); font-weight: 500; font-size: 15px; width: 13px; }
+  .feat .lb { color: rgba(255,255,255,.9); font-weight: 500; font-size: 16px; line-height: 1.5; white-space: nowrap; }
+
+  .btn-gold { background: var(--gold-btn); height: 40px; width: var(--cta-w); border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; padding: 7px 20px; font-weight: 500; font-size: 12px; color: var(--olive-ink); white-space: nowrap; transition: opacity .2s; }
+  .btn-gold:hover { opacity: .88; }
+  .btn-ghost { height: 40px; border-radius: 9px; border: 1px solid rgba(255,255,255,.4); display: inline-flex; align-items: center; justify-content: center; padding: 7px 26px; font-weight: 600; font-size: 15px; color: #fff; transition: border-color .2s; }
+  .btn-ghost:hover { border-color: #fff; }
+  .btn-ghost-dark { height: 40px; border-radius: 4px; border: 1px solid rgba(27,32,16,.35); display: inline-flex; align-items: center; justify-content: center; padding: 7px 26px; font-weight: 500; font-size: 12px; color: var(--olive-deep); transition: border-color .2s; }
+  .btn-ghost-dark:hover { border-color: var(--olive-deep); }
+
+  .card { background: var(--card); border: 1px solid var(--card-border); border-radius: 24px; padding: var(--container-pad); display: flex; flex-direction: column; gap: 16px; }
+  .row-2 { display: flex; gap: 32px; align-items: stretch; }
+  .row-2 .card { flex: 1 0 0; min-width: 0; }
+  .risk-disc-card { border-color: rgba(200,60,60,.2); background: rgba(255,245,245,.6); }
+  .risk-disc-card .card-p { color: var(--ink-3); }
+
+  .cat-grid { border: 1px solid var(--card-border); border-radius: 24px; overflow: hidden; display: grid; background: var(--card); }
+  .cat-3 { grid-template-columns: repeat(3, 1fr); }
+  .cat-4 { grid-template-columns: repeat(4, 1fr); }
+  .cat { background: var(--card); padding: var(--container-pad); display: flex; flex-direction: column; gap: 12px; border-right: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border); }
+  .cat-4 .cat:nth-child(4n)  { border-right: 0; }
+  .cat-4 .cat:nth-child(n+5) { border-bottom: 0; }
+  .cat-4 .cat:last-child { border-right: 0; }
+  .cat h4 { font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.5; }
+  .cat p  { font-weight: 400; font-size: 16px; color: var(--muted); line-height: 1.5; }
+  .risk-cat h4 { color: var(--olive-deep); }
+  .metric-cat { gap: 8px; }
+  .metric-val { font-weight: 300; font-size: 52px; color: var(--gold-2); line-height: 1; display: block; }
+  .metric-cat h4 { font-size: 18px; color: var(--ink); }
+
+  .nfo-tag { display: inline-flex; width: fit-content; background: rgba(242,184,63,.18); border-radius: 100px; padding: 4px 12px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--olive-deep); }
+
+  .num-grid { display: grid; grid-template-columns: repeat(3, 1fr); background: var(--card); border: 1px solid var(--card-border); border-radius: 24px; overflow: hidden; }
+  .num-item { padding: var(--container-pad); display: flex; flex-direction: column; gap: 12px; border-right: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border); }
+  .num-item:nth-child(3n)        { border-right: 0; }
+  .num-item:nth-last-child(-n+3) { border-bottom: 0; }
+  .num-item:last-child           { border-right: 0; }
+  .num-n { font-weight: 400; font-size: 36px; color: var(--gold-2); line-height: 1; display: block; }
+  .num-item h4 { font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.4; }
+  .num-item p  { font-weight: 400; font-size: 15px; color: var(--ink-3); line-height: 1.5; }
+
+  .check-list { display: flex; flex-direction: column; gap: 20px; }
+  .check-row  { display: flex; gap: 14px; align-items: flex-start; }
+  .check-row .ck { color: var(--green); font-weight: 700; font-size: 15px; line-height: 25.5px; width: 13px; flex: none; }
+  .check-row .tx { flex: 1 0 0; min-width: 0; font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.5; }
+  .check-sep  { height: 1px; background: var(--row-line); width: 100%; }
+
+  .t-scroll { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .table    { background: var(--card); border-radius: 24px; overflow: hidden; display: grid; }
+  .t3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+  .cell { padding: 16px 24px; display: flex; align-items: center; justify-content: center; text-align: center; }
+  .cell p { flex: 1 0 0; min-width: 0; font-size: 16px; line-height: 1.5; overflow-wrap: break-word; }
+  .th { background: var(--olive-head); }
+  .th p { font-weight: 600; color: #fff; }
+  .tb { border-top: 1px solid var(--row-line); }
+  .tb .k { font-weight: 600; color: var(--ink); }
+  .tb .v { font-weight: 400; color: var(--ink-2); }
+
+  .faq-wrap { padding: 158px var(--pad); min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; justify-content: center; }
+  .faq-cols  { display: flex; gap: 48px; align-items: stretch; }
+  .faq-left  { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; gap: 48px; }
+  .faq-title { font-weight: 400; font-size: 40px; color: var(--olive-title); text-transform: capitalize; line-height: 1.5; white-space: nowrap; }
+  .faq-acc   { border-radius: 24px; overflow: hidden; display: flex; flex-direction: column; gap: 2px; width: 100%; }
+  .faq-item  { background: var(--card); list-style: none; }
+  .faq-sum   { display: flex; align-items: flex-start; justify-content: space-between; gap: 40px; padding: 24px; cursor: pointer; list-style: none; }
+  .faq-sum::-webkit-details-marker { display: none; }
+  .faq-item .qt { font-weight: 500; font-size: 14px; color: #333; line-height: 1.5; flex: 1; }
+  .faq-item[open] .qt { font-weight: 600; }
+  .faq-icon  { width: 16px; height: 16px; flex: none; color: #404040; margin-top: 2px; }
+  .faq-h     { transition: opacity .28s ease; }
+  .faq-item[open] .faq-h { opacity: 0; }
+  .qa { padding: 0 24px 20px; }
+  .qa p { font-weight: 400; font-size: 14px; color: #404040; line-height: 1.5; }
+  .faq-side { width: 464px; flex: none; background: var(--card); border: 1px solid var(--card-border); border-radius: 24px; padding: var(--container-pad); display: flex; flex-direction: column; gap: 40px; justify-content: flex-end; position: relative; overflow: hidden; }
+  .usr { position: absolute; left: var(--container-pad); top: 64px; width: 130.667px; height: 147px; opacity: .1; }
+  .usr svg { display: block; width: 100%; height: 100%; color: var(--olive-deep); }
+  .side-in  { display: flex; flex-direction: column; gap: 32px; position: relative; }
+  .side-tx  { display: flex; flex-direction: column; gap: 8px; color: #222320; }
+  .side-tx h4 { font-weight: 500; font-size: 20px; line-height: 28px; letter-spacing: -.45px; }
+  .side-tx p  { font-weight: 400; font-size: 14px; line-height: 22px; letter-spacing: -.15px; }
+
+  .cta-sec { padding: var(--section-y) var(--pad); }
+  .cta-box { border-radius: 22px; padding: 64px 60px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; text-align: center; background: var(--olive-deep); }
+  .cta-h   { font-weight: 400; font-size: 36px; color: #fff; line-height: 1.4; max-width: 640px; }
+  .cta-h .g { color: var(--gold-2); }
+  .cta-sub { font-size: 16px; color: rgba(255,255,255,.65); line-height: 1.5; }
+  .cta-box .cta-row { margin-top: 8px; }
+  .cta-box .btn-gold { width: auto; }
 </style>
 
 <script>
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        (e.target as HTMLElement).classList.add('in-view');
-        obs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.10 });
-  document.querySelectorAll('.equity-reveal').forEach(el => obs.observe(el));
-
-  document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(d => {
-    d.addEventListener('toggle', () => {
-      if (d.open) document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(o => { if (o !== d) o.removeAttribute('open'); });
+  document.querySelectorAll('.faq-acc').forEach(acc => {
+    acc.addEventListener('click', e => {
+      const item = e.target instanceof Element ? e.target.closest('details') : null;
+      if (!item) return;
+      acc.querySelectorAll('details[open]').forEach(d => { if (d !== item) d.removeAttribute('open'); });
     });
   });
 </script>

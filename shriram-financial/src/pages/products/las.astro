@@ -2,166 +2,475 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const benefits = [
-  { title: 'No Need to Sell Shares', desc: 'Pledge stocks as collateral without selling — shares stay in your demat account, earning dividends and bonus shares throughout the loan.' },
-  { title: 'High Loan Amount', desc: 'Borrow up to 50–60% of pledged share value. Large portfolios unlock significant liquidity without any asset liquidation.' },
-  { title: 'Flexible Overdraft', desc: 'Draw funds when needed, repay when convenient, and redraw again — pay interest only on the outstanding amount, not the total limit.' },
-  { title: 'Low Interest Rates', desc: 'LAS rates start at 10% p.a. — far below unsecured personal loans and credit cards, because your shares secure the lender.' },
-  { title: 'Continue Earning Benefits', desc: 'Dividends, bonus shares, and rights issues on pledged stocks are all credited to your demat account during the loan period.' },
-  { title: 'Digital Pledge Process', desc: 'Pledge creation is 100% online via CDSL/NSDL. No physical certificates or branch visits — done within minutes.' },
+  { label: 'No Need to Sell',           desc: 'Retain full ownership of your portfolio. Your shares remain pledged but you continue to hold them — you keep any dividends, bonuses, and rights through the loan tenure.' },
+  { label: 'High Loan Amount',          desc: 'Access up to 50% of your portfolio value (LTV) as an overdraft — and more as the portfolio grows. No ceiling on loan size beyond the approved LTV ratio.' },
+  { label: 'Flexible Overdraft Facility',desc: 'Funds disbursed as an overdraft — draw only what you need, repay anytime. Interest is charged only on the utilised amount, not the entire sanctioned limit.' },
+  { label: 'Competitive Interest Rates', desc: 'Since the loan is fully secured by your securities, interest rates are significantly lower than personal loans or credit cards — typically 10–12% p.a.' },
+  { label: 'Continue Earning Benefits',  desc: 'Dividends, bonus shares, and rights entitlements continue to accrue in your demat account even while the shares are pledged — full portfolio upside retained.' },
+  { label: 'Digital Pledge Process',    desc: 'Pledge securities digitally through CDSL/NSDL. No physical share certificates, no branch visits. The entire process is completed online within 24–48 hours.' },
+];
+
+const lasSteps = [
+  { n: '01', title: 'Valuation and Eligibility', desc: 'The lender values your portfolio using the SEBI-approved list of eligible scrips. BSE/NSE-listed equities, SGBs, ETFs, and select mid-cap stocks qualify. Penny stocks and suspended securities are excluded.' },
+  { n: '02', title: 'LTV Ratio Determined',      desc: 'Loan-to-Value ratio is set based on asset class and scrip category — up to 50% for large-cap equities, lower for mid/small-caps. Your overdraft limit is calculated from the LTV-adjusted portfolio value.' },
+  { n: '03', title: 'Marking a Lien via CDSL/NSDL', desc: "You authorise a pledge on your demat holdings digitally through the depository's TPIN/OTP mechanism. No share certificates are transferred — a lien is simply marked on your existing demat account." },
+  { n: '04', title: 'Repayment and Interest',    desc: 'Interest is charged daily on the utilised overdraft balance. You can repay in full or part at any time with no prepayment penalty. As the loan is repaid, the pledge is released proportionally.' },
 ];
 
 const eligibleSecurities = [
-  { type: 'BSE/NSE Listed Shares', ltv: '50–60%', example: 'NIFTY 50, NIFTY 100, large-cap stocks' },
-  { type: 'Mid-cap Stocks', ltv: '40–50%', example: 'NIFTY Midcap 150 constituents (lender-approved list)' },
-  { type: 'ETFs (Equity)', ltv: '50–60%', example: 'Nifty BeES, SBI ETF Nifty 50' },
-  { type: 'Sovereign Gold Bonds', ltv: '60–70%', example: 'RBI-issued SGBs held in demat form' },
+  { type: 'BSE/NSE Listed Large-Cap',     ltv: 'Up to 50%', examples: 'NIFTY 50, BSE 100 constituent stocks' },
+  { type: 'Mid-Cap Equities',             ltv: 'Up to 40%', examples: 'NIFTY Midcap 150 constituents (SEBI approved)' },
+  { type: 'Exchange-Traded Funds (ETFs)', ltv: 'Up to 50%', examples: 'NIFTY 50 ETF, Liquid BeES, Gold ETF' },
+  { type: 'Sovereign Gold Bonds (SGBs)',  ltv: 'Up to 50%', examples: 'RBI-issued SGBs held in demat form' },
 ];
 
-const steps = [
-  { n: '01', title: 'Submit Pledge Request', desc: 'Select the stocks you want to pledge from your demat account. Shriram initiates a pledge request to CDSL/NSDL on your behalf.' },
-  { n: '02', title: 'Authorise via CDSL/NSDL', desc: 'You receive a TPIN-based authorisation request on your registered mobile and email. One-time approval authorises the pledge.' },
-  { n: '03', title: 'Pledge Confirmed & Limit Set', desc: 'Once CDSL/NSDL confirms the pledge mark, your loan limit is activated based on the LTV of pledged shares.' },
-  { n: '04', title: 'Withdraw & Repay Anytime', desc: 'Draw funds to your bank account. Repay whenever convenient. The pledge is released when the loan is fully repaid.' },
+const interestRows = [
+  { item: 'Applicable Interest Rate', detail: '10% – 12% p.a. (reduces with higher loan utilisation)' },
+  { item: 'Interest Calculation',     detail: 'Daily reducing balance on the utilised overdraft amount' },
+  { item: 'Processing Fee',           detail: '0.25% – 0.50% of the sanctioned limit (one-time)' },
+  { item: 'Prepayment Penalty',       detail: 'Nil — repay any amount at any time without charges' },
+  { item: 'Annual Renewal Fee',       detail: '0.10% – 0.25% of the limit on annual renewal' },
+];
+
+const ltvRows = [
+  { scenario: '₹20 lakh portfolio, 50% LTV', limit: '₹10 lakh overdraft', safety: 'Margin call if portfolio falls below ₹16.67 lakh at full utilisation' },
+  { scenario: '₹50 lakh portfolio, 50% LTV', limit: '₹25 lakh overdraft', safety: 'Margin call threshold at ₹31.25 lakh under full utilisation' },
+  { scenario: '₹10 lakh mid-cap, 40% LTV',   limit: '₹4 lakh overdraft',  safety: 'Margin call threshold at ₹6.67 lakh portfolio value' },
+];
+
+const eligibility = [
+  'Indian resident individual aged 21 years and above',
+  'Active demat account with CDSL or NSDL',
+  'Holdings in SEBI-approved eligible scrips (minimum value ₹1 lakh)',
+  'Valid PAN card linked to demat account',
+  'Bank account in the borrower name for overdraft credit and repayment',
+];
+
+const documents = [
+  'PAN Card — mandatory for all loan applications',
+  'Aadhaar Card or other government-issued photo ID',
+  'Demat Account statement (latest 3-month holding statement)',
+  'Cancelled cheque or latest bank account statement',
+  'Address proof if different from Aadhaar address',
+];
+
+const applySteps = [
+  { n: '01', title: 'Apply Online or via App',      desc: 'Visit shriramfinancialservices.com or the Shriram mobile app. Fill in your name, mobile number, city, and demat details to begin.' },
+  { n: '02', title: 'eKYC and Document Upload',      desc: 'Complete eKYC using Aadhaar OTP or DigiLocker. Upload your PAN, demat statement, and bank details — all digital, no physical documents required.' },
+  { n: '03', title: 'Portfolio Assessment',          desc: 'Our system fetches your current holdings and calculates the eligible LTV-adjusted overdraft limit. You receive a detailed breakdown of each scrip within minutes.' },
+  { n: '04', title: 'Digital Pledge via CDSL/NSDL',  desc: 'Authorise the pledge using your demat TPIN or Aadhaar OTP. A lien is marked on your selected holdings — shares remain in your demat account throughout.' },
+  { n: '05', title: 'Overdraft Activated',           desc: 'Your overdraft account is activated and funds credited within 24–48 hours. Draw only what you need — interest starts only on the amount drawn.' },
+];
+
+const vsRows = [
+  { feature: 'Interest Rate',     las: '10–12% p.a. (secured)',        personal: '14–18% p.a. (unsecured)', other: '8–13% p.a. (property-backed)' },
+  { feature: 'Collateral',        las: 'Shares / ETFs / SGBs',         personal: 'None',                    other: 'Property / home' },
+  { feature: 'Disbursal Time',    las: '24–48 hours',                   personal: '2–5 business days',       other: '7–15 business days' },
+  { feature: 'Prepayment',        las: 'Nil penalty',                   personal: '2–4% penalty',            other: 'Nil to 2% depending on lender' },
+  { feature: 'Portfolio Upside',  las: 'Fully retained',                personal: 'N/A',                     other: 'N/A' },
+  { feature: 'Best For',          las: 'Investors with equity portfolio needing short-term liquidity', personal: 'Short-term needs, no collateral', other: 'Long-term needs against property' },
+];
+
+const useCases = [
+  { label: 'Emergency Liquidity',       desc: 'Cover medical emergencies, urgent travel, or unexpected costs without disrupting your long-term equity portfolio — retain all portfolio upside.' },
+  { label: 'Business Cash-Flow Bridge', desc: 'Bridge short-term working capital gaps or fund business expansion without selling profitable equity positions at an inopportune time.' },
+  { label: 'IPO and NFO Subscription',  desc: 'Fund IPO or NFO applications during the subscription window. Repay within days once allotment is received without selling existing holdings.' },
+  { label: 'Derivatives Margin',        desc: 'Use LAS overdraft to fund F&O margin requirements while keeping your long equity book intact for the medium term.' },
+  { label: 'Education Fees',            desc: 'Pay term fees or overseas tuition without liquidating long-term equity holdings that have significant unrealised appreciation.' },
+  { label: 'Real Estate Down Payment',  desc: 'Bridge a property down payment gap temporarily — repay once the primary home loan is disbursed or property registration is complete.' },
+];
+
+const taxRows = [
+  { item: 'Interest Paid on LAS',            treatment: 'Business income borrowers: deductible as business expense. Personal borrowers: no deduction under standard income tax rules.' },
+  { item: 'Pledged Shares — Capital Gains',  treatment: 'No capital gains tax on pledging. Tax arises only when shares are actually sold — a pledge alone is not a taxable event.' },
+  { item: 'Forced Sale by Lender',           treatment: 'If the lender sells pledged shares to recover dues after a margin call, capital gains tax applies on that sale in the hands of the borrower.' },
+  { item: 'Dividend on Pledged Shares',      treatment: 'Dividends received during the pledge period are fully taxable as income. They are not offset against the loan interest automatically.' },
+];
+
+const regulations = [
+  'SEBI Guidelines cap LTV at 50% of portfolio value for listed equities — no lender can offer more regardless of portfolio size or quality.',
+  'RBI Circular (2020) requires separate demat and bank accounts for pledge and loan: the lender cannot hold the borrower demat account directly.',
+  'Securities pledged under LAS cannot be sold by the lender without first issuing a margin call notice and giving the borrower a reasonable window to respond.',
+  'All LAS transactions must flow through the SEBI-mandated CDSL/NSDL pledge mechanism — informal pledges or physical share transfers are non-compliant.',
+  'LAS lenders must be RBI-registered NBFCs, scheduled commercial banks, or SEBI-registered entities — verify registration before signing any agreement.',
 ];
 
 const faqs = [
-  { q: 'What is Loan Against Stocks (LAS)?', a: 'LAS is a secured overdraft where you pledge equity shares or ETFs in your demat account. CDSL/NSDL marks a lien on the pledged securities — you retain ownership and dividends, but cannot sell until the lien is lifted on full repayment.' },
-  { q: 'Which stocks are eligible for pledging?', a: 'Lenders accept NIFTY 50/100 constituents, large-cap and mid-cap exchange-listed shares, and ETFs from their approved list. Penny stocks, illiquid shares, and stocks under special surveillance are ineligible.' },
-  { q: 'Do I still receive dividends on pledged shares?', a: 'Yes — pledging transfers only a lien, not ownership. Dividends, bonus shares, rights, and stock splits are credited to your demat account throughout the loan period.' },
-  { q: 'What happens if the share price falls sharply?', a: 'If pledged value drops and the loan exceeds the LTV (typically 50–60%), Shriram issues a margin call. You must pledge more shares, deposit cash, or repay part of the loan. The system alerts you well before forced action is triggered.' },
-  { q: 'How is LAS different from Margin Trading Facility (MTF)?', a: 'MTF is specifically for buying more securities on margin in your trading account — the bought shares serve as collateral. LAS is a general-purpose credit line against existing demat holdings, disbursed to your bank account for any use, typically at lower rates and longer tenors.' },
+  { q: 'What is a Loan Against Shares (LAS)?',
+    a: 'LAS is a secured overdraft facility where you pledge your equity shares, ETFs, or SGBs as collateral to borrow money. You retain ownership and all portfolio benefits — the lender only marks a lien on your holdings. You get up to 50% of the portfolio value as an overdraft and interest is charged only on the amount you draw.' },
+  { q: 'What is the LTV ratio in LAS?',
+    a: 'The Loan-to-Value (LTV) ratio is the percentage of your pledged portfolio that you can borrow. SEBI caps LTV at 50% for listed equities. A portfolio worth ₹20 lakh gives a maximum overdraft of ₹10 lakh. Mid-cap stocks may have a lower LTV of 30–40% depending on the scrip.' },
+  { q: 'What happens if my portfolio value falls — margin call?',
+    a: 'If your pledged portfolio value drops and the loan-to-market-value ratio breaches the threshold (typically 80% of the loan), the lender issues a margin call. You can respond by pledging additional securities, depositing cash, or partially repaying the overdraft. If unaddressed, the lender may sell pledged shares.' },
+  { q: 'Can I still receive dividends on pledged shares?',
+    a: 'Yes. Pledging shares does not transfer ownership. Dividends, bonus shares, rights entitlements, and all other corporate actions continue to accrue in your demat account throughout the pledge period.' },
+  { q: 'How quickly is LAS disbursed?',
+    a: 'After eKYC, document verification, and CDSL/NSDL digital pledge authorisation, the overdraft is typically activated and credited within 24–48 hours. No physical documents or branch visits are required.' },
 ];
 ---
 
 <BaseLayout
   title="Loan Against Shares India — Pledge Stocks for Loan LAS | Shriram"
-  description="Pledge your equity shares for instant liquidity without selling. Low rates from 10.5% p.a., flexible overdraft, dividends continue. Apply for LAS with Shriram today."
+  description="Unlock liquidity from your equity portfolio without selling a single share. Get up to 50% LTV against listed shares, ETFs, and SGBs with Shriram Financial Services."
 >
 
-  <!-- ══ 1. HERO ═══════════════════════════════════════════════════ -->
-  <section class="relative overflow-hidden bg-[var(--color-dark-800)]">
-    <div class="pointer-events-none absolute -right-40 -top-40 h-[560px] w-[560px] rounded-full bg-[var(--color-brand)]/10 blur-3xl"></div>
-    <div class="pointer-events-none absolute -bottom-32 left-0 h-80 w-80 rounded-full bg-[var(--color-brand)]/5 blur-3xl"></div>
-    <div class="site-wrap relative py-[120px]">
-      <p class="equity-reveal text-[14px] font-medium tracking-[.04em] text-[var(--color-brand)]">Loan Against Stocks</p>
-      <h1 class="equity-reveal mt-[22px] max-w-[880px] text-[clamp(32px,4vw,52px)] font-bold leading-[1.06] text-white" style="font-family:var(--font-display)">
-        Borrow Against Your Share <span class="text-[var(--color-brand)]">Portfolio Instantly</span>
-      </h1>
-      <p class="equity-reveal mt-[26px] max-w-[600px] text-[18px] leading-relaxed text-white/70">
-        Pledge your equity holdings and unlock a flexible credit line — without selling a single share. Your stocks stay, your dividends continue, and you get the funds you need.
-      </p>
-      <div class="equity-reveal mt-[38px] flex flex-wrap gap-[14px]">
-        <a href="/about/open-demat-account/" class="btn-primary">Get Started</a>
-        <a href="/about/support/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Talk to RM</a>
+  <!-- ══ 1. HERO ══════════════════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <h1>Loan Against Shares — <span class="g">Unlock Liquidity Without Selling a Single Share</span></h1>
+          <p class="lead">Pledge your BSE/NSE-listed equities, ETFs, or SGBs as collateral and access a flexible overdraft — all while retaining full ownership, dividends, and portfolio upside.</p>
+          <div class="hero-metrics">
+            <div class="metric"><span class="mv">10–12%</span><span class="ml">Interest p.a.</span></div>
+            <div class="m-div"></div>
+            <div class="metric"><span class="mv">50%</span><span class="ml">LTV (SEBI Cap)</span></div>
+            <div class="m-div"></div>
+            <div class="metric"><span class="mv">24–48 hrs</span><span class="ml">Disbursal</span></div>
+            <div class="m-div"></div>
+            <div class="metric"><span class="mv">5,000+</span><span class="ml">Approved Scrips</span></div>
+          </div>
+          <div class="trust-row">
+            {['SEBI-Regulated Lender', 'RBI Guidelines Compliant', 'Shriram Group 25+ Years', 'Digital-First Process'].map(b => (
+              <div class="trust-badge"><span class="tc">✓</span><span>{b}</span></div>
+            ))}
+          </div>
+        </div>
+        <div class="hero-form-wrap">
+          <form class="hero-form" id="las-form" autocomplete="off">
+            <p class="form-title">Request a Callback</p>
+            <p class="form-sub">Our LAS specialist will call within 2 hours (9 AM – 6 PM IST).</p>
+            <div class="field-wrap">
+              <label for="hf-name" class="fld-label">Full Name</label>
+              <input id="hf-name" name="name" type="text" placeholder="Your full name" class="fld" required />
+            </div>
+            <div class="field-wrap">
+              <label for="hf-mobile" class="fld-label">Mobile Number</label>
+              <input id="hf-mobile" name="mobile" type="tel" placeholder="10-digit mobile number" class="fld" required pattern="[6-9][0-9]{9}" maxlength="10" />
+            </div>
+            <div class="field-wrap">
+              <label for="hf-city" class="fld-label">City</label>
+              <input id="hf-city" name="city" type="text" placeholder="Your city" class="fld" required />
+            </div>
+            <button type="submit" class="btn-gold" style="width:100%;border:none;cursor:pointer">Request a Callback</button>
+            <p class="form-disc" id="hf-status"></p>
+          </form>
+        </div>
       </div>
-      <div class="equity-reveal mt-[54px] flex flex-wrap gap-x-9 gap-y-3 border-t border-white/15 pt-9">
-        {['✓ No Share Sale', '✓ Keep Dividends', '✓ Flexible Overdraft', '✓ Low Interest Rates'].map(f => (
-          <span class="text-[15px] font-medium text-white/90">
-            <span class="mr-2 text-[var(--color-brand)]">{f.slice(0,1)}</span>{f.slice(1)}
-          </span>
+    </div>
+  </section>
+
+  <!-- ══ 2. WHAT IS LAS ═══════════════════════════════════════════════ -->
+  <section class="section stack" id="sec-what" style="background:var(--sec-light);gap:48px;min-height:0">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">What Is Loan Against Shares (LAS)?</p>
+      <p class="sec-lead">A Loan Against Shares is a secured overdraft facility regulated by SEBI and RBI that allows you to borrow money by pledging your equity shares, ETFs, or Sovereign Gold Bonds as collateral — without selling them. You continue to benefit from dividends, bonus shares, and portfolio appreciation throughout the loan tenure.</p>
+      <p class="sec-lead">Unlike a personal loan, LAS is fully secured — which is why interest rates are far lower (10–12% vs 16–18% for unsecured loans). The lender marks a lien on your demat account through CDSL/NSDL. No physical transfer of shares takes place. When you repay, the lien is released and your portfolio is fully restored.</p>
+    </div>
+  </section>
+
+  <!-- ══ 3. HOW LAS WORKS ══════════════════════════════════════════════ -->
+  <section class="section stack" id="sec-how" style="background:var(--sec-tint);gap:48px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">How LAS Works — Step by Step</p>
+      <p class="sec-lead">From valuation to disbursal — understand the four core mechanisms that define a Loan Against Shares facility.</p>
+    </div>
+    <div class="num-grid num-2">
+      {lasSteps.map(s => (
+        <div class="num-item">
+          <span class="num-n">{s.n}</span>
+          <h4>{s.title}</h4>
+          <p>{s.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ══ 4. KEY FEATURES ══════════════════════════════════════════════ -->
+  <section class="section stack" id="sec-features" style="background:var(--sec-light);gap:48px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Key Features and Benefits of LAS</p>
+      <p class="sec-lead">Six key advantages that make a Loan Against Shares the most capital-efficient short-term borrowing option for equity investors.</p>
+    </div>
+    <div class="cat-grid cat-3">
+      {benefits.map(b => (
+        <div class="cat">
+          <h4>{b.label}</h4>
+          <p>{b.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ══ 5. ELIGIBLE SECURITIES ═══════════════════════════════════════ -->
+  <section class="section stack" id="sec-eligible" style="background:var(--sec-tint);gap:48px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Eligible Securities and Approved Scrip List</p>
+      <p class="sec-lead">Not all securities qualify for LAS. SEBI mandates that only exchange-listed, liquid, and independently-valued securities can be pledged. Below are the four main asset classes accepted, with their respective LTV ratios.</p>
+    </div>
+    <div class="t-scroll">
+      <div class="table t3">
+        <div class="cell th"><p>Security Type</p></div>
+        <div class="cell th"><p>LTV (Max)</p></div>
+        <div class="cell th"><p>Examples</p></div>
+        {eligibleSecurities.map(r => (
+          <>
+            <div class="cell tb"><p class="k">{r.type}</p></div>
+            <div class="cell tb ltv-cell"><p class="v">{r.ltv}</p></div>
+            <div class="cell tb"><p class="v">{r.examples}</p></div>
+          </>
+        ))}
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--muted-2)">Penny stocks, suspended securities, unlisted shares, and Futures &amp; Options positions are not eligible for pledging under LAS.</p>
+  </section>
+
+  <!-- ══ 6. INTEREST RATES ═════════════════════════════════════════════ -->
+  <section class="section stack" id="sec-rates" style="background:var(--sec-light);gap:48px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Interest Rates and Fees</p>
+      <p class="sec-lead">LAS is one of the lowest-cost secured borrowing products available to retail equity investors in India. Interest is charged only on the utilised overdraft balance — not the full sanctioned limit.</p>
+    </div>
+    <div class="t-scroll">
+      <div class="table t2">
+        <div class="cell th"><p>Fee / Rate Item</p></div>
+        <div class="cell th"><p>Current Rate / Detail</p></div>
+        {interestRows.map(r => (
+          <>
+            <div class="cell tb"><p class="k">{r.item}</p></div>
+            <div class="cell tb"><p class="v">{r.detail}</p></div>
+          </>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- ══ 2. WHY CHOOSE LAS ══════════════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto grid max-w-[1000px] items-start gap-[72px] lg:grid-cols-[5fr_7fr]">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Why Choose <span class="text-[var(--color-brand)]">LAS?</span>
-        </h2>
-        <div class="space-y-5 text-[17px] leading-relaxed text-[var(--color-muted)]">
-          <p>Loan Against Stocks lets you access the value locked in your share portfolio without triggering a sale event or paying capital gains tax.</p>
-          <p>A CDSL/NSDL pledge marks a lien on your shares — you retain all shareholder rights including dividends, bonuses, and voting rights throughout the loan tenure.</p>
+  <!-- ══ 7. LTV + MARGIN CALL ═════════════════════════════════════════ -->
+  <section class="section stack" id="sec-ltv" style="background:var(--sec-tint);gap:48px;min-height:0">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">LTV Ratio and Margin Call</p>
+      <p class="sec-lead">The Loan-to-Value ratio determines how much you can borrow. SEBI caps LTV at 50% for listed equities. A margin call is triggered when your portfolio falls below the required collateral threshold — understanding this mechanism helps you avoid forced sales.</p>
+    </div>
+    <div class="row-2">
+      <div class="card">
+        <p class="card-h">LTV Safety Buffer Table</p>
+        <div class="t-scroll">
+          <div class="table t3" style="border-radius:12px;margin-top:8px">
+            <div class="cell th"><p>Portfolio Value</p></div>
+            <div class="cell th"><p>Overdraft Limit</p></div>
+            <div class="cell th"><p>Margin Call Threshold</p></div>
+            {ltvRows.map(r => (
+              <>
+                <div class="cell tb"><p class="k" style="font-size:13px">{r.scenario}</p></div>
+                <div class="cell tb"><p class="v">{r.limit}</p></div>
+                <div class="cell tb"><p class="v" style="font-size:13px">{r.safety}</p></div>
+              </>
+            ))}
+          </div>
         </div>
       </div>
-      <div class="equity-reveal mx-auto mt-[76px] max-w-[1000px] border-t border-[var(--color-n400)] pt-[60px]">
-        <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {benefits.map((b, i) => (
-            <div class="product-card-light flex flex-col gap-3 p-[28px]" style={`animation-delay:${i*60}ms`}>
-              <h3 class="text-[16px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{b.title}</h3>
-              <p class="text-[13px] leading-relaxed text-[var(--color-muted)]">{b.desc}</p>
-            </div>
+      <div class="card">
+        <p class="card-h">How to Handle a Margin Call</p>
+        <div class="check-list" style="margin-top:4px">
+          {[
+            'Pledge additional eligible securities to increase total collateral value',
+            'Deposit cash to partially repay the overdraft outstanding',
+            'Sell some pledged securities yourself via your broker to reduce the loan balance',
+          ].map((item, i) => (
+            <>
+              {i > 0 && <div class="check-sep"></div>}
+              <div class="check-row"><span class="ck">✓</span><p class="tx">{item}</p></div>
+            </>
+          ))}
+        </div>
+        <p class="card-h" style="margin-top:8px;font-size:16px">5 Tips to Avoid a Margin Call</p>
+        <div class="check-list" style="margin-top:4px">
+          {[
+            'Keep loan utilisation below 70% of the sanctioned limit',
+            'Maintain a 20–25% buffer above the minimum collateral requirement',
+            'Avoid pledging highly volatile mid-cap stocks as sole collateral',
+            'Set price alerts on pledged scrips to monitor portfolio value in real time',
+            'Review and rebalance pledged holdings quarterly — remove underperformers proactively',
+          ].map((item, i) => (
+            <>
+              {i > 0 && <div class="check-sep"></div>}
+              <div class="check-row"><span class="ck">✓</span><p class="tx">{item}</p></div>
+            </>
           ))}
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ══ 3. ELIGIBLE SECURITIES & LTV ══════════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Eligible Securities &amp; <span class="text-[var(--color-brand)]">LTV Ratios</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Loan limits depend on the type and market value of securities pledged. Only exchange-listed, lender-approved shares qualify.</p>
-      </div>
-      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
-        <div class="overflow-x-auto"><table class="w-full text-[15.5px]">
-          <thead><tr class="bg-[var(--color-dark-olive)]"><th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Security Type</th><th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">LTV Ratio</th><th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Examples</th></tr></thead>
-          <tbody>{eligibleSecurities.map((r,i) => (<tr class={i%2===0?'bg-white':'bg-[#f8f6f1]'}><td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">{r.type}</td><td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-bold text-[var(--color-brand)]">{r.ltv}</td><td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.example}</td></tr>))}</tbody>
-        </table></div>
-      </div>
+  <!-- ══ 8. ELIGIBILITY + DOCUMENTS ══════════════════════════════════ -->
+  <section class="section stack" id="sec-elig" style="background:var(--sec-light);gap:48px;min-height:0">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Eligibility Criteria and Documents</p>
+      <p class="sec-lead">LAS eligibility is straightforward — most investors with a standard demat account holding listed equities qualify within minutes of submitting their application.</p>
     </div>
-  </section>
-
-  <!-- ══ 4. HOW IT WORKS ════════════════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          How to Get a Loan <span class="text-[var(--color-brand)]">Against Stocks</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Four steps from pledge request to funds in your bank account.</p>
-      </div>
-      <div class="equity-reveal steps-grid overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
-        {steps.map(s => (
-          <div class="px-[30px] py-[34px]">
-            <div class="mb-[22px] font-display text-[34px] font-normal leading-none text-[var(--color-brand)]">{s.n}</div>
-            <h4 class="mb-[10px] text-[19px] font-medium leading-[1.25] text-[var(--color-ink)]" style="font-family:var(--font-display)">{s.title}</h4>
-            <p class="text-[14.5px] leading-relaxed text-[var(--color-muted)]">{s.desc}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ 5. FAQ ════════════════════════════════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Frequently Asked <span class="text-[var(--color-brand)]">Questions</span>
-        </h2>
-      </div>
-      <div class="equity-reveal mx-auto max-w-[840px] border-t border-[var(--color-n400)]">
-        {faqs.map(item => (
-          <details class="eq-faq group border-b border-[var(--color-n400)]">
-            <summary class="flex cursor-pointer list-none items-center justify-between gap-5 py-[26px] px-2">
-              <span class="text-[18px] font-semibold text-[var(--color-ink)]">{item.q}</span>
-              <span class="shrink-0 text-[22px] leading-none text-[var(--color-brand)] transition-transform duration-300 group-open:rotate-45">+</span>
-            </summary>
-            <div class="overflow-hidden px-2 pb-0 text-[16px] leading-relaxed text-[var(--color-muted)] transition-all duration-300 group-open:pb-[28px]">
-              <p class="max-w-[680px]">{item.a}</p>
-            </div>
-          </details>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ 6. FINAL CTA ══════════════════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal overflow-hidden rounded-[22px] bg-[var(--color-dark-800)] px-[60px] py-[64px] text-center">
-        <h3 class="mx-auto max-w-[560px] text-[38px] font-bold leading-[1.12] text-white" style="font-family:var(--font-display)">Make Your Portfolio Work Harder</h3>
-        <p class="mx-auto mt-[18px] max-w-[480px] text-[17px] leading-relaxed text-white/70">Access funds without selling your shares. Keep your portfolio intact and growing while drawing the capital you need.</p>
-        <div class="mt-[34px] flex flex-wrap justify-center gap-[14px]">
-          <a href="/about/open-demat-account/" class="btn-primary">Apply Now</a>
-          <a href="/about/support/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Talk to an RM</a>
+    <div class="row-2">
+      <div class="card">
+        <p class="card-h">Eligibility Criteria</p>
+        <div class="check-list" style="margin-top:4px">
+          {eligibility.map((item, i) => (
+            <>
+              {i > 0 && <div class="check-sep"></div>}
+              <div class="check-row"><span class="ck">✓</span><p class="tx">{item}</p></div>
+            </>
+          ))}
         </div>
+      </div>
+      <div class="card">
+        <p class="card-h">Documents Required</p>
+        <div class="check-list" style="margin-top:4px">
+          {documents.map((item, i) => (
+            <>
+              {i > 0 && <div class="check-sep"></div>}
+              <div class="check-row"><span class="ck">✓</span><p class="tx">{item}</p></div>
+            </>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 9. HOW TO APPLY ══════════════════════════════════════════════ -->
+  <section class="section stack" id="sec-apply" style="background:var(--sec-tint);gap:48px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">How to Apply for LAS</p>
+      <p class="sec-lead">Five steps from initial application to overdraft activation. The entire process is digital and takes 24–48 hours from submission to fund disbursal.</p>
+    </div>
+    <div class="num-grid">
+      {applySteps.map(s => (
+        <div class="num-item">
+          <span class="num-n">{s.n}</span>
+          <h4>{s.title}</h4>
+          <p>{s.desc}</p>
+        </div>
+      ))}
+    </div>
+    <a class="btn-gold" href="#las-form" style="align-self:center">Apply Now</a>
+  </section>
+
+  <!-- ══ 10. LAS vs OTHER LOANS ════════════════════════════════════════ -->
+  <section class="section stack" id="sec-vs" style="background:var(--sec-light);gap:48px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">LAS vs Other Loan Types</p>
+      <p class="sec-lead">How does LAS compare to personal loans, home loans, and Loan Against Property? Choose the right facility based on your need, collateral, and cost sensitivity.</p>
+    </div>
+    <div class="t-scroll">
+      <div class="table t4">
+        <div class="cell th"><p>Factor</p></div>
+        <div class="cell th"><p>Loan Against Shares</p></div>
+        <div class="cell th"><p>Personal Loan</p></div>
+        <div class="cell th"><p>Home Loan / LAP</p></div>
+        {vsRows.map(r => (
+          <>
+            <div class="cell tb"><p class="k">{r.feature}</p></div>
+            <div class="cell tb las-col"><p class="v">{r.las}</p></div>
+            <div class="cell tb"><p class="v">{r.personal}</p></div>
+            <div class="cell tb"><p class="v">{r.other}</p></div>
+          </>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 11. USE CASES ════════════════════════════════════════════════ -->
+  <section class="section stack" id="sec-use" style="background:var(--sec-tint);gap:48px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Top Use Cases for LAS</p>
+      <p class="sec-lead">LAS is uniquely suited for investors who hold significant equity wealth but need short-term cash without disrupting long-term wealth creation goals.</p>
+    </div>
+    <div class="cat-grid cat-3">
+      {useCases.map(u => (
+        <div class="cat">
+          <h4>{u.label}</h4>
+          <p>{u.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ══ 12. TAX IMPLICATIONS ══════════════════════════════════════════ -->
+  <section class="section stack" id="sec-tax" style="background:var(--sec-light);gap:48px;min-height:0">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Tax Implications of LAS</p>
+      <p class="sec-lead">Pledging shares does not trigger a tax event in India. Capital gains tax applies only when shares are actually sold — not when pledged. Here are the key tax considerations every LAS borrower should know.</p>
+    </div>
+    <div class="t-scroll">
+      <div class="table t2">
+        <div class="cell th"><p>Tax Item</p></div>
+        <div class="cell th"><p>Treatment</p></div>
+        {taxRows.map(r => (
+          <>
+            <div class="cell tb"><p class="k">{r.item}</p></div>
+            <div class="cell tb"><p class="v">{r.treatment}</p></div>
+          </>
+        ))}
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--muted-2)">Tax rules are subject to change. Consult a SEBI-registered tax adviser for personalised guidance on LAS taxation.</p>
+  </section>
+
+  <!-- ══ 13. SEBI & RBI REGULATIONS ════════════════════════════════════ -->
+  <section class="section stack" id="sec-reg" style="background:var(--sec-tint);gap:48px;min-height:0">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">RBI &amp; SEBI Regulatory Framework</p>
+      <p class="sec-lead">LAS is one of the most tightly regulated lending products in India. Before you apply, understand the five key regulatory rules that govern every Loan Against Shares transaction.</p>
+    </div>
+    <div class="card" style="gap:32px">
+      <div class="check-list">
+        {regulations.map((item, i) => (
+          <>
+            {i > 0 && <div class="check-sep"></div>}
+            <div class="check-row"><span class="ck">✓</span><p class="tx">{item}</p></div>
+          </>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 14. FAQ ═══════════════════════════════════════════════════════ -->
+  <section class="faq-wrap" style="background:var(--sec-light)">
+    <div class="faq-cols">
+      <div class="faq-left">
+        <h2 class="faq-title">Frequently asked<br>questions.</h2>
+        <div class="faq-acc" role="list">
+          {faqs.map(f => (
+            <details class="faq-item" role="listitem">
+              <summary class="faq-sum">
+                <span class="qt">{f.q}</span>
+                <svg class="faq-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8" class="faq-h"/></svg>
+              </summary>
+              <div class="qa"><p>{f.a}</p></div>
+            </details>
+          ))}
+        </div>
+      </div>
+      <div class="faq-side">
+        <div class="usr" aria-hidden="true">
+          <svg viewBox="0 0 131 147" fill="none"><circle cx="65.5" cy="42" r="34" stroke="currentColor" stroke-width="2"/><path d="M4 147c0-34 27.6-61.5 61.5-61.5S127 113 127 147" stroke="currentColor" stroke-width="2"/></svg>
+        </div>
+        <div class="side-in">
+          <div class="side-tx">
+            <h4>Ready to Apply for LAS?</h4>
+            <p>Get your overdraft activated in 24–48 hours. Full digital process — from pledge to disbursal, no branch visit needed.</p>
+          </div>
+          <a class="btn-gold" href="#las-form" style="align-self:flex-start">Request a Callback</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 15. FINAL CTA ════════════════════════════════════════════════ -->
+  <section class="cta-sec" style="background:var(--sec-tint)">
+    <div class="cta-box">
+      <h2 class="cta-h">Unlock Liquidity from Your Portfolio — <span class="g">Without Selling a Share</span></h2>
+      <p class="cta-sub">10–12% p.a. &middot; Up to 50% LTV &middot; 24–48 hr disbursal &middot; 5,000+ approved scrips &middot; Digital pledge via CDSL/NSDL &middot; Shriram Group 25+ years trust.</p>
+      <div class="cta-row">
+        <a class="btn-gold" href="#las-form">Apply for LAS</a>
+        <a class="btn-ghost-dark" href="/about/support/">Talk to an Expert</a>
       </div>
     </div>
   </section>
@@ -169,42 +478,199 @@ const faqs = [
 </BaseLayout>
 
 <style>
-  .equity-reveal {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+  :root {
+    --sec-light: #fef8ee;
+    --sec-tint: #f6efe1;
+    --card: #fffdf8;
+    --card-border: #e1e0db;
+    --row-line: rgba(28,28,22,.08);
+    --olive-title: #2e3914;
+    --olive-head: #2d3813;
+    --olive-deep: #1b2010;
+    --ink: #1c1c16;
+    --ink-2: #46463c;
+    --ink-3: #595959;
+    --muted: #73736a;
+    --muted-2: #9a9a8e;
+    --gold-2: #f2b83f;
+    --gold-btn: #f3b83f;
+    --olive-ink: #2e3914;
+    --green: #009d58;
+    --pad: clamp(20px, 8vw, 144px);
+    --container-pad: 32px;
+    --section-y: 72px;
+    --cta-w: 220px;
   }
-  .equity-reveal.in-view { opacity: 1; transform: none; }
+  *, *::before, *::after { box-sizing: border-box; }
+  a { color: inherit; text-decoration: none; }
+  p { line-height: 1.5; }
 
-  .steps-grid { display: grid; grid-template-columns: repeat(2, 1fr); }
-  .steps-grid > * { border-right: 1px solid var(--color-n400); border-bottom: 1px solid var(--color-n400); }
-  .steps-grid > *:nth-child(2n) { border-right: 0; }
-  .steps-grid > *:nth-last-child(-n+2) { border-bottom: 0; }
-  @media (min-width: 1024px) {
-    .steps-grid { grid-template-columns: repeat(4, 1fr); }
-    .steps-grid > * { border-right: 1px solid var(--color-n400); border-bottom: 0; }
-    .steps-grid > *:last-child { border-right: 0; }
-  }
+  .section { padding: var(--section-y) var(--pad); min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; justify-content: center; }
+  .stack { display: flex; flex-direction: column; }
+  .sec-title { font-weight: 400; font-size: 40px; color: var(--olive-title); text-transform: capitalize; line-height: 1.5; }
+  .sec-lead  { font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.6; }
+  .card-h    { font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.5; }
+  .card-p    { font-weight: 400; font-size: 16px; color: var(--muted); line-height: 1.5; }
 
-  @media (prefers-reduced-motion: reduce) {
-    .equity-reveal { opacity: 1; transform: none; transition: none; }
-  }
+  /* ── HERO ─────────────────────────────────────── */
+  .hero { padding: 0 var(--pad); display: flex; flex-direction: column; justify-content: center; background: radial-gradient(125% 210% at 100% -8%, #4f583b 0%, #363a2c 50%, #1d1d1d 100%); }
+  .hero-inner { padding: clamp(80px,12vw,140px) 0 clamp(48px,6vw,80px); }
+  .hero-grid { display: flex; gap: 48px; align-items: flex-start; }
+  .hero-copy { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; }
+  .hero h1   { font-weight: 500; font-size: 40px; color: #fff; line-height: 1.5; max-width: 640px; }
+  .hero h1 .g { color: var(--gold-2); }
+  .hero .lead { margin-top: 24px; font-size: 16px; line-height: 1.5; color: rgba(255,255,255,.74); max-width: 540px; }
+  .hero-metrics { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 0; padding: 28px 0; border-top: 1px solid rgba(255,255,255,.14); border-bottom: 1px solid rgba(255,255,255,.14); }
+  .metric  { display: flex; flex-direction: column; gap: 4px; padding: 0 28px 0 0; }
+  .mv { font-weight: 600; font-size: 26px; color: var(--gold-2); line-height: 1.2; }
+  .ml { font-size: 13px; color: rgba(255,255,255,.65); }
+  .m-div { width: 1px; background: rgba(255,255,255,.16); margin: 4px 28px 4px 0; }
+  .trust-row { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; }
+  .trust-badge { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14); border-radius: 100px; padding: 6px 14px; font-size: 12px; font-weight: 500; color: rgba(255,255,255,.85); }
+  .tc { color: var(--gold-2); font-weight: 700; }
+
+  /* ── HERO FORM ────────────────────────────────── */
+  .hero-form-wrap { flex: none; width: 360px; }
+  .hero-form { background: var(--card); border-radius: 20px; padding: 28px; display: flex; flex-direction: column; gap: 16px; }
+  .form-title { font-weight: 600; font-size: 20px; color: var(--ink); line-height: 1.3; }
+  .form-sub   { font-size: 13px; color: var(--muted); line-height: 1.4; margin-top: -4px; }
+  .field-wrap { display: flex; flex-direction: column; gap: 6px; }
+  .fld-label  { font-size: 12px; font-weight: 600; color: var(--ink-2); letter-spacing: .02em; }
+  .fld { height: 40px; border: 1px solid var(--card-border); border-radius: 8px; padding: 0 12px; font-size: 14px; color: var(--ink); background: #fff; outline: none; transition: border-color .2s; }
+  .fld:focus  { border-color: var(--olive-deep); }
+  .form-disc  { font-size: 12px; color: var(--muted); min-height: 16px; }
+
+  /* ── BUTTONS ──────────────────────────────────── */
+  .btn-gold { background: var(--gold-btn); height: 40px; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; padding: 7px 20px; font-weight: 500; font-size: 12px; color: var(--olive-ink); white-space: nowrap; transition: opacity .2s; }
+  .btn-gold:hover { opacity: .88; }
+  .btn-ghost-dark { height: 40px; border-radius: 4px; border: 1px solid rgba(27,32,16,.35); display: inline-flex; align-items: center; justify-content: center; padding: 7px 26px; font-weight: 500; font-size: 12px; color: var(--olive-deep); transition: border-color .2s; }
+  .btn-ghost-dark:hover { border-color: var(--olive-deep); }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+
+  /* ── CARDS ────────────────────────────────────── */
+  .card { background: var(--card); border: 1px solid var(--card-border); border-radius: 24px; padding: var(--container-pad); display: flex; flex-direction: column; gap: 16px; }
+  .row-2 { display: flex; gap: 32px; align-items: stretch; }
+  .row-2 .card { flex: 1 0 0; min-width: 0; }
+
+  /* ── CAT GRID ─────────────────────────────────── */
+  .cat-grid { border: 1px solid var(--card-border); border-radius: 24px; overflow: hidden; display: grid; background: var(--card); }
+  .cat-3 { grid-template-columns: repeat(3, 1fr); }
+  .cat-4 { grid-template-columns: repeat(4, 1fr); }
+  .cat { background: var(--card); padding: var(--container-pad); display: flex; flex-direction: column; gap: 12px; border-right: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border); }
+  .cat-3 .cat:nth-child(3n)  { border-right: 0; }
+  .cat-3 .cat:nth-child(n+4) { border-bottom: 0; }
+  .cat-3 .cat:last-child     { border-right: 0; }
+  .cat h4 { font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.5; }
+  .cat p  { font-weight: 400; font-size: 16px; color: var(--muted); line-height: 1.5; }
+
+  /* ── NUM GRID ─────────────────────────────────── */
+  .num-grid { display: grid; grid-template-columns: repeat(3, 1fr); background: var(--card); border: 1px solid var(--card-border); border-radius: 24px; overflow: hidden; }
+  .num-2    { grid-template-columns: repeat(2, 1fr); }
+  .num-item { padding: var(--container-pad); display: flex; flex-direction: column; gap: 12px; border-right: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border); }
+  .num-grid:not(.num-2) .num-item:nth-child(3n)        { border-right: 0; }
+  .num-grid:not(.num-2) .num-item:nth-last-child(-n+3) { border-bottom: 0; }
+  .num-2 .num-item:nth-child(2n)         { border-right: 0; }
+  .num-2 .num-item:nth-last-child(-n+2)  { border-bottom: 0; }
+  .num-item:last-child { border-right: 0; }
+  .num-n { font-weight: 400; font-size: 36px; color: var(--gold-2); line-height: 1; display: block; }
+  .num-item h4 { font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.4; }
+  .num-item p  { font-weight: 400; font-size: 15px; color: var(--ink-3); line-height: 1.5; }
+
+  /* ── CHECK LIST ───────────────────────────────── */
+  .check-list { display: flex; flex-direction: column; gap: 20px; }
+  .check-row  { display: flex; gap: 14px; align-items: flex-start; }
+  .check-row .ck { color: var(--green); font-weight: 700; font-size: 15px; line-height: 25.5px; width: 13px; flex: none; }
+  .check-row .tx { flex: 1 0 0; min-width: 0; font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.5; }
+  .check-sep  { height: 1px; background: var(--row-line); width: 100%; }
+
+  /* ── TABLES ───────────────────────────────────── */
+  .t-scroll { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .table    { background: var(--card); border-radius: 24px; overflow: hidden; display: grid; }
+  .t2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .t3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+  .t4 { grid-template-columns: repeat(4, minmax(0,1fr)); }
+  .cell { padding: 16px 24px; display: flex; align-items: center; justify-content: center; text-align: center; }
+  .cell p { flex: 1 0 0; min-width: 0; font-size: 16px; line-height: 1.5; overflow-wrap: break-word; }
+  .th { background: var(--olive-head); }
+  .th p { font-weight: 600; color: #fff; }
+  .tb { border-top: 1px solid var(--row-line); }
+  .tb .k { font-weight: 600; color: var(--ink); }
+  .tb .v { font-weight: 400; color: var(--ink-2); }
+  .ltv-cell .v { font-weight: 700; color: var(--green); }
+  .las-col .v  { font-weight: 600; color: var(--olive-deep); }
+
+  /* ── FAQ ──────────────────────────────────────── */
+  .faq-wrap { padding: 158px var(--pad); min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; justify-content: center; }
+  .faq-cols  { display: flex; gap: 48px; align-items: stretch; }
+  .faq-left  { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; gap: 48px; }
+  .faq-title { font-weight: 400; font-size: 40px; color: var(--olive-title); text-transform: capitalize; line-height: 1.5; white-space: nowrap; }
+  .faq-acc   { border-radius: 24px; overflow: hidden; display: flex; flex-direction: column; gap: 2px; width: 100%; }
+  .faq-item  { background: var(--card); list-style: none; }
+  .faq-sum   { display: flex; align-items: flex-start; justify-content: space-between; gap: 40px; padding: 24px; cursor: pointer; list-style: none; }
+  .faq-sum::-webkit-details-marker { display: none; }
+  .faq-item .qt { font-weight: 500; font-size: 14px; color: #333; line-height: 1.5; flex: 1; }
+  .faq-item[open] .qt { font-weight: 600; }
+  .faq-icon  { width: 16px; height: 16px; flex: none; color: #404040; margin-top: 2px; }
+  .faq-h     { transition: opacity .28s ease; }
+  .faq-item[open] .faq-h { opacity: 0; }
+  .qa { padding: 0 24px 20px; }
+  .qa p { font-weight: 400; font-size: 14px; color: #404040; line-height: 1.5; }
+  .faq-side { width: 464px; flex: none; background: var(--card); border: 1px solid var(--card-border); border-radius: 24px; padding: var(--container-pad); display: flex; flex-direction: column; gap: 40px; justify-content: flex-end; position: relative; overflow: hidden; }
+  .usr { position: absolute; left: var(--container-pad); top: 64px; width: 130.667px; height: 147px; opacity: .1; }
+  .usr svg { display: block; width: 100%; height: 100%; color: var(--olive-deep); }
+  .side-in  { display: flex; flex-direction: column; gap: 32px; position: relative; }
+  .side-tx  { display: flex; flex-direction: column; gap: 8px; color: #222320; }
+  .side-tx h4 { font-weight: 500; font-size: 20px; line-height: 28px; letter-spacing: -.45px; }
+  .side-tx p  { font-weight: 400; font-size: 14px; line-height: 22px; letter-spacing: -.15px; }
+
+  /* ── CTA SECTION ──────────────────────────────── */
+  .cta-sec { padding: var(--section-y) var(--pad); }
+  .cta-box { border-radius: 22px; padding: 64px 60px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; text-align: center; background: var(--olive-deep); }
+  .cta-h   { font-weight: 400; font-size: 36px; color: #fff; line-height: 1.4; max-width: 680px; }
+  .cta-h .g { color: var(--gold-2); }
+  .cta-sub { font-size: 16px; color: rgba(255,255,255,.65); line-height: 1.5; }
+  .cta-box .cta-row { margin-top: 8px; }
+  .cta-box .btn-gold { width: auto; }
 </style>
 
 <script>
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        (e.target as HTMLElement).classList.add('in-view');
-        obs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.10 });
-  document.querySelectorAll('.equity-reveal').forEach(el => obs.observe(el));
-
-  document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(d => {
-    d.addEventListener('toggle', () => {
-      if (d.open) document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(o => { if (o !== d) o.removeAttribute('open'); });
+  document.querySelectorAll('.faq-acc').forEach(acc => {
+    acc.addEventListener('click', e => {
+      const item = e.target instanceof Element ? e.target.closest('details') : null;
+      if (!item) return;
+      acc.querySelectorAll('details[open]').forEach(d => { if (d !== item) d.removeAttribute('open'); });
     });
   });
+
+  const form = document.getElementById('las-form') as HTMLFormElement | null;
+  const status = document.getElementById('hf-status');
+  if (form && status) {
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+      const data = new FormData(form);
+      try {
+        const res = await fetch('/api/partner-lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: data.get('name'), mobile: data.get('mobile'), city: data.get('city'), product: 'Loan Against Shares (LAS)' }),
+        });
+        if (res.ok) {
+          status.textContent = 'Thank you! Our LAS specialist will call you within 2 hours.';
+          status.style.color = '#009d58';
+          form.reset();
+        } else {
+          throw new Error('server');
+        }
+      } catch {
+        status.textContent = 'Something went wrong. Please call us directly or try again.';
+        status.style.color = '#c84444';
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Request a Callback';
+      }
+    });
+  }
 </script>
