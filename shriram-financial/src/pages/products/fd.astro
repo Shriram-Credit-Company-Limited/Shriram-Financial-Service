@@ -56,8 +56,55 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     </div>
   </section>
 
-  <!-- ══ S3. HOW FIXED DEPOSITS WORK ══════════════════════════════════ -->
+  <!-- ══ S2b. FD vs SAVINGS ACCOUNT vs RD ═════════════════════════════ -->
   <section class="bg-[#f8f6f1] py-[104px]">
+    <div class="site-wrap">
+      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
+        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
+          FD vs Savings Account <span class="text-[var(--color-brand)]">vs Recurring Deposit</span>
+        </h2>
+        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">
+          Choose the right savings instrument — FDs, savings accounts, and recurring deposits serve different financial goals.
+        </p>
+      </div>
+      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
+        <div class="overflow-x-auto">
+          <table class="w-full text-[14.5px]">
+            <thead>
+              <tr class="bg-[var(--color-dark-olive)]">
+                <th class="px-[22px] py-[16px] text-left text-[13px] font-semibold text-white">Feature</th>
+                <th class="px-[22px] py-[16px] text-left text-[13px] font-semibold text-[var(--color-brand)]">Fixed Deposit (FD)</th>
+                <th class="px-[22px] py-[16px] text-left text-[13px] font-semibold text-white/80">Savings Account</th>
+                <th class="px-[22px] py-[16px] text-left text-[13px] font-semibold text-white/80">Recurring Deposit (RD)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { feature: 'Investment Type', fd: 'Lump sum deposit', savings: 'Any-time deposit/withdraw', rd: 'Fixed monthly installments' },
+                { feature: 'Interest Rate (p.a.)', fd: '6.5–9.4% (fixed at deposit)', savings: '2.5–7% (variable)', rd: '5.5–8% (fixed at opening)' },
+                { feature: 'Liquidity', fd: 'Low — penalty on early exit', savings: 'High — withdraw anytime', rd: 'Low — penalty on premature closure' },
+                { feature: 'Minimum Deposit', fd: '₹1,000 (varies by bank)', savings: '₹0–₹10,000 (MAB)', rd: '₹100/month' },
+                { feature: 'Tenure', fd: '7 days – 10 years', savings: 'No tenure — ongoing', rd: '6 months – 10 years' },
+                { feature: 'DICGC Insurance', fd: 'Up to ₹5 lakh', savings: 'Up to ₹5 lakh', rd: 'Up to ₹5 lakh' },
+                { feature: 'Tax on Returns', fd: 'TDS on interest > ₹40K/yr', savings: 'TDS on interest > ₹10K/yr', rd: 'TDS on maturity interest' },
+                { feature: 'Best For', fd: 'Lump sum, fixed-term goals', savings: 'Daily expenses, emergency fund', rd: 'Monthly savers, disciplined saving' },
+              ].map((r, i) => (
+                <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[#f8f6f1]'}>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[22px] py-[14px] font-semibold text-[var(--color-ink)]">{r.feature}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[22px] py-[14px] font-medium text-[var(--color-brand-deep)]">{r.fd}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[22px] py-[14px] text-[var(--color-muted)]">{r.savings}</td>
+                  <td class="border-t border-[var(--color-n400)]/50 px-[22px] py-[14px] text-[var(--color-muted)]">{r.rd}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ S3. HOW FIXED DEPOSITS WORK ══════════════════════════════════ -->
+  <section class="bg-white py-[104px]">
     <div class="site-wrap">
       <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
         <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
@@ -82,7 +129,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   </section>
 
   <!-- ══ S4. FD INTEREST RATES — CURRENT RATES 2025 ════════════════════ -->
-  <section class="bg-white py-[104px]">
+  <section class="bg-[#f8f6f1] py-[104px]">
     <div class="site-wrap">
       <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
         <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
@@ -128,7 +175,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   </section>
 
   <!-- ══ S5. TYPES OF FIXED DEPOSITS ══════════════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-[104px]">
+  <section class="bg-white py-[104px]">
     <div class="site-wrap">
       <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
         <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
@@ -171,7 +218,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   </section>
 
   <!-- ══ S6. FD INTEREST CALCULATOR ═══════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
+  <section class="bg-[#f8f6f1] py-[104px]">
     <div class="site-wrap">
       <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
         <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
@@ -202,7 +249,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   </section>
 
   <!-- ══ S7. FD BENEFITS & FEATURES ═══════════════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-[104px]">
+  <section class="bg-white py-[104px]">
     <div class="site-wrap">
       <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
         <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
@@ -226,7 +273,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   </section>
 
   <!-- ══ S8. PREMATURE WITHDRAWAL & LOAN AGAINST FD ════════════════════ -->
-  <section class="bg-white py-[104px]">
+  <section class="bg-[#f8f6f1] py-[104px]">
     <div class="site-wrap">
       <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
         <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
@@ -247,7 +294,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   </section>
 
   <!-- ══ S9. HOW TO OPEN A FIXED DEPOSIT ONLINE ════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-[104px]">
+  <section class="bg-white py-[104px]">
     <div class="site-wrap">
       <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
         <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
@@ -272,7 +319,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   </section>
 
   <!-- ══ S10. FAQs — FIXED DEPOSIT INDIA ══════════════════════════════ -->
-  <section class="bg-white py-[104px]">
+  <section class="bg-[#f8f6f1] py-[104px]">
     <div class="site-wrap">
       <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
         <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
