@@ -11,76 +11,76 @@ const benefits = [
 ];
 
 const eligibleFunds = [
-  { type: 'Equity Mutual Funds', ltv: '50–60%', example: 'Large-cap, mid-cap, flexi-cap, ELSS funds' },
-  { type: 'Debt Mutual Funds', ltv: '70–80%', example: 'Liquid funds, short-term bond funds, gilt funds' },
+  { type: 'Equity Mutual Funds',     ltv: '50–60%', example: 'Large-cap, mid-cap, flexi-cap, ELSS funds' },
+  { type: 'Debt Mutual Funds',       ltv: '70–80%', example: 'Liquid funds, short-term bond funds, gilt funds' },
   { type: 'Hybrid / Balanced Funds', ltv: '55–65%', example: 'Balanced advantage, aggressive hybrid funds' },
-  { type: 'Index Funds / ETFs', ltv: '50–60%', example: 'NIFTY 50 index funds, SENSEX ETFs' },
+  { type: 'Index Funds / ETFs',      ltv: '50–60%', example: 'NIFTY 50 index funds, SENSEX ETFs' },
 ];
 
 const interestRates = [
-  { item: 'Interest Rate', rate: '9.5% – 11% p.a.', note: 'Reducing balance; varies by LTV ratio and fund type' },
-  { item: 'Processing Fee', rate: '0.5% – 1%', note: 'One-time, calculated on sanctioned credit limit' },
-  { item: 'Stamp Duty', rate: 'As applicable', note: 'Per state regulations on loan agreement' },
-  { item: 'Margin Call Trigger', rate: 'LTV breach', note: 'Issued when portfolio value drops below required LTV threshold' },
-  { item: 'Foreclosure Charges', rate: 'Nil', note: 'No penalty after initial 3-month lock-in period' },
+  { item: 'Interest Rate',        rate: '9.5% – 11% p.a.', note: 'Reducing balance; varies by LTV ratio and fund type' },
+  { item: 'Processing Fee',       rate: '0.5% – 1%',        note: 'One-time, calculated on sanctioned credit limit' },
+  { item: 'Stamp Duty',           rate: 'As applicable',     note: 'Per state regulations on loan agreement' },
+  { item: 'Margin Call Trigger',  rate: 'LTV breach',        note: 'Issued when portfolio value drops below required LTV threshold' },
+  { item: 'Foreclosure Charges',  rate: 'Nil',               note: 'No penalty after initial 3-month lock-in period' },
 ];
 
 const vsRows = [
-  { feature: 'Interest Rate', lamf: '9.5–11% p.a.', personal: '10.5–24% p.a.', sell: 'N/A — no loan' },
-  { feature: 'Processing Time', lamf: 'Same day', personal: '2–7 days', sell: 'T+3 settlement' },
-  { feature: 'Portfolio Impact', lamf: 'Units pledged, stay invested', personal: 'No portfolio impact', sell: 'Units redeemed permanently' },
-  { feature: 'SIP Continuity', lamf: 'Yes — uninterrupted', personal: 'Yes — unaffected', sell: 'No — units gone' },
-  { feature: 'Capital Gains Tax', lamf: 'No tax event', personal: 'No tax event', sell: 'STCG / LTCG applicable' },
-  { feature: 'Repayment Flexibility', lamf: 'Overdraft — repay anytime', personal: 'Fixed monthly EMIs', sell: 'No repayment needed' },
-  { feature: 'Future NAV Growth', lamf: 'Retained on pledged units', personal: 'Unrelated', sell: 'Lost — units sold' },
-  { feature: 'Credit Score Impact', lamf: 'Minimal (secured)', personal: 'Moderate (unsecured)', sell: 'None' },
+  { feature: 'Interest Rate',         lamf: '9.5–11% p.a.',                  personal: '10.5–24% p.a.',       sell: 'N/A — no loan' },
+  { feature: 'Processing Time',       lamf: 'Same day',                       personal: '2–7 days',            sell: 'T+3 settlement' },
+  { feature: 'Portfolio Impact',      lamf: 'Units pledged, stay invested',   personal: 'No portfolio impact', sell: 'Units redeemed permanently' },
+  { feature: 'SIP Continuity',        lamf: 'Yes — uninterrupted',            personal: 'Yes — unaffected',    sell: 'No — units gone' },
+  { feature: 'Capital Gains Tax',     lamf: 'No tax event',                   personal: 'No tax event',        sell: 'STCG / LTCG applicable' },
+  { feature: 'Repayment Flexibility', lamf: 'Overdraft — repay anytime',      personal: 'Fixed monthly EMIs',  sell: 'No repayment needed' },
+  { feature: 'Future NAV Growth',     lamf: 'Retained on pledged units',      personal: 'Unrelated',           sell: 'Lost — units sold' },
+  { feature: 'Credit Score Impact',   lamf: 'Minimal (secured)',              personal: 'Moderate (unsecured)',sell: 'None' },
 ];
 
 const steps = [
   { n: '01', title: 'Link Your Mutual Fund Holdings', desc: 'Connect your existing mutual fund portfolio to your Shriram account. Folios held across AMCs are visible in one dashboard.' },
-  { n: '02', title: 'Select Units to Pledge', desc: 'Choose the fund(s) you want to pledge. The system calculates your eligible loan amount (LTV) based on current NAV.' },
-  { n: '03', title: 'Submit Pledge Request', desc: 'Submit the pledge digitally — the AMC registers the lien on your units with the RTA. No physical forms required.' },
-  { n: '04', title: 'Receive Loan in Your Account', desc: 'Once the pledge is confirmed, funds are credited to your linked bank account. Draw as little or as much as you need.' },
+  { n: '02', title: 'Select Units to Pledge',         desc: 'Choose the fund(s) you want to pledge. The system calculates your eligible loan amount (LTV) based on current NAV.' },
+  { n: '03', title: 'Submit Pledge Request',           desc: 'Submit the pledge digitally — the AMC registers the lien on your units with the RTA. No physical forms required.' },
+  { n: '04', title: 'Receive Loan in Your Account',   desc: 'Once the pledge is confirmed, funds are credited to your linked bank account. Draw as little or as much as you need.' },
 ];
 
 const eligibility = [
-  { point: 'Indian resident — individual, HUF, or company' },
-  { point: 'Age 18 years and above with valid KYC (Aadhaar + PAN)' },
-  { point: 'Mutual fund units held in demat or folio form' },
-  { point: 'Minimum portfolio value of ₹50,000 in eligible funds' },
-  { point: 'Units must be from SEBI-approved eligible fund list' },
-  { point: 'Demat account linked with Shriram Financial Services' },
+  'Indian resident — individual, HUF, or company',
+  'Age 18 years and above with valid KYC (Aadhaar + PAN)',
+  'Mutual fund units held in demat or folio form',
+  'Minimum portfolio value of ₹50,000 in eligible funds',
+  'Units must be from SEBI-approved eligible fund list',
+  'Demat account linked with Shriram Financial Services',
 ];
 
 const documents = [
-  { doc: 'PAN Card', purpose: 'Identity and income tax verification' },
-  { doc: 'Aadhaar Card', purpose: 'KYC and address proof (e-KYC supported)' },
-  { doc: 'Bank Account Details', purpose: 'For loan disbursement and repayments' },
-  { doc: 'Mutual Fund Statement', purpose: 'Portfolio verification for eligible pledgeable units' },
+  { doc: 'PAN Card',                purpose: 'Identity and income tax verification' },
+  { doc: 'Aadhaar Card',            purpose: 'KYC and address proof (e-KYC supported)' },
+  { doc: 'Bank Account Details',    purpose: 'For loan disbursement and repayments' },
+  { doc: 'Mutual Fund Statement',   purpose: 'Portfolio verification for eligible pledgeable units' },
 ];
 
 const useCases = [
-  { title: 'Medical Emergency', desc: 'Cover unexpected hospitalisation costs immediately without disturbing long-term investments.' },
-  { title: 'Home Renovation', desc: 'Fund repairs or upgrades at low interest — no property mortgage or CIBIL score dependency.' },
-  { title: 'Business Working Capital', desc: 'Bridge short-term cash flow gaps without disrupting business operations or your investment portfolio.' },
-  { title: "Child's Education", desc: 'Pay school, college, or overseas education fees without redeeming your SIP corpus mid-goal.' },
-  { title: 'Bridge Loan', desc: 'Get liquidity while waiting for FDs to mature, a property sale to close, or salary credit.' },
-  { title: 'Opportunity Fund', desc: 'Seize a time-sensitive investment — IPO, property deal — without liquidating existing positions.' },
+  { title: 'Medical Emergency',         desc: 'Cover unexpected hospitalisation costs immediately without disturbing long-term investments.' },
+  { title: 'Home Renovation',           desc: 'Fund repairs or upgrades at low interest — no property mortgage or CIBIL score dependency.' },
+  { title: 'Business Working Capital',  desc: 'Bridge short-term cash flow gaps without disrupting business operations or your investment portfolio.' },
+  { title: "Child's Education",         desc: 'Pay school, college, or overseas education fees without redeeming your SIP corpus mid-goal.' },
+  { title: 'Bridge Loan',               desc: 'Get liquidity while waiting for FDs to mature, a property sale to close, or salary credit.' },
+  { title: 'Opportunity Fund',          desc: 'Seize a time-sensitive investment — IPO, property deal — without liquidating existing positions.' },
 ];
 
 const risks = [
   { title: 'NAV Decline & Margin Call', desc: 'If the market falls and your portfolio value drops below the required LTV threshold, we issue a margin call — you must add collateral or repay a portion.' },
-  { title: 'Interest Accumulation', desc: 'Running the overdraft for extended periods without repayment increases total interest costs. Plan repayments to minimise the interest outgo over time.' },
-  { title: 'Forced Liquidation Risk', desc: 'In extreme cases where a margin call goes unmet, the lender can sell pledged units. This triggers capital gains tax and permanently removes units from your portfolio.' },
-  { title: 'Eligible Fund Restrictions', desc: 'Not all mutual funds qualify for LAMF. Sectoral funds, close-ended schemes, and some NFOs may be excluded from the eligible fund list.' },
+  { title: 'Interest Accumulation',     desc: 'Running the overdraft for extended periods without repayment increases total interest costs. Plan repayments to minimise the interest outgo over time.' },
+  { title: 'Forced Liquidation Risk',   desc: 'In extreme cases where a margin call goes unmet, the lender can sell pledged units. This triggers capital gains tax and permanently removes units from your portfolio.' },
+  { title: 'Eligible Fund Restrictions',desc: 'Not all mutual funds qualify for LAMF. Sectoral funds, close-ended schemes, and some NFOs may be excluded from the eligible fund list.' },
 ];
 
 const faqs = [
-  { q: 'What is Loan Against Mutual Funds (LAMF)?', a: 'LAMF is a secured loan where you pledge MF units as collateral. The lender places a lien via the RTA — you retain ownership and units keep earning returns, but cannot be redeemed until the lien is released on repayment.' },
-  { q: 'How much loan can I get against my mutual funds?', a: 'LTV varies by fund type: equity funds 50–60%, debt funds 70–80%, hybrid funds 55–65%. Pledge equity funds worth ₹10 lakh and receive ₹5–6 lakh in credit.' },
-  { q: 'Do my SIPs continue during the loan period?', a: 'Yes. Only the specific units pledged are locked. New SIP units added each month are not auto-pledged — your SIP corpus keeps growing alongside the pledged holdings.' },
-  { q: 'What happens if the NAV falls below the loan value?', a: 'If NAV drops and the loan exceeds the permissible LTV, Shriram issues a margin call asking for more collateral or partial repayment. Real-time LTV monitoring alerts you before forced action is needed.' },
-  { q: 'Can I repay the LAMF loan early?', a: 'Yes — LAMF is an overdraft facility. Repay any amount at any time without penalty after the initial lock-in (typically 3 months). Full repayment releases the pledge lien immediately.' },
+  { q: 'What is Loan Against Mutual Funds (LAMF)?',             a: 'LAMF is a secured loan where you pledge MF units as collateral. The lender places a lien via the RTA — you retain ownership and units keep earning returns, but cannot be redeemed until the lien is released on repayment.' },
+  { q: 'How much loan can I get against my mutual funds?',      a: 'LTV varies by fund type: equity funds 50–60%, debt funds 70–80%, hybrid funds 55–65%. Pledge equity funds worth ₹10 lakh and receive ₹5–6 lakh in credit.' },
+  { q: 'Do my SIPs continue during the loan period?',           a: 'Yes. Only the specific units pledged are locked. New SIP units added each month are not auto-pledged — your SIP corpus keeps growing alongside the pledged holdings.' },
+  { q: 'What happens if the NAV falls below the loan value?',   a: 'If NAV drops and the loan exceeds the permissible LTV, Shriram issues a margin call asking for more collateral or partial repayment. Real-time LTV monitoring alerts you before forced action is needed.' },
+  { q: 'Can I repay the LAMF loan early?',                      a: 'Yes — LAMF is an overdraft facility. Repay any amount at any time without penalty after the initial lock-in (typically 3 months). Full repayment releases the pledge lien immediately.' },
   { q: 'Is LAMF better than a personal loan for short-term needs?', a: 'For most investors with mutual fund holdings, yes. LAMF rates (9.5–11%) are lower than personal loans (10.5–24%), there are no EMIs, and your investments continue growing. The key advantage is that units are not sold — future NAV gains remain yours.' },
 ];
 ---
@@ -90,163 +90,161 @@ const faqs = [
   description="Get instant cash by pledging mutual fund units as collateral. No redemption required, SIPs keep running, low interest rates from 9.5% p.a. Apply for LAMF today."
 >
 
-  <!-- ══ 1. HERO ═══════════════════════════════════════════════════ -->
-  <section class="relative overflow-hidden bg-[var(--color-dark-800)]">
-    <div class="pointer-events-none absolute -right-40 -top-40 h-[560px] w-[560px] rounded-full bg-[var(--color-brand)]/10 blur-3xl"></div>
-    <div class="pointer-events-none absolute -bottom-32 left-0 h-80 w-80 rounded-full bg-[var(--color-brand)]/5 blur-3xl"></div>
-    <div class="site-wrap relative py-[120px]">
-      <p class="equity-reveal text-[14px] font-medium tracking-[.04em] text-[var(--color-brand)]">Loan Against Mutual Funds</p>
-      <h1 class="equity-reveal mt-[22px] max-w-[880px] text-[clamp(32px,4vw,52px)] font-bold leading-[1.06] text-white" style="font-family:var(--font-display)">
-        Get Instant Liquidity Without <span class="text-[var(--color-brand)]">Selling Your Investments</span>
-      </h1>
-      <p class="equity-reveal mt-[26px] max-w-[600px] text-[18px] leading-relaxed text-white/70">
-        Pledge your mutual fund units and unlock cash at 9.5% p.a. — without redemption, without stopping SIPs, and without losing future NAV growth.
-      </p>
-      <div class="equity-reveal mt-[38px] flex flex-wrap gap-[14px]">
-        <a href="/about/open-demat-account/" class="btn-primary">Apply for LAMF</a>
-        <a href="/about/support/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Talk to RM</a>
+  <!-- ══ HERO ═══════════════════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <h1>Get Instant Liquidity Without <span class="g">Selling Your Investments</span></h1>
+      <p class="lead">Pledge your mutual fund units and unlock cash at 9.5% p.a. — without redemption, without stopping SIPs, and without losing future NAV growth.</p>
+      <div class="cta-row">
+        <a class="btn-gold" href="/about/open-demat-account/">Apply for LAMF</a>
+        <a class="btn-ghost" href="/about/support/">Talk to RM</a>
       </div>
-      <div class="equity-reveal mt-[54px] flex flex-wrap gap-x-9 gap-y-3 border-t border-white/15 pt-9">
-        {['✓ No Redemption', '✓ From 9.5% p.a.', '✓ SIPs Continue', '✓ Overdraft Facility'].map(f => (
-          <span class="text-[15px] font-medium text-white/90">{f}</span>
+      <ul class="feats">
+        {['No Redemption', 'From 9.5% p.a.', 'SIPs Continue', 'Overdraft Facility'].map(f => (
+          <li class="feat"><span class="tk">✓</span><span class="lb">{f}</span></li>
         ))}
-      </div>
+      </ul>
     </div>
   </section>
 
-  <!-- ══ 2. WHAT IS LAMF? ══════════════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto grid max-w-[1000px] items-start gap-[72px] lg:grid-cols-[5fr_7fr]">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          What is <span class="text-[var(--color-brand)]">LAMF?</span>
-        </h2>
-        <div class="space-y-5 text-[17px] leading-relaxed text-[var(--color-muted)]">
-          <p>A Loan Against Mutual Funds (LAMF) is a secured credit facility where your existing mutual fund units act as collateral. The lender places a lien on your units via the Registrar and Transfer Agent (RTA) — you retain full ownership and your portfolio keeps growing.</p>
-          <p>Unlike selling your funds, LAMF triggers no capital gains tax and allows you to preserve the compounding power of your portfolio. It works as an overdraft — borrow what you need, pay interest only on what you draw, and repay whenever you have surplus funds.</p>
+  <!-- ══ WHAT IS LAMF? ══════════════════════════════════════════════ -->
+  <section class="section auto" style="background:var(--sec-light)">
+    <div class="def-row">
+      <p class="sec-title">What is <span class="g">LAMF?</span></p>
+      <div class="def-body">
+        <p>A Loan Against Mutual Funds (LAMF) is a secured credit facility where your existing mutual fund units act as collateral. The lender places a lien on your units via the Registrar and Transfer Agent (RTA) — you retain full ownership and your portfolio keeps growing.</p>
+        <p>Unlike selling your funds, LAMF triggers no capital gains tax and allows you to preserve the compounding power of your portfolio. It works as an overdraft — borrow what you need, pay interest only on what you draw, and repay whenever you have surplus funds.</p>
+      </div>
+    </div>
+    <div class="cat-grid" style="margin-top:64px;grid-template-columns:repeat(3,1fr)">
+      {benefits.map((b, i) => (
+        <div class="cat" style={i % 3 === 2 ? 'border-right:0' : ''}>
+          <h4>{b.title}</h4>
+          <p>{b.desc}</p>
         </div>
-      </div>
-      <div class="equity-reveal mx-auto mt-[76px] max-w-[1000px] border-t border-[var(--color-n400)] pt-[60px]">
-        <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {benefits.map((b, i) => (
-            <div class="product-card-light flex flex-col gap-3 p-[28px]" style={`animation-delay:${i*60}ms`}>
-              <h3 class="text-[16px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{b.title}</h3>
-              <p class="text-[13px] leading-relaxed text-[var(--color-muted)]">{b.desc}</p>
-            </div>
-          ))}
+      ))}
+    </div>
+  </section>
+
+  <!-- ══ HOW LAMF WORKS ════════════════════════════════════════════ -->
+  <section class="section" style="background:var(--sec-tint)">
+    <p class="sec-title">How to Get a Loan Against <span class="g">Mutual Funds</span></p>
+    <p class="sec-lead" style="margin-top:16px">Four steps from linking your portfolio to receiving funds — entirely digital, no paperwork.</p>
+    <div class="steps" style="margin-top:48px">
+      {steps.map((s, i, arr) => (<>
+        <div class="step">
+          <div class="num">{s.n}</div>
+          <h4>{s.title}</h4>
+          <p>{s.desc}</p>
         </div>
-      </div>
+        {i < arr.length - 1 && <div class="step-div"></div>}
+      </>))}
     </div>
   </section>
 
-  <!-- ══ 3. HOW LAMF WORKS ══════════════════════════════════════════ -->
-  <section class="bg-[var(--color-n100)] py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          How to Get a Loan Against <span class="text-[var(--color-brand)]">Mutual Funds</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Four steps from linking your portfolio to receiving funds — entirely digital, no paperwork.</p>
-      </div>
-      <div class="equity-reveal steps-grid overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
-        {steps.map(s => (
-          <div class="px-[30px] py-[34px]">
-            <div class="mb-[22px] font-display text-[34px] font-normal leading-none text-[var(--color-brand)]">{s.n}</div>
-            <h4 class="mb-[10px] text-[19px] font-medium leading-[1.25] text-[var(--color-ink)]" style="font-family:var(--font-display)">{s.title}</h4>
-            <p class="text-[14.5px] leading-relaxed text-[var(--color-muted)]">{s.desc}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ 4. LTV RATIOS — ELIGIBLE FUND TYPES ════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          LTV Ratios — <span class="text-[var(--color-brand)]">How Much Can You Borrow?</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">The loan amount depends on the Loan-to-Value (LTV) ratio of the funds you pledge. Debt funds command higher LTV; equity funds are more conservative.</p>
-      </div>
-      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
-        <div class="overflow-x-auto"><table class="w-full text-[15.5px]">
-          <thead><tr class="bg-[var(--color-dark-olive)]"><th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Fund Type</th><th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">LTV Ratio</th><th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Examples</th></tr></thead>
-          <tbody>{eligibleFunds.map((r,i) => (<tr class={i%2===0?'bg-white':'bg-[var(--color-n100)]'}><td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">{r.type}</td><td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-bold text-[var(--color-brand)]">{r.ltv}</td><td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.example}</td></tr>))}</tbody>
-        </table></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ 5. INTEREST RATES & CHARGES ═══════════════════════════════ -->
-  <section class="bg-[var(--color-n100)] py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          LAMF Interest Rates <span class="text-[var(--color-brand)]">&amp; Charges</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Transparent pricing — no hidden fees. Interest accrues daily on the amount drawn; repay anytime to reduce costs.</p>
-      </div>
-      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
-        <div class="overflow-x-auto"><table class="w-full text-[15.5px]">
-          <thead><tr class="bg-[var(--color-dark-olive)]"><th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Fee / Charge</th><th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">Rate</th><th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Note</th></tr></thead>
-          <tbody>{interestRates.map((r,i) => (<tr class={i%2===0?'bg-white':'bg-[var(--color-n100)]'}><td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">{r.item}</td><td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-bold text-[var(--color-brand)]">{r.rate}</td><td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[14px] text-[var(--color-muted)]">{r.note}</td></tr>))}</tbody>
-        </table></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ 6. LAMF vs PERSONAL LOAN vs SELLING MF ════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          LAMF vs Personal Loan <span class="text-[var(--color-brand)]">vs Selling Mutual Funds</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Compare your three options for accessing liquidity — LAMF is usually the most cost-effective for investors with mutual fund holdings.</p>
-      </div>
-      <div class="equity-reveal overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
-        <div class="overflow-x-auto">
-          <table class="w-full text-[15.5px]">
-            <thead>
-              <tr class="bg-[var(--color-dark-olive)]">
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white">Feature</th>
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-[var(--color-brand)]">LAMF</th>
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white/80">Personal Loan</th>
-                <th class="px-[26px] py-[17px] text-left text-[14px] font-semibold text-white/80">Selling MF</th>
+  <!-- ══ LTV RATIOS ════════════════════════════════════════════════ -->
+  <section class="section" style="background:var(--sec-light)">
+    <p class="sec-title">LTV Ratios — <span class="g">How Much Can You Borrow?</span></p>
+    <p class="sec-lead" style="margin-top:16px">The loan amount depends on the Loan-to-Value (LTV) ratio of the funds you pledge. Debt funds command higher LTV; equity funds are more conservative.</p>
+    <div class="t-wrap" style="margin-top:48px">
+      <div class="t-scroll">
+        <table>
+          <thead><tr>
+            <th>Fund Type</th><th class="hl">LTV Ratio</th><th>Examples</th>
+          </tr></thead>
+          <tbody>
+            {eligibleFunds.map(r => (
+              <tr>
+                <td class="k">{r.type}</td><td class="hl">{r.ltv}</td><td>{r.example}</td>
               </tr>
-            </thead>
-            <tbody>
-              {vsRows.map((r, i) => (
-                <tr class={i % 2 === 0 ? 'bg-white' : 'bg-[var(--color-n100)]'}>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-semibold text-[var(--color-ink)]">{r.feature}</td>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] font-medium text-[var(--color-brand-deep)]">{r.lamf}</td>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.personal}</td>
-                  <td class="border-t border-[var(--color-n400)]/50 px-[26px] py-[17px] text-[var(--color-muted)]">{r.sell}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   </section>
 
-  <!-- ══ 7. TOP USE CASES ══════════════════════════════════════════ -->
-  <section class="bg-[var(--color-n100)] py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          When to Use <span class="text-[var(--color-brand)]">LAMF</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">LAMF works best for short-to-medium-term needs where preserving your investments is more valuable than selling them.</p>
+  <!-- ══ INTEREST RATES & CHARGES ══════════════════════════════════ -->
+  <section class="section" style="background:var(--sec-tint)">
+    <p class="sec-title">LAMF Interest Rates <span class="g">&amp; Charges</span></p>
+    <p class="sec-lead" style="margin-top:16px">Transparent pricing — no hidden fees. Interest accrues daily on the amount drawn; repay anytime to reduce costs.</p>
+    <div class="t-wrap" style="margin-top:48px">
+      <div class="t-scroll">
+        <table>
+          <thead><tr>
+            <th>Fee / Charge</th><th class="hl">Rate</th><th>Note</th>
+          </tr></thead>
+          <tbody>
+            {interestRates.map(r => (
+              <tr>
+                <td class="k">{r.item}</td><td class="hl">{r.rate}</td><td>{r.note}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
-      <div class="equity-reveal mx-auto max-w-[1000px]">
-        <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {useCases.map((u, i) => (
-            <div class="product-card-light flex flex-col gap-3 p-[28px]" style={`animation-delay:${i*60}ms`}>
-              <h3 class="text-[16px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{u.title}</h3>
-              <p class="text-[13px] leading-relaxed text-[var(--color-muted)]">{u.desc}</p>
+    </div>
+  </section>
+
+  <!-- ══ LAMF vs PERSONAL LOAN vs SELLING MF ═══════════════════════ -->
+  <section class="section" style="background:var(--sec-light)">
+    <p class="sec-title">LAMF vs Personal Loan <span class="g">vs Selling Mutual Funds</span></p>
+    <p class="sec-lead" style="margin-top:16px">Compare your three options for accessing liquidity — LAMF is usually the most cost-effective for investors with mutual fund holdings.</p>
+    <div class="t-wrap" style="margin-top:48px">
+      <div class="t-scroll">
+        <table>
+          <thead><tr>
+            <th>Feature</th><th class="hl">LAMF</th><th>Personal Loan</th><th>Selling MF</th>
+          </tr></thead>
+          <tbody>
+            {vsRows.map(r => (
+              <tr>
+                <td class="k">{r.feature}</td><td class="hl">{r.lamf}</td><td>{r.personal}</td><td>{r.sell}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ TOP USE CASES ═════════════════════════════════════════════ -->
+  <section class="section" style="background:var(--sec-tint)">
+    <p class="sec-title">When to Use <span class="g">LAMF</span></p>
+    <p class="sec-lead" style="margin-top:16px">LAMF works best for short-to-medium-term needs where preserving your investments is more valuable than selling them.</p>
+    <div class="cat-grid" style="margin-top:48px;grid-template-columns:repeat(3,1fr)">
+      {useCases.map((u, i) => (
+        <div class="cat" style={i % 3 === 2 ? 'border-right:0' : ''}>
+          <h4>{u.title}</h4>
+          <p>{u.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ══ ELIGIBILITY & DOCUMENTS ═══════════════════════════════════ -->
+  <section class="section" style="background:var(--sec-light)">
+    <p class="sec-title">Eligibility &amp; <span class="g">Documents Required</span></p>
+    <p class="sec-lead" style="margin-top:16px">LAMF is available to all Indian residents holding eligible mutual fund units. KYC must be complete.</p>
+    <div class="elig-row" style="margin-top:56px">
+      <div class="card">
+        <p class="sub-title">Eligibility Criteria</p>
+        <ul class="elig-list">
+          {eligibility.map(e => (
+            <li><span class="ck">✓</span><span>{e}</span></li>
+          ))}
+        </ul>
+      </div>
+      <div class="card">
+        <p class="sub-title">Documents Required</p>
+        <div class="doc-list">
+          {documents.map((d, i) => (
+            <div class="doc-item">
+              <div class="doc-num">{String(i+1).padStart(2,'0')}</div>
+              <div>
+                <p class="doc-name">{d.doc}</p>
+                <p class="doc-purpose">{d.purpose}</p>
+              </div>
             </div>
           ))}
         </div>
@@ -254,121 +252,76 @@ const faqs = [
     </div>
   </section>
 
-  <!-- ══ 8. ELIGIBILITY & DOCUMENTS ════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[64px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Eligibility &amp; <span class="text-[var(--color-brand)]">Documents Required</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">LAMF is available to all Indian residents holding eligible mutual fund units. KYC must be complete.</p>
-      </div>
-      <div class="equity-reveal mx-auto max-w-[1000px] grid gap-[48px] lg:grid-cols-2">
-        <div>
-          <h3 class="mb-[24px] text-[20px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">Eligibility Criteria</h3>
-          <ul class="space-y-4">
-            {eligibility.map(e => (
-              <li class="flex items-start gap-4">
-                <span class="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[var(--color-brand)]/15 text-[13px] font-bold text-[var(--color-brand-deep)]">✓</span>
-                <span class="text-[15px] leading-relaxed text-[var(--color-muted)]">{e.point}</span>
-              </li>
-            ))}
-          </ul>
+  <!-- ══ RISKS & HOW WE HELP ═══════════════════════════════════════ -->
+  <section class="section" style="background:var(--sec-tint)">
+    <p class="sec-title">LAMF Risks &amp; <span class="g">What to Watch Out For</span></p>
+    <p class="sec-lead" style="margin-top:16px">LAMF is low-risk for disciplined borrowers — but understanding the risks helps you use it wisely.</p>
+    <div class="risks-grid" style="margin-top:48px">
+      {risks.map(r => (
+        <div class="appr">
+          <h4>{r.title}</h4>
+          <p>{r.desc}</p>
         </div>
-        <div>
-          <h3 class="mb-[24px] text-[20px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">Documents Required</h3>
-          <div class="space-y-4">
-            {documents.map((d, i) => (
-              <div class="product-card-light flex items-start gap-4 p-5" style={`animation-delay:${i*60}ms`}>
-                <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-[8px] bg-[var(--color-dark-olive)]">
-                  <span class="text-[13px] font-bold text-[var(--color-brand)]">{String(i+1).padStart(2,'0')}</span>
-                </div>
-                <div>
-                  <p class="text-[15px] font-semibold text-[var(--color-ink)]">{d.doc}</p>
-                  <p class="mt-1 text-[13px] leading-relaxed text-[var(--color-muted)]">{d.purpose}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+      ))}
     </div>
-  </section>
-
-  <!-- ══ 9. RISKS & HOW WE HELP ════════════════════════════════════ -->
-  <section class="bg-[var(--color-n100)] py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          LAMF Risks &amp; <span class="text-[var(--color-brand)]">What to Watch Out For</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">LAMF is low-risk for disciplined borrowers — but understanding the risks helps you use it wisely.</p>
-      </div>
-      <div class="equity-reveal mx-auto max-w-[1000px]">
-        <div class="grid gap-5 sm:grid-cols-2">
-          {risks.map((r, i) => (
-            <div class="product-card-light flex flex-col gap-3 p-[32px]" style={`animation-delay:${i*60}ms`}>
-              <div class="flex h-9 w-9 items-center justify-center rounded-[8px] bg-[var(--color-brand)]/15">
-                <span class="text-[14px] font-bold text-[var(--color-brand-deep)]">!</span>
-              </div>
-              <h3 class="text-[17px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{r.title}</h3>
-              <p class="text-[13px] leading-relaxed text-[var(--color-muted)]">{r.desc}</p>
-            </div>
-          ))}
-        </div>
-        <div class="mt-[48px] overflow-hidden rounded-[16px] bg-[var(--color-dark-olive)] p-[48px]">
-          <h3 class="text-[26px] font-bold text-white" style="font-family:var(--font-display)">How <span class="text-[var(--color-brand)]">Shriram</span> Helps You Stay Safe</h3>
-          <div class="mt-[24px] grid gap-4 sm:grid-cols-3">
-            {[
-              { title: 'Real-time LTV Alerts', desc: 'Get notified before a margin call is triggered — act early, not under pressure.' },
-              { title: 'Expert RM Support', desc: 'Our relationship managers review your LAMF setup and flag concentration risks proactively.' },
-              { title: 'Flexible Overdraft Control', desc: 'Draw only what you need. Limiting utilisation reduces margin call risk during volatile markets.' },
-            ].map((h, i) => (
-              <div class="flex flex-col gap-2" style={`animation-delay:${i*80}ms`}>
-                <p class="text-[15px] font-semibold text-[var(--color-brand)]">{h.title}</p>
-                <p class="text-[13px] leading-relaxed text-white/74">{h.desc}</p>
-              </div>
-            ))}
+    <div class="help-panel" style="margin-top:48px">
+      <p class="help-h">How <span class="g">Shriram</span> Helps You Stay Safe</p>
+      <div class="help-grid">
+        {[
+          { title: 'Real-time LTV Alerts',    desc: 'Get notified before a margin call is triggered — act early, not under pressure.' },
+          { title: 'Expert RM Support',        desc: 'Our relationship managers review your LAMF setup and flag concentration risks proactively.' },
+          { title: 'Flexible Overdraft Control',desc: 'Draw only what you need. Limiting utilisation reduces margin call risk during volatile markets.' },
+        ].map(h => (
+          <div class="help-item">
+            <p class="help-title">{h.title}</p>
+            <p class="help-desc">{h.desc}</p>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ 10. FAQ ════════════════════════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Frequently Asked <span class="text-[var(--color-brand)]">Questions</span>
-        </h2>
-      </div>
-      <div class="equity-reveal mx-auto max-w-[840px] border-t border-[var(--color-n400)]">
-        {faqs.map(item => (
-          <details class="eq-faq group border-b border-[var(--color-n400)]">
-            <summary class="flex cursor-pointer list-none items-center justify-between gap-5 py-[26px] px-2">
-              <span class="text-[18px] font-semibold text-[var(--color-ink)]">{item.q}</span>
-              <span class="shrink-0 text-[22px] leading-none text-[var(--color-brand)] transition-transform duration-300 group-open:rotate-45">+</span>
-            </summary>
-            <div class="overflow-hidden px-2 pb-0 text-[16px] leading-relaxed text-[var(--color-muted)] transition-all duration-300 group-open:pb-[28px]">
-              <p class="max-w-[680px]">{item.a}</p>
-            </div>
-          </details>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- ══ 11. FINAL CTA ══════════════════════════════════════════════ -->
-  <section class="bg-[var(--color-n100)] py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal overflow-hidden rounded-[22px] bg-[var(--color-dark-800)] px-[60px] py-[64px] text-center">
-        <h3 class="mx-auto max-w-[560px] text-[38px] font-bold leading-[1.12] text-white" style="font-family:var(--font-display)">Ready to Unlock Your Portfolio's Value?</h3>
-        <p class="mx-auto mt-[18px] max-w-[480px] text-[17px] leading-relaxed text-white/70">Get instant liquidity at low interest rates without disrupting your investments. Apply digitally in minutes.</p>
-        <div class="mt-[34px] flex flex-wrap justify-center gap-[14px]">
-          <a href="/about/open-demat-account/" class="btn-primary">Apply for LAMF Now</a>
-          <a href="/about/support/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Talk to an RM</a>
+  <!-- ══ FAQ ════════════════════════════════════════════════════════ -->
+  <section class="faq-wrap" id="sec-faq">
+    <div class="faq-cols">
+      <div class="faq-left">
+        <p class="faq-title">Frequently Asked <span class="g">Questions</span></p>
+        <ul class="faq-acc">
+          {faqs.map(item => (
+            <li class="faq-item">
+              <details>
+                <summary class="faq-sum">
+                  <span class="qt">{item.q}</span>
+                  <svg class="faq-icon faq-v" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="2" x2="8" y2="14"/><line x1="2" y1="8" x2="14" y2="8"/></svg>
+                  <svg class="faq-icon faq-h" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><line x1="2" y1="8" x2="14" y2="8"/></svg>
+                </summary>
+                <div class="qa"><p>{item.a}</p></div>
+              </details>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="faq-side">
+        <img src="/images/advisor-avatar.png" alt="Financial advisor" class="usr-img" />
+        <div class="side-in">
+          <div class="side-tx">
+            <h4>Still got questions?</h4>
+            <p>Our LAMF specialists will help you understand pledging, LTV ratios, and margin calls before you apply.</p>
+          </div>
+          <a class="btn-gold" href="/about/support/">Book a Call</a>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FINAL CTA ══════════════════════════════════════════════════ -->
+  <section class="cta-sec" style="background:var(--sec-light)">
+    <div class="cta-box">
+      <p class="cta-h">Ready to Unlock Your <span class="g">Portfolio's Value?</span></p>
+      <p class="cta-sub">Get instant liquidity at low interest rates without disrupting your investments. Apply digitally in minutes.</p>
+      <div class="cta-row" style="margin-top:0;justify-content:center">
+        <a class="btn-gold" href="/about/open-demat-account/">Apply for LAMF</a>
+        <a class="btn-dark" href="/about/support/">Talk to an RM</a>
       </div>
     </div>
   </section>
@@ -376,42 +329,161 @@ const faqs = [
 </BaseLayout>
 
 <style>
-  .equity-reveal {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+  :root {
+    --sec-light:#fef8ee; --sec-tint:#f6efe1;
+    --card:#fffdf8; --card-border:#e1e0db; --card-border-soft:rgba(28,28,22,.13); --row-line:rgba(28,28,22,.08);
+    --olive-title:#2e3914; --olive-head:#2d3813; --olive-deep:#1b2010;
+    --ink:#1c1c16; --ink-2:#46463c; --ink-3:#595959; --muted:#73736a;
+    --gold:#e0a82e; --gold-2:#f2b83f; --gold-btn:#f3b83f; --gold-ink:#231a06; --olive-ink:#2e3914; --green:#009d58;
+    --pad:clamp(20px,8vw,144px); --section-y:72px; --cta-w:220px;
   }
-  .equity-reveal.in-view { opacity: 1; transform: none; }
+  *, *::before, *::after { box-sizing: border-box; }
+  a { color: inherit; text-decoration: none; }
+  p { line-height: 1.5; margin: 0; }
+  ul { list-style: none; padding: 0; margin: 0; }
 
-  .steps-grid { display: grid; grid-template-columns: repeat(2, 1fr); }
-  .steps-grid > * { border-right: 1px solid var(--color-n400); border-bottom: 1px solid var(--color-n400); }
-  .steps-grid > *:nth-child(2n) { border-right: 0; }
-  .steps-grid > *:nth-last-child(-n+2) { border-bottom: 0; }
-  @media (min-width: 1024px) {
-    .steps-grid { grid-template-columns: repeat(4, 1fr); }
-    .steps-grid > * { border-right: 1px solid var(--color-n400); border-bottom: 0; }
-    .steps-grid > *:last-child { border-right: 0; }
-  }
+  .section { padding: var(--section-y) var(--pad); min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; justify-content: center; }
+  .section.auto { min-height: 0; }
+  .sec-title { font-weight: 400; font-size: 40px; color: var(--olive-title); line-height: 1.4; max-width: 860px; }
+  .sec-lead  { font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.5; max-width: 640px; }
+  .sub-title { font-weight: 500; font-size: 24px; color: var(--ink); line-height: 1.5; }
+  .g { color: var(--gold-2); }
 
-  @media (prefers-reduced-motion: reduce) {
-    .equity-reveal { opacity: 1; transform: none; transition: none; }
+  .card { background: var(--card); border: 1px solid var(--card-border); border-radius: 24px; padding: 32px; display: flex; flex-direction: column; gap: 16px; }
+
+  .hero { padding: 0 var(--pad); display: flex; flex-direction: column; justify-content: center; overflow: hidden; background: radial-gradient(125% 210% at 100% -8%, #4f583b 0%, #363a2c 50%, #1d1d1d 100%); }
+  .hero-inner { padding: clamp(80px,12vw,140px) 0 clamp(48px,6vw,80px); display: flex; flex-direction: column; }
+  .hero h1 { font-weight: 500; font-size: 40px; color: #fff; line-height: 1.5; max-width: 860px; }
+  .hero .lead { margin-top: 32px; font-weight: 400; font-size: 18px; line-height: 1.5; color: rgba(255,255,255,.74); max-width: 600px; }
+  .cta-row { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .feats { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 14px 16px; max-width: 760px; padding-top: 36px; border-top: 1px solid rgba(255,255,255,.16); }
+  .feat { display: flex; gap: 10px; align-items: center; }
+  .feat .tk { color: var(--gold-2); font-weight: 500; font-size: 15px; }
+  .feat .lb { color: rgba(255,255,255,.9); font-weight: 500; font-size: 16px; }
+
+  .btn-gold  { background: var(--gold-btn); height: 40px; width: var(--cta-w); border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; font-weight: 500; font-size: 12px; color: var(--olive-ink); white-space: nowrap; transition: opacity .2s; }
+  .btn-gold:hover { opacity: .88; }
+  .btn-ghost { height: 40px; border-radius: 9px; border: 1px solid rgba(255,255,255,.4); display: inline-flex; align-items: center; justify-content: center; padding: 7px 26px; font-weight: 600; font-size: 15px; color: #fff; transition: border-color .2s; }
+  .btn-ghost:hover { border-color: #fff; }
+  .btn-dark  { background: #333; height: 40px; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; padding: 0 24px; font-weight: 500; font-size: 12px; color: #fff; transition: opacity .2s; }
+  .btn-dark:hover { opacity: .88; }
+
+  .def-row { display: grid; grid-template-columns: 5fr 7fr; gap: 72px; align-items: start; }
+  .def-body { display: flex; flex-direction: column; gap: 20px; font-size: 17px; line-height: 1.7; color: var(--ink-3); }
+
+  .cat-grid { border: 1px solid var(--card-border); border-radius: 24px; overflow: hidden; display: grid; grid-template-columns: repeat(4,1fr); background: var(--card); }
+  .cat { background: var(--card); padding: 32px; display: flex; flex-direction: column; gap: 12px; border-right: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border); }
+  .cat:nth-child(4n) { border-right: 0; }
+  .cat:last-child, .cat:nth-last-child(-n+3):nth-child(3n+1) { border-bottom: 0; }
+  .cat h4 { font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.5; }
+  .cat p  { font-weight: 400; font-size: 16px; color: var(--muted); line-height: 1.5; }
+
+  .steps { background: var(--card); border: 1px solid var(--card-border); border-radius: 24px; overflow: hidden; display: flex; align-items: stretch; width: 100%; }
+  .step  { flex: 1 0 0; min-width: 0; padding: 32px; display: flex; flex-direction: column; gap: 16px; }
+  .step .num { font-weight: 400; font-size: 32px; color: var(--gold); }
+  .step h4 { font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.5; }
+  .step p  { font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.5; }
+  .step-div { width: 1px; align-self: stretch; background: var(--card-border); flex: none; }
+
+  .t-wrap   { border: 1px solid var(--card-border); border-radius: 24px; overflow: hidden; background: var(--card); }
+  .t-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  table { width: 100%; border-collapse: collapse; }
+  thead tr { background: var(--olive-head); }
+  thead th { padding: 16px 24px; font-weight: 600; font-size: 14px; color: #fff; text-align: left; }
+  thead th.hl { color: var(--gold-2); }
+  tbody tr:nth-child(even) { background: var(--sec-tint); }
+  tbody td { padding: 14px 24px; font-size: 15px; color: var(--ink-2); border-top: 1px solid var(--row-line); }
+  tbody td.k  { font-weight: 600; color: var(--ink); }
+  tbody td.hl { color: var(--gold-2); font-weight: 500; }
+
+  .elig-row { display: flex; gap: 32px; align-items: stretch; }
+  .elig-row .card { flex: 1 0 0; min-width: 0; }
+  .elig-list { display: flex; flex-direction: column; gap: 16px; }
+  .elig-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 15px; color: var(--ink-3); line-height: 1.5; }
+  .ck { color: var(--gold-2); font-weight: 600; font-size: 14px; margin-top: 2px; flex: none; }
+  .doc-list { display: flex; flex-direction: column; gap: 16px; }
+  .doc-item { display: flex; gap: 16px; align-items: flex-start; }
+  .doc-num  { width: 36px; height: 36px; border-radius: 8px; background: var(--olive-head); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; color: var(--gold-2); flex: none; }
+  .doc-name { font-weight: 600; font-size: 15px; color: var(--ink); }
+  .doc-purpose { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+  .risks-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 24px; }
+  .appr { background: var(--olive-deep); border: 1px solid rgba(255,255,255,.08); border-radius: 24px; padding: 32px; display: flex; flex-direction: column; gap: 16px; }
+  .appr h4 { font-weight: 500; font-size: 20px; color: #fff; line-height: 1.5; }
+  .appr p  { font-weight: 400; font-size: 16px; color: rgba(255,255,255,.72); line-height: 1.5; }
+
+  .help-panel { background: var(--olive-deep); border-radius: 24px; padding: 48px; }
+  .help-h { font-weight: 500; font-size: 28px; color: #fff; line-height: 1.4; margin-bottom: 28px; }
+  .help-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 32px; }
+  .help-title { font-weight: 600; font-size: 15px; color: var(--gold-2); margin-bottom: 8px; }
+  .help-desc  { font-size: 13px; color: rgba(255,255,255,.74); line-height: 1.6; }
+
+  .faq-wrap  { padding: var(--section-y) var(--pad); background: #FFFCF3; display: flex; flex-direction: column; justify-content: center; }
+  .faq-cols  { display: flex; gap: 48px; align-items: stretch; }
+  .faq-left  { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; gap: 32px; }
+  .faq-title { font-weight: 700; font-size: 38px; color: #222320; line-height: 1.3; }
+  .faq-acc   { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+  .faq-item  { background: #f8f4e8; border-radius: 0; }
+  .faq-item:first-child { border-radius: 24px 24px 0 0; }
+  .faq-item:last-child  { border-radius: 0 0 24px 24px; }
+  .faq-sum   { display: flex; align-items: flex-start; justify-content: space-between; gap: 40px; padding: 20px 24px; cursor: pointer; list-style: none; }
+  .faq-sum::-webkit-details-marker { display: none; }
+  .faq-item .qt { font-weight: 500; font-size: 15px; color: #222320; line-height: 1.5; flex: 1; }
+  .faq-item[open] .qt { font-weight: 600; }
+  .faq-icon  { width: 16px; height: 16px; flex: none; color: #222320; }
+  .faq-v     { transition: opacity .28s ease; }
+  .faq-item[open] .faq-v { opacity: 0; }
+  .qa { padding: 0 24px 20px; }
+  .qa p { font-weight: 400; font-size: 14px; color: #5a5a5a; line-height: 1.6; }
+  .faq-side  { width: 360px; flex: none; background: #4f583b; border: 1px solid rgba(255,255,255,.12); border-radius: 24px; padding: 32px; display: flex; flex-direction: column; overflow: hidden; }
+  .usr-img   { width: 140px; height: 140px; object-fit: contain; flex: none; }
+  .side-in   { margin-top: auto; padding-top: 40px; display: flex; flex-direction: column; gap: 16px; }
+  .side-tx   { display: flex; flex-direction: column; gap: 8px; color: #fff; }
+  .side-tx h4 { font-weight: 600; font-size: 20px; line-height: 28px; }
+  .side-tx p  { font-weight: 400; font-size: 14px; line-height: 1.6; color: rgba(255,255,255,.74); }
+
+  .cta-sec { padding: var(--section-y) var(--pad); display: flex; flex-direction: column; align-items: center; }
+  .cta-box { background: var(--olive-deep); border-radius: 22px; padding: 64px 60px; display: flex; flex-direction: column; align-items: center; gap: 20px; text-align: center; width: 100%; }
+  .cta-h   { font-weight: 500; font-size: 38px; color: #fff; line-height: 1.3; max-width: 560px; }
+  .cta-sub { font-weight: 400; font-size: 17px; color: rgba(255,255,255,.7); line-height: 1.5; max-width: 480px; }
+
+  @media (max-width: 1024px) {
+    .def-row { grid-template-columns: 1fr; gap: 32px; }
+    .cat-grid[style*="repeat(3"] { grid-template-columns: repeat(2,1fr) !important; }
+    .cat:nth-child(3n) { border-right: 1px solid var(--card-border); }
+    .cat:nth-child(2n) { border-right: 0; }
+    .help-grid { grid-template-columns: 1fr 1fr; }
   }
+  @media (max-width: 900px) {
+    .steps { flex-direction: column; }
+    .step-div { width: 100%; height: 1px; align-self: auto; }
+    .faq-cols { flex-direction: column; }
+    .faq-side { width: 100%; }
+    .elig-row { flex-direction: column; }
+    .risks-grid { grid-template-columns: 1fr; }
+    .help-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 768px) {
+    .hero h1 { font-size: clamp(28px,7vw,40px); }
+    .sec-title { font-size: clamp(28px,7vw,40px); }
+    .faq-title { font-size: clamp(24px,6vw,38px); }
+    .cta-h { font-size: clamp(24px,6.4vw,38px); }
+    .section { padding: 56px var(--pad); min-height: 0; }
+    .cta-box { padding: 48px 24px; }
+    .help-panel { padding: 32px 24px; }
+  }
+  @media (max-width: 560px) {
+    .cat-grid { grid-template-columns: 1fr !important; }
+    .cat { border-right: 0 !important; border-bottom: 1px solid var(--card-border) !important; }
+    .cat:last-child { border-bottom: 0 !important; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
 
 <script>
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        (e.target as HTMLElement).classList.add('in-view');
-        obs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.10 });
-  document.querySelectorAll('.equity-reveal').forEach(el => obs.observe(el));
-
-  document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(d => {
+  document.querySelectorAll<HTMLDetailsElement>('.faq-item details').forEach(d => {
     d.addEventListener('toggle', () => {
-      if (d.open) document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(o => { if (o !== d) o.removeAttribute('open'); });
+      if (d.open) document.querySelectorAll<HTMLDetailsElement>('.faq-item details').forEach(o => { if (o !== d) o.removeAttribute('open'); });
     });
   });
 </script>
