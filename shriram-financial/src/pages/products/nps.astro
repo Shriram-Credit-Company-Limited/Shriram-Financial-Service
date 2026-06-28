@@ -6,33 +6,43 @@ const accounts = [
   { label: 'Tier 2 Account', desc: 'A voluntary, fully liquid savings account linked to Tier 1. No tax benefit (except for government employees). Minimum: ₹250/year — withdraw anytime.' },
 ];
 
+const features = [
+  { label: 'Tax-Efficient (Up to ₹2L)',    desc: 'Deductions under 80CCD(1), 80CCD(1B), and 80CCD(2) — the highest combined tax saving available in any retirement instrument.' },
+  { label: 'Market-Linked Returns',          desc: 'Invested in equity, corporate bonds, and government securities. Equity class has historically delivered 10–14% p.a. over long horizons.' },
+  { label: 'PFRDA Regulated',               desc: 'Fully regulated by PFRDA under the Ministry of Finance. Your corpus is held in a trust, completely separate from the fund manager.' },
+  { label: 'Flexible Fund Choice',           desc: 'Choose from multiple PFRDA-approved Pension Fund Managers. Switch once a year across fund managers or asset allocation — at zero cost.' },
+  { label: 'Lowest Cost Structure',          desc: 'Fund management charges at just 0.09% p.a. — the lowest among all retirement products in India. More of your money stays invested.' },
+  { label: 'Portable PRAN',                 desc: 'One permanent PRAN number follows you across jobs, cities, and employers. No need to transfer or close accounts when you switch jobs.' },
+];
+
+const eligibility = [
+  { label: 'Indian Citizens (Resident)',  desc: 'Any Indian citizen aged 18–70 years can open an individual NPS account online or through a registered Point of Presence (PoP).' },
+  { label: 'NRIs',                        desc: 'Non-Resident Indians (NRIs) are eligible for NPS. Contributions can be made through NRE/NRO accounts. Account closes on loss of citizenship.' },
+  { label: 'Corporate Employees',         desc: 'Employees whose organisations are registered under Corporate NPS can contribute through payroll deductions with employer matching.' },
+  { label: 'Government Employees',        desc: 'Central government employees joining after 2004 are mandatorily covered under NPS. State government employees under respective state rules.' },
+];
+
+const documents = [
+  { label: 'PAN Card',              desc: 'Mandatory for all NPS subscribers. Used for tax deduction reporting and KYC verification with PFRDA.' },
+  { label: 'Aadhaar Card',          desc: 'Required for e-KYC (paperless). Your Aadhaar-linked mobile receives the OTP to verify identity instantly.' },
+  { label: 'Bank Account Details',  desc: 'Cancelled cheque or bank statement showing your account number and IFSC code for contribution and withdrawal.' },
+  { label: 'Photograph',            desc: 'Recent passport-size photograph in digital format (JPEG/PNG). Typically under 2 MB for online submission.' },
+  { label: 'Nominee Details',       desc: 'Name, date of birth, and relationship of your nominee(s). Multiple nominees can be added with split percentages.' },
+  { label: 'Signature',             desc: 'Scanned or digital signature required for account registration and future correspondence with PFRDA.' },
+];
+
 const assetClasses = [
-  { label: 'Class E — Equity',                       desc: 'Equity and equity-related instruments. Up to 75% allocation (tapers after age 50). Highest growth potential, highest volatility.' },
-  { label: 'Class C — Corporate Bonds',               desc: 'High-rated corporate debt (AA and above). Moderate risk with stable, predictable returns — good for core stability.' },
-  { label: 'Class G — Government Securities',         desc: 'Central and state government bonds — the lowest-risk NPS class. Suitable for conservative investors nearing retirement.' },
-  { label: 'Class A — Alternatives',                  desc: 'REITs, InvITs, and alternative assets. Capped at 5% allocation — adds diversification beyond traditional debt and equity.' },
-];
-
-const taxRows = [
-  { section: '80CCD(1)',   limit: '₹1,50,000 per year',            category: 'Employee / Self-employed',            note: 'Part of overall 80C limit of ₹1.5 lakh' },
-  { section: '80CCD(1B)', limit: '₹50,000 per year (additional)',   category: 'All NPS subscribers',                 note: 'Over and above the 80C limit — exclusive to NPS' },
-  { section: '80CCD(2)',  limit: 'Up to 10% of Basic + DA',         category: 'Salaried (employer contribution)',     note: "No upper limit; employer's contribution is fully deductible" },
-];
-
-const vsRows = [
-  { feature: 'Purpose',               nps: 'Market-linked retirement savings',            epf: 'Retirement corpus for salaried',           ppf: 'Tax-free long-term savings' },
-  { feature: 'Returns',               nps: 'Market-linked (8–12% historically)',           epf: '8.25% (FY2024, EPFO declared)',            ppf: '7.1% (reviewed quarterly)' },
-  { feature: 'Lock-in',               nps: 'Until age 60',                                epf: 'Until retirement (partial allowed)',        ppf: '15 years (partial from year 7)' },
-  { feature: 'Tax on Maturity',       nps: '60% tax-free; 40% annuity (taxable)',         epf: 'Tax-free (if 5+ years service)',           ppf: 'Fully tax-free' },
-  { feature: 'Employer Contribution', nps: '10% Basic+DA (govt); 14% for central govt',  epf: '12% Basic+DA (mandatory)',                 ppf: 'No employer contribution' },
-  { feature: 'Regulator',             nps: 'PFRDA',                                       epf: 'EPFO',                                     ppf: 'Ministry of Finance' },
+  { label: 'Class E — Equity',               desc: 'Equity and equity-related instruments. Up to 75% allocation (tapers after age 50). Highest growth potential, highest volatility.' },
+  { label: 'Class C — Corporate Bonds',       desc: 'High-rated corporate debt (AA and above). Moderate risk with stable, predictable returns — good for portfolio stability.' },
+  { label: 'Class G — Government Securities', desc: 'Central and state government bonds — the lowest-risk NPS asset class. Best for conservative investors nearing retirement.' },
+  { label: 'Class A — Alternatives',          desc: 'REITs, InvITs, and alternative assets. Capped at 5% allocation — adds diversification beyond traditional debt and equity.' },
 ];
 
 const steps = [
-  { n: '01', title: 'Choose PRAN Account Type',    desc: 'Select Tier 1 (pension) or Tier 1 + Tier 2 (pension + savings). Choose your Pension Fund Manager — HDFC, SBI, Kotak, and more.' },
-  { n: '02', title: 'Submit KYC & Documents',      desc: 'Complete Aadhaar-based e-KYC on the Shriram platform. Submit PAN, address proof, and nominee details digitally.' },
-  { n: '03', title: 'Choose Asset Allocation',     desc: 'Select Active Choice (you control E/C/G split) or Auto Choice (age-based rebalancing) — conservative, moderate, or aggressive lifecycle fund.' },
-  { n: '04', title: 'Start Contributing',           desc: 'Make your first contribution (min ₹500 Tier 1, ₹250 Tier 2). Set up auto-debit for regular contributions and track corpus in real time.' },
+  { n: '01', title: 'Choose PRAN Account Type',   desc: 'Select Tier 1 (pension) or Tier 1 + Tier 2 (pension + savings). Choose your Pension Fund Manager — HDFC, SBI, Kotak, and more.' },
+  { n: '02', title: 'Submit KYC & Documents',     desc: 'Complete Aadhaar-based e-KYC on the Shriram platform. Submit PAN, address proof, and nominee details digitally.' },
+  { n: '03', title: 'Choose Asset Allocation',    desc: 'Select Active Choice (you control E/C/G split) or Auto Choice (age-based rebalancing) — conservative, moderate, or aggressive lifecycle fund.' },
+  { n: '04', title: 'Start Contributing',          desc: 'Make your first contribution (min ₹500 Tier 1, ₹250 Tier 2). Set up auto-debit for regular contributions and track corpus in real time.' },
 ];
 
 const withdrawalReasons = [
@@ -43,136 +53,117 @@ const withdrawalReasons = [
 ];
 
 const annuityPoints = [
-  { label: '60% of corpus',          desc: 'Fully tax-free withdrawal at age 60 — no tax liability on this portion.' },
-  { label: '40% mandatory annuity',  desc: 'Must purchase a PFRDA-registered annuity. Monthly pension paid; annuity income taxable per slab.' },
-  { label: 'Deferred exit',          desc: 'Defer withdrawal until age 75 if you wish to continue growing the corpus.' },
-  { label: 'Lump sum below ₹5L',    desc: 'If total corpus is below ₹5 lakh, the entire amount can be withdrawn as a lump sum.' },
+  { label: '60% of corpus',         desc: 'Fully tax-free withdrawal at age 60 — no tax liability on this portion of the retirement corpus.' },
+  { label: '40% mandatory annuity', desc: 'Must purchase a PFRDA-registered annuity. Monthly pension is paid; annuity income is taxable per slab.' },
+  { label: 'Deferred exit',         desc: 'Defer the entire withdrawal until age 75 if you wish to continue growing the retirement corpus.' },
+  { label: 'Lump sum below ₹5L',   desc: 'If total corpus is below ₹5 lakh at maturity, the entire amount can be withdrawn as a lump sum.' },
+];
+
+const taxationRows = [
+  { stage: 'Lump Sum (60%)',          treatment: 'Fully exempt',                    note: 'No tax on up to 60% corpus withdrawal at age 60' },
+  { stage: 'Annuity Purchased (40%)', treatment: 'Tax-free at purchase',            note: 'Annuity purchase itself is not taxed' },
+  { stage: 'Annuity Income (monthly)',treatment: 'Taxable as per income slab',      note: 'Monthly pension taxed like salary income' },
+  { stage: 'Premature Exit (<60)',    treatment: '20% tax-free; 80% buy annuity',  note: 'Partial exit is taxable; annuity purchase exempt' },
+];
+
+const vsRows = [
+  { feature: 'Purpose',         nps: 'Government-backed retirement savings',       mf: 'Wealth creation (any goal)',                    equity: 'High-growth long-term capital appreciation' },
+  { feature: 'Returns',         nps: '8–14% historically (asset-class linked)',    mf: '10–15% equity funds (market-linked)',            equity: '12–18% long-term (high volatility)' },
+  { feature: 'Lock-in',         nps: 'Until age 60',                              mf: 'ELSS: 3 yrs; others: none',                     equity: 'No lock-in' },
+  { feature: 'Tax Deduction',   nps: 'Up to ₹2 lakh (80CCD(1)+(1B)+(2))',        mf: 'ELSS only — ₹1.5L under 80C',                  equity: 'None' },
+  { feature: 'Tax on Gains',    nps: '60% corpus tax-free; annuity income taxed', mf: 'LTCG 12.5% above ₹1.25L (equity funds)',       equity: 'LTCG 12.5% above ₹1.25L' },
+  { feature: 'Liquidity',       nps: 'Limited — partial withdrawal after 3 yrs',  mf: 'High — redeem anytime (except ELSS lock-in)',   equity: 'High — sell anytime during market hours' },
+  { feature: 'Regulator',       nps: 'PFRDA',                                     mf: 'SEBI',                                          equity: 'SEBI' },
+];
+
+const verifyPoints = [
+  { label: 'PFRDA Source Data',       desc: 'All contribution limits, tax deduction sections, withdrawal rules, and fund performance data are sourced from official PFRDA circulars and the Income Tax Act.' },
+  { label: 'Last Updated June 2026',  desc: 'This page reflects NPS rules as of the current financial year, including FY2026 contribution limits and tax treatment under both old and new tax regimes.' },
+  { label: 'Reviewed by RM Team',     desc: 'Our Relationship Managers review product page accuracy quarterly. For complex NPS tax scenarios, we recommend consulting a qualified tax advisor.' },
+  { label: 'No Guaranteed Returns',   desc: 'NPS is a market-linked product. Historical return figures are indicative only. Past performance does not guarantee future results.' },
 ];
 
 const faqs = [
-  { q: 'Can I withdraw from NPS before retirement?',         a: "Yes — after 3 years, you can withdraw up to 25% of your own contributions for specific reasons: child's education/marriage, home purchase, critical illness, or business setup. Maximum 3 withdrawals over the lifetime of the PRAN." },
-  { q: 'What happens to NPS at age 60?',                    a: 'At 60, withdraw up to 60% of the corpus tax-free. The remaining 40% must purchase a PFRDA-registered annuity for a monthly pension. You can defer the entire withdrawal until age 75.' },
-  { q: 'Is NPS better than PPF for tax saving?',            a: "NPS allows up to ₹2 lakh deduction (80C + 80CCD(1B)), vs PPF's ₹1.5 lakh under 80C. PPF maturity is fully tax-free; NPS annuity income is taxable. Most advisors recommend both for maximum efficiency." },
-  { q: 'What is the minimum annual contribution?',           a: "Tier 1: ₹500 per contribution, ₹1,000 per year minimum. Tier 2: ₹250 per contribution, no annual minimum. Missing Tier 1's annual minimum makes your PRAN inactive with a ₹100/year penalty." },
-  { q: 'Can self-employed individuals invest in NPS?',       a: 'Yes. All Indian citizens aged 18–70 can open NPS. Self-employed subscribers claim 80CCD(1) up to 20% of gross income (within ₹1.5 lakh 80C limit), plus the exclusive ₹50,000 under 80CCD(1B).' },
-  { q: 'Who regulates NPS?',                                 a: 'NPS is regulated by PFRDA (Pension Fund Regulatory and Development Authority), a statutory body under the Ministry of Finance. All Pension Fund Managers (PFMs) are PFRDA-registered.' },
-  { q: 'Can I change my Pension Fund Manager (PFM)?',        a: 'Yes. You can switch your PFM or investment scheme once per year at no cost. Active Choice allows you to rebalance your E/C/G/A allocation at any time.' },
-  { q: 'What happens to NPS if I die before 60?',           a: "The entire accumulated corpus is paid to the nominee (or legal heir) as a lump sum — no mandatory annuity. Nominee is exempt from the 40% annuity rule in the subscriber's case." },
+  { q: 'Can I withdraw from NPS before retirement?',       a: "Yes — after 3 years, you can withdraw up to 25% of your own contributions for specific reasons: child's education/marriage, home purchase, critical illness, or business setup. Maximum 3 withdrawals over the lifetime of the PRAN." },
+  { q: 'What happens to NPS at age 60?',                  a: 'At 60, withdraw up to 60% of the corpus tax-free. The remaining 40% must purchase a PFRDA-registered annuity for a monthly pension. You can defer the entire withdrawal until age 75.' },
+  { q: 'Is NPS better than PPF for tax saving?',          a: "NPS allows up to ₹2 lakh deduction (80C + 80CCD(1B)), vs PPF's ₹1.5 lakh under 80C. PPF maturity is fully tax-free; NPS annuity income is taxable. Most advisors recommend both for maximum efficiency." },
+  { q: 'What is the minimum annual contribution?',         a: "Tier 1: ₹500 per contribution, ₹1,000 per year minimum. Tier 2: ₹250 per contribution, no annual minimum. Missing Tier 1's annual minimum makes your PRAN inactive with a ₹100/year penalty." },
+  { q: 'Can self-employed individuals invest in NPS?',     a: 'Yes. All Indian citizens aged 18–70 can open NPS. Self-employed subscribers claim 80CCD(1) up to 20% of gross income (within ₹1.5 lakh 80C limit), plus the exclusive ₹50,000 under 80CCD(1B).' },
+  { q: 'Who regulates NPS?',                               a: 'NPS is regulated by PFRDA (Pension Fund Regulatory and Development Authority), a statutory body under the Ministry of Finance. All Pension Fund Managers (PFMs) are PFRDA-registered.' },
+  { q: 'Can I change my Pension Fund Manager (PFM)?',      a: 'Yes. You can switch your PFM or investment scheme once per year at no cost. Active Choice allows you to rebalance your E/C/G/A allocation at any time.' },
+  { q: 'What happens to NPS if I die before 60?',         a: "The entire accumulated corpus is paid to the nominee (or legal heir) as a lump sum — no mandatory annuity. The nominee is exempt from the 40% annuity rule that applies to the subscriber." },
 ];
 ---
 
 <BaseLayout
   title="NPS India 2026 — National Pension Scheme Tax Saving | Shriram"
-  description="Invest in NPS India 2026 and save up to ₹2 lakh in tax deductions annually. Market-linked retirement corpus, PFRDA regulated, flexible fund choice. Open NPS account today."
+  description="Build your retirement plan with NPS. Open a paperless NPS account in 20 minutes. Save up to ₹2 lakh in tax, market-linked returns, PFRDA regulated. Start with ₹1,000."
 >
 
   <!-- ══ HERO ═══════════════════════════════════════════════════════ -->
   <section class="hero">
     <div class="hero-inner">
-      <h1><span class="g">NPS India 2026</span> — Tax-Efficient &amp; Market-Linked Retirement</h1>
-      <p class="lead">The National Pension Scheme offers up to ₹2 lakh in tax deductions annually, market-linked returns, and a guaranteed retirement income — all in one PFRDA-regulated account.</p>
+      <div class="trust-bar">
+        <span>✓ Min ₹1,000 Contribution</span>
+        <span class="sep">|</span>
+        <span>✓ PFRDA Regulated</span>
+        <span class="sep">|</span>
+        <span>✓ Up to ₹2L Tax Deduction</span>
+      </div>
+      <h1>Build Your <span class="g">Retirement Plan</span> with NPS</h1>
+      <p class="lead">Open a paperless NPS account in under 20 minutes. Government-backed, market-linked, and loaded with India's best tax benefits at every stage of your retirement journey.</p>
       <div class="cta-row">
         <a class="btn-gold" href="/about/open-demat-account/">Open NPS Account</a>
         <a class="btn-ghost" href="/about/support/">Talk to RM</a>
       </div>
-      <ul class="feats">
-        {['Up to ₹2L tax saving', 'PFRDA regulated', 'Market-linked returns', 'Flexible fund choice'].map(f => (
-          <li class="feat"><span class="tk">✓</span><span class="lb">{f}</span></li>
-        ))}
-      </ul>
+      <div class="login-bar">
+        <a href="/about/open-demat-account/" class="login-btn">Login with NSDL</a>
+        <span class="lsep"></span>
+        <a href="/about/open-demat-account/" class="login-btn">Login with KFintech</a>
+        <span class="lsep"></span>
+        <a href="/about/open-demat-account/" class="login-btn login-btn--gold">Pay your Monthly SIP →</a>
+      </div>
     </div>
   </section>
 
   <!-- ══ WHAT IS NPS? ═══════════════════════════════════════════════ -->
   <section class="section auto" style="background:var(--sec-light)">
     <div class="def-row">
-      <p class="sec-title">What is <span class="g">NPS?</span></p>
+      <p class="sec-title">What is <span class="g">National Pension Scheme?</span></p>
       <div class="def-body">
-        <p>NPS (National Pension Scheme) is a voluntary, government-backed retirement savings plan regulated by PFRDA. Contributions are invested in market-linked instruments — equity, corporate bonds, and government securities.</p>
-        <p>NPS operates through two types of accounts designed for different financial needs: mandatory pension savings (Tier 1) and flexible voluntary savings (Tier 2).</p>
+        <p>NPS (National Pension Scheme) is a voluntary, long-term retirement savings scheme regulated by PFRDA. Open to all Indian citizens aged 18–70, it lets you systematically save for retirement while enjoying significant tax advantages at every stage — contribution, investment, and withdrawal.</p>
+        <p>Research-backed investing reduces emotional decisions and improves outcomes. NPS gives you the same quality of asset management used by institutional investors — covering when to contribute, how to allocate, and what returns to target.</p>
+        <p><strong>NPS for Individuals</strong> — Build a tax-efficient retirement corpus over your working years. Enjoy the exclusive ₹50,000 deduction under 80CCD(1B) that no other instrument offers.</p>
+        <p><strong>NPS for Corporate</strong> — Organisations can contribute up to 10% of Basic + DA on behalf of employees. Employer contributions are deductible under Section 80CCD(2) with no upper rupee cap.</p>
       </div>
     </div>
-    <div class="cat-grid" style="margin-top:64px;grid-template-columns:repeat(2,1fr)">
+  </section>
+
+  <!-- ══ KEY FEATURES & BENEFITS ════════════════════════════════════ -->
+  <section class="section" style="background:var(--sec-tint)">
+    <p class="sec-title">NPS Key Features <span class="g">&amp; Benefits</span></p>
+    <p class="sec-lead" style="margin-top:16px">Six reasons NPS stands apart as India's most comprehensive retirement-planning instrument.</p>
+    <div class="cat-grid" style="margin-top:48px;grid-template-columns:repeat(3,1fr)">
+      {features.map((f, i) => (
+        <div class="cat" style={i%3===2?'border-right:0':''}>
+          <h4>{f.label}</h4>
+          <p>{f.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ══ TYPES OF NPS ACCOUNTS ══════════════════════════════════════ -->
+  <section class="section auto" style="background:var(--sec-light)">
+    <p class="sec-title">Types of <span class="g">NPS Accounts</span></p>
+    <p class="sec-lead" style="margin-top:16px">NPS operates through two account types designed for different financial needs — mandatory pension savings and flexible voluntary savings.</p>
+    <div class="cat-grid" style="margin-top:48px;grid-template-columns:repeat(2,1fr)">
       {accounts.map((a, i) => (
         <div class="cat" style={i===1?'border-right:0':''}>
           <h4>{a.label}</h4>
           <p>{a.desc}</p>
         </div>
       ))}
-    </div>
-  </section>
-
-  <!-- ══ NPS ASSET CLASSES ══════════════════════════════════════════ -->
-  <section class="section" style="background:var(--sec-tint)">
-    <p class="sec-title">NPS Asset Classes — <span class="g">Where Your Money Is Invested</span></p>
-    <p class="sec-lead" style="margin-top:16px">Four classes covering the full risk-return spectrum — from equity to government bonds to alternatives.</p>
-    <div class="cat-grid" style="margin-top:48px">
-      {assetClasses.map((a, i) => (
-        <div class="cat" style={i===3?'border-right:0':''}>
-          <h4>{a.label}</h4>
-          <p>{a.desc}</p>
-        </div>
-      ))}
-    </div>
-  </section>
-
-  <!-- ══ NPS TAX BENEFITS ═══════════════════════════════════════════ -->
-  <section class="section" style="background:var(--sec-light)">
-    <p class="sec-title">NPS Tax Benefits — <span class="g">Up to ₹2 Lakh Deduction</span></p>
-    <p class="sec-lead" style="margin-top:16px">NPS offers the highest combined tax deduction among all Section 80 instruments. Combine 80CCD(1), 80CCD(1B), and 80CCD(2) for maximum savings.</p>
-    <div class="t-wrap" style="margin-top:48px">
-      <div class="t-scroll">
-        <table>
-          <thead><tr>
-            <th>Section</th><th class="hl">Deduction Limit</th><th class="hl">Eligible For</th><th class="hl">Note</th>
-          </tr></thead>
-          <tbody>
-            {taxRows.map(r => (
-              <tr>
-                <td class="k">{r.section}</td><td class="hl">{r.limit}</td><td>{r.category}</td><td>{r.note}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ NPS RETURNS CALCULATOR ════════════════════════════════════ -->
-  <section class="section auto" style="background:var(--sec-tint)">
-    <p class="sec-title">NPS Returns <span class="g">Calculator</span></p>
-    <p class="sec-lead" style="margin-top:16px">Estimate your NPS retirement corpus based on your age, monthly contribution, and expected returns. Plan early, retire comfortably.</p>
-    <div style="margin-top:48px;max-width:640px">
-      <a href="/calculators/sip/" class="card calc-card">
-        <div class="calc-icon">₹</div>
-        <div>
-          <p class="card-h">NPS Retirement Calculator</p>
-          <p class="card-p" style="margin-top:8px">Project your corpus, monthly pension, and annuity income. Adjust contributions and fund choice to see the impact.</p>
-        </div>
-        <span class="btn-dark" style="width:fit-content">Calculate Now →</span>
-      </a>
-    </div>
-  </section>
-
-  <!-- ══ NPS vs EPF vs PPF ══════════════════════════════════════════ -->
-  <section class="section" style="background:var(--sec-light)">
-    <p class="sec-title">NPS vs EPF <span class="g">vs PPF</span></p>
-    <p class="sec-lead" style="margin-top:16px">Compare India's three major retirement savings instruments across returns, lock-in, tax treatment, and regulatory structure.</p>
-    <div class="t-wrap" style="margin-top:48px">
-      <div class="t-scroll">
-        <table>
-          <thead><tr>
-            <th>Feature</th><th class="hl">NPS</th><th>EPF</th><th>PPF</th>
-          </tr></thead>
-          <tbody>
-            {vsRows.map(r => (
-              <tr>
-                <td class="k">{r.feature}</td><td class="hl">{r.nps}</td><td>{r.epf}</td><td>{r.ppf}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
     </div>
   </section>
 
@@ -192,10 +183,202 @@ const faqs = [
     </div>
   </section>
 
-  <!-- ══ PARTIAL WITHDRAWAL RULES ══════════════════════════════════ -->
+  <!-- ══ ELIGIBILITY ════════════════════════════════════════════════ -->
+  <section class="section auto" style="background:var(--sec-light)">
+    <p class="sec-title">Eligibility for <span class="g">NPS Account</span></p>
+    <p class="sec-lead" style="margin-top:16px">NPS is one of the broadest retirement schemes in India — open to citizens, NRIs, salaried employees, and the self-employed.</p>
+    <div class="cat-grid" style="margin-top:48px;grid-template-columns:repeat(2,1fr)">
+      {eligibility.map((e, i) => (
+        <div class="cat" style={i%2===1?'border-right:0':''}>
+          <h4>{e.label}</h4>
+          <p>{e.desc}</p>
+        </div>
+      ))}
+    </div>
+    <div class="note-box" style="margin-top:24px">
+      <p><strong>Age range:</strong> Minimum entry age is <strong>18 years</strong>; maximum entry age is <strong>70 years</strong>. NPS account can be continued until age 75 with deferred withdrawal.</p>
+    </div>
+  </section>
+
+  <!-- ══ DOCUMENTS REQUIRED ════════════════════════════════════════ -->
+  <section class="section" style="background:var(--sec-tint)">
+    <p class="sec-title">Documents Required <span class="g">for NPS Account</span></p>
+    <p class="sec-lead" style="margin-top:16px">Keep these documents ready to open your NPS account digitally through Shriram Financial Services in under 20 minutes.</p>
+    <div class="cat-grid" style="margin-top:48px;grid-template-columns:repeat(3,1fr)">
+      {documents.map((d, i) => (
+        <div class="cat" style={i%3===2?'border-right:0':''}>
+          <h4>{d.label}</h4>
+          <p>{d.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ══ NPS CALCULATORS & TOOLS ════════════════════════════════════ -->
+  <section class="section auto" style="background:var(--sec-light)">
+    <p class="sec-title">NPS Calculators <span class="g">&amp; Tools</span></p>
+    <p class="sec-lead" style="margin-top:16px">An NPS Calculator helps you estimate the retirement corpus and monthly pension you may receive based on your age, contribution amount, expected returns, and retirement age.</p>
+    <div style="margin-top:48px;max-width:640px">
+      <a href="/calculators/sip/" class="card calc-card">
+        <div class="calc-icon">₹</div>
+        <div>
+          <p class="card-h">NPS Retirement Calculator</p>
+          <p class="card-p" style="margin-top:8px">Project your corpus, monthly pension, and annuity income. Adjust contributions and fund choice to see the impact on your retirement goal.</p>
+        </div>
+        <span class="btn-dark" style="width:fit-content">Calculate Now →</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ══ CONTRIBUTION LIMITS & RULES ════════════════════════════════ -->
+  <section class="section" style="background:var(--sec-tint)">
+    <p class="sec-title">NPS Contribution Limits <span class="g">&amp; Rules 2026</span></p>
+    <p class="sec-lead" style="margin-top:16px">Maximise your NPS tax benefits by understanding the three deduction sections available under the Income Tax Act.</p>
+    <div class="t-wrap" style="margin-top:48px">
+      <div class="t-scroll">
+        <table>
+          <thead><tr>
+            <th>Section</th><th class="hl">Annual Limit</th><th class="hl">Eligible For</th><th>Key Note</th>
+          </tr></thead>
+          <tbody>
+            {[
+              { sec: '80CCD(1)',   limit: 'Up to ₹1,50,000',    who: 'Employee / Self-employed',         note: 'Within the overall ₹1.5L 80C limit' },
+              { sec: '80CCD(1B)', limit: '₹50,000 additional',  who: 'All NPS subscribers',              note: 'Exclusive to NPS — over and above 80C' },
+              { sec: '80CCD(2)',  limit: '10% of Basic + DA',   who: 'Salaried (employer contribution)', note: 'No upper rupee cap — deductible in full' },
+            ].map(r => (
+              <tr>
+                <td class="k">{r.sec}</td><td class="hl">{r.limit}</td><td>{r.who}</td><td>{r.note}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="note-box" style="margin-top:24px;text-align:center">
+      <p>Maximum total NPS deduction: <strong style="color:var(--gold-2)">₹2,00,000/year</strong> (₹1.5L under 80CCD(1) + ₹50,000 under 80CCD(1B)) — more than any other retirement instrument in India.</p>
+    </div>
+  </section>
+
+  <!-- ══ TAX BENEFITS OF NPS ════════════════════════════════════════ -->
   <section class="section" style="background:var(--sec-light)">
-    <p class="sec-title">Partial Withdrawal <span class="g">Rules</span></p>
-    <p class="sec-lead" style="margin-top:16px">NPS locks your corpus until retirement, but PFRDA permits partial withdrawals in specific situations.</p>
+    <p class="sec-title">Tax Benefits <span class="g">of NPS</span></p>
+    <p class="sec-lead" style="margin-top:16px">NPS is one of India's most tax-efficient retirement products — with deductions at the contribution stage, tax-free accumulation, and partial exemption at withdrawal. Benefits differ for individuals and corporates.</p>
+
+    <div class="tax-cols" style="margin-top:48px">
+      <div class="tax-col">
+        <p class="tax-col-h">Individual</p>
+        <div class="t-wrap">
+          <div class="t-scroll">
+            <table>
+              <thead><tr>
+                <th>Section</th><th class="hl">Limit</th><th>Note</th>
+              </tr></thead>
+              <tbody>
+                {[
+                  { sec: '80CCD(1)',   limit: '₹1,50,000',             note: 'Part of overall 80C limit' },
+                  { sec: '80CCD(1B)', limit: '₹50,000 (extra)',        note: 'Exclusive to NPS; above 80C' },
+                  { sec: '80CCD(2)',  limit: '10% of Basic + DA',      note: 'Employer contribution; no cap' },
+                ].map(r => (
+                  <tr>
+                    <td class="k">{r.sec}</td><td class="hl">{r.limit}</td><td>{r.note}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="tax-col">
+        <p class="tax-col-h">Corporate</p>
+        <div class="t-wrap">
+          <div class="t-scroll">
+            <table>
+              <thead><tr>
+                <th>Section</th><th class="hl">Limit</th><th>Note</th>
+              </tr></thead>
+              <tbody>
+                {[
+                  { sec: '80CCD(2)',           limit: '10% Basic+DA (pvt) / 14% (Govt)', note: "Employer's contribution; deductible" },
+                  { sec: 'Sec 36(1)(iv-a)',    limit: 'Up to 10% of Basic + DA',         note: 'Additional corporate deduction' },
+                ].map(r => (
+                  <tr>
+                    <td class="k">{r.sec}</td><td class="hl">{r.limit}</td><td>{r.note}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ NPS RETURNS & PERFORMANCE ══════════════════════════════════ -->
+  <section class="section" style="background:var(--sec-tint)">
+    <p class="sec-title">NPS Returns &amp; <span class="g">Performance</span></p>
+    <p class="sec-lead" style="margin-top:16px">NPS is a market-linked product. Returns depend on asset class and fund manager. Here are indicative historical returns across asset classes.</p>
+    <div class="t-wrap" style="margin-top:48px">
+      <div class="t-scroll">
+        <table>
+          <thead><tr>
+            <th>Asset Class</th><th class="hl">5-Year CAGR</th><th class="hl">10-Year CAGR</th><th>Risk Level</th>
+          </tr></thead>
+          <tbody>
+            {[
+              { cls: 'Class E — Equity',                    five: '12–15% p.a.', ten: '10–13% p.a.',  risk: 'High' },
+              { cls: 'Class C — Corporate Bonds',           five: '7–9% p.a.',   ten: '7–8.5% p.a.',  risk: 'Moderate' },
+              { cls: 'Class G — Government Securities',     five: '6.5–8% p.a.', ten: '6–7.5% p.a.',  risk: 'Low' },
+              { cls: 'Class A — Alternatives (capped 5%)', five: '8–11% p.a.',  ten: 'N/A (recent)',  risk: 'Moderate-High' },
+            ].map(r => (
+              <tr>
+                <td class="k">{r.cls}</td><td class="hl">{r.five}</td><td class="hl">{r.ten}</td><td>{r.risk}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <p class="sec-lead" style="margin-top:16px;font-size:13px">* Past returns are indicative only. NPS returns are not guaranteed. Source: PFRDA performance data, 2024.</p>
+  </section>
+
+  <!-- ══ ASSET ALLOCATION OPTIONS ═══════════════════════════════════ -->
+  <section class="section" style="background:var(--sec-light)">
+    <p class="sec-title">Asset Allocation Options — <span class="g">Active vs Auto Choice</span></p>
+    <p class="sec-lead" style="margin-top:16px">Unlike rigid instruments, NPS lets you decide how your savings are invested through two flexible allocation methods.</p>
+    <div class="alloc-grid" style="margin-top:48px">
+      <div class="alloc-card">
+        <h4>Active Choice</h4>
+        <p>Complete control over your portfolio allocation. Decide how much to invest in Equity (E), Corporate Bonds (C), Government Securities (G), and Alternative Assets (A) based on your risk appetite.</p>
+        <ul class="alloc-list">
+          <li><span class="tk">→</span><span>Max 75% in equity (reduces after age 50)</span></li>
+          <li><span class="tk">→</span><span>Max 5% in alternative assets</span></li>
+          <li><span class="tk">→</span><span>Best for experienced investors seeking higher returns</span></li>
+        </ul>
+      </div>
+      <div class="alloc-card">
+        <h4>Auto Choice</h4>
+        <p>Investment allocation is managed automatically using an age-based lifecycle strategy. Higher equity exposure at younger ages, gradually reducing as you approach retirement.</p>
+        <ul class="alloc-list">
+          <li><span class="tk">→</span><span>Three lifecycle options: Conservative, Moderate, Aggressive</span></li>
+          <li><span class="tk">→</span><span>Auto-rebalances annually based on age</span></li>
+          <li><span class="tk">→</span><span>Ideal for hands-off investors who prefer simplicity</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="cat-grid" style="margin-top:32px">
+      {assetClasses.map((a, i) => (
+        <div class="cat" style={i===3?'border-right:0':''}>
+          <h4>{a.label}</h4>
+          <p>{a.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ══ NPS WITHDRAWAL & EXIT RULES ════════════════════════════════ -->
+  <section class="section" style="background:var(--sec-tint)">
+    <p class="sec-title">NPS Withdrawal <span class="g">&amp; Exit Rules</span></p>
+    <p class="sec-lead" style="margin-top:16px">NPS locks your corpus until retirement, but PFRDA permits partial withdrawals in specific situations before age 60.</p>
     <div class="wd-grid" style="margin-top:48px">
       <div class="appr">
         <div class="stat-n">3 yrs</div>
@@ -223,11 +406,27 @@ const faqs = [
     </div>
   </section>
 
-  <!-- ══ MATURITY & ANNUITY ════════════════════════════════════════ -->
-  <section class="section" style="background:var(--sec-tint)">
-    <p class="sec-title">Maturity &amp; Annuity — <span class="g">What Happens at Age 60</span></p>
+  <!-- ══ TAXATION OF NPS (AT WITHDRAWAL) ════════════════════════════ -->
+  <section class="section" style="background:var(--sec-light)">
+    <p class="sec-title">Taxation of NPS <span class="g">(At Withdrawal)</span></p>
     <p class="sec-lead" style="margin-top:16px">At retirement, NPS follows a structured withdrawal: 60% lump sum (tax-free) and 40% mandatory annuity for a monthly pension.</p>
-    <div class="cat-grid" style="margin-top:48px;grid-template-columns:repeat(2,1fr)">
+    <div class="t-wrap" style="margin-top:48px">
+      <div class="t-scroll">
+        <table>
+          <thead><tr>
+            <th>Withdrawal Stage</th><th class="hl">Tax Treatment</th><th>Note</th>
+          </tr></thead>
+          <tbody>
+            {taxationRows.map(r => (
+              <tr>
+                <td class="k">{r.stage}</td><td class="hl">{r.treatment}</td><td>{r.note}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="cat-grid" style="margin-top:32px;grid-template-columns:repeat(2,1fr)">
       {annuityPoints.map((p, i) => (
         <div class="cat" style={i===1||i===3?'border-right:0':''}>
           <h4>{p.label}</h4>
@@ -236,84 +435,63 @@ const faqs = [
       ))}
     </div>
     <div class="note-box" style="margin-top:32px">
-      <p><strong>Note on annuity providers:</strong> PFRDA maintains a list of empanelled life insurers (LIC, SBI Life, HDFC Life, and others) from which you must purchase the annuity. Multiple payout options are available — life annuity, joint life with spouse, guaranteed period, and more.</p>
+      <p><strong>Annuity providers:</strong> PFRDA maintains a list of empanelled life insurers (LIC, SBI Life, HDFC Life, and others). Multiple payout options available — life annuity, joint life with spouse, guaranteed period, and more.</p>
     </div>
-  </section>
-
-  <!-- ══ CONTRIBUTION LIMITS & RULES ════════════════════════════════ -->
-  <section class="section" style="background:var(--sec-light)">
-    <p class="sec-title">NPS Contribution Limits <span class="g">&amp; Rules 2026</span></p>
-    <p class="sec-lead" style="margin-top:16px">Maximise your NPS tax benefits by understanding the three deduction sections available under the Income Tax Act.</p>
-    <div class="t-wrap" style="margin-top:48px">
-      <div class="t-scroll">
-        <table>
-          <thead><tr>
-            <th>Section</th><th class="hl">Annual Limit</th><th class="hl">Eligible For</th><th>Key Note</th>
-          </tr></thead>
-          <tbody>
-            {[
-              { sec: '80CCD(1)',   limit: 'Up to ₹1,50,000',      who: 'Employee / Self-employed',            note: 'Within the overall ₹1.5L 80C limit' },
-              { sec: '80CCD(1B)', limit: '₹50,000 additional',     who: 'All NPS subscribers',                 note: 'Exclusive to NPS — over and above 80C' },
-              { sec: '80CCD(2)',  limit: '10% of Basic + DA',       who: 'Salaried (employer contribution)',    note: 'No upper rupee cap — deductible in full' },
-            ].map(r => (
-              <tr>
-                <td class="k">{r.sec}</td><td class="hl">{r.limit}</td><td>{r.who}</td><td>{r.note}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="note-box" style="margin-top:24px;text-align:center">
-      <p>Maximum total NPS deduction: <strong style="color:var(--gold-2)">₹2,00,000/year</strong> (₹1.5L under 80CCD(1) + ₹50,000 under 80CCD(1B)) — more than any other retirement instrument.</p>
-    </div>
-  </section>
-
-  <!-- ══ RETURNS & HISTORICAL PERFORMANCE ══════════════════════════ -->
-  <section class="section" style="background:var(--sec-tint)">
-    <p class="sec-title">NPS Returns &amp; <span class="g">Historical Performance</span></p>
-    <p class="sec-lead" style="margin-top:16px">NPS returns are market-linked and vary by asset class and pension fund manager. Here are indicative historical returns.</p>
-    <div class="t-wrap" style="margin-top:48px">
-      <div class="t-scroll">
-        <table>
-          <thead><tr>
-            <th>Asset Class</th><th class="hl">5-Year CAGR</th><th class="hl">10-Year CAGR</th><th>Risk Level</th>
-          </tr></thead>
-          <tbody>
-            {[
-              { cls: 'Class E — Equity',                    five: '12–15% p.a.', ten: '10–13% p.a.',    risk: 'High' },
-              { cls: 'Class C — Corporate Bonds',           five: '7–9% p.a.',   ten: '7–8.5% p.a.',   risk: 'Moderate' },
-              { cls: 'Class G — Government Securities',     five: '6.5–8% p.a.', ten: '6–7.5% p.a.',   risk: 'Low' },
-              { cls: 'Class A — Alternatives (capped 5%)', five: '8–11% p.a.',  ten: 'N/A (recent)', risk: 'Moderate-High' },
-            ].map(r => (
-              <tr>
-                <td class="k">{r.cls}</td><td class="hl">{r.five}</td><td class="hl">{r.ten}</td><td>{r.risk}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <p class="sec-lead" style="margin-top:16px;font-size:13px">* Past returns are indicative only. NPS returns are not guaranteed. Source: PFRDA performance data, 2024.</p>
   </section>
 
   <!-- ══ NPS FEES & CHARGES ════════════════════════════════════════ -->
-  <section class="section" style="background:var(--sec-light)">
+  <section class="section" style="background:var(--sec-tint)">
     <p class="sec-title">NPS Fees &amp; <span class="g">Charges Explained</span></p>
     <p class="sec-lead" style="margin-top:16px">NPS has one of the lowest fee structures of any retirement instrument in India — here's a complete breakdown.</p>
     <div class="cat-grid" style="margin-top:48px;grid-template-columns:repeat(3,1fr)">
       {[
-        { label: 'PRAN Card Issuance',              fee: '₹40 one-time',              note: 'For physical PRAN card; ePRAN is free' },
-        { label: 'CRA Annual Maintenance',           fee: '₹95 per year',              note: 'CRA record-keeping fee charged by CRA' },
-        { label: 'Fund Management Charge',           fee: '0.09% p.a.',                note: 'Charged on AUM — lowest in the industry' },
-        { label: 'Contribution Processing (PoP)',    fee: '0.25% (min ₹20)',           note: 'Per contribution via Point of Presence' },
-        { label: 'eNPS Digital Contribution',        fee: '₹5–₹20 per transaction',   note: 'Payment gateway charges (UPI/Net Banking)' },
-        { label: 'Exit / Withdrawal Charge',         fee: '0.125% of corpus',          note: 'On premature exit; no charge at age 60 maturity' },
+        { label: 'PRAN Card Issuance',           fee: '₹40 one-time',            note: 'For physical PRAN card; ePRAN is free' },
+        { label: 'CRA Annual Maintenance',        fee: '₹95 per year',            note: 'CRA record-keeping fee charged by CRA' },
+        { label: 'Fund Management Charge',        fee: '0.09% p.a.',              note: 'Charged on AUM — lowest in the industry' },
+        { label: 'Contribution Processing (PoP)', fee: '0.25% (min ₹20)',        note: 'Per contribution via Point of Presence' },
+        { label: 'eNPS Digital Contribution',     fee: '₹5–₹20 per transaction', note: 'Payment gateway charges (UPI/Net Banking)' },
+        { label: 'Exit / Withdrawal Charge',      fee: '0.125% of corpus',        note: 'On premature exit; no charge at age 60 maturity' },
       ].map((f, i) => (
         <div class="cat" style={i%3===2?'border-right:0':''}>
           <div class="fee-n">{f.fee}</div>
           <h4>{f.label}</h4>
           <p>{f.note}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ══ COMPARE NPS vs MF vs EQUITY ════════════════════════════════ -->
+  <section class="section" style="background:var(--sec-light)">
+    <p class="sec-title">Compare NPS vs Mutual Funds <span class="g">vs Equity</span></p>
+    <p class="sec-lead" style="margin-top:16px">How NPS stacks up against the two most popular market-linked investment alternatives across returns, tax, liquidity, and risk.</p>
+    <div class="t-wrap" style="margin-top:48px">
+      <div class="t-scroll">
+        <table>
+          <thead><tr>
+            <th>Feature</th><th class="hl">NPS</th><th>Mutual Funds</th><th>Equity (Direct)</th>
+          </tr></thead>
+          <tbody>
+            {vsRows.map(r => (
+              <tr>
+                <td class="k">{r.feature}</td><td class="hl">{r.nps}</td><td>{r.mf}</td><td>{r.equity}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ HOW WE VERIFY NPS INFORMATION ══════════════════════════════ -->
+  <section class="section auto" style="background:var(--sec-tint)">
+    <p class="sec-title">How We Verify <span class="g">NPS Information</span></p>
+    <p class="sec-lead" style="margin-top:16px">Every fact, limit, and rule on this page is verified against official PFRDA guidelines and the Income Tax Act before publishing.</p>
+    <div class="cat-grid" style="margin-top:48px;grid-template-columns:repeat(2,1fr)">
+      {verifyPoints.map((v, i) => (
+        <div class="cat" style={i%2===1?'border-right:0':''}>
+          <h4>{v.label}</h4>
+          <p>{v.desc}</p>
         </div>
       ))}
     </div>
@@ -386,15 +564,21 @@ const faqs = [
   .sec-lead  { font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.5; max-width: 640px; }
   .g { color: var(--gold-2); }
 
+  /* ── Hero ── */
   .hero { padding: 0 var(--pad); display: flex; flex-direction: column; justify-content: center; overflow: hidden; background: radial-gradient(125% 210% at 100% -8%, #4f583b 0%, #363a2c 50%, #1d1d1d 100%); }
   .hero-inner { padding: clamp(80px,12vw,140px) 0 clamp(48px,6vw,80px); display: flex; flex-direction: column; }
+  .trust-bar { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; margin-bottom: 28px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.16); border-radius: 8px; padding: 10px 18px; width: fit-content; }
+  .trust-bar span { font-size: 13px; font-weight: 500; color: rgba(255,255,255,.85); }
+  .trust-bar .sep { color: rgba(255,255,255,.3); }
   .hero h1 { font-weight: 500; font-size: 40px; color: #fff; line-height: 1.5; max-width: 860px; }
   .hero .lead { margin-top: 32px; font-weight: 400; font-size: 18px; line-height: 1.5; color: rgba(255,255,255,.74); max-width: 600px; }
   .cta-row { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
-  .feats { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 14px 16px; max-width: 760px; padding-top: 36px; border-top: 1px solid rgba(255,255,255,.16); }
-  .feat { display: flex; gap: 10px; align-items: center; }
-  .feat .tk { color: var(--gold-2); font-weight: 500; font-size: 15px; }
-  .feat .lb { color: rgba(255,255,255,.9); font-weight: 500; font-size: 16px; }
+  .login-bar { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 0; align-items: center; background: #13590f; border-radius: 8px; width: fit-content; overflow: hidden; }
+  .login-btn { padding: 14px 24px; font-size: 14px; font-weight: 500; color: #fff; white-space: nowrap; transition: background .2s; }
+  .login-btn:hover { background: rgba(255,255,255,.1); }
+  .login-btn--gold { background: var(--gold-btn); color: var(--gold-ink); font-weight: 600; }
+  .login-btn--gold:hover { background: #e0a82e; }
+  .lsep { width: 1px; align-self: stretch; background: rgba(255,255,255,.2); flex: none; }
 
   .btn-gold  { background: var(--gold-btn); height: 40px; width: var(--cta-w); border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; font-weight: 500; font-size: 12px; color: var(--olive-ink); white-space: nowrap; transition: opacity .2s; }
   .btn-gold:hover { opacity: .88; }
@@ -403,9 +587,12 @@ const faqs = [
   .btn-dark  { background: #333; height: 40px; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; padding: 0 24px; font-weight: 500; font-size: 12px; color: #fff; transition: opacity .2s; }
   .btn-dark:hover { opacity: .88; }
 
+  /* ── Def row ── */
   .def-row { display: grid; grid-template-columns: 5fr 7fr; gap: 72px; align-items: start; }
   .def-body { display: flex; flex-direction: column; gap: 20px; font-size: 17px; line-height: 1.7; color: var(--ink-3); }
+  .def-body strong { color: var(--ink); }
 
+  /* ── Cat grid ── */
   .cat-grid { border: 1px solid var(--card-border); border-radius: 24px; overflow: hidden; display: grid; grid-template-columns: repeat(4,1fr); background: var(--card); }
   .cat { background: var(--card); padding: 32px; display: flex; flex-direction: column; gap: 12px; border-right: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border); }
   .cat:nth-child(4n) { border-right: 0; }
@@ -414,6 +601,7 @@ const faqs = [
   .cat p  { font-weight: 400; font-size: 16px; color: var(--muted); line-height: 1.5; }
   .fee-n  { font-weight: 700; font-size: 22px; color: var(--gold-2); line-height: 1; }
 
+  /* ── Card ── */
   .card { background: var(--card); border: 1px solid var(--card-border); border-radius: 24px; padding: 32px; display: flex; flex-direction: column; gap: 16px; }
   .card-h { font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.5; }
   .card-p { font-weight: 400; font-size: 16px; color: var(--muted); line-height: 1.5; }
@@ -421,6 +609,7 @@ const faqs = [
   .calc-card:hover { box-shadow: 0 8px 32px rgba(28,28,22,.10); }
   .calc-icon { width: 64px; height: 64px; border-radius: 50%; background: var(--olive-deep); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 28px; color: var(--gold-2); }
 
+  /* ── Steps ── */
   .steps { background: var(--card); border: 1px solid var(--card-border); border-radius: 24px; overflow: hidden; display: flex; align-items: stretch; width: 100%; }
   .step  { flex: 1 0 0; min-width: 0; padding: 32px; display: flex; flex-direction: column; gap: 16px; }
   .step .num { font-weight: 400; font-size: 32px; color: var(--gold); }
@@ -428,6 +617,7 @@ const faqs = [
   .step p  { font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.5; }
   .step-div { width: 1px; align-self: stretch; background: var(--card-border); flex: none; }
 
+  /* ── Withdrawal grid ── */
   .wd-grid  { display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; }
   .appr     { background: var(--olive-deep); border: 1px solid rgba(255,255,255,.08); border-radius: 24px; padding: 32px; display: flex; flex-direction: column; gap: 16px; }
   .appr h4  { font-weight: 500; font-size: 20px; color: #fff; line-height: 1.5; }
@@ -437,6 +627,7 @@ const faqs = [
   .reason-list li { display: flex; gap: 8px; font-size: 14px; color: rgba(255,255,255,.72); }
   .reason-list .tk { color: var(--gold-2); flex: none; }
 
+  /* ── Tables ── */
   .t-wrap   { border: 1px solid var(--card-border); border-radius: 24px; overflow: hidden; background: var(--card); }
   .t-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
   table { width: 100%; border-collapse: collapse; }
@@ -448,8 +639,24 @@ const faqs = [
   tbody td.k  { font-weight: 600; color: var(--ink); }
   tbody td.hl { color: var(--gold-2); font-weight: 500; }
 
+  /* ── Note box ── */
   .note-box { background: var(--card); border: 1px solid var(--card-border); border-radius: 16px; padding: 20px 24px; font-size: 15px; color: var(--ink-3); line-height: 1.6; }
 
+  /* ── Tax cols ── */
+  .tax-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .tax-col  { display: flex; flex-direction: column; gap: 16px; }
+  .tax-col-h { font-weight: 600; font-size: 20px; color: var(--olive-title); }
+
+  /* ── Allocation grid ── */
+  .alloc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .alloc-card { background: var(--olive-deep); border-radius: 24px; padding: 36px; display: flex; flex-direction: column; gap: 16px; }
+  .alloc-card h4 { font-weight: 600; font-size: 22px; color: #fff; }
+  .alloc-card p  { font-size: 16px; color: rgba(255,255,255,.72); line-height: 1.6; }
+  .alloc-list { display: flex; flex-direction: column; gap: 10px; }
+  .alloc-list li { display: flex; gap: 10px; font-size: 14px; color: rgba(255,255,255,.72); }
+  .alloc-list .tk { color: var(--gold-2); flex: none; padding-top: 2px; }
+
+  /* ── FAQ ── */
   .faq-wrap  { padding: var(--section-y) var(--pad); background: #FFFCF3; display: flex; flex-direction: column; justify-content: center; }
   .faq-cols  { display: flex; gap: 48px; align-items: stretch; }
   .faq-left  { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; gap: 32px; }
@@ -474,11 +681,13 @@ const faqs = [
   .side-tx h4 { font-weight: 600; font-size: 20px; line-height: 28px; }
   .side-tx p  { font-weight: 400; font-size: 14px; line-height: 1.6; color: rgba(255,255,255,.74); }
 
+  /* ── Final CTA ── */
   .cta-sec { padding: var(--section-y) var(--pad); display: flex; flex-direction: column; align-items: center; }
   .cta-box { background: var(--olive-deep); border-radius: 22px; padding: 64px 60px; display: flex; flex-direction: column; align-items: center; gap: 20px; text-align: center; width: 100%; }
   .cta-h   { font-weight: 500; font-size: 38px; color: #fff; line-height: 1.3; max-width: 560px; }
   .cta-sub { font-weight: 400; font-size: 17px; color: rgba(255,255,255,.7); line-height: 1.5; max-width: 480px; }
 
+  /* ── Responsive ── */
   @media (max-width: 1024px) {
     .def-row { grid-template-columns: 1fr; gap: 32px; }
     .cat-grid { grid-template-columns: repeat(2,1fr) !important; }
@@ -487,6 +696,8 @@ const faqs = [
     .cat:nth-last-child(-n+4) { border-bottom: 1px solid var(--card-border); }
     .cat:nth-last-child(-n+2) { border-bottom: 0; }
     .wd-grid { grid-template-columns: repeat(2,1fr); }
+    .tax-cols { grid-template-columns: 1fr; }
+    .alloc-grid { grid-template-columns: 1fr; }
   }
   @media (max-width: 900px) {
     .steps { flex-direction: column; }
@@ -501,12 +712,16 @@ const faqs = [
     .cta-h { font-size: clamp(24px,6.4vw,38px); }
     .section { padding: 56px var(--pad); min-height: 0; }
     .cta-box { padding: 48px 24px; }
+    .login-bar { width: 100%; border-radius: 8px; }
+    .login-btn { flex: 1; text-align: center; font-size: 12px; padding: 12px 12px; }
   }
   @media (max-width: 560px) {
     .cat-grid { grid-template-columns: 1fr !important; }
     .cat { border-right: 0 !important; border-bottom: 1px solid var(--card-border) !important; }
     .cat:last-child { border-bottom: 0 !important; }
     .wd-grid { grid-template-columns: 1fr; }
+    .login-bar { flex-direction: column; }
+    .lsep { width: 100%; height: 1px; align-self: auto; }
   }
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
