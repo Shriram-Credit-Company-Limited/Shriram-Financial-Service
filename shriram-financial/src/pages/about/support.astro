@@ -1,64 +1,764 @@
 ---
-import AboutTemplate from '../../layouts/AboutTemplate.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const branches = [
+  {
+    city: 'Bengaluru',
+    area: 'Residency Road',
+    address: 'No. 3/1, Residency Cross Rd, Bengaluru – 560025',
+    phone: '080-4660 0300',
+    mapUrl: 'https://maps.google.com/?q=No+3%2F1+Residency+Cross+Rd+Bengaluru+560025',
+  },
+  {
+    city: 'Mumbai',
+    area: 'Andheri East',
+    address: '101–104, Dynasty Business Park, J.B. Nagar, Andheri East – 400059',
+    phone: '080-4660 0300',
+    mapUrl: 'https://maps.google.com/?q=Dynasty+Business+Park+Andheri+East+Mumbai',
+  },
+  {
+    city: 'Chennai',
+    area: 'Nungambakkam',
+    address: 'V.G.P. Minerva, Nungambakkam High Rd, Chennai – 600034',
+    phone: '080-4660 0300',
+    mapUrl: 'https://maps.google.com/?q=VGP+Minerva+Nungambakkam+High+Rd+Chennai+600034',
+  },
+  {
+    city: 'New Delhi',
+    area: 'Connaught Place',
+    address: '801, 8th Floor, Mercantile House, K G Marg, Connaught Place – 110001',
+    phone: '080-4660 0300',
+    mapUrl: 'https://maps.google.com/?q=Mercantile+House+KG+Marg+Connaught+Place+Delhi',
+  },
+  {
+    city: 'Hyderabad',
+    area: 'Begumpet',
+    address: 'Ground Floor, Wing B, Diamond District, Old Airport Road, Begumpet – 500016',
+    phone: '080-4660 0300',
+    mapUrl: 'https://maps.google.com/?q=Diamond+District+Old+Airport+Road+Begumpet+Hyderabad',
+  },
+];
+
+const downloads = [
+  {
+    title: 'Account Opening Form',
+    desc: 'For opening a new Demat & trading account with Shriram Financial Securities.',
+    file: '#',
+  },
+  {
+    title: 'KYC Update Form',
+    desc: 'To update your KYC details — address, bank account, email, or mobile number.',
+    file: '#',
+  },
+  {
+    title: 'Nominee Registration / Change Form',
+    desc: 'To register or update nominee details for your Demat account.',
+    file: '#',
+  },
+  {
+    title: 'Change of Details / Signature Form',
+    desc: 'To update signature, photograph, or other personal details on your account.',
+    file: '#',
+  },
+  {
+    title: 'Power of Attorney (POA) Form',
+    desc: 'CDSL-prescribed PoA form for enabling seamless settlement of trades.',
+    file: '#',
+  },
+  {
+    title: 'Closure of Account Form',
+    desc: 'To close your Demat and/or trading account with Shriram Financial Securities.',
+    file: '#',
+  },
+];
 ---
-<AboutTemplate
-  title="Support & Help Centre"
-  eyebrow="We're Here for You"
-  lead="Reach our team via phone, email, or WhatsApp — Mon to Sat, 9 AM to 6 PM IST. Every client gets a dedicated Relationship Manager as their first point of contact for any query."
-  description="Contact Shriram Financial Services support. Dedicated relationship managers, toll-free helpline, email support, and branch locator for all investment queries."
+
+<BaseLayout
+  title="Contact Us — Support & Branch Locator | Shriram Financial Services"
+  description="Contact Shriram Financial Services. Reach us on 1800-425-5501 (toll-free), email support@sfs.com, or find your nearest branch. Schedule a callback with an advisor."
 >
-  <h2>Your First Point of Contact</h2>
-  <p>
-    Every Shriram Financial Services client is assigned a dedicated Relationship Manager (RM) — a named individual who knows your portfolio, your goals, and your history with us. For most queries, your RM is the fastest and most personalised support you will find. Your RM's direct contact details are available in your Antara platform dashboard under "My Relationship Manager."
-  </p>
 
-  <h2>General Support Channels</h2>
-  <ul>
-    <li><strong>Toll-Free Helpline:</strong> 1800 103 1212 (Mon–Sat, 9:00 AM – 6:00 PM IST)</li>
-    <li><strong>Email Support:</strong> support@shriramfinancialservices.com (response within 24 hours on business days)</li>
-    <li><strong>WhatsApp Support:</strong> +91 98765 43210 (Mon–Sat, 9:00 AM – 6:00 PM IST)</li>
-    <li><strong>Registered Office:</strong> Shriram House, No. 4, Burkit Road, T. Nagar, Chennai – 600 017</li>
-  </ul>
+  <!-- ══ HERO ═══════════════════════════════════════════════════════ -->
+  <section class="hero-section">
+    <div class="hero-inner">
 
-  <h2>Account & Trading Queries</h2>
-  <ul>
-    <li><strong>Account Opening / KYC:</strong> accounts@shriramfinancialservices.com or call 1800 103 1212 (Option 1)</li>
-    <li><strong>Trading Platform (Antara) Issues:</strong> antara-support@shriramfinancialservices.com or call 1800 103 1212 (Option 2)</li>
-    <li><strong>Demat / CDSL Queries:</strong> demat@shriramfinancialservices.com or call 1800 103 1212 (Option 3)</li>
-    <li><strong>Mutual Fund Queries:</strong> mf@shriramfinancialservices.com</li>
-    <li><strong>Research & Advisory:</strong> research@shriramfinancialservices.com</li>
-    <li><strong>Partner / Sub-Broker Queries:</strong> partners@shriramfinancialservices.com</li>
-  </ul>
+      <!-- Left: contact info -->
+      <div class="hero-left">
+        <p class="eyebrow">CONTACT US</p>
+        <h1 class="hero-h1">How can we <span class="gold">help you?</span></h1>
+        <p class="hero-sub">Reach our support team across multiple channels. We're here Monday to Saturday, 9 AM – 6 PM.</p>
+        <div class="contact-pills">
+          <a href="tel:18004255501" class="pill">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.44 2 2 0 0 1 3.59 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.69a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.03z"/></svg>
+            1800-425-5501 (toll-free)
+          </a>
+          <a href="mailto:support@sfs.com" class="pill">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            support@sfs.com
+          </a>
+        </div>
+      </div>
 
-  <h2>Grievance Redressal</h2>
-  <p>
-    At Shriram Financial Services, we take all client grievances seriously and aim to resolve them within 30 days. Our SEBI-mandated grievance redressal mechanism is as follows:
-  </p>
-  <ul>
-    <li><strong>Level 1 — Relationship Manager:</strong> Contact your dedicated RM first. Most issues are resolved at this level within 24–48 hours.</li>
-    <li><strong>Level 2 — Compliance Officer:</strong> If your RM is unable to resolve your concern within 7 working days, escalate to our Compliance Officer at: compliance@shriramfinancialservices.com</li>
-    <li><strong>Level 3 — SEBI SCORES:</strong> If your grievance remains unresolved after 30 days, you may file a complaint directly on the SEBI SCORES portal at scores.sebi.gov.in — a government-managed grievance platform for securities market investors.</li>
-    <li><strong>ODR Portal:</strong> For dispute resolution, SEBI has mandated the Online Dispute Resolution (ODR) mechanism at smartodr.in for all securities market disputes.</li>
-  </ul>
+      <!-- Right: Schedule a call form -->
+      <div class="hero-form">
+        <h3 class="form-title">Schedule a call with us</h3>
+        <form class="callback-form" id="callbackForm">
+          <input type="text" placeholder="Name" required />
+          <input type="tel" placeholder="Mobile Number" required />
+          <input type="text" placeholder="City" required />
+          <select required>
+            <option value="" disabled selected>Purpose</option>
+            <option>Open Demat Account</option>
+            <option>Equity Trading</option>
+            <option>Mutual Funds</option>
+            <option>IPO Application</option>
+            <option>Loan Against Securities</option>
+            <option>General Query</option>
+          </select>
+          <button type="submit" class="submit-btn">Submit</button>
+        </form>
+      </div>
 
-  <h2>Grievance Officer</h2>
-  <ul>
-    <li><strong>Name:</strong> Compliance Officer, Shriram Financial Services</li>
-    <li><strong>Address:</strong> Shriram House, No. 4, Burkit Road, T. Nagar, Chennai – 600 017</li>
-    <li><strong>Email:</strong> compliance@shriramfinancialservices.com</li>
-    <li><strong>Phone:</strong> 1800 103 1212 (Toll-Free)</li>
-  </ul>
+    </div>
+  </section>
 
-  <h2>Branch Network</h2>
-  <p>
-    With over 3,000 Shriram Group offices across India, there is likely a Shriram service centre near you. For in-person assistance, call 1800 103 1212 to locate your nearest branch and book an appointment with a Relationship Manager.
-  </p>
+  <!-- ══ TAB NAV ════════════════════════════════════════════════════ -->
+  <nav class="tab-nav" role="tablist">
+    <button class="tab-btn active" role="tab" data-tab="care" aria-selected="true">Customer Care</button>
+    <button class="tab-btn" role="tab" data-tab="branch" aria-selected="false">Branch Locator</button>
+    <button class="tab-btn" role="tab" data-tab="downloads" aria-selected="false">Downloads</button>
+  </nav>
 
-  <h2>Frequently Asked Questions</h2>
-  <ul>
-    <li><strong>How do I reset my Antara trading password?</strong> Use the "Forgot Password" option on the Antara login page — you will receive a reset link on your registered email within 2 minutes.</li>
-    <li><strong>How do I update my bank account for withdrawals?</strong> Submit a bank account change request via the Antara platform under Settings > Bank Details — requires your Aadhaar OTP for verification.</li>
-    <li><strong>How do I check my margin available for trading?</strong> Log in to Antara and go to Funds > Available Margin — updated in real time during market hours.</li>
-    <li><strong>How long does it take to withdraw funds to my bank account?</strong> Fund withdrawal requests placed before 2:00 PM on business days are typically credited to your bank account within T+1 working day.</li>
-  </ul>
-</AboutTemplate>
+  <!-- ══ TAB 1: CUSTOMER CARE ═══════════════════════════════════════ -->
+  <section class="tab-panel active" id="tab-care" role="tabpanel">
+    <div class="wrap">
+
+      <div class="panel-head">
+        <h2 class="panel-title">Get in touch</h2>
+        <p class="panel-sub">Choose the channel that works best for you.</p>
+      </div>
+
+      <div class="hours-bar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span>Support hours: Monday – Saturday, 9:00 AM to 6:00 PM IST. Closed on public holidays.</span>
+      </div>
+
+      <!-- 3-column contact cards -->
+      <div class="contact-cards">
+        <div class="contact-card">
+          <div class="card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.44 2 2 0 0 1 3.59 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.69a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.03z"/></svg>
+          </div>
+          <h4>Toll-free helpline</h4>
+          <p class="card-val"><a href="tel:18004255501">1800-425-5501</a></p>
+          <p class="card-note">No charges from any network</p>
+        </div>
+        <div class="contact-card">
+          <div class="card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.44 2 2 0 0 1 3.59 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.69a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.03z"/></svg>
+          </div>
+          <h4>Alternate number</h4>
+          <p class="card-val"><a href="tel:08046600300">080-4660 0300</a></p>
+          <p class="card-note">Bengaluru head office</p>
+        </div>
+        <div class="contact-card">
+          <div class="card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <h4>Email support</h4>
+          <p class="card-val"><a href="mailto:support@sfs.com">support@sfs.com</a></p>
+          <p class="card-note">Response within 24 hours</p>
+        </div>
+      </div>
+
+      <!-- Head office wide card -->
+      <div class="office-card">
+        <div class="office-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <div class="office-info">
+          <h4>Head office</h4>
+          <p>No. 3/1, Residency Cross Rd, Bengaluru – 560025</p>
+          <p class="office-hours">Mon–Sat, 9 AM – 6 PM</p>
+        </div>
+      </div>
+
+      <!-- Grievance section -->
+      <div class="grievance-grid">
+        <div class="grievance-card">
+          <h4>Grievance Redressal</h4>
+          <ol class="grievance-steps">
+            <li><strong>Level 1 — RM:</strong> Contact your Relationship Manager first. Most queries resolved in 24–48 hours.</li>
+            <li><strong>Level 2 — Compliance Officer:</strong> Escalate to <a href="mailto:compliance@sfs.com">compliance@sfs.com</a> if unresolved in 7 working days.</li>
+            <li><strong>Level 3 — SEBI SCORES:</strong> File on <a href="https://scores.sebi.gov.in" target="_blank" rel="noopener">scores.sebi.gov.in</a> if unresolved after 30 days.</li>
+            <li><strong>ODR Portal:</strong> Use <a href="https://smartodr.in" target="_blank" rel="noopener">smartodr.in</a> for SEBI-mandated dispute resolution.</li>
+          </ol>
+        </div>
+        <div class="grievance-card">
+          <h4>Grievance Officer</h4>
+          <ul class="grievance-list">
+            <li><span class="gl">Name</span><span>Compliance Officer, Shriram Financial Services</span></li>
+            <li><span class="gl">Address</span><span>No. 3/1, Residency Cross Rd, Bengaluru – 560025</span></li>
+            <li><span class="gl">Email</span><span><a href="mailto:compliance@sfs.com">compliance@sfs.com</a></span></li>
+            <li><span class="gl">Phone</span><span><a href="tel:18004255501">1800-425-5501</a> (Toll-Free)</span></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ TAB 2: BRANCH LOCATOR ══════════════════════════════════════ -->
+  <section class="tab-panel" id="tab-branch" role="tabpanel" hidden>
+    <div class="wrap">
+
+      <div class="panel-head">
+        <h2 class="panel-title">Find a branch near you</h2>
+        <p class="panel-sub">Search by state and city, or browse the list below.</p>
+      </div>
+
+      <!-- Search filters -->
+      <div class="branch-filters">
+        <select id="filterState" class="filter-select">
+          <option value="">Select State</option>
+          <option>Karnataka</option>
+          <option>Maharashtra</option>
+          <option>Tamil Nadu</option>
+          <option>Delhi</option>
+          <option>Telangana</option>
+        </select>
+        <select id="filterCity" class="filter-select">
+          <option value="">Select City</option>
+          <option>Bengaluru</option>
+          <option>Mumbai</option>
+          <option>Chennai</option>
+          <option>New Delhi</option>
+          <option>Hyderabad</option>
+        </select>
+        <button class="filter-search" id="branchSearch">Search</button>
+      </div>
+
+      <!-- Map placeholder -->
+      <div class="map-placeholder">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <p>Enter state and city above to locate branches on map</p>
+      </div>
+
+      <!-- Branch list -->
+      <div class="branch-list" id="branchList">
+        {branches.map(b => (
+          <div class="branch-row" data-city={b.city.toLowerCase()} data-area={b.area.toLowerCase()}>
+            <div class="branch-info">
+              <h4>{b.city} — {b.area}</h4>
+              <p>{b.address}</p>
+              <p class="branch-phone"><a href={`tel:${b.phone.replace(/[^0-9]/g,'')}`}>{b.phone}</a></p>
+            </div>
+            <a href={b.mapUrl} target="_blank" rel="noopener" class="directions-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+              Directions
+            </a>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ TAB 3: DOWNLOADS ═══════════════════════════════════════════ -->
+  <section class="tab-panel" id="tab-downloads" role="tabpanel" hidden>
+    <div class="wrap">
+
+      <div class="panel-head">
+        <h2 class="panel-title">Forms &amp; Documents</h2>
+        <p class="panel-sub">Download, fill, and submit at your nearest branch or via email.</p>
+      </div>
+
+      <div class="downloads-list">
+        {downloads.map(d => (
+          <div class="download-row">
+            <div class="dl-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            </div>
+            <div class="dl-info">
+              <h4>{d.title}</h4>
+              <p>{d.desc}</p>
+            </div>
+            <a href={d.file} class="dl-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download
+            </a>
+          </div>
+        ))}
+      </div>
+
+      <div class="dl-note">
+        <p>Printed forms should be submitted with self-attested copies of PAN and address proof at your nearest branch, or scanned and emailed to <a href="mailto:support@sfs.com">support@sfs.com</a>.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ CTA BANNER ════════════════════════════════════════════════ -->
+  <section class="cta-banner">
+    <div class="cta-inner">
+      <div>
+        <p class="cta-h">Open Demat account</p>
+        <p class="cta-sub">In less than 5 minutes</p>
+      </div>
+      <a href="/about/open-demat-account/" class="cta-btn">Open Demat Account</a>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  /* ── Design tokens ── */
+  :root {
+    --pad: clamp(20px, 8vw, 120px);
+    --gold: #fac527;
+    --gold-btn: #fdcd11;
+    --blue-dark: #04298d;
+    --ink: #1c1c16;
+    --ink-2: #46463c;
+    --muted: #73736a;
+    --border: #d5d4d0;
+    --card-bg: #fff;
+    --hero-bg: rgba(251, 226, 82, 0.18);
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  a { color: inherit; text-decoration: none; }
+  p { margin: 0; line-height: 1.5; }
+  ul, ol { padding: 0; margin: 0; list-style: none; }
+
+  /* ── Hero ── */
+  .hero-section {
+    background: var(--hero-bg);
+    padding: clamp(60px, 10vw, 120px) var(--pad) clamp(60px, 8vw, 100px);
+  }
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 80px;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .eyebrow {
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: .1em;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+  .hero-h1 {
+    font-weight: 700;
+    font-size: clamp(32px, 5vw, 52px);
+    line-height: 1.1;
+    color: var(--ink);
+    margin: 0 0 20px;
+  }
+  .gold { color: #b8860b; }
+  .hero-sub {
+    font-size: 17px;
+    color: var(--ink-2);
+    line-height: 1.6;
+    max-width: 540px;
+    margin-bottom: 32px;
+  }
+  .contact-pills { display: flex; flex-wrap: wrap; gap: 12px; }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 100px;
+    border: 1.5px solid rgba(0,0,0,.18);
+    background: #fff;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .pill:hover { border-color: var(--gold); box-shadow: 0 2px 12px rgba(0,0,0,.07); }
+  .pill svg { flex: none; color: #666; }
+
+  /* ── Callback form ── */
+  .hero-form {
+    background: #fff;
+    border-radius: 16px;
+    padding: 36px 32px;
+    box-shadow: 0 4px 32px rgba(0,0,0,.08);
+  }
+  .form-title {
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--ink);
+    margin: 0 0 24px;
+  }
+  .callback-form { display: flex; flex-direction: column; gap: 14px; }
+  .callback-form input,
+  .callback-form select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-size: 15px;
+    color: var(--ink);
+    background: #fafafa;
+    outline: none;
+    transition: border-color .2s;
+    appearance: none;
+  }
+  .callback-form input:focus,
+  .callback-form select:focus { border-color: var(--gold); background: #fff; }
+  .submit-btn {
+    align-self: flex-end;
+    padding: 12px 36px;
+    background: var(--gold-btn);
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 15px;
+    color: #1c1c00;
+    cursor: pointer;
+    transition: opacity .2s;
+  }
+  .submit-btn:hover { opacity: .88; }
+
+  /* ── Tab nav ── */
+  .tab-nav {
+    display: flex;
+    border-bottom: 2px solid var(--border);
+    background: rgba(235,229,229,.4);
+    padding: 0 var(--pad);
+    gap: 0;
+  }
+  .tab-btn {
+    padding: 20px 32px;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--ink-2);
+    cursor: pointer;
+    transition: color .2s, border-color .2s;
+    white-space: nowrap;
+  }
+  .tab-btn:hover { color: var(--ink); }
+  .tab-btn.active { color: #8a6500; border-bottom-color: var(--gold); }
+
+  /* ── Tab panels ── */
+  .tab-panel { display: none; padding: 64px var(--pad) 80px; }
+  .tab-panel.active { display: block; }
+  .wrap { max-width: 1200px; margin: 0 auto; }
+  .panel-head { margin-bottom: 40px; }
+  .panel-title { font-weight: 700; font-size: 32px; color: var(--ink); margin: 0 0 10px; }
+  .panel-sub { font-size: 16px; color: var(--muted); }
+
+  /* ── Hours bar ── */
+  .hours-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 24px;
+    background: #f5f4ef;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--ink);
+    margin-bottom: 40px;
+  }
+  .hours-bar svg { flex: none; color: #8a6500; }
+
+  /* ── Contact cards ── */
+  .contact-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  .contact-card {
+    background: var(--card-bg);
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .card-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: rgba(250, 197, 39, .12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #8a6500;
+    margin-bottom: 4px;
+    flex: none;
+  }
+  .contact-card h4 { font-weight: 600; font-size: 16px; color: var(--ink); }
+  .card-val { font-weight: 700; font-size: 20px; color: var(--ink); }
+  .card-val a:hover { color: #8a6500; }
+  .card-note { font-size: 14px; color: var(--muted); }
+
+  /* ── Office wide card ── */
+  .office-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    background: var(--card-bg);
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    padding: 28px 32px;
+    margin-bottom: 40px;
+  }
+  .office-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    background: rgba(250, 197, 39, .12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #8a6500;
+    flex: none;
+  }
+  .office-info h4 { font-weight: 700; font-size: 18px; color: var(--ink); margin-bottom: 6px; }
+  .office-info p { font-size: 16px; color: var(--ink-2); }
+  .office-hours { color: var(--muted); font-size: 14px; margin-top: 4px; }
+
+  /* ── Grievance ── */
+  .grievance-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .grievance-card {
+    background: #f8f7f2;
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    padding: 28px 24px;
+  }
+  .grievance-card h4 { font-weight: 700; font-size: 18px; color: var(--ink); margin-bottom: 16px; }
+  .grievance-steps { display: flex; flex-direction: column; gap: 12px; padding-left: 16px; list-style: decimal; }
+  .grievance-steps li { font-size: 14px; color: var(--ink-2); line-height: 1.6; }
+  .grievance-steps a { color: #8a6500; text-decoration: underline; }
+  .grievance-list { display: flex; flex-direction: column; gap: 12px; }
+  .grievance-list li { display: grid; grid-template-columns: 80px 1fr; gap: 8px; font-size: 14px; color: var(--ink-2); }
+  .gl { font-weight: 600; color: var(--ink); }
+  .grievance-list a { color: #8a6500; }
+
+  /* ── Branch Locator ── */
+  .branch-filters {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+  .filter-select {
+    flex: 1;
+    min-width: 200px;
+    padding: 14px 18px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-size: 15px;
+    color: var(--ink);
+    background: #fff;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    cursor: pointer;
+    outline: none;
+    transition: border-color .2s;
+  }
+  .filter-select:focus { border-color: var(--gold); }
+  .filter-search {
+    padding: 14px 32px;
+    background: var(--gold-btn);
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 15px;
+    color: #1c1c00;
+    cursor: pointer;
+    transition: opacity .2s;
+  }
+  .filter-search:hover { opacity: .88; }
+  .map-placeholder {
+    background: #f0eee8;
+    border-radius: 14px;
+    height: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 32px;
+    color: #999;
+    font-size: 15px;
+  }
+  .branch-list { display: flex; flex-direction: column; }
+  .branch-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .branch-row:first-child { border-top: 1px solid var(--border); }
+  .branch-info h4 { font-weight: 700; font-size: 17px; color: var(--ink); margin-bottom: 4px; }
+  .branch-info p { font-size: 14px; color: var(--muted); }
+  .branch-phone { margin-top: 4px !important; }
+  .branch-phone a { color: var(--ink); font-weight: 600; }
+  .branch-phone a:hover { color: #8a6500; }
+  .directions-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 10px 20px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    white-space: nowrap;
+    flex: none;
+    transition: border-color .2s, background .2s;
+  }
+  .directions-btn:hover { border-color: var(--gold); background: rgba(250,197,39,.06); }
+
+  /* ── Downloads ── */
+  .downloads-list { display: flex; flex-direction: column; margin-bottom: 32px; }
+  .download-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .download-row:first-child { border-top: 1px solid var(--border); }
+  .dl-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    background: rgba(250, 197, 39, .12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #8a6500;
+    flex: none;
+  }
+  .dl-info { flex: 1; min-width: 0; }
+  .dl-info h4 { font-weight: 600; font-size: 16px; color: var(--ink); margin-bottom: 3px; }
+  .dl-info p { font-size: 14px; color: var(--muted); }
+  .dl-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 10px 22px;
+    background: var(--gold-btn);
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 14px;
+    color: #1c1c00;
+    flex: none;
+    transition: opacity .2s;
+  }
+  .dl-btn:hover { opacity: .88; }
+  .dl-note {
+    background: #f8f7f2;
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 24px;
+    font-size: 14px;
+    color: var(--ink-2);
+    line-height: 1.6;
+  }
+  .dl-note a { color: #8a6500; text-decoration: underline; }
+
+  /* ── CTA Banner ── */
+  .cta-banner { background: var(--blue-dark); }
+  .cta-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px var(--pad);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+  }
+  .cta-h { font-weight: 700; font-size: 28px; color: #fff; line-height: 1.2; }
+  .cta-sub { font-size: 15px; color: rgba(255,255,255,.7); margin-top: 4px; }
+  .cta-btn {
+    padding: 14px 32px;
+    background: var(--gold-btn);
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 15px;
+    color: #1c1c00;
+    white-space: nowrap;
+    flex: none;
+    transition: opacity .2s;
+  }
+  .cta-btn:hover { opacity: .9; }
+
+  /* ── Responsive ── */
+  @media (max-width: 1024px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+    .hero-form { max-width: 480px; }
+    .grievance-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 768px) {
+    .contact-cards { grid-template-columns: 1fr; }
+    .tab-btn { padding: 16px 20px; font-size: 14px; }
+    .branch-row { flex-direction: column; align-items: flex-start; }
+    .download-row { flex-wrap: wrap; }
+    .cta-inner { flex-direction: column; text-align: center; }
+  }
+  @media (max-width: 560px) {
+    .branch-filters { flex-direction: column; }
+    .filter-select { min-width: 0; width: 100%; }
+    .filter-search { width: 100%; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<script>
+  // ── Tab switching ──
+  const tabBtns = document.querySelectorAll<HTMLButtonElement>('.tab-btn');
+  const tabPanels = document.querySelectorAll<HTMLElement>('.tab-panel');
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.tab!;
+      tabBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+      tabPanels.forEach(p => { p.classList.remove('active'); p.hidden = true; });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+      const panel = document.getElementById(`tab-${target}`)!;
+      panel.classList.add('active');
+      panel.hidden = false;
+    });
+  });
+
+  // ── Branch filter ──
+  document.getElementById('branchSearch')?.addEventListener('click', () => {
+    const city = (document.getElementById('filterCity') as HTMLSelectElement).value.toLowerCase();
+    const rows = document.querySelectorAll<HTMLElement>('.branch-row');
+    rows.forEach(row => {
+      const match = !city || row.dataset.city?.includes(city) || row.dataset.area?.includes(city);
+      row.style.display = match ? '' : 'none';
+    });
+  });
+
+  // ── Callback form ──
+  document.getElementById('callbackForm')?.addEventListener('submit', e => {
+    e.preventDefault();
+    const btn = (e.currentTarget as HTMLFormElement).querySelector<HTMLButtonElement>('.submit-btn')!;
+    btn.textContent = 'Request sent ✓';
+    btn.disabled = true;
+    setTimeout(() => { btn.textContent = 'Submit'; btn.disabled = false; }, 4000);
+  });
+</script>
