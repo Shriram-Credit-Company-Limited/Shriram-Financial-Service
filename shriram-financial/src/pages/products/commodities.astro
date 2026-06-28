@@ -110,7 +110,6 @@ const faqs = [
       <p class="lead">Trade Gold, Silver, Crude Oil, Copper, and Agri commodities through India's trusted SEBI-regulated broker. Low margins, flat ₹20/order, live MCX and NCDEX prices on the Antara app.</p>
       <div class="cta-row">
         <a class="btn-gold" href="/about/open-demat-account/">Open Demat Account</a>
-        <a class="btn-ghost" href="/about/support/">Talk to an Expert</a>
       </div>
       <div class="hero-feats">
         <div class="feats">
@@ -148,10 +147,23 @@ const faqs = [
       <p class="sec-title">Types of Commodities in India</p>
       <p class="sec-lead">India's commodity markets span five major categories traded across MCX and NCDEX. Each segment has distinct exchanges, lot sizes, and price drivers. Hard commodities include metals and energy resources; soft commodities cover agricultural products and livestock.</p>
     </div>
-    <div class="cat-grid cat-3">
-      {commodityTypes.map(t => (
-        <div class="cat"><h4>{t.label}</h4><p>{t.desc}</p></div>
-      ))}
+    <div class="stack" style="gap:24px">
+      <div class="stack" style="gap:12px">
+        <p style="font-size:18px;font-weight:600;color:var(--olive-title)">Hard Commodities</p>
+        <div class="cat-grid cat-3">
+          {commodityTypes.slice(0,3).map(t => (
+            <div class="cat"><h4>{t.label}</h4><p>{t.desc}</p></div>
+          ))}
+        </div>
+      </div>
+      <div class="stack" style="gap:12px">
+        <p style="font-size:18px;font-weight:600;color:var(--olive-title)">Soft Commodities</p>
+        <div class="cat-grid" style="grid-template-columns:repeat(2,1fr)">
+          {commodityTypes.slice(3).map(t => (
+            <div class="cat"><h4>{t.label}</h4><p>{t.desc}</p></div>
+          ))}
+        </div>
+      </div>
     </div>
   </section>
 
@@ -166,6 +178,7 @@ const faqs = [
         <div class="cat"><h4>{b.label}</h4><p>{b.desc}</p></div>
       ))}
     </div>
+    <a class="btn-gold" href="/about/open-demat-account/" style="align-self:center">Start Commodity Trading</a>
   </section>
 
   <!-- ══ 5. ADVANTAGES OF COMMODITIES (Shriram) ══════════════════════ -->
@@ -341,7 +354,6 @@ const faqs = [
         </div>
       ))}
     </div>
-    <a class="btn-gold" href="/about/open-demat-account/" style="align-self:center">Start Trading with Shriram</a>
   </section>
 
   <!-- ══ 13. FAQ ════════════════════════════════════════════════════════ -->
@@ -359,16 +371,6 @@ const faqs = [
               <div class="qa"><p>{f.a}</p></div>
             </details>
           ))}
-        </div>
-      </div>
-      <div class="faq-side">
-        <img src="/images/advisor-avatar.png" alt="" class="usr-img" width="140" height="140">
-        <div class="side-in">
-          <div class="side-tx">
-            <h4>Ready to Trade Commodities?</h4>
-            <p>Open your Demat account with Shriram in under 10 minutes. Flat ₹20/order. MCX + NCDEX access. SEBI-registered.</p>
-          </div>
-          <a class="btn-gold" href="/about/open-demat-account/" style="align-self:flex-start">Open Demat Account</a>
         </div>
       </div>
     </div>

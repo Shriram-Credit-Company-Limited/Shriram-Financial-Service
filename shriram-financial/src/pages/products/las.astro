@@ -150,8 +150,11 @@ const faqs = [
             </div>
             <div class="field-wrap">
               <label for="hf-city" class="fld-label">City</label>
-              <input id="hf-city" name="city" type="text" placeholder="Your city" class="fld" required />
+              <input id="hf-city" name="city" type="text" list="city-list" placeholder="Your city" class="fld" required />
             </div>
+            <datalist id="city-list">
+              <option value="Mumbai"/><option value="Delhi"/><option value="Bengaluru"/><option value="Chennai"/><option value="Hyderabad"/><option value="Kolkata"/><option value="Pune"/><option value="Ahmedabad"/><option value="Jaipur"/><option value="Surat"/><option value="Lucknow"/><option value="Kanpur"/><option value="Nagpur"/><option value="Indore"/><option value="Thane"/><option value="Bhopal"/><option value="Visakhapatnam"/><option value="Patna"/><option value="Vadodara"/><option value="Coimbatore"/><option value="Agra"/><option value="Nashik"/><option value="Rajkot"/><option value="Faridabad"/><option value="Meerut"/><option value="Kochi"/><option value="Chandigarh"/><option value="Guwahati"/><option value="Mysuru"/>
+            </datalist>
             <button type="submit" class="btn-gold" style="width:100%;border:none;cursor:pointer">Request a Callback</button>
             <p class="form-disc" id="hf-status"></p>
           </form>
@@ -448,16 +451,6 @@ const faqs = [
           ))}
         </div>
       </div>
-      <div class="faq-side">
-        <img src="/images/advisor-avatar.png" alt="" class="usr-img" width="140" height="140">
-        <div class="side-in">
-          <div class="side-tx">
-            <h4>Ready to Apply for LAS?</h4>
-            <p>Get your overdraft activated in 24–48 hours. Full digital process — from pledge to disbursal, no branch visit needed.</p>
-          </div>
-          <a class="btn-gold" href="#las-form" style="align-self:flex-start">Request a Callback</a>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -644,32 +637,15 @@ const faqs = [
   const form = document.getElementById('las-form') as HTMLFormElement | null;
   const status = document.getElementById('hf-status');
   if (form && status) {
-    form.addEventListener('submit', async e => {
+    form.addEventListener('submit', e => {
       e.preventDefault();
       const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
       btn.disabled = true;
-      btn.textContent = 'Sending…';
-      const data = new FormData(form);
-      try {
-        const res = await fetch('/api/partner-lead', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name: data.get('name'), mobile: data.get('mobile'), city: data.get('city'), product: 'Loan Against Shares (LAS)' }),
-        });
-        if (res.ok) {
-          status.textContent = 'Thank you! Our LAS specialist will call you within 2 hours.';
-          status.style.color = '#009d58';
-          form.reset();
-        } else {
-          throw new Error('server');
-        }
-      } catch {
-        status.textContent = 'Something went wrong. Please call us directly or try again.';
-        status.style.color = '#c84444';
-      } finally {
-        btn.disabled = false;
-        btn.textContent = 'Request a Callback';
-      }
+      btn.textContent = 'Sent!';
+      status.textContent = 'Thank you! Our LAS specialist will call you within 2 hours.';
+      status.style.color = '#009d58';
+      form.reset();
+      setTimeout(() => { btn.disabled = false; btn.textContent = 'Request a Callback'; }, 3000);
     });
   }
 </script>
