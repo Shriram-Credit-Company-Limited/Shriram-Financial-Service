@@ -207,17 +207,39 @@ export function getStaticPaths() {
   },
 };
 
-  return Object.entries(calcData).map(([slug, data]) => ({
-    params: { slug },
-    props: {
-      slug,
-      ...data,
-      relatedCalcs: (data.related as string[]).map((s: string) => ({ slug: s, title: calcData[s].title })),
-    },
-  }));
+  return Object.entries(calcData)
+    .filter(([slug]) => slug !== 'sip')
+    .map(([slug, data]) => ({
+      params: { slug },
+      props: {
+        slug,
+        ...data,
+        relatedCalcs: (data.related as string[]).map((s: string) => ({ slug: s, title: calcData[s].title })),
+      },
+    }));
 }
 
 const { slug, title, subtitle, inputs, whatIs, howHelps, howWorks, advantages, faqs, relatedCalcs } = Astro.props;
+
+const exploreDesc: Record<string, string> = {
+  sip: 'Project the future value of your monthly SIP investments.',
+  lumpsum: 'See how a one-time investment grows over your chosen horizon.',
+  fd: 'Estimate the maturity value and interest earned on your deposit.',
+  swp: 'Plan steady withdrawals while the rest of your corpus stays invested.',
+  nps: 'Forecast your retirement corpus and expected monthly pension.',
+};
+
+const fields = (inputs as any[]).map((inp) => {
+  const group = inp.prefix === '₹';
+  const fmtN = (n: number) => (group ? n.toLocaleString('en-IN') : String(n));
+  return {
+    ...inp,
+    group,
+    valueText: fmtN(inp.value),
+    minText: (inp.prefix ?? '') + fmtN(inp.min) + (inp.suffix ?? ''),
+    maxText: (inp.prefix ?? '') + fmtN(inp.max) + (inp.suffix ?? ''),
+  };
+});
 ---
 
 <BaseLayout
@@ -225,209 +247,180 @@ const { slug, title, subtitle, inputs, whatIs, howHelps, howWorks, advantages, f
   description={subtitle}
 >
 
-  <!-- ══ 1. HERO ════════════════════════════════════════════════════ -->
-  <section class="hero">
-    <div class="hero-inner">
-      <h1>{title} — <span class="g">Free Online Tool</span></h1>
-      <p class="lead">{subtitle}</p>
-      <div class="cta-row">
-        <a class="btn-gold" href="/about/open-demat-account/">Open Demat Account</a>
-        <a class="btn-ghost" href="/calculators/">All Calculators</a>
-      </div>
-      <div class="hero-feats">
-        <div class="feats">
-          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;100% Free</span></div>
-          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;No Sign-Up Required</span></div>
-          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;Instant Results</span></div>
-          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;Indian Market Benchmarks</span></div>
-        </div>
+<!-- HERO -->
+<section class="hero" id="sec-hero">
+  <div class="hero-inner">
+    <h1>{title} — <span class="g">Free Online Tool</span></h1>
+    <p class="lead">{subtitle}</p>
+    <div class="cta"><a class="btn-gold" href="/about/open-demat-account/">Open Demat Account</a></div>
+    <div class="hero-feats">
+      <div class="feats">
+        <div class="feat"><span class="tk" aria-hidden="true">✓</span><span class="lb">&nbsp;100% Free</span></div>
+        <div class="feat"><span class="tk" aria-hidden="true">✓</span><span class="lb">&nbsp;Instant Results</span></div>
+        <div class="feat"><span class="tk" aria-hidden="true">✓</span><span class="lb">&nbsp;No Sign-up Required</span></div>
+        <div class="feat"><span class="tk" aria-hidden="true">✓</span><span class="lb">&nbsp;Accurate Projections</span></div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ══ 2. CALCULATOR PANEL ════════════════════════════════════════ -->
-  <section class="section stack calc-section" style="background:var(--sec-light);gap:32px">
-    <div class="calc-grid">
+<!-- CALCULATOR -->
+<section class="section stack" id="sec-calc" style="background:var(--sec-light);gap:24px">
+  <h2 class="sec-title">{title}</h2>
+  <p class="calc-hint">Drag the sliders or type your own numbers — results update instantly.</p>
 
-      <!-- Calculator card -->
-      <div class="calc-card">
-        <div class="calc-inner">
-
-          <!-- Inputs -->
-          <div class="calc-inputs">
-            {inputs.map((inp: any) => (
-              <div class="inp-wrap">
-                <div class="inp-header">
-                  <label for={inp.id} class="inp-label">{inp.label}</label>
-                  <span id={`${inp.id}-display`} class="inp-val">
-                    {inp.prefix ?? ''}{inp.value.toLocaleString('en-IN')}{inp.suffix ?? ''}
-                  </span>
-                </div>
+  <div class="calc-row">
+    <div class="card calc-panel">
+      <div class="fields">
+        {fields.map((inp: any) => (
+          <div class="field">
+            <div class="field-top">
+              <label for={inp.id}>{inp.label}</label>
+              <div class="field-val">
+                {inp.prefix && <span class="pfx">{inp.prefix}</span>}
                 <input
-                  type="range"
                   id={inp.id}
-                  min={inp.min}
-                  max={inp.max}
-                  step={inp.step}
-                  value={inp.value}
-                  class="calc-slider"
-                  data-prefix={inp.prefix ?? ''}
-                  data-suffix={inp.suffix ?? ''}
+                  type="text"
+                  inputmode="decimal"
+                  value={inp.valueText}
+                  data-min={inp.min}
+                  data-max={inp.max}
+                  data-step={inp.step}
+                  data-group={inp.group ? '1' : '0'}
+                  aria-label={inp.label}
                 />
-                <div class="inp-range">
-                  <span>{inp.prefix ?? ''}{inp.min.toLocaleString('en-IN')}{inp.suffix ?? ''}</span>
-                  <span>{inp.prefix ?? ''}{inp.max.toLocaleString('en-IN')}{inp.suffix ?? ''}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <!-- Results -->
-          <div class="calc-results">
-            <div class="donut-wrap">
-              <div class="donut-ring">
-                <svg viewBox="0 0 120 120" class="donut-svg">
-                  <circle cx="60" cy="60" r="50" fill="none" stroke="var(--card-border)" stroke-width="12"/>
-                  <circle id="donut-returns" cx="60" cy="60" r="50" fill="none" stroke="var(--gold-2)" stroke-width="12" stroke-dasharray="314 314" stroke-dashoffset="157" stroke-linecap="round"/>
-                </svg>
-                <div class="donut-center">
-                  <div class="donut-lbl">Total Value</div>
-                  <div id="calc-total" class="donut-val">₹0</div>
-                </div>
+                {inp.suffix && <span class="sfx">{inp.suffix.trim()}</span>}
               </div>
             </div>
-            <div class="result-stats">
-              <div class="stat-row stat-invested">
-                <div class="stat-left">
-                  <span class="stat-dot stat-dot-inv"></span>
-                  <span id="calc-invested-label" class="stat-name">Invested Amount</span>
-                </div>
-                <span id="calc-invested" class="stat-amt">₹0</span>
-              </div>
-              <div class="stat-row stat-gains">
-                <div class="stat-left">
-                  <span class="stat-dot stat-dot-ret"></span>
-                  <span id="calc-gains-label" class="stat-name">Estimated Returns</span>
-                </div>
-                <span id="calc-gains" class="stat-amt stat-amt-gold">₹0</span>
-              </div>
+            <input class="slider" id={`${inp.id}-r`} type="range" min={inp.min} max={inp.max} step={inp.step} value={inp.value} aria-label={inp.label} />
+            <div class="slider-scale">
+              <span>{inp.minText}</span>
+              <span>{inp.maxText}</span>
             </div>
           </div>
-
-        </div>
-      </div>
-
-      <!-- CTA card -->
-      <div class="cta-aside">
-        <div class="cta-aside-in">
-          <h2 class="cta-aside-h">Ready to build your future?</h2>
-          <p class="cta-aside-p">Open a free Demat account and start investing in minutes — completely paperless, SEBI-registered.</p>
-        </div>
-        <a class="btn-gold" href="/about/open-demat-account/">Open Demat Account</a>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ══ 3. WHAT IS ═════════════════════════════════════════════════ -->
-  <section class="section stack" style="background:var(--sec-tint);gap:32px">
-    <p class="sec-title">What is {title}?</p>
-    <p class="sec-lead">{whatIs}</p>
-  </section>
-
-  <!-- ══ 4. HOW IT HELPS ════════════════════════════════════════════ -->
-  <section class="section stack" style="background:var(--sec-light);gap:48px">
-    <div class="stack" style="gap:16px">
-      <p class="sec-title">How Can {title} Help You?</p>
-      <p class="sec-lead">{howHelps.body}</p>
-    </div>
-    <div class="card check-card-full">
-      <div class="check-list">
-        {howHelps.points.map((p: string, i: number) => (
-          <>
-            {i > 0 && <div class="check-sep"></div>}
-            <div class="check-row"><span class="ck">✓</span><p class="tx">{p}</p></div>
-          </>
         ))}
       </div>
     </div>
-  </section>
 
-  <!-- ══ 5. HOW IT WORKS ════════════════════════════════════════════ -->
-  <section class="section stack" style="background:var(--sec-tint);gap:32px">
-    <p class="sec-title">How Does {title} Work?</p>
-    <p class="sec-lead">{howWorks}</p>
-  </section>
+    <div class="calc-results">
+      <div class="bar-wrap">
+        <div class="bar-top">
+          <div class="bar-head">
+            <span class="bar-cap" id="d-tot-label">Total Value</span>
+            <span class="bar-tot" id="d-tot">₹0</span>
+          </div>
+          <div class="stack-bar" role="img" aria-label="Result split">
+            <div class="seg seg-inv" id="seg-inv" style="width:60%"></div>
+            <div class="seg seg-ret" id="seg-ret" style="width:40%"></div>
+          </div>
+        </div>
 
-  <!-- ══ 6. ADVANTAGES ══════════════════════════════════════════════ -->
-  <section class="section stack" style="background:var(--sec-light);gap:48px">
-    <div class="stack" style="gap:16px">
-      <p class="sec-title">Advantages of {title}</p>
-      <p class="sec-lead">{advantages.body}</p>
-    </div>
-    <div class="card check-card-full">
-      <div class="check-list">
-        {advantages.points.map((p: string, i: number) => (
-          <>
-            {i > 0 && <div class="check-sep"></div>}
-            <div class="check-row"><span class="ck">✓</span><p class="tx">{p}</p></div>
-          </>
-        ))}
+        <div class="res-cards">
+          <div class="res-card">
+            <div class="res-top"><span class="dot" style="background:var(--c-inv)"></span><span id="r-inv-label">Invested Amount</span></div>
+            <div class="res-val" id="r-inv">₹0</div>
+          </div>
+          <div class="res-card">
+            <div class="res-top"><span class="dot" style="background:var(--c-ret)"></span><span id="r-ret-label">Estimated Returns</span></div>
+            <div class="res-val" id="r-ret">₹0</div>
+          </div>
+        </div>
+
+        <div class="bar-div" role="presentation"></div>
+
+        <p class="bar-note" id="bar-note">Figures are illustrative and assume a constant rate over the full term; actual returns fluctuate and are not guaranteed.</p>
+      </div>
+
+      <div class="ready-bar">
+        <p class="ready-text">Put your plan into action — <strong>open a free Demat account</strong></p>
+        <a class="ready-btn" href="/about/open-demat-account/">Open Demat Account</a>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- ══ 7. EXPLORE MORE ════════════════════════════════════════════ -->
-  <section class="section stack" style="background:var(--sec-tint);gap:48px">
-    <div class="stack" style="gap:16px">
-      <p class="sec-title">Explore More Calculators</p>
-      <p class="sec-lead">Use these free calculators to plan every aspect of your financial life — from monthly SIP investing to retirement income planning.</p>
-    </div>
-    <div class="cat-grid cat-3">
-      {relatedCalcs.map((c: any) => (
-        <a href={`/calculators/${c.slug}/`} class="cat calc-cat">
-          <h3>{c.title}</h3>
-          <span class="calc-go">Calculate →</span>
-        </a>
-      ))}
-      <a href="/calculators/" class="cat calc-cat">
-        <h3 style="color:var(--muted)">All Calculators</h3>
-        <span class="calc-go" style="color:var(--muted)">View Hub →</span>
+  <p class="sr-only" id="sr-summary" aria-live="polite"></p>
+</section>
+
+<!-- WHAT IS -->
+<section class="section stack" id="sec-what" style="background:var(--sec-tint);gap:24px">
+  <h2 class="sec-title">What Is {title}?</h2>
+  <p class="sec-lead">{whatIs}</p>
+</section>
+
+<!-- HOW IT HELPS -->
+<section class="section stack" id="sec-help" style="background:var(--sec-light);gap:24px">
+  <h2 class="sec-title">How {title} Helps You</h2>
+  <p class="sec-lead">{howHelps.body}</p>
+  <ul class="bullets">
+    {howHelps.points.map((p: string) => <li>{p}</li>)}
+  </ul>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section stack" id="sec-work" style="background:var(--sec-tint);gap:24px">
+  <h2 class="sec-title">How Does {title} Work?</h2>
+  <p class="sec-lead">{howWorks}</p>
+</section>
+
+<!-- ADVANTAGES -->
+<section class="section stack" id="sec-adv" style="background:var(--sec-light);gap:24px">
+  <h2 class="sec-title">Advantages Of {title}</h2>
+  <p class="sec-lead">{advantages.body}</p>
+  <ul class="bullets">
+    {advantages.points.map((p: string) => <li>{p}</li>)}
+  </ul>
+</section>
+
+<!-- EXPLORE MORE -->
+<section class="section stack" id="sec-explore" style="background:var(--sec-tint);gap:40px">
+  <h2 class="sec-title">Explore More</h2>
+  <div class="explore-grid">
+    {relatedCalcs.map((c: any) => (
+      <a class="xcard" href={`/calculators/${c.slug}/`}>
+        <span class="xc-title">{c.title}</span>
+        <span class="xc-desc">{exploreDesc[c.slug] ?? 'Plan with this free calculator.'}</span>
+        <span class="xc-cta">Calculate Now <span class="arr">→</span></span>
       </a>
-    </div>
-  </section>
+    ))}
+    <a class="xcard" href="/calculators/">
+      <span class="xc-title">All Calculators</span>
+      <span class="xc-desc">Browse every free financial calculator in one place.</span>
+      <span class="xc-cta">View Hub <span class="arr">→</span></span>
+    </a>
+  </div>
+</section>
 
-  <!-- ══ 8. FAQ ════════════════════════════════════════════════════ -->
-  <section class="faq-wrap" style="background:var(--sec-light)">
-    <div class="faq-cols">
-      <div class="faq-left">
-        <h2 class="faq-title">Frequently asked<br>questions.</h2>
-        <div class="faq-acc" role="list">
-          {faqs.map((faq: any) => (
-            <details class="faq-item" role="listitem">
-              <summary class="faq-sum">
-                <span class="qt">{faq.q}</span>
-                <svg class="faq-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8" class="faq-h"/></svg>
-              </summary>
-              <div class="qa"><p>{faq.a}</p></div>
-            </details>
-          ))}
-        </div>
-      </div>
-      <div class="faq-side">
-        <div class="usr" aria-hidden="true">
-          <svg viewBox="0 0 131 147" fill="none"><circle cx="65.5" cy="42" r="34" stroke="currentColor" stroke-width="2"/><path d="M4 147c0-34 27.6-61.5 61.5-61.5S127 113 127 147" stroke="currentColor" stroke-width="2"/></svg>
-        </div>
-        <div class="side-in">
-          <div class="side-tx">
-            <h4>Start Investing Today</h4>
-            <p>Open a free Demat account with Shriram and put your calculations into action — zero delivery brokerage, SEBI-registered.</p>
+<!-- FAQ -->
+<section class="faq-wrap" id="sec-faq" style="background:var(--sec-light)">
+  <div class="faq-cols">
+    <div class="faq-left">
+      <h2 class="faq-title">Frequently Asked Questions</h2>
+      <div class="faq-acc">
+        {faqs.map((item: any, i: number) => (
+          <div class={`faq-item${i === 0 ? ' open' : ''}`}>
+            <button class="faq-q" type="button">
+              <span class="qt">{item.q}</span>
+              <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><line class="v" x1="12" y1="5" x2="12" y2="19" stroke="#404040" stroke-width="2" stroke-linecap="round"/><line x1="5" y1="12" x2="19" y2="12" stroke="#404040" stroke-width="2" stroke-linecap="round"/></svg></span>
+            </button>
+            <div class="qa-wrap"><div class="qa"><p>{item.a}</p></div></div>
           </div>
-          <a class="btn-gold" href="/about/open-demat-account/" style="align-self:flex-start">Open Demat Account</a>
-        </div>
+        ))}
       </div>
     </div>
-  </section>
+    <div class="faq-side">
+      <div class="usr" aria-hidden="true">
+        <svg viewBox="0 0 131 147" fill="none"><circle cx="65.5" cy="42" r="34" stroke="currentColor" stroke-width="2"/><path d="M4 147c0-34 27.6-61.5 61.5-61.5S127 113 127 147" stroke="currentColor" stroke-width="2"/></svg>
+      </div>
+      <div class="side-in">
+        <div class="side-tx">
+          <h3>Need A Clearer Direction?</h3>
+          <p>Let&rsquo;s get in touch on a 15-minute call where we can answer any questions you may have. Our advisor will also help map your wealth mix and show what a dedicated advisor would do differently.</p>
+        </div>
+        <a class="btn-gold" href="/about/open-demat-account/">Book A Discovery Call</a>
+      </div>
+    </div>
+  </div>
+</section>
 
 </BaseLayout>
 
@@ -437,346 +430,357 @@ const { slug, title, subtitle, inputs, whatIs, howHelps, howWorks, advantages, f
     --sec-tint: #f6efe1;
     --card: #fffdf8;
     --card-border: #e1e0db;
-    --row-line: rgba(28,28,22,.08);
     --olive-title: #2e3914;
+    --olive-head: #2d3813;
     --olive-deep: #1b2010;
+    --olive-ink: #2e3914;
     --ink: #1c1c16;
-    --ink-2: #46463c;
+    --ink-2: #404040;
     --ink-3: #595959;
     --muted: #73736a;
     --gold-2: #f2b83f;
     --gold-btn: #f3b83f;
-    --olive-ink: #2e3914;
-    --green: #009d58;
+    --c-inv: #4f583b;
+    --c-ret: #f3b83f;
     --pad: clamp(20px, 8vw, 144px);
     --section-y: 72px;
-    --cta-w: 220px;
+    --container-pad: 32px;
   }
+
   *, *::before, *::after { box-sizing: border-box; }
   a { color: inherit; text-decoration: none; }
   p { line-height: 1.5; }
 
   .section { padding: var(--section-y) var(--pad); display: flex; flex-direction: column; }
   .stack { display: flex; flex-direction: column; }
-
   .sec-title { font-weight: 400; font-size: 40px; color: var(--olive-title); text-transform: capitalize; line-height: 1.5; }
-  .sec-lead  { font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.6; }
+  .sec-lead { font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 
-  /* Hero */
+  /* HERO */
   .hero {
-    padding: 0 var(--pad);
     background: radial-gradient(125% 210% at 100% -8%, #4f583b 0%, #363a2c 50%, #1d1d1d 100%);
-    display: flex; flex-direction: column; justify-content: center; overflow: hidden;
+    min-height: clamp(440px, 29vw, 552px); display: flex; flex-direction: column; justify-content: center;
+    padding: 0 var(--pad);
   }
-  .hero-inner { padding: clamp(80px,12vw,140px) 0 clamp(48px,6vw,80px); display: flex; flex-direction: column; }
-  .hero h1   { font-weight: 500; font-size: 40px; color: #fff; line-height: 1.5; max-width: 800px; }
+  .hero-inner { padding: 56px 0; display: flex; flex-direction: column; }
+  .hero h1 { font-weight: 500; font-size: 40px; color: #fff; line-height: 1.5; max-width: 640px; }
   .hero h1 .g { color: var(--gold-2); }
-  .hero .lead { margin-top: 32px; font-size: 18px; line-height: 1.5; color: rgba(255,255,255,.74); max-width: 620px; }
-  .cta-row   { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .lead { margin-top: 16px; font-weight: 400; font-size: 18px; color: rgba(255,255,255,.74); line-height: 1.5; max-width: 600px; }
+  .cta { margin-top: 24px; }
   .hero-feats { margin-top: 40px; }
-  .feats { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 16px; max-width: 760px; padding-top: 36px; border-top: 1px solid rgba(255,255,255,.16); }
-  .feat  { display: flex; gap: 10px; align-items: center; }
-  .feat .tk { color: var(--gold-2); font-weight: 500; font-size: 15px; width: 13px; }
-  .feat .lb { color: rgba(255,255,255,.9); font-weight: 500; font-size: 16px; white-space: nowrap; }
+  .feats { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; padding-top: 36px; border-top: 1px solid rgba(255,255,255,.16); }
+  .feat { display: flex; gap: 10px; align-items: center; }
+  .feat .tk { color: var(--gold-2); font-weight: 500; font-size: 15px; }
+  .feat .lb { color: rgba(255,255,255,.9); font-weight: 500; font-size: 16px; line-height: 1.5; white-space: nowrap; }
 
-  /* Buttons */
+  /* CALCULATOR LAYOUT */
+  .calc-row { display: flex; gap: 24px; align-items: stretch; flex-wrap: wrap; }
+  .calc-panel { flex: 1.6 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 24px; }
+  .calc-results { flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 32px; }
+  .calc-hint { font-weight: 400; font-size: 15px; color: var(--muted); line-height: 1.5; }
+
+  .card { background: var(--card); border: 1px solid var(--card-border); border-radius: 24px; padding: var(--container-pad); }
+
+  /* slider fields */
+  .fields { display: flex; flex-direction: column; gap: 32px; }
+  .field { display: flex; flex-direction: column; gap: 12px; }
+  .field-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .field-top label { font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.5; }
+  .field-val { display: flex; align-items: center; gap: 4px; border: 1px solid var(--card-border);
+              border-radius: 8px; padding: 8px 12px; background: #fff; min-width: 128px; justify-content: flex-end; }
+  .field-val:focus-within { border-color: var(--olive-head); }
+  .field-val .pfx,.field-val .sfx { font-weight: 500; font-size: 15px; color: var(--ink-2); white-space: nowrap; }
+  .field-val input { width: 88px; border: 0; outline: 0; background: transparent; text-align: right;
+                    font-family: inherit; font-weight: 500; font-size: 15px; color: var(--ink); -moz-appearance: textfield; }
+  .field-val input::-webkit-outer-spin-button,
+  .field-val input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+  /* range slider */
+  .slider { -webkit-appearance: none; appearance: none; width: 100%; height: 6px; border-radius: 999px;
+           background: #f3f3f3; outline: none; cursor: pointer; margin: 0; }
+  .slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 18px; height: 18px;
+           border-radius: 50%; background: #fff; border: 2px solid #4f583b;
+           box-shadow: 0 1px 4px rgba(0,0,0,.18); cursor: pointer; }
+  .slider::-moz-range-thumb { width: 18px; height: 18px; border: 2px solid #4f583b; border-radius: 50%;
+           background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,.18); cursor: pointer; }
+  .slider::-moz-range-track { height: 6px; border-radius: 999px; background: transparent; }
+  .slider-scale { display: flex; justify-content: space-between; font-weight: 400; font-size: 12px; color: var(--muted); }
+
+  /* results bar card */
+  .bar-wrap { flex: 1 1 auto; background: var(--card); border: 1px solid var(--card-border); border-radius: 24px;
+             padding: var(--container-pad); display: flex; flex-direction: column; gap: 24px; justify-content: center; }
+  .bar-top { display: flex; flex-direction: column; gap: 16px; }
+  .bar-head { display: flex; flex-direction: column; gap: 8px; }
+  .bar-cap { font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.5; }
+  .bar-tot { font-weight: 600; font-size: 28px; color: #4f583b; line-height: 1.5; }
+  .stack-bar { display: flex; height: 36px; border-radius: 8px; overflow: hidden; background: #e6e3da; }
+  .stack-bar .seg { height: 100%; min-width: 0; transition: width .3s ease; }
+  .stack-bar .seg-inv { background: var(--c-inv); }
+  .stack-bar .seg-ret { background: var(--c-ret); }
+  .bar-div { width: 100%; height: 1px; background: var(--card-border); }
+  .bar-note { font-weight: 400; font-size: 14px; color: var(--muted); line-height: 1.5; }
+
+  /* res split */
+  .res-cards { display: flex; gap: 32px; }
+  .res-card { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 8px; justify-content: center; }
+  .res-top { display: flex; align-items: center; gap: 8px; font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.5; }
+  .res-top .dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+  .res-val { font-weight: 500; font-size: 24px; color: var(--ink); line-height: 1.5; overflow-wrap: anywhere; padding-left: 16px; }
+
+  /* ready bar */
+  .ready-bar { background: #ffd277; border-radius: 24px; padding: 16px 24px; display: flex; align-items: center;
+              justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; }
+  .ready-text { font-weight: 500; font-size: 16px; color: var(--ink); line-height: 1.4; }
+  .ready-btn { flex: none; background: #fff0d7; color: var(--olive-ink); height: 40px; padding: 7px 20px; border-radius: 4px;
+              display: flex; align-items: center; justify-content: center; font-weight: 500; font-size: 12px;
+              white-space: nowrap; transition: opacity .2s; }
+  .ready-btn:hover { opacity: .88; }
+
+  /* btn-gold */
   .btn-gold {
-    background: var(--gold-btn); height: 40px; width: var(--cta-w);
-    border-radius: 4px; display: inline-flex; align-items: center; justify-content: center;
+    background: var(--gold-btn); height: 40px; min-width: 180px; border-radius: 4px;
+    display: inline-flex; align-items: center; justify-content: center;
     padding: 7px 20px; font-weight: 500; font-size: 12px; color: var(--olive-ink);
-    white-space: nowrap; transition: opacity .2s;
+    white-space: nowrap; line-height: 1.5; transition: opacity .2s;
   }
   .btn-gold:hover { opacity: .88; }
-  .btn-ghost {
-    height: 40px; border-radius: 9px; border: 1px solid rgba(255,255,255,.4);
-    display: inline-flex; align-items: center; justify-content: center;
-    padding: 7px 26px; font-weight: 600; font-size: 15px; color: #fff;
-    transition: border-color .2s;
-  }
-  .btn-ghost:hover { border-color: #fff; }
 
-  /* Calculator section */
-  .calc-section { gap: 0; padding-top: var(--section-y); padding-bottom: var(--section-y); }
-  .calc-grid { display: grid; grid-template-columns: 1fr 260px; gap: 24px; align-items: start; }
-  .calc-card {
-    background: var(--card); border: 1px solid var(--card-border);
-    border-radius: 24px; padding: 32px;
-  }
-  .calc-inner { display: grid; grid-template-columns: 1fr 240px; gap: 32px; align-items: start; }
-  .calc-inputs { display: flex; flex-direction: column; gap: 28px; }
-  .inp-wrap { display: flex; flex-direction: column; gap: 6px; }
-  .inp-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
-  .inp-label { font-weight: 600; font-size: 13px; color: var(--ink); }
-  .inp-val   { font-weight: 700; font-size: 14px; color: var(--olive-title); }
-  .inp-range { display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); margin-top: 2px; }
-  .calc-results { display: flex; flex-direction: column; gap: 16px; }
-  .donut-wrap { display: flex; align-items: center; justify-content: center; }
-  .donut-ring { position: relative; width: 160px; height: 160px; }
-  .donut-svg  { width: 100%; height: 100%; transform: rotate(-90deg); display: block; }
-  .donut-center {
-    position: absolute; inset: 0; display: flex; flex-direction: column;
-    align-items: center; justify-content: center; text-align: center;
-  }
-  .donut-lbl { font-size: 10px; color: var(--muted); }
-  .donut-val { font-size: 16px; font-weight: 700; color: var(--ink); }
-  .result-stats { display: flex; flex-direction: column; gap: 8px; }
-  .stat-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; border-radius: 10px; }
-  .stat-left { display: flex; align-items: center; gap: 8px; }
-  .stat-dot { width: 10px; height: 10px; border-radius: 50%; flex: none; }
-  .stat-dot-inv { background: var(--card-border); }
-  .stat-dot-ret { background: var(--gold-2); }
-  .stat-name { font-size: 12px; color: var(--muted); }
-  .stat-amt  { font-size: 13px; font-weight: 700; color: var(--ink); }
-  .stat-amt-gold { color: var(--olive-title); }
-  .stat-invested { background: var(--sec-tint); }
-  .stat-gains { background: rgba(242,184,63,.12); }
+  /* bullets */
+  .bullets { list-style: none; display: flex; flex-direction: column; gap: 14px; padding: 0; margin: 0; }
+  .bullets li { position: relative; padding-left: 24px; font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.5; }
+  .bullets li::before { content: ''; position: absolute; left: 7px; top: 9px; width: 6px; height: 6px;
+                        border-radius: 50%; background: var(--olive-title); }
 
-  /* CTA aside */
-  .cta-aside {
-    background: var(--olive-deep); border-radius: 24px; padding: 32px;
-    display: flex; flex-direction: column; gap: 32px; justify-content: space-between;
-    min-height: 280px;
-  }
-  .cta-aside-in { display: flex; flex-direction: column; gap: 12px; }
-  .cta-aside-h { font-weight: 500; font-size: 20px; color: #fff; line-height: 1.4; }
-  .cta-aside-p { font-size: 14px; color: rgba(255,255,255,.65); line-height: 1.5; }
-  .cta-aside .btn-gold { width: 100%; }
-
-  /* Slider */
-  .calc-slider {
-    -webkit-appearance: none; appearance: none;
-    width: 100%; height: 4px; border-radius: 2px; outline: none; cursor: pointer;
-  }
-  .calc-slider::-webkit-slider-thumb {
-    -webkit-appearance: none; appearance: none;
-    width: 20px; height: 20px; border-radius: 50%;
-    background: var(--gold-btn); cursor: pointer;
-    border: 2px solid #fff; box-shadow: 0 1px 6px rgba(0,0,0,.18);
-  }
-  .calc-slider::-moz-range-thumb {
-    width: 20px; height: 20px; border-radius: 50%;
-    background: var(--gold-btn); cursor: pointer;
-    border: 2px solid #fff; box-shadow: 0 1px 6px rgba(0,0,0,.18);
-  }
-
-  /* Cards & check */
-  .card { background: var(--card); border: 1px solid var(--card-border); border-radius: 24px; padding: 32px; }
-  .check-card-full { background: var(--card); border: 1px solid var(--card-border); border-radius: 24px; padding: 32px; }
-  .check-list { display: flex; flex-direction: column; gap: 20px; }
-  .check-row  { display: flex; gap: 14px; align-items: flex-start; }
-  .check-row .ck { color: var(--green); font-weight: 700; font-size: 15px; line-height: 25.5px; width: 13px; flex: none; }
-  .check-row .tx { flex: 1 0 0; min-width: 0; font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.5; }
-  .check-sep  { height: 1px; background: var(--row-line); width: 100%; }
-
-  /* Cat grid */
-  .cat-grid {
-    border: 1px solid var(--card-border); border-radius: 24px;
-    overflow: hidden; display: grid; background: var(--card);
-  }
-  .cat-3 { grid-template-columns: repeat(3, 1fr); }
-  .cat {
-    background: var(--card); padding: 32px;
-    display: flex; flex-direction: column; gap: 12px;
-    border-right: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border);
-  }
-  .cat-3 .cat:nth-child(3n)  { border-right: 0; }
-  .cat-3 .cat:nth-child(n+4) { border-bottom: 0; }
-  .cat-3 .cat:last-child     { border-right: 0; }
-  .cat h3 { font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.5; }
-  .calc-cat { text-decoration: none; transition: background .15s; }
-  .calc-cat:hover { background: var(--sec-light); }
-  .calc-go { font-weight: 600; font-size: 13px; color: var(--gold-2); }
+  /* explore grid */
+  .explore-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; }
+  .xcard { background: var(--olive-deep); border: 1px solid var(--olive-deep); border-radius: 24px; padding: 32px;
+          display: flex; flex-direction: column; color: inherit;
+          transition: background-color .25s ease, border-color .25s ease; }
+  .xcard:hover { background: #26301a; border-color: #3a471b; }
+  .xc-title { font-weight: 500; font-size: 19px; color: #fff; line-height: 1.3; }
+  .xc-desc { margin-top: 12px; font-weight: 400; font-size: 14px; color: rgba(255,255,255,.72); line-height: 1.5; flex: 1 1 auto; }
+  .xc-cta { margin-top: 24px; display: inline-flex; align-items: center; gap: 8px; color: var(--gold-2); font-weight: 600; font-size: 14px; }
+  .xc-cta .arr { transition: transform .25s ease; }
+  .xcard:hover .xc-cta .arr { transform: translateX(5px); }
 
   /* FAQ */
-  .faq-wrap { padding: 100px var(--pad); background: var(--sec-light); display: flex; flex-direction: column; justify-content: center; }
-  .faq-cols  { display: flex; gap: 48px; align-items: stretch; }
-  .faq-left  { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; gap: 48px; }
+  .faq-wrap { padding: 100px var(--pad); display: flex; flex-direction: column; }
+  .faq-cols { display: flex; gap: 48px; align-items: stretch; }
+  .faq-left { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; gap: 48px; }
   .faq-title { font-weight: 400; font-size: 40px; color: var(--olive-title); text-transform: capitalize; line-height: 1.5; }
-  .faq-acc   { border-radius: 24px; overflow: hidden; display: flex; flex-direction: column; gap: 2px; }
-  .faq-item  { background: var(--card); list-style: none; }
-  .faq-sum   { display: flex; align-items: flex-start; justify-content: space-between; gap: 40px; padding: 24px; cursor: pointer; list-style: none; }
-  .faq-sum::-webkit-details-marker { display: none; }
-  .faq-item .qt { font-weight: 500; font-size: 14px; color: #333; line-height: 1.5; flex: 1; }
-  .faq-item[open] .qt { font-weight: 600; }
-  .faq-icon  { width: 16px; height: 16px; flex: none; color: #404040; margin-top: 2px; }
-  .faq-h     { transition: opacity .28s ease; }
-  .faq-item[open] .faq-h { opacity: 0; }
-  .qa { padding: 0 24px 20px; }
-  .qa p { font-weight: 400; font-size: 14px; color: #404040; line-height: 1.5; }
+  .faq-acc { display: flex; flex-direction: column; gap: 2px; border: 1px solid var(--card-border); border-radius: 16px; overflow: hidden; padding: 1px; }
+  .faq-item { background: var(--card); }
+  .faq-q { width: 100%; display: flex; align-items: flex-start; justify-content: space-between; gap: 40px;
+           padding: 24px; cursor: pointer; background: none; border: 0; text-align: left; }
+  .faq-q .qt { font-weight: 500; font-size: 14px; color: #333; line-height: 1.5; flex: 1; }
+  .faq-icon { width: 24px; height: 24px; flex: none; }
+  .faq-icon svg { width: 24px; height: 24px; display: block; }
+  .faq-icon svg .v { transform-box: fill-box; transform-origin: center;
+                    transition: transform .38s cubic-bezier(.4,0,.2,1), opacity .38s ease; }
+  .faq-item.open .faq-icon svg .v { transform: scaleY(0); opacity: 0; }
+  .qa-wrap { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .38s cubic-bezier(.4,0,.2,1); }
+  .faq-item.open .qa-wrap { grid-template-rows: 1fr; }
+  .qa { overflow: hidden; min-height: 0; }
+  .qa p { padding: 0 24px 20px; font-weight: 400; font-size: 14px; color: #404040; line-height: 1.5; }
   .faq-side {
-    width: 400px; flex: none;
-    background: var(--card); border: 1px solid var(--card-border);
-    border-radius: 24px; padding: 32px;
+    width: 464px; flex: none; background: var(--card); border-radius: 24px; padding: var(--container-pad);
     display: flex; flex-direction: column; gap: 40px; justify-content: flex-end;
-    position: relative; overflow: hidden;
+    position: relative; overflow: hidden; border: 1px solid var(--card-border);
   }
-  .usr { position: absolute; left: 32px; top: 48px; width: 130px; height: 147px; opacity: .1; }
+  .usr { position: absolute; left: var(--container-pad); top: 64px; width: 128px; height: 144px; opacity: .1; }
   .usr svg { display: block; width: 100%; height: 100%; color: var(--olive-deep); }
-  .side-in  { display: flex; flex-direction: column; gap: 32px; position: relative; }
-  .side-tx  { display: flex; flex-direction: column; gap: 8px; color: #222320; }
-  .side-tx h4 { font-weight: 500; font-size: 20px; line-height: 28px; }
-  .side-tx p  { font-weight: 400; font-size: 14px; line-height: 22px; }
+  .side-in { display: flex; flex-direction: column; gap: 32px; position: relative; }
+  .side-tx { display: flex; flex-direction: column; gap: 8px; }
+  .side-tx h3 { font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.5; }
+  .side-tx p { font-weight: 400; font-size: 14px; color: var(--ink-3); line-height: 1.5; }
 
-  @media (max-width: 1024px) {
-    .calc-grid { grid-template-columns: 1fr; }
-    .cta-aside { min-height: 0; flex-direction: row; align-items: center; gap: 24px; }
-    .cta-aside-in { flex: 1; }
-    .cta-aside .btn-gold { width: auto; }
-    .faq-side { width: 320px; }
-  }
+  @media (max-width: 1024px) { .explore-grid { grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 900px) { .calc-panel,.calc-results { flex: 1 1 100%; } }
   @media (max-width: 768px) {
-    .calc-inner { grid-template-columns: 1fr; }
+    .bullets li { font-size: 14px; }
+    .bar-cap,.res-top { font-size: 14px; }
+    .bar-tot { font-size: 24px; }
+    .res-val { font-size: 20px; }
     .faq-cols { flex-direction: column; }
-    .faq-side { width: 100%; min-height: 200px; }
-    .cat-3 { grid-template-columns: 1fr 1fr; }
-    .cat-3 .cat:nth-child(3n) { border-right: inherit; }
-    .cat-3 .cat:nth-child(n+4) { border-bottom: inherit; }
-    .cat-3 .cat:nth-child(2n) { border-right: 0; }
-    .cat-3 .cat:nth-last-child(-n+2) { border-bottom: 0; }
-    .cat-3 .cat:last-child { border-right: 0; border-bottom: 0; }
-    .hero h1 { font-size: 28px; }
+    .faq-side { width: 100%; }
     .sec-title { font-size: 28px; }
-    .faq-title { font-size: 28px; white-space: normal; }
+    .faq-title { font-size: 28px; }
   }
-  @media (max-width: 480px) {
-    .calc-inner { grid-template-columns: 1fr; }
-    .cat-3 { grid-template-columns: 1fr; }
-    .cat-3 .cat { border-right: 0; border-bottom: 1px solid var(--card-border); }
-    .cat-3 .cat:last-child { border-bottom: 0; }
+  @media (max-width: 560px) {
+    .explore-grid { grid-template-columns: 1fr; }
+    .res-cards { gap: 16px; }
+    .field-top { gap: 10px; }
+    .field-top label { font-size: 14px; }
+    .field-val { min-width: 104px; }
+    .field-val input { width: 64px; }
+    .ready-bar { flex-direction: column; align-items: stretch; gap: 14px; }
+    .ready-btn { width: 100%; }
   }
 </style>
 
 <script>
-  const fmt    = (n: number) => '₹' + Math.round(n).toLocaleString('en-IN');
-  const fmtRaw = (v: number, prefix: string, suffix: string) =>
-    `${prefix}${v.toLocaleString('en-IN')}${suffix}`;
+  (function () {
+    const fmt = new Intl.NumberFormat('en-IN', { maximumFractionDigits: 0 });
+    const rupee = (v) => '₹' + fmt.format(Math.round(v));
 
-  function syncSlider(input: HTMLInputElement) {
-    const min = +input.min, max = +input.max, val = +input.value;
-    const pct = ((val - min) / (max - min)) * 100;
-    input.style.background = `linear-gradient(to right, var(--gold-btn) ${pct}%, var(--card-border) ${pct}%)`;
-    const display = document.getElementById(`${input.id}-display`);
-    if (display) {
-      const prefix = input.dataset.prefix ?? '';
-      const suffix = input.dataset.suffix ?? '';
-      display.textContent = fmtRaw(val, prefix, suffix);
-    }
-  }
+    function digits(s) { return String(s).replace(/[^0-9.]/g, ''); }
+    function clamp(v, mn, mx) { return Math.max(mn, Math.min(mx, v)); }
+    function set(id, txt) { const el = document.getElementById(id); if (el) el.textContent = txt; }
 
-  document.querySelectorAll<HTMLInputElement>('.calc-slider').forEach(slider => {
-    syncSlider(slider);
-    slider.addEventListener('input', () => { syncSlider(slider); calc(); });
-  });
-
-  function updateDonut(invested: number, total: number) {
-    const arc = document.getElementById('donut-returns');
-    if (!arc) return;
-    const circumference = 2 * Math.PI * 50;
-    const gainFraction = total > 0 ? (total - invested) / total : 0;
-    const offset = circumference * (1 - gainFraction);
-    arc.style.strokeDashoffset = String(offset);
-  }
-
-  function calc() {
-    const get = (id: string) => {
-      const el = document.getElementById(id) as HTMLInputElement | null;
-      return el ? parseFloat(el.value) || 0 : null;
-    };
-
-    const sipAmount = get('sip-amount'), sipRate = get('sip-rate'), sipYears = get('sip-years');
-    if (sipAmount !== null && sipRate !== null && sipYears !== null) {
-      const r = sipRate / 100 / 12, n = sipYears * 12;
-      const fv = r === 0 ? sipAmount * n : sipAmount * ((Math.pow(1 + r, n) - 1) / r) * (1 + r);
-      const invested = sipAmount * n;
-      const gains = fv - invested;
-      setResults(invested, gains, fv, 'Invested Amount', 'Est. Returns');
-      return;
+    function fillSlider(sl) {
+      const p = (+sl.value - +sl.min) / (+sl.max - +sl.min) * 100;
+      sl.style.background = 'linear-gradient(90deg,#4f583b 0%,#4f583b ' + p + '%,#f3f3f3 ' + p + '%,#f3f3f3 100%)';
     }
 
-    const lsAmount = get('ls-amount'), lsRate = get('ls-rate'), lsYears = get('ls-years');
-    if (lsAmount !== null && lsRate !== null && lsYears !== null) {
-      const fv = lsAmount * Math.pow(1 + lsRate / 100, lsYears);
-      setResults(lsAmount, fv - lsAmount, fv, 'Amount Invested', 'Est. Returns');
-      return;
+    function val(id) {
+      const el = document.getElementById(id);
+      if (!el) return null;
+      return clamp(parseFloat(digits(el.value)) || 0, +el.dataset.min, +el.dataset.max);
     }
 
-    const fdAmount = get('fd-amount'), fdRate = get('fd-rate'), fdYears = get('fd-years');
-    if (fdAmount !== null && fdRate !== null && fdYears !== null) {
-      const fv = fdAmount * Math.pow(1 + fdRate / 100 / 4, 4 * fdYears);
-      setResults(fdAmount, fv - fdAmount, fv, 'Principal', 'Interest Earned');
-      return;
+    function pct(part, whole) { return whole > 0 ? (part / whole) * 100 : 0; }
+
+    function result(o) { return o; }
+
+    function calc() {
+      // Lumpsum
+      const lsA = val('ls-amount'), lsR = val('ls-rate'), lsY = val('ls-years');
+      if (lsA !== null && lsR !== null && lsY !== null) {
+        const fv = lsA * Math.pow(1 + lsR / 100, lsY);
+        return result({
+          totalLabel: 'Total Value', totalText: rupee(fv),
+          invLabel: 'Amount Invested', invText: rupee(lsA),
+          retLabel: 'Estimated Returns', retText: rupee(fv - lsA),
+          invPct: pct(lsA, fv),
+          note: 'Figures are illustrative and assume a constant annual return compounded over the full term; actual market returns fluctuate and are not guaranteed.',
+        });
+      }
+      // Fixed Deposit
+      const fdA = val('fd-amount'), fdR = val('fd-rate'), fdY = val('fd-years');
+      if (fdA !== null && fdR !== null && fdY !== null) {
+        const fv = fdA * Math.pow(1 + fdR / 100 / 4, 4 * fdY);
+        return result({
+          totalLabel: 'Maturity Value', totalText: rupee(fv),
+          invLabel: 'Principal', invText: rupee(fdA),
+          retLabel: 'Interest Earned', retText: rupee(fv - fdA),
+          invPct: pct(fdA, fv),
+          note: 'Calculated using quarterly compounding, the standard for most Indian bank FDs. FD interest is taxable as per your slab, so actual post-tax returns will be lower.',
+        });
+      }
+      // SWP
+      const swC = val('swp-corpus'), swW = val('swp-withdrawal'), swR = val('swp-rate');
+      if (swC !== null && swW !== null && swR !== null) {
+        const r = swR / 100 / 12;
+        let bal = swC, m = 0;
+        while (bal > 0 && m < 600) { bal = bal * (1 + r) - swW; m++; }
+        const withdrawn = swW * m, remaining = Math.max(0, bal);
+        const label = m >= 600 ? '50+ yrs' : (m / 12).toFixed(1) + ' yrs';
+        return result({
+          totalLabel: 'How Long It Lasts', totalText: label,
+          invLabel: 'Total Withdrawn', invText: rupee(withdrawn),
+          retLabel: 'Remaining Corpus', retText: rupee(remaining),
+          invPct: pct(withdrawn, withdrawn + remaining),
+          note: 'Each month your corpus earns a return, then your withdrawal is deducted. If monthly returns exceed your withdrawal, the corpus can last indefinitely (shown as 50+ yrs).',
+        });
+      }
+      // NPS
+      const npA = val('nps-age'), npRet = val('nps-retire'), npAmt = val('nps-amount');
+      const npR = val('nps-rate'), npAnP = val('nps-annuity-pct'), npAnR = val('nps-annuity-rate');
+      if (npA !== null && npRet !== null && npAmt !== null) {
+        const years = Math.max(0, (npRet || 60) - (npA || 30));
+        const n = years * 12;
+        const r = (npR || 10) / 100 / 12;
+        const corpus = r === 0 ? (npAmt || 0) * n : (npAmt || 0) * ((Math.pow(1 + r, n) - 1) / r) * (1 + r);
+        const aFrac = (npAnP || 40) / 100;
+        const lump = corpus * (1 - aFrac);
+        const annuityCorpus = corpus * aFrac;
+        const pension = annuityCorpus * ((npAnR || 6) / 100) / 12;
+        return result({
+          totalLabel: 'Total Corpus', totalText: rupee(corpus),
+          invLabel: 'Lump Sum (Tax-Free)', invText: rupee(lump),
+          retLabel: 'Monthly Pension', retText: rupee(pension) + '/mo',
+          invPct: pct(lump, corpus),
+          note: 'A two-stage estimate: the corpus accumulates monthly, then the annuitised portion converts to pension. The lump sum (up to 60%) is tax-free; pension income is taxable.',
+        });
+      }
+      return null;
     }
 
-    const corpus = get('swp-corpus'), monthly = get('swp-withdrawal'), swpRate = get('swp-rate');
-    if (corpus !== null && monthly !== null && swpRate !== null) {
-      const r = swpRate / 100 / 12;
-      let bal = corpus, months = 0;
-      while (bal > 0 && months < 600) { bal = bal * (1 + r) - monthly; months++; }
-      const totalWithdrawn = monthly * months;
-      const remaining = Math.max(0, bal);
-      const label = months >= 600 ? '50+ yrs' : `${(months / 12).toFixed(1)} yrs`;
-      const totalEl = document.getElementById('calc-total');
-      const investedEl = document.getElementById('calc-invested');
-      const gainsEl = document.getElementById('calc-gains');
-      const investedLabelEl = document.getElementById('calc-invested-label');
-      const gainsLabelEl = document.getElementById('calc-gains-label');
-      if (totalEl) totalEl.textContent = label;
-      if (investedEl) investedEl.textContent = fmt(totalWithdrawn);
-      if (gainsEl) gainsEl.textContent = fmt(remaining);
-      if (investedLabelEl) investedLabelEl.textContent = 'Total Withdrawn';
-      if (gainsLabelEl) gainsLabelEl.textContent = 'Remaining Corpus';
-      updateDonut(totalWithdrawn, totalWithdrawn + remaining);
-      return;
+    function render() {
+      const r = calc();
+      if (!r) return;
+      set('d-tot-label', r.totalLabel);
+      set('d-tot', r.totalText);
+      set('r-inv-label', r.invLabel);
+      set('r-inv', r.invText);
+      set('r-ret-label', r.retLabel);
+      set('r-ret', r.retText);
+      set('bar-note', r.note);
+      const segInv = document.getElementById('seg-inv');
+      const segRet = document.getElementById('seg-ret');
+      if (segInv) segInv.style.width = r.invPct + '%';
+      if (segRet) segRet.style.width = (100 - r.invPct) + '%';
+      set('sr-summary', r.totalLabel + ': ' + r.totalText + '. ' + r.invLabel + ' ' + r.invText + ', ' + r.retLabel + ' ' + r.retText + '.');
+
+      try {
+        const p = new URLSearchParams();
+        document.querySelectorAll('.field-val input').forEach((el) => { p.set(el.id, digits(el.value)); });
+        history.replaceState(null, '', '?' + p.toString());
+      } catch (e) { /* ignore */ }
     }
 
-    const npsAge = get('nps-age'), npsRetire = get('nps-retire'), npsAmount = get('nps-amount');
-    const npsRate = get('nps-rate'), npsAnnuityPct = get('nps-annuity-pct'), npsAnnuityRate = get('nps-annuity-rate');
-    if (npsAge !== null && npsRetire !== null && npsAmount !== null) {
-      const years = Math.max(0, (npsRetire ?? 60) - (npsAge ?? 30));
-      const n = years * 12;
-      const r = (npsRate ?? 10) / 100 / 12;
-      const corpus = r === 0 ? (npsAmount ?? 0) * n : (npsAmount ?? 0) * ((Math.pow(1 + r, n) - 1) / r) * (1 + r);
-      const totalInvested = (npsAmount ?? 0) * n;
-      const annuityFrac = (npsAnnuityPct ?? 40) / 100;
-      const lumpSum = corpus * (1 - annuityFrac);
-      const annuityCorpus = corpus * annuityFrac;
-      const monthlyPension = annuityCorpus * ((npsAnnuityRate ?? 6) / 100) / 12;
-      const totalEl = document.getElementById('calc-total');
-      const investedEl = document.getElementById('calc-invested');
-      const gainsEl = document.getElementById('calc-gains');
-      const investedLabelEl = document.getElementById('calc-invested-label');
-      const gainsLabelEl = document.getElementById('calc-gains-label');
-      if (totalEl) totalEl.textContent = fmt(corpus);
-      if (investedEl) investedEl.textContent = fmt(lumpSum);
-      if (gainsEl) gainsEl.textContent = '₹' + Math.round(monthlyPension).toLocaleString('en-IN') + '/mo';
-      if (investedLabelEl) investedLabelEl.textContent = 'Lump Sum (Tax-Free)';
-      if (gainsLabelEl) gainsLabelEl.textContent = 'Monthly Pension';
-      updateDonut(totalInvested, corpus);
-      return;
-    }
-  }
+    const numbers = Array.prototype.slice.call(document.querySelectorAll('.field-val input'));
 
-  function setResults(invested: number, gains: number, total: number, investedLabel: string, gainsLabel: string) {
-    const totalEl = document.getElementById('calc-total');
-    const investedEl = document.getElementById('calc-invested');
-    const gainsEl = document.getElementById('calc-gains');
-    const investedLabelEl = document.getElementById('calc-invested-label');
-    const gainsLabelEl = document.getElementById('calc-gains-label');
-    if (totalEl) totalEl.textContent = fmt(total);
-    if (investedEl) investedEl.textContent = fmt(invested);
-    if (gainsEl) gainsEl.textContent = fmt(gains);
-    if (investedLabelEl) investedLabelEl.textContent = investedLabel;
-    if (gainsLabelEl) gainsLabelEl.textContent = gainsLabel;
-    updateDonut(invested, total);
-  }
+    numbers.forEach((num) => {
+      const sl = document.getElementById(num.id + '-r');
+      if (!sl) return;
+      const group = num.dataset.group === '1';
+      const mn = +num.dataset.min, mx = +num.dataset.max;
 
-  calc();
-
-  document.querySelectorAll('.faq-acc').forEach(acc => {
-    acc.addEventListener('click', e => {
-      const item = e.target instanceof Element ? e.target.closest('details') : null;
-      if (!item) return;
-      acc.querySelectorAll('details[open]').forEach(d => { if (d !== item) d.removeAttribute('open'); });
+      sl.addEventListener('input', () => {
+        num.value = group ? fmt.format(+sl.value) : sl.value;
+        fillSlider(sl); render();
+      });
+      num.addEventListener('input', () => {
+        const raw = parseFloat(digits(num.value)) || 0;
+        sl.value = String(clamp(raw, mn, mx));
+        fillSlider(sl); render();
+      });
+      num.addEventListener('change', () => {
+        const v = clamp(parseFloat(digits(num.value)) || mn, mn, mx);
+        num.value = group ? fmt.format(v) : String(v);
+        sl.value = String(v); fillSlider(sl); render();
+      });
     });
-  });
+
+    // hydrate from URL
+    (function initFromUrl() {
+      const p = new URLSearchParams(location.search);
+      numbers.forEach((num) => {
+        if (!p.has(num.id)) return;
+        const sl = document.getElementById(num.id + '-r');
+        const group = num.dataset.group === '1';
+        const v = clamp(parseFloat(p.get(num.id) || '') || +num.dataset.min, +num.dataset.min, +num.dataset.max);
+        num.value = group ? fmt.format(v) : String(v);
+        if (sl) sl.value = String(v);
+      });
+    })();
+
+    document.querySelectorAll('.slider').forEach(fillSlider);
+    render();
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-acc').forEach((acc) => {
+      acc.querySelectorAll('.faq-item').forEach((item) => {
+        const q = item.querySelector('.faq-q');
+        if (!q) return;
+        q.addEventListener('click', () => {
+          const isOpen = item.classList.contains('open');
+          acc.querySelectorAll('.faq-item').forEach((i) => i.classList.remove('open'));
+          if (!isOpen) item.classList.add('open');
+        });
+      });
+    });
+  })();
 </script>
