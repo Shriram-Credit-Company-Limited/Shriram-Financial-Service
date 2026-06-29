@@ -1,0 +1,134 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Privacy Policy — How We Collect, Use & Protect Your Data | Shriram Financial Services"
+  description="Read the Shriram Financial Services Privacy Policy — what personal and KYC information we collect, how it is disclosed to SEBI, NSE, BSE and CDSL, how long we retain it, and the security safeguards that protect it."
+>
+
+<!-- HERO -->
+<section class="hero" id="sec-hero">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <h1>Privacy <span class="g">Policy</span></h1>
+      <p class="lead">How Shriram Financial Services collects, uses, protects and shares your personal information across our website, trading platforms and services.</p>
+      <div class="hero-feats">
+        <div class="feats">
+          <div class="feat"><span class="tk">✓</span><span class="lb">SEBI-compliant</span></div>
+          <div class="feat"><span class="tk">✓</span><span class="lb">Encrypted &amp; secured</span></div>
+          <div class="feat"><span class="tk">✓</span><span class="lb">Never sold to third parties</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTRODUCTION + DISCLOSURE -->
+<section class="section" id="sec-intro" style="background:var(--sec-light)">
+  <div class="legal">
+    <div class="policy">
+      <p class="updated">Last updated: 26 June 2026</p>
+      <h2 class="sub-title">Introduction</h2>
+      <p>Shriram Financial Services (&ldquo;Shriram&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo; or &ldquo;our&rdquo;) is committed to protecting the privacy of every customer, visitor and partner. This Privacy Policy explains what information we collect when you browse our website, open a Demat or trading account, or use our research and advisory services &mdash; and how that information is stored, used and safeguarded.</p>
+      <p>By accessing our website or using our services, you consent to the practices described in this policy. We may update it from time to time to reflect changes in regulation or in our services; the &ldquo;last updated&rdquo; date above always reflects the version currently in force.</p>
+    </div>
+
+    <div class="policy">
+      <h2 class="sub-title">Disclosure of Personal Information</h2>
+      <p>We collect personal information that you provide to us directly, as well as information generated as you use our platforms. <strong>We do not sell your personal information.</strong> We disclose it only in the limited circumstances described below:</p>
+      <ul class="legal-list">
+        <li><strong>Identity &amp; KYC details</strong> &mdash; name, PAN, Aadhaar reference, date of birth and photograph, collected to satisfy SEBI and depository (CDSL) account-opening requirements.</li>
+        <li><strong>Contact &amp; financial details</strong> &mdash; address, email, mobile number, bank account and income band, used to operate and service your account.</li>
+        <li><strong>Usage &amp; device data</strong> &mdash; pages visited, device type, IP address and cookies, used to secure, maintain and improve the platform.</li>
+        <li><strong>Regulators &amp; depositories</strong> &mdash; information shared with SEBI, NSE, BSE and CDSL where required by law or to clear and settle your trades.</li>
+        <li><strong>Service providers</strong> &mdash; KYC registration agencies, payment partners and IT vendors who process data on our behalf under strict confidentiality obligations.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SUPPLEMENTAL + SECURITY -->
+<section class="section" id="sec-security" style="background:var(--sec-tint)">
+  <div class="legal">
+    <div class="policy">
+      <h2 class="sub-title">Supplemental Information</h2>
+      <p>Where you interact with us through third-party channels &mdash; such as WhatsApp, our partner referral network or social media &mdash; those platforms may also collect information about you under their own privacy policies, which we encourage you to review separately.</p>
+      <p>We retain your personal information for as long as your account is active, and thereafter for the period mandated by SEBI, the Income Tax Act and other applicable laws. You may request access to, correction of, or deletion of your information at any time, subject to the records we are legally required to retain.</p>
+    </div>
+
+    <div class="policy">
+      <h2 class="sub-title">Security Policy</h2>
+      <p>We apply industry-standard safeguards &mdash; encryption in transit and at rest, role-based access controls, OTP-based authentication and continuous monitoring &mdash; to protect your information against unauthorised access, alteration or disclosure.</p>
+      <p>While we work hard to protect your data, no method of transmission over the internet is completely secure, and we cannot guarantee absolute security. If you believe your account has been compromised, or if you have any questions about this policy, contact us immediately at <a href="mailto:support@shriramsecurities.com">support@shriramsecurities.com</a> or <a href="tel:18001031212">1800 103 1212</a>.</p>
+    </div>
+  </div>
+</section>
+
+</BaseLayout>
+
+<style>
+  :root {
+    --sec-light: #fef8ee;
+    --sec-tint: #f6efe1;
+    --card-border: #e1e0db;
+    --olive-title: #2e3914;
+    --olive-deep: #1b2010;
+    --ink: #1c1c16;
+    --ink-3: #595959;
+    --muted: #73736a;
+    --gold-2: #f2b83f;
+    --blue: #2f7ef4;
+    --pad: clamp(20px, 8vw, 144px);
+    --section-y: 72px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  a { color: inherit; text-decoration: none; }
+  p { line-height: 1.5; }
+
+  .section { padding: var(--section-y) var(--pad); display: flex; flex-direction: column; }
+
+  /* hero */
+  .hero {
+    background: radial-gradient(125% 210% at 100% -8%, #4f583b 0%, #363a2c 50%, #1d1d1d 100%);
+    min-height: clamp(440px, 29vw, 552px); display: flex; flex-direction: column; justify-content: center;
+    padding: 0 var(--pad);
+  }
+  .hero-inner { padding: 56px 0; display: flex; flex-direction: column; }
+  .hero-content { display: flex; flex-direction: column; align-items: flex-start; }
+  .hero h1 { font-weight: 500; font-size: 40px; color: #fff; line-height: 1.5; max-width: 600px; }
+  .hero h1 .g { color: var(--gold-2); }
+  .lead { margin-top: 16px; font-weight: 400; font-size: 18px; color: rgba(255,255,255,.74); line-height: 1.5; max-width: 600px; }
+  .hero-feats { margin-top: 40px; }
+  .feats { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; padding-top: 36px; border-top: 1px solid rgba(255,255,255,.16); }
+  .feat { display: flex; gap: 10px; align-items: center; }
+  .feat .tk { color: var(--gold-2); font-weight: 500; font-size: 15px; }
+  .feat .lb { color: rgba(255,255,255,.9); font-weight: 500; font-size: 16px; line-height: 1.5; white-space: nowrap; }
+
+  /* legal document column */
+  .legal { display: flex; flex-direction: column; gap: 56px; }
+  .policy { display: flex; flex-direction: column; gap: 16px; }
+  .policy p { font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.5; }
+  .policy p strong { font-weight: 600; color: var(--ink); }
+  .policy a { color: var(--blue); }
+  .updated { font-weight: 500; font-size: 14px; color: var(--muted); }
+  .sub-title { font-weight: 500; font-size: 28px; color: var(--ink); line-height: 1.5; }
+
+  /* bulleted list */
+  .legal-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 16px; }
+  .legal-list li {
+    position: relative; padding-left: 24px;
+    font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.5;
+  }
+  .legal-list li::before {
+    content: ""; position: absolute; left: 8px; top: 9px; width: 6px; height: 6px;
+    border-radius: 50%; background: var(--olive-title);
+  }
+  .legal-list li strong { font-weight: 600; color: var(--ink); }
+
+  @media (max-width: 768px) {
+    .legal { gap: 48px; }
+    .policy p, .legal-list li { font-size: 14px; }
+  }
+</style>

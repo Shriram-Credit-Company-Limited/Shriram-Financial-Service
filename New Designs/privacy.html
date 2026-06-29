@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<script>document.documentElement.className += ' js';</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Privacy Policy — How We Collect, Use &amp; Protect Your Data | Shriram Financial Services</title>
+<meta name="description" content="Read the Shriram Financial Services Privacy Policy — what personal and KYC information we collect, how it is disclosed to SEBI, NSE, BSE and CDSL, how long we retain it, and the security safeguards that protect it." />
+<link rel="canonical" href="https://www.shriramsec.in/privacy.html" />
+<meta name="theme-color" content="#1d1d1d" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Privacy Policy | Shriram Financial Services" />
+<meta property="og:description" content="How Shriram collects, uses, protects and shares your personal information across our website, trading platforms and services." />
+<meta property="og:url" content="https://www.shriramsec.in/privacy.html" />
+<meta property="og:site_name" content="Shriram Financial Services" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<style>
+  /* ===== Privacy Policy — page-specific components. Every value reuses the shared
+     design tokens, radii, container padding and section rhythm. ===== */
+
+  .section{ scroll-margin-top:96px; }
+
+  /* ---------- legal document column ---------- */
+  /* a constrained, left-aligned measure for comfortable long-form reading */
+  .legal{ display:flex; flex-direction:column; gap:56px; }
+  .policy{ display:flex; flex-direction:column; gap:16px; }
+  .policy p{ font-weight:400; font-size:16px; color:var(--ink-3); line-height:1.5; }
+  .policy p b{ font-weight:600; color:var(--ink); }
+  .policy a{ color:var(--blue); }
+  .policy p.updated{ font-weight:500; font-size:14px; color:var(--muted); }
+
+  /* bulleted list — olive-green markers (DESIGN-SYSTEM §8) */
+  .legal-list{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:16px; }
+  .legal-list li{ position:relative; padding-left:24px; font-weight:400; font-size:16px; color:var(--ink-3); line-height:1.5; }
+  .legal-list li::before{ content:""; position:absolute; left:8px; top:9px; width:6px; height:6px;
+                          border-radius:50%; background:var(--olive-title); }
+  .legal-list li b{ font-weight:600; color:var(--ink); }
+
+  /* ---------- back to top ---------- */
+  .to-top{ position:fixed; right:24px; bottom:24px; width:48px; height:48px; border-radius:50%;
+           background:var(--olive-deep); color:var(--gold-2); border:0; cursor:pointer;
+           display:flex; align-items:center; justify-content:center; z-index:80;
+           opacity:0; visibility:hidden; transform:translateY(8px);
+           box-shadow:0 6px 20px rgba(0,0,0,.18);
+           transition:opacity .3s ease, transform .3s ease, visibility .3s; }
+  .to-top.show{ opacity:1; visibility:visible; transform:none; }
+  .to-top svg{ width:20px; height:20px; }
+
+  /* ---------- responsive ---------- */
+  @media (max-width:768px){
+    .legal{ gap:48px; }
+    .policy p, .legal-list li{ font-size:14px; }
+    .to-top{ right:16px; bottom:16px; }
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="viewport">
+<div class="page">
+
+  <!-- ================= NAV ================= -->
+  <header class="nav">
+    <div class="nav-left">
+      <div class="logo-box">
+        <div class="logo-crop"><img src="assets/logo.png" alt="Shriram Financial Services" /></div>
+      </div>
+      <nav class="nav-links">
+        <a class="nav-link" href="#"><span>Products</span><svg class="chev" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.25 7 8.75l3.5-3.5" stroke="#333" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="nav-link" href="#"><span>Research Centre</span><svg class="chev" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.25 7 8.75l3.5-3.5" stroke="#333" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="nav-link" href="calculators.html"><span>Calculators</span><svg class="chev" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.25 7 8.75l3.5-3.5" stroke="#333" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="nav-link" href="#"><span>Support</span><svg class="chev" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.25 7 8.75l3.5-3.5" stroke="#333" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="nav-link" href="#"><span>Become a Partner</span></a>
+      </nav>
+    </div>
+    <div class="nav-right">
+      <div style="display:flex;gap:16px;align-items:center">
+        <a class="login" href="#"><span>Login</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6 8 10l4-4" stroke="#2f7ef4" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="btn-dark" href="demat.html">Open A Demat Account</a>
+      </div>
+    </div>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </header>
+  <div class="mobile-menu">
+    <div class="mm-inner">
+      <a class="mlink" href="#">Products</a>
+      <a class="mlink" href="#">Research Centre</a>
+      <a class="mlink" href="calculators.html">Calculators</a>
+      <a class="mlink" href="#">Support</a>
+      <a class="mlink" href="#">Become a Partner</a>
+      <div class="mm-actions">
+        <a class="login" href="#">Login</a>
+        <a class="btn-dark" href="demat.html">Open A Demat Account</a>
+      </div>
+    </div>
+  </div>
+
+  <main id="main">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero" id="sec-hero" data-section="hero">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <h1>Privacy <span class="g">Policy</span></h1>
+        <p class="lead">How Shriram Financial Services collects, uses, protects and shares your personal information across our website, trading platforms and services.</p>
+        <div class="hero-feats">
+          <div class="feats">
+            <div class="feat"><span class="tk">✓</span><span class="lb">SEBI-compliant</span></div>
+            <div class="feat"><span class="tk">✓</span><span class="lb">Encrypted &amp; secured</span></div>
+            <div class="feat"><span class="tk">✓</span><span class="lb">Never sold to third parties</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= INTRODUCTION + DISCLOSURE ================= -->
+  <section class="section" id="sec-intro" data-section="intro" style="background:var(--sec-light)">
+    <div class="legal">
+
+      <div class="policy">
+        <p class="updated">Last updated: 26 June 2026</p>
+        <h2 class="sub-title">Introduction</h2>
+        <p>Shriram Financial Services (&ldquo;Shriram&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo; or &ldquo;our&rdquo;) is committed to protecting the privacy of every customer, visitor and partner. This Privacy Policy explains what information we collect when you browse our website, open a Demat or trading account, or use our research and advisory services &mdash; and how that information is stored, used and safeguarded.</p>
+        <p>By accessing our website or using our services, you consent to the practices described in this policy. We may update it from time to time to reflect changes in regulation or in our services; the &ldquo;last updated&rdquo; date above always reflects the version currently in force.</p>
+      </div>
+
+      <div class="policy">
+        <h2 class="sub-title">Disclosure of Personal Information</h2>
+        <p>We collect personal information that you provide to us directly, as well as information generated as you use our platforms. <b>We do not sell your personal information.</b> We disclose it only in the limited circumstances described below:</p>
+        <ul class="legal-list">
+          <li><b>Identity &amp; KYC details</b> &mdash; name, PAN, Aadhaar reference, date of birth and photograph, collected to satisfy SEBI and depository (CDSL) account-opening requirements.</li>
+          <li><b>Contact &amp; financial details</b> &mdash; address, email, mobile number, bank account and income band, used to operate and service your account.</li>
+          <li><b>Usage &amp; device data</b> &mdash; pages visited, device type, IP address and cookies, used to secure, maintain and improve the platform.</li>
+          <li><b>Regulators &amp; depositories</b> &mdash; information shared with SEBI, NSE, BSE and CDSL where required by law or to clear and settle your trades.</li>
+          <li><b>Service providers</b> &mdash; KYC registration agencies, payment partners and IT vendors who process data on our behalf under strict confidentiality obligations.</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= SUPPLEMENTAL + SECURITY ================= -->
+  <section class="section" id="sec-security" data-section="security" style="background:var(--sec-tint)">
+    <div class="legal">
+
+      <div class="policy">
+        <h2 class="sub-title">Supplemental Information</h2>
+        <p>Where you interact with us through third-party channels &mdash; such as WhatsApp, our partner referral network or social media &mdash; those platforms may also collect information about you under their own privacy policies, which we encourage you to review separately.</p>
+        <p>We retain your personal information for as long as your account is active, and thereafter for the period mandated by SEBI, the Income Tax Act and other applicable laws. You may request access to, correction of, or deletion of your information at any time, subject to the records we are legally required to retain.</p>
+      </div>
+
+      <div class="policy">
+        <h2 class="sub-title">Security Policy</h2>
+        <p>We apply industry-standard safeguards &mdash; encryption in transit and at rest, role-based access controls, OTP-based authentication and continuous monitoring &mdash; to protect your information against unauthorised access, alteration or disclosure.</p>
+        <p>While we work hard to protect your data, no method of transmission over the internet is completely secure, and we cannot guarantee absolute security. If you believe your account has been compromised, or if you have any questions about this policy, contact us immediately at <a href="mailto:support@shriramsecurities.com">support@shriramsecurities.com</a> or <a href="tel:18001031212">1800 103 1212</a>.</p>
+      </div>
+
+    </div>
+  </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="foot-top">
+      <div class="foot-brand">
+        <div class="fb-logo"><span class="fmark"><span>S</span></span><span class="fb-name">&nbsp;Shriram Financial Services</span></div>
+        <p class="fb-desc">A research-led, advisory-driven trading firm dedicated to helping clients achieve their financial goals through personalised advice.</p>
+        <div class="fb-contact">
+          <span>Shriram House, No. 4, Burkit Road, T. Nagar, Chennai – 600 017</span>
+          <span>1800 103 1212</span>
+          <span>support@shriramsecurities.com</span>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h5>Company</h5>
+        <a href="about.html">About Us</a><a href="#">Become a Partner</a><a href="demat.html">Open Demat Account</a><a href="#">Regulatory</a><a href="#">Antara Platform</a><a href="#">Sitemap</a>
+      </div>
+      <div class="foot-col">
+        <h5>Research</h5>
+        <a href="#">Research Overview</a><a href="#">Technical Analysis</a><a href="#">Fundamental Research</a><a href="#">Mutual Fund Picks</a><a href="calculators.html">Calculators</a><a href="#">Support</a>
+      </div>
+      <div class="foot-col">
+        <h5>Legal</h5>
+        <a href="#">Regulatory &amp; Compliance</a><a href="#">Investor Charter</a><a href="#">Risk Disclosures</a><a href="#">Grievance Redressal</a><a href="privacy.html">Privacy Policy</a><a href="contact.html">Contact Us</a>
+      </div>
+      <div class="foot-col">
+        <h5>Products</h5>
+        <a href="equity.html">Equity</a><a href="#">Derivatives</a><a href="#">Commodities</a><a href="#">Currency</a><a href="#">Mutual Funds</a><a href="#">IPO</a><a href="#">NPS</a><a href="#">Bonds</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span class="copy">© 2026 Shriram Securities Limited. All rights reserved. · SEBI Registered | ARN-29483</span>
+      <div class="socials"><a href="#" aria-label="Facebook">f</a><a href="#" aria-label="LinkedIn">in</a><a href="#" aria-label="X">𝕏</a><a href="#" aria-label="Instagram">◎</a></div>
+    </div>
+  </footer>
+
+</div>
+</div>
+
+<button class="to-top" aria-label="Back to top"><svg viewBox="0 0 24 24" fill="none"><path d="M12 19V6M6 11l6-6 6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+
+<script src="app.js"></script>
+<script>
+/* ---- Privacy page enhancement: back-to-top ---- */
+(function(){
+  'use strict';
+  var tt = document.querySelector('.to-top');
+  if(tt){
+    window.addEventListener('scroll', function(){
+      tt.classList.toggle('show', window.pageYOffset > 600);
+    }, {passive:true});
+    tt.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
+  }
+})();
+</script>
+</body>
+</html>

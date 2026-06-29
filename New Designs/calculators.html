@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Calculators — Shriram Financial Services</title>
+<meta name="description" content="Free financial calculators from Shriram — SIP, lumpsum, SWP, fixed deposit and NPS. Plan investments and estimate returns instantly, no sign-up." />
+<link rel="canonical" href="https://www.shriramsec.in/calculators.html" />
+<meta name="theme-color" content="#1d1d1d" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Calculators — Shriram Financial Services" />
+<meta property="og:description" content="All the financial calculators you need in one place — free, instant and accurate." />
+<meta property="og:url" content="https://www.shriramsec.in/calculators.html" />
+<meta property="og:site_name" content="Shriram Financial Services" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<style>
+  /* ================= Calculators page ================= */
+  /* on-brand dark hero (matches the Equity hero gradient) */
+  .calc-hero{ background:radial-gradient(125% 210% at 100% -8%, #4f583b 0%, #363a2c 50%, #1d1d1d 100%);
+              min-height:clamp(440px, 29vw, 552px); display:flex; flex-direction:column; justify-content:center;
+              padding:72px var(--pad); }
+  .calc-hero h1{ font-weight:500; font-size:40px; line-height:1.5; color:#fff; max-width:780px; }
+  .calc-hero h1 .g{ color:var(--gold-2); }
+  .calc-hero .ch-lead{ margin-top:16px; font-weight:400; font-size:18px; line-height:1.5; color:rgba(255,255,255,.74); max-width:600px; }
+  .calc-hero .ch-chips{ margin-top:40px; padding-top:36px; border-top:1px solid rgba(255,255,255,.16);
+                        max-width:840px; display:flex; flex-wrap:wrap; gap:16px 32px; }
+  .calc-hero .chip{ display:flex; align-items:center; gap:10px; font-weight:500; font-size:16px; color:rgba(255,255,255,.9); }
+  .calc-hero .chip .tk{ color:var(--gold-2); font-size:15px; }
+
+  /* calculator cards grid */
+  .calc-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .calc-card{ background:var(--card); border:1px solid var(--card-border); border-radius:24px;
+              padding:32px; display:flex; flex-direction:column; gap:16px; color:inherit;
+              transition:border-color .22s ease; }
+  /* minimal hover: crisp olive border + arrow nudge (no shadow / lift) */
+  a.calc-card:hover{ border-color:var(--olive-deep); }
+  .cc-title{ font-weight:500; font-size:20px; color:var(--ink); line-height:1.3; }
+  .cc-desc{ flex:1 1 auto; font-weight:400; font-size:15px; color:var(--muted); line-height:1.5; }
+  .cc-cta{ display:inline-flex; align-items:center; gap:8px; color:var(--olive-title); font-weight:600; font-size:15px; }
+  .cc-cta .arr{ transition:transform .25s ease; }
+  a.calc-card:hover .cc-cta .arr{ transform:translateX(5px); }
+
+  /* demat CTA tile (fills the 6th grid cell) */
+  .cta-tile{ background:var(--olive-deep); border-color:var(--olive-deep); }
+  .cta-tile .cc-title{ color:#fff; }
+  .cta-tile .cc-desc{ color:rgba(255,255,255,.72); }
+  .cta-tile .btn-gold{ margin-top:4px; }
+
+  @media (max-width:1024px){ .calc-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:640px){
+    .calc-grid{ grid-template-columns:1fr; }
+    .calc-hero{ padding:72px var(--pad); }
+    .calc-hero h1{ font-size:clamp(28px, 7vw, 40px); }
+    .calc-hero .ch-lead{ font-size:16px; }
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="viewport">
+<div class="page">
+
+  <!-- ================= NAV ================= -->
+  <header class="nav">
+    <div class="nav-left">
+      <div class="logo-box">
+        <div class="logo-crop"><img src="assets/logo.png" alt="Shriram Financial Services" /></div>
+      </div>
+      <nav class="nav-links">
+        <a class="nav-link" href="#"><span>Products</span><svg class="chev" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.25 7 8.75l3.5-3.5" stroke="#333" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="nav-link" href="#"><span>Learning Centre</span><svg class="chev" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.25 7 8.75l3.5-3.5" stroke="#333" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="nav-link" href="#"><span>Calculators</span><svg class="chev" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.25 7 8.75l3.5-3.5" stroke="#333" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="nav-link" href="#"><span>Support</span><svg class="chev" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.25 7 8.75l3.5-3.5" stroke="#333" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="nav-link" href="#"><span>Become a Partner</span></a>
+      </nav>
+    </div>
+    <div class="nav-right">
+      <div style="display:flex;gap:16px;align-items:center">
+        <a class="login" href="#"><span>Login</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6 8 10l4-4" stroke="#2f7ef4" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="btn-dark" href="#">Open A Trading Account</a>
+      </div>
+    </div>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </header>
+  <div class="mobile-menu">
+    <div class="mm-inner">
+      <a class="mlink" href="#">Products</a>
+      <a class="mlink" href="#">Learning Centre</a>
+      <a class="mlink" href="#">Calculators</a>
+      <a class="mlink" href="#">Support</a>
+      <a class="mlink" href="#">Become a Partner</a>
+      <div class="mm-actions">
+        <a class="login" href="#">Login</a>
+        <a class="btn-dark" href="#">Open A Trading Account</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <main id="main">
+  <section class="calc-hero" id="sec-hero" data-section="hero">
+    <h1>All the Calculators You Need, <span class="g">All in One Place.</span></h1>
+    <p class="ch-lead">Plan investments, estimate returns, optimise taxes, and map your retirement &mdash; all the financial tools you need, free and instant.</p>
+    <div class="ch-chips">
+      <span class="chip"><span class="tk">&#10003;</span> 100% Free</span>
+      <span class="chip"><span class="tk">&#10003;</span> Instant Results</span>
+      <span class="chip"><span class="tk">&#10003;</span> No Sign-up Required</span>
+      <span class="chip"><span class="tk">&#10003;</span> Accurate Projections</span>
+    </div>
+  </section>
+
+  <!-- ===== CALCULATORS ===== -->
+  <section class="section stack" id="sec-calculators" data-section="calculators" style="gap:56px">
+    <div class="stack" style="gap:16px">
+      <h2 class="sec-title">Explore Our Calculators</h2>
+      <p class="sec-lead">Pick a tool and get instant, accurate projections to plan every part of your financial journey.</p>
+    </div>
+    <div class="calc-grid">
+      <a class="calc-card" href="#">
+        <span class="cc-title">SIP Calculator</span>
+        <span class="cc-desc">Project the future value of your monthly SIP investments.</span>
+        <span class="cc-cta">Calculate Now <span class="arr">&rarr;</span></span>
+      </a>
+      <a class="calc-card" href="#">
+        <span class="cc-title">Lumpsum Calculator</span>
+        <span class="cc-desc">See how a one-time investment grows over your chosen horizon.</span>
+        <span class="cc-cta">Calculate Now <span class="arr">&rarr;</span></span>
+      </a>
+      <a class="calc-card" href="#">
+        <span class="cc-title">SWP Calculator</span>
+        <span class="cc-desc">Plan steady withdrawals while the rest of your corpus stays invested.</span>
+        <span class="cc-cta">Calculate Now <span class="arr">&rarr;</span></span>
+      </a>
+      <a class="calc-card" href="#">
+        <span class="cc-title">Fixed Deposit Calculator</span>
+        <span class="cc-desc">Estimate maturity value and interest earned on your deposit.</span>
+        <span class="cc-cta">Calculate Now <span class="arr">&rarr;</span></span>
+      </a>
+      <a class="calc-card" href="#">
+        <span class="cc-title">NPS Calculator</span>
+        <span class="cc-desc">Forecast your retirement corpus and expected monthly pension.</span>
+        <span class="cc-cta">Calculate Now <span class="arr">&rarr;</span></span>
+      </a>
+      <div class="calc-card cta-tile">
+        <span class="cc-title">Open a Demat Account</span>
+        <span class="cc-desc">Like what you see? Start investing in under 5 minutes &mdash; zero paperwork.</span>
+        <a class="btn-gold" href="#">Open Demat Account</a>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="foot-top">
+      <div class="foot-brand">
+        <div class="fb-logo"><span class="fmark"><span>S</span></span><span class="fb-name">&nbsp;Shriram Financial Services</span></div>
+        <p class="fb-desc">A research-led, advisory-driven trading firm dedicated to helping clients achieve their financial goals through personalised advice.</p>
+        <div class="fb-contact">
+          <span>1800-XXX-XXXX</span>
+          <span>hello@shriramsec.in</span>
+          <span>Shriram House, No. 4, Burkit Road, T-Nagar, Chennai – 600 017</span>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h5>Company</h5>
+        <a href="#">About Us</a><a href="#">Media</a><a href="#">Locate Us</a><a href="#">Advertise With Us</a>
+      </div>
+      <div class="foot-col">
+        <h5>Resources</h5>
+        <a href="#">Pricing</a><a href="#">Research Reports</a><a href="#">Market Insights</a><a href="#">Learning Center</a><a href="#">Calculator Tools</a>
+      </div>
+      <div class="foot-col">
+        <h5>Legal</h5>
+        <a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Disclaimer</a><a href="#">Registratory</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span class="copy">© 2026 Shriram Financial Services. All rights reserved. · SEBI Registered Investment Advisor | ARN-XXXXX</span>
+      <div class="socials"><a href="#">f</a><a href="#">in</a><a href="#">𝕏</a><a href="#">◎</a></div>
+    </div>
+  </footer>
+
+</div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

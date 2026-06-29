@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SIP Calculator — Estimate Your Mutual Fund Returns | Shriram Financial Services</title>
+<meta name="description" content="Free SIP calculator to estimate the future value of your monthly investments. Model step-up SIPs and choose your investment frequency — instant, no sign-up." />
+<link rel="canonical" href="https://www.shriramsec.in/sip-calculator.html" />
+<meta name="theme-color" content="#1d1d1d" />
+
+<!-- Open Graph / Twitter -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="SIP Calculator — Shriram Financial Services" />
+<meta property="og:description" content="Estimate the future value of your monthly SIP investments with step-up and flexible frequency. Free and instant." />
+<meta property="og:url" content="https://www.shriramsec.in/sip-calculator.html" />
+<meta property="og:site_name" content="Shriram Financial Services" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="SIP Calculator — Shriram Financial Services" />
+<meta name="twitter:description" content="Estimate the future value of your monthly SIP investments — free, instant, no sign-up." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<!-- shared design system -->
+<link rel="stylesheet" href="styles.css" />
+
+<style>
+  /* ===================================================================
+     SIP CALCULATOR — page-specific components
+     (built on the shared tokens, spacing and radii in styles.css)
+     =================================================================== */
+  :root{ --c-inv:#4f583b; --c-ret:#f3b83f; }   /* invested (olive) / returns (gold) accents */
+
+  /* calculator layout: input panel | results — section hugs content (standard --section-y padding) */
+  .calc-row{ display:flex; gap:24px; align-items:stretch; flex-wrap:wrap; }
+  .calc-panel{ flex:1.6 1 380px; min-width:0; display:flex; flex-direction:column; gap:24px; }
+  /* desktop: results column fills the row height; the white card grows to fill (mobile hugs) */
+  .calc-results{ flex:1 1 340px; min-width:0; display:flex; flex-direction:column; gap:32px; }
+  .calc-hint{ font-weight:400; font-size:15px; color:var(--muted); line-height:1.5; }
+
+  /* frequency segmented control */
+  .freq-toggle{ display:inline-flex; align-self:flex-start; background:#f0ece1;
+                border:1px solid var(--card-border); border-radius:10px; padding:4px; gap:4px; }
+  .freq-btn{ border:0; background:none; font-family:inherit; cursor:pointer; padding:8px 16px;
+             border-radius:7px; font-weight:500; font-size:14px; color:var(--ink-3);
+             transition:background .2s ease, color .2s ease; }
+  .freq-btn.is-active{ background:var(--olive-head); color:#fff; }
+
+  /* slider fields */
+  .fields{ display:flex; flex-direction:column; gap:32px; }
+  .field{ display:flex; flex-direction:column; gap:12px; }
+  .field-top{ display:flex; align-items:center; justify-content:space-between; gap:12px; }
+  .field-top label{ font-weight:400; font-size:16px; color:var(--ink-3); line-height:1.5; }
+  .field-val{ display:flex; align-items:center; gap:4px; border:1px solid var(--card-border);
+              border-radius:8px; padding:8px 12px; background:#fff; min-width:128px; justify-content:flex-end; }
+  .field-val:focus-within{ border-color:var(--olive-head); }
+  .field-val .pfx,.field-val .sfx{ font-weight:500; font-size:15px; color:var(--ink-2); white-space:nowrap; }
+  .field-val input{ width:78px; border:0; outline:0; background:transparent; text-align:right;
+                    font-family:inherit; font-weight:500; font-size:15px; color:var(--ink); -moz-appearance:textfield; }
+  .field-val input::-webkit-outer-spin-button,
+  .field-val input::-webkit-inner-spin-button{ -webkit-appearance:none; margin:0; }
+
+  /* range input — on-brand olive fill (set inline via JS) */
+  .slider{ -webkit-appearance:none; appearance:none; width:100%; height:6px; border-radius:999px;
+           background:#f3f3f3; outline:none; cursor:pointer; margin:0; }
+  .slider::-webkit-slider-thumb{ -webkit-appearance:none; appearance:none; width:18px; height:18px;
+           border-radius:50%; background:#fff; border:2px solid #4f583b;
+           box-shadow:0 1px 4px rgba(0,0,0,.18); cursor:pointer; }
+  .slider::-moz-range-thumb{ width:18px; height:18px; border:2px solid #4f583b; border-radius:50%;
+           background:#fff; box-shadow:0 1px 4px rgba(0,0,0,.18); cursor:pointer; }
+  .slider::-moz-range-track{ height:6px; border-radius:999px; background:transparent; }
+  .slider-scale{ display:flex; justify-content:space-between; font-weight:400; font-size:12px; color:var(--muted); }
+
+  /* results hero — total value + stacked split bar + illustrative note.
+     The white card grows to fill the column height (mobile hugs); type & spacing
+     follow the design-system scale (16px label / 24px value / 14px note). */
+  .bar-wrap{ flex:1 1 auto; background:var(--card); border:1px solid var(--card-border); border-radius:24px;
+             padding:var(--container-pad); display:flex; flex-direction:column; gap:24px; justify-content:center; }
+  .bar-top{ display:flex; flex-direction:column; gap:16px; }
+  .bar-head{ display:flex; flex-direction:column; gap:8px; }
+  .bar-cap{ font-weight:400; font-size:16px; color:var(--ink-3); line-height:1.5; }
+  .bar-tot{ font-weight:600; font-size:28px; color:#4f583b; line-height:1.5; }   /* main amount — olive */
+  .stack-bar{ display:flex; height:36px; border-radius:8px; overflow:hidden; background:#e6e3da; }
+  .stack-bar .seg{ height:100%; min-width:0; transition:width .3s ease; }
+  .stack-bar .seg-inv{ background:var(--c-inv); }
+  .stack-bar .seg-ret{ background:var(--c-ret); }
+  .bar-div{ width:100%; height:1px; background:var(--card-border); }
+  .bar-note{ font-weight:400; font-size:14px; color:var(--muted); line-height:1.5; }
+
+  /* invested / returns — inline columns inside the results card (no border) */
+  .res-cards{ display:flex; gap:32px; }
+  .res-card{ flex:1 1 0; min-width:0; display:flex; flex-direction:column; gap:8px; justify-content:center; }
+  .res-top{ display:flex; align-items:center; gap:8px; font-weight:400; font-size:16px; color:var(--ink-3); line-height:1.5; }
+  .res-top .dot{ width:8px; height:8px; border-radius:50%; flex:none; }
+  .res-val{ font-weight:500; font-size:24px; color:var(--ink); line-height:1.5; overflow-wrap:anywhere; padding-left:16px; }
+
+  /* "ready" CTA — full-width amber bar at the bottom of the section */
+  .ready-bar{ background:#ffd277; border-radius:24px; padding:16px 24px; display:flex; align-items:center;
+              justify-content:space-between; gap:12px 24px; flex-wrap:wrap; }
+  .ready-text{ font-weight:500; font-size:16px; color:var(--ink); line-height:1.4; }
+  .ready-text b{ font-weight:700; }
+  .ready-btn{ flex:none; background:#fff0d7; color:var(--olive-ink); height:40px; padding:7px 20px; border-radius:4px;
+              display:flex; align-items:center; justify-content:center; font-weight:500; font-size:12px; white-space:nowrap; }
+
+  /* bulleted body lists */
+  .bullets{ list-style:none; display:flex; flex-direction:column; gap:14px; }
+  .bullets li{ position:relative; padding-left:24px; font-weight:400; font-size:16px; color:var(--ink-3); line-height:1.5; }
+  .bullets li::before{ content:''; position:absolute; left:7px; top:9px; width:6px; height:6px; border-radius:50%; background:var(--olive-title); }
+
+  /* explore-more calculator cards */
+  .explore-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:24px; }
+  .xcard{ background:var(--olive-deep); border:1px solid var(--olive-deep); border-radius:24px; padding:32px;
+          display:flex; flex-direction:column; color:inherit;
+          transition:background-color .25s ease, border-color .25s ease; }
+  /* Card Hover Animation 1 — dark green lightens to a lighter green + arrow nudge (no lift/shadow) */
+  .xcard:hover{ background:#26301a; border-color:#3a471b; }
+  .xc-title{ font-weight:500; font-size:19px; color:#fff; line-height:1.3; }
+  .xc-desc{ margin-top:12px; font-weight:400; font-size:14px; color:rgba(255,255,255,.72); line-height:1.5; }
+  .xc-cta{ margin-top:24px; display:inline-flex; align-items:center; gap:8px; color:var(--gold-2); font-weight:600; font-size:14px; }
+  .xc-cta .arr{ transition:transform .25s ease; }
+  .xcard:hover .xc-cta .arr{ transform:translateX(5px); }
+
+  /* General Questions sits on --sec-light, so the FAQ block needs a defined edge:
+     stroke the accordion AND the helper side card together (background-dependent rule,
+     see DESIGN-SYSTEM §4.11/§8). */
+  .faq-acc{ border:1px solid var(--card-border); padding:1px; }
+  .faq-side{ border:1px solid var(--card-border); }
+
+  @media (max-width:1024px){ .explore-grid{ grid-template-columns:repeat(2,1fr); } }
+  /* stack the calculator columns; the results card goes full width and hugs its content */
+  @media (max-width:900px){ .calc-panel,.calc-results{ flex:1 1 100%; } }
+  /* mobile type follows the design-system body rule (16→14) and sub-title step */
+  @media (max-width:768px){
+    .bullets li{ font-size:14px; }
+    .bar-cap, .res-top{ font-size:14px; }
+    .bar-tot{ font-size:24px; }
+    .res-val{ font-size:20px; }
+  }
+  /* ---- phones: keep the calculator neat ---- */
+  @media (max-width:560px){
+    .explore-grid{ grid-template-columns:1fr; }
+    /* keep invested / returns side by side on mobile */
+    .res-cards{ gap:16px; }
+    .field-top{ gap:10px; }
+    .field-top label{ font-size:14px; }
+    .field-val{ min-width:96px; }
+    .field-val input{ width:56px; }
+    .ready-bar{ flex-direction:column; align-items:stretch; gap:14px; }
+    .ready-btn{ width:100%; }
+  }
+</style>
+
+<!-- FAQ structured data (matches the General Questions section) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is a SIP and how is it different from a lumpsum investment?",
+      "acceptedAnswer": { "@type": "Answer", "text": "A Systematic Investment Plan (SIP) lets you invest a fixed amount at regular intervals — usually monthly — rather than committing a large sum all at once. This spreads your entry points across market cycles, averages out your purchase cost over time (rupee-cost averaging) and makes investing more affordable and disciplined. A lumpsum, by contrast, is a single one-time investment." }
+    },
+    {
+      "@type": "Question",
+      "name": "How accurate are the results from this SIP calculator?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The calculator applies the standard SIP future-value formula precisely to the inputs you provide. However, the expected rate of return is an assumption — real market returns fluctuate year to year. Treat the output as a well-grounded estimate for planning purposes rather than a guaranteed outcome." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I change or stop my SIP amount later?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. SIPs are flexible — you can increase, decrease, pause or stop your contributions at any time, and many investors use a step-up SIP to raise their instalment each year as their income grows. There is typically no penalty for modifying or stopping a SIP." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is a realistic rate of return to assume?",
+      "acceptedAnswer": { "@type": "Answer", "text": "For equity-oriented funds, investors often use a long-term assumption in the range of 10–12% per annum, while debt-oriented funds are usually modelled lower. The right figure depends on your fund choice and risk appetite — it is wise to run the calculator with both an optimistic and a conservative rate to understand the range of possible outcomes." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a minimum amount required to start a SIP?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Many funds let you start a SIP with as little as ₹500 per month, making it accessible to almost every investor. You can always increase your contribution as your savings capacity grows." }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="viewport">
+<div class="page">
+
+  <!-- ================= NAV ================= -->
+  <header class="nav">
+    <div class="nav-left">
+      <div class="logo-box">
+        <div class="logo-crop"><img src="assets/logo.png" alt="Shriram Financial Services" width="129" height="55" /></div>
+      </div>
+      <nav class="nav-links" aria-label="Primary">
+        <a class="nav-link" href="#"><span>Products</span><svg class="chev" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3.5 5.25 7 8.75l3.5-3.5" stroke="#333" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="nav-link" href="#"><span>Learning Centre</span><svg class="chev" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3.5 5.25 7 8.75l3.5-3.5" stroke="#333" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="nav-link" href="calculators.html"><span>Calculators</span><svg class="chev" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3.5 5.25 7 8.75l3.5-3.5" stroke="#333" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="nav-link" href="#"><span>Support</span><svg class="chev" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3.5 5.25 7 8.75l3.5-3.5" stroke="#333" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="nav-link" href="#"><span>Become a Partner</span></a>
+      </nav>
+    </div>
+    <div class="nav-right">
+      <div style="display:flex;gap:16px;align-items:center">
+        <a class="login" href="#"><span>Login</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6 8 10l4-4" stroke="#2f7ef4" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="btn-dark" href="#">Open A Trading Account</a>
+      </div>
+    </div>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </header>
+  <div class="mobile-menu">
+    <div class="mm-inner">
+      <a class="mlink" href="#">Products</a>
+      <a class="mlink" href="#">Learning Centre</a>
+      <a class="mlink" href="calculators.html">Calculators</a>
+      <a class="mlink" href="#">Support</a>
+      <a class="mlink" href="#">Become a Partner</a>
+      <div class="mm-actions">
+        <a class="login" href="#">Login</a>
+        <a class="btn-dark" href="#">Open A Trading Account</a>
+      </div>
+    </div>
+  </div>
+
+  <main id="main">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero" id="sec-hero" data-section="hero">
+    <div class="hero-inner">
+      <h1>Plan Smarter With The <span class="g">SIP Calculator</span></h1>
+      <p class="lead">Estimate your future wealth instantly by adjusting your monthly SIP amount, duration, and return rate.</p>
+      <div class="cta"><a class="btn-gold" href="#">Open Demat Account</a></div>
+      <div class="hero-feats">
+        <div class="feats">
+          <div class="feat"><span class="tk" aria-hidden="true">✓</span><span class="lb">&nbsp;100% Free</span></div>
+          <div class="feat"><span class="tk" aria-hidden="true">✓</span><span class="lb">&nbsp;Instant Results</span></div>
+          <div class="feat"><span class="tk" aria-hidden="true">✓</span><span class="lb">&nbsp;No Sign-up Required</span></div>
+          <div class="feat"><span class="tk" aria-hidden="true">✓</span><span class="lb">&nbsp;Accurate Projections</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SIP Calculator ===== -->
+  <section class="section stack" id="sec-calc" data-section="calc" style="background:var(--sec-light);gap:24px">
+    <h2 class="sec-title">SIP Calculator</h2>
+    <p class="calc-hint">Drag the sliders or type your own numbers — results update instantly. Switch frequency or add an annual step-up to model a growing SIP.</p>
+
+    <div class="calc-row">
+      <!-- inputs + split bar -->
+      <div class="card calc-panel">
+        <div class="freq-toggle" role="group" aria-label="Investment frequency">
+          <button type="button" class="freq-btn is-active" data-freq="12" aria-pressed="true">Monthly</button>
+          <button type="button" class="freq-btn" data-freq="4" aria-pressed="false">Quarterly</button>
+          <button type="button" class="freq-btn" data-freq="1" aria-pressed="false">Yearly</button>
+        </div>
+
+        <div class="fields">
+          <div class="field">
+            <div class="field-top">
+              <label for="amt">SIP amount</label>
+              <div class="field-val"><span class="pfx">₹</span><input id="amt" type="text" inputmode="numeric" value="10,000" aria-label="SIP amount in rupees per instalment" /></div>
+            </div>
+            <input class="slider" id="amtR" type="range" min="500" max="100000" step="500" value="10000" aria-label="SIP amount" />
+            <div class="slider-scale"><span>₹500</span><span>₹1,00,000</span></div>
+          </div>
+
+          <div class="field">
+            <div class="field-top">
+              <label for="dur">Investment duration</label>
+              <div class="field-val"><input id="dur" type="text" inputmode="numeric" value="10" aria-label="Investment duration in years" /><span class="sfx">Yr</span></div>
+            </div>
+            <input class="slider" id="durR" type="range" min="1" max="40" step="1" value="10" aria-label="Investment duration in years" />
+            <div class="slider-scale"><span>1 Yr</span><span>40 Yr</span></div>
+          </div>
+
+          <div class="field">
+            <div class="field-top">
+              <label for="rate">Expected rate of return</label>
+              <div class="field-val"><input id="rate" type="text" inputmode="decimal" value="10" aria-label="Expected annual rate of return in percent" /><span class="sfx">%</span></div>
+            </div>
+            <input class="slider" id="rateR" type="range" min="1" max="30" step="0.5" value="10" aria-label="Expected annual rate of return in percent" />
+            <div class="slider-scale"><span>1%</span><span>30%</span></div>
+          </div>
+
+          <div class="field">
+            <div class="field-top">
+              <label for="step">Annual step-up</label>
+              <div class="field-val"><input id="step" type="text" inputmode="decimal" value="0" aria-label="Annual step-up in percent" /><span class="sfx">%</span></div>
+            </div>
+            <input class="slider" id="stepR" type="range" min="0" max="25" step="1" value="0" aria-label="Annual step-up in percent" />
+            <div class="slider-scale"><span>0%</span><span>25%</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- results -->
+      <div class="calc-results">
+        <div class="bar-wrap">
+          <div class="bar-top">
+            <div class="bar-head">
+              <span class="bar-cap">Total Assumed Value</span>
+              <span class="bar-tot" id="d-tot">₹20,65,520</span>
+            </div>
+            <div class="stack-bar" role="img" aria-label="Total assumed value split between invested amount and estimated returns">
+              <div class="seg seg-inv" id="seg-inv" style="width:58%"></div>
+              <div class="seg seg-ret" id="seg-ret" style="width:42%"></div>
+            </div>
+          </div>
+
+          <div class="res-cards">
+            <div class="res-card">
+              <div class="res-top"><span class="dot" style="background:var(--c-inv)"></span>Invested Amount</div>
+              <div class="res-val" id="r-inv">₹12,00,000</div>
+            </div>
+            <div class="res-card">
+              <div class="res-top"><span class="dot" style="background:var(--c-ret)"></span>Estimated Returns</div>
+              <div class="res-val" id="r-ret">₹8,65,520</div>
+            </div>
+          </div>
+
+          <div class="bar-div" role="presentation"></div>
+
+          <p class="bar-note">Note: Figures are illustrative and assume a constant annual rate of return compounded over the full term; actual mutual-fund returns fluctuate and are not guaranteed.</p>
+        </div>
+
+        <!-- ready CTA — sits in the results column, under the results card -->
+        <div class="ready-bar">
+          <p class="ready-text">Start a <b id="cta-amt">₹10,000/month SIP</b> and build your future</p>
+          <a class="ready-btn" href="#">Open Demat Account</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- live summary for screen readers (not visually shown) -->
+    <p class="sr-only" id="sr-summary" aria-live="polite"></p>
+  </section>
+
+  <!-- ===== What Is A SIP Calculator ===== -->
+  <section class="section stack" id="sec-what" data-section="what" style="background:var(--sec-tint);gap:24px">
+    <h2 class="sec-title">What Is A SIP Calculator?</h2>
+    <p class="sec-lead">A SIP calculator is a free online tool that estimates the maturity value of your Systematic Investment Plan. By entering your monthly contribution, the length of time you plan to stay invested and an expected annual rate of return, it projects how much wealth you could accumulate. It removes the guesswork from financial planning, giving you an instant, data-backed picture of your investment journey so you can set realistic goals and invest with confidence.</p>
+  </section>
+
+  <!-- ===== How A SIP Calculator Helps You ===== -->
+  <section class="section stack" id="sec-help" data-section="help" style="background:var(--sec-light);gap:24px">
+    <h2 class="sec-title">How A SIP Calculator Helps You</h2>
+    <p class="sec-lead">Planning your investments by hand is tedious and error-prone. A SIP calculator does the heavy lifting in seconds, so you can focus on the decisions that matter:</p>
+    <ul class="bullets">
+      <li>Instantly estimate the future value of your monthly investments without complex manual calculations.</li>
+      <li>Compare different scenarios by changing your contribution, duration or expected return to find what fits your goals.</li>
+      <li>Understand how much of your final corpus comes from invested capital versus estimated returns.</li>
+      <li>Set realistic, time-bound financial goals — be it a home, education, or retirement — and track progress toward them.</li>
+    </ul>
+  </section>
+
+  <!-- ===== How Does A SIP Calculator Work ===== -->
+  <section class="section stack" id="sec-work" data-section="work" style="background:var(--sec-tint);gap:24px">
+    <h2 class="sec-title">How Does A SIP Calculator Work?</h2>
+    <p class="sec-lead">The calculator uses the standard future-value formula for a series of regular investments: M = P × ({[1 + i]ⁿ − 1} ÷ i) × (1 + i), where P is your periodic investment, i is the periodic rate of return (your annual rate divided by the number of instalments per year) and n is the total number of instalments. It compounds each contribution over the remaining investment period and sums them to arrive at your projected maturity value. Because every instalment earns returns for a different length of time, the tool captures the true effect of compounding far more accurately than a simple multiplication ever could. When you add an annual step-up, each year's instalment is increased before the next year's compounding begins.</p>
+  </section>
+
+  <!-- ===== Advantages Of A SIP Calculator ===== -->
+  <section class="section stack" id="sec-adv" data-section="adv" style="background:var(--sec-light);gap:24px">
+    <h2 class="sec-title">Advantages Of A SIP Calculator</h2>
+    <p class="sec-lead">Whether you are a first-time investor or a seasoned one, a SIP calculator brings clarity and discipline to your planning:</p>
+    <ul class="bullets">
+      <li>Accurate, instant projections that account for compounding across the entire investment horizon.</li>
+      <li>Completely free to use, with no sign-up required and results delivered in real time.</li>
+      <li>Helps you decide a comfortable monthly amount that aligns with your income and goals.</li>
+      <li>Encourages consistent, disciplined investing by making the long-term payoff easy to visualise.</li>
+    </ul>
+  </section>
+
+  <!-- ===== Explore More ===== -->
+  <section class="section stack" id="sec-explore" data-section="explore" style="background:var(--sec-tint);gap:40px">
+    <h2 class="sec-title">Explore More</h2>
+    <div class="explore-grid">
+      <a class="xcard" href="calculators.html">
+        <span class="xc-title">Brokerage Calculator</span>
+        <span class="xc-desc">Estimate the all-in cost of a trade across brokerage, taxes and charges.</span>
+        <span class="xc-cta">Calculate Now <span class="arr">→</span></span>
+      </a>
+      <a class="xcard" href="calculators.html">
+        <span class="xc-title">Lumpsum Calculator</span>
+        <span class="xc-desc">See how a one-time investment grows over your chosen horizon.</span>
+        <span class="xc-cta">Calculate Now <span class="arr">→</span></span>
+      </a>
+      <a class="xcard" href="calculators.html">
+        <span class="xc-title">Income Tax Calculator</span>
+        <span class="xc-desc">Work out your tax liability across the old and new regimes.</span>
+        <span class="xc-cta">Calculate Now <span class="arr">→</span></span>
+      </a>
+      <a class="xcard" href="calculators.html">
+        <span class="xc-title">Mutual Fund Calculator</span>
+        <span class="xc-desc">Project returns across SIP and lumpsum mutual-fund investments.</span>
+        <span class="xc-cta">Calculate Now <span class="arr">→</span></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== General Questions ===== -->
+  <section class="faq-wrap" id="sec-faq" data-section="faq" style="background:var(--sec-light)">
+    <div class="faq-cols">
+      <div class="faq-left">
+        <h2 class="faq-title">General Questions</h2>
+        <div class="faq-acc">
+          <div class="faq-item open">
+            <button class="faq-q" type="button">
+              <span class="qt">What is a SIP and how is it different from a lumpsum investment?</span>
+              <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><line class="v" x1="12" y1="5" x2="12" y2="19" stroke="#404040" stroke-width="2" stroke-linecap="round"/><line x1="5" y1="12" x2="19" y2="12" stroke="#404040" stroke-width="2" stroke-linecap="round"/></svg></span>
+            </button>
+            <div class="qa-wrap"><div class="qa"><p>A Systematic Investment Plan (SIP) lets you invest a fixed amount at regular intervals — usually monthly — rather than committing a large sum all at once. This spreads your entry points across market cycles, averages out your purchase cost over time (rupee-cost averaging) and makes investing more affordable and disciplined. A lumpsum, by contrast, is a single one-time investment.</p></div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">
+              <span class="qt">How accurate are the results from this SIP calculator?</span>
+              <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><line class="v" x1="12" y1="5" x2="12" y2="19" stroke="#404040" stroke-width="2" stroke-linecap="round"/><line x1="5" y1="12" x2="19" y2="12" stroke="#404040" stroke-width="2" stroke-linecap="round"/></svg></span>
+            </button>
+            <div class="qa-wrap"><div class="qa"><p>The calculator applies the standard SIP future-value formula precisely to the inputs you provide. However, the expected rate of return is an assumption — real market returns fluctuate year to year. Treat the output as a well-grounded estimate for planning purposes rather than a guaranteed outcome.</p></div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">
+              <span class="qt">Can I change or stop my SIP amount later?</span>
+              <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><line class="v" x1="12" y1="5" x2="12" y2="19" stroke="#404040" stroke-width="2" stroke-linecap="round"/><line x1="5" y1="12" x2="19" y2="12" stroke="#404040" stroke-width="2" stroke-linecap="round"/></svg></span>
+            </button>
+            <div class="qa-wrap"><div class="qa"><p>Yes. SIPs are flexible — you can increase, decrease, pause or stop your contributions at any time, and many investors use a step-up SIP to raise their instalment each year as their income grows. There is typically no penalty for modifying or stopping a SIP.</p></div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">
+              <span class="qt">What is a realistic rate of return to assume?</span>
+              <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><line class="v" x1="12" y1="5" x2="12" y2="19" stroke="#404040" stroke-width="2" stroke-linecap="round"/><line x1="5" y1="12" x2="19" y2="12" stroke="#404040" stroke-width="2" stroke-linecap="round"/></svg></span>
+            </button>
+            <div class="qa-wrap"><div class="qa"><p>For equity-oriented funds, investors often use a long-term assumption in the range of 10–12% per annum, while debt-oriented funds are usually modelled lower. The right figure depends on your fund choice and risk appetite — it is wise to run the calculator with both an optimistic and a conservative rate to understand the range of possible outcomes.</p></div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">
+              <span class="qt">Is there a minimum amount required to start a SIP?</span>
+              <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><line class="v" x1="12" y1="5" x2="12" y2="19" stroke="#404040" stroke-width="2" stroke-linecap="round"/><line x1="5" y1="12" x2="19" y2="12" stroke="#404040" stroke-width="2" stroke-linecap="round"/></svg></span>
+            </button>
+            <div class="qa-wrap"><div class="qa"><p>Many funds let you start a SIP with as little as ₹500 per month, making it accessible to almost every investor. You can always increase your contribution as your savings capacity grows.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="faq-side">
+        <div class="usr"><img src="assets/user.svg" alt="" /></div>
+        <div class="side-in">
+          <div class="side-tx">
+            <h3>Need A Clearer Direction? </h3>
+            <p>Let's get in touch on a 15-Minute call where we would be able to answer any questions you may have. Our Advisor will additionally help map your wealth mix and demonstrate what a dedicated advisor would do differently.</p>
+          </div>
+          <a class="btn-gold" href="#">Book A Discovery Call</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="foot-top">
+      <div class="foot-brand">
+        <div class="fb-logo"><span class="fmark"><span>S</span></span><span class="fb-name">&nbsp;Shriram Financial Services</span></div>
+        <p class="fb-desc">A research-led, advisory-driven trading firm dedicated to helping clients achieve their financial goals through personalised advice.</p>
+        <div class="fb-contact">
+          <span>1800-XXX-XXXX</span>
+          <span>hello@shriramsec.in</span>
+          <span>Shriram House, No. 4, Burkit Road, T-Nagar, Chennai – 600 017</span>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h5>Company</h5>
+        <a href="#">About Us</a><a href="#">Media</a><a href="#">Locate Us</a><a href="#">Advertise With Us</a>
+      </div>
+      <div class="foot-col">
+        <h5>Resources</h5>
+        <a href="#">Pricing</a><a href="#">Research Reports</a><a href="#">Market Insights</a><a href="#">Learning Center</a><a href="calculators.html">Calculator Tools</a>
+      </div>
+      <div class="foot-col">
+        <h5>Legal</h5>
+        <a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Disclaimer</a><a href="#">Registratory</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span class="copy">© 2026 Shriram Financial Services. All rights reserved. · SEBI Registered Investment Advisor | ARN-XXXXX</span>
+      <div class="socials"><a href="#" aria-label="Facebook">f</a><a href="#" aria-label="LinkedIn">in</a><a href="#" aria-label="X">𝕏</a><a href="#" aria-label="Threads">◎</a></div>
+    </div>
+  </footer>
+
+</div>
+</div>
+
+<!-- shared nav + accessible accordion -->
+<script src="app.js"></script>
+
+<!-- SIP calculator -->
+<script>
+  (function(){
+    var fmt   = new Intl.NumberFormat('en-IN', { maximumFractionDigits:0 });
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var amt  = document.getElementById('amt'),  amtR  = document.getElementById('amtR');
+    var dur  = document.getElementById('dur'),  durR  = document.getElementById('durR');
+    var rate = document.getElementById('rate'), rateR = document.getElementById('rateR');
+    var step = document.getElementById('step'), stepR = document.getElementById('stepR');
+    var freq = 12;
+
+    var segInv = document.getElementById('seg-inv');
+    var segRet = document.getElementById('seg-ret');
+    var last = { inv:0, ret:0, tot:0 };
+
+    function digits(s){ return String(s).replace(/[^0-9.]/g, ''); }
+    function clamp(v, mn, mx){ return Math.max(mn, Math.min(mx, v)); }
+
+    function fillSlider(sl){
+      var p = (sl.value - sl.min) / (sl.max - sl.min) * 100;
+      sl.style.background = 'linear-gradient(90deg, #4f583b 0%, #4f583b ' + p +
+                            '%, #f3f3f3 ' + p + '%, #f3f3f3 100%)';
+    }
+    /* core SIP maths, period-by-period so step-up & frequency are exact */
+    function compute(amount, years, ratePct, stepPct, perYear){
+      var n = Math.round(years * perYear), i = ratePct / 100 / perYear;
+      var contribution = amount, balance = 0, invested = 0, rows = [];
+      for(var p = 1; p <= n; p++){
+        if(p > 1 && (p - 1) % perYear === 0) contribution *= (1 + stepPct / 100);
+        balance = (balance + contribution) * (1 + i);
+        invested += contribution;
+        if(p % perYear === 0) rows.push({ year:p/perYear, invested:invested, value:balance });
+      }
+      return { fv:balance, invested:invested, returns:balance - invested, rows:rows };
+    }
+
+    function countTo(el, from, to, fn){
+      if(reduce || from === to){ el.textContent = fn(to); return; }
+      var t0 = null, dur = 350;
+      function tick(ts){
+        if(t0 === null) t0 = ts;
+        var t = Math.min(1, (ts - t0) / dur), e = 1 - Math.pow(1 - t, 3);
+        el.textContent = fn(from + (to - from) * e);
+        if(t < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+
+    function freqWord(){ return freq === 12 ? 'month' : freq === 4 ? 'quarter' : 'year'; }
+
+    function render(animate){
+      var amount = clamp(parseFloat(digits(amt.value)) || 0, +amtR.min, +amtR.max);
+      var years  = clamp(parseFloat(digits(dur.value)) || 0, +durR.min, +durR.max);
+      var ratePct= clamp(parseFloat(digits(rate.value)) || 0, +rateR.min, +rateR.max);
+      var stepPct= clamp(parseFloat(digits(step.value)) || 0, +stepR.min, +stepR.max);
+
+      var r = compute(amount, years, ratePct, stepPct, freq);
+      var rupee = function(v){ return '₹' + fmt.format(Math.round(v)); };
+
+      if(animate){
+        countTo(document.getElementById('r-inv'), last.inv, r.invested, rupee);
+        countTo(document.getElementById('r-ret'), last.ret, r.returns, rupee);
+        countTo(document.getElementById('d-tot'), last.tot, r.fv, rupee);
+      } else {
+        document.getElementById('r-inv').textContent = rupee(r.invested);
+        document.getElementById('r-ret').textContent = rupee(r.returns);
+        document.getElementById('d-tot').textContent = rupee(r.fv);
+      }
+      last = { inv:r.invested, ret:r.returns, tot:r.fv };
+
+      /* horizontally stacked split bar */
+      var invPct = r.fv > 0 ? r.invested / r.fv * 100 : 0;
+      segInv.style.width = invPct + '%';
+      segRet.style.width = (100 - invPct) + '%';
+
+      /* contextual CTA + screen-reader summary */
+      document.getElementById('cta-amt').textContent =
+        '₹' + fmt.format(amount) + '/' + freqWord() + ' SIP';
+      document.getElementById('sr-summary').textContent =
+        'Projected total value ' + rupee(r.fv) + ' from ' + rupee(r.invested) +
+        ' invested over ' + years + ' years.';
+
+      updateUrl(amount, years, ratePct, stepPct);
+
+      /* slider aria-valuetext mirrors the visible value */
+      amtR.setAttribute('aria-valuetext', '₹' + fmt.format(amount));
+      durR.setAttribute('aria-valuetext', years + ' years');
+      rateR.setAttribute('aria-valuetext', ratePct + ' percent');
+      stepR.setAttribute('aria-valuetext', stepPct + ' percent');
+    }
+
+
+    function updateUrl(amount, years, ratePct, stepPct){
+      var q = '?amt=' + amount + '&dur=' + years + '&rate=' + ratePct + '&step=' + stepPct + '&freq=' + freq;
+      try { history.replaceState(null, '', q); } catch(e){ /* ignore (e.g. file://) */ }
+    }
+
+    /* ----- input <-> slider wiring ----- */
+    function pairNumberAndSlider(numEl, slEl, group){
+      slEl.addEventListener('input', function(){
+        numEl.value = group ? fmt.format(slEl.value) : slEl.value;
+        fillSlider(slEl); render(false);
+      });
+      numEl.addEventListener('input', function(){
+        var raw = parseFloat(digits(numEl.value)) || 0;
+        if(group){ numEl.value = raw ? fmt.format(raw) : ''; }
+        slEl.value = clamp(raw, +slEl.min, +slEl.max);
+        fillSlider(slEl); render(false);
+      });
+      numEl.addEventListener('change', function(){
+        var v = clamp(parseFloat(digits(numEl.value)) || +slEl.min, +slEl.min, +slEl.max);
+        numEl.value = group ? fmt.format(v) : v;
+        slEl.value = v; fillSlider(slEl); render(true);
+      });
+    }
+    pairNumberAndSlider(amt, amtR, true);
+    pairNumberAndSlider(dur, durR, false);
+    pairNumberAndSlider(rate, rateR, false);
+    pairNumberAndSlider(step, stepR, false);
+
+    /* frequency segmented control */
+    document.querySelectorAll('.freq-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        freq = parseInt(btn.getAttribute('data-freq'), 10);
+        document.querySelectorAll('.freq-btn').forEach(function(b){
+          var on = b === btn;
+          b.classList.toggle('is-active', on);
+          b.setAttribute('aria-pressed', on ? 'true' : 'false');
+        });
+        render(true);
+      });
+    });
+
+    /* ----- read state from the URL on load ----- */
+    (function initFromUrl(){
+      var p = new URLSearchParams(location.search);
+      function setNum(el, sl, key, group){
+        if(!p.has(key)) return;
+        var v = clamp(parseFloat(p.get(key)) || +sl.min, +sl.min, +sl.max);
+        sl.value = v; el.value = group ? fmt.format(v) : v;
+      }
+      setNum(amt, amtR, 'amt', true);
+      setNum(dur, durR, 'dur', false);
+      setNum(rate, rateR, 'rate', false);
+      setNum(step, stepR, 'step', false);
+      if(p.has('freq')){
+        var f = parseInt(p.get('freq'), 10);
+        if(f === 12 || f === 4 || f === 1){
+          freq = f;
+          document.querySelectorAll('.freq-btn').forEach(function(b){
+            var on = parseInt(b.getAttribute('data-freq'), 10) === f;
+            b.classList.toggle('is-active', on);
+            b.setAttribute('aria-pressed', on ? 'true' : 'false');
+          });
+        }
+      }
+    })();
+
+    [amtR, durR, rateR, stepR].forEach(fillSlider);
+    render(true);
+  })();
+</script>
+</body>
+</html>
