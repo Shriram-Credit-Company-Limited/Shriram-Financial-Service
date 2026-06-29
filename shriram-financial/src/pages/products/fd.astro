@@ -1,358 +1,744 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const comparisonRows = [
+  { feature: 'Investment Type',      fd: 'One-time lump sum',               sa: 'Deposit / withdraw anytime',     rd: 'Fixed monthly instalments' },
+  { feature: 'Interest Rate (p.a.)', fd: '6.5–9.4% fixed at deposit',       sa: '2.5–7% variable',                rd: '5.5–8% fixed at opening' },
+  { feature: 'Liquidity',            fd: 'Low — penalty on early exit',     sa: 'High — withdraw anytime',        rd: 'Low — premature penalty' },
+  { feature: 'Minimum Deposit',      fd: '₹1,000 (varies by bank)',         sa: '₹0–₹10,000 (MAB)',               rd: '₹100/month' },
+  { feature: 'Tenure',               fd: '7 days – 10 years',               sa: 'No fixed tenure',                rd: '6 months – 10 years' },
+  { feature: 'DICGC Insurance',      fd: 'Up to ₹5 lakh',                  sa: 'Up to ₹5 lakh',                  rd: 'Up to ₹5 lakh' },
+  { feature: 'Best For',             fd: 'Lump-sum, goal-based saving',     sa: 'Daily expenses, emergency fund', rd: 'Monthly disciplined savers' },
+];
+
+const howItWorks = [
+  { n: '1', title: 'Deposit a Lump Sum',  desc: 'Choose your bank or NBFC, decide the amount, and transfer your principal. Minimum deposit typically starts at ₹1,000.' },
+  { n: '2', title: 'Lock the Rate',       desc: 'Your interest rate is fixed at deposit — completely unaffected by future market movements or RBI rate revisions.' },
+  { n: '3', title: 'Earn Interest',       desc: 'Interest compounds quarterly (cumulative) or pays out monthly / quarterly (non-cumulative) as per your choice.' },
+  { n: '4', title: 'Choose Payout',       desc: 'Cumulative: receive everything at maturity. Non-cumulative: receive periodic interest while the principal stays invested.' },
+  { n: '5', title: 'Receive at Maturity', desc: 'On maturity, principal and accrued interest are credited to your account. Choose to auto-renew or redeem in full.' },
+];
+
+const typeRows = [
+  { type: 'Cumulative FD',      interest: 'Compounded, paid at maturity',       tenure: '7 days – 10 years', tax: 'TDS on interest',          best: 'Long-term savings goal' },
+  { type: 'Non-Cumulative FD',  interest: 'Monthly / quarterly payouts',         tenure: '7 days – 10 years', tax: 'TDS on interest',          best: 'Regular income needs' },
+  { type: 'Tax Saving FD',      interest: '~7% p.a.',                            tenure: '5 years (lock-in)', tax: '₹1.5L deduction u/s 80C', best: 'Tax planning under 80C' },
+  { type: 'Senior Citizen FD',  interest: '+0.25–0.50% over general rate',       tenure: 'Same as regular',   tax: 'TDS applies',              best: 'Retired investors' },
+  { type: 'NBFC FD (Shriram)',  interest: '8.50–9.40% p.a.',                     tenure: '1–5 years',         tax: 'TDS on interest',          best: 'Higher-rate seekers' },
+  { type: 'Flexi FD',           interest: 'FD rate on surplus above threshold',  tenure: 'Ongoing',           tax: 'TDS applies',              best: 'Liquidity + FD returns' },
+];
+
+const coreB = [
+  'Guaranteed returns — rate locked at deposit, immune to market or rate changes',
+  'DICGC-insured up to ₹5 lakh per depositor per bank (bank FDs)',
+  'Flexible tenure — 7 days to 10 years to match any financial goal',
+  'Loan against FD — borrow up to 90% of value without breaking the deposit',
+  'Senior citizen benefit — extra 0.25–0.50% above the general rate',
+  'Tax Saving FD qualifies for ₹1.5L deduction under Section 80C',
+];
+
+const flexB = [
+  'Premature withdrawal with a defined interest penalty',
+  'Nomination facility for all depositors',
+  'Partial withdrawal facility at select banks',
+  'Auto-renewal on maturity at then-prevailing rates',
+  'Online account opening — fully paperless, done in minutes',
+  'Digital FD receipt accessible at any time',
+];
+
+const steps = [
+  { n: '1', title: 'Register',       desc: 'Create your Shriram account with your mobile number and email in under 2 minutes.' },
+  { n: '2', title: 'Choose an FD',   desc: 'Compare rates, tenures, and institution types. Pick the FD that fits your goal and risk profile.' },
+  { n: '3', title: 'Complete KYC',   desc: 'One-time PAN + Aadhaar-based digital KYC. Fully paperless — takes under 5 minutes.' },
+  { n: '4', title: 'Add Details',    desc: 'Enter deposit amount, choose your tenure, and select payout type (cumulative or non-cumulative).' },
+  { n: '5', title: 'Pay & Confirm',  desc: 'Transfer funds via net banking or UPI. Your digital FD receipt is generated instantly.' },
+];
+
+const kycDocs = [
+  'PAN card (mandatory)',
+  'Aadhaar card for identity verification',
+  'Address proof — Aadhaar, Passport, or Utility Bill',
+  'Cancelled cheque or recent bank statement',
+  'Passport-size photograph (JPEG format)',
+];
+
+const setupNeeds = [
+  'Valid mobile number linked to Aadhaar',
+  'Net banking or UPI for fund transfer',
+  'Active bank account in your name',
+  'Valid email ID for account confirmation',
+];
+
+const faqs = [
+  { q: 'Is FD safe in India?', a: 'Bank FDs up to ₹5 lakh per depositor per bank are insured by DICGC — covering both principal and interest. NBFC FDs are not DICGC-insured but are regulated by RBI.' },
+  { q: 'Is FD interest taxable?', a: 'Yes. FD interest is added to your total income and taxed at your applicable slab rate. TDS at 10% is deducted if annual interest exceeds ₹40,000 (₹50,000 for senior citizens).' },
+  { q: 'Can I break an FD before maturity?', a: 'Yes, with a premature withdrawal penalty of 0.50–1.00% below the applicable interest rate for the period actually held.' },
+  { q: 'What is a Tax Saving FD?', a: 'A 5-year lock-in FD eligible for ₹1.5 lakh deduction under Section 80C. The interest earned is fully taxable. Premature withdrawal is not permitted.' },
+  { q: 'Cumulative vs non-cumulative FD — what is the difference?', a: 'Cumulative FD pays principal + compounded interest at maturity — ideal for wealth building. Non-cumulative FD pays interest monthly or quarterly while the principal remains invested — suitable for regular income.' },
+  { q: 'What is the maximum DICGC insurance amount?', a: 'DICGC insures up to ₹5 lakh per depositor per bank, covering both principal and interest across all accounts held at that bank.' },
+  { q: 'Do senior citizens get higher FD rates?', a: 'Yes. Senior citizens aged 60+ receive 0.25–0.50% above the general rate at most banks and NBFCs.' },
+  { q: 'Can NRIs invest in FDs in India?', a: 'Yes — through NRE FDs (interest tax-free in India, fully repatriable) or NRO FDs (interest taxable in India). FCNR FDs are denominated in foreign currency.' },
+];
 ---
 
 <BaseLayout
-  title="Fixed Deposit in India — FD Interest Rates 2025 | Shriram"
-  description="Invest in fixed deposit in India. Compare FD interest rates 2025, types of FD, FD calculator, tax on FD returns. Open FD online with Shriram Financial Services."
+  title="Fixed Deposit in India — Safe, Guaranteed Returns | Shriram"
+  description="Open a Fixed Deposit online with Shriram. Compare FD interest rates, calculate your maturity amount, and earn guaranteed returns. DICGC-insured bank FDs and competitive NBFC FD rates."
 >
 
-  <!-- ══ HERO ═══════════════════════════════════════════════════════ -->
+  <!-- ══ 1. HERO ══════════════════════════════════════════════════════ -->
   <section class="hero">
     <div class="hero-inner">
-      <h1>Invest in <span class="g">Fixed Deposit</span> — Guaranteed Returns</h1>
-      <p class="lead">Earn guaranteed returns on your savings with FDs. DICGC-insured bank FDs and competitive NBFC FD rates. Compare rates and invest online in minutes.</p>
-      <div class="cta-row">
-        <a class="btn-gold" href="/about/open-demat-account/">Open Fixed Deposit</a>
-        <a class="btn-ghost" href="/about/open-demat-account/">Compare FD Rates</a>
+      <div class="hero-left">
+        <h1>Fixed Deposit in India — <span class="g">Safe, Assured Growth</span></h1>
+        <p class="lead">Open a Fixed Deposit online in minutes and lock in guaranteed returns — unaffected by market swings. DICGC-insured bank FDs and competitive NBFC rates from Shriram.</p>
+        <div class="cta-row">
+          <a class="btn-gold" href="/about/open-demat-account/">Open Fixed Deposit</a>
+        </div>
+        <div class="hero-feats">
+          <div class="feats">
+            {['DICGC-insured (up to ₹5 lakh)', 'RBI regulated', 'SEBI registered', 'Flexible tenure'].map(f => (
+              <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;{f}</span></div>
+            ))}
+          </div>
+        </div>
       </div>
-      <ul class="feats">
-        {['DICGC-insured (bank FDs)', 'Guaranteed returns', 'Flexible tenure', 'Senior citizen benefits'].map(f => (
-          <li class="feat"><span class="tk">✓</span><span class="lb">{f}</span></li>
+
+      <div class="hero-panel">
+        <p class="panel-title">Open Your Fixed Deposit</p>
+        <div class="fd-form">
+          <div class="fd-field">
+            <label>Full Name</label>
+            <input type="text" placeholder="Rajesh Kumar" />
+          </div>
+          <div class="fd-field">
+            <label>Mobile Number</label>
+            <input type="tel" placeholder="+91 98765 43210" />
+          </div>
+          <div class="fd-field">
+            <label>Email</label>
+            <input type="email" placeholder="name@email.com" />
+          </div>
+          <div class="fd-field">
+            <label>City</label>
+            <input type="text" placeholder="Chennai" />
+          </div>
+          <div class="fd-field">
+            <label>Preferred Tenure</label>
+            <div class="tenure-tabs">
+              <button type="button" class="t-tab active" data-tab>1 Yr</button>
+              <button type="button" class="t-tab" data-tab>2 Yr</button>
+              <button type="button" class="t-tab" data-tab>3 Yr</button>
+            </div>
+          </div>
+          <a class="btn-gold" href="/about/open-demat-account/" style="width:100%;justify-content:center;margin-top:8px">Invest Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 2. WHAT IS FD? ═══════════════════════════════════════════════ -->
+  <section class="section stack" id="sec-about" style="background:var(--sec-light);gap:56px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">What is a Fixed Deposit?</p>
+      <p class="sec-lead">A Fixed Deposit is a savings instrument where you deposit a lump sum at a pre-agreed interest rate for a fixed tenure. Your principal and returns are fully guaranteed — unlike a savings account, the rate is locked for the full tenure so you know your maturity amount on day one.</p>
+    </div>
+    <div class="stack" style="gap:16px">
+      <p class="sub-title">FD vs Savings Account vs Recurring Deposit</p>
+      <p class="sub-lead">Choose the right savings instrument — each serves a different financial goal.</p>
+    </div>
+    <div class="t-scroll">
+      <div class="table t4 bordered">
+        <div class="cell th"><p>Feature</p></div>
+        <div class="cell th hi"><p>Fixed Deposit</p></div>
+        <div class="cell th"><p>Savings Account</p></div>
+        <div class="cell th"><p>Recurring Deposit</p></div>
+        {comparisonRows.map(r => (
+          <>
+            <div class="cell tb"><p class="k">{r.feature}</p></div>
+            <div class="cell tb hi-cell"><p class="v">{r.fd}</p></div>
+            <div class="cell tb"><p class="v">{r.sa}</p></div>
+            <div class="cell tb"><p class="v">{r.rd}</p></div>
+          </>
         ))}
-      </ul>
+      </div>
     </div>
+    <a class="btn-gold" href="/about/open-demat-account/" style="align-self:center">Open Fixed Deposit</a>
   </section>
 
-  <!-- ══ WHAT IS FD? ════════════════════════════════════════════════ -->
-  <section class="section auto" style="background:var(--sec-light)">
-    <p class="sec-title">What is <span class="g">Fixed Deposit?</span></p>
-    <p class="sec-lead" style="margin-top:16px">A Fixed Deposit (FD) is a savings instrument where you deposit a lump sum for a fixed tenure at a pre-agreed interest rate. Your principal and returns are fully guaranteed.</p>
-    <div class="cat-grid" style="margin-top:48px;grid-template-columns:repeat(3,1fr)">
-      {[
-        { title: 'Guaranteed Returns', desc: 'Interest rate fixed at the time of deposit — not market-linked. Know exactly what you earn.' },
-        { title: 'Capital Safety',     desc: 'Bank FDs insured by DICGC up to ₹5 lakh per bank. NBFC FDs regulated by RBI.' },
-        { title: 'Flexible Tenure',    desc: 'Choose from 7 days to 10 years based on your financial goal and liquidity needs.' },
-      ].map((c, i) => (
-        <div class="cat" style={i===2?'border-right:0':''}>
-          <h4>{c.title}</h4>
-          <p>{c.desc}</p>
-        </div>
+  <!-- ══ 3. HOW FDS WORK ══════════════════════════════════════════════ -->
+  <section class="section stack" id="sec-how" style="background:var(--sec-tint);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">How Fixed Deposits Work</p>
+      <p class="sec-lead">Fixed deposits mature to the simple sum of capital plus interest — add the power of compounding working for you throughout the tenure.</p>
+    </div>
+
+    <div class="steps">
+      {howItWorks.map((s, i) => (
+        <>
+          {i > 0 && <div class="step-div"></div>}
+          <div class="step">
+            <div class="num">{s.n}</div>
+            <div class="st-body">
+              <h4>{s.title}</h4>
+              <p>{s.desc}</p>
+            </div>
+          </div>
+        </>
       ))}
     </div>
-  </section>
 
-  <!-- ══ FD vs SAVINGS ACCOUNT vs RD ════════════════════════════════ -->
-  <section class="section" style="background:var(--sec-tint)">
-    <p class="sec-title">FD vs Savings Account <span class="g">vs Recurring Deposit</span></p>
-    <p class="sec-lead" style="margin-top:16px">Choose the right savings instrument — FDs, savings accounts, and recurring deposits serve different financial goals.</p>
-    <div class="t-wrap" style="margin-top:48px">
-      <div class="t-scroll">
-        <table>
-          <thead><tr>
-            <th>Feature</th><th class="hl">Fixed Deposit (FD)</th><th>Savings Account</th><th>Recurring Deposit</th>
-          </tr></thead>
-          <tbody>
-            {[
-              { f:'Investment Type',     fd:'Lump sum deposit',            sv:'Any-time deposit/withdraw',           rd:'Fixed monthly installments' },
-              { f:'Interest Rate (p.a.)',fd:'6.5–9.4% (fixed at deposit)', sv:'2.5–7% (variable)',                   rd:'5.5–8% (fixed at opening)' },
-              { f:'Liquidity',          fd:'Low — penalty on early exit',  sv:'High — withdraw anytime',             rd:'Low — penalty on premature closure' },
-              { f:'Minimum Deposit',    fd:'₹1,000 (varies by bank)',      sv:'₹0–₹10,000 (MAB)',                    rd:'₹100/month' },
-              { f:'Tenure',             fd:'7 days – 10 years',            sv:'No tenure — ongoing',                 rd:'6 months – 10 years' },
-              { f:'DICGC Insurance',    fd:'Up to ₹5 lakh',               sv:'Up to ₹5 lakh',                       rd:'Up to ₹5 lakh' },
-              { f:'Tax on Returns',     fd:'TDS on interest > ₹40K/yr',   sv:'TDS on interest > ₹10K/yr',           rd:'TDS on maturity interest' },
-              { f:'Best For',           fd:'Lump sum, fixed-term goals',   sv:'Daily expenses, emergency fund',      rd:'Monthly savers, disciplined saving' },
-            ].map(r => (
-              <tr>
-                <td class="k">{r.f}</td><td class="hl">{r.fd}</td><td>{r.sv}</td><td>{r.rd}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+    <div class="row-2">
+      <div class="card">
+        <p class="card-h">Cumulative FD — Compounding</p>
+        <p class="card-p">Interest is reinvested quarterly and compounded throughout the tenure. At maturity, you receive the full principal plus all compounded interest in one lump sum — ideal for building wealth without needing immediate income.</p>
+      </div>
+      <div class="card">
+        <p class="card-h">Non-Cumulative FD — Regular Payouts</p>
+        <p class="card-p">Interest is paid out monthly or quarterly while your principal remains fully intact. Ideal for retirees or anyone who needs a predictable income stream — each payout brings regular liquidity without touching the invested corpus.</p>
       </div>
     </div>
+
+    <a class="btn-gold" href="/calculators/fd/" style="align-self:center">Calculate FD Returns</a>
   </section>
 
-  <!-- ══ HOW FDS WORK ════════════════════════════════════════════════ -->
-  <section class="section" style="background:var(--sec-light)">
-    <p class="sec-title">How <span class="g">Fixed Deposits</span> Work — Compounding &amp; Interest</p>
-    <div class="steps" style="margin-top:48px">
-      {[
-        { n:'01', title:'Choose FD',        desc:'Select bank/NBFC, tenure (e.g., 1 year), and payout type (cumulative or non-cumulative).' },
-        { n:'02', title:'Deposit Amount',   desc:'Transfer the principal amount. Minimum deposit: ₹1,000 (varies by institution).' },
-        { n:'03', title:'Interest Accrues', desc:'Interest compounds quarterly (cumulative) or pays out monthly/quarterly (non-cumulative).' },
-        { n:'04', title:'Maturity Payout',  desc:'On maturity, receive principal + interest. Auto-renew or withdraw as needed.' },
-      ].map((s, i, arr) => (<>
-        <div class="step">
-          <div class="num">{s.n}</div>
-          <h4>{s.title}</h4>
-          <p>{s.desc}</p>
+  <!-- ══ 4. TYPES OF FDS ══════════════════════════════════════════════ -->
+  <section class="section stack" id="sec-types" style="background:var(--sec-light);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Types of Fixed Deposits in India</p>
+      <p class="sec-lead">Different FDs serve different goals — income, tax saving, or higher returns. Compare them at a glance.</p>
+    </div>
+    <div class="t-scroll">
+      <div class="table t5 bordered">
+        <div class="cell th"><p>FD Type</p></div>
+        <div class="cell th"><p>Interest</p></div>
+        <div class="cell th"><p>Tenure</p></div>
+        <div class="cell th"><p>Tax</p></div>
+        <div class="cell th hi"><p>Best For</p></div>
+        {typeRows.map(r => (
+          <>
+            <div class="cell tb"><p class="k">{r.type}</p></div>
+            <div class="cell tb"><p class="v">{r.interest}</p></div>
+            <div class="cell tb"><p class="v">{r.tenure}</p></div>
+            <div class="cell tb"><p class="v">{r.tax}</p></div>
+            <div class="cell tb hi-cell"><p class="v">{r.best}</p></div>
+          </>
+        ))}
+      </div>
+    </div>
+    <a class="btn-gold" href="/about/open-demat-account/" style="align-self:center">Open Fixed Deposit</a>
+  </section>
+
+  <!-- ══ 5. FD CALCULATOR ═════════════════════════════════════════════ -->
+  <section class="section stack" id="sec-calc" style="background:var(--sec-tint);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">FD Calculator</p>
+      <p class="sec-lead">Find out exactly how much interest you will earn by investing in a Fixed Deposit for a chosen tenure.</p>
+    </div>
+    <div class="calc-card">
+      <div class="calc-inputs">
+        <div class="calc-field">
+          <div class="calc-label-row">
+            <label for="c-principal">Principal Amount</label>
+            <span class="calc-val" id="c-principal-val">₹1,00,000</span>
+          </div>
+          <input id="c-principal" type="range" min="10000" max="5000000" step="10000" value="100000" class="calc-slider" />
+          <div class="calc-range-ends"><span>₹10K</span><span>₹50L</span></div>
         </div>
-        {i < arr.length - 1 && <div class="step-div"></div>}
-      </>))}
-    </div>
-  </section>
-
-  <!-- ══ FD INTEREST RATES ══════════════════════════════════════════ -->
-  <section class="section" style="background:var(--sec-tint)">
-    <p class="sec-title">FD Interest Rates — <span class="g">Current Rates 2025</span></p>
-    <p class="sec-lead" style="margin-top:16px">Indicative FD rates for general citizens and senior citizens. Verify before investing.</p>
-    <div class="t-wrap" style="margin-top:48px">
-      <div class="t-scroll">
-        <table>
-          <thead><tr>
-            <th>Institution</th><th>Tenure</th><th class="hl">General Rate (p.a.)</th><th class="hl">Senior Citizen Rate (p.a.)</th>
-          </tr></thead>
-          <tbody>
-            {[
-              { inst:'SBI',                  tenure:'1 Year',     general:'6.80%',      senior:'7.30%' },
-              { inst:'HDFC Bank',            tenure:'1 Year',     general:'7.10%',      senior:'7.60%' },
-              { inst:'ICICI Bank',           tenure:'1 Year',     general:'7.10%',      senior:'7.60%' },
-              { inst:'Axis Bank',            tenure:'1 Year',     general:'7.10%',      senior:'7.85%' },
-              { inst:'Small Finance Bank',   tenure:'1 Year',     general:'7.75–9.00%', senior:'8.25–9.50%' },
-              { inst:'Shriram Finance NBFC', tenure:'1–5 Year',   general:'8.50–9.40%', senior:'8.95–9.90%' },
-            ].map(r => (
-              <tr>
-                <td class="k">{r.inst}</td><td>{r.tenure}</td><td class="hl">{r.general}</td><td class="hl">{r.senior}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <p class="sec-lead" style="margin-top:16px;font-size:13px">* Rates are indicative as of June 2025. Verify current rates before investing.</p>
-  </section>
-
-  <!-- ══ TYPES OF FDS ════════════════════════════════════════════════ -->
-  <section class="section" style="background:var(--sec-light)">
-    <p class="sec-title">Types of <span class="g">Fixed Deposits</span> in India</p>
-    <div class="t-wrap" style="margin-top:48px">
-      <div class="t-scroll">
-        <table>
-          <thead><tr>
-            <th>FD Type</th><th>Interest</th><th>Tenure</th><th>Tax</th><th class="hl">Best For</th>
-          </tr></thead>
-          <tbody>
-            {[
-              { type:'Cumulative FD',          interest:'Compounded, paid at maturity',     tenure:'7 days – 10 years', tax:'TDS on interest',       best:'Long-term savings' },
-              { type:'Non-Cumulative FD',       interest:'Paid monthly/quarterly',           tenure:'7 days – 10 years', tax:'TDS on interest',       best:'Regular income needs' },
-              { type:'Tax Saving FD',           interest:'~7% (banks)',                      tenure:'5 years (lock-in)', tax:'80C deduction ₹1.5L',   best:'Tax-saving under 80C' },
-              { type:'Senior Citizen FD',       interest:'Extra 0.25–0.50% over general',   tenure:'Same as regular',   tax:'TDS applies',           best:'Retired investors' },
-              { type:'NRI FD (NRE/FCNR)',       interest:'Market rate',                      tenure:'1–5 years',         tax:'Tax-free in India (NRE)',best:'NRI investors' },
-            ].map(r => (
-              <tr>
-                <td class="k">{r.type}</td><td>{r.interest}</td><td>{r.tenure}</td><td>{r.tax}</td><td class="hl">{r.best}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ FD CALCULATOR ══════════════════════════════════════════════ -->
-  <section class="section" style="background:var(--sec-tint)">
-    <p class="sec-title">FD <span class="g">Interest Calculator</span> — Calculate Maturity Amount</p>
-    <p class="sec-lead" style="margin-top:16px">Estimate your maturity amount based on deposit amount, rate, and tenure.</p>
-    <div class="card" style="margin-top:48px;max-width:760px">
-      <div style="background:var(--sec-tint);border-radius:12px;padding:20px;font-family:monospace;font-size:15px;color:var(--ink)">
-        <p style="font-weight:700;margin-bottom:12px">Maturity Amount (Cumulative) = P × (1 + r/n)^(n×t)</p>
-        <div style="display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--muted)">
-          <p><strong style="color:var(--ink)">P</strong> = Principal</p>
-          <p><strong style="color:var(--ink)">r</strong> = Annual Interest Rate</p>
-          <p><strong style="color:var(--ink)">n</strong> = Compounding frequency (4 for quarterly)</p>
-          <p><strong style="color:var(--ink)">t</strong> = Tenure in years</p>
+        <div class="calc-field">
+          <div class="calc-label-row">
+            <label for="c-rate">Annual Rate (% p.a.)</label>
+            <span class="calc-val" id="c-rate-val">8.50%</span>
+          </div>
+          <input id="c-rate" type="range" min="4" max="10" step="0.05" value="8.50" class="calc-slider" />
+          <div class="calc-range-ends"><span>4%</span><span>10%</span></div>
+        </div>
+        <div class="calc-field">
+          <div class="calc-label-row">
+            <label for="c-tenure">Tenure</label>
+            <span class="calc-val" id="c-tenure-val">2 Years</span>
+          </div>
+          <input id="c-tenure" type="range" min="1" max="10" step="1" value="2" class="calc-slider" />
+          <div class="calc-range-ends"><span>1 Yr</span><span>10 Yr</span></div>
         </div>
       </div>
-      <p class="card-p"><strong style="color:var(--ink)">Example:</strong> ₹1,00,000 at 8.50% for 2 years (quarterly) = <strong style="color:var(--olive-title)">₹1,18,197 at maturity</strong></p>
-      <a class="btn-gold" href="/calculators/" style="width:fit-content">Calculate FD Returns →</a>
+      <div class="calc-output">
+        <div class="donut-wrap">
+          <svg class="donut" viewBox="0 0 120 120">
+            <circle class="donut-track" cx="60" cy="60" r="50" />
+            <circle class="donut-fill" id="c-donut" cx="60" cy="60" r="50" />
+          </svg>
+          <div class="donut-center">
+            <p class="donut-label">Maturity</p>
+            <p class="donut-amount" id="c-maturity">₹1,18,197</p>
+          </div>
+        </div>
+        <div class="calc-results">
+          <div class="cr-row">
+            <span class="cr-dot" style="background:var(--olive-deep)"></span>
+            <span class="cr-label">Invested</span>
+            <span class="cr-val" id="c-invested">₹1,00,000</span>
+          </div>
+          <div class="cr-row">
+            <span class="cr-dot" style="background:var(--gold-btn)"></span>
+            <span class="cr-label">Returns</span>
+            <span class="cr-val" id="c-returns">₹18,197</span>
+          </div>
+          <div class="cr-sep"></div>
+          <div class="cr-row total">
+            <span class="cr-label">Total Value</span>
+            <span class="cr-val" id="c-total">₹1,18,197</span>
+          </div>
+          <a class="btn-gold" href="/about/open-demat-account/" style="width:100%;justify-content:center;margin-top:8px">Open FD</a>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- ══ FD BENEFITS ════════════════════════════════════════════════ -->
-  <section class="section" style="background:var(--sec-light)">
-    <p class="sec-title">FD <span class="g">Benefits &amp; Features</span> — Why Invest in Fixed Deposit</p>
-    <div class="cat-grid" style="margin-top:48px">
-      {[
-        { title:'Capital Safety',         desc:'Bank FDs up to ₹5 lakh protected by DICGC insurance. NBFC FDs are uninsured but RBI-regulated.' },
-        { title:'Predictable Returns',    desc:'Interest rate locked at deposit — no market risk. Know exactly what you earn before investing.' },
-        { title:'Loan Against FD',        desc:'Get up to 90% of FD amount as an overdraft. No need to break your FD early to access funds.' },
-        { title:'Senior Citizen Benefits',desc:'Extra 0.25–0.50% over general rates. Special senior citizen deposit schemes available.' },
-      ].map((c, i) => (
-        <div class="cat" style={i===3?'border-right:0':''}>
-          <h4>{c.title}</h4>
-          <p>{c.desc}</p>
+  <!-- ══ 6. FD BENEFITS & FEATURES ═══════════════════════════════════ -->
+  <section class="section stack" id="sec-benefits" style="background:var(--sec-light);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">FD Benefits &amp; Features</p>
+      <p class="sec-lead">What makes Fixed Deposits the cornerstone of safe, predictable, and flexible investing.</p>
+    </div>
+    <div class="row-2">
+      <div class="card check-card">
+        <p class="ch-title">Core Benefits</p>
+        <div class="check-list">
+          {coreB.map((item, i) => (
+            <>
+              {i > 0 && <div class="check-sep"></div>}
+              <div class="check-row"><span class="ck">✓</span><p class="tx">{item}</p></div>
+            </>
+          ))}
         </div>
+      </div>
+      <div class="card check-card">
+        <p class="ch-title">Added Flexibility</p>
+        <div class="check-list">
+          {flexB.map((item, i) => (
+            <>
+              {i > 0 && <div class="check-sep"></div>}
+              <div class="check-row"><span class="ck">✓</span><p class="tx">{item}</p></div>
+            </>
+          ))}
+        </div>
+      </div>
+    </div>
+    <a class="btn-gold" href="/about/open-demat-account/" style="align-self:center">Open Fixed Deposit</a>
+  </section>
+
+  <!-- ══ 7. PREMATURE WITHDRAWAL & LOAN ══════════════════════════════ -->
+  <section class="section stack" id="sec-withdraw" style="background:var(--sec-tint);gap:56px;justify-content:center;min-height:0">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Premature Withdrawal &amp; Loan Against FD</p>
+      <p class="sec-lead">Two ways to access money before maturity — one breaks the FD, the other keeps it fully intact.</p>
+    </div>
+    <div class="row-2">
+      <div class="card">
+        <p class="card-h">Premature Withdrawal</p>
+        <p class="card-p">Break your FD before maturity with a penalty — typically 0.50–1.00% below the rate applicable for the period held. Example: ₹1L FD at 8.5% for 2 years, broken at 18 months → earns approximately 7.5–8.0% for the 18-month period only.</p>
+      </div>
+      <div class="card">
+        <p class="card-h">Loan / Overdraft Against FD</p>
+        <p class="card-p">Get an overdraft of up to 90% of FD value at FD rate + 1–2%. Your FD continues earning full interest while you use the loan — a smarter alternative to breaking the deposit. Interest is charged only on the drawn amount and days used.</p>
+      </div>
+    </div>
+    <a class="btn-gold" href="/about/open-demat-account/" style="align-self:center">Open Fixed Deposit</a>
+  </section>
+
+  <!-- ══ 8. HOW TO OPEN FD ONLINE ═════════════════════════════════════ -->
+  <section class="section stack" id="sec-open" style="background:var(--sec-light);gap:56px;align-items:center;justify-content:center">
+    <div class="stack" style="gap:16px;width:100%">
+      <p class="sec-title">How to Open a Fixed Deposit Online</p>
+      <p class="sec-lead">Start in five steps — plus exactly what you'll need to complete your first FD.</p>
+    </div>
+
+    <div class="steps">
+      {steps.map((s, i) => (
+        <>
+          {i > 0 && <div class="step-div"></div>}
+          <div class="step">
+            <div class="num">{s.n}</div>
+            <div class="st-body">
+              <h4>{s.title}</h4>
+              <p>{s.desc}</p>
+            </div>
+          </div>
+        </>
       ))}
     </div>
-    <a class="btn-gold" href="/about/open-demat-account/" style="align-self:center;margin-top:48px">Open Fixed Deposit</a>
-  </section>
 
-  <!-- ══ PREMATURE WITHDRAWAL & LOAN AGAINST FD ════════════════════ -->
-  <section class="section" style="background:var(--sec-tint)">
-    <p class="sec-title">FD <span class="g">Premature Withdrawal</span> &amp; Loan Against FD</p>
-    <div class="row-2" style="margin-top:48px">
-      <div class="card">
-        <p class="sub-title">Premature Withdrawal</p>
-        <p class="card-p">Break your FD before maturity at a penalty (typically 0.50–1.00% below applicable rate). Example: ₹1L FD at 7.5% for 2 years, broken at 18 months → earns ~6.5–7.0% for 18 months only.</p>
+    <div class="stack" style="gap:32px;width:100%">
+      <div class="stack" style="gap:16px">
+        <p class="sub-title">Documents &amp; Setup</p>
+        <p class="sub-lead">Everything you need to qualify and complete your FD account opening.</p>
       </div>
-      <div class="card">
-        <p class="sub-title">Loan Against FD</p>
-        <p class="card-p">Get an overdraft facility of up to 90% of FD value at FD rate + 1–2%. Better than breaking FD — your FD continues to earn full interest while you use the loan.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ HOW TO OPEN FD ONLINE ══════════════════════════════════════ -->
-  <section class="section" style="background:var(--sec-light)">
-    <p class="sec-title">How to <span class="g">Open Fixed Deposit</span> Online — Step by Step</p>
-    <div class="steps" style="margin-top:48px">
-      {[
-        { n:'01', title:'Choose Institution',       desc:'Compare FD rates. Select bank or NBFC based on interest rate, safety, and tenure.' },
-        { n:'02', title:'Complete KYC',             desc:'One-time PAN + Aadhaar-based digital KYC. Fully paperless on the Shriram platform.' },
-        { n:'03', title:'Choose Tenure &amp; Amount', desc:'Select deposit amount, tenure, and payout type (cumulative or non-cumulative).' },
-        { n:'04', title:'Fund Your FD',             desc:'Transfer funds via net banking or UPI. Receive FD receipt (digital or physical).' },
-      ].map((s, i, arr) => (<>
-        <div class="step">
-          <div class="num">{s.n}</div>
-          <h4 set:html={s.title}></h4>
-          <p>{s.desc}</p>
+      <div class="row-2">
+        <div class="card check-card">
+          <p class="ch-title">KYC Documents Required</p>
+          <div class="check-list">
+            {kycDocs.map((item, i) => (
+              <>
+                {i > 0 && <div class="check-sep"></div>}
+                <div class="check-row"><span class="ck">✓</span><p class="tx">{item}</p></div>
+              </>
+            ))}
+          </div>
         </div>
-        {i < arr.length - 1 && <div class="step-div"></div>}
-      </>))}
+        <div class="card check-card">
+          <p class="ch-title">What You'll Need to Set Up</p>
+          <div class="check-list">
+            {setupNeeds.map((item, i) => (
+              <>
+                {i > 0 && <div class="check-sep"></div>}
+                <div class="check-row"><span class="ck">✓</span><p class="tx">{item}</p></div>
+              </>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
+
+    <a class="btn-gold" href="/about/open-demat-account/" style="align-self:center">Open FD Account</a>
   </section>
 
-  <!-- ══ FAQ ════════════════════════════════════════════════════════ -->
+  <!-- ══ 9. DEMAT CTA BANNER ═══════════════════════════════════════════ -->
+  <section class="demat-banner">
+    <p class="banner-title">Open Your Demat Account Within Minutes</p>
+    <p class="banner-sub">Start investing in stocks, mutual funds, FDs and more — with zero paperwork.</p>
+    <a class="btn-gold" href="/about/open-demat-account/">Open Demat Account</a>
+  </section>
+
+  <!-- ══ 10. FAQ ══════════════════════════════════════════════════════ -->
   <section class="faq-wrap" id="sec-faq">
     <div class="faq-cols">
       <div class="faq-left">
-        <p class="faq-title">Frequently Asked <span class="g">Questions</span></p>
-        <ul class="faq-acc">
-          {[
-            { q:'Is FD safe in India?',                                              a:'Bank FDs up to ₹5 lakh per bank are insured by DICGC. NBFC FDs are not DICGC-insured but are regulated by RBI.' },
-            { q:'Is FD interest taxable?',                                           a:'Yes. FD interest is added to your income and taxed at your slab rate. TDS at 10% is deducted if interest exceeds ₹40,000 (₹50,000 for senior citizens) per year.' },
-            { q:'What is the maximum FD insurance amount?',                          a:'DICGC insures up to ₹5 lakh per depositor per bank — including principal and interest across all accounts at that bank.' },
-            { q:'Can I break FD before maturity?',                                   a:'Yes, with a premature withdrawal penalty of 0.50–1.00% below the applicable rate for the period held.' },
-            { q:'What is a Tax Saving FD?',                                          a:'A 5-year lock-in FD eligible for ₹1.5 lakh deduction under Section 80C. Interest is taxable. Premature withdrawal not allowed.' },
-            { q:'Cumulative vs non-cumulative FD — what is the difference?',         a:'Cumulative FD pays principal + compounded interest at maturity. Non-cumulative FD pays interest monthly/quarterly — better for regular income.' },
-            { q:'Is senior citizen FD rate higher?',                                 a:'Yes. Senior citizens (60+) get 0.25–0.50% higher rate than the regular rate on most FDs.' },
-            { q:'Can NRIs invest in FDs in India?',                                  a:'Yes — through NRE FDs (interest tax-free in India, fully repatriable) or NRO FDs (interest taxable). FCNR FDs are denominated in foreign currency.' },
-          ].map(item => (
-            <li class="faq-item">
-              <details>
-                <summary class="faq-sum">
-                  <span class="qt">{item.q}</span>
-                  <svg class="faq-icon faq-v" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="2" x2="8" y2="14"/><line x1="2" y1="8" x2="14" y2="8"/></svg>
-                  <svg class="faq-icon faq-h" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><line x1="2" y1="8" x2="14" y2="8"/></svg>
-                </summary>
-                <div class="qa"><p>{item.a}</p></div>
-              </details>
-            </li>
+        <p class="faq-title">Fixed Deposit FAQs</p>
+        <div class="faq-acc">
+          {faqs.map((item) => (
+            <details class="faq-item">
+              <summary class="faq-sum">
+                <span class="qt">{item.q}</span>
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="faq-icon">
+                  <path d="M2 8h12"/>
+                  <path class="faq-v" d="M8 2v12"/>
+                </svg>
+              </summary>
+              <div class="qa"><p>{item.a}</p></div>
+            </details>
           ))}
-        </ul>
+        </div>
       </div>
       <div class="faq-side">
-        <img src="/images/advisor-avatar.png" alt="Financial advisor" class="usr-img" />
         <div class="side-in">
           <div class="side-tx">
-            <h4>Still got questions?</h4>
+            <h4>Need a clearer direction?</h4>
             <p>Our FD specialists will help you choose the right tenure, institution, and payout option for your goals.</p>
           </div>
-          <a class="btn-gold" href="/about/support/">Book a Call</a>
+          <a class="btn-gold" href="/about/support/">Schedule a Call</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ══ FINAL CTA ══════════════════════════════════════════════════ -->
-  <section class="cta-sec" style="background:var(--sec-light)">
+  <!-- ══ 11. FINAL CTA ════════════════════════════════════════════════ -->
+  <section class="cta-sec" id="sec-final-cta" style="background:var(--sec-light)">
     <div class="cta-box">
-      <p class="cta-h">Open Fixed Deposit Online — <span class="g">Guaranteed Returns</span></p>
-      <p class="cta-sub">Compare FD rates, open digitally, and start earning guaranteed returns today with Shriram Financial Services.</p>
-      <div class="cta-row" style="margin-top:0;justify-content:center">
-        <a class="btn-gold" href="/about/open-demat-account/">Open FD</a>
-        <a class="btn-dark" href="/about/open-demat-account/">Compare Rates</a>
+      <div class="ct-tt">
+        <h3>Open Fixed Deposit Online — Guaranteed Returns</h3>
+        <p class="ct-sub">Compare FD rates, open digitally, and start earning safe, predictable returns today with Shriram Financial Services.</p>
       </div>
+      <a class="btn-gold" href="/about/open-demat-account/">Open Fixed Deposit</a>
     </div>
   </section>
 
 </BaseLayout>
 
 <style>
+  /* ── Design tokens ─────────────────────────────────────────────── */
   :root {
-    --sec-light:#fef8ee; --sec-tint:#f6efe1;
-    --card:#fffdf8; --card-border:#e1e0db; --card-border-soft:rgba(28,28,22,.13); --row-line:rgba(28,28,22,.08);
-    --olive-title:#2e3914; --olive-head:#2d3813; --olive-deep:#1b2010;
-    --ink:#1c1c16; --ink-2:#46463c; --ink-3:#595959; --muted:#73736a;
-    --gold:#e0a82e; --gold-2:#f2b83f; --gold-btn:#f3b83f; --gold-ink:#231a06; --olive-ink:#2e3914; --green:#009d58;
-    --pad:clamp(20px,8vw,144px); --section-y:72px; --cta-w:220px;
+    --page: #fcf8ef;
+    --sec-light: #fef8ee;
+    --sec-tint: #f6efe1;
+    --card: #fffdf8;
+    --card-border: #e1e0db;
+    --card-border-soft: rgba(28,28,22,.13);
+    --row-line: rgba(28,28,22,.08);
+    --olive-title: #2e3914;
+    --olive-head: #2d3813;
+    --olive-deep: #1b2010;
+    --ink: #1c1c16;
+    --ink-2: #46463c;
+    --ink-3: #595959;
+    --muted: #73736a;
+    --muted-2: #9a9a8e;
+    --gold: #e0a82e;
+    --gold-2: #f2b83f;
+    --gold-btn: #f3b83f;
+    --gold-ink: #231a06;
+    --olive-ink: #2e3914;
+    --green: #009d58;
+    --blue: #2f7ef4;
+    --pad: clamp(20px, 8vw, 144px);
+    --container-pad: 32px;
+    --section-y: 72px;
+    --cta-w: 220px;
   }
+
+  /* ── Base ────────────────────────────────────────────────────────── */
   *, *::before, *::after { box-sizing: border-box; }
   a { color: inherit; text-decoration: none; }
   p { line-height: 1.5; margin: 0; }
 
-  .section { padding: var(--section-y) var(--pad); min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; justify-content: center; }
-  .section.auto { min-height: 0; }
-  .sec-title { font-weight: 400; font-size: 40px; color: var(--olive-title); line-height: 1.4; max-width: 860px; }
-  .sec-lead  { font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.5; max-width: 640px; }
+  /* ── Section shell ───────────────────────────────────────────────── */
+  .section {
+    padding: var(--section-y) var(--pad);
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  #sec-about, #sec-withdraw { min-height: 0; }
+  .stack { display: flex; flex-direction: column; }
+
+  /* ── Typography ──────────────────────────────────────────────────── */
+  .sec-title { font-weight: 400; font-size: 40px; color: var(--olive-title); text-transform: capitalize; line-height: 1.5; }
+  .sec-lead  { font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.5; }
   .sub-title { font-weight: 500; font-size: 24px; color: var(--ink); line-height: 1.5; }
+  .sub-lead  { font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.5; }
+  .card-h    { font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.5; }
+  .card-p    { font-weight: 400; font-size: 16px; color: var(--muted); line-height: 1.5; }
   .g { color: var(--gold-2); }
 
-  .card { background: var(--card); border: 1px solid var(--card-border); border-radius: 24px; padding: 32px; display: flex; flex-direction: column; gap: 16px; }
-  .card-h { font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.5; }
-  .card-p { font-weight: 400; font-size: 16px; color: var(--muted); line-height: 1.5; }
+  /* ── Cards ───────────────────────────────────────────────────────── */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 24px;
+    padding: var(--container-pad);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  /* ── Hero ────────────────────────────────────────────────────────── */
+  .hero {
+    padding: 0 var(--pad);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    background: radial-gradient(125% 210% at 100% -8%, #4f583b 0%, #363a2c 50%, #1d1d1d 100%);
+  }
+  .hero-inner {
+    padding: clamp(80px,12vw,140px) 0 clamp(48px,6vw,80px);
+    display: flex;
+    gap: clamp(40px, 6vw, 80px);
+    align-items: flex-start;
+  }
+  .hero-left { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; }
+  .hero h1 { font-weight: 500; font-size: 40px; color: #fff; line-height: 1.5; max-width: 620px; }
+  .hero .lead { margin-top: 32px; font-weight: 400; font-size: 18px; line-height: 1.5; color: rgba(255,255,255,.74); max-width: 520px; }
+  .cta-row { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .hero-feats { margin-top: 40px; }
+  .feats { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 16px; max-width: 560px; padding-top: 36px; border-top: 1px solid rgba(255,255,255,.16); }
+  .feat { display: flex; gap: 10px; align-items: center; }
+  .feat .tk { color: var(--gold-2); font-weight: 500; font-size: 15px; width: 13px; }
+  .feat .lb { color: rgba(255,255,255,.9); font-weight: 500; font-size: 16px; line-height: 1.5; white-space: nowrap; }
+
+  /* ── Hero panel (form) ──────────────────────────────────────────── */
+  .hero-panel {
+    width: 340px;
+    flex: none;
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 20px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    backdrop-filter: blur(8px);
+    margin-top: clamp(40px,6vw,80px);
+  }
+  .panel-title { font-weight: 600; font-size: 17px; color: #fff; line-height: 1.4; }
+  .fd-form { display: flex; flex-direction: column; gap: 14px; }
+  .fd-field { display: flex; flex-direction: column; gap: 6px; }
+  .fd-field label { font-weight: 500; font-size: 12px; color: rgba(255,255,255,.6); letter-spacing: .4px; }
+  .fd-field input {
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 14px;
+    color: #fff;
+    outline: none;
+    transition: border-color .2s;
+  }
+  .fd-field input::placeholder { color: rgba(255,255,255,.35); }
+  .fd-field input:focus { border-color: var(--gold-2); }
+  .tenure-tabs { display: flex; gap: 8px; }
+  .t-tab {
+    flex: 1;
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 8px;
+    padding: 8px 4px;
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255,255,255,.7);
+    cursor: pointer;
+    transition: background .2s, border-color .2s, color .2s;
+  }
+  .t-tab.active { background: var(--gold-btn); border-color: var(--gold-btn); color: var(--olive-ink); }
+  .t-tab:hover:not(.active) { background: rgba(255,255,255,.14); }
+
+  /* ── Buttons ─────────────────────────────────────────────────────── */
+  .btn-gold {
+    background: var(--gold-btn);
+    height: 40px;
+    width: var(--cta-w);
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px 20px;
+    font-weight: 500;
+    font-size: 12px;
+    color: var(--olive-ink);
+    white-space: nowrap;
+    transition: opacity .2s;
+  }
+  .btn-gold:hover { opacity: .88; }
+
+  /* ── Two-card row ────────────────────────────────────────────────── */
   .row-2 { display: flex; gap: 32px; align-items: stretch; }
   .row-2 .card { flex: 1 0 0; min-width: 0; }
 
-  .hero { padding: 0 var(--pad); display: flex; flex-direction: column; justify-content: center; overflow: hidden; background: radial-gradient(125% 210% at 100% -8%, #4f583b 0%, #363a2c 50%, #1d1d1d 100%); }
-  .hero-inner { padding: clamp(80px,12vw,140px) 0 clamp(48px,6vw,80px); display: flex; flex-direction: column; }
-  .hero h1 { font-weight: 500; font-size: 40px; color: #fff; line-height: 1.5; max-width: 860px; }
-  .hero .lead { margin-top: 32px; font-weight: 400; font-size: 18px; line-height: 1.5; color: rgba(255,255,255,.74); max-width: 600px; }
-  .cta-row { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
-  .feats { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 14px 16px; max-width: 760px; padding-top: 36px; border-top: 1px solid rgba(255,255,255,.16); list-style: none; padding-left: 0; }
-  .feat { display: flex; gap: 10px; align-items: center; }
-  .feat .tk { color: var(--gold-2); font-weight: 500; font-size: 15px; }
-  .feat .lb { color: rgba(255,255,255,.9); font-weight: 500; font-size: 16px; }
-
-  .btn-gold  { background: var(--gold-btn); height: 40px; width: var(--cta-w); border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; font-weight: 500; font-size: 12px; color: var(--olive-ink); white-space: nowrap; transition: opacity .2s; }
-  .btn-gold:hover { opacity: .88; }
-  .btn-ghost { height: 40px; border-radius: 9px; border: 1px solid rgba(255,255,255,.4); display: inline-flex; align-items: center; justify-content: center; padding: 7px 26px; font-weight: 600; font-size: 15px; color: #fff; transition: border-color .2s; }
-  .btn-ghost:hover { border-color: #fff; }
-  .btn-dark  { background: #333; height: 40px; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; padding: 0 24px; font-weight: 500; font-size: 12px; color: #fff; transition: opacity .2s; }
-  .btn-dark:hover { opacity: .88; }
-
-  .cat-grid { border: 1px solid var(--card-border); border-radius: 24px; overflow: hidden; display: grid; grid-template-columns: repeat(4,1fr); background: var(--card); }
-  .cat { background: var(--card); padding: 32px; display: flex; flex-direction: column; gap: 12px; border-right: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border); }
-  .cat:nth-child(4n) { border-right: 0; }
-  .cat:nth-child(n+5) { border-bottom: 0; }
-  .cat:last-child { border-bottom: 0; }
-  .cat h4 { font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.5; }
-  .cat p  { font-weight: 400; font-size: 16px; color: var(--muted); line-height: 1.5; }
-
-  .steps { background: var(--card); border: 1px solid var(--card-border); border-radius: 24px; overflow: hidden; display: flex; align-items: stretch; width: 100%; }
-  .step  { flex: 1 0 0; min-width: 0; padding: 32px; display: flex; flex-direction: column; gap: 16px; }
-  .step .num { font-weight: 400; font-size: 32px; color: var(--gold); }
+  /* ── Steps ───────────────────────────────────────────────────────── */
+  .steps {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 24px;
+    overflow: hidden;
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+  }
+  .step { flex: 1 0 0; min-width: 0; padding: var(--container-pad); display: flex; flex-direction: column; gap: 16px; }
+  .step .num { font-weight: 400; font-size: 32px; line-height: 34px; color: var(--gold); }
+  .step .st-body { display: flex; flex-direction: column; gap: 12px; }
   .step h4 { font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.5; }
   .step p  { font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.5; }
   .step-div { width: 1px; align-self: stretch; background: var(--card-border); flex: none; }
 
-  .t-wrap { border: 1px solid var(--card-border); border-radius: 24px; overflow: hidden; background: var(--card); }
-  .t-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  table { width: 100%; border-collapse: collapse; }
-  thead tr { background: var(--olive-head); }
-  thead th { padding: 16px 24px; font-weight: 600; font-size: 14px; color: #fff; text-align: left; }
-  thead th.hl { color: var(--gold-2); }
-  tbody tr:nth-child(even) { background: var(--sec-tint); }
-  tbody td { padding: 14px 24px; font-size: 15px; color: var(--ink-2); border-top: 1px solid var(--row-line); }
-  tbody td.k  { font-weight: 600; color: var(--ink); }
-  tbody td.hl { color: var(--gold-2); font-weight: 500; }
+  /* ── Checklist cards ─────────────────────────────────────────────── */
+  .check-card { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; gap: 32px; }
+  .ch-title   { font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.5; }
+  .check-list { display: flex; flex-direction: column; gap: 24px; }
+  .check-row  { display: flex; gap: 14px; align-items: flex-start; }
+  .check-row .ck { color: var(--green); font-weight: 700; font-size: 15px; line-height: 25.5px; width: 13px; flex: none; }
+  .check-row .tx { flex: 1 0 0; min-width: 0; font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.5; }
+  .check-sep  { height: 1px; background: var(--row-line); width: 100%; }
 
-  .faq-wrap  { padding: var(--section-y) var(--pad); background: #FFFCF3; display: flex; flex-direction: column; justify-content: center; }
+  /* ── Tables ──────────────────────────────────────────────────────── */
+  .t-scroll { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .table    { background: var(--card); border-radius: 24px; overflow: hidden; display: grid; }
+  .table.bordered { border: 1px solid var(--card-border); }
+  .t4 { grid-template-columns: repeat(4, minmax(0,1fr)); }
+  .t5 { grid-template-columns: repeat(5, minmax(0,1fr)); }
+  .cell { padding: 16px 24px; display: flex; align-items: center; justify-content: center; text-align: center; }
+  .cell p { flex: 1 0 0; min-width: 0; font-size: 16px; line-height: 1.5; overflow-wrap: break-word; }
+  .th { background: var(--olive-head); }
+  .th p { font-weight: 600; color: #fff; }
+  .th.hi p { color: var(--gold-2); }
+  .tb { border-top: 1px solid var(--row-line); }
+  .tb .k { font-weight: 600; color: var(--ink); }
+  .tb .v { font-weight: 400; color: var(--ink-2); }
+  .hi-cell { background: rgba(243,184,63,.06); }
+  .hi-cell .v { color: var(--olive-title); font-weight: 500; }
+
+  /* ── FD Calculator ───────────────────────────────────────────────── */
+  .calc-card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 24px;
+    padding: var(--container-pad);
+    display: flex;
+    gap: 48px;
+    align-items: flex-start;
+  }
+  .calc-inputs { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 32px; }
+  .calc-field { display: flex; flex-direction: column; gap: 10px; }
+  .calc-label-row { display: flex; justify-content: space-between; align-items: center; }
+  .calc-label-row label { font-weight: 500; font-size: 15px; color: var(--ink); }
+  .calc-val { font-weight: 600; font-size: 15px; color: var(--olive-title); }
+  .calc-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--card-border);
+    outline: none;
+    cursor: pointer;
+  }
+  .calc-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: var(--gold-btn);
+    border: 2px solid var(--olive-ink);
+    cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0,0,0,.18);
+  }
+  .calc-slider::-moz-range-thumb {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: var(--gold-btn);
+    border: 2px solid var(--olive-ink);
+    cursor: pointer;
+  }
+  .calc-range-ends { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted-2); }
+
+  .calc-output { display: flex; flex-direction: column; gap: 24px; align-items: center; flex: none; width: 240px; }
+  .donut-wrap { position: relative; width: 160px; height: 160px; }
+  .donut { width: 160px; height: 160px; transform: rotate(-90deg); }
+  .donut-track { fill: none; stroke: rgba(28,28,22,.1); stroke-width: 16; }
+  .donut-fill  { fill: none; stroke: var(--gold-btn); stroke-width: 16; stroke-linecap: round; stroke-dasharray: 0 314; transition: stroke-dasharray .5s ease; }
+  .donut-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; }
+  .donut-label  { font-size: 11px; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; }
+  .donut-amount { font-size: 18px; font-weight: 700; color: var(--olive-title); line-height: 1.3; }
+
+  .calc-results { width: 100%; display: flex; flex-direction: column; gap: 12px; }
+  .cr-row { display: flex; align-items: center; gap: 10px; }
+  .cr-dot { width: 10px; height: 10px; border-radius: 50%; flex: none; }
+  .cr-label { flex: 1 0 0; font-size: 14px; color: var(--ink-3); }
+  .cr-val   { font-weight: 600; font-size: 14px; color: var(--ink); }
+  .cr-sep { height: 1px; background: var(--row-line); }
+  .cr-row.total .cr-label { font-weight: 600; color: var(--ink); }
+  .cr-row.total .cr-val   { color: var(--olive-title); font-size: 16px; }
+
+  /* ── Demat CTA Banner ────────────────────────────────────────────── */
+  .demat-banner {
+    padding: 72px var(--pad);
+    background: var(--sec-tint);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    text-align: center;
+  }
+  .banner-title { font-weight: 400; font-size: 40px; color: var(--olive-title); line-height: 1.5; }
+  .banner-sub   { font-weight: 400; font-size: 16px; color: var(--ink-3); max-width: 440px; }
+
+  /* ── FAQ ─────────────────────────────────────────────────────────── */
+  .faq-wrap { padding: var(--section-y) var(--pad); background: #FFFCF3; display: flex; flex-direction: column; justify-content: center; }
   .faq-cols  { display: flex; gap: 48px; align-items: stretch; }
   .faq-left  { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; gap: 32px; }
   .faq-title { font-weight: 700; font-size: 38px; color: #222320; line-height: 1.3; }
-  .faq-acc   { display: flex; flex-direction: column; gap: 8px; width: 100%; list-style: none; padding: 0; margin: 0; }
+  .faq-acc   { display: flex; flex-direction: column; gap: 8px; width: 100%; }
   .faq-item  { background: #f8f4e8; border-radius: 0; }
   .faq-item:first-child { border-radius: 24px 24px 0 0; }
   .faq-item:last-child  { border-radius: 0 0 24px 24px; }
@@ -365,52 +751,143 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   .faq-item[open] .faq-v { opacity: 0; }
   .qa { padding: 0 24px 20px; }
   .qa p { font-weight: 400; font-size: 14px; color: #5a5a5a; line-height: 1.6; }
-  .faq-side  { width: 360px; flex: none; background: #4f583b; border: 1px solid rgba(255,255,255,.12); border-radius: 24px; padding: 32px; display: flex; flex-direction: column; overflow: hidden; }
-  .usr-img   { width: 140px; height: 140px; object-fit: contain; flex: none; }
-  .side-in   { margin-top: auto; padding-top: 40px; display: flex; flex-direction: column; gap: 16px; }
-  .side-tx   { display: flex; flex-direction: column; gap: 8px; color: #fff; }
+  .faq-side {
+    width: 300px;
+    flex: none;
+    background: #4f583b;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 24px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .side-in  { display: flex; flex-direction: column; gap: 20px; }
+  .side-tx  { display: flex; flex-direction: column; gap: 10px; color: #fff; }
   .side-tx h4 { font-weight: 600; font-size: 20px; line-height: 28px; }
   .side-tx p  { font-weight: 400; font-size: 14px; line-height: 1.6; color: rgba(255,255,255,.74); }
 
-  .cta-sec { padding: var(--section-y) var(--pad); display: flex; flex-direction: column; align-items: center; }
-  .cta-box { background: var(--olive-deep); border-radius: 22px; padding: 64px 60px; display: flex; flex-direction: column; align-items: center; gap: 20px; text-align: center; width: 100%; }
-  .cta-h   { font-weight: 500; font-size: 38px; color: #fff; line-height: 1.3; max-width: 560px; }
-  .cta-sub { font-weight: 400; font-size: 17px; color: rgba(255,255,255,.7); line-height: 1.5; max-width: 480px; }
-
-  @media (max-width: 1024px) {
-    .cat-grid { grid-template-columns: repeat(2,1fr); }
-    .cat:nth-child(4n) { border-right: 1px solid var(--card-border); }
-    .cat:nth-child(2n) { border-right: 0; }
-    .cat:nth-child(n+5) { border-bottom: 1px solid var(--card-border); }
-    .cat:nth-last-child(-n+2) { border-bottom: 0; }
+  /* ── Final CTA ───────────────────────────────────────────────────── */
+  .cta-sec { padding: var(--section-y) var(--pad); }
+  .cta-box {
+    border-radius: 22px;
+    padding: 64px 60px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 32px; text-align: center;
   }
+  .ct-tt { display: flex; flex-direction: column; align-items: center; gap: 16px; color: var(--olive-deep); }
+  .cta-box h3 { font-weight: 500; font-size: 38px; line-height: 1.3; letter-spacing: -0.76px; }
+  .ct-sub { font-weight: 400; font-size: 17px; line-height: 1.65; color: var(--ink-2); max-width: 480px; }
+
+  /* ── Responsive ──────────────────────────────────────────────────── */
+  @media (max-width: 1100px) {
+    .hero-panel { width: 300px; }
+    .calc-card { flex-direction: column; }
+    .calc-output { flex-direction: row; width: 100%; justify-content: center; align-items: flex-start; }
+    .calc-results { width: auto; flex: 1; }
+  }
+
   @media (max-width: 900px) {
+    .hero-inner { flex-direction: column; }
+    .hero-panel { width: 100%; margin-top: 0; }
     .steps { flex-direction: column; }
-    .step-div { width: 100%; height: 1px; align-self: auto; }
+    .step-div { width: auto; height: 1px; background: var(--card-border); }
     .faq-cols { flex-direction: column; }
     .faq-side { width: 100%; }
     .row-2 { flex-direction: column; }
   }
+
   @media (max-width: 768px) {
-    .hero h1 { font-size: clamp(28px,7vw,40px); }
-    .sec-title { font-size: clamp(28px,7vw,40px); }
-    .faq-title { font-size: clamp(24px,6vw,38px); }
-    .cta-h { font-size: clamp(24px,6.4vw,38px); }
-    .section { padding: 56px var(--pad); min-height: 0; }
+    :root { --pad: 16px; --container-pad: 24px; --section-y: 56px; }
+    .hero-inner { padding: 80px 0 48px; }
+    .hero h1 { font-size: clamp(28px, 7vw, 40px); }
+    .hero .lead { font-size: 16px; }
+    .sec-title, .faq-title, .banner-title { font-size: clamp(28px, 7vw, 40px); }
+    .sub-title { font-size: clamp(20px, 5.4vw, 24px); }
+    .sec-lead, .sub-lead, .card-p, .step p, .check-row .tx, .cell p, .banner-sub { font-size: 14px; }
+    .cell { padding: 12px 8px; }
     .cta-box { padding: 48px 24px; }
+    .cta-box h3 { font-size: clamp(24px, 6.4vw, 38px); }
+    .calc-output { flex-direction: column; align-items: center; }
+    .calc-results { width: 100%; }
   }
+
   @media (max-width: 560px) {
-    .cat-grid { grid-template-columns: 1fr; }
-    .cat { border-right: 0 !important; border-bottom: 1px solid var(--card-border) !important; }
-    .cat:last-child { border-bottom: 0 !important; }
+    .t5 { grid-template-columns: repeat(5, minmax(120px, 1fr)); }
+    .t4 { grid-template-columns: repeat(4, minmax(120px, 1fr)); }
+    .faq-item { gap: 20px; }
   }
-  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .donut-fill { transition: none; }
+    .faq-v { transition: none; }
+  }
 </style>
 
 <script>
-  document.querySelectorAll<HTMLDetailsElement>('.faq-item details').forEach(d => {
-    d.addEventListener('toggle', () => {
-      if (d.open) document.querySelectorAll<HTMLDetailsElement>('.faq-item details').forEach(o => { if (o !== d) o.removeAttribute('open'); });
+  /* Tenure tab toggle */
+  document.querySelectorAll<HTMLButtonElement>('[data-tab]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.closest('.tenure-tabs')?.querySelectorAll('[data-tab]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+
+  /* FD Calculator */
+  (function () {
+    const pInput  = document.getElementById('c-principal') as HTMLInputElement;
+    const rInput  = document.getElementById('c-rate')      as HTMLInputElement;
+    const tInput  = document.getElementById('c-tenure')    as HTMLInputElement;
+    const pVal    = document.getElementById('c-principal-val')!;
+    const rVal    = document.getElementById('c-rate-val')!;
+    const tVal    = document.getElementById('c-tenure-val')!;
+    const matEl   = document.getElementById('c-maturity')!;
+    const invEl   = document.getElementById('c-invested')!;
+    const retEl   = document.getElementById('c-returns')!;
+    const totEl   = document.getElementById('c-total')!;
+    const donut   = document.getElementById('c-donut')!;
+    const CIRCUM  = 2 * Math.PI * 50;
+
+    function fmt(n: number): string {
+      if (n >= 10000000) return '₹' + (n / 10000000).toFixed(2) + ' Cr';
+      if (n >= 100000)   return '₹' + (n / 100000).toFixed(2) + ' L';
+      if (n >= 1000)     return '₹' + (n / 1000).toFixed(1) + 'K';
+      return '₹' + Math.round(n).toLocaleString('en-IN');
+    }
+
+    function calc() {
+      const P = parseFloat(pInput.value);
+      const r = parseFloat(rInput.value) / 100;
+      const t = parseFloat(tInput.value);
+      const maturity = P * Math.pow(1 + r / 4, 4 * t);
+      const returns  = maturity - P;
+
+      pVal.textContent = '₹' + Math.round(P).toLocaleString('en-IN');
+      rVal.textContent = parseFloat(rInput.value).toFixed(2) + '%';
+      tVal.textContent = t + (t === 1 ? ' Year' : ' Years');
+      matEl.textContent = fmt(maturity);
+      invEl.textContent = fmt(P);
+      retEl.textContent = fmt(returns);
+      totEl.textContent = fmt(maturity);
+
+      const dash = (returns / maturity) * CIRCUM;
+      (donut as SVGCircleElement).style.strokeDasharray = dash + ' ' + CIRCUM;
+    }
+
+    [pInput, rInput, tInput].forEach(el => el?.addEventListener('input', calc));
+    calc();
+  })();
+
+  /* FAQ accordion — one open at a time */
+  document.querySelectorAll('.faq-acc').forEach(acc => {
+    acc.querySelectorAll('details').forEach(d => {
+      d.addEventListener('toggle', () => {
+        if ((d as HTMLDetailsElement).open) {
+          acc.querySelectorAll<HTMLDetailsElement>('details').forEach(o => {
+            if (o !== d) o.removeAttribute('open');
+          });
+        }
+      });
     });
   });
 </script>
