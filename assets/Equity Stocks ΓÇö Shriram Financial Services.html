@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<!-- saved from url=(0023)http://127.0.0.1:4178/# -->
+<html lang="en" class="js"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style>body {transition: opacity ease-in 0.2s; } 
+body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relative; } 
+</style>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Equity Stocks — Shriram Financial Services</title>
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+<link href="./Equity Stocks — Shriram Financial Services_files/css2" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FCF8EF;
+    --cream-2:#F5EFE1;
+    --card:#FFFDF8;
+    --ink:#1C1C16;
+    --ink-soft:#46463C;
+    --muted:#73736A;
+    --olive:#2D3813;
+    --olive-2:#3A471B;
+    --olive-deep:#1B2010;
+    --gold:#E0A82E;
+    --gold-soft:#F2B83F;
+    --line:rgba(28,28,22,.13);
+    --line-soft:rgba(28,28,22,.08);
+    --line-dark:rgba(255,255,255,.16);
+    --radius:14px;
+    --maxw:1632px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Outfit',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    background:var(--cream);color:var(--ink);line-height:1.65;
+    -webkit-font-smoothing:antialiased;font-size:16px;
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px}
+  section{padding:104px 0}
+  a{color:inherit;text-decoration:none}
+  .gold{color:var(--gold)}
+
+  /* ---------- Typography ---------- */
+  h1,h2,h3{font-family:'Outfit',system-ui,-apple-system,sans-serif;font-weight:600;letter-spacing:-.02em;line-height:1.12}
+  .sec-head{max-width:760px;margin:0 auto 56px;text-align:center}
+  .sec-head h2{font-size:42px}
+  .sec-head p{margin-top:18px;color:var(--muted);font-size:17px;font-weight:400;line-height:1.6}
+
+  /* chapter sub-parts */
+  .part{margin-top:76px;padding-top:60px;border-top:1px solid var(--line)}
+  .subhead{font-size:26px;font-weight:500;margin-bottom:10px}
+  .part-lead{color:var(--muted);font-size:16px;margin-bottom:34px;max-width:680px}
+
+  /* ---------- Scroll reveal ---------- */
+  .js .reveal{opacity:0;transform:translateY(20px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)}
+  .js .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion: reduce){.js .reveal{opacity:1;transform:none;transition:none}}
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;font-weight:600;font-size:15px;
+    border-radius:9px;padding:13px 26px;cursor:pointer;border:1px solid transparent;
+    transition:background .2s ease,color .2s ease,border-color .2s ease;font-family:inherit;
+  }
+  .btn-gold{background:var(--gold);color:#231a06}
+  .btn-gold:hover{background:var(--gold-soft)}
+  .btn-olive{background:var(--olive);color:#fff}
+  .btn-olive:hover{background:var(--olive-2)}
+  .btn-ghost{background:transparent;border-color:rgba(255,255,255,.4);color:#fff}
+  .btn-ghost:hover{border-color:#fff}
+  .btn-line{background:transparent;border-color:var(--line);color:var(--ink)}
+  .btn-line:hover{border-color:var(--ink)}
+
+  /* ---------- Nav ---------- */
+  header.nav{position:sticky;top:0;z-index:50;background:var(--cream);border-bottom:1px solid var(--line-soft)}
+  .nav-inner{display:flex;align-items:center;gap:32px;height:72px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.04em;font-size:17px}
+  .logo .mark{width:30px;height:30px;border-radius:7px;background:var(--olive);display:grid;place-items:center;color:var(--gold-soft);font-weight:700;font-size:15px;font-family:'Outfit',sans-serif}
+  .nav-links{display:flex;gap:28px;font-size:15px;font-weight:500;color:var(--ink-soft)}
+  .nav-links a{padding-bottom:2px;border-bottom:1px solid transparent;transition:border-color .2s}
+  .nav-links a:hover{border-color:var(--ink)}
+  .nav-right{margin-left:auto;display:flex;align-items:center;gap:22px}
+  .nav-right .login{font-size:15px;font-weight:600;color:var(--olive)}
+
+  /* ---------- Hero ---------- */
+  .hero{background:var(--olive-deep);color:#fff;position:relative;overflow:hidden}
+  .hero .wrap{padding-top:120px;padding-bottom:120px;position:relative}
+  .hero .kicker{font-size:14px;letter-spacing:.04em;color:var(--gold-soft);margin-bottom:22px;font-weight:500}
+  .hero h1{font-size:32px;font-weight:500;max-width:880px;line-height:1.06}
+  .hero h1 .gold{color:var(--gold-soft)}
+  .hero p.lead{margin-top:26px;max-width:600px;color:rgba(255,255,255,.74);font-size:18px}
+  .hero .cta-row{margin-top:38px;display:flex;gap:14px;flex-wrap:wrap}
+  .hero-feats{margin-top:54px;display:flex;flex-wrap:wrap;gap:14px 36px;padding-top:36px;border-top:1px solid var(--line-dark);max-width:760px}
+  .feat{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:500;color:rgba(255,255,255,.9)}
+  .feat .tick{color:var(--gold-soft);font-size:15px}
+
+  /* ---------- Editorial two-column ---------- */
+  .editorial{display:grid;grid-template-columns:0.85fr 1.15fr;gap:72px;align-items:start;max-width:1000px;margin:0 auto}
+  .editorial h2{font-size:40px}
+  .editorial .body p{color:var(--ink-soft);font-size:17px;margin-bottom:20px}
+  .editorial .body p:last-child{margin-bottom:0}
+
+  /* ---------- Flat cards (non-interactive) ---------- */
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:34px}
+  .card h4{font-family:'Outfit',sans-serif;font-weight:500;font-size:22px;margin-bottom:10px}
+  .card p{color:var(--muted);font-size:15.5px}
+  .center-cta{text-align:center;margin-top:52px}
+
+  /* ---------- Eligibility ---------- */
+  .check-card h4{display:flex;align-items:center;gap:12px;font-family:'Outfit',sans-serif;font-weight:500;font-size:22px;margin-bottom:24px}
+  .check-card .n{width:34px;height:34px;border:1px solid var(--line);border-radius:8px;display:grid;place-items:center;font-family:'Outfit';font-size:13px;font-weight:700;color:var(--olive)}
+  .check-list{list-style:none;display:grid;gap:16px}
+  .check-list li{display:flex;gap:14px;align-items:flex-start;font-size:15.5px;color:var(--ink-soft);padding-bottom:16px;border-bottom:1px solid var(--line-soft)}
+  .check-list li:last-child{border-bottom:0;padding-bottom:0}
+  .check-list .b{color:var(--gold);font-weight:700;flex:none;font-size:15px;line-height:1.7}
+
+  /* ---------- Steps ---------- */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  .step{padding:34px 30px;border-right:1px solid var(--line)}
+  .step:last-child{border-right:0}
+  .step .num{font-family:'Outfit',sans-serif;font-size:34px;color:var(--gold);font-weight:400;line-height:1;margin-bottom:22px}
+  .step h4{font-family:'Outfit',sans-serif;font-weight:500;font-size:19px;margin-bottom:10px;line-height:1.25}
+  .step p{font-size:14.5px;color:var(--muted)}
+
+  /* ---------- Tables ---------- */
+  .table-card{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  table{width:100%;border-collapse:collapse;font-size:15.5px;background:var(--card)}
+  thead th{background:var(--olive);color:#fff;text-align:left;font-weight:600;padding:17px 26px;font-size:14px;font-family:'Outfit'}
+  tbody td{padding:17px 26px;border-top:1px solid var(--line-soft);color:var(--ink-soft)}
+  tbody td:first-child{font-weight:600;color:var(--ink)}
+
+  /* ---------- Category grid ---------- */
+  .cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line);border-left:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  .cat{padding:32px 28px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--card)}
+  .cat h4{font-family:'Outfit',sans-serif;font-weight:500;font-size:19px;margin-bottom:9px}
+  .cat p{font-size:14px;color:var(--muted)}
+
+  /* ---------- Analyse (ONLY clickable cards) ---------- */
+  .analyse{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .analyse-card{
+    display:block;background:var(--olive-deep);color:#fff;border:1px solid var(--olive-deep);
+    border-radius:var(--radius);padding:46px 40px;cursor:pointer;
+    transition:background .25s ease;
+  }
+  .analyse-card:hover{background:var(--olive)}
+  .analyse-card .idx{font-size:13px;letter-spacing:.05em;color:rgba(255,255,255,.5);margin-bottom:26px}
+  .analyse-card h4{font-size:25px;font-weight:500;margin-bottom:14px;font-family:'Outfit',sans-serif}
+  .analyse-card p{color:rgba(255,255,255,.72);font-size:15.5px;max-width:360px}
+  .analyse-card .explore{margin-top:30px;display:inline-flex;align-items:center;gap:10px;color:var(--gold-soft);font-weight:600;font-size:15px}
+  .analyse-card .explore .arrow{transition:transform .25s ease}
+  .analyse-card:hover .explore .arrow{transform:translateX(6px)}
+
+  /* ---------- Risks ---------- */
+  .risks{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+  .risk{border:1px solid var(--line);border-radius:var(--radius);padding:30px 26px;background:var(--card)}
+  .risk .num{font-family:'Outfit',sans-serif;font-size:15px;color:var(--gold);margin-bottom:18px;font-weight:500;letter-spacing:.05em}
+  .risk h4{font-family:'Outfit',sans-serif;font-weight:500;font-size:19px;margin-bottom:10px}
+  .risk p{font-size:14px;color:var(--muted)}
+
+  /* ---------- FAQ ---------- */
+  .faq-list{max-width:840px;margin:0 auto;border-top:1px solid var(--line)}
+  .faq{border-bottom:1px solid var(--line)}
+  .faq-q{width:100%;background:none;border:0;cursor:pointer;font-family:'Outfit',sans-serif;color:inherit;padding:26px 8px;display:flex;align-items:center;justify-content:space-between;gap:20px;font-weight:600;font-size:18px;text-align:left}
+  .faq-q .chev{color:var(--gold);flex:none;font-size:22px;line-height:1;transition:transform .3s ease}
+  .faq-q[aria-expanded="true"] .chev{transform:rotate(45deg)}
+  .faq-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .34s cubic-bezier(.22,.61,.36,1)}
+  .faq-q[aria-expanded="true"] + .faq-a{grid-template-rows:1fr}
+  .faq-a > .answer{overflow:hidden;min-height:0;padding:0 8px 0;color:var(--muted);font-size:16px;max-width:680px;opacity:0;transition:opacity .3s ease}
+  .faq-q[aria-expanded="true"] + .faq-a > .answer{padding-bottom:28px;opacity:1}
+  @media (prefers-reduced-motion: reduce){.faq-a{transition:none}.faq-a > .answer{transition:none}}
+
+  /* ---------- Final CTA ---------- */
+  .final{background:var(--olive-deep);border-radius:22px;color:#fff;padding:64px 60px;text-align:center}
+  .final h3{font-size:38px;font-weight:500;max-width:560px;margin:0 auto}
+  .final p{color:rgba(255,255,255,.72);margin:18px auto 34px;font-size:17px;max-width:480px}
+
+  /* ---------- Footer ---------- */
+  footer{background:#15150F;color:#cfcfc4;padding:80px 0 36px}
+  .foot-top{display:grid;grid-template-columns:1.7fr 1fr 1fr 1fr;gap:48px}
+  .foot-brand .logo{color:#fff;margin-bottom:20px}
+  .foot-brand p{font-size:14.5px;color:#9a9a8e;max-width:320px;margin-bottom:22px;line-height:1.6}
+  .foot-brand .contact{font-size:14px;color:#b4b4a6;display:grid;gap:8px}
+  .foot-col h5{color:#fff;font-size:14px;font-weight:700;margin-bottom:18px;letter-spacing:.03em}
+  .foot-col a{display:block;font-size:14.5px;color:#9a9a8e;margin-bottom:13px;transition:color .2s}
+  .foot-col a:hover{color:var(--gold-soft)}
+  .foot-bottom{border-top:1px solid rgba(255,255,255,.1);margin-top:56px;padding-top:28px;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;font-size:13px;color:#7c7c70;align-items:center}
+  .socials{display:flex;gap:10px}
+  .socials a{width:36px;height:36px;border-radius:9px;border:1px solid rgba(255,255,255,.16);display:grid;place-items:center;color:#b4b4a6;font-size:13px;transition:border-color .2s,color .2s}
+  .socials a:hover{border-color:var(--gold-soft);color:var(--gold-soft)}
+
+  /* ---------- Responsive ---------- */
+  @media(max-width:980px){
+    .nav-links{display:none}
+    .nav-inner .btn-olive{white-space:nowrap;padding:9px 16px;font-size:14px}
+    .editorial{grid-template-columns:1fr;gap:28px}
+    .steps{grid-template-columns:1fr 1fr}
+    .step:nth-child(1),.step:nth-child(2){border-bottom:1px solid var(--line)}
+    .step:nth-child(2){border-right:0}
+    .cat-grid{grid-template-columns:1fr 1fr}
+    .risks{grid-template-columns:1fr 1fr}
+    .foot-top{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:640px){
+    .nav-inner .btn-olive{display:none}
+    section{padding:72px 0}
+    .wrap{padding:0 22px}
+    .hero .wrap{padding-top:80px;padding-bottom:80px}
+    .sec-head h2,.editorial h2{font-size:31px}
+    .subhead{font-size:23px}
+    .part{margin-top:56px;padding-top:44px}
+    .grid-2,.analyse,.steps,.cat-grid,.risks{grid-template-columns:1fr}
+    .steps .step{border-right:0;border-bottom:1px solid var(--line)}
+    .steps .step:last-child{border-bottom:0}
+    .cat{border-right:0}
+    .final{padding:44px 26px}
+    .final h3{font-size:28px}
+    .foot-top{grid-template-columns:1fr}
+    table{font-size:14px}
+    thead th,tbody td{padding:13px 16px}
+    .table-card{overflow-x:auto}
+  }
+</style>
+<script>document.documentElement.classList.add("js");</script>
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <div class="logo"><span class="mark">S</span> SHRIRAM</div>
+    <nav class="nav-links">
+      <a href="http://127.0.0.1:4178/#">Products</a>
+      <a href="http://127.0.0.1:4178/#">Learning Centre</a>
+      <a href="http://127.0.0.1:4178/#">Calculators</a>
+      <a href="http://127.0.0.1:4178/#">Support</a>
+      <a href="http://127.0.0.1:4178/#">Become a Partner</a>
+    </nav>
+    <div class="nav-right">
+      <a href="http://127.0.0.1:4178/#" class="login">Login</a>
+      <a href="http://127.0.0.1:4178/#" class="btn btn-olive" style="padding:10px 20px">Open A Trading Account</a>
+    </div>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero" style="padding:0">
+  <div class="wrap">
+    <div class="kicker">Equity Investing, Made Simple</div>
+    <h1>Build Long-Term Wealth Through <span class="gold">Equity Investing</span></h1>
+    <p class="lead">Buy and invest in equity stocks in India with live market data, deep research insights, stock analysis tools and expert-backed guidance from Shriram.</p>
+    <div class="cta-row">
+      <a href="http://127.0.0.1:4178/#" class="btn btn-gold">Open Demat Account</a>
+      <a href="http://127.0.0.1:4178/#" class="btn btn-ghost">Talk to RM</a>
+    </div>
+    <div class="hero-feats">
+      <div class="feat"><span class="tick">✓</span> SEBI-registered</div>
+      <div class="feat"><span class="tick">✓</span> Research-led</div>
+      <div class="feat"><span class="tick">✓</span> Full-service</div>
+      <div class="feat"><span class="tick">✓</span> Transparent</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CHAPTER 1 — What equity stocks are (definition + exchanges) ===== -->
+<section id="basics">
+  <div class="wrap">
+    <div class="editorial reveal in">
+      <h2>What Are <span class="gold">Equity Stocks?</span></h2>
+      <div class="body">
+        <p>Equity stocks, also known as shares, represent ownership in a company. When you purchase equity shares, you become a partial owner of that company and gain rights to a portion of its assets and earnings.</p>
+        <p>In India, equity stocks trade on two major exchanges, with all activity regulated by the Securities and Exchange Board of India (SEBI) to protect investor interests.</p>
+      </div>
+    </div>
+    <div class="part">
+      <h3 class="subhead reveal in">Where Equity Stocks Trade</h3>
+      <p class="part-lead reveal in">The market functions through two primary exchanges that enable transparent, electronic trading of shares.</p>
+      <div class="grid-2 reveal in">
+        <div class="card">
+          <h4>National Stock Exchange</h4>
+          <p>India's largest exchange by trading volume, offering electronic trading across equities, derivatives and debt instruments with high liquidity and transparent price discovery.</p>
+        </div>
+        <div class="card">
+          <h4>Bombay Stock Exchange</h4>
+          <p>Asia's oldest stock exchange, home to thousands of listed companies and the benchmark Sensex index, providing a deep and well-regulated marketplace for investors.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CHAPTER 2 — Types of equity stocks (rights + categories) ===== -->
+<section style="background:var(--cream-2)">
+  <div class="wrap">
+    <div class="sec-head reveal in">
+      <h2>Types of <span class="gold">Equity Stocks</span></h2>
+      <p>Stocks are grouped two ways — by the rights they carry, and by the size and style of the company behind them.</p>
+    </div>
+
+    <h3 class="subhead reveal in">By Shareholder Rights</h3>
+    <p class="part-lead reveal in">Companies issue different classes of shares, each carrying its own rights to voting, dividends and profits.</p>
+    <div class="grid-2 reveal in">
+      <div class="card">
+        <h4>Common Equity Shares</h4>
+        <p>The most widely traded shares. Investors receive voting rights and participate in the company's profits through dividends and price appreciation.</p>
+      </div>
+      <div class="card">
+        <h4>Preferred Equity Shares</h4>
+        <p>Preferred shareholders receive preference in dividend payments over common shareholders. These shares generally carry limited or no voting rights.</p>
+      </div>
+    </div>
+
+    <div class="part">
+      <h3 class="subhead reveal in">By Size and Style</h3>
+      <p class="part-lead reveal in">The main categories investors use to classify and compare stocks.</p>
+      <div class="cat-grid reveal in">
+        <div class="cat"><h4>Large Cap</h4><p>Top 100 companies by market capitalisation — stable and lower risk.</p></div>
+        <div class="cat"><h4>Mid Cap</h4><p>Companies ranked 101–250 — a balance of growth potential and stability.</p></div>
+        <div class="cat"><h4>Small Cap</h4><p>Companies ranked beyond 250 — higher growth potential with higher risk.</p></div>
+        <div class="cat"><h4>Growth Stocks</h4><p>Companies expected to grow earnings faster than the broader market.</p></div>
+        <div class="cat"><h4>Dividend Stocks</h4><p>Companies that share regular profits with shareholders as dividends.</p></div>
+        <div class="cat"><h4>Value Stocks</h4><p>Stocks trading below their intrinsic worth — potentially undervalued.</p></div>
+        <div class="cat"><h4>Blue Chip Stocks</h4><p>Well-established, financially sound market leaders with a strong record.</p></div>
+        <div class="cat"><h4>Cyclical Stocks</h4><p>Stocks whose performance moves in line with broader economic cycles.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CHAPTER 3 — Getting started (steps + eligibility/documents) ===== -->
+<section id="start">
+  <div class="wrap">
+    <div class="sec-head reveal in">
+      <h2>How to <span class="gold">Start Investing</span></h2>
+      <p>Four simple steps from sign-up to your first trade — plus exactly what you'll need to qualify.</p>
+    </div>
+    <div class="steps reveal in">
+      <div class="step">
+        <div class="num">1</div>
+        <h4>Open Demat &amp; Trading Account</h4>
+        <p>Open a Demat and trading account online with Shriram in minutes.</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <h4>Complete PAN / KYC / Bank Linking</h4>
+        <p>Submit your PAN, complete KYC with Aadhaar and link your bank account.</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <h4>Search and Analyse Stocks</h4>
+        <p>Use research tools, screeners and expert analysis to identify quality stocks.</p>
+      </div>
+      <div class="step">
+        <div class="num">4</div>
+        <h4>Buy, Hold, Sell &amp; Track</h4>
+        <p>Execute trades, build your portfolio and track holdings to grow your wealth.</p>
+      </div>
+    </div>
+
+    <div class="part">
+      <h3 class="subhead reveal in">Eligibility &amp; Documents</h3>
+      <p class="part-lead reveal in">Everything you need to qualify and complete your account opening.</p>
+      <div class="grid-2 reveal in">
+        <div class="card check-card">
+          <h4><span class="n">01</span> Eligibility Criteria</h4>
+          <ul class="check-list">
+            <li><span class="b">✓</span> Indian resident (NRIs can invest through specific routes)</li>
+            <li><span class="b">✓</span> Valid PAN card</li>
+            <li><span class="b">✓</span> Active bank account in your name</li>
+            <li><span class="b">✓</span> Completed KYC verification</li>
+            <li><span class="b">✓</span> 18+ years of age (minors can invest through guardians)</li>
+          </ul>
+        </div>
+        <div class="card check-card">
+          <h4><span class="n">02</span> Documents Required</h4>
+          <ul class="check-list">
+            <li><span class="b">✓</span> PAN card (mandatory)</li>
+            <li><span class="b">✓</span> Aadhaar card for identity verification</li>
+            <li><span class="b">✓</span> Address proof (Aadhaar, Passport, Utility Bill)</li>
+            <li><span class="b">✓</span> Cancelled cheque or bank statement</li>
+            <li><span class="b">✓</span> Passport-size photograph</li>
+            <li><span class="b">✓</span> Valid mobile number and email ID</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="center-cta reveal in"><a href="http://127.0.0.1:4178/#" class="btn btn-line">Open Demat Account</a></div>
+  </div>
+</section>
+
+<!-- ===== CHAPTER 4 — Costs & taxes (brokerage + tax, both visible) ===== -->
+<section id="costs" style="background:var(--cream-2)">
+  <div class="wrap">
+    <div class="sec-head reveal in">
+      <h2>Costs &amp; <span class="gold">Taxes</span></h2>
+      <p>What you pay to trade, and how your gains are taxed — with no hidden costs.</p>
+    </div>
+
+    <h3 class="subhead reveal in">Brokerage &amp; Charges</h3>
+    <p class="part-lead reveal in">A clear breakdown of the charges that apply across delivery, intraday and F&amp;O segments.</p>
+    <div class="table-card reveal in">
+      <table>
+        <thead>
+          <tr><th>Charge Type</th><th>Delivery</th><th>Intraday</th><th>F&amp;O</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Brokerage</td><td>0.03%</td><td>0.03%</td><td>0.03%</td></tr>
+          <tr><td>STT</td><td>0.1%</td><td>0.025%</td><td>0.02%</td></tr>
+          <tr><td>GST</td><td>18% on brokerage</td><td>18% on brokerage</td><td>18% on brokerage</td></tr>
+          <tr><td>DP Charges</td><td>₹15 per stock</td><td>N/A</td><td>N/A</td></tr>
+          <tr><td>Exchange Charges</td><td>0.00325%</td><td>0.00325%</td><td>0.002%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="part">
+      <h3 class="subhead reveal in">Tax on Equity Stocks — LTCG &amp; STCG</h3>
+      <p class="part-lead reveal in">How short-term and long-term capital gains are treated for equity investors.</p>
+      <div class="table-card reveal in">
+        <table>
+          <thead>
+            <tr><th>Feature</th><th>Short-Term (STCG)</th><th>Long-Term (LTCG)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Holding Period</td><td>Up to 12 months</td><td>More than 12 months</td></tr>
+            <tr><td>Tax Rate</td><td>20% flat</td><td>12.5%</td></tr>
+            <tr><td>Tax-Free Limit</td><td>Nil (taxed from ₹1)</td><td>Up to ₹1.25 lakh per year</td></tr>
+            <tr><td>Indexation Benefit</td><td>Not Applicable</td><td>Not Applicable</td></tr>
+            <tr><td>Applicable Section</td><td>Section 111A</td><td>Section 112A</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CHAPTER 5 — Analyse and decide (research + strategies + vs MF + risks) ===== -->
+<section id="analyse">
+  <div class="wrap">
+    <div class="sec-head reveal in">
+      <h2>Analyse and <span class="gold">Decide</span></h2>
+      <p>How to research a stock, choose a strategy, compare your options and weigh the risks.</p>
+    </div>
+
+    <h3 class="subhead reveal in">Research Approaches</h3>
+    <p class="part-lead reveal in">Two complementary approaches, backed by data-driven insights and research-led ideas.</p>
+    <div class="analyse reveal in">
+      <a href="http://127.0.0.1:4178/#" class="analyse-card">
+        <div class="idx">Approach 01</div>
+        <h4>Fundamental Research</h4>
+        <p>In-depth company analysis, financial modeling and valuation reports to assess a stock's true intrinsic worth.</p>
+        <span class="explore">Explore <span class="arrow">→</span></span>
+      </a>
+      <a href="http://127.0.0.1:4178/#" class="analyse-card">
+        <div class="idx">Approach 02</div>
+        <h4>Technical Research</h4>
+        <p>Chart patterns, price action and technical indicators to time entries and exits with greater precision.</p>
+        <span class="explore">Explore <span class="arrow">→</span></span>
+      </a>
+    </div>
+
+    <div class="part">
+      <h3 class="subhead reveal">Top Trading Strategies</h3>
+      <p class="part-lead reveal">Match your time, capital and risk appetite to the right approach.</p>
+      <div class="table-card reveal">
+        <table>
+          <thead>
+            <tr><th>Parameter</th><th>Intraday Trading</th><th>Swing Trading</th><th>Long-Term Investing</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Holding Period</td><td>Same day (square-off before close)</td><td>2 days to a few weeks</td><td>1+ years (often 5–10+ years)</td></tr>
+            <tr><td>Time Commitment</td><td>High — active monitoring</td><td>Moderate — daily / weekly check</td><td>Low — periodic review</td></tr>
+            <tr><td>Capital Required</td><td>Lower entry, margin common</td><td>Moderate</td><td>Can start small via SIP (₹500+)</td></tr>
+            <tr><td>Risk Level</td><td>Very High</td><td>High</td><td>Moderate to Low</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="part">
+      <h3 class="subhead reveal">Equity Stocks vs Mutual Funds</h3>
+      <p class="part-lead reveal">Compare direct equity investing with mutual funds across the factors that matter most.</p>
+      <div class="table-card reveal">
+        <table>
+          <thead>
+            <tr><th>Feature</th><th>Equity Stocks</th><th>Mutual Funds</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Control</td><td>Direct ownership and control</td><td>Fund manager decides</td></tr>
+            <tr><td>Risk</td><td>Company-specific risk</td><td>Diversified risk</td></tr>
+            <tr><td>Return Potential</td><td>Potentially higher (unlimited upside)</td><td>Market-linked returns</td></tr>
+            <tr><td>Research Involvement</td><td>Active research needed</td><td>Professional management</td></tr>
+            <tr><td>Suitable For</td><td>Knowledgeable investors</td><td>All investor types</td></tr>
+            <tr><td>Cost</td><td>Brokerage per trade</td><td>Expense ratio annually</td></tr>
+            <tr><td>Liquidity</td><td>Real-time during market hours</td><td>End-of-day NAV</td></tr>
+            <tr><td>Management</td><td>Self-managed portfolio</td><td>Professionally managed</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="part">
+      <h3 class="subhead reveal">Risks to Weigh</h3>
+      <p class="part-lead reveal">Understand what can move against you before you commit capital.</p>
+      <div class="risks reveal">
+        <div class="risk">
+          <div class="num">01</div>
+          <h4>Market Risk</h4>
+          <p>Broad market movements can affect all stocks due to economic events, policy changes or global sentiment.</p>
+        </div>
+        <div class="risk">
+          <div class="num">02</div>
+          <h4>Volatility</h4>
+          <p>Prices can fluctuate significantly within short periods, testing investor discipline and patience.</p>
+        </div>
+        <div class="risk">
+          <div class="num">03</div>
+          <h4>Stock-Specific Risk</h4>
+          <p>Company-specific factors such as poor earnings or governance issues can impact a single stock sharply.</p>
+        </div>
+        <div class="risk">
+          <div class="num">04</div>
+          <h4>Behavioural Risk</h4>
+          <p>Emotional decisions driven by fear or greed can lead to poor timing and avoidable losses.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section id="faq" style="background:var(--cream-2)">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Frequently Asked <span class="gold">Questions</span></h2>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq">
+        <button class="faq-q" type="button" aria-expanded="true">What is the difference between large-cap, mid-cap and small-cap stocks? <span class="chev">+</span></button>
+        <div class="faq-a"><div class="answer">Large-cap stocks are the top 100 companies by market capitalisation and tend to be stable. Mid-caps (ranked 101–250) balance growth and stability, while small-caps (beyond 250) offer higher growth potential at higher risk.</div></div>
+      </div>
+      <div class="faq">
+        <button class="faq-q" type="button" aria-expanded="false">How is stock market profit taxed in India in 2026? <span class="chev">+</span></button>
+        <div class="faq-a"><div class="answer">Short-term capital gains (held up to 12 months) are taxed at 20% flat, while long-term gains (held over 12 months) are taxed at 12.5% beyond the ₹1.25 lakh annual exemption.</div></div>
+      </div>
+      <div class="faq">
+        <button class="faq-q" type="button" aria-expanded="false">What is a P/E ratio and why does it matter for investors? <span class="chev">+</span></button>
+        <div class="faq-a"><div class="answer">The price-to-earnings (P/E) ratio compares a stock's price to its earnings per share. It helps investors gauge whether a stock is over- or under-valued relative to its peers and historical levels.</div></div>
+      </div>
+      <div class="faq">
+        <button class="faq-q" type="button" aria-expanded="false">Should I invest a lump sum or use SIP for equity investments? <span class="chev">+</span></button>
+        <div class="faq-a"><div class="answer">A SIP spreads investments over time and averages out market volatility, making it ideal for most investors. Lump-sum investing can work when markets are favourable and you have a longer horizon and higher risk appetite.</div></div>
+      </div>
+      <div class="faq">
+        <button class="faq-q" type="button" aria-expanded="false">How do I evaluate if a stock is fundamentally strong? <span class="chev">+</span></button>
+        <div class="faq-a"><div class="answer">Assess consistent revenue and profit growth, low debt, healthy return ratios (ROE / ROCE), strong cash flows and competent management. Combine these fundamentals with reasonable valuations before investing.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FINAL CTA ===== -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="final reveal">
+      <h3>Open Your Demat Account in Minutes</h3>
+      <p>Start investing in stocks, mutual funds and more — with zero paperwork.</p>
+      <a href="http://127.0.0.1:4178/#" class="btn btn-gold">Open Demat Account</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <div class="logo"><span class="mark">S</span> Shriram Financial Services</div>
+        <p>A research-led, advisory-driven trading firm dedicated to helping clients achieve their financial goals through personalised advice.</p>
+        <div class="contact">
+          <span>1800-XXX-XXXX</span>
+          <span>hello@shriramsec.in</span>
+          <span>Shriram House, No. 4, Burkit Road, T-Nagar, Chennai – 600 017</span>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h5>Company</h5>
+        <a href="http://127.0.0.1:4178/#">About Us</a>
+        <a href="http://127.0.0.1:4178/#">Media</a>
+        <a href="http://127.0.0.1:4178/#">Locate Us</a>
+        <a href="http://127.0.0.1:4178/#">Advertise With Us</a>
+      </div>
+      <div class="foot-col">
+        <h5>Resources</h5>
+        <a href="http://127.0.0.1:4178/#">Pricing</a>
+        <a href="http://127.0.0.1:4178/#">Research Reports</a>
+        <a href="http://127.0.0.1:4178/#">Market Insights</a>
+        <a href="http://127.0.0.1:4178/#">Learning Center</a>
+        <a href="http://127.0.0.1:4178/#">Calculator Tools</a>
+      </div>
+      <div class="foot-col">
+        <h5>Legal</h5>
+        <a href="http://127.0.0.1:4178/#">Privacy Policy</a>
+        <a href="http://127.0.0.1:4178/#">Terms of Service</a>
+        <a href="http://127.0.0.1:4178/#">Disclaimer</a>
+        <a href="http://127.0.0.1:4178/#">Registratory</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Shriram Financial Services. All rights reserved. · SEBI Registered Investment Advisor | ARN-XXXXX</span>
+      <div class="socials">
+        <a href="http://127.0.0.1:4178/#">f</a><a href="http://127.0.0.1:4178/#">in</a><a href="http://127.0.0.1:4178/#">𝕏</a><a href="http://127.0.0.1:4178/#">◎</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  if(!('IntersectionObserver' in window)){return;}
+  var els=document.querySelectorAll('.reveal');
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}
+    });
+  },{threshold:0.12,rootMargin:'0px 0px -8% 0px'});
+  els.forEach(function(el){io.observe(el);});
+})();
+</script>
+<script>
+(function(){
+  var qs = document.querySelectorAll('.faq-q');
+  qs.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      qs.forEach(function(o){ if(o!==btn){ o.setAttribute('aria-expanded','false'); } });
+      btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+    });
+  });
+})();
+</script>
+
+
+<veepn-lock-screen><template shadowrootmode="open"><style>html{box-sizing:border-box;text-size-adjust:100%;word-break:normal;tab-size:4}*,:before,:after{background-repeat:no-repeat;box-sizing:border-box}:before,:after{text-decoration:inherit;vertical-align:inherit}*{padding:0;margin:0}hr{overflow:visible;height:0;color:inherit;border:0;border-top:1px solid}details,main{display:block}summary{display:list-item}small{font-size:80%}[hidden]{display:none!important}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}a{background-color:transparent}a:active,a:hover{outline-width:0}code,kbd,pre,samp{font-family:monospace}pre{font-size:1em}b,strong{font-weight:bolder}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{border-color:inherit;text-indent:0}iframe{border-style:none}input{border-radius:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-decoration{appearance:none}textarea{overflow:auto;resize:vertical}button,input,optgroup,select,textarea{font:inherit;color:inherit}optgroup{font-weight:700}button{overflow:visible}button,select{text-transform:none}button,[type=button],[type=reset],[type=submit],[role=button]{cursor:pointer}button::-moz-focus-inner,[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner{border-style:none;padding:0}button,html [type=button],[type=reset],[type=submit]{appearance:auto}button,input,select,textarea{background-color:transparent;border-style:none}button:-moz-focusring,[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner{outline:1px dotted ButtonText}select{appearance:none}a:focus,button:focus,input:focus,select:focus,textarea:focus{outline-width:0}select::-ms-expand{display:none}select::-ms-value{color:currentcolor}legend{border:0;color:inherit;display:table;white-space:normal;max-width:100%}::-webkit-file-upload-button{appearance:auto;color:inherit;font:inherit}[disabled]{cursor:default}img{border-style:none}progress{vertical-align:baseline}[aria-busy=true]{cursor:progress}[aria-controls]{cursor:pointer}[aria-disabled=true]{cursor:default}ul,ol{list-style-type:none}figure{margin:0}@keyframes slide-in{0%{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}.gradient-blue{background:radial-gradient(106.41% 128.47% at 50.15% 128.47%,#23abff,#3066ff)}.gradient-green{background:radial-gradient(92.26% 118.88% at 50.15% .13%,#00c3c3,#00aab3)}.gradient-purple{background:radial-gradient(165.12% 115.56% at 50.15% .13%,#a15aff,#00a0eb)}.bg-blue{background-color:#f2f5ff}.bg-purple{background-color:#f7f0ff}.bg-green{background-color:#ebffed}.lock-screen{font-family:FigtreeVF,sans-serif;letter-spacing:normal;position:fixed;z-index:2147483638;right:24px;bottom:24px;width:327px;border-radius:24px;overflow:hidden;box-shadow:0 24px 32px #00000014;animation:slide-in .3s ease-in-out forwards}.lock-screen__content{position:relative;padding:24px 24px 64px}.lock-screen__close{position:absolute;top:16px;right:16px;width:24px;height:24px;display:flex;align-items:center;justify-content:center;opacity:.5}.lock-screen__label{height:26px;width:fit-content;border-radius:50px;background-color:#fff3;padding-inline:16px;display:flex;align-items:center;justify-content:center;gap:8px;color:#fff;font-size:12px;line-height:18px;margin:-8px auto 16px}.lock-screen__title{color:#fff;text-align:center;font-size:20px;line-height:28px;font-weight:600;margin-bottom:8px}.lock-screen__description{color:#f5f6f7;text-align:center;font-size:14px;line-height:20px}.lock-screen__description b{font-weight:600}.lock-screen__card{position:relative;z-index:1;margin-top:-44px;background-color:#fff;border-radius:24px;padding:32px 20px 20px}.lock-screen__inner{margin-bottom:24px}.lock-screen__submit{display:flex;align-items:center;justify-content:center;gap:10px;font-weight:700;font-size:16px;height:40px;width:100%;border-radius:12px;padding-inline:16px;background-color:#f70;color:#fff;margin-bottom:16px}.lock-screen__skip{display:flex;align-items:center;justify-content:center;font-size:14px;line-height:20px;color:#82829c;margin-inline:auto}.price-card{border:1px solid #f2f2fc;background:linear-gradient(254.14deg,#fafbff .04%,#f5f8ff 100.04%);border-radius:24px;padding:24px 28px}.price-card__label{color:#4a5764;text-align:center;font-size:14px;line-height:20px;text-transform:uppercase;margin-bottom:16px}.price-card__price{display:flex;justify-content:center;align-items:flex-start;column-gap:2px;margin-bottom:12px}.price-card__currency{color:#515478;font-size:18px;line-height:28px}.price-card__number{color:#14142a;text-align:center;font-size:64px;line-height:54px}.price-card__wrap{display:flex;flex-direction:column}.price-card__decimal{color:#515478;font-size:18px;line-height:28px;font-weight:600}.price-card__period{color:#515478;font-size:14px;line-height:20px;margin-top:-6px}.price-card__discount{position:relative;display:flex;align-items:center;justify-content:center;margin-bottom:12px}.price-card__discount-divider{position:absolute;z-index:0;top:50%;left:0;width:100%;height:1px;background-color:#dbe2f9;transform:translateY(-50%)}.price-card__discount-icon{position:absolute;z-index:1;top:50%;left:50%;transform:translate(-50%,-50%)}.price-card__discount-text{position:relative;z-index:2;color:#fff;font-size:12px;font-weight:600;line-height:18px}.price-card__features{display:flex;align-items:center;justify-content:center;column-gap:16px}.price-card__feature{color:#222e3a;font-size:14px;line-height:20px;display:flex;align-items:center;gap:6px}.price-card__feature:before{content:"";display:block;width:4px;height:4px;background-color:#20df9e;border-radius:50%;flex-shrink:0}.features-list{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.features-list__item{display:flex;flex-direction:column;align-items:center;gap:6px}.features-list__icon{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center}.features-list__text{color:#293a53;text-align:center;font-size:16px;line-height:24px;letter-spacing:-.1px}</style></template><style>@font-face{font-family:FigtreeVF;src:url(chrome-extension://majdfhpaihoncoakbjgbdhglocklcgno/fonts/FigtreeVF.woff2) format("woff2 supports variations"),url(chrome-extension://majdfhpaihoncoakbjgbdhglocklcgno/fonts/FigtreeVF.woff2) format("woff2-variations");font-weight:100 1000;font-display:swap}</style></veepn-lock-screen></body></html>

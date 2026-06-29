@@ -1,0 +1,21 @@
+{
+  "enabled": true,
+  "name": "Update Docs on Source Change",
+  "description": "Watches all source files in the Astro/TypeScript project. When any source file is edited, prompts the agent to review and update the README or any docs to reflect the changes.",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "**/*.ts",
+      "**/*.astro",
+      "**/*.mjs",
+      "**/*.css",
+      "**/*.json",
+      "**/*.md"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "A source file was just edited in this Astro/TypeScript project. Review the change and determine if the documentation needs to be updated. If relevant, update the README.md at shriram-financial/README.md. If there is a /docs folder, update the relevant file there too. Focus on changes to components, pages, configuration, or project structure that a developer reading the docs would need to know about."
+  }
+}

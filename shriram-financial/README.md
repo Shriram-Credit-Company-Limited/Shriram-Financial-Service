@@ -81,8 +81,12 @@ For automated deploys, wire `deploy.sh` into a CI pipeline (e.g. GitHub Actions 
 - **Regulatory & Support pages:** the regulatory disclosures and contact details are
   placeholders. These must be drafted and approved by a qualified compliance professional
   (SEBI registrations, risk disclosures, grievance redressal, etc.) before going live.
-- **Forms** (Open Demat Account, Support contact): a static site can't process form
-  submissions on its own. Connect a form service (Formspree, Web3Forms) or your own
-  backend/onboarding system.
+- **Forms** (Open Demat Account, Become a Partner, Support contact): a static site can't
+  process form submissions on its own. Connect a form service (Formspree, Web3Forms) or
+  your own backend/onboarding system. The Partner Registration form (`about/become-a-partner`)
+  is a single-page form collecting name, mobile, email, city, and partner type. On submit it
+  validates all fields client-side and shows a success state inline — there is currently no
+  backend call. Wire the submit handler in the `<script>` block to your CRM or lead-capture
+  endpoint (e.g. POST to `/api/partner-lead`) before going live.
 - **Antara Web Login:** link out to your secure login portal rather than collecting
   credentials on the static site.
