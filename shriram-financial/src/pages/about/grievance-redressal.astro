@@ -27,14 +27,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 <!-- HOW TO RAISE A GRIEVANCE -->
 <section class="section stack" id="sec-policy" style="background:var(--sec-light);gap:56px">
-  <div class="stack reveal" style="gap:24px">
+  <div class="stack gr-reveal" style="gap:24px">
     <h2 class="sub-title">How to Raise a Grievance</h2>
     <p class="sub-lead">Customers who are not satisfied or have a grievance about the products or services provided by the Company can address their complaint to the contacts below. We're here Monday to Saturday, 9 AM – 6 PM.</p>
     <p class="policy-p">The grievance redressal mechanism within the organisation will be explained to every Client so that any dispute can be resolved fairly and without delay. Once a complaint is received, it is acknowledged, logged and assigned to the team best placed to act on it, and the Client is kept informed of the progress until the matter is closed. The mechanism is designed so that all disputes arising out of the decisions of our functionaries are heard and disposed of at least at the next higher level — no concern is left to be settled solely by the person whose decision is being questioned.</p>
     <p class="policy-p">If the applicant or Client is not satisfied with the response received, or does not hear from the Company within the committed timeline, an escalated complaint-handling mechanism is available. The Client may take the issue to the Compliance Officer of the Company at the address below, and, should it remain unresolved, escalate it further to the Head of Customer Care and then to the CEO, in the order set out in the escalation contacts. As a final recourse, a complaint may also be lodged with the relevant regulator through the SEBI SCORES portal.</p>
   </div>
 
-  <div class="policy-card reveal">
+  <div class="policy-card gr-reveal">
     <span class="policy-ico" aria-hidden="true">
       <svg viewBox="0 0 24 24" fill="none"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M14 3v5h5" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 12v5m0 0 2.5-2.5M12 17l-2.5-2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </span>
@@ -48,17 +48,17 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 <!-- ESCALATIONS -->
 <section class="section stack" id="sec-escalations" style="background:var(--sec-tint);gap:56px">
-  <div class="stack reveal" style="gap:16px">
+  <div class="stack gr-reveal" style="gap:16px">
     <h2 class="sub-title">For Escalations, Contact the Right Team</h2>
     <p class="sub-lead">Complaints are heard and resolved at the next higher level. If you're not satisfied with the response, escalate to the next team in order.</p>
   </div>
 
-  <div class="hours-bar reveal">
+  <div class="hours-bar gr-reveal">
     <svg viewBox="0 0 24 24" fill="none"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.6"/></svg>
     All teams: 3rd Floor, Rukmini Towers, #3/1, Sheshadripuram, Bengaluru – 560 020 · Monday to Friday, 9:30 AM – 5:30 PM.
   </div>
 
-  <div class="esc-grid reveal">
+  <div class="esc-grid gr-reveal">
     <article class="esc-card">
       <span class="esc-num" aria-hidden="true">01</span>
       <h3 class="esc-role">Customer Care</h3>
@@ -130,7 +130,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 <!-- FINAL CTA -->
 <section class="cta-sec" id="sec-final-cta" style="background:var(--sec-light)">
-  <div class="cta-box reveal">
+  <div class="cta-box gr-reveal">
     <div class="ct-tt">
       <h3>Still Not Resolved?</h3>
       <p class="ct-sub">If your complaint remains unresolved after escalation, reach our support team directly or escalate to the SEBI SCORES portal.</p>
@@ -176,10 +176,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   .sub-lead { font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.5; }
 
   /* reveal */
-  .reveal { opacity: 0; transform: translateY(16px);
+  .gr-reveal { opacity: 0; transform: translateY(16px);
             transition: opacity .6s cubic-bezier(.4,0,.2,1), transform .6s cubic-bezier(.4,0,.2,1); }
-  .reveal.in { opacity: 1; transform: none; }
-  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+  .gr-reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .gr-reveal { opacity: 1; transform: none; transition: none; } }
 
   /* hero */
   .hero {
@@ -290,7 +290,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 </style>
 
 <script>
-  const reveals = document.querySelectorAll('.reveal');
+  const reveals = document.querySelectorAll('.gr-reveal');
   if ('IntersectionObserver' in window) {
     const ro = new IntersectionObserver((entries, obs) => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
