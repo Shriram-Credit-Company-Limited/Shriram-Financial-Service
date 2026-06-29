@@ -13,12 +13,6 @@ export default defineConfig({
   // Astro copies this folder to dist/ as-is, preserving the same URL paths.
   publicDir: '../assets',
   integrations: [sitemap()],
-  // Map clean/legacy grievance URLs to the canonical About page.
-  redirects: {
-    '/grievance': '/about/grievance-redressal/',
-    '/grievance-redressal': '/about/grievance-redressal/',
-    '/grievance-redressal.html': '/about/grievance-redressal/',
-  },
   vite: {
     plugins: [tailwindcss()],
   },

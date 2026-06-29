@@ -1,0 +1,16 @@
+---
+// Static redirect alias → canonical grievance page.
+const target = '/about/grievance-redressal/';
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <link rel="canonical" href={target} />
+    <meta name="robots" content="noindex" />
+    <title>Redirecting to Grievance Redressal…</title>
+    <script is:inline>location.replace('/about/grievance-redressal/')</script>
+  </head>
+  <body>Redirecting to <a href={target}>Grievance Redressal</a>…</body>
+</html>
