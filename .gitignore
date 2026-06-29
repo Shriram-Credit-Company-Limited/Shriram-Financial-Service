@@ -25,3 +25,7 @@
 
 # Misc
 screenshots/
+
+# macOS archive metadata junk
+__MACOSX/
+.DS_Store
