@@ -61,7 +61,7 @@ const faqs = [
       </div>
 
       <div class="fields">
-        <div class="field">
+        <div class="calc-field">
           <div class="field-top">
             <label for="amt">SIP amount</label>
             <div class="field-val"><span class="pfx">₹</span><input id="amt" type="text" inputmode="numeric" value="10,000" aria-label="SIP amount in rupees per instalment" /></div>
@@ -70,7 +70,7 @@ const faqs = [
           <div class="slider-scale"><span>₹500</span><span>₹1,00,000</span></div>
         </div>
 
-        <div class="field">
+        <div class="calc-field">
           <div class="field-top">
             <label for="dur">Investment duration</label>
             <div class="field-val"><input id="dur" type="text" inputmode="numeric" value="10" aria-label="Investment duration in years" /><span class="sfx">Yr</span></div>
@@ -79,7 +79,7 @@ const faqs = [
           <div class="slider-scale"><span>1 Yr</span><span>40 Yr</span></div>
         </div>
 
-        <div class="field">
+        <div class="calc-field">
           <div class="field-top">
             <label for="rate">Expected rate of return</label>
             <div class="field-val"><input id="rate" type="text" inputmode="decimal" value="10" aria-label="Expected annual rate of return in percent" /><span class="sfx">%</span></div>
@@ -88,7 +88,7 @@ const faqs = [
           <div class="slider-scale"><span>1%</span><span>30%</span></div>
         </div>
 
-        <div class="field">
+        <div class="calc-field">
           <div class="field-top">
             <label for="step">Annual step-up</label>
             <div class="field-val"><input id="step" type="text" inputmode="decimal" value="0" aria-label="Annual step-up in percent" /><span class="sfx">%</span></div>
@@ -304,7 +304,7 @@ const faqs = [
 
   /* slider fields */
   .fields { display: flex; flex-direction: column; gap: 32px; }
-  .field { display: flex; flex-direction: column; gap: 12px; }
+  .calc-field { display: flex; flex-direction: column; gap: 12px; }
   .field-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
   .field-top label { font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.5; }
   .field-val { display: flex; align-items: center; gap: 4px; border: 1px solid var(--card-border);

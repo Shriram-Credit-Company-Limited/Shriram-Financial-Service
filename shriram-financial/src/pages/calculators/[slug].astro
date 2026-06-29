@@ -273,7 +273,7 @@ const fields = (inputs as any[]).map((inp) => {
     <div class="card calc-panel">
       <div class="fields">
         {fields.map((inp: any) => (
-          <div class="field">
+          <div class="calc-field">
             <div class="field-top">
               <label for={inp.id}>{inp.label}</label>
               <div class="field-val">
@@ -484,7 +484,7 @@ const fields = (inputs as any[]).map((inp) => {
 
   /* slider fields */
   .fields { display: flex; flex-direction: column; gap: 32px; }
-  .field { display: flex; flex-direction: column; gap: 12px; }
+  .calc-field { display: flex; flex-direction: column; gap: 12px; }
   .field-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
   .field-top label { font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.5; }
   .field-val { display: flex; align-items: center; gap: 4px; border: 1px solid var(--card-border);
