@@ -1,367 +1,565 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-const markets = [
-  { region: 'United States', indices: 'S&P 500, Nasdaq 100, Dow Jones', desc: "The world's largest and most liquid market. Access Apple, Microsoft, Amazon, NVIDIA, and thousands of global category leaders with deep research coverage.", icon: '🇺🇸' },
-  { region: 'Europe',        indices: 'FTSE 100, DAX, CAC 40, STOXX 50', desc: 'Established multinationals in luxury, automotive, pharma, and banking. Built-in currency diversification across EUR, GBP, and CHF.', icon: '🇪🇺' },
-  { region: 'Asia Pacific',  indices: 'Hang Seng, Nikkei 225, MSCI Asia', desc: 'Chinese tech, Japanese precision manufacturing, and South Korean semiconductors — high-growth markets with distinct economic cycles from India.', icon: '🌏' },
+const routes = [
+  { n: '01', title: 'India-Listed International ETFs', tag: 'No LRS Required — Simplest', desc: 'Buy Nasdaq 100 or S&P 500 index ETFs listed on NSE/BSE. Same process as any domestic mutual fund — no FEMA forms, no currency conversion. Start via SIP from ₹500.' },
+  { n: '02', title: 'International Fund-of-Funds', tag: 'No LRS Required', desc: 'Indian mutual funds that invest in overseas ETFs via a feeder structure. Fully SEBI-regulated, professionally managed, and accessible with as little as ₹500 via SIP.' },
+  { n: '03', title: 'Direct US Stocks via LRS', tag: 'LRS Required — Up to USD 250K/yr', desc: 'Buy fractional US shares (Apple, NVIDIA, Amazon) through an LRS-linked foreign brokerage. Maximum flexibility for stock-pickers. TCS applies above ₹7 lakh remittance.' },
+  { n: '04', title: 'NRI Investment Routes', tag: 'For NRI Investors', desc: 'NRIs invest through NRE/NRO accounts and FCNR deposits without LRS constraints. Separate FEMA permissions apply. NRE route is fully repatriable.' },
 ];
 
-const howItWorks = [
-  { label: 'LRS (Liberalised Remittance Scheme)',  desc: "Remit up to USD 250,000 per financial year for overseas investment under FEMA's LRS. Funds go to your foreign brokerage account or via India-based fund-of-funds." },
-  { label: 'India-Listed Global Funds',             desc: 'The simplest route — buy Nasdaq 100 ETFs or S&P 500 index funds listed on Indian exchanges. No LRS needed; invest like any domestic mutual fund.' },
-  { label: 'Direct Foreign Stock Platform',         desc: 'Buy fractional US shares (Apple, NVIDIA, Berkshire) directly via LRS-linked platforms. More flexibility for individual stock-pickers.' },
+const vsRows = [
+  { factor: '10-Year CAGR',           global: '~12–14% USD (S&P 500)',                   india: '~11–13% INR (Nifty 50)' },
+  { factor: 'Currency Effect',         global: 'USD appreciates ~4%/yr vs INR',           india: 'INR depreciates vs major currencies' },
+  { factor: 'Volatility',             global: 'Lower — deepest global market',            india: 'Higher — emerging market premium' },
+  { factor: 'Key Sectors',            global: 'AI, Big Tech, Healthcare, Biotech',        india: 'Financials, IT, FMCG, Energy' },
+  { factor: 'Liquidity',              global: 'Extremely high — $30T+ market cap',        india: 'High — smaller universe' },
+  { factor: 'India Correlation',      global: 'Low-to-moderate (diversification benefit)', india: 'Full — no within-India diversification' },
+  { factor: 'Recommended Allocation', global: '10–30% of equity portfolio',               india: '70–90% of equity portfolio' },
 ];
 
-const steps = [
-  { n: '01', title: 'Choose Your Route',                     desc: 'Decide between India-listed international ETFs/funds (no LRS, simplest) or a direct foreign stock account (LRS required, more flexibility).' },
-  { n: '02', title: 'Complete KYC & Currency Exchange',      desc: 'For LRS-based investing, submit Form A2 to your bank and complete FEMA compliance. For India-listed funds, standard KYC through Shriram is sufficient.' },
-  { n: '03', title: 'Select Markets & Instruments',          desc: 'Choose geographic markets, index funds, ETFs, or specific stocks. Our research desk provides guidance on US and international market opportunities.' },
-  { n: '04', title: 'Monitor Global Portfolio',              desc: 'Track your international positions alongside domestic holdings on the Antara app. Set FX rate alerts and portfolio rebalancing reminders.' },
+const sectorRows = [
+  { sector: 'Technology',  top: 'Apple, NVIDIA, Microsoft, Meta',      why: 'No equivalent scale available in India' },
+  { sector: 'AI & Semis',  top: 'NVIDIA, AMD, Qualcomm, ASML',         why: 'India has no semiconductor manufacturers' },
+  { sector: 'Healthcare',  top: 'UnitedHealth, Pfizer, Eli Lilly',     why: 'Global pharma R&D depth unmatched' },
+  { sector: 'Consumer',    top: "Amazon, Costco, McDonald's",          why: 'Global consumer brand dominance' },
+  { sector: 'Financials',  top: 'JPMorgan, Berkshire Hathaway, Visa',  why: 'USD-denominated financial depth' },
+];
+
+const indicesRows = [
+  { index: 'S&P 500',      cos: '500 largest US companies',      focus: 'Broad market — diversified',       best: 'Beginners, long-term investors' },
+  { index: 'Nasdaq 100',   cos: 'Top 100 tech/growth firms',     focus: 'Technology & innovation',          best: 'Growth-oriented investors' },
+  { index: 'Dow Jones',    cos: '30 blue-chip giants',            focus: 'Established mega-cap stability',   best: 'Conservative US exposure' },
+  { index: 'Russell 2000', cos: '2,000 US small-cap stocks',     focus: 'US small-cap growth',              best: 'Broad small-cap diversification' },
+];
+
+const fundRows = [
+  { type: 'India-Listed S&P 500 ETF',      tracks: 'Top 500 US companies',            lrs: 'No',  tax: 'As per slab (debt fund rules)' },
+  { type: 'India-Listed Nasdaq 100 ETF',   tracks: 'Top 100 US tech/growth stocks',   lrs: 'No',  tax: 'As per slab' },
+  { type: 'International Fund-of-Funds',   tracks: 'Global ETFs via feeder structure', lrs: 'No',  tax: 'As per slab' },
+  { type: 'Direct US Stock / ETF via LRS', tracks: 'Individual stocks or ETFs',        lrs: 'Yes', tax: 'STCG/LTCG + US withholding tax' },
+  { type: 'Regional Fund (Europe / Asia)', tracks: 'European or Asian markets',        lrs: 'No',  tax: 'As per slab' },
+];
+
+const featuredFunds = [
+  { name: 'Motilal Oswal Nasdaq 100 ETF', tag: 'NSE: MOFN100',    desc: 'Tracks the Nasdaq 100 — top 100 US tech and growth companies. No LRS required; invest via SIP from ₹500.' },
+  { name: 'Mirae Asset NYSE FANG+ ETF',   tag: 'NSE: MAN50ETF',   desc: 'Concentrated exposure to the top 10 global tech leaders — Apple, Amazon, Netflix, Google, and more.' },
+  { name: 'ICICI Pru US Bluechip Fund',   tag: 'Fund-of-Funds',   desc: 'Invests in US blue-chip stocks via actively managed US equity funds. SEBI-regulated, no LRS needed.' },
+  { name: 'Edelweiss US Tech Fund',        tag: 'Fund-of-Funds',  desc: 'Focused exposure to US technology via a feeder fund structure. No LRS required, accessible via SIP.' },
+];
+
+const taxRows = [
+  { head: 'US Dividend Withholding Tax',   lrs: '25% (15% with DTAA benefit — file W-8BEN)', etf: 'Not applicable — fund absorbs it' },
+  { head: 'STCG (held under 2 years)',     lrs: 'As per income tax slab',                    etf: 'As per income tax slab (under 2 yrs)' },
+  { head: 'LTCG (held 2+ years)',          lrs: '12.5% flat — no indexation',                etf: 'As per slab — no indexation (Apr 2023)' },
+  { head: 'DTAA Benefit',                  lrs: 'India-US DTAA allows credit for US tax',    etf: 'Managed at fund level — transparent' },
+  { head: 'TCS on LRS Remittance',        lrs: '20% TCS above ₹7 lakh/yr (refundable ITR)', etf: 'No TCS (domestic investment)' },
+  { head: 'ITR Disclosure (Schedule FA)', lrs: 'Must disclose all foreign assets',            etf: 'No disclosure needed by investor' },
 ];
 
 const risks = [
-  { label: 'Currency Risk',             desc: 'Returns in USD or EUR convert to INR on exit. If INR strengthens, your rupee returns fall even if the underlying stock rose.' },
-  { label: 'Regulatory Risk',           desc: 'RBI and SEBI periodically revise LRS limits and fund-of-fund structures. A regulatory change can restrict overseas investment or affect existing holdings.' },
-  { label: 'Market & Geopolitical Risk',desc: "Trade wars, sanctions, and foreign central bank policy drive international markets — factors outside India-based investors' control." },
-  { label: 'TCS on Remittance',         desc: "LRS remittances above ₹7 lakh/year attract 20% TCS under Section 206C(1G). It's refundable via ITR, but creates temporary cash flow drag." },
+  { title: 'Currency Risk',              desc: 'Returns in USD or EUR convert to INR on exit. If INR strengthens against the USD, rupee returns fall even if the underlying stock rose in dollar terms.' },
+  { title: 'Regulatory Risk',            desc: 'RBI and SEBI periodically revise LRS limits and fund-of-fund structures. A regulatory change can restrict overseas investment or affect existing holdings.' },
+  { title: 'Geopolitical & Market Risk', desc: 'Trade wars, sanctions, interest rate decisions, and foreign central bank policy drive international markets — factors largely outside India-based investors control.' },
+  { title: 'TCS Cash Flow Drag',         desc: 'LRS remittances above ₹7 lakh/year attract 20% TCS under Section 206C(1G). Although refundable via ITR, it creates a temporary cash flow impact for larger investors.' },
 ];
 
 const regGuide = [
   {
     title: 'LRS — Liberalised Remittance Scheme',
     points: [
-      'All Indian residents can remit up to USD 250,000 (~₹2.08 crore) per financial year',
+      'All Indian residents may remit up to USD 250,000 (~₹2.08 crore) per financial year',
       'Covers overseas investment, education, travel, and property purchase',
       'Remittance above ₹7 lakh/year attracts 20% TCS (refundable via ITR filing)',
       'Submit Form A2 with your authorised dealer bank for each remittance',
-    ]
+    ],
   },
   {
     title: 'FEMA 1999 Compliance',
     points: [
       'FEMA governs all cross-border capital flows for Indian residents',
-      'Overseas investment in securities is a "capital account transaction" permitted under FEMA',
-      'OTC forex trading (offshore brokers) is a FEMA violation — punishable by penalty',
-      'Keep proof of all overseas investments and file Schedule FA in your ITR',
-    ]
+      'Overseas investment in securities is a capital account transaction permitted under FEMA',
+      'OTC forex trading via offshore brokers is a FEMA violation — punishable by penalty',
+      'File Schedule FA in your ITR every year to disclose all overseas investments',
+    ],
   },
   {
     title: 'RBI Guidelines',
     points: [
       'RBI approves and monitors LRS remittances through authorised dealer banks',
       'No RBI approval needed for individual LRS investments up to USD 250,000',
-      'RBI can revise LRS limits — check rbi.org.in for current guidelines',
-      'NRIs have separate FEMA permissions and cannot use LRS',
-    ]
+      'RBI can revise LRS limits — always check rbi.org.in for the current position',
+      'NRIs have separate FEMA permissions and cannot use the LRS route',
+    ],
   },
 ];
 
+const steps = [
+  { n: '1', title: 'Choose Your Route',         desc: 'Decide between India-listed international ETFs/funds (no LRS) or a direct foreign stock account (LRS required, more flexibility for stock-pickers).' },
+  { n: '2', title: 'Complete KYC & LRS Setup',  desc: 'For LRS-based investing, submit Form A2 with your bank and complete FEMA compliance. For India-listed funds, standard KYC through Shriram is sufficient.' },
+  { n: '3', title: 'Select Markets & Assets',   desc: 'Choose your geographic market, index ETF, active fund, or individual stocks. Our research desk provides guidance on US and international opportunities.' },
+  { n: '4', title: 'Monitor Global Portfolio',  desc: 'Track international positions alongside domestic holdings on the Antara app. Set FX rate alerts and portfolio rebalancing reminders as needed.' },
+];
+
+const kycDocs = [
+  'PAN card (mandatory for all investors)',
+  'Aadhaar card for identity verification',
+  'Address proof — Aadhaar, Passport, or Utility Bill',
+  'Cancelled cheque or recent bank statement',
+  'W-8BEN form for US investing via LRS (withholding tax benefit)',
+];
+
+const lrsSetup = [
+  'Form A2 submission with authorised dealer bank (LRS route only)',
+  'Foreign brokerage account linked to Indian bank (LRS route)',
+  'Valid mobile number and email ID for account confirmation',
+  'Active bank account with net banking or UPI enabled',
+];
+
+const relatedProducts = [
+  { idx: 'Related 01', title: 'Equity Stocks', desc: 'Build a strong domestic foundation alongside your global portfolio. Zero delivery brokerage on NSE & BSE with full research support.', href: '/products/equity/' },
+  { idx: 'Related 02', title: 'Mutual Funds',  desc: 'India-listed international ETFs are mutual funds — invest in Nasdaq 100 or S&P 500 via SIP or lump sum with no LRS required.',     href: '/products/mutual-funds/' },
+  { idx: 'Related 03', title: 'Fixed Deposit', desc: 'Balance global equity risk with guaranteed-return FDs for the stable core of your portfolio. DICGC-insured bank FDs available.',   href: '/products/fd/' },
+];
+
 const faqs = [
-  { q: 'Can Indian residents invest in US stocks?',                        a: 'Yes — two routes: (1) India-listed international ETFs/funds, no LRS needed; (2) Direct US stock investment via a foreign brokerage linked to an LRS-compliant Indian bank, allowing fractional shares.' },
-  { q: 'What is the LRS limit for investing abroad?',                      a: "Under FEMA's LRS, Indian residents can remit up to USD 250,000 (~₹2.08 crore) per financial year for overseas investment. Remittances above ₹7 lakh attract 20% TCS, refundable via ITR." },
-  { q: 'How are international investment returns taxed in India?',         a: 'Direct LRS holdings: short-term gains (under 2 years) taxed per slab; long-term gains (2+ years) at 12.5%. India-listed international ETFs are taxed as debt funds — per slab for both short and long term (from April 2023).' },
-  { q: 'Is investing in international markets risky for Indian investors?', a: "Global diversification reduces overall portfolio correlation — US and Indian markets don't always move together. Currency, geopolitical, and regulatory risks are additional. A 10–20% allocation via India-listed international ETFs suits most retail investors." },
+  { q: 'Can Indian residents invest in US stocks?', a: 'Yes — two routes: (1) India-listed international ETFs and fund-of-funds (no LRS needed, same process as a domestic mutual fund); (2) Direct US stock investment via a foreign brokerage linked to an LRS-compliant Indian bank, allowing fractional shares starting from $1.' },
+  { q: 'What is the LRS limit for investing abroad?', a: "Under FEMA's LRS, Indian residents can remit up to USD 250,000 (~₹2.08 crore) per financial year for overseas investment. Remittances above ₹7 lakh attract 20% TCS, refundable via ITR filing." },
+  { q: 'How are international investment returns taxed in India?', a: 'Direct LRS holdings: STCG (under 2 years) taxed per slab; LTCG (2+ years) at 12.5% flat. India-listed international ETFs are taxed as debt funds — per slab rate for both short and long term (from April 2023).' },
+  { q: 'Can I invest globally without LRS?', a: 'Yes — India-listed international ETFs (e.g., Motilal Oswal Nasdaq 100 ETF, Mirae Asset NYSE FANG+ ETF) and international fund-of-funds are bought exactly like domestic mutual funds on NSE/BSE. No LRS, no forex conversion, no FEMA compliance needed.' },
+  { q: 'What is TCS on LRS remittance and is it refundable?', a: 'Tax Collected at Source at 20% applies to LRS remittances above ₹7 lakh per financial year under Section 206C(1G). It is fully refundable when you file your ITR but creates temporary cash flow drag for investors remitting larger amounts.' },
+  { q: 'What is the minimum amount for global investing from India?', a: 'For India-listed international ETFs, you can start with as little as ₹500 via SIP. For direct US stocks via LRS, many foreign brokerages allow fractional shares starting from $1, with no mandatory minimum deposit.' },
+  { q: 'Is global investing risky for Indian investors?', a: "Global diversification reduces overall portfolio correlation — US and Indian markets don't always move together. Currency, geopolitical, and regulatory risks are additional. A 10–20% allocation via India-listed international ETFs suits most retail investors starting out." },
+  { q: 'Do NRIs follow the same LRS rules as residents?', a: 'No. NRIs have separate FEMA permissions and cannot use the LRS route. They invest through NRE/NRO accounts, FCNR deposits, or direct foreign investment permitted under FEMA. Consult a FEMA-qualified tax advisor for NRI-specific guidance.' },
 ];
 ---
 
 <BaseLayout
-  title="Global Investing from India — US Stocks S&amp;P 500 International ETFs | Shriram"
-  description="Start global investing from India in US stocks, S&amp;P 500, and Nasdaq 100 via LRS or India-listed international ETFs. FEMA-compliant, expert-guided. Start today."
+  title="Global Investing from India — US Stocks, S&P 500, Nasdaq 100 | Shriram"
+  description="Complete guide to global investing from India 2026. Invest in US stocks, S&P 500, Nasdaq 100 via LRS or India-listed international ETFs. FEMA-compliant, expert-guided."
 >
 
-  <!-- ══ HERO ═══════════════════════════════════════════════════════ -->
+  <!-- ══ 1. HERO ══════════════════════════════════════════════════════ -->
   <section class="hero">
     <div class="hero-inner">
-      <h1><span class="g">Global Investing from India</span> — US Stocks, ETFs &amp; More</h1>
-      <p class="lead">Diversify beyond India. Access S&amp;P 500, Nasdaq 100, and global leaders like Apple, NVIDIA, and Microsoft — with expert guidance and LRS-compliant processes from Shriram Financial Services.</p>
-      <div class="cta-row">
-        <a class="btn-gold" href="/about/open-demat-account/">Start Global Investing</a>
-        <a class="btn-ghost" href="/about/support/">Talk to RM</a>
-      </div>
-      <ul class="feats">
-        {['USD 250,000 LRS limit', 'No LRS for India-listed ETFs', 'Expert global research', 'Currency & FX guidance'].map(f => (
-          <li class="feat"><span class="tk">✓</span><span class="lb">{f}</span></li>
-        ))}
-      </ul>
-    </div>
-  </section>
-
-  <!-- ══ WHAT IS GLOBAL INVESTING? ═════════════════════════════════ -->
-  <section class="section auto" style="background:var(--sec-light)">
-    <div class="def-row">
-      <p class="sec-title">What is <span class="g">Global Investing?</span></p>
-      <div class="def-body">
-        <p>Global investing means allocating a portion of your portfolio to financial assets outside India — primarily US stocks, international ETFs, global mutual funds (fund-of-funds), or direct foreign securities — to benefit from global economic growth and currency diversification.</p>
-        <p>For Indian investors, global investing is legally permitted under FEMA's Liberalised Remittance Scheme (LRS) — up to USD 250,000 (~₹2.1 crore) per financial year. A simpler route requires no LRS at all: India-listed international ETFs and fund-of-funds track global indices like the S&amp;P 500 and Nasdaq 100 and are bought like any domestic mutual fund.</p>
-      </div>
-    </div>
-    <div class="cat-grid" style="margin-top:64px;grid-template-columns:repeat(3,1fr)">
-      {[
-        { title: 'Why Diversify Globally?',  desc: 'Indian markets (Nifty 50) and US markets (S&P 500) are not correlated — when one falls, the other often holds. A 10–20% global allocation smooths overall portfolio volatility.' },
-        { title: 'Currency Hedge',            desc: 'The Indian rupee has historically depreciated ~4% per year against the USD. Investing in USD-denominated assets provides a natural hedge against INR weakness.' },
-        { title: 'Access to Global Leaders', desc: "India has no equivalent of Apple, NVIDIA, Microsoft, or Amazon. Global investing lets you own the world's most innovative companies — unavailable on Indian exchanges." },
-      ].map((c, i) => (
-        <div class="cat" style={i===2?'border-right:0':''}>
-          <h4>{c.title}</h4>
-          <p>{c.desc}</p>
+      <div class="hero-left">
+        <h1>Complete Guide to <span class="g">Global Investing</span> from India 2026</h1>
+        <p class="lead">Diversify beyond India. Access the S&amp;P 500, Nasdaq 100, and global leaders like Apple, NVIDIA, and Microsoft — with expert guidance and LRS-compliant processes from Shriram Financial Services.</p>
+        <div class="cta-row">
+          <a class="btn-gold" href="/about/open-demat-account/">Start Global Investing</a>
         </div>
-      ))}
-    </div>
-  </section>
-
-  <!-- ══ MARKETS YOU CAN ACCESS ════════════════════════════════════ -->
-  <section class="section" style="background:var(--sec-tint)">
-    <p class="sec-title">Markets You <span class="g">Can Access</span></p>
-    <p class="sec-lead" style="margin-top:16px">From Silicon Valley tech giants to European luxury brands and Asian semiconductor leaders, global diversification is now accessible to every Indian investor.</p>
-    <div class="cat-grid" style="margin-top:48px;grid-template-columns:repeat(3,1fr)">
-      {markets.map((m, i) => (
-        <div class="cat" style={i===2?'border-right:0':''}>
-          <div class="mkt-head">
-            <span class="mkt-icon">{m.icon}</span>
-            <div>
-              <h4 style="margin-bottom:4px">{m.region}</h4>
-              <p class="mkt-idx">{m.indices}</p>
+        <div class="hero-feats">
+          <div class="feats">
+            {['USD 250K LRS limit', 'No LRS for India ETFs', 'Expert global research', 'FEMA-compliant process'].map(f => (
+              <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;{f}</span></div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div class="hero-panel">
+        <p class="panel-title">Open Your Demat Account</p>
+        <div class="fd-form">
+          <div class="fd-field">
+            <label>Full Name</label>
+            <input type="text" placeholder="Rajesh Kumar" />
+          </div>
+          <div class="fd-field">
+            <label>Mobile Number</label>
+            <input type="tel" placeholder="+91 98765 43210" />
+          </div>
+          <div class="fd-field">
+            <label>Email</label>
+            <input type="email" placeholder="name@email.com" />
+          </div>
+          <div class="fd-field">
+            <label>City</label>
+            <input type="text" placeholder="Chennai" />
+          </div>
+          <div class="fd-field">
+            <label>Investment Interest</label>
+            <div class="tenure-tabs">
+              <button type="button" class="t-tab active" data-tab>US Stocks</button>
+              <button type="button" class="t-tab" data-tab>Global ETFs</button>
+              <button type="button" class="t-tab" data-tab>FoFs</button>
             </div>
           </div>
-          <p>{m.desc}</p>
+          <a class="btn-gold" href="/about/open-demat-account/" style="width:100%;justify-content:center;margin-top:8px">Get Started</a>
         </div>
-      ))}
+      </div>
     </div>
   </section>
 
-  <!-- ══ WAYS TO INVEST ════════════════════════════════════════════ -->
-  <section class="section" style="background:var(--sec-light)">
-    <p class="sec-title">Ways to Invest <span class="g">Internationally from India</span></p>
-    <p class="sec-lead" style="margin-top:16px">Three routes — from the simplest (no LRS needed) to full direct stock access via the liberalised remittance scheme.</p>
-    <div class="way-list" style="margin-top:48px">
-      {howItWorks.map((h, i) => (
-        <div class="way-item">
-          <div class="way-num">{i + 1}</div>
-          <div>
-            <p class="way-title">{h.label}</p>
-            <p class="way-desc">{h.desc}</p>
+  <!-- ══ 2. WHAT IS GLOBAL INVESTING? ════════════════════════════════ -->
+  <section class="section stack" id="sec-about" style="background:var(--sec-light);gap:56px">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">What is Global Investing?</p>
+      <p class="sec-lead">Global investing means allocating a portion of your portfolio to financial assets outside India — US stocks, international ETFs, global mutual funds, or direct foreign securities. For Indian investors, it is legally permitted under FEMA's Liberalised Remittance Scheme (LRS) up to USD 250,000 per year. A simpler route requires no LRS at all: India-listed international ETFs track global indices like the S&amp;P 500 and Nasdaq 100 and are bought like any domestic mutual fund.</p>
+    </div>
+    <div class="stack" style="gap:32px">
+      <div class="stack" style="gap:16px">
+        <p class="sub-title">Why Diversify Globally?</p>
+        <p class="sub-lead">Three structural reasons every Indian investor should consider a global allocation.</p>
+      </div>
+      <div class="cat-grid" style="grid-template-columns:repeat(3,1fr)">
+        {[
+          { title: 'Portfolio Diversification', desc: 'Indian markets (Nifty 50) and US markets (S&P 500) are not highly correlated — when one falls, the other often holds. A 10–20% global allocation meaningfully smooths overall portfolio volatility.' },
+          { title: 'Natural Currency Hedge',    desc: 'The Indian rupee has historically depreciated ~4% per year against the USD. Investing in USD-denominated assets provides a natural hedge against long-term INR weakness.' },
+          { title: 'Access to Global Leaders', desc: "India has no equivalent of Apple, NVIDIA, Microsoft, or Amazon. Global investing lets you own the world's most innovative companies — entirely unavailable on Indian exchanges." },
+        ].map((c, i) => (
+          <div class="cat" style={i===2?'border-right:0':''}>
+            <h4>{c.title}</h4>
+            <p>{c.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+    <a class="btn-gold" href="/about/open-demat-account/" style="align-self:center">Start Global Investing</a>
+  </section>
+
+  <!-- ══ 3. WAYS TO INVEST ════════════════════════════════════════════ -->
+  <section class="section stack" id="sec-routes" style="background:var(--sec-tint);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Ways to Invest Globally from India</p>
+      <p class="sec-lead">Four routes — from the simplest (no LRS, start with ₹500) to full direct US stock access via the Liberalised Remittance Scheme.</p>
+    </div>
+    <div class="routes-grid">
+      {routes.map(r => (
+        <div class="route-card">
+          <div class="route-top">
+            <p class="route-idx">{r.n}</p>
+            <span class="route-tag">{r.tag}</span>
+          </div>
+          <div class="route-body">
+            <h4>{r.title}</h4>
+            <p>{r.desc}</p>
           </div>
         </div>
       ))}
     </div>
+    <a class="btn-gold" href="/about/open-demat-account/" style="align-self:center">Start Global Investing</a>
   </section>
 
-  <!-- ══ GLOBAL INVESTING vs INDIA INVESTING ═══════════════════════ -->
-  <section class="section" style="background:var(--sec-tint)">
-    <p class="sec-title">Global Investing vs <span class="g">Indian Investing</span></p>
-    <p class="sec-lead" style="margin-top:16px">How do US and Indian markets compare across returns, risk, currency, and access? Use this to decide your right allocation.</p>
-    <div class="t-wrap" style="margin-top:48px">
-      <div class="t-scroll">
-        <table>
-          <thead><tr>
-            <th>Factor</th><th class="hl">US Markets (S&amp;P 500)</th><th>Indian Markets (Nifty 50)</th>
-          </tr></thead>
-          <tbody>
-            {[
-              { factor: '10-Year CAGR (USD / INR)',      us: '~12–14% USD CAGR',                              india: '~11–13% INR CAGR' },
-              { factor: 'Currency',                      us: 'USD — appreciates vs INR (avg ~4%/yr)',          india: 'INR — depreciates vs USD historically' },
-              { factor: 'Volatility',                    us: 'Lower (deepest market globally)',                india: 'Higher (emerging market premium)' },
-              { factor: 'Sectors Represented',           us: 'Tech, AI, Healthcare, Consumer, Financials',    india: 'Financials, IT, Energy, FMCG, Industrials' },
-              { factor: 'Liquidity',                     us: 'Extremely high — $30T+ market cap',             india: 'High — but smaller universe' },
-              { factor: 'Correlation with Indian Stocks',us: 'Low-to-moderate (diversification benefit)',     india: 'Full — no diversification within India' },
-              { factor: 'Recommended Allocation',        us: '10–30% of total equity portfolio',             india: '70–90% of total equity portfolio' },
-            ].map(r => (
-              <tr>
-                <td class="k">{r.factor}</td><td class="hl">{r.us}</td><td>{r.india}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+  <!-- ══ 4. GLOBAL VS INDIA ════════════════════════════════════════════ -->
+  <section class="section stack" id="sec-vs" style="background:var(--sec-light);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Global Investing vs Indian Investing</p>
+      <p class="sec-lead">How do US and Indian markets compare across returns, currency, risk, and access? Use this to decide the right allocation for your portfolio.</p>
+    </div>
+    <div class="t-scroll">
+      <div class="table t3 bordered">
+        <div class="cell th"><p>Factor</p></div>
+        <div class="cell th hi"><p>Global Markets (S&amp;P 500)</p></div>
+        <div class="cell th"><p>Indian Markets (Nifty 50)</p></div>
+        {vsRows.map(r => (
+          <>
+            <div class="cell tb"><p class="k">{r.factor}</p></div>
+            <div class="cell tb hi-cell"><p class="v">{r.global}</p></div>
+            <div class="cell tb"><p class="v">{r.india}</p></div>
+          </>
+        ))}
       </div>
     </div>
+    <a class="btn-gold" href="/about/open-demat-account/" style="align-self:center">Start Global Investing</a>
   </section>
 
-  <!-- ══ HOW TO START ══════════════════════════════════════════════ -->
-  <section class="section" style="background:var(--sec-light)">
-    <p class="sec-title">How to Start <span class="g">Global Investing</span></p>
-    <p class="sec-lead" style="margin-top:16px">Four steps from choosing your route to monitoring your international portfolio.</p>
-    <div class="steps" style="margin-top:48px">
-      {steps.map((s, i, arr) => (<>
-        <div class="step">
-          <div class="num">{s.n}</div>
-          <h4>{s.title}</h4>
-          <p>{s.desc}</p>
-        </div>
-        {i < arr.length - 1 && <div class="step-div"></div>}
-      </>))}
+  <!-- ══ 5. US STOCKS FOR INDIANS ════════════════════════════════════ -->
+  <section class="section stack" id="sec-us" style="background:var(--sec-tint);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">US Stocks for Indians</p>
+      <p class="sec-lead">From fractional shares to sector selection — everything you need to know about investing directly in US equities from India.</p>
     </div>
+
+    <div class="stack" style="gap:32px">
+      <div class="stack" style="gap:16px">
+        <p class="sub-title">US Sectors &amp; Top Stocks</p>
+        <p class="sub-lead">Key sectors available in US markets that have no comparable scale in India.</p>
+      </div>
+      <div class="t-scroll">
+        <div class="table t3 bordered">
+          <div class="cell th"><p>Sector</p></div>
+          <div class="cell th"><p>Top Stocks</p></div>
+          <div class="cell th hi"><p>Why Access It from India</p></div>
+          {sectorRows.map(r => (
+            <>
+              <div class="cell tb"><p class="k">{r.sector}</p></div>
+              <div class="cell tb"><p class="v">{r.top}</p></div>
+              <div class="cell tb hi-cell"><p class="v">{r.why}</p></div>
+            </>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <div class="stack" style="gap:32px">
+      <div class="stack" style="gap:16px">
+        <p class="sub-title">US Market Indices</p>
+        <p class="sub-lead">The four major US indices — and which suits each type of investor.</p>
+      </div>
+      <div class="t-scroll">
+        <div class="table t4 bordered">
+          <div class="cell th"><p>Index</p></div>
+          <div class="cell th"><p>Companies</p></div>
+          <div class="cell th"><p>Focus</p></div>
+          <div class="cell th hi"><p>Best For</p></div>
+          {indicesRows.map(r => (
+            <>
+              <div class="cell tb"><p class="k">{r.index}</p></div>
+              <div class="cell tb"><p class="v">{r.cos}</p></div>
+              <div class="cell tb"><p class="v">{r.focus}</p></div>
+              <div class="cell tb hi-cell"><p class="v">{r.best}</p></div>
+            </>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <div class="row-2">
+      <div class="card">
+        <p class="card-h">Fractional Shares</p>
+        <p class="card-p">Many US stocks cost hundreds of dollars per share (Amazon $190+, Google $180+). Fractional share platforms let you invest as little as $1 in any stock — making all global leaders accessible regardless of share price.</p>
+      </div>
+      <div class="card">
+        <p class="card-h">Dividend vs Growth Stocks</p>
+        <p class="card-p">US dividend stocks (Coca-Cola, J&amp;J, AT&amp;T) yield 2–5% USD annually — useful for passive USD income. Growth stocks (Tesla, NVIDIA, Meta) pay no dividend but offer capital appreciation potential far outpacing income returns.</p>
+      </div>
+    </div>
+
+    <a class="btn-gold" href="/about/open-demat-account/" style="align-self:center">Start with US Stocks</a>
   </section>
 
-  <!-- ══ US STOCKS FOR INDIANS — DEEP DIVE ════════════════════════ -->
-  <section class="section" style="background:var(--sec-tint)">
-    <p class="sec-title">US Stocks for Indians — <span class="g">What You Need to Know</span></p>
-    <p class="sec-lead" style="margin-top:16px">From opening a foreign brokerage account to understanding fractional shares — here's the complete guide.</p>
-    <div class="cat-grid" style="margin-top:48px">
-      {[
-        { title: 'Fractional Shares',      desc: "Buy a fraction of expensive US stocks like Amazon (₹1,50,000+) or Google. Many platforms allow investments from as little as $1, making global giants accessible to all." },
-        { title: 'Top US Sectors',         desc: "Technology (Apple, NVIDIA, Microsoft), Healthcare (Pfizer, UnitedHealth), Consumer (Amazon, Meta), Financials (JPMorgan). Pick sectors India doesn't offer." },
-        { title: 'S&P 500 vs Nasdaq 100', desc: 'S&P 500 covers the 500 largest US companies (diversified). Nasdaq 100 concentrates on top 100 tech/growth stocks (higher risk, higher growth potential). Most beginners start with S&P 500.' },
-        { title: 'Dividend vs Growth',     desc: 'US dividend stocks (Coca-Cola, J&J, AT&T) yield 2–5% USD annually — useful for USD income. Growth stocks (Tesla, NVIDIA) pay no dividend but offer capital appreciation.' },
-      ].map((c, i) => (
-        <div class="cat" style={i===3?'border-right:0':''}>
-          <h4>{c.title}</h4>
-          <p>{c.desc}</p>
-        </div>
+  <!-- ══ 6. GLOBAL MUTUAL FUNDS & ETFS ════════════════════════════════ -->
+  <section class="section stack" id="sec-funds" style="background:var(--sec-light);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Global Mutual Funds &amp; ETFs</p>
+      <p class="sec-lead">The simplest way to invest globally from India — no LRS, no forex conversion, same process as buying any domestic mutual fund.</p>
+    </div>
+
+    <div class="t-scroll">
+      <div class="table t4 bordered">
+        <div class="cell th"><p>Fund Type</p></div>
+        <div class="cell th"><p>What It Tracks</p></div>
+        <div class="cell th"><p>LRS Required?</p></div>
+        <div class="cell th hi"><p>Tax Treatment</p></div>
+        {fundRows.map(r => (
+          <>
+            <div class="cell tb"><p class="k">{r.type}</p></div>
+            <div class="cell tb"><p class="v">{r.tracks}</p></div>
+            <div class="cell tb">
+              <p class="v" style={r.lrs === 'No' ? 'color:var(--green);font-weight:600' : 'color:var(--ink-2)'}>{r.lrs}</p>
+            </div>
+            <div class="cell tb hi-cell"><p class="v">{r.tax}</p></div>
+          </>
+        ))}
+      </div>
+    </div>
+
+    <div class="stack" style="gap:32px">
+      <div class="stack" style="gap:16px">
+        <p class="sub-title">Featured India-Listed Global Funds</p>
+        <p class="sub-lead">Popular international ETFs and fund-of-funds available on NSE/BSE — no LRS required.</p>
+      </div>
+      <div class="fund-grid">
+        {featuredFunds.map(f => (
+          <div class="card fund-card">
+            <span class="fund-tag">{f.tag}</span>
+            <p class="card-h">{f.name}</p>
+            <p class="card-p">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <a class="btn-gold" href="/about/open-demat-account/" style="align-self:center">Invest in Global ETFs</a>
+  </section>
+
+  <!-- ══ 7. HOW TO INVEST ═════════════════════════════════════════════ -->
+  <section class="section stack" id="sec-how" style="background:var(--sec-tint);gap:56px;align-items:center;justify-content:center">
+    <div class="stack" style="gap:16px;width:100%">
+      <p class="sec-title">How to Invest in Global Markets</p>
+      <p class="sec-lead">Four steps from choosing your route to tracking your first international position.</p>
+    </div>
+
+    <div class="steps">
+      {steps.map((s, i) => (
+        <>
+          {i > 0 && <div class="step-div"></div>}
+          <div class="step">
+            <div class="num">{s.n}</div>
+            <div class="st-body">
+              <h4>{s.title}</h4>
+              <p>{s.desc}</p>
+            </div>
+          </div>
+        </>
       ))}
     </div>
-  </section>
 
-  <!-- ══ GLOBAL MUTUAL FUNDS & ETFS ════════════════════════════════ -->
-  <section class="section" style="background:var(--sec-light)">
-    <p class="sec-title">Global Mutual Funds &amp; <span class="g">International ETFs</span></p>
-    <p class="sec-lead" style="margin-top:16px">The simplest way to invest globally from India — no LRS, no forex conversion, same process as buying a domestic mutual fund.</p>
-    <div class="t-wrap" style="margin-top:48px">
-      <div class="t-scroll">
-        <table>
-          <thead><tr>
-            <th>Fund Type</th><th class="hl">What It Tracks</th><th>LRS Required?</th><th>Tax Treatment</th>
-          </tr></thead>
-          <tbody>
-            {[
-              { type: 'India-listed S&P 500 ETF',        tracks: 'Top 500 US companies',                   lrs: 'No',                    tax: 'As per slab (debt fund rules)' },
-              { type: 'India-listed Nasdaq 100 ETF',     tracks: 'Top 100 US tech/growth stocks',          lrs: 'No',                    tax: 'As per slab' },
-              { type: 'International Fund-of-Funds',     tracks: 'Global ETFs via feeder structure',       lrs: 'No',                    tax: 'As per slab' },
-              { type: 'Direct US Stock (LRS)',            tracks: 'Individual US stocks/ETFs',              lrs: 'Yes (up to $250K/yr)',  tax: 'STCG/LTCG + US WHT' },
-              { type: 'Regional Funds (Europe, Asia)',   tracks: 'European or Asian markets',              lrs: 'No',                    tax: 'As per slab' },
-            ].map(r => (
-              <tr>
-                <td class="k">{r.type}</td><td class="hl">{r.tracks}</td><td>{r.lrs}</td><td>{r.tax}</td>
-              </tr>
+    <div class="stack" style="gap:32px;width:100%">
+      <div class="stack" style="gap:16px">
+        <p class="sub-title">Documents &amp; Setup</p>
+        <p class="sub-lead">Everything you need to qualify and get your global investment account ready.</p>
+      </div>
+      <div class="row-2">
+        <div class="card check-card">
+          <p class="ch-title">KYC Documents Required</p>
+          <div class="check-list">
+            {kycDocs.map((item, i) => (
+              <>
+                {i > 0 && <div class="check-sep"></div>}
+                <div class="check-row"><span class="ck">✓</span><p class="tx">{item}</p></div>
+              </>
             ))}
-          </tbody>
-        </table>
+          </div>
+        </div>
+        <div class="card check-card">
+          <p class="ch-title">LRS Setup (Direct US Stocks Route)</p>
+          <div class="check-list">
+            {lrsSetup.map((item, i) => (
+              <>
+                {i > 0 && <div class="check-sep"></div>}
+                <div class="check-row"><span class="ck">✓</span><p class="tx">{item}</p></div>
+              </>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
-    <a class="btn-gold" href="/about/open-demat-account/" style="align-self:center;margin-top:32px">Start with India-listed International ETFs</a>
+
+    <a class="btn-gold" href="/about/open-demat-account/" style="align-self:center">Open Global Investment Account</a>
   </section>
 
-  <!-- ══ RISKS OF GLOBAL INVESTING ════════════════════════════════ -->
-  <section class="section" style="background:var(--sec-tint)">
-    <p class="sec-title">Risks of <span class="g">Global Investing</span></p>
-    <p class="sec-lead" style="margin-top:16px">Understand what can move against you before you commit capital to international markets.</p>
-    <div class="cat-grid" style="margin-top:48px">
-      {risks.map((r, i) => (
-        <div class="cat-dark" style={i===3?'border-right:0':''}>
-          <h4>{r.label}</h4>
+  <!-- ══ 8. TAXATION ══════════════════════════════════════════════════ -->
+  <section class="section stack" id="sec-tax" style="background:var(--sec-light);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Taxation of Global Investments</p>
+      <p class="sec-lead">Tax treatment depends entirely on your route — direct LRS investing versus India-listed international ETFs. Both India and source-country taxes may apply for the LRS route.</p>
+    </div>
+    <div class="t-scroll">
+      <div class="table t3 bordered">
+        <div class="cell th"><p>Tax Head</p></div>
+        <div class="cell th hi"><p>Direct US Stocks (LRS)</p></div>
+        <div class="cell th"><p>India-Listed Intl ETF / Fund</p></div>
+        {taxRows.map(r => (
+          <>
+            <div class="cell tb"><p class="k">{r.head}</p></div>
+            <div class="cell tb hi-cell"><p class="v">{r.lrs}</p></div>
+            <div class="cell tb"><p class="v">{r.etf}</p></div>
+          </>
+        ))}
+      </div>
+    </div>
+    <a class="btn-gold" href="/about/open-demat-account/" style="align-self:center">Start Global Investing</a>
+  </section>
+
+  <!-- ══ 9. RISKS ══════════════════════════════════════════════════════ -->
+  <section class="section stack" id="sec-risks" style="background:var(--sec-tint);gap:56px;justify-content:center;min-height:0">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Risks in Global Investing</p>
+      <p class="sec-lead">Understand what can move against you before committing capital to international markets.</p>
+    </div>
+    <div class="risk-grid">
+      {risks.map(r => (
+        <div class="risk-card">
+          <h4>{r.title}</h4>
           <p>{r.desc}</p>
         </div>
       ))}
     </div>
+    <a class="btn-gold" href="/about/open-demat-account/" style="align-self:center">Start Global Investing</a>
   </section>
 
-  <!-- ══ TAXATION OF GLOBAL INVESTMENTS ═══════════════════════════ -->
-  <section class="section" style="background:var(--sec-light)">
-    <p class="sec-title">Taxation of <span class="g">Global Investments</span></p>
-    <p class="sec-lead" style="margin-top:16px">Tax treatment depends on your route — direct LRS investing vs India-listed international funds. Both India and source-country taxes may apply.</p>
-    <div class="t-wrap" style="margin-top:48px">
-      <div class="t-scroll">
-        <table>
-          <thead><tr>
-            <th>Tax Head</th><th class="hl">Direct US Stocks (LRS)</th><th>India-Listed Intl ETF/Fund</th>
-          </tr></thead>
-          <tbody>
-            {[
-              { head: 'US Dividend Withholding Tax',                         lrs: '25% (15% with DTAA benefit — file W-8BEN)',              india: 'Not applicable (fund handles it)' },
-              { head: 'STCG (under 2 years — LRS; under 3 years — India)', lrs: 'As per income tax slab',                                 india: 'As per income tax slab' },
-              { head: 'LTCG (2+ years — LRS; 3+ years — India funds)',     lrs: '12.5% (no indexation from FY2024)',                      india: 'As per slab (no indexation from Apr 2023)' },
-              { head: 'DTAA Benefit',                                        lrs: 'India-US DTAA allows credit for US tax paid',            india: 'Managed at fund level — transparent to investor' },
-              { head: 'TCS on LRS Remittance',                              lrs: '20% TCS above ₹7 lakh/year (refundable via ITR)',        india: 'No TCS (domestic investment)' },
-            ].map(r => (
-              <tr>
-                <td class="k">{r.head}</td><td class="hl">{r.lrs}</td><td>{r.india}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+  <!-- ══ 10. REGULATORY GUIDE ══════════════════════════════════════════ -->
+  <section class="section stack" id="sec-reg" style="background:var(--sec-light);gap:56px;justify-content:center;min-height:0">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Regulatory Guide for Indians</p>
+      <p class="sec-lead">Everything Indian residents need to know to invest globally in a legal and FEMA-compliant manner.</p>
     </div>
-  </section>
-
-  <!-- ══ REGULATORY GUIDE ══════════════════════════════════════════ -->
-  <section class="section" style="background:var(--sec-tint)">
-    <p class="sec-title">Regulatory Guide — <span class="g">LRS, FEMA &amp; RBI Rules</span></p>
-    <p class="sec-lead" style="margin-top:16px">Everything Indian residents need to know to invest globally in a legal and FEMA-compliant manner.</p>
-    <div class="cat-grid" style="margin-top:48px;grid-template-columns:repeat(3,1fr)">
-      {regGuide.map((c, i) => (
-        <div class="cat" style={i===2?'border-right:0':''}>
-          <h4>{c.title}</h4>
-          <ul class="reg-list">
-            {c.points.map(p => (
-              <li><span class="tk">→</span><span>{p}</span></li>
+    <div class="row-3">
+      {regGuide.map(g => (
+        <div class="card check-card">
+          <p class="ch-title">{g.title}</p>
+          <div class="check-list" style="gap:16px">
+            {g.points.map((pt, i) => (
+              <>
+                {i > 0 && <div class="check-sep"></div>}
+                <div class="check-row"><span class="arr">→</span><p class="tx" style="font-size:14px">{pt}</p></div>
+              </>
             ))}
-          </ul>
+          </div>
         </div>
       ))}
     </div>
   </section>
 
-  <!-- ══ CALCULATORS & TOOLS ══════════════════════════════════════ -->
-  <section class="section" style="background:var(--sec-light)">
-    <p class="sec-title">Global Investing <span class="g">Calculators &amp; Tools</span></p>
-    <p class="sec-lead" style="margin-top:16px">Estimate your global portfolio returns, currency impact, and tax before investing a single rupee.</p>
-    <div class="cat-grid" style="margin-top:48px;grid-template-columns:repeat(3,1fr)">
-      {[
-        { title: 'Currency Impact Calculator', desc: 'See how INR/USD movements affect your actual returns in rupee terms. A 10% USD appreciation adds ~10% to your INR return on top of the underlying stock gain.', cta: 'Calculate Currency Impact', href: '/calculators/sip/' },
-        { title: 'US vs India Return Comparison', desc: 'Compare S&P 500 CAGR vs Nifty 50 CAGR over 5, 10, and 20-year periods with INR adjustment. Understand the real diversification benefit in rupee-adjusted terms.', cta: 'Compare Returns', href: '/calculators/sip/' },
-        { title: 'LRS Tax (TCS) Calculator', desc: 'Estimate your 20% TCS liability on LRS remittances above ₹7 lakh. Know your temporary cash outflow and when to expect the refund via ITR.', cta: 'Estimate TCS', href: '/calculators/sip/' },
-      ].map((c, i) => (
-        <div class="cat" style={i===2?'border-right:0':''}>
-          <h4>{c.title}</h4>
-          <p>{c.desc}</p>
-          <a href={c.href} class="cat-cta">{c.cta} →</a>
-        </div>
+  <!-- ══ 11. NEXT STEPS & RELATED PRODUCTS ════════════════════════════ -->
+  <section class="section stack" id="sec-next" style="background:var(--sec-tint);gap:56px;justify-content:center;min-height:0">
+    <div class="stack" style="gap:16px">
+      <p class="sec-title">Next Steps &amp; Related Products</p>
+      <p class="sec-lead">Global diversification works best alongside a strong domestic foundation. Explore related products.</p>
+    </div>
+    <div class="approaches">
+      {relatedProducts.map(p => (
+        <a class="appr" href={p.href}>
+          <div class="appr-main">
+            <p class="idx">{p.idx}</p>
+            <div class="appr-tt">
+              <h4>{p.title}</h4>
+              <p>{p.desc}</p>
+            </div>
+          </div>
+          <div class="explore"><span>Explore&nbsp;</span><span>→</span></div>
+        </a>
       ))}
     </div>
   </section>
 
-  <!-- ══ FAQ ════════════════════════════════════════════════════════ -->
+  <!-- ══ 12. DEMAT CTA BANNER ════════════════════════════════════════ -->
+  <section class="demat-banner">
+    <p class="banner-title">Open Your Demat Account Within Minutes</p>
+    <p class="banner-sub">Start investing in US stocks, global ETFs, domestic equities and more — with zero paperwork.</p>
+    <a class="btn-gold" href="/about/open-demat-account/">Open Demat Account</a>
+  </section>
+
+  <!-- ══ 13. FAQ ══════════════════════════════════════════════════════ -->
   <section class="faq-wrap" id="sec-faq">
     <div class="faq-cols">
       <div class="faq-left">
-        <p class="faq-title">Frequently Asked <span class="g">Questions</span></p>
-        <ul class="faq-acc">
+        <p class="faq-title">Frequently Asked Questions</p>
+        <div class="faq-acc">
           {faqs.map(item => (
-            <li class="faq-item">
-              <details>
-                <summary class="faq-sum">
-                  <span class="qt">{item.q}</span>
-                  <svg class="faq-icon faq-v" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="2" x2="8" y2="14"/><line x1="2" y1="8" x2="14" y2="8"/></svg>
-                  <svg class="faq-icon faq-h" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><line x1="2" y1="8" x2="14" y2="8"/></svg>
-                </summary>
-                <div class="qa"><p>{item.a}</p></div>
-              </details>
-            </li>
+            <details class="faq-item">
+              <summary class="faq-sum">
+                <span class="qt">{item.q}</span>
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="faq-icon">
+                  <path d="M2 8h12"/>
+                  <path class="faq-v" d="M8 2v12"/>
+                </svg>
+              </summary>
+              <div class="qa"><p>{item.a}</p></div>
+            </details>
           ))}
-        </ul>
+        </div>
       </div>
       <div class="faq-side">
-        <img src="/images/advisor-avatar.png" alt="Financial advisor" class="usr-img" />
         <div class="side-in">
           <div class="side-tx">
-            <h4>Still got questions?</h4>
-            <p>Our global investing specialists will guide you through LRS compliance, fund selection, and tax planning.</p>
+            <h4>Need expert guidance?</h4>
+            <p>Our global investing specialists will walk you through LRS compliance, fund selection, and tax planning for international investments.</p>
           </div>
-          <a class="btn-gold" href="/about/support/">Book a Call</a>
+          <a class="btn-gold" href="/about/support/">Schedule a Call</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ══ FINAL CTA ══════════════════════════════════════════════════ -->
-  <section class="cta-sec" style="background:var(--sec-tint)">
+  <!-- ══ 14. FINAL CTA ═════════════════════════════════════════════════ -->
+  <section class="cta-sec" id="sec-final-cta" style="background:var(--sec-light)">
     <div class="cta-box">
-      <p class="cta-h">Go Global with <span class="g">Shriram Financial Services</span></p>
-      <p class="cta-sub">Access US stocks, global ETFs, and international funds — expert-guided, FEMA-compliant, and fully digital.</p>
-      <div class="cta-row" style="margin-top:0;justify-content:center">
-        <a class="btn-gold" href="/about/open-demat-account/">Start Investing</a>
-        <a class="btn-dark" href="/about/support/">Talk to an RM</a>
+      <div class="ct-tt">
+        <h3>Go Global with Shriram Financial Services</h3>
+        <p class="ct-sub">Access US stocks, global ETFs, and international funds — expert-guided, FEMA-compliant, and fully digital from India.</p>
       </div>
+      <a class="btn-gold" href="/about/open-demat-account/">Start Global Investing</a>
     </div>
   </section>
 
@@ -369,93 +567,315 @@ const faqs = [
 
 <style>
   :root {
-    --sec-light:#fef8ee; --sec-tint:#f6efe1;
-    --card:#fffdf8; --card-border:#e1e0db; --card-border-soft:rgba(28,28,22,.13); --row-line:rgba(28,28,22,.08);
-    --olive-title:#2e3914; --olive-head:#2d3813; --olive-deep:#1b2010;
-    --ink:#1c1c16; --ink-2:#46463c; --ink-3:#595959; --muted:#73736a;
-    --gold:#e0a82e; --gold-2:#f2b83f; --gold-btn:#f3b83f; --gold-ink:#231a06; --olive-ink:#2e3914; --green:#009d58;
-    --pad:clamp(20px,8vw,144px); --section-y:72px; --cta-w:220px;
+    --page: #fcf8ef;
+    --sec-light: #fef8ee;
+    --sec-tint: #f6efe1;
+    --card: #fffdf8;
+    --card-border: #e1e0db;
+    --card-border-soft: rgba(28,28,22,.13);
+    --row-line: rgba(28,28,22,.08);
+    --olive-title: #2e3914;
+    --olive-head: #2d3813;
+    --olive-deep: #1b2010;
+    --ink: #1c1c16;
+    --ink-2: #46463c;
+    --ink-3: #595959;
+    --muted: #73736a;
+    --muted-2: #9a9a8e;
+    --gold: #e0a82e;
+    --gold-2: #f2b83f;
+    --gold-btn: #f3b83f;
+    --gold-ink: #231a06;
+    --olive-ink: #2e3914;
+    --green: #009d58;
+    --pad: clamp(20px, 8vw, 144px);
+    --container-pad: 32px;
+    --section-y: 72px;
+    --cta-w: 220px;
   }
+
   *, *::before, *::after { box-sizing: border-box; }
   a { color: inherit; text-decoration: none; }
   p { line-height: 1.5; margin: 0; }
-  ul { list-style: none; padding: 0; margin: 0; }
 
-  .section { padding: var(--section-y) var(--pad); min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; justify-content: center; }
-  .section.auto { min-height: 0; }
-  .sec-title { font-weight: 400; font-size: 40px; color: var(--olive-title); line-height: 1.4; max-width: 860px; }
-  .sec-lead  { font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.5; max-width: 640px; }
+  .section {
+    padding: var(--section-y) var(--pad);
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  #sec-about, #sec-risks, #sec-reg, #sec-next { min-height: 0; }
+  .stack { display: flex; flex-direction: column; }
   .g { color: var(--gold-2); }
 
-  .hero { padding: 0 var(--pad); display: flex; flex-direction: column; justify-content: center; overflow: hidden; background: radial-gradient(125% 210% at 100% -8%, #4f583b 0%, #363a2c 50%, #1d1d1d 100%); }
-  .hero-inner { padding: clamp(80px,12vw,140px) 0 clamp(48px,6vw,80px); display: flex; flex-direction: column; }
-  .hero h1 { font-weight: 500; font-size: 40px; color: #fff; line-height: 1.5; max-width: 860px; }
-  .hero .lead { margin-top: 32px; font-weight: 400; font-size: 18px; line-height: 1.5; color: rgba(255,255,255,.74); max-width: 600px; }
+  /* ── Typography ──────────────────────────────────────────────────── */
+  .sec-title { font-weight: 400; font-size: 40px; color: var(--olive-title); text-transform: capitalize; line-height: 1.5; }
+  .sec-lead  { font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.5; }
+  .sub-title { font-weight: 500; font-size: 24px; color: var(--ink); line-height: 1.5; }
+  .sub-lead  { font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.5; }
+  .card-h    { font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.5; }
+  .card-p    { font-weight: 400; font-size: 16px; color: var(--muted); line-height: 1.5; }
+
+  /* ── Hero ────────────────────────────────────────────────────────── */
+  .hero {
+    padding: 0 var(--pad);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    background: radial-gradient(125% 210% at 100% -8%, #4f583b 0%, #363a2c 50%, #1d1d1d 100%);
+  }
+  .hero-inner {
+    padding: clamp(80px,12vw,140px) 0 clamp(48px,6vw,80px);
+    display: flex;
+    gap: clamp(40px,6vw,80px);
+    align-items: flex-start;
+  }
+  .hero-left { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; }
+  .hero h1 { font-weight: 500; font-size: 40px; color: #fff; line-height: 1.5; max-width: 620px; }
+  .hero .lead { margin-top: 32px; font-weight: 400; font-size: 18px; line-height: 1.5; color: rgba(255,255,255,.74); max-width: 520px; }
   .cta-row { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
-  .feats { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 14px 16px; max-width: 760px; padding-top: 36px; border-top: 1px solid rgba(255,255,255,.16); }
+  .hero-feats { margin-top: 40px; }
+  .feats { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 16px; max-width: 560px; padding-top: 36px; border-top: 1px solid rgba(255,255,255,.16); }
   .feat { display: flex; gap: 10px; align-items: center; }
-  .feat .tk { color: var(--gold-2); font-weight: 500; font-size: 15px; }
-  .feat .lb { color: rgba(255,255,255,.9); font-weight: 500; font-size: 16px; }
+  .feat .tk { color: var(--gold-2); font-weight: 500; font-size: 15px; width: 13px; }
+  .feat .lb { color: rgba(255,255,255,.9); font-weight: 500; font-size: 16px; line-height: 1.5; white-space: nowrap; }
 
-  .btn-gold  { background: var(--gold-btn); height: 40px; width: var(--cta-w); border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; font-weight: 500; font-size: 12px; color: var(--olive-ink); white-space: nowrap; transition: opacity .2s; }
+  /* ── Hero panel ──────────────────────────────────────────────────── */
+  .hero-panel {
+    width: min(560px, 100%);
+    flex: none;
+    background: rgba(255,255,255,.85);
+    border: 1px solid rgba(255,255,255,.50);
+    border-radius: 24px;
+    padding: 32px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    backdrop-filter: blur(20px) saturate(1.6);
+    -webkit-backdrop-filter: blur(20px) saturate(1.6);
+    box-shadow: 0 8px 40px rgba(0,0,0,.08), inset 0 1px 0 rgba(255,255,255,.60);
+    margin-top: clamp(40px,6vw,80px);
+  }
+  .panel-title { font-weight: 600; font-size: 24px; color: var(--olive-deep); line-height: 1.4; }
+  .fd-form { display: flex; flex-direction: column; gap: 14px; }
+  .fd-field { display: flex; flex-direction: column; gap: 6px; }
+  .fd-field label { font-weight: 500; font-size: 12px; color: var(--olive-head); letter-spacing: .4px; }
+  .fd-field input {
+    background: #fff;
+    border: 1px solid rgba(46,57,20,.18);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 14px;
+    color: var(--ink);
+    outline: none;
+    transition: border-color .2s;
+  }
+  .fd-field input::placeholder { color: var(--muted-2); }
+  .fd-field input:focus { border-color: var(--gold-2); }
+  .tenure-tabs { display: flex; gap: 8px; }
+  .t-tab {
+    flex: 1;
+    background: rgba(46,57,20,.05);
+    border: 1px solid rgba(46,57,20,.15);
+    border-radius: 8px;
+    padding: 8px 4px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink-2);
+    cursor: pointer;
+    transition: background .2s, border-color .2s, color .2s;
+  }
+  .t-tab.active { background: var(--gold-btn); border-color: var(--gold-btn); color: var(--olive-ink); }
+  .t-tab:hover:not(.active) { background: rgba(46,57,20,.1); }
+
+  /* ── Buttons ─────────────────────────────────────────────────────── */
+  .btn-gold {
+    background: var(--gold-btn);
+    height: 40px;
+    width: var(--cta-w);
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px 20px;
+    font-weight: 500;
+    font-size: 12px;
+    color: var(--olive-ink);
+    white-space: nowrap;
+    transition: opacity .2s;
+  }
   .btn-gold:hover { opacity: .88; }
-  .btn-ghost { height: 40px; border-radius: 9px; border: 1px solid rgba(255,255,255,.4); display: inline-flex; align-items: center; justify-content: center; padding: 7px 26px; font-weight: 600; font-size: 15px; color: #fff; transition: border-color .2s; }
-  .btn-ghost:hover { border-color: #fff; }
-  .btn-dark  { background: #333; height: 40px; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; padding: 0 24px; font-weight: 500; font-size: 12px; color: #fff; transition: opacity .2s; }
-  .btn-dark:hover { opacity: .88; }
 
-  .def-row { display: grid; grid-template-columns: 5fr 7fr; gap: 72px; align-items: start; }
-  .def-body { display: flex; flex-direction: column; gap: 20px; font-size: 17px; line-height: 1.7; color: var(--ink-3); }
+  /* ── Cards ───────────────────────────────────────────────────────── */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 24px;
+    padding: var(--container-pad);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
 
-  .cat-grid { border: 1px solid var(--card-border); border-radius: 24px; overflow: hidden; display: grid; grid-template-columns: repeat(4,1fr); background: var(--card); }
-  .cat { background: var(--card); padding: 32px; display: flex; flex-direction: column; gap: 12px; border-right: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border); }
-  .cat:nth-child(4n) { border-right: 0; }
-  .cat:nth-last-child(-n+4) { border-bottom: 0; }
-  .cat:last-child { border-bottom: 0; }
+  /* ── Category grid ───────────────────────────────────────────────── */
+  .cat-grid {
+    border: 1px solid var(--card-border);
+    border-radius: 24px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background: var(--card);
+  }
+  .cat {
+    background: var(--card);
+    padding: var(--container-pad);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border-right: 1px solid var(--card-border);
+    border-bottom: 1px solid var(--card-border);
+  }
+  .cat:nth-child(3n) { border-right: 0; }
+  .cat:last-child { border-bottom: 0; border-right: 0; }
   .cat h4 { font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.5; }
   .cat p  { font-weight: 400; font-size: 16px; color: var(--muted); line-height: 1.5; }
-  .cat-cta { margin-top: auto; font-size: 14px; font-weight: 600; color: var(--gold-2); transition: opacity .2s; }
-  .cat-cta:hover { opacity: .8; }
 
-  .cat-dark { background: var(--olive-deep); border: 1px solid rgba(255,255,255,.06); padding: 32px; display: flex; flex-direction: column; gap: 12px; border-right: 1px solid rgba(255,255,255,.06); border-bottom: 1px solid rgba(255,255,255,.06); }
-  .cat-dark:nth-child(4n) { border-right: 0; }
-  .cat-dark:nth-last-child(-n+4) { border-bottom: 0; }
-  .cat-dark h4 { font-weight: 500; font-size: 20px; color: #fff; line-height: 1.5; }
-  .cat-dark p  { font-weight: 400; font-size: 16px; color: rgba(255,255,255,.72); line-height: 1.5; }
+  /* ── Route cards (2×2 dark) ──────────────────────────────────────── */
+  .routes-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .route-card {
+    background: var(--olive-deep);
+    border: 1px solid rgba(255,255,255,.07);
+    border-radius: 24px;
+    padding: var(--container-pad);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .route-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .route-idx { font-weight: 400; font-size: 13px; color: rgba(255,255,255,.45); letter-spacing: .6px; }
+  .route-tag { font-size: 11px; font-weight: 500; background: rgba(243,184,63,.15); color: var(--gold-2); border-radius: 6px; padding: 3px 10px; white-space: nowrap; flex: none; }
+  .route-body { display: flex; flex-direction: column; gap: 10px; }
+  .route-body h4 { font-weight: 500; font-size: 20px; color: #fff; line-height: 1.5; }
+  .route-body p  { font-weight: 400; font-size: 15px; color: rgba(255,255,255,.7); line-height: 1.6; }
 
-  .mkt-head { display: flex; gap: 12px; align-items: flex-start; }
-  .mkt-icon { font-size: 28px; line-height: 1; flex: none; }
-  .mkt-idx  { font-size: 12px; font-weight: 500; color: var(--gold-2); }
+  /* ── Two / three column rows ─────────────────────────────────────── */
+  .row-2 { display: flex; gap: 32px; align-items: stretch; }
+  .row-2 .card { flex: 1 0 0; min-width: 0; }
+  .row-3 { display: flex; gap: 24px; align-items: stretch; }
+  .row-3 .card { flex: 1 0 0; min-width: 0; }
 
-  .way-list { display: flex; flex-direction: column; gap: 16px; }
-  .way-item { background: var(--card); border: 1px solid var(--card-border); border-radius: 20px; padding: 28px; display: flex; gap: 20px; align-items: flex-start; }
-  .way-num  { width: 32px; height: 32px; border-radius: 50%; background: var(--olive-head); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; color: var(--gold-2); flex: none; }
-  .way-title { font-weight: 600; font-size: 16px; color: var(--ink); margin-bottom: 8px; }
-  .way-desc  { font-size: 14px; color: var(--muted); line-height: 1.6; }
+  /* ── Fund grid ───────────────────────────────────────────────────── */
+  .fund-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .fund-card { gap: 12px; }
+  .fund-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    background: rgba(28,32,16,.06);
+    color: var(--olive-title);
+    border: 1px solid var(--card-border);
+    border-radius: 6px;
+    padding: 3px 10px;
+    align-self: flex-start;
+  }
 
-  .steps { background: var(--card); border: 1px solid var(--card-border); border-radius: 24px; overflow: hidden; display: flex; align-items: stretch; width: 100%; }
-  .step  { flex: 1 0 0; min-width: 0; padding: 32px; display: flex; flex-direction: column; gap: 16px; }
-  .step .num { font-weight: 400; font-size: 32px; color: var(--gold); }
+  /* ── Steps ───────────────────────────────────────────────────────── */
+  .steps {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 24px;
+    overflow: hidden;
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+  }
+  .step { flex: 1 0 0; min-width: 0; padding: var(--container-pad); display: flex; flex-direction: column; gap: 16px; }
+  .step .num { font-weight: 400; font-size: 32px; line-height: 34px; color: var(--gold); }
+  .step .st-body { display: flex; flex-direction: column; gap: 12px; }
   .step h4 { font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.5; }
   .step p  { font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.5; }
   .step-div { width: 1px; align-self: stretch; background: var(--card-border); flex: none; }
 
-  .t-wrap   { border: 1px solid var(--card-border); border-radius: 24px; overflow: hidden; background: var(--card); }
-  .t-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  table { width: 100%; border-collapse: collapse; }
-  thead tr { background: var(--olive-head); }
-  thead th { padding: 16px 24px; font-weight: 600; font-size: 14px; color: #fff; text-align: left; }
-  thead th.hl { color: var(--gold-2); }
-  tbody tr:nth-child(even) { background: var(--sec-tint); }
-  tbody td { padding: 14px 24px; font-size: 15px; color: var(--ink-2); border-top: 1px solid var(--row-line); }
-  tbody td.k  { font-weight: 600; color: var(--ink); }
-  tbody td.hl { color: var(--gold-2); font-weight: 500; }
+  /* ── Checklist cards ─────────────────────────────────────────────── */
+  .check-card { display: flex; flex-direction: column; gap: 32px; }
+  .ch-title   { font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.5; }
+  .check-list { display: flex; flex-direction: column; gap: 24px; }
+  .check-row  { display: flex; gap: 14px; align-items: flex-start; }
+  .check-row .ck  { color: var(--green); font-weight: 700; font-size: 15px; line-height: 25.5px; width: 13px; flex: none; }
+  .check-row .arr { color: var(--gold-2); font-weight: 700; font-size: 15px; line-height: 25.5px; width: 16px; flex: none; }
+  .check-row .tx  { flex: 1 0 0; min-width: 0; font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.5; }
+  .check-sep  { height: 1px; background: var(--row-line); width: 100%; }
 
-  .reg-list { display: flex; flex-direction: column; gap: 10px; }
-  .reg-list li { display: flex; gap: 8px; align-items: flex-start; font-size: 13px; color: var(--muted); line-height: 1.5; }
-  .reg-list .tk { color: var(--gold-2); font-weight: 600; flex: none; font-size: 13px; }
+  /* ── Tables ──────────────────────────────────────────────────────── */
+  .t-scroll { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .table    { background: var(--card); border-radius: 24px; overflow: hidden; display: grid; }
+  .table.bordered { border: 1px solid var(--card-border); }
+  .t3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+  .t4 { grid-template-columns: repeat(4, minmax(0,1fr)); }
+  .cell { padding: 16px 24px; display: flex; align-items: center; justify-content: center; text-align: center; }
+  .cell p { flex: 1 0 0; min-width: 0; font-size: 16px; line-height: 1.5; overflow-wrap: break-word; }
+  .th    { background: var(--olive-head); }
+  .th p  { font-weight: 600; color: #fff; }
+  .th.hi p { color: var(--gold-2); }
+  .tb    { border-top: 1px solid var(--row-line); }
+  .tb .k { font-weight: 600; color: var(--ink); }
+  .tb .v { font-weight: 400; color: var(--ink-2); }
+  .hi-cell { background: rgba(243,184,63,.06); }
+  .hi-cell .v { color: var(--olive-title); font-weight: 500; }
 
-  .faq-wrap  { padding: var(--section-y) var(--pad); background: #FFFCF3; display: flex; flex-direction: column; justify-content: center; }
+  /* ── Risk grid (2×2 dark) ────────────────────────────────────────── */
+  .risk-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .risk-card {
+    background: var(--olive-deep);
+    border: 1px solid rgba(255,255,255,.07);
+    border-radius: 24px;
+    padding: var(--container-pad);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .risk-card h4 { font-weight: 500; font-size: 20px; color: #fff; line-height: 1.5; }
+  .risk-card p  { font-weight: 400; font-size: 16px; color: rgba(255,255,255,.72); line-height: 1.5; }
+
+  /* ── Approach cards (Related Products) ──────────────────────────── */
+  .approaches { display: flex; gap: 24px; align-items: stretch; }
+  .appr {
+    flex: 1 0 0; min-width: 0;
+    background: var(--olive-deep);
+    border: 1px solid var(--olive-deep);
+    border-radius: 24px;
+    padding: var(--container-pad);
+    display: flex; gap: 32px; align-items: flex-start;
+    transition: background .25s ease, border-color .25s ease, transform .25s ease, box-shadow .25s ease;
+  }
+  .appr:hover { background: #26301a; border-color: #3a471b; transform: translateY(-4px); box-shadow: 0 18px 40px rgba(27,32,16,.28); }
+  .appr:hover .explore span:last-child { transform: translateX(6px); }
+  .appr .explore span:last-child { transition: transform .25s ease; }
+  .appr-main { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; gap: 32px; }
+  .appr .idx { font-weight: 400; font-size: 14px; color: rgba(255,255,255,.5); letter-spacing: .65px; line-height: 21px; }
+  .appr-tt { display: flex; flex-direction: column; gap: 16px; }
+  .appr h4 { font-weight: 500; font-size: 24px; color: #fff; line-height: 1.5; }
+  .appr p  { font-weight: 400; font-size: 16px; color: rgba(255,255,255,.72); line-height: 1.5; }
+  .appr .explore { display: flex; gap: 8px; align-items: flex-start; color: var(--gold-2); font-weight: 600; font-size: 15px; line-height: 24px; white-space: nowrap; flex: none; }
+
+  /* ── Demat CTA Banner ────────────────────────────────────────────── */
+  .demat-banner {
+    padding: 72px var(--pad);
+    background: var(--sec-tint);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    text-align: center;
+  }
+  .banner-title { font-weight: 400; font-size: 40px; color: var(--olive-title); line-height: 1.5; }
+  .banner-sub   { font-weight: 400; font-size: 16px; color: var(--ink-3); max-width: 440px; }
+
+  /* ── FAQ ─────────────────────────────────────────────────────────── */
+  .faq-wrap { padding: var(--section-y) var(--pad); background: #FFFCF3; display: flex; flex-direction: column; justify-content: center; }
   .faq-cols  { display: flex; gap: 48px; align-items: stretch; }
   .faq-left  { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; gap: 32px; }
   .faq-title { font-weight: 700; font-size: 38px; color: #222320; line-height: 1.3; }
@@ -472,56 +892,97 @@ const faqs = [
   .faq-item[open] .faq-v { opacity: 0; }
   .qa { padding: 0 24px 20px; }
   .qa p { font-weight: 400; font-size: 14px; color: #5a5a5a; line-height: 1.6; }
-  .faq-side  { width: 360px; flex: none; background: #4f583b; border: 1px solid rgba(255,255,255,.12); border-radius: 24px; padding: 32px; display: flex; flex-direction: column; overflow: hidden; }
-  .usr-img   { width: 140px; height: 140px; object-fit: contain; flex: none; }
-  .side-in   { margin-top: auto; padding-top: 40px; display: flex; flex-direction: column; gap: 16px; }
-  .side-tx   { display: flex; flex-direction: column; gap: 8px; color: #fff; }
+  .faq-side {
+    width: 300px; flex: none;
+    background: #4f583b;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 24px;
+    padding: 32px;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .side-in  { display: flex; flex-direction: column; gap: 20px; }
+  .side-tx  { display: flex; flex-direction: column; gap: 10px; color: #fff; }
   .side-tx h4 { font-weight: 600; font-size: 20px; line-height: 28px; }
   .side-tx p  { font-weight: 400; font-size: 14px; line-height: 1.6; color: rgba(255,255,255,.74); }
 
-  .cta-sec { padding: var(--section-y) var(--pad); display: flex; flex-direction: column; align-items: center; }
-  .cta-box { background: var(--olive-deep); border-radius: 22px; padding: 64px 60px; display: flex; flex-direction: column; align-items: center; gap: 20px; text-align: center; width: 100%; }
-  .cta-h   { font-weight: 500; font-size: 38px; color: #fff; line-height: 1.3; max-width: 560px; }
-  .cta-sub { font-weight: 400; font-size: 17px; color: rgba(255,255,255,.7); line-height: 1.5; max-width: 480px; }
-
-  @media (max-width: 1024px) {
-    .def-row { grid-template-columns: 1fr; gap: 32px; }
-    .cat-grid { grid-template-columns: repeat(2,1fr) !important; }
-    .cat-dark { grid-template-columns: repeat(2,1fr) !important; }
-    .cat:nth-child(4n) { border-right: 1px solid var(--card-border); }
-    .cat:nth-child(2n) { border-right: 0; }
-    .cat:nth-last-child(-n+4) { border-bottom: 1px solid var(--card-border); }
-    .cat:nth-last-child(-n+2) { border-bottom: 0; }
+  /* ── Final CTA ───────────────────────────────────────────────────── */
+  .cta-sec { padding: var(--section-y) var(--pad); }
+  .cta-box {
+    border-radius: 22px;
+    padding: 64px 60px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 32px; text-align: center;
   }
+  .ct-tt { display: flex; flex-direction: column; align-items: center; gap: 16px; color: var(--olive-deep); }
+  .cta-box h3 { font-weight: 500; font-size: 38px; line-height: 1.3; letter-spacing: -0.76px; }
+  .ct-sub { font-weight: 400; font-size: 17px; line-height: 1.65; color: var(--ink-2); max-width: 480px; }
+
+  /* ── Responsive ──────────────────────────────────────────────────── */
+  @media (max-width: 1100px) {
+    .routes-grid { grid-template-columns: 1fr 1fr; }
+    .approaches { flex-direction: column; }
+  }
+
   @media (max-width: 900px) {
+    .hero-inner { flex-direction: column; }
+    .hero-panel { width: 100%; margin-top: 0; }
     .steps { flex-direction: column; }
-    .step-div { width: 100%; height: 1px; align-self: auto; }
+    .step-div { width: auto; height: 1px; }
+    .row-2, .row-3 { flex-direction: column; }
+    .routes-grid { grid-template-columns: 1fr; }
+    .risk-grid { grid-template-columns: 1fr; }
+    .fund-grid { grid-template-columns: 1fr; }
     .faq-cols { flex-direction: column; }
     .faq-side { width: 100%; }
   }
+
+  @media (max-width: 820px) {
+    .appr p { max-width: none; }
+  }
+
   @media (max-width: 768px) {
-    .hero h1 { font-size: clamp(28px,7vw,40px); }
-    .sec-title { font-size: clamp(28px,7vw,40px); }
-    .faq-title { font-size: clamp(24px,6vw,38px); }
-    .cta-h { font-size: clamp(24px,6.4vw,38px); }
-    .section { padding: 56px var(--pad); min-height: 0; }
+    :root { --pad: 16px; --container-pad: 24px; --section-y: 56px; }
+    .hero-inner { padding: 80px 0 48px; }
+    .hero h1 { font-size: clamp(28px, 7vw, 40px); }
+    .hero .lead { font-size: 16px; }
+    .sec-title, .faq-title, .banner-title { font-size: clamp(28px, 7vw, 40px); }
+    .sub-title { font-size: clamp(20px, 5.4vw, 24px); }
+    .sec-lead, .sub-lead, .card-p, .step p, .check-row .tx, .cell p, .banner-sub { font-size: 14px; }
+    .cell { padding: 12px 8px; }
     .cta-box { padding: 48px 24px; }
-  }
-  @media (max-width: 560px) {
+    .cta-box h3 { font-size: clamp(24px, 6.4vw, 38px); }
     .cat-grid { grid-template-columns: 1fr !important; }
-    .cat { border-right: 0 !important; border-bottom: 1px solid var(--card-border) !important; }
-    .cat:last-child { border-bottom: 0 !important; }
-    .cat-dark { grid-template-columns: 1fr !important; }
-    .cat-dark { border-right: 0 !important; border-bottom: 1px solid rgba(255,255,255,.08) !important; }
-    .cat-dark:last-child { border-bottom: 0 !important; }
+    .cat { border-right: 0 !important; }
   }
-  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+  @media (max-width: 560px) {
+    .t3 { grid-template-columns: repeat(3, minmax(130px, 1fr)); }
+    .t4 { grid-template-columns: repeat(4, minmax(120px, 1fr)); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .appr, .appr .explore span:last-child { transition: none; }
+    .faq-v { transition: none; }
+  }
 </style>
 
 <script>
-  document.querySelectorAll<HTMLDetailsElement>('.faq-item details').forEach(d => {
-    d.addEventListener('toggle', () => {
-      if (d.open) document.querySelectorAll<HTMLDetailsElement>('.faq-item details').forEach(o => { if (o !== d) o.removeAttribute('open'); });
+  document.querySelectorAll<HTMLButtonElement>('[data-tab]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.closest('.tenure-tabs')?.querySelectorAll('[data-tab]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+
+  document.querySelectorAll('.faq-acc').forEach(acc => {
+    acc.querySelectorAll('details').forEach(d => {
+      d.addEventListener('toggle', () => {
+        if ((d as HTMLDetailsElement).open) {
+          acc.querySelectorAll<HTMLDetailsElement>('details').forEach(o => {
+            if (o !== d) o.removeAttribute('open');
+          });
+        }
+      });
     });
   });
 </script>
