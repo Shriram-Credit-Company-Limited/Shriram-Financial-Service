@@ -2,54 +2,48 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const equityTypes = [
-  {
-    label: 'Common Equity Shares',
-    desc: 'The most widely traded shares. Investors receive voting rights and participate in the company\'s profits through dividends and price appreciation.',
-  },
-  {
-    label: 'Preferred Equity Shares',
-    desc: 'Preferred shareholders receive preference in dividend payments over common shareholders. These shares generally carry limited or no voting rights.',
-  },
+  { label: 'Common Equity Shares',   desc: 'The most widely traded shares. Investors receive voting rights and participate in the company\'s profits through dividends and price appreciation.' },
+  { label: 'Preferred Equity Shares', desc: 'Preferred shareholders receive preference in dividend payments over common shareholders. These shares generally carry limited or no voting rights.' },
 ];
 
 const eligibility = [
   'Indian resident (NRIs can invest through specific routes)',
-  'Valid PAN card mandatory for all account holders',
+  'Valid PAN card',
   'Active bank account in your name',
-  'Completed KYC verification as per SEBI regulations',
+  'Completed KYC verification',
   '18+ years of age (minors can invest through guardians)',
 ];
 
 const documents = [
   'PAN card (mandatory)',
   'Aadhaar card for identity verification',
-  'Address proof — Aadhaar, Passport, or Utility Bill',
-  'Cancelled cheque or recent bank statement',
-  'Passport-size photograph (JPEG format)',
+  'Address proof (Aadhaar, Passport, Utility Bill)',
+  'Cancelled cheque or bank statement',
+  'Passport-size photograph',
   'Valid mobile number and email ID',
 ];
 
 const steps = [
-  { n: '1', title: 'Open Demat & Trading Account', desc: 'Open a Demat and trading account online with Shriram in minutes.' },
+  { n: '1', title: 'Open Demat & Trading Account',      desc: 'Open a Demat and trading account online with Shriram in minutes.' },
   { n: '2', title: 'Complete PAN / KYC / Bank Linking', desc: 'Submit your PAN, complete KYC with Aadhaar and link your bank account.' },
-  { n: '3', title: 'Search and Analyse Stocks', desc: 'Use research tools, screeners and expert analysis to identify quality stocks.' },
-  { n: '4', title: 'Buy, Hold, Sell & Track', desc: 'Execute trades, build your portfolio and track holdings to grow your wealth.' },
+  { n: '3', title: 'Search and Analyse Stocks',         desc: 'Use research tools, screeners and expert analysis to identify quality stocks.' },
+  { n: '4', title: 'Buy, Hold, Sell & Track',           desc: 'Execute trades, build your portfolio and track holdings to grow your wealth.' },
 ];
 
 const brokerageRows = [
-  { label: 'Brokerage',        delivery: '₹0 (Zero)',                         intraday: '₹20 per executed order',         fo: '₹20 per executed order' },
-  { label: 'STT',              delivery: '0.1% on sell side',                  intraday: '0.025% on buy & sell side',      fo: '0.02% on sell side' },
-  { label: 'GST',              delivery: '18% on brokerage + exchange charges', intraday: '18% on brokerage + exchange charges', fo: '18% on brokerage + exchange charges' },
-  { label: 'DP Charges',       delivery: '₹15.93 per scrip on sell',           intraday: 'N/A',                            fo: 'N/A' },
-  { label: 'Exchange Charges', delivery: '0.00345% (NSE) / 0.00375% (BSE)',    intraday: '0.00345% (NSE) / 0.00375% (BSE)', fo: '0.002%' },
+  { label: 'Brokerage',        delivery: '0.03%',               intraday: '0.03%',                   fo: '0.03%' },
+  { label: 'STT',              delivery: '0.1%',                 intraday: '0.025%',                  fo: '0.02%' },
+  { label: 'GST',              delivery: '18% on brokerage',     intraday: '18% on brokerage',        fo: '18% on brokerage' },
+  { label: 'DP Charges',       delivery: '₹15 per stock',        intraday: 'N/A',                     fo: 'N/A' },
+  { label: 'Exchange Charges', delivery: '0.00325%',             intraday: '0.00325%',                fo: '0.002%' },
 ];
 
 const taxRows = [
-  { feature: 'Holding Period',       stcg: 'Up to 12 months',          ltcg: 'More than 12 months' },
-  { feature: 'Tax Rate',             stcg: '20% Flat',                  ltcg: '12.5%' },
-  { feature: 'Tax-Free Limit',       stcg: 'Nil (taxed from ₹1)',       ltcg: 'Up to ₹1.25 Lakh per year' },
-  { feature: 'Indexation Benefit',   stcg: 'Not Applicable',            ltcg: 'Not Applicable' },
-  { feature: 'Applicable Section',   stcg: 'Section 111A',              ltcg: 'Section 112A' },
+  { feature: 'Holding Period',     stcg: 'Up to 12 months',       ltcg: 'More than 12 months' },
+  { feature: 'Tax Rate',           stcg: '20% flat',               ltcg: '12.5%' },
+  { feature: 'Tax-Free Limit',     stcg: 'Nil (taxed from ₹1)',    ltcg: 'Up to ₹1.25 lakh per year' },
+  { feature: 'Indexation Benefit', stcg: 'Not Applicable',         ltcg: 'Not Applicable' },
+  { feature: 'Applicable Section', stcg: 'Section 111A',           ltcg: 'Section 112A' },
 ];
 
 const categories = [
@@ -59,7 +53,7 @@ const categories = [
   { label: 'Growth Stocks',   desc: 'Companies expected to grow earnings faster than the broader market.' },
   { label: 'Dividend Stocks', desc: 'Companies that share regular profits with shareholders as dividends.' },
   { label: 'Value Stocks',    desc: 'Stocks trading below their intrinsic worth — potentially undervalued.' },
-  { label: 'Blue Chip',       desc: 'Well-established, financially sound market leaders with a strong record.' },
+  { label: 'Blue Chip Stocks', desc: 'Well-established, financially sound market leaders with a strong record.' },
   { label: 'Cyclical Stocks', desc: 'Stocks whose performance moves in line with broader economic cycles.' },
 ];
 
@@ -69,10 +63,10 @@ const research = [
 ];
 
 const strategyRows = [
-  { label: 'Holding Period',   intraday: 'Same day (square-off before close)', swing: '2 days to a few weeks',       lt: '1+ years (often 5–10+ years)' },
-  { label: 'Time Commitment',  intraday: 'High — active monitoring',           swing: 'Moderate — daily/weekly check', lt: 'Low — periodic review' },
-  { label: 'Capital Required', intraday: 'Lower entry, margin common',         swing: 'Moderate',                     lt: 'Can start small via SIP (₹500+)' },
-  { label: 'Risk Level',       intraday: 'Very High',                          swing: 'High',                         lt: 'Moderate to Low' },
+  { label: 'Holding Period',   intraday: 'Same day (square-off before close)', swing: '2 days to a few weeks',        lt: '1+ years (often 5–10+ years)' },
+  { label: 'Time Commitment',  intraday: 'High — active monitoring',           swing: 'Moderate — daily / weekly check', lt: 'Low — periodic review' },
+  { label: 'Capital Required', intraday: 'Lower entry, margin common',         swing: 'Moderate',                      lt: 'Can start small via SIP (₹500+)' },
+  { label: 'Risk Level',       intraday: 'Very High',                          swing: 'High',                          lt: 'Moderate to Low' },
 ];
 
 const vsRows = [
@@ -94,12 +88,13 @@ const risks = [
 ];
 
 const faqs = [
-  { q: 'What is the difference between large-cap, mid-cap and small-cap stocks?', a: 'Large-cap stocks are the top 100 companies by market capitalisation and tend to be stable. Mid-caps (ranked 101–250) balance growth and stability, while small-caps (beyond 250) offer higher growth potential at higher risk.' },
-  { q: 'How is stock market profit taxed in India in 2026?', a: 'Short-term capital gains (held up to 12 months) are taxed at 20% flat, while long-term gains (held over 12 months) are taxed at 12.5% beyond the ₹1.25 lakh annual exemption.' },
-  { q: 'What is a P/E ratio and why does it matter for investors?', a: 'The price-to-earnings (P/E) ratio compares a stock\'s price to its earnings per share. It helps investors gauge whether a stock is over- or under-valued relative to its peers and historical levels.' },
-  { q: 'Should I invest a lump sum or use SIP for equity investments?', a: 'A SIP spreads investments over time and averages out market volatility, making it ideal for most investors. Lump-sum investing can work when markets are favourable and you have a longer horizon and higher risk appetite.' },
-  { q: 'How do I evaluate if a stock is fundamentally strong?', a: 'Assess consistent revenue and profit growth, low debt, healthy return ratios (ROE / ROCE), strong cash flows and competent management. Combine these fundamentals with reasonable valuations before investing.' },
-  { q: 'What is the minimum amount needed to start equity investing?', a: 'No regulatory minimum exists. You can start with the price of one share — many blue-chips trade under ₹500. Zero delivery brokerage at Shriram means no extra cost for buy-and-hold investors.' },
+  { q: 'What is a Demat Account?',                                              a: 'A Demat (dematerialised) account holds your shares and securities in electronic form, replacing physical certificates. It lets you buy, sell and hold equities, bonds, ETFs and mutual funds safely, with instant electronic settlement of trades.' },
+  { q: 'What are the benefits of a Demat Account?',                             a: 'A Demat account removes the risks of physical certificates — theft, loss and forgery — and enables faster, paperless settlement. You get a single consolidated view of your holdings, easy access to corporate actions such as dividends and bonuses, and the ability to trade from anywhere.' },
+  { q: 'What are the brokerage charges for options trading with Shriram?',      a: 'Shriram charges a flat brokerage of 0.03% per executed order for options trading. Use the Brokerage Calculator to estimate the total cost — including brokerage, STT and exchange charges — before placing any trade.' },
+  { q: 'Are there any charges associated with the Demat Account?',              a: 'Typical charges include a one-time account opening fee (often waived), an annual maintenance charge (AMC) and per-transaction DP charges. Shriram keeps these fully transparent so you can review the complete schedule before you open your account.' },
+  { q: 'What is Intraday brokerage and Option brokerage?',                      a: 'Intraday brokerage applies to positions bought and sold within the same trading day, while option brokerage applies to options contracts. Both are charged per executed order — estimate the exact cost of any trade with our Brokerage Calculator.' },
+  { q: 'Can I have multiple Demat Accounts?',                                   a: 'Yes. You may hold more than one Demat account across different depository participants, but you cannot open two accounts with the same DP under the same PAN. Your PAN links all accounts for tax and regulatory purposes.' },
+  { q: 'Is a Demat Account mandatory for applying for an IPO?',                 a: 'Yes. To receive shares allotted in an IPO in electronic form you need a Demat account. You can apply via ASBA through your bank or broker, and any allotted shares are credited directly to your Demat account.' },
 ];
 ---
 
@@ -112,10 +107,8 @@ const faqs = [
   <section class="hero">
     <div class="hero-inner">
       <h1>Build Long-Term Wealth Through <span class="g">Equity Investing</span></h1>
-      <p class="lead">Buy and invest in equity stocks in India with live market data, deep research insights, stock analysis tools, and expert-backed guidance from Shriram Financial Services.</p>
-      <div class="cta-row">
-        <a class="btn-gold" href="/about/open-demat-account/">Open Demat Account</a>
-      </div>
+      <p class="lead">Buy and invest in equity stocks in India with live market data, deep research insights, stock analysis tools and expert-backed guidance from Shriram.</p>
+      <div class="cta"><a class="btn-gold" href="/about/open-demat-account/">Open Demat Account</a></div>
       <div class="hero-feats">
         <div class="feats">
           <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;SEBI-registered</span></div>
@@ -128,23 +121,23 @@ const faqs = [
   </section>
 
   <!-- ══ 2. WHAT ARE EQUITY STOCKS ════════════════════════════════════ -->
-  <section class="section stack" id="sec-about" style="background:var(--sec-light);gap:56px">
+  <section class="section stack" id="sec-about" style="background:var(--sec-light);gap:56px;justify-content:center">
     <div class="stack" style="gap:16px">
-      <p class="sec-title">What Are Equity Stocks?</p>
+      <h2 class="sec-title">What Are Equity Stocks?</h2>
       <p class="sec-lead">Equity stocks, also known as shares, represent ownership in a company. When you purchase equity shares, you become a partial owner of that company and gain rights to a portion of its assets and earnings. In India, equity stocks trade on two major exchanges, with all activity regulated by the Securities and Exchange Board of India (SEBI) to protect investor interests.</p>
     </div>
     <div class="stack" style="gap:32px">
       <div class="stack" style="gap:16px">
-        <p class="sub-title">Where Equity Stocks Trade</p>
-        <p class="sub-lead">The market functions through two primary exchanges that enable transparent, electronic trading of shares.</p>
+        <h3 class="sub-title">Where Equity Stocks Trade</h3>
+        <p class="sub-lead">The market functions through two primary exchanges that enable transparent, electronic trading of shares:</p>
       </div>
       <div class="row-2">
         <div class="card" style="border-color:var(--card-border-soft)">
-          <p class="card-h">National Stock Exchange</p>
+          <h4 class="card-h">National Stock Exchange</h4>
           <p class="card-p">India's largest exchange by trading volume, offering electronic trading across equities, derivatives and debt instruments with high liquidity and transparent price discovery.</p>
         </div>
         <div class="card" style="border-color:var(--card-border-soft)">
-          <p class="card-h">Bombay Stock Exchange</p>
+          <h4 class="card-h">Bombay Stock Exchange</h4>
           <p class="card-p">Asia's oldest stock exchange, home to thousands of listed companies and the benchmark Sensex index, providing a deep and well-regulated marketplace for investors.</p>
         </div>
       </div>
@@ -154,19 +147,19 @@ const faqs = [
   <!-- ══ 3. TYPES OF EQUITY STOCKS ════════════════════════════════════ -->
   <section class="section stack" id="sec-types" style="background:var(--sec-tint);gap:56px;justify-content:center">
     <div class="stack" style="gap:16px">
-      <p class="sec-title">Types of Equity Stocks</p>
+      <h2 class="sec-title">Types of Equity Stocks</h2>
       <p class="sec-lead">Stocks are grouped two ways — by the rights they carry, and by the size and style of the company behind them.</p>
     </div>
 
     <div class="stack" style="gap:32px">
       <div class="stack" style="gap:16px">
-        <p class="sub-title">By Shareholder Rights</p>
+        <h3 class="sub-title">By Shareholder Rights</h3>
         <p class="sub-lead">Companies issue different classes of shares, each carrying its own rights to voting, dividends and profits.</p>
       </div>
       <div class="row-2">
         {equityTypes.map(t => (
           <div class="card">
-            <p class="card-h">{t.label}</p>
+            <h4 class="card-h">{t.label}</h4>
             <p class="card-p">{t.desc}</p>
           </div>
         ))}
@@ -175,7 +168,7 @@ const faqs = [
 
     <div class="stack" style="gap:32px">
       <div class="stack" style="gap:16px">
-        <p class="sub-title">By Size and Style</p>
+        <h3 class="sub-title">By Size and Style</h3>
         <p class="sub-lead">The main categories investors use to classify and compare stocks.</p>
       </div>
       <div class="cat-grid">
@@ -191,7 +184,7 @@ const faqs = [
   <!-- ══ 4. HOW TO START INVESTING ════════════════════════════════════ -->
   <section class="section stack" id="sec-getting-started" style="background:var(--sec-light);gap:56px;align-items:center;justify-content:center">
     <div class="stack" style="gap:16px;width:100%">
-      <p class="sec-title">How to Start Investing</p>
+      <h2 class="sec-title">How to Start Investing</h2>
       <p class="sec-lead">Four simple steps from sign-up to your first trade — plus exactly what you'll need to qualify.</p>
     </div>
 
@@ -200,6 +193,7 @@ const faqs = [
         <>
           {i > 0 && <div class="step-div"></div>}
           <div class="step">
+            <div class="num">{s.n}</div>
             <div class="st-body">
               <h4>{s.title}</h4>
               <p>{s.desc}</p>
@@ -211,12 +205,12 @@ const faqs = [
 
     <div class="stack" style="gap:32px;width:100%">
       <div class="stack" style="gap:16px">
-        <p class="sub-title">Eligibility &amp; Documents</p>
+        <h3 class="sub-title">Eligibility &amp; Documents</h3>
         <p class="sub-lead">Everything you need to qualify and complete your account opening.</p>
       </div>
       <div class="row-2">
         <div class="card check-card">
-          <p class="ch-title">Eligibility Criteria</p>
+          <h4 class="ch-title">Eligibility Criteria</h4>
           <div class="check-list">
             {eligibility.map((item, i) => (
               <>
@@ -227,7 +221,7 @@ const faqs = [
           </div>
         </div>
         <div class="card check-card">
-          <p class="ch-title">Documents Required</p>
+          <h4 class="ch-title">Documents Required</h4>
           <div class="check-list">
             {documents.map((item, i) => (
               <>
@@ -239,20 +233,18 @@ const faqs = [
         </div>
       </div>
     </div>
-
-    <a class="btn-gold" href="/about/open-demat-account/" style="align-self:center">Open Demat Account</a>
   </section>
 
   <!-- ══ 5. COSTS & TAXES ══════════════════════════════════════════════ -->
   <section class="section stack" id="sec-costs" style="background:var(--sec-tint);gap:56px;justify-content:center">
     <div class="stack" style="gap:16px">
-      <p class="sec-title">Costs &amp; Taxes</p>
+      <h2 class="sec-title">Costs &amp; Taxes</h2>
       <p class="sec-lead" style="color:var(--ink-2)">What you pay to trade, and how your gains are taxed — with no hidden costs.</p>
     </div>
 
     <div class="stack" style="gap:32px">
       <div class="stack" style="gap:16px">
-        <p class="sub-title">Brokerage &amp; Charges</p>
+        <h3 class="sub-title">Brokerage &amp; Charges</h3>
         <p class="sub-lead" style="color:var(--ink-2)">A clear breakdown of the charges that apply across delivery, intraday and F&amp;O segments.</p>
       </div>
       <div class="t-scroll">
@@ -275,7 +267,7 @@ const faqs = [
 
     <div class="stack" style="gap:32px">
       <div class="stack" style="gap:16px">
-        <p class="sub-title">Tax on Equity Stocks — LTCG &amp; STCG</p>
+        <h3 class="sub-title">Tax on Equity Stocks — LTCG &amp; STCG</h3>
         <p class="sub-lead" style="color:var(--ink-2)">How short-term and long-term capital gains are treated for equity investors.</p>
       </div>
       <div class="t-scroll">
@@ -300,13 +292,13 @@ const faqs = [
   <!-- ══ 6. ANALYSE & DECIDE ═══════════════════════════════════════════ -->
   <section class="section stack" id="sec-analyse" style="background:var(--sec-light);gap:56px;justify-content:center">
     <div class="stack" style="gap:16px">
-      <p class="sec-title">Analyse and Decide</p>
+      <h2 class="sec-title">Analyse and Decide</h2>
       <p class="sec-lead" style="color:var(--ink-2)">How to research a stock, choose a strategy, compare your options and weigh the risks.</p>
     </div>
 
     <div class="stack" style="gap:32px">
       <div class="stack" style="gap:16px">
-        <p class="sub-title">Research Approaches</p>
+        <h3 class="sub-title">Research Approaches</h3>
         <p class="sub-lead" style="color:var(--ink-2)">Two complementary approaches, backed by data-driven insights and research-led ideas.</p>
       </div>
       <div class="approaches">
@@ -327,7 +319,7 @@ const faqs = [
 
     <div class="stack" style="gap:32px">
       <div class="stack" style="gap:16px">
-        <p class="sub-title">Top Trading Strategies</p>
+        <h3 class="sub-title">Top Trading Strategies</h3>
         <p class="sub-lead" style="color:var(--ink-2)">Match your time, capital and risk appetite to the right approach.</p>
       </div>
       <div class="t-scroll">
@@ -350,7 +342,7 @@ const faqs = [
 
     <div class="stack" style="gap:32px">
       <div class="stack" style="gap:16px">
-        <p class="sub-title">Equity Stocks vs Mutual Funds</p>
+        <h3 class="sub-title">Equity Stocks vs Mutual Funds</h3>
         <p class="sub-lead" style="color:var(--ink-2)">Compare direct equity investing with mutual funds across the factors that matter most.</p>
       </div>
       <div class="t-scroll">
@@ -371,7 +363,7 @@ const faqs = [
 
     <div class="stack" style="gap:32px">
       <div class="stack" style="gap:16px">
-        <p class="sub-title">Risks to Weigh</p>
+        <h3 class="sub-title">Risks to Weigh</h3>
         <p class="sub-lead" style="color:var(--ink-2)">Understand what can move against you before you commit capital.</p>
       </div>
       <div class="risks">
@@ -388,26 +380,44 @@ const faqs = [
   </section>
 
   <!-- ══ 7. GENERAL QUESTIONS (FAQ) ═══════════════════════════════════ -->
-  <section class="faq-wrap" id="sec-faq">
+  <section class="faq-wrap" id="sec-faq" style="background:var(--sec-tint)">
     <div class="faq-cols">
       <div class="faq-left">
-        <p class="faq-title">General Questions</p>
+        <h2 class="faq-title">General Questions</h2>
         <div class="faq-acc">
           {faqs.map((item, i) => (
-            <details class="faq-item">
-              <summary class="faq-sum">
+            <div class={`faq-item${i === 0 ? ' open' : ''}`}>
+              <button class="faq-q" type="button">
                 <span class="qt">{item.q}</span>
-                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="faq-icon">
-                  <path d="M2 8h12"/>
-                  <path class="faq-v" d="M8 2v12"/>
-                </svg>
-              </summary>
-              <div class="qa"><p>{item.a}</p></div>
-            </details>
+                <span class="faq-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <line class="v" x1="12" y1="5" x2="12" y2="19" stroke="#404040" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="5" y1="12" x2="19" y2="12" stroke="#404040" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </button>
+              <div class="qa-wrap">
+                <div class="qa"><p>{item.a}</p></div>
+              </div>
+            </div>
           ))}
         </div>
       </div>
-
+      <div class="faq-side">
+        <div class="usr" aria-hidden="true">
+          <svg viewBox="0 0 128 144" fill="none" xmlns="http://www.w3.org/2000/svg" width="128" height="144">
+            <circle cx="64" cy="48" r="32" stroke="#2d3813" stroke-width="2"/>
+            <path d="M8 144c0-30.928 25.072-56 56-56s56 25.072 56 56" stroke="#2d3813" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="side-in">
+          <div class="side-tx">
+            <h3>Need A Clearer Direction?</h3>
+            <p>Let's get in touch on a 15-minute call where we would be able to answer any questions you may have. Our advisor will additionally help map your wealth mix and demonstrate what a dedicated advisor would do differently.</p>
+          </div>
+          <a class="btn-gold" href="/about/support/">Book A Discovery Call</a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -448,37 +458,69 @@ const faqs = [
     --gold-ink: #231a06;
     --olive-ink: #2e3914;
     --green: #009d58;
-    --blue: #2f7ef4;
     --pad: clamp(20px, 8vw, 144px);
     --container-pad: 32px;
     --section-y: 72px;
     --cta-w: 220px;
+    --hero-text-w: 600px;
   }
 
-  /* ── Base ────────────────────────────────────────────────────────── */
   *, *::before, *::after { box-sizing: border-box; }
   a { color: inherit; text-decoration: none; }
-  p { line-height: 1.5; }
 
   /* ── Section shell ───────────────────────────────────────────────── */
-  .section {
-    padding: var(--section-y) var(--pad);
-    min-height: 100vh;
-    min-height: 100dvh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  #sec-about { min-height: 0; }
+  .section { padding: var(--section-y) var(--pad); display: flex; flex-direction: column; }
   .stack { display: flex; flex-direction: column; }
 
   /* ── Typography ──────────────────────────────────────────────────── */
-  .sec-title  { font-weight: 400; font-size: 40px; color: var(--olive-title); text-transform: capitalize; line-height: 1.5; }
-  .sec-lead   { font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.5; }
-  .sub-title  { font-weight: 500; font-size: 24px; color: var(--ink); line-height: 1.5; }
-  .sub-lead   { font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.5; }
-  .card-h     { font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.5; }
-  .card-p     { font-weight: 400; font-size: 16px; color: var(--muted); line-height: 1.5; }
+  .sec-title { font-weight: 400; font-size: 40px; color: var(--olive-title); text-transform: capitalize; line-height: 1.5; }
+  .sec-lead  { font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.5; }
+  .sub-title { font-weight: 500; font-size: 24px; color: var(--ink); line-height: 1.5; }
+  .sub-lead  { font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.5; }
+  .card-h    { font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.5; }
+  .card-p    { font-weight: 400; font-size: 16px; color: var(--muted); line-height: 1.5; }
+
+  /* ── Hero ────────────────────────────────────────────────────────── */
+  .hero {
+    min-height: clamp(440px, 29vw, 552px);
+    padding: 0 var(--pad);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    background: radial-gradient(125% 210% at 100% -8%, #4f583b 0%, #363a2c 50%, #1d1d1d 100%);
+  }
+  .hero-inner { padding: 56px 0; display: flex; flex-direction: column; }
+  .hero h1 { font-weight: 500; font-size: 40px; color: #fff; line-height: 1.5; max-width: var(--hero-text-w); }
+  .hero h1 .g { color: var(--gold-2); }
+  .hero .lead { margin-top: 16px; font-weight: 400; font-size: 18px; line-height: 1.5; color: rgba(255,255,255,.74); max-width: var(--hero-text-w); }
+  .hero .cta { margin-top: 40px; }
+  .hero-feats { margin-top: 40px; width: 100%; }
+  .feats { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; width: 100%; max-width: 760px; padding-top: 36px; border-top: 1px solid rgba(255,255,255,.16); }
+  .feat { display: flex; gap: 8px; align-items: center; }
+  .feat .tk { color: var(--gold-2); font-weight: 500; font-size: 15px; line-height: 1.5; width: 12px; }
+  .feat .lb { color: rgba(255,255,255,.9); font-weight: 500; font-size: 16px; line-height: 1.5; white-space: nowrap; }
+
+  /* ── Buttons ─────────────────────────────────────────────────────── */
+  .btn-gold {
+    background: var(--gold-btn);
+    height: 40px;
+    width: var(--cta-w);
+    border: 0;
+    border-radius: 4px;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    font-family: inherit;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 20px;
+    font-weight: 500;
+    font-size: 12px;
+    color: var(--olive-ink);
+    white-space: nowrap;
+  }
 
   /* ── Cards ───────────────────────────────────────────────────────── */
   .card {
@@ -490,58 +532,6 @@ const faqs = [
     flex-direction: column;
     gap: 16px;
   }
-
-  /* ── Hero ────────────────────────────────────────────────────────── */
-  .hero {
-    padding: 0 var(--pad);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    overflow: hidden;
-    background: radial-gradient(125% 210% at 100% -8%, #4f583b 0%, #363a2c 50%, #1d1d1d 100%);
-  }
-  .hero-inner { padding: clamp(80px,12vw,140px) 0 clamp(48px,6vw,80px); display: flex; flex-direction: column; }
-  .hero h1 { font-weight: 500; font-size: 40px; color: #fff; line-height: 1.5; max-width: 860px; }
-  .hero h1 .g { color: var(--gold-2); }
-  .hero .lead { margin-top: 32px; font-weight: 400; font-size: 18px; line-height: 1.5; color: rgba(255,255,255,.74); max-width: 600px; }
-  .cta-row { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
-  .hero-feats { margin-top: 40px; }
-  .feats { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 16px; max-width: 760px; padding-top: 36px; border-top: 1px solid rgba(255,255,255,.16); }
-  .feat { display: flex; gap: 10px; align-items: center; }
-  .feat .tk { color: var(--gold-2); font-weight: 500; font-size: 15px; width: 13px; }
-  .feat .lb { color: rgba(255,255,255,.9); font-weight: 500; font-size: 16px; line-height: 1.5; white-space: nowrap; }
-
-  /* ── Buttons ─────────────────────────────────────────────────────── */
-  .btn-gold {
-    background: var(--gold-btn);
-    height: 40px;
-    width: var(--cta-w);
-    border-radius: 4px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 7px 20px;
-    font-weight: 500;
-    font-size: 12px;
-    color: var(--olive-ink);
-    white-space: nowrap;
-    transition: opacity .2s;
-  }
-  .btn-gold:hover { opacity: .88; }
-  .btn-ghost {
-    height: 40px;
-    border-radius: 9px;
-    border: 1px solid rgba(255,255,255,.4);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 7px 26px;
-    font-weight: 600;
-    font-size: 15px;
-    color: #fff;
-    transition: border-color .2s;
-  }
-  .btn-ghost:hover { border-color: #fff; }
 
   /* ── Two-card row ────────────────────────────────────────────────── */
   .row-2 { display: flex; gap: 32px; align-items: stretch; }
@@ -565,8 +555,8 @@ const faqs = [
     border-right: 1px solid var(--card-border);
     border-bottom: 1px solid var(--card-border);
   }
-  .cat:nth-child(4n)    { border-right: 0; }
-  .cat:nth-child(n+5)   { border-bottom: 0; }
+  .cat:nth-child(4n)  { border-right: 0; }
+  .cat:nth-child(n+5) { border-bottom: 0; }
   .cat h4 { font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.5; }
   .cat p  { font-weight: 400; font-size: 16px; color: var(--muted); line-height: 1.5; }
 
@@ -581,32 +571,32 @@ const faqs = [
     width: 100%;
   }
   .step { flex: 1 0 0; min-width: 0; padding: var(--container-pad); display: flex; flex-direction: column; gap: 16px; }
-  .step .num { font-weight: 400; font-size: 32px; line-height: 34px; color: var(--gold); }
+  .step .num { font-weight: 400; font-size: 32px; line-height: 1; color: var(--gold); }
   .step .st-body { display: flex; flex-direction: column; gap: 12px; }
   .step h4 { font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.5; }
   .step p  { font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.5; }
   .step-div { width: 1px; align-self: stretch; background: var(--card-border); flex: none; }
 
   /* ── Checklist cards ─────────────────────────────────────────────── */
-  .check-card { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; gap: 32px; }
+  .row-2 .check-card { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; gap: 32px; }
   .ch-title   { font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.5; }
   .check-list { display: flex; flex-direction: column; gap: 24px; }
-  .check-row  { display: flex; gap: 14px; align-items: flex-start; }
-  .check-row .ck { color: var(--green); font-weight: 700; font-size: 15px; line-height: 25.5px; width: 13px; flex: none; }
+  .check-row  { display: flex; gap: 16px; align-items: flex-start; }
+  .check-row .ck { color: var(--green); font-weight: 700; font-size: 15px; line-height: 1.5; width: 12px; flex: none; }
   .check-row .tx { flex: 1 0 0; min-width: 0; font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.5; }
   .check-sep  { height: 1px; background: var(--row-line); width: 100%; }
 
   /* ── Tables ──────────────────────────────────────────────────────── */
-  .t-scroll   { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  .table      { background: var(--card); border-radius: 24px; overflow: hidden; display: grid; }
+  .t-scroll { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .table    { background: var(--card); border-radius: 24px; overflow: hidden; display: grid; }
   .table.bordered { border: 1px solid var(--card-border); }
   .t4 { grid-template-columns: repeat(4, minmax(0,1fr)); }
   .t3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
   .cell { padding: 16px 24px; display: flex; align-items: center; justify-content: center; text-align: center; }
   .cell p { flex: 1 0 0; min-width: 0; font-size: 16px; line-height: 1.5; overflow-wrap: break-word; }
-  .th { background: var(--olive-head); }
+  .th   { background: var(--olive-head); }
   .th p { font-weight: 600; color: #fff; }
-  .tb { border-top: 1px solid var(--row-line); }
+  .tb   { border-top: 1px solid var(--row-line); }
   .tb .k { font-weight: 600; color: var(--ink); }
   .tb .v { font-weight: 400; color: var(--ink-2); }
 
@@ -619,17 +609,17 @@ const faqs = [
     border-radius: 24px;
     padding: var(--container-pad);
     display: flex; gap: 32px; align-items: flex-start;
-    transition: background .25s ease, border-color .25s ease, transform .25s ease, box-shadow .25s ease;
+    transition: background .25s ease, border-color .25s ease;
   }
-  .appr:hover { background: #26301a; border-color: #3a471b; transform: translateY(-4px); box-shadow: 0 18px 40px rgba(27,32,16,.28); }
-  .appr:hover .explore span:last-child { transform: translateX(6px); }
+  .appr:hover { background: #26301a; border-color: #3a471b; }
   .appr .explore span:last-child { transition: transform .25s ease; }
+  .appr:hover .explore span:last-child { transform: translateX(8px); }
   .appr-main { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; gap: 32px; }
-  .appr .idx { font-weight: 400; font-size: 14px; color: rgba(255,255,255,.5); letter-spacing: .65px; line-height: 21.45px; }
+  .appr .idx { font-weight: 400; font-size: 14px; color: rgba(255,255,255,.5); letter-spacing: 1px; line-height: 1.5; }
   .appr-tt { display: flex; flex-direction: column; gap: 16px; }
   .appr h4 { font-weight: 500; font-size: 24px; color: #fff; line-height: 1.5; }
-  .appr p  { font-weight: 400; font-size: 16px; color: rgba(255,255,255,.72); line-height: 1.5; max-width: 450px; }
-  .appr .explore { display: flex; gap: 8px; align-items: flex-start; color: var(--gold-2); font-weight: 600; font-size: 15px; line-height: 24.75px; white-space: nowrap; flex: none; }
+  .appr p  { font-weight: 400; font-size: 16px; color: rgba(255,255,255,.72); line-height: 1.5; max-width: 448px; }
+  .appr .explore { display: flex; gap: 8px; align-items: flex-start; color: var(--gold-2); font-weight: 600; font-size: 15px; line-height: 1.5; white-space: nowrap; flex: none; }
 
   /* ── Risk cards ──────────────────────────────────────────────────── */
   .risks { display: flex; gap: 24px; align-items: stretch; }
@@ -638,49 +628,69 @@ const faqs = [
   .risk p  { font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.5; }
 
   /* ── FAQ ─────────────────────────────────────────────────────────── */
-  .faq-wrap { padding: var(--section-y) var(--pad); background: #FFFCF3; display: flex; flex-direction: column; justify-content: center; }
+  .faq-wrap  { padding: var(--section-y) var(--pad); }
   .faq-cols  { display: flex; gap: 48px; align-items: stretch; }
-  .faq-left  { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; gap: 32px; }
-  .faq-title { font-weight: 700; font-size: 38px; color: #222320; line-height: 1.3; }
-  .faq-acc   { display: flex; flex-direction: column; gap: 8px; width: 100%; }
-  .faq-item  { background: #f8f4e8; list-style: none; border-radius: 0; }
-  .faq-item:first-child { border-radius: 24px 24px 0 0; }
-  .faq-item:last-child  { border-radius: 0 0 24px 24px; }
-  .faq-sum   { display: flex; align-items: flex-start; justify-content: space-between; gap: 40px; padding: 20px 24px; cursor: pointer; list-style: none; }
-  .faq-sum::-webkit-details-marker { display: none; }
-  .faq-item .qt { font-weight: 500; font-size: 15px; color: #222320; line-height: 1.5; flex: 1; }
-  .faq-item[open] .qt { font-weight: 600; }
-  .faq-icon  { width: 16px; height: 16px; flex: none; color: #222320; }
-  .faq-v     { transition: opacity .28s ease; }
-  .faq-item[open] .faq-v { opacity: 0; }
-  .qa { padding: 0 24px 20px; }
-  .qa p { font-weight: 400; font-size: 14px; color: #5a5a5a; line-height: 1.6; }
-  .faq-side { width: 360px; flex: none; background: #4f583b; border: 1px solid rgba(255,255,255,.12); border-radius: 24px; padding: 32px; display: flex; flex-direction: column; overflow: hidden; }
-  .usr-img { width: 140px; height: 140px; object-fit: contain; flex: none; }
-  .side-in  { margin-top: auto; padding-top: 40px; display: flex; flex-direction: column; gap: 16px; }
-  .side-tx  { display: flex; flex-direction: column; gap: 8px; color: #fff; }
-  .side-tx h4 { font-weight: 600; font-size: 20px; line-height: 28px; }
-  .side-tx p  { font-weight: 400; font-size: 14px; line-height: 1.6; color: rgba(255,255,255,.74); }
+  .faq-left  { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; gap: 48px; }
+  .faq-title { font-weight: 400; font-size: 40px; color: var(--olive-title); text-transform: capitalize; line-height: 1.5; white-space: nowrap; }
+  .faq-acc   { border-radius: 24px; overflow: hidden; display: flex; flex-direction: column; gap: 2px; width: 100%; }
+  .faq-item  { background: var(--card); }
+
+  /* button accordion */
+  .faq-q {
+    width: 100%; background: none; border: 0; margin: 0; cursor: pointer; font-family: inherit;
+    padding: 24px; display: flex; gap: 40px; align-items: flex-start; text-align: left;
+  }
+  .faq-q .qt { flex: 1 0 0; min-width: 0; font-weight: 500; font-size: 14px; color: #333; line-height: 1.5; }
+  .faq-item.open .faq-q .qt { font-weight: 600; }
+  .faq-icon { width: 24px; height: 24px; flex: none; }
+  .faq-icon svg { display: block; width: 24px; height: 24px; }
+  .faq-icon svg .v {
+    transform-box: fill-box; transform-origin: center;
+    transition: transform .38s cubic-bezier(.4,0,.2,1), opacity .38s ease;
+  }
+  .faq-item.open .faq-icon svg .v { transform: scaleY(0); opacity: 0; }
+  .qa-wrap { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .38s cubic-bezier(.4,0,.2,1); }
+  .faq-item.open .qa-wrap { grid-template-rows: 1fr; }
+  .qa { overflow: hidden; min-height: 0; }
+  .qa p { padding: 0 24px 24px; font-weight: 400; font-size: 14px; color: #404040; line-height: 1.5; }
+
+  /* faq-side — light card with user avatar watermark */
+  .faq-side {
+    width: 464px; flex: none;
+    background: var(--card);
+    border-radius: 24px;
+    padding: var(--container-pad);
+    position: relative; overflow: hidden;
+    display: flex; flex-direction: column; gap: 40px; justify-content: flex-end;
+  }
+  .faq-side .usr { position: absolute; left: var(--container-pad); top: 64px; width: 128px; height: 144px; opacity: .1; }
+  .faq-side .usr svg { width: 100%; height: 100%; display: block; }
+  .faq-side .side-in { display: flex; flex-direction: column; gap: 32px; position: relative; }
+  .faq-side .side-tx { display: flex; flex-direction: column; gap: 8px; color: #222320; }
+  .faq-side .side-tx h3 { font-weight: 500; font-size: 20px; line-height: 1.5; }
+  .faq-side .side-tx p  { font-weight: 400; font-size: 14px; line-height: 1.5; color: var(--ink-3); }
 
   /* ── Final CTA ───────────────────────────────────────────────────── */
   .cta-sec { padding: var(--section-y) var(--pad); }
   .cta-box {
-    border-radius: 22px;
-    padding: 64px 60px;
+    height: 304px;
+    border-radius: 24px;
+    padding: 64px;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     gap: 32px; text-align: center;
   }
   .ct-tt { display: flex; flex-direction: column; align-items: center; gap: 16px; color: var(--olive-deep); }
-  .cta-box h3 { font-weight: 500; font-size: 38px; line-height: 42.56px; letter-spacing: -0.76px; }
-  .ct-sub { font-weight: 400; font-size: 17px; line-height: 28.05px; color: var(--ink-2); }
+  .cta-box h3 { font-weight: 500; font-size: 40px; line-height: 1.2; letter-spacing: -1px; }
+  .ct-sub { font-weight: 400; font-size: 17px; line-height: 1.5; color: var(--ink-2); }
 
   /* ── Responsive ──────────────────────────────────────────────────── */
   @media (max-width: 1024px) {
-    .cat-grid { grid-template-columns: repeat(2,1fr); }
-    .cat-grid .cat:nth-child(2n)  { border-right: 0; }
+    .cat-grid { grid-template-columns: repeat(2, 1fr); }
+    .cat-grid .cat:nth-child(2n) { border-right: 0; }
     .cat-grid .cat:nth-child(7), .cat-grid .cat:nth-child(8) { border-bottom: 0; }
     .risks { flex-wrap: wrap; }
     .risk  { flex: 1 1 calc(50% - 12px); }
+    .faq-side .usr { display: none; }
   }
 
   @media (max-width: 900px) {
@@ -688,6 +698,7 @@ const faqs = [
     .step-div { display: none; }
     .step { border-bottom: 1px solid var(--card-border); }
     .step:last-child { border-bottom: 0; }
+    .step h4 { white-space: normal !important; }
     .faq-cols { flex-direction: column; }
     .faq-side { width: 100%; }
     .faq-title { white-space: normal; }
@@ -701,7 +712,7 @@ const faqs = [
   @media (max-width: 768px) {
     :root { --pad: 16px; --container-pad: 24px; --section-y: 56px; }
     .feats { padding-top: 32px; }
-    .hero-inner { padding: 80px 0 48px; }
+    .hero-inner { padding: 48px 0; }
     .hero h1 { font-size: clamp(28px, 7vw, 40px); }
     .hero .lead { font-size: 16px; }
     .sec-title, .faq-title { font-size: clamp(28px, 7vw, 40px); }
@@ -710,10 +721,10 @@ const faqs = [
     .check-list { gap: 16px; }
     .sec-lead, .sub-lead, .card-p, .cat p, .step p,
     .check-row .tx, .appr p, .risk p, .cell p { font-size: 14px; }
-    .cell { padding: 12px 6px; }
-    .cta-box { padding: 48px; }
-    .cta-box h3 { font-size: clamp(24px, 6.4vw, 38px); line-height: 1.2; }
-    .ct-sub { font-size: 15px; line-height: 1.6; }
+    .cell { padding: 12px 8px; }
+    .cta-box { height: auto; padding: 48px; }
+    .cta-box h3 { font-size: clamp(24px, 6.4vw, 40px); line-height: 1.2; }
+    .ct-sub { font-size: 15px; }
   }
 
   @media (max-width: 560px) {
@@ -721,25 +732,25 @@ const faqs = [
     .cat { border-right: 0 !important; border-bottom: 1px solid var(--card-border) !important; }
     .cat:nth-child(8) { border-bottom: 0 !important; }
     .risk { flex: 1 1 100%; }
-    .faq-item { gap: 20px; }
+    .faq-q { gap: 20px; }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .appr, .appr .explore span:last-child { transition: none; }
-    .faq-v { transition: none; }
+    .faq-icon svg .v, .qa-wrap { transition: none; }
   }
 </style>
 
 <script>
-  /* FAQ accordion — one open at a time */
-  document.querySelectorAll('.faq-acc').forEach(function(acc) {
-    acc.querySelectorAll('details').forEach(function(d) {
-      d.addEventListener('toggle', function() {
-        if ((d as HTMLDetailsElement).open) {
-          acc.querySelectorAll<HTMLDetailsElement>('details').forEach(function(other) {
-            if (other !== d) other.removeAttribute('open');
-          });
-        }
+  /* Button accordion — one open at a time */
+  document.querySelectorAll<HTMLElement>('.faq-acc').forEach(acc => {
+    acc.querySelectorAll<HTMLElement>('.faq-item').forEach(item => {
+      const btn = item.querySelector('.faq-q');
+      if (!btn) return;
+      btn.addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+        acc.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
       });
     });
   });
