@@ -452,7 +452,7 @@ const faqs = [
   </section>
 
   <!-- ══ 9. RISKS ══════════════════════════════════════════════════════ -->
-  <section class="section stack" id="sec-risks" style="background:var(--sec-tint);gap:56px;justify-content:center;min-height:0">
+  <section class="section stack" id="sec-risks" style="background:var(--sec-tint);gap:56px;justify-content:center">
     <div class="stack" style="gap:16px">
       <p class="sec-title">Risks in Global Investing</p>
       <p class="sec-lead">Understand what can move against you before committing capital to international markets.</p>
@@ -469,7 +469,7 @@ const faqs = [
   </section>
 
   <!-- ══ 10. REGULATORY GUIDE ══════════════════════════════════════════ -->
-  <section class="section stack" id="sec-reg" style="background:var(--sec-light);gap:56px;justify-content:center;min-height:0">
+  <section class="section stack" id="sec-reg" style="background:var(--sec-light);gap:56px;justify-content:center">
     <div class="stack" style="gap:16px">
       <p class="sec-title">Regulatory Guide for Indians</p>
       <p class="sec-lead">Everything Indian residents need to know to invest globally in a legal and FEMA-compliant manner.</p>
@@ -492,7 +492,7 @@ const faqs = [
   </section>
 
   <!-- ══ 11. NEXT STEPS & RELATED PRODUCTS ════════════════════════════ -->
-  <section class="section stack" id="sec-next" style="background:var(--sec-tint);gap:56px;justify-content:center;min-height:0">
+  <section class="section stack" id="sec-next" style="background:var(--sec-tint);gap:56px;justify-content:center">
     <div class="stack" style="gap:16px">
       <p class="sec-title">Next Steps &amp; Related Products</p>
       <p class="sec-lead">Global diversification works best alongside a strong domestic foundation. Explore related products.</p>
@@ -600,13 +600,10 @@ const faqs = [
 
   .section {
     padding: var(--section-y) var(--pad);
-    min-height: 100vh;
-    min-height: 100dvh;
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
-  #sec-about, #sec-risks, #sec-reg, #sec-next { min-height: 0; }
   .stack { display: flex; flex-direction: column; }
   .g { color: var(--gold-2); }
 
