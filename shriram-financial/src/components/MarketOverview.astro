@@ -2,8 +2,8 @@
 // Live Market Overview — major Indian/global indices + commodities & currency.
 // Data is polled from /data/market.json, which a server-side cron refreshes from
 // Yahoo Finance every ~2 min (see deploy/market/market_fetch.py + SETUP.md).
-// Self-contained: mkt- prefixed classes (no collision with global/page styles);
-// uses page design tokens with hard fallbacks so it also works standalone.
+// Cards are injected client-side, so styles are is:global but scoped under `.mkt`
+// (mkt- prefixed, collision-safe) — scoped <style> would NOT reach injected nodes.
 ---
 
 <section class="mkt" id="sec-market" aria-label="Market overview">
@@ -43,73 +43,71 @@
   </p>
 </section>
 
-<style>
+<style is:global>
   .mkt {
     padding: var(--section-y, 72px) var(--pad, clamp(20px, 8vw, 144px));
     background: var(--sec-tint, #f6efe1);
     display: flex; flex-direction: column; gap: 32px;
   }
-  .mkt-head { display: flex; flex-direction: column; gap: 12px; }
-  .mkt-title { font-weight: 400; font-size: 40px; line-height: 1.5; color: var(--olive-title, #2e3914); text-transform: capitalize; }
-  .mkt-lead { font-weight: 400; font-size: 16px; line-height: 1.5; color: var(--ink-3, #595959); max-width: 760px; }
+  .mkt .mkt-head { display: flex; flex-direction: column; gap: 12px; }
+  .mkt .mkt-title { font-weight: 400; font-size: 40px; line-height: 1.5; color: var(--olive-title, #2e3914); text-transform: capitalize; }
+  .mkt .mkt-lead { font-weight: 400; font-size: 16px; line-height: 1.5; color: var(--ink-3, #595959); max-width: 760px; }
 
-  .mkt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .mkt .mkt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
 
-  .mkt-panel {
-    background: var(--card, #fffdf8); border: 1px solid var(--card-border, #e1e0db);
+  .mkt .mkt-panel {
+    background: var(--sec-light, #fef8ee); border: 1px solid var(--card-border, #e1e0db);
     border-radius: 24px; padding: 24px; display: flex; flex-direction: column; gap: 20px; min-width: 0;
   }
-  .mkt-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
-  .mkt-bar-label { font-weight: 600; font-size: 14px; color: var(--olive-title, #2e3914); letter-spacing: .01em; }
+  .mkt .mkt-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .mkt .mkt-bar-label { font-weight: 600; font-size: 14px; color: var(--olive-title, #2e3914); letter-spacing: .01em; }
 
-  .mkt-tabs { display: inline-flex; background: #f0ece1; border: 1px solid var(--card-border, #e1e0db); border-radius: 999px; padding: 4px; gap: 4px; }
-  .mkt-tab {
-    border: 0; background: none; font-family: inherit; cursor: pointer; padding: 6px 14px; border-radius: 999px;
-    font-weight: 500; font-size: 13px; line-height: 1.4; color: var(--muted, #73736a); transition: background .2s ease, color .2s ease;
+  .mkt .mkt-tabs { display: inline-flex; background: #f0ece1; border: 1px solid var(--card-border, #e1e0db); border-radius: 999px; padding: 4px; gap: 4px; }
+  .mkt .mkt-tab { border: 0; background: none; font-family: inherit; cursor: pointer; padding: 6px 14px; border-radius: 999px; font-weight: 500; font-size: 13px; line-height: 1.4; color: var(--muted, #73736a); transition: background .2s ease, color .2s ease; }
+  .mkt .mkt-tab.is-active { background: var(--olive-deep, #1b2010); color: #fff; }
+
+  .mkt .mkt-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-content: start; }
+
+  .mkt .mkt-card {
+    background: #fff; border: 1px solid var(--card-border, #e1e0db); border-radius: 14px; padding: 14px 16px;
+    display: flex; flex-direction: column; gap: 6px; min-width: 0;
+    box-shadow: 0 1px 2px rgba(28,28,22,.05);
+    transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
   }
-  .mkt-tab.is-active { background: var(--olive-deep, #1b2010); color: #fff; }
+  .mkt .mkt-card:hover { border-color: var(--olive-title, #2e3914); box-shadow: 0 6px 18px rgba(28,28,22,.08); transform: translateY(-1px); }
+  .mkt .mkt-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+  .mkt .mkt-name { font-weight: 700; font-size: 15px; line-height: 1.3; color: var(--olive-title, #2e3914); overflow-wrap: anywhere; }
+  .mkt .mkt-flag { width: 22px; height: 15px; flex: none; border-radius: 3px; object-fit: cover; box-shadow: 0 0 0 1px rgba(0,0,0,.06); margin-top: 2px; }
+  .mkt .mkt-badge { flex: none; font-weight: 600; font-size: 9px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted, #73736a); padding: 3px 7px; border: 1px solid var(--card-border, #e1e0db); border-radius: 999px; white-space: nowrap; }
+  .mkt .mkt-card-date { font-weight: 500; font-size: 11px; line-height: 1.3; color: var(--muted, #73736a); }
+  .mkt .mkt-card-row { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-top: 2px; }
+  .mkt .mkt-val { font-weight: 700; font-size: 17px; line-height: 1.25; color: #1c1c16; white-space: nowrap; }
+  .mkt .mkt-chg { display: inline-flex; align-items: baseline; gap: 4px; font-weight: 700; font-size: 12px; line-height: 1.3; white-space: nowrap; }
+  .mkt .mkt-up { color: #0a8a4f; }
+  .mkt .mkt-down { color: #d23b3b; }
+  .mkt .mkt-pct { font-weight: 500; opacity: .9; }
 
-  .mkt-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; min-height: 372px; align-content: start; }
-
-  .mkt-card {
-    background: #fff; border: 1px solid var(--card-border, #e1e0db); border-radius: 16px; padding: 16px 18px;
-    display: flex; flex-direction: column; gap: 6px; min-width: 0; justify-content: space-between;
-  }
-  .mkt-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; min-height: 22px; }
-  .mkt-name { font-weight: 700; font-size: 15px; line-height: 1.3; color: var(--olive-title, #2e3914); overflow-wrap: anywhere; }
-  .mkt-flag { width: 26px; height: 18px; flex: none; border-radius: 3px; object-fit: cover; box-shadow: 0 0 0 1px rgba(0,0,0,.06); }
-  .mkt-badge { flex: none; font-weight: 600; font-size: 10px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted, #73736a); padding: 3px 8px; border: 1px solid var(--card-border, #e1e0db); border-radius: 999px; }
-  .mkt-card-date { font-weight: 500; font-size: 11px; line-height: 1.3; color: var(--muted, #73736a); }
-  .mkt-card-row { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-top: 4px; }
-  .mkt-val { font-weight: 700; font-size: 18px; line-height: 1.25; color: #1c1c16; }
-  .mkt-chg { display: inline-flex; align-items: baseline; gap: 4px; font-weight: 700; font-size: 12.5px; line-height: 1.3; white-space: nowrap; }
-  .mkt-up { color: #0a8a4f; }
-  .mkt-down { color: #d23b3b; }
-  .mkt-pct { font-weight: 500; opacity: .9; }
-
-  /* skeleton */
-  .mkt-card.is-skel { pointer-events: none; }
-  .mkt-skel { background: linear-gradient(90deg,#efece4 25%,#f6f3ec 37%,#efece4 63%); background-size: 400% 100%; border-radius: 6px; animation: mkt-shimmer 1.3s ease infinite; }
-  .mkt-skel.l1 { height: 14px; width: 60%; }
-  .mkt-skel.l2 { height: 20px; width: 70%; }
-  .mkt-skel.l3 { height: 12px; width: 45%; }
+  .mkt .mkt-card.is-skel { pointer-events: none; }
+  .mkt .mkt-skel { background: linear-gradient(90deg,#efece4 25%,#f6f3ec 37%,#efece4 63%); background-size: 400% 100%; border-radius: 6px; animation: mkt-shimmer 1.3s ease infinite; display: block; }
+  .mkt .mkt-skel.l1 { height: 14px; width: 58%; }
+  .mkt .mkt-skel.l2 { height: 18px; width: 82%; }
+  .mkt .mkt-skel.l3 { height: 11px; width: 50%; }
   @keyframes mkt-shimmer { 0% { background-position: 100% 0; } 100% { background-position: 0 0; } }
-  @media (prefers-reduced-motion: reduce) { .mkt-skel { animation: none; } }
 
-  .mkt-empty { grid-column: 1 / -1; color: var(--muted, #73736a); font-size: 14px; padding: 24px 4px; }
+  .mkt .mkt-empty { grid-column: 1 / -1; color: var(--muted, #73736a); font-size: 14px; padding: 24px 4px; }
 
-  .mkt-foot { display: flex; align-items: center; gap: 8px; font-weight: 500; font-size: 13px; color: var(--muted, #73736a); }
-  .mkt-dot { width: 8px; height: 8px; border-radius: 50%; background: #0a8a4f; box-shadow: 0 0 0 0 rgba(10,138,79,.5); animation: mkt-pulse 2s ease infinite; flex: none; }
-  .mkt-foot.is-stale .mkt-dot { background: #c9962a; animation: none; }
-  .mkt-foot.is-error .mkt-dot { background: #d23b3b; animation: none; }
+  .mkt .mkt-foot { display: flex; align-items: center; gap: 8px; font-weight: 500; font-size: 13px; color: var(--muted, #73736a); }
+  .mkt .mkt-dot { width: 8px; height: 8px; border-radius: 50%; background: #0a8a4f; box-shadow: 0 0 0 0 rgba(10,138,79,.5); animation: mkt-pulse 2s ease infinite; flex: none; }
+  .mkt .mkt-foot.is-stale .mkt-dot { background: #c9962a; animation: none; }
+  .mkt .mkt-foot.is-error .mkt-dot { background: #d23b3b; animation: none; }
   @keyframes mkt-pulse { 0% { box-shadow: 0 0 0 0 rgba(10,138,79,.5); } 70% { box-shadow: 0 0 0 6px rgba(10,138,79,0); } 100% { box-shadow: 0 0 0 0 rgba(10,138,79,0); } }
-  @media (prefers-reduced-motion: reduce) { .mkt-dot { animation: none; } }
 
-  @media (max-width: 1024px) { .mkt-grid { grid-template-columns: 1fr; } }
-  @media (max-width: 768px) { .mkt-title { font-size: 28px; } }
+  @media (prefers-reduced-motion: reduce) { .mkt .mkt-skel, .mkt .mkt-dot { animation: none; } }
+  @media (max-width: 1024px) { .mkt .mkt-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 768px) { .mkt .mkt-title { font-size: 28px; } }
   @media (max-width: 520px) {
-    .mkt-bar { flex-direction: column; align-items: flex-start; }
-    .mkt-cards { grid-template-columns: 1fr; min-height: 0; }
+    .mkt .mkt-cards { grid-template-columns: 1fr; }
+    .mkt .mkt-bar { flex-direction: column; align-items: flex-start; }
   }
 </style>
 
@@ -124,12 +122,23 @@
 
     function esc(s) { return String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
 
+    function dateStr(epoch) {
+      const d = epoch ? new Date(epoch * 1000) : new Date();
+      try { return d.toLocaleString('en-IN', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Kolkata' }); }
+      catch (e) { return d.toLocaleString(); }
+    }
+    function timeStr(epoch) {
+      const d = epoch ? new Date(epoch * 1000) : new Date();
+      try { return d.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Kolkata' }); }
+      catch (e) { return d.toLocaleTimeString(); }
+    }
+
     function cardHTML(it) {
       const up = it.change >= 0;
       const sign = up ? '+' : '';
       const cls = up ? 'mkt-up' : 'mkt-down';
       let mark = '';
-      if (it.cat === 'indian') mark = `<img class="mkt-flag" src="${FLAG_IN}" alt="India" width="26" height="18" />`;
+      if (it.cat === 'indian') mark = `<img class="mkt-flag" src="${FLAG_IN}" alt="India" width="22" height="15" />`;
       else if (it.cat === 'global') mark = `<span class="mkt-badge">Global</span>`;
       else if (it.cat === 'currency') mark = `<span class="mkt-badge">FX</span>`;
       return (
@@ -166,18 +175,6 @@
       const t = document.getElementById('mkt-foot-text');
       if (foot) foot.className = 'mkt-foot' + (kind ? ' is-' + kind : '');
       if (t) t.textContent = text;
-    }
-
-    function timeStr(epoch) {
-      const d = epoch ? new Date(epoch * 1000) : new Date();
-      try { return d.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Kolkata' }); }
-      catch (e) { return d.toLocaleTimeString(); }
-    }
-
-    function dateStr(epoch) {
-      const d = epoch ? new Date(epoch * 1000) : new Date();
-      try { return d.toLocaleString('en-IN', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Kolkata' }); }
-      catch (e) { return d.toLocaleString(); }
     }
 
     async function load() {
