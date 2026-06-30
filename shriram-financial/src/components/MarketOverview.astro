@@ -73,17 +73,19 @@
 
   .mkt-card {
     background: #fff; border: 1px solid var(--card-border, #e1e0db); border-radius: 16px; padding: 16px 18px;
-    display: flex; flex-direction: column; gap: 10px; min-width: 0;
+    display: flex; flex-direction: column; gap: 6px; min-width: 0; justify-content: space-between;
   }
-  .mkt-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+  .mkt-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; min-height: 22px; }
   .mkt-name { font-weight: 700; font-size: 15px; line-height: 1.3; color: var(--olive-title, #2e3914); overflow-wrap: anywhere; }
   .mkt-flag { width: 26px; height: 18px; flex: none; border-radius: 3px; object-fit: cover; box-shadow: 0 0 0 1px rgba(0,0,0,.06); }
   .mkt-badge { flex: none; font-weight: 600; font-size: 10px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted, #73736a); padding: 3px 8px; border: 1px solid var(--card-border, #e1e0db); border-radius: 999px; }
-  .mkt-val { font-weight: 700; font-size: 20px; line-height: 1.25; color: #1c1c16; }
-  .mkt-chg { display: flex; align-items: baseline; gap: 8px; font-weight: 600; font-size: 13px; line-height: 1.3; }
+  .mkt-card-date { font-weight: 500; font-size: 11px; line-height: 1.3; color: var(--muted, #73736a); }
+  .mkt-card-row { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-top: 4px; }
+  .mkt-val { font-weight: 700; font-size: 18px; line-height: 1.25; color: #1c1c16; }
+  .mkt-chg { display: inline-flex; align-items: baseline; gap: 4px; font-weight: 700; font-size: 12.5px; line-height: 1.3; white-space: nowrap; }
   .mkt-up { color: #0a8a4f; }
   .mkt-down { color: #d23b3b; }
-  .mkt-chg .mkt-pct { font-weight: 500; opacity: .9; }
+  .mkt-pct { font-weight: 500; opacity: .9; }
 
   /* skeleton */
   .mkt-card.is-skel { pointer-events: none; }
@@ -114,7 +116,7 @@
 <script>
   (function () {
     const ENDPOINT = '/data/market.json';
-    const POLL_MS = 60000;
+    const POLL_MS = 120000; // 2 min — matches the server cron cadence
     const FLAG_IN = '/images/india-flag.png';
 
     const nf = new Intl.NumberFormat('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -133,9 +135,11 @@
       return (
         `<div class="mkt-card">` +
           `<div class="mkt-card-top"><span class="mkt-name">${esc(it.name)}</span>${mark}</div>` +
-          `<div class="mkt-val">${nf.format(it.price)}</div>` +
-          `<div class="mkt-chg ${cls}"><span>${sign}${nf.format(it.change)}</span>` +
-            `<span class="mkt-pct">(${sign}${(it.changePct).toFixed(2)}%)</span></div>` +
+          `<div class="mkt-card-date">as on ${dateStr(it.time)}</div>` +
+          `<div class="mkt-card-row">` +
+            `<span class="mkt-val">${nf.format(it.price)}</span>` +
+            `<span class="mkt-chg ${cls}">${sign}${nf.format(it.change)} <span class="mkt-pct">(${sign}${(it.changePct).toFixed(2)}%)</span></span>` +
+          `</div>` +
         `</div>`
       );
     }
@@ -143,7 +147,7 @@
     function skeletons(n) {
       let h = '';
       for (let i = 0; i < n; i++) {
-        h += `<div class="mkt-card is-skel"><div class="mkt-card-top"><span class="mkt-skel l1"></span></div><span class="mkt-skel l2"></span><span class="mkt-skel l3"></span></div>`;
+        h += `<div class="mkt-card is-skel"><div class="mkt-card-top"><span class="mkt-skel l1"></span></div><span class="mkt-skel l3"></span><div class="mkt-card-row"><span class="mkt-skel l2"></span></div></div>`;
       }
       return h;
     }
@@ -170,6 +174,12 @@
       catch (e) { return d.toLocaleTimeString(); }
     }
 
+    function dateStr(epoch) {
+      const d = epoch ? new Date(epoch * 1000) : new Date();
+      try { return d.toLocaleString('en-IN', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Kolkata' }); }
+      catch (e) { return d.toLocaleString(); }
+    }
+
     async function load() {
       try {
         const res = await fetch(ENDPOINT + '?t=' + Date.now(), { cache: 'no-store' });
@@ -181,7 +191,7 @@
         renderPanel('indices'); renderPanel('commodities');
         const ageMin = data.updated ? (Date.now() / 1000 - data.updated) / 60 : 0;
         if (ageMin > 15) setFoot('stale', 'Last updated ' + timeStr(data.updated) + ' IST (data may be delayed)');
-        else setFoot('', 'Live · updated ' + timeStr(data.updated) + ' IST');
+        else setFoot('', 'Live · updated ' + timeStr(data.updated) + ' IST · auto-refreshes every 2 min');
       } catch (err) {
         if (!state.loaded) { renderPanel('indices'); renderPanel('commodities'); }
         setFoot('error', 'Market data is temporarily unavailable. Retrying…');
