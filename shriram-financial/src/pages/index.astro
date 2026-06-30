@@ -3,48 +3,40 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 const differItems = [
   {
+    num: 'I',
     title: 'Research-Backed Insights',
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><path d="M3 3v18h18"/><path d="m7 14 4-4 4 4 4-4"/></svg>`,
+    subtitle: 'Investment and portfolio insights powered by comprehensive market research',
     points: [
-      'SEBI-registered analysts with real-time market data',
-      'Clear buy/sell calls — no jargon, no guesswork',
-      'Fundamental and technical research in one place',
+      'Access high-conviction, SEBI-registered technical and fundamental research to capture sharp market movements.',
+      'Trade and invest with confidence using deep-dive macroeconomic reports and real-time data analytics.',
     ],
-    cta: 'Explore Research',
-    href: '/research/',
   },
   {
+    num: 'II',
     title: 'A Relationship-Led Human Experience',
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a7 7 0 0 1 7-7h.5"/><path d="M16 19l2 2 4-4"/></svg>`,
+    subtitle: 'A dedicated relationship manager and personalised advice at every financial milestone',
     points: [
-      'Dedicated RM matched to your goals and risk profile',
-      'Portfolio reviews by call or in person',
-      'Personalised advice at every financial milestone',
+      'Get matched with a dedicated RM aligned to your goals and risk profile, with portfolio reviews by call or in person.',
+      'Receive personalised, human guidance at every milestone — never algorithm-only recommendations.',
     ],
-    cta: 'Meet Your Advisor',
-    href: '/about/',
   },
   {
+    num: 'III',
     title: 'Partner Network',
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><rect x="2" y="7" width="6" height="14" rx="1"/><rect x="9" y="3" width="6" height="18" rx="1"/><rect x="16" y="10" width="6" height="11" rx="1"/></svg>`,
+    subtitle: 'Institutional-grade products and a pan-India network, opened up to retail investors',
     points: [
-      'Exclusive access to PMS and premium bond offerings',
-      'Institutional-grade products open to retail investors',
-      'Pan-India network of top financial institutions',
+      'Access exclusive PMS and premium bond offerings usually reserved for institutions.',
+      'Tap a pan-India network of leading financial institutions through a single trusted partner.',
     ],
-    cta: 'Our Story',
-    href: '/about/',
   },
   {
+    num: 'IV',
     title: 'Gentle Reminders, Zero Stress',
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>`,
+    subtitle: 'Timely, relevant nudges that keep you on track without the noise',
     points: [
-      'Instant entry/exit alerts — only when it matters',
-      'Watchlist triggers and smart rebalancing nudges',
-      'No noise, just the signals relevant to your portfolio',
+      'Get instant entry and exit alerts and watchlist triggers — only when they actually matter.',
+      'Stay on top with smart rebalancing nudges and zero clutter — just the signals relevant to your portfolio.',
     ],
-    cta: 'Explore Antara',
-    href: '/about/antara/',
   },
 ];
 
@@ -266,21 +258,18 @@ const faqs = [
           <div class="relative w-full lg:h-full lg:w-[min(48%,560px)] lg:shrink-0 lg:self-stretch xl:w-[580px]">
           <div id="differ-scroll" class="no-scrollbar flex h-[410px] w-full flex-col gap-[96px] overflow-hidden lg:h-full">
             {differItems.map((item) => (
-              <div class="flex h-[410px] w-full shrink-0 items-center overflow-hidden rounded-[24px] border-2 border-[rgba(255,255,255,0.27)] border-b-[#f3b83f] px-8 py-10 lg:px-[56px] lg:py-[88px]"
-                   style="background:rgba(116,116,116,0.10);backdrop-filter:blur(27.55px);-webkit-backdrop-filter:blur(27.55px);">
-                <div class="flex h-full w-full flex-col justify-between text-[#f8f4e8]">
-                  <div class="flex h-14 w-14 items-center justify-center rounded-[16px] bg-[rgba(243,184,63,0.15)] text-[#f3b83f]" set:html={item.icon} />
-                  <div class="flex flex-col gap-5">
-                    <h3 class="text-[22px] font-medium leading-[1.4] lg:text-[30px]" style="font-family:var(--font-body)">{item.title}</h3>
-                    <ul class="flex flex-col gap-3">
-                      {item.points.map(p => (
-                        <li class="flex items-start gap-3 text-[14px] leading-[1.55] text-[#f8f4e8]/80">
-                          <span class="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-[#f3b83f]"></span>
-                          {p}
-                        </li>
-                      ))}
-                    </ul>
+              <div class="flex h-[410px] w-full shrink-0 items-center overflow-hidden rounded-[24px] border-b-2 border-[#f3b83f] px-8 py-10 lg:px-[56px] lg:py-[88px]"
+                   style="box-shadow:0 18px 40px -12px rgba(243,184,63,0.30);">
+                <div class="flex w-full flex-col gap-10 text-[#f8f4e8]">
+                  <div class="flex flex-col gap-2">
+                    <h3 class="text-[26px] font-medium leading-[1.5] lg:text-[32px]" style="font-family:var(--font-body)">{item.num}. {item.title}</h3>
+                    <p class="text-[15px] font-normal leading-[1.3] lg:text-[16px]">{item.subtitle}</p>
                   </div>
+                  <ul class="flex list-disc flex-col gap-4 ps-[21px] text-[14px] leading-[1.4]">
+                    {item.points.map(p => (
+                      <li>{p}</li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             ))}
