@@ -1,0 +1,207 @@
+---
+// Live Market Overview — major Indian/global indices + commodities & currency.
+// Data is polled from /data/market.json, which a server-side cron refreshes from
+// Yahoo Finance every ~2 min (see deploy/market/market_fetch.py + SETUP.md).
+// Self-contained: mkt- prefixed classes (no collision with global/page styles);
+// uses page design tokens with hard fallbacks so it also works standalone.
+---
+
+<section class="mkt" id="sec-market" aria-label="Market overview">
+  <div class="mkt-head">
+    <h2 class="mkt-title">Market Overview</h2>
+    <p class="mkt-lead">A live snapshot of major indices, commodities and currencies — refreshed through the trading day.</p>
+  </div>
+
+  <div class="mkt-grid">
+    <article class="mkt-panel" data-panel="indices">
+      <header class="mkt-bar">
+        <span class="mkt-bar-label">Indices</span>
+        <div class="mkt-tabs" role="tablist" aria-label="Filter indices">
+          <button type="button" class="mkt-tab is-active" data-filter="all" aria-pressed="true">All</button>
+          <button type="button" class="mkt-tab" data-filter="indian" aria-pressed="false">Indian</button>
+          <button type="button" class="mkt-tab" data-filter="global" aria-pressed="false">Global</button>
+        </div>
+      </header>
+      <div class="mkt-cards" data-cards="indices"></div>
+    </article>
+
+    <article class="mkt-panel" data-panel="commodities">
+      <header class="mkt-bar">
+        <span class="mkt-bar-label">Commodities &amp; Currency</span>
+        <div class="mkt-tabs" role="tablist" aria-label="Filter commodities and currency">
+          <button type="button" class="mkt-tab is-active" data-filter="all" aria-pressed="true">All</button>
+          <button type="button" class="mkt-tab" data-filter="commodity" aria-pressed="false">Commodities</button>
+          <button type="button" class="mkt-tab" data-filter="currency" aria-pressed="false">Currency</button>
+        </div>
+      </header>
+      <div class="mkt-cards" data-cards="commodities"></div>
+    </article>
+  </div>
+
+  <p class="mkt-foot" id="mkt-foot" aria-live="polite">
+    <span class="mkt-dot" aria-hidden="true"></span><span id="mkt-foot-text">Loading live market data…</span>
+  </p>
+</section>
+
+<style>
+  .mkt {
+    padding: var(--section-y, 72px) var(--pad, clamp(20px, 8vw, 144px));
+    background: var(--sec-tint, #f6efe1);
+    display: flex; flex-direction: column; gap: 32px;
+  }
+  .mkt-head { display: flex; flex-direction: column; gap: 12px; }
+  .mkt-title { font-weight: 400; font-size: 40px; line-height: 1.5; color: var(--olive-title, #2e3914); text-transform: capitalize; }
+  .mkt-lead { font-weight: 400; font-size: 16px; line-height: 1.5; color: var(--ink-3, #595959); max-width: 760px; }
+
+  .mkt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+  .mkt-panel {
+    background: var(--card, #fffdf8); border: 1px solid var(--card-border, #e1e0db);
+    border-radius: 24px; padding: 24px; display: flex; flex-direction: column; gap: 20px; min-width: 0;
+  }
+  .mkt-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .mkt-bar-label { font-weight: 600; font-size: 14px; color: var(--olive-title, #2e3914); letter-spacing: .01em; }
+
+  .mkt-tabs { display: inline-flex; background: #f0ece1; border: 1px solid var(--card-border, #e1e0db); border-radius: 999px; padding: 4px; gap: 4px; }
+  .mkt-tab {
+    border: 0; background: none; font-family: inherit; cursor: pointer; padding: 6px 14px; border-radius: 999px;
+    font-weight: 500; font-size: 13px; line-height: 1.4; color: var(--muted, #73736a); transition: background .2s ease, color .2s ease;
+  }
+  .mkt-tab.is-active { background: var(--olive-deep, #1b2010); color: #fff; }
+
+  .mkt-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; min-height: 372px; align-content: start; }
+
+  .mkt-card {
+    background: #fff; border: 1px solid var(--card-border, #e1e0db); border-radius: 16px; padding: 16px 18px;
+    display: flex; flex-direction: column; gap: 10px; min-width: 0;
+  }
+  .mkt-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+  .mkt-name { font-weight: 700; font-size: 15px; line-height: 1.3; color: var(--olive-title, #2e3914); overflow-wrap: anywhere; }
+  .mkt-flag { width: 26px; height: 18px; flex: none; border-radius: 3px; object-fit: cover; box-shadow: 0 0 0 1px rgba(0,0,0,.06); }
+  .mkt-badge { flex: none; font-weight: 600; font-size: 10px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted, #73736a); padding: 3px 8px; border: 1px solid var(--card-border, #e1e0db); border-radius: 999px; }
+  .mkt-val { font-weight: 700; font-size: 20px; line-height: 1.25; color: #1c1c16; }
+  .mkt-chg { display: flex; align-items: baseline; gap: 8px; font-weight: 600; font-size: 13px; line-height: 1.3; }
+  .mkt-up { color: #0a8a4f; }
+  .mkt-down { color: #d23b3b; }
+  .mkt-chg .mkt-pct { font-weight: 500; opacity: .9; }
+
+  /* skeleton */
+  .mkt-card.is-skel { pointer-events: none; }
+  .mkt-skel { background: linear-gradient(90deg,#efece4 25%,#f6f3ec 37%,#efece4 63%); background-size: 400% 100%; border-radius: 6px; animation: mkt-shimmer 1.3s ease infinite; }
+  .mkt-skel.l1 { height: 14px; width: 60%; }
+  .mkt-skel.l2 { height: 20px; width: 70%; }
+  .mkt-skel.l3 { height: 12px; width: 45%; }
+  @keyframes mkt-shimmer { 0% { background-position: 100% 0; } 100% { background-position: 0 0; } }
+  @media (prefers-reduced-motion: reduce) { .mkt-skel { animation: none; } }
+
+  .mkt-empty { grid-column: 1 / -1; color: var(--muted, #73736a); font-size: 14px; padding: 24px 4px; }
+
+  .mkt-foot { display: flex; align-items: center; gap: 8px; font-weight: 500; font-size: 13px; color: var(--muted, #73736a); }
+  .mkt-dot { width: 8px; height: 8px; border-radius: 50%; background: #0a8a4f; box-shadow: 0 0 0 0 rgba(10,138,79,.5); animation: mkt-pulse 2s ease infinite; flex: none; }
+  .mkt-foot.is-stale .mkt-dot { background: #c9962a; animation: none; }
+  .mkt-foot.is-error .mkt-dot { background: #d23b3b; animation: none; }
+  @keyframes mkt-pulse { 0% { box-shadow: 0 0 0 0 rgba(10,138,79,.5); } 70% { box-shadow: 0 0 0 6px rgba(10,138,79,0); } 100% { box-shadow: 0 0 0 0 rgba(10,138,79,0); } }
+  @media (prefers-reduced-motion: reduce) { .mkt-dot { animation: none; } }
+
+  @media (max-width: 1024px) { .mkt-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 768px) { .mkt-title { font-size: 28px; } }
+  @media (max-width: 520px) {
+    .mkt-bar { flex-direction: column; align-items: flex-start; }
+    .mkt-cards { grid-template-columns: 1fr; min-height: 0; }
+  }
+</style>
+
+<script>
+  (function () {
+    const ENDPOINT = '/data/market.json';
+    const POLL_MS = 60000;
+    const FLAG_IN = '/images/india-flag.png';
+
+    const nf = new Intl.NumberFormat('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const state = { indices: [], commodities: [], filters: { indices: 'all', commodities: 'all' }, loaded: false };
+
+    function esc(s) { return String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
+
+    function cardHTML(it) {
+      const up = it.change >= 0;
+      const sign = up ? '+' : '';
+      const cls = up ? 'mkt-up' : 'mkt-down';
+      let mark = '';
+      if (it.cat === 'indian') mark = `<img class="mkt-flag" src="${FLAG_IN}" alt="India" width="26" height="18" />`;
+      else if (it.cat === 'global') mark = `<span class="mkt-badge">Global</span>`;
+      else if (it.cat === 'currency') mark = `<span class="mkt-badge">FX</span>`;
+      return (
+        `<div class="mkt-card">` +
+          `<div class="mkt-card-top"><span class="mkt-name">${esc(it.name)}</span>${mark}</div>` +
+          `<div class="mkt-val">${nf.format(it.price)}</div>` +
+          `<div class="mkt-chg ${cls}"><span>${sign}${nf.format(it.change)}</span>` +
+            `<span class="mkt-pct">(${sign}${(it.changePct).toFixed(2)}%)</span></div>` +
+        `</div>`
+      );
+    }
+
+    function skeletons(n) {
+      let h = '';
+      for (let i = 0; i < n; i++) {
+        h += `<div class="mkt-card is-skel"><div class="mkt-card-top"><span class="mkt-skel l1"></span></div><span class="mkt-skel l2"></span><span class="mkt-skel l3"></span></div>`;
+      }
+      return h;
+    }
+
+    function renderPanel(panel) {
+      const wrap = document.querySelector(`.mkt-cards[data-cards="${panel}"]`);
+      if (!wrap) return;
+      const f = state.filters[panel];
+      const items = state[panel].filter((it) => f === 'all' || it.cat === f);
+      if (!state.loaded) { wrap.innerHTML = skeletons(6); return; }
+      wrap.innerHTML = items.length ? items.map(cardHTML).join('') : `<p class="mkt-empty">No data available right now.</p>`;
+    }
+
+    function setFoot(kind, text) {
+      const foot = document.getElementById('mkt-foot');
+      const t = document.getElementById('mkt-foot-text');
+      if (foot) foot.className = 'mkt-foot' + (kind ? ' is-' + kind : '');
+      if (t) t.textContent = text;
+    }
+
+    function timeStr(epoch) {
+      const d = epoch ? new Date(epoch * 1000) : new Date();
+      try { return d.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Kolkata' }); }
+      catch (e) { return d.toLocaleTimeString(); }
+    }
+
+    async function load() {
+      try {
+        const res = await fetch(ENDPOINT + '?t=' + Date.now(), { cache: 'no-store' });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const data = await res.json();
+        state.indices = Array.isArray(data.indices) ? data.indices : [];
+        state.commodities = Array.isArray(data.commodities) ? data.commodities : [];
+        state.loaded = true;
+        renderPanel('indices'); renderPanel('commodities');
+        const ageMin = data.updated ? (Date.now() / 1000 - data.updated) / 60 : 0;
+        if (ageMin > 15) setFoot('stale', 'Last updated ' + timeStr(data.updated) + ' IST (data may be delayed)');
+        else setFoot('', 'Live · updated ' + timeStr(data.updated) + ' IST');
+      } catch (err) {
+        if (!state.loaded) { renderPanel('indices'); renderPanel('commodities'); }
+        setFoot('error', 'Market data is temporarily unavailable. Retrying…');
+      }
+    }
+
+    document.querySelectorAll('.mkt-panel').forEach((panel) => {
+      const name = panel.getAttribute('data-panel');
+      panel.querySelectorAll('.mkt-tab').forEach((tab) => {
+        tab.addEventListener('click', () => {
+          panel.querySelectorAll('.mkt-tab').forEach((t) => { t.classList.remove('is-active'); t.setAttribute('aria-pressed', 'false'); });
+          tab.classList.add('is-active'); tab.setAttribute('aria-pressed', 'true');
+          state.filters[name] = tab.getAttribute('data-filter');
+          renderPanel(name);
+        });
+      });
+    });
+
+    renderPanel('indices'); renderPanel('commodities');
+    load();
+    setInterval(load, POLL_MS);
+  })();
+</script>

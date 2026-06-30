@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import MarketOverview from '../../components/MarketOverview.astro';
 
 const equityTypes = [
   { label: 'Common Equity Shares',   desc: 'The most widely traded shares. Investors receive voting rights and participate in the company\'s profits through dividends and price appreciation.' },
@@ -119,6 +120,9 @@ const faqs = [
       </div>
     </div>
   </section>
+
+  <!-- ══ 1b. MARKET OVERVIEW (live indices + commodities) ═════════════ -->
+  <MarketOverview />
 
   <!-- ══ 2. WHAT ARE EQUITY STOCKS ════════════════════════════════════ -->
   <section class="section stack" id="sec-about" style="background:var(--sec-light);gap:56px;justify-content:center">
