@@ -39,7 +39,7 @@ sudo chmod 644 /etc/cron.d/market-fetch
 sudo nginx -t && sudo systemctl reload nginx
 ```
 
-Verify: `curl -s https://uat.shriramfinancialservices.online/data/market.json | head -c 400`
+Verify: `curl -s https://dev.shriramfinancialservices.online/data/market.json | head -c 400`
 
 ## Notes
 - Add the same `location /data/` block to the **prod** vhost when promoting to prod (one shared `market.json` serves both).

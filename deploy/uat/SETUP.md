@@ -1,4 +1,4 @@
-# UAT environment — `uat.shriramfinancialservices.online`
+# UAT environment — `dev.shriramfinancialservices.online`
 
 UAT serves the **`UAT` branch** from `/var/www/uat` on the prod server
 (`13.234.46.220`), behind its own nginx vhost. It is `noindex` so search
@@ -22,8 +22,8 @@ Add an **A record**:
 > **DNS only (grey cloud)** for the initial certbot run, then you may re-enable
 > the proxy afterwards.
 
-Wait until `uat.shriramfinancialservices.online` resolves to `13.234.46.220`
-(`dig +short uat.shriramfinancialservices.online`) before running certbot.
+Wait until `dev.shriramfinancialservices.online` resolves to `13.234.46.220`
+(`dig +short dev.shriramfinancialservices.online`) before running certbot.
 
 ## 2. nginx vhost + docroot (on the server, via SSH)
 
@@ -31,11 +31,11 @@ Wait until `uat.shriramfinancialservices.online` resolves to `13.234.46.220`
 sudo mkdir -p /var/www/uat
 sudo chown -R www-data:www-data /var/www/uat
 
-sudo tee /etc/nginx/sites-available/uat.shriramfinancialservices.online >/dev/null <<'EOF'
+sudo tee /etc/nginx/sites-available/dev.shriramfinancialservices.online >/dev/null <<'EOF'
 server {
     listen 80;
     listen [::]:80;
-    server_name uat.shriramfinancialservices.online;
+    server_name dev.shriramfinancialservices.online;
 
     root /var/www/uat;
     index index.html;
@@ -48,15 +48,15 @@ server {
 }
 EOF
 
-sudo ln -sf /etc/nginx/sites-available/uat.shriramfinancialservices.online \
-            /etc/nginx/sites-enabled/uat.shriramfinancialservices.online
+sudo ln -sf /etc/nginx/sites-available/dev.shriramfinancialservices.online \
+            /etc/nginx/sites-enabled/dev.shriramfinancialservices.online
 sudo nginx -t && sudo systemctl reload nginx
 ```
 
 ## 3. TLS (after DNS resolves)
 
 ```bash
-sudo certbot --nginx -d uat.shriramfinancialservices.online
+sudo certbot --nginx -d dev.shriramfinancialservices.online
 ```
 
 Certbot adds the `443` listener and an HTTP→HTTPS redirect to the vhost above.
@@ -73,7 +73,7 @@ docroot, so the very first push also creates it).
 ```bash
 git checkout UAT
 git merge main          # bring in changes to stage, or commit straight to UAT
-git push origin UAT     # -> deploys to uat.shriramfinancialservices.online
+git push origin UAT     # -> deploys to dev.shriramfinancialservices.online
 ```
 
 Prod is untouched: `deploy.yml` (push to `main`) → `/var/www/html`,

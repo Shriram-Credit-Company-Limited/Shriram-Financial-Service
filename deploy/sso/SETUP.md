@@ -24,7 +24,7 @@ sudo tee /opt/sso/config.json >/dev/null <<'EOF'
   "company": "way2wealth",
   "workflowName": "individual_new_uat",
   "secret_key": "<MEON_SECRET_KEY>",
-  "redirect_url": "https://uat.shriramfinancialservices.online/",
+  "redirect_url": "https://dev.shriramfinancialservices.online/",
   "utm_source": "sfs"
 }
 EOF
@@ -59,7 +59,7 @@ sudo nginx -t && sudo systemctl reload nginx
 
 Verify:
 ```bash
-curl -s -X POST https://uat.shriramfinancialservices.online/api/sso-route \
+curl -s -X POST https://dev.shriramfinancialservices.online/api/sso-route \
   -H 'Content-Type: application/json' -d '{"mobile":"9876543210"}'
 # -> {"url":"https://signup.way2wealth.com/way2wealth/individual_new_uat/<token>?utm_source=sfs"}
 ```
