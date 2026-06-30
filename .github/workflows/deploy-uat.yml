@@ -1,0 +1,41 @@
+name: Build and Deploy (UAT)
+
+on:
+  push:
+    branches: [UAT]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: shriram-financial/package-lock.json
+
+      - name: Install dependencies
+        working-directory: shriram-financial
+        run: npm install
+
+      - name: Build site
+        working-directory: shriram-financial
+        run: npm run build
+
+      - name: Deploy to server (UAT docroot)
+        env:
+          SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SERVER: ubuntu@13.234.46.220
+        run: |
+          echo "$SSH_KEY" > /tmp/deploy_key
+          chmod 600 /tmp/deploy_key
+          cd shriram-financial/dist/client
+          zip -r /tmp/uat-site.zip .
+          scp -i /tmp/deploy_key -o StrictHostKeyChecking=no /tmp/uat-site.zip $SERVER:/tmp/uat-site.zip
+          ssh -i /tmp/deploy_key -o StrictHostKeyChecking=no $SERVER \
+            "sudo mkdir -p /var/www/uat && sudo rm -rf /var/www/uat/* && sudo unzip -o /tmp/uat-site.zip -d /var/www/uat/ && sudo chown -R www-data:www-data /var/www/uat/"
+          rm /tmp/deploy_key
