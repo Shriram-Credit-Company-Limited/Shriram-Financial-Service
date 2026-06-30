@@ -148,6 +148,7 @@ const offices = [
     <div class="grp reveal">
       <div class="grp-left">
         <h3 class="sub-title">The Shriram Group</h3>
+        <div class="grp-logo"><img src="/images/shriram-group.svg" alt="Shriram Group" /></div>
       </div>
       <div class="grp-body">
         <p class="sec-lead">Founded in 1974 by Shri. R. Thyagarajan, the Shriram Group works with the philosophy of financially empowering the underserved. It manages assets of over ₹2.08 lakh crore across 4,050 branches in Consumer Finance, Vehicle Finance, Life &amp; General Insurance, Chit Funds, Asset Management and Stock Broking.</p>
@@ -162,6 +163,7 @@ const offices = [
     <div class="grp reveal">
       <div class="grp-left">
         <h3 class="sub-title">The Sanlam Group</h3>
+        <div class="grp-logo"><img src="/images/sanlam-group.png" alt="Sanlam Group" /></div>
       </div>
       <div class="grp-body">
         <p class="sec-lead">Sanlam is a leading financial services group based in Cape Town, South Africa. Sanlam's association with the Shriram Group began in 2005 with the emergence of Shriram Life Insurance Company (SLIC), a part of the diversified Shriram Group.</p>
@@ -404,6 +406,8 @@ const offices = [
   /* groups */
   .grp { display: flex; gap: 32px; align-items: center; justify-content: space-between; }
   .grp-left { width: 500px; flex: none; display: flex; flex-direction: column; gap: 32px; justify-content: center; }
+  .grp-logo { height: 56px; display: flex; align-items: center; }
+  .grp-logo img { height: 100%; width: auto; display: block; }
   .grp-body { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; gap: 16px; }
   .grp-div { height: 1px; background: var(--card-border); }
   .chips { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 8px; }
