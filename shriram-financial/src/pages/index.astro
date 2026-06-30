@@ -530,15 +530,36 @@ const faqs = [
 </BaseLayout>
 
 <script>
-  /* Hero "Get Started Now" → way2wealth signup with the entered mobile number prefilled */
+  /* Hero "Get Started Now" → Meon SSO journey. POST the mobile to our server-side
+     /api/sso-route (the secret_key stays on the server), then redirect into the
+     pre-authenticated journey (mobile pre-filled, OTP auto-triggered, utm_source=sfs). */
   const heroMobile = document.getElementById('hero-mobile') as HTMLInputElement | null;
   const heroGetStarted = document.getElementById('hero-get-started') as HTMLAnchorElement | null;
   if (heroMobile && heroGetStarted) {
-    const SIGNUP_URL = 'https://signup.way2wealth.com/way2wealth/individual_new';
-    heroGetStarted.addEventListener('click', (e) => {
+    const FALLBACK = 'https://signup.way2wealth.com/way2wealth/individual_new';
+    let busy = false;
+    heroGetStarted.addEventListener('click', async (e) => {
       e.preventDefault();
+      if (busy) return;
       const digits = (heroMobile.value || '').replace(/\D/g, '').slice(-10);
-      window.location.href = digits ? `${SIGNUP_URL}?mobile_number=${digits}` : SIGNUP_URL;
+      if (digits.length !== 10) { window.location.href = FALLBACK; return; }
+      busy = true;
+      heroGetStarted.setAttribute('aria-busy', 'true');
+      try {
+        const res = await fetch('/api/sso-route', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ mobile: digits }),
+        });
+        const data = await res.json().catch(() => null);
+        if (res.ok && data && data.url) { window.location.href = data.url; return; }
+        throw new Error('no route');
+      } catch (err) {
+        window.location.href = FALLBACK;
+      } finally {
+        busy = false;
+        heroGetStarted.removeAttribute('aria-busy');
+      }
     });
   }
 
