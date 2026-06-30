@@ -205,7 +205,7 @@ const faqs = [
 
             <!-- Buttons (gap-[16px]) -->
             <div class="flex flex-col gap-4">
-              <a href="/about/open-demat-account/" class="inline-flex h-[48px] w-[220px] self-start items-center justify-center rounded-[6px] bg-[#f3b83f] text-[12px] font-medium text-[#202318] transition-colors hover:bg-[#d4982a]">
+              <a id="hero-get-started" href="https://signup.way2wealth.com/way2wealth/individual_new" class="inline-flex h-[48px] w-[220px] self-start items-center justify-center rounded-[6px] bg-[#f3b83f] text-[12px] font-medium text-[#202318] transition-colors hover:bg-[#d4982a]">
                 Get Started Now
               </a>
               <p class="text-[12px] font-medium text-[var(--color-n900)]">
@@ -530,6 +530,18 @@ const faqs = [
 </BaseLayout>
 
 <script>
+  /* Hero "Get Started Now" → way2wealth signup with the entered mobile number prefilled */
+  const heroMobile = document.getElementById('hero-mobile') as HTMLInputElement | null;
+  const heroGetStarted = document.getElementById('hero-get-started') as HTMLAnchorElement | null;
+  if (heroMobile && heroGetStarted) {
+    const SIGNUP_URL = 'https://signup.way2wealth.com/way2wealth/individual_new';
+    heroGetStarted.addEventListener('click', (e) => {
+      e.preventDefault();
+      const digits = (heroMobile.value || '').replace(/\D/g, '').slice(-10);
+      window.location.href = digits ? `${SIGNUP_URL}?mobile_number=${digits}` : SIGNUP_URL;
+    });
+  }
+
   /* Fade in hero video */
   const heroVideo = document.getElementById('hero-video') as HTMLVideoElement | null;
   const heroWave  = document.querySelector('.hero-wave') as HTMLElement | null;
