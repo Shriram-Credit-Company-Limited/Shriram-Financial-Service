@@ -92,6 +92,7 @@ def main():
     with os.fdopen(fd, "w") as f:
         json.dump(out, f, separators=(",", ":"))
     os.replace(tmp, OUT_PATH)
+    os.chmod(OUT_PATH, 0o644)  # mkstemp is 0600; nginx (www-data) must read it
     print(f"[market_fetch] wrote {len(out['indices'])} indices + "
           f"{len(out['commodities'])} commodities -> {OUT_PATH}")
 

@@ -11,13 +11,16 @@ never wipe it.
 
 ## One-time server setup (SSH to `ubuntu@13.234.46.220`)
 
+> **Status:** already provisioned on the UAT box (2026-06-30) — script at
+> `/opt/market/market_fetch.py`, cron `/etc/cron.d/market-fetch` (every 2 min),
+> JSON at `/var/www/market-data/market.json`, nginx `location /data/` on the UAT
+> vhost. The steps below are the reproducible recipe (e.g. for prod).
+
 ```bash
-# 1. data dir + script
+# 1. data dir + script (scp the file up from the repo first)
 sudo mkdir -p /var/www/market-data /opt/market
-sudo chown www-data:www-data /var/www/market-data
-sudo curl -fsSL -o /opt/market/market_fetch.py \
-  https://raw.githubusercontent.com/<repo>/UAT/deploy/market/market_fetch.py
-# (or scp deploy/market/market_fetch.py to /opt/market/)
+scp -i <key.pem> deploy/market/market_fetch.py ubuntu@13.234.46.220:/tmp/
+sudo cp /tmp/market_fetch.py /opt/market/market_fetch.py
 
 # 2. first run (creates market.json)
 sudo python3 /opt/market/market_fetch.py
