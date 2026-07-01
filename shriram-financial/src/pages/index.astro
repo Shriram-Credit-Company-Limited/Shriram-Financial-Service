@@ -529,21 +529,18 @@ const faqs = [
 
 </BaseLayout>
 
-<!-- CryptoJS — AES-256 of the hero mobile payload (see hero handler below) -->
-<script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
-
 <script>
   /* Hero "Get Started Now" → way2wealth signup.
-     We AES-256-CBC encrypt a JSON payload of the form-fields (currently just
-     { mobile_number }) and pass it as `enc_details`. Format handed to way2wealth to
-     decrypt (shared key below):
-       token       = base64url( IV[16 bytes] + ciphertext )
-       cipher      = AES-256-CBC, PKCS7 padding
-       key         = 'ShriramSFS2026Way2WealthAESKey01' (32 bytes / 256-bit, UTF-8)
-       plaintext   = JSON.stringify({ mobile_number: "<10 digits>" })
-     They: base64url-decode → first 16 bytes = IV, rest = ciphertext → AES-256-CBC
-     decrypt with the key → JSON.parse. utm_source stays plaintext.
-     Falls back to plain signup on <10 digits / CryptoJS load failure. */
+     We AES-256-GCM encrypt a JSON payload of the form-fields (currently just
+     { mobile_number }) with the browser-native Web Crypto API and pass it as
+     `enc_details`. Format handed to way2wealth to decrypt (shared key below):
+       token     = base64url( IV[12 bytes] + ciphertext + authTag[16 bytes] )
+       cipher    = AES-256-GCM (12-byte/96-bit IV, 128-bit tag) — authenticated, no padding
+       key       = 'ShriramSFS2026Way2WealthAESKey01' (32 bytes / 256-bit, UTF-8)
+       plaintext = JSON.stringify({ mobile_number: "<10 digits>" })
+     They: base64url-decode → first 12 bytes = IV, last 16 bytes = auth tag, middle =
+     ciphertext → AES-256-GCM decrypt (verifies tag) → JSON.parse. utm_source stays plaintext.
+     Falls back to plain signup on <10 digits / no SubtleCrypto / encrypt error. */
   const heroMobile = document.getElementById('hero-mobile') as HTMLInputElement | null;
   const heroGetStarted = document.getElementById('hero-get-started') as HTMLAnchorElement | null;
   if (heroMobile && heroGetStarted) {
@@ -551,27 +548,33 @@ const faqs = [
     const AES_KEY  = 'ShriramSFS2026Way2WealthAESKey01'; // 32 chars → AES-256 (share with way2wealth)
     const UTM      = 'sfs';
     const FALLBACK = BASE_URL;
-    const CJS: any = (window as any).CryptoJS;
+    const subtle = (window.crypto && window.crypto.subtle) || null;
 
-    const encryptPayload = (payload: object): string => {
-      const key    = CJS.enc.Utf8.parse(AES_KEY);
-      const iv     = CJS.lib.WordArray.random(16);           // fresh IV every click
-      const enc    = CJS.AES.encrypt(JSON.stringify(payload), key, {
-        iv, mode: CJS.mode.CBC, padding: CJS.pad.Pkcs7,
-      });
-      const packed = iv.concat(enc.ciphertext);              // IV(16 bytes) + ciphertext
-      // base64url so the token is URL-safe (no +, /, = → no percent-encoding needed)
-      return CJS.enc.Base64.stringify(packed)
-                .replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+    const b64url = (bytes: ArrayBuffer): string =>
+      btoa(String.fromCharCode(...new Uint8Array(bytes)))
+        .replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+
+    const encryptPayload = async (payload: object): Promise<string> => {
+      const enc   = new TextEncoder();
+      const key   = await subtle!.importKey('raw', enc.encode(AES_KEY), 'AES-GCM', false, ['encrypt']);
+      const iv    = crypto.getRandomValues(new Uint8Array(12));            // 96-bit IV, fresh each click
+      const ctTag = await subtle!.encrypt({ name: 'AES-GCM', iv, tagLength: 128 }, key, enc.encode(JSON.stringify(payload)));
+      const packed = new Uint8Array(iv.length + ctTag.byteLength);        // IV[12] + ciphertext + tag[16]
+      packed.set(iv, 0);
+      packed.set(new Uint8Array(ctTag), iv.length);
+      return b64url(packed.buffer);
     };
 
-    heroGetStarted.addEventListener('click', (e) => {
+    heroGetStarted.addEventListener('click', async (e) => {
       e.preventDefault();
       const digits = (heroMobile.value || '').replace(/\D/g, '').slice(-10);
-      if (digits.length !== 10 || !CJS) { window.location.href = FALLBACK; return; }
-      const token = encryptPayload({ mobile_number: digits });
-      const url = BASE_URL + '?enc_details=' + token + '&utm_source=' + encodeURIComponent(UTM);
-      window.location.href = url;
+      if (digits.length !== 10 || !subtle) { window.location.href = FALLBACK; return; }
+      try {
+        const token = await encryptPayload({ mobile_number: digits });
+        window.location.href = BASE_URL + '?enc_details=' + token + '&utm_source=' + encodeURIComponent(UTM);
+      } catch {
+        window.location.href = FALLBACK;
+      }
     });
   }
 
