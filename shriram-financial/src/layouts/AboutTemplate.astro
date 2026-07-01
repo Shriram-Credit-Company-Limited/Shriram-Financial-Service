@@ -7,42 +7,72 @@ interface Props {
   eyebrow?: string;
   lead: string;
 }
-const { title, description, eyebrow = 'About Us', lead } = Astro.props;
+const { title, description, lead } = Astro.props;
 ---
 
 <BaseLayout title={title} description={description}>
 
-  <!-- Header band -->
-  <section class="border-b border-[var(--color-n400)] bg-[var(--color-n100)]">
-    <div class="site-wrap py-12 sm:py-16 lg:py-20">
-      <p class="reveal reveal-1 text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">{eyebrow}</p>
-      <h1 class="reveal reveal-2 mt-4 text-[26px] font-bold text-[var(--color-n900)] sm:text-[32px] lg:text-[40px]" style="font-family:var(--font-display)">{title}</h1>
-      <p class="reveal reveal-3 mt-5 max-w-2xl text-[15px] leading-relaxed text-[var(--color-muted)] lg:text-[16px]">{lead}</p>
+  <!-- ── Hero ── -->
+  <section class="hero">
+    <div class="hero-inner">
+      <h1>{title}</h1>
+      <p class="lead">{lead}</p>
     </div>
   </section>
 
-  <!-- Content -->
-  <section class="site-wrap py-14 lg:py-20">
-    <div class="prose-shriram">
+  <!-- ── Content ── -->
+  <section class="section" style="background:var(--sec-light)">
+    <div class="legal-prose">
       <slot />
     </div>
   </section>
 
-  <!-- CTA band -->
-  <section class="site-wrap pb-16">
-    <div class="relative overflow-hidden rounded-[24px] bg-[var(--color-brand)] p-10 lg:p-12">
-      <div class="pointer-events-none absolute right-0 top-0 h-64 w-64 translate-x-16 -translate-y-16 rounded-full bg-white/10 blur-2xl"></div>
-      <div class="relative flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
-        <div>
-          <h2 class="text-[26px] font-bold text-[#202318] lg:text-[30px]" style="font-family:var(--font-display)">Ready to Start Investing?</h2>
-          <p class="mt-2 max-w-md text-[14px] text-[#202318]/75">Open a free Demat account in under 10 minutes — zero delivery brokerage, SEBI-registered research, dedicated advisor.</p>
-        </div>
-        <div class="flex shrink-0 flex-wrap gap-3">
-          <a href="/about/open-demat-account/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] bg-[#202318] text-[14px] font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-black">Open Free Demat Account</a>
-          <a href="/about/support/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] border border-[#202318]/30 text-[14px] font-medium text-[#202318] transition-all hover:bg-[#202318]/10">Talk to an Advisor</a>
-        </div>
+  <!-- ── Final CTA ── -->
+  <section class="cta-sec" style="background:var(--sec-tint)">
+    <div class="cta-box">
+      <div class="ct-tt">
+        <h3>Ready to Start Investing?</h3>
+        <p class="ct-sub">Open a free Demat account in under 10 minutes — zero delivery brokerage, SEBI-registered research, and a dedicated advisor.</p>
       </div>
+      <a class="btn-gold" href="/about/open-demat-account/">Open Demat Account</a>
     </div>
   </section>
 
 </BaseLayout>
+
+<style>
+  /* Legal / about prose — matches the design-system tokens (see privacy.astro). */
+  .legal-prose { display: flex; flex-direction: column; gap: 40px; max-width: 900px; }
+  .legal-prose :global(h2) {
+    font-weight: 500; font-size: 28px; color: var(--ink); line-height: 1.5;
+    margin-top: 16px;
+  }
+  .legal-prose :global(h2:first-child) { margin-top: 0; }
+  .legal-prose :global(h3) {
+    font-weight: 500; font-size: 20px; color: var(--ink); line-height: 1.5;
+  }
+  .legal-prose :global(p) {
+    font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.6;
+    margin-top: 12px;
+  }
+  .legal-prose :global(a) { color: #2f7ef4; }
+  .legal-prose :global(strong) { font-weight: 600; color: var(--ink); }
+  .legal-prose :global(ul) {
+    list-style: none; padding: 0; margin: 16px 0 0;
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .legal-prose :global(ul li) {
+    position: relative; padding-left: 24px;
+    font-weight: 400; font-size: 16px; color: var(--ink-3); line-height: 1.6;
+  }
+  .legal-prose :global(ul li::before) {
+    content: ""; position: absolute; left: 8px; top: 10px; width: 6px; height: 6px;
+    border-radius: 50%; background: var(--olive-title);
+  }
+
+  @media (max-width: 768px) {
+    .legal-prose { gap: 32px; }
+    .legal-prose :global(h2) { font-size: clamp(22px, 5.4vw, 28px); }
+    .legal-prose :global(p), .legal-prose :global(ul li) { font-size: 14px; }
+  }
+</style>

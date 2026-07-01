@@ -2,13 +2,13 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 <BaseLayout title="Page not found" description="The page you were looking for could not be found.">
-  <section class="mx-auto flex max-w-3xl flex-col items-center px-5 py-32 text-center lg:px-8">
-    <p class="text-[72px] font-bold text-[var(--color-brand)]" style="font-family:var(--font-display)">404</p>
-    <h1 class="mt-4 text-[28px] font-semibold text-[var(--color-ink)]" style="font-family:var(--font-display)">Page not found</h1>
-    <p class="mt-3 text-[15px] text-[var(--color-muted)]">The page you're looking for doesn't exist or has been moved.</p>
-    <div class="mt-8 flex flex-wrap justify-center gap-3">
-      <a href="/" class="btn-primary">Back to Home</a>
-      <a href="/products/" class="inline-flex h-12 w-[220px] items-center justify-center rounded-[6px] border border-[var(--color-brand)] text-[14px] font-medium text-[var(--color-brand)] transition-colors hover:bg-[var(--color-brand-pale)]">Browse Products</a>
+  <section class="section" style="background:var(--sec-light);align-items:center;text-align:center;min-height:clamp(440px,50vh,640px);justify-content:center;gap:16px">
+    <p style="font-weight:400;font-size:88px;line-height:1;color:var(--gold)">404</p>
+    <h1 class="sec-title" style="text-transform:none">Page Not Found</h1>
+    <p class="sec-lead" style="max-width:520px">The page you're looking for doesn't exist or has been moved.</p>
+    <div style="margin-top:24px;display:flex;flex-wrap:wrap;justify-content:center;gap:16px">
+      <a href="/" class="btn-gold">Back to Home</a>
+      <a href="/products/" class="btn-gold" style="background:transparent;border:1px solid var(--card-border);color:var(--ink)">Browse Products</a>
     </div>
   </section>
 </BaseLayout>

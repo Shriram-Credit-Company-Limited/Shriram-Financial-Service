@@ -72,20 +72,11 @@ const faqs = [
 >
 
   <!-- ── Hero ─────────────────────────────────────────────────────── -->
-  <section class="relative overflow-hidden" style="background: radial-gradient(ellipse 132% 312% at 117% -4%, #4F583B 0%, #3F4733 14%, #363A2C 25%, #2a2d23 38%, #1d1d1d 55%, #1d1d1d 100%);">
-    <div class="site-wrap relative z-10 py-16 lg:py-24">
-      <nav class="mb-6 flex items-center gap-2 text-[12px] text-white/40" aria-label="Breadcrumb">
-        <a href="/" class="transition-colors hover:text-white/70">Home</a>
-        <span aria-hidden="true">›</span>
-        <span class="text-white/60">Products</span>
-      </nav>
-      <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Product Suite</p>
-      <h1 class="mt-3 max-w-3xl text-[32px] font-bold leading-tight text-white lg:text-[40px]" style="font-family:var(--font-display)">
-        Everything You Need to Grow Your Wealth
-      </h1>
-      <p class="mt-4 max-w-xl text-[15px] leading-relaxed text-white/60 lg:text-[16px]">
-        Trade, Invest and Borrow — explore our comprehensive list of financial products and services, all in one place.
-      </p>
+  <section class="hero">
+    <div class="hero-inner">
+      <h1>Everything You Need to <span class="g">Grow Your Wealth</span></h1>
+      <p class="lead">Trade, Invest and Borrow — explore our comprehensive suite of financial products and services, all in one place.</p>
+      <div class="cta"><a class="btn-gold" href="/about/open-demat-account/">Open Demat Account</a></div>
     </div>
   </section>
 
@@ -193,67 +184,56 @@ const faqs = [
     </div>
   </section>
 
-  <!-- ── General Questions ─────────────────────────────────────────── -->
-  <section class="bg-white py-16 lg:py-24">
-    <div class="site-wrap">
-      <h2 class="text-[24px] font-semibold text-[var(--color-ink)] lg:text-[30px]" style="font-family:var(--font-display)">
-        General <span class="text-[var(--color-brand)]">Questions</span>
-      </h2>
-
-      <div class="mt-10 grid gap-8 lg:grid-cols-[1fr_1.4fr] lg:gap-12">
-
-        <!-- CTA card -->
-        <div class="flex flex-col justify-between rounded-[24px] bg-[var(--color-dark-olive)] p-8 lg:p-10">
-          <div class="h-32 w-32 rounded-full border border-white/10 opacity-20 lg:h-48 lg:w-48"></div>
-          <div class="mt-8">
-            <h3 class="text-[22px] font-semibold leading-snug text-white lg:text-[26px]" style="font-family:var(--font-display)">
-              Still Have Questions?
-            </h3>
-            <p class="mt-3 text-[14px] leading-relaxed text-white/60">
-              Book a free 15-minute discovery call with a friendly wealth expert. We will answer your doubts, help you understand your risk comfort, and show you how a dedicated advisor can fast-track your wealth creation.
-            </p>
-            <a href="/about/support/" class="mt-6 inline-flex h-11 w-[220px] items-center justify-center rounded-[6px] bg-[var(--color-brand)] text-[13px] font-semibold text-[#202318] transition-colors hover:bg-[var(--color-brand-hover)]">
-              Book a Discovery Call
-            </a>
-          </div>
-        </div>
-
-        <!-- FAQ accordion -->
-        <div class="flex flex-col gap-2" id="ps-faq-accord">
-          {faqs.map((item) => (
-            <details class="group overflow-hidden rounded-[12px] border border-[var(--color-n400)] bg-white">
-              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 lg:px-6 lg:py-5">
-                <span class="text-[14px] font-medium text-[var(--color-n900)] lg:text-[15px]">{item.q}</span>
-                <span class="grid h-6 w-6 shrink-0 place-items-center rounded-full border border-[var(--color-n400)] text-[var(--color-n700)] transition-transform group-open:rotate-45">
-                  <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" class="h-3 w-3"><path d="M6 2v8M2 6h8"/></svg>
+  <!-- ── General Questions (FAQ) ───────────────────────────────────── -->
+  <section class="faq-wrap" id="sec-faq" style="background:var(--sec-tint)">
+    <div class="faq-cols">
+      <div class="faq-left">
+        <h2 class="faq-title">General Questions</h2>
+        <div class="faq-acc">
+          {faqs.map((item, i) => (
+            <div class={`faq-item${i === 0 ? ' open' : ''}`}>
+              <button class="faq-q" type="button">
+                <span class="qt">{item.q}</span>
+                <span class="faq-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <line class="v" x1="12" y1="5" x2="12" y2="19" stroke="#404040" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="5" y1="12" x2="19" y2="12" stroke="#404040" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
                 </span>
-              </summary>
-              <div class="border-t border-[var(--color-n400)] bg-[var(--color-n100)] px-5 py-4 lg:px-6">
-                <p class="text-[14px] leading-relaxed text-[var(--color-muted)]">{item.a}</p>
+              </button>
+              <div class="qa-wrap">
+                <div class="qa"><p>{item.a}</p></div>
               </div>
-            </details>
+            </div>
           ))}
+        </div>
+      </div>
+      <div class="faq-side">
+        <div class="usr" aria-hidden="true">
+          <svg viewBox="0 0 128 144" fill="none" xmlns="http://www.w3.org/2000/svg" width="128" height="144">
+            <circle cx="64" cy="48" r="32" stroke="#2d3813" stroke-width="2"/>
+            <path d="M8 144c0-30.928 25.072-56 56-56s56 25.072 56 56" stroke="#2d3813" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="side-in">
+          <div class="side-tx">
+            <h3>Still Have Questions?</h3>
+            <p>Book a free 15-minute discovery call with a friendly wealth expert. We'll answer your doubts, help you understand your risk comfort, and show you how a dedicated advisor can fast-track your wealth creation.</p>
+          </div>
+          <a class="btn-gold" href="/about/support/">Book A Discovery Call</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ── CTA Band ──────────────────────────────────────────────────── -->
-  <section class="site-wrap pb-20">
-    <div class="relative overflow-hidden rounded-[24px] p-10 lg:p-14" style="background: radial-gradient(ellipse 132% 312% at 117% -4%, #4F583B 0%, #3F4733 14%, #363A2C 25%, #2a2d23 38%, #1d1d1d 55%, #1d1d1d 100%);">
-      <div class="relative flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
-        <div>
-          <h2 class="text-[22px] font-bold text-white lg:text-[28px]" style="font-family:var(--font-display)">
-            We are now your new gateway to the Stock Market!
-          </h2>
-          <p class="mt-2 max-w-md text-[14px] text-white/60">
-            Open a free Demat account in under 10 minutes — zero delivery brokerage, SEBI-registered research, and a dedicated advisor.
-          </p>
-        </div>
-        <a href="/about/open-demat-account/" class="inline-flex h-12 shrink-0 items-center justify-center rounded-[6px] bg-[var(--color-brand)] px-8 text-[13px] font-semibold text-[#202318] transition-all hover:bg-[var(--color-brand-hover)]">
-          Open Free Demat Account
-        </a>
+  <!-- ── Final CTA ─────────────────────────────────────────────────── -->
+  <section class="cta-sec" id="sec-final-cta" style="background:var(--sec-light)">
+    <div class="cta-box">
+      <div class="ct-tt">
+        <h3>Your New Gateway to the Stock Market</h3>
+        <p class="ct-sub">Open a free Demat account in under 10 minutes — zero delivery brokerage, SEBI-registered research, and a dedicated advisor.</p>
       </div>
+      <a class="btn-gold" href="/about/open-demat-account/">Open Free Demat Account</a>
     </div>
   </section>
 
@@ -333,11 +313,16 @@ const faqs = [
 </style>
 
 <script>
-  // FAQ — one open at a time
-  const faqAccord = document.getElementById('ps-faq-accord');
-  faqAccord?.querySelectorAll('details').forEach(d => {
-    d.addEventListener('toggle', () => {
-      if (d.open) faqAccord.querySelectorAll('details').forEach(o => { if (o !== d) o.removeAttribute('open'); });
+  // FAQ button accordion — one open at a time
+  document.querySelectorAll('.faq-acc').forEach(acc => {
+    acc.querySelectorAll('.faq-item').forEach(item => {
+      const btn = item.querySelector('.faq-q');
+      if (!btn) return;
+      btn.addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+        acc.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
     });
   });
 

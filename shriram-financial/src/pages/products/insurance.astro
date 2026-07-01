@@ -2,10 +2,10 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const insuranceTypes = [
-  { label: 'Term Life Insurance', desc: 'Pure life cover for a fixed term — nominee receives sum assured on death. No maturity benefit, but the highest cover at the lowest premium.', highlight: 'Highest cover at lowest premium' },
+  { label: 'Term Life Insurance', desc: 'Pure life cover for a fixed term — the nominee receives the sum assured on death. No maturity benefit, but the highest cover at the lowest premium.', highlight: 'Highest cover at lowest premium' },
   { label: 'Health Insurance', desc: 'Covers hospitalisation, surgery, ICU, daycare, and pre/post-hospitalisation costs. Shields your savings from catastrophic medical bills.', highlight: 'Cashless treatment at 10,000+ hospitals' },
-  { label: 'Motor Insurance', desc: 'Mandatory third-party cover for all vehicles in India. Comprehensive plans add own-damage, theft, and natural calamity protection.', highlight: 'Mandatory by law (third-party)' },
-  { label: 'ULIP', desc: 'Unit Linked Insurance Plan — part of the premium provides life cover, and the remainder invests in market-linked equity/debt funds.', highlight: 'Insurance + investment in one' },
+  { label: 'Motor Insurance', desc: 'Mandatory third-party cover for all vehicles in India. Comprehensive plans add own-damage, theft, and natural-calamity protection.', highlight: 'Mandatory by law (third-party)' },
+  { label: 'ULIP', desc: 'Unit Linked Insurance Plan — part of the premium provides life cover, and the remainder invests in market-linked equity or debt funds.', highlight: 'Insurance + investment in one' },
 ];
 
 const whyInsure = [
@@ -16,199 +16,176 @@ const whyInsure = [
 ];
 
 const steps = [
-  { n: '01', title: 'Assess Your Needs', desc: 'Determine the type and quantum of cover needed. Use our online calculators: HLV (Human Life Value) for life insurance, sum insured calculator for health.' },
-  { n: '02', title: 'Compare Plans', desc: 'Compare premiums, features, claim settlement ratios, and network hospitals across multiple insurance providers on the Shriram platform.' },
-  { n: '03', title: 'Apply & Undergo Medical Tests', desc: 'Fill the proposal form digitally. For higher life insurance covers, an insurer-appointed doctor may conduct a medical examination.' },
-  { n: '04', title: 'Receive Policy Document', desc: 'Once underwriting is complete and premium is paid, your policy document is issued digitally. Claim support is provided by Shriram\'s dedicated insurance team.' },
+  { n: '1', title: 'Assess Your Needs', desc: 'Determine the type and quantum of cover needed. Use our calculators: HLV (Human Life Value) for life insurance, sum-insured calculator for health.' },
+  { n: '2', title: 'Compare Plans', desc: 'Compare premiums, features, claim settlement ratios, and network hospitals across multiple insurers on the Shriram platform.' },
+  { n: '3', title: 'Apply & Undergo Medical Tests', desc: 'Fill the proposal form digitally. For higher life covers, an insurer-appointed doctor may conduct a medical examination.' },
+  { n: '4', title: 'Receive Policy Document', desc: 'Once underwriting is complete and premium is paid, your policy is issued digitally. Claim support is provided by Shriram\'s insurance team.' },
 ];
 
 const faqs = [
-  { q: 'How much life insurance cover do I need?', a: 'A standard benchmark is 10–15x your annual income. Factor in home loan balances, children\'s education costs, and spouse\'s income gap. Use Shriram\'s HLV calculator for a precise figure.' },
-  { q: 'What is the difference between a cashless and reimbursement health claim?', a: 'Cashless claims are settled directly between your insurer and a network hospital — you pay nothing upfront. Reimbursement claims require you to pay the bill first and apply for refund; used for non-network hospitals.' },
-  { q: 'Does health insurance cover pre-existing diseases?', a: 'Most plans have a 2–4 year waiting period for pre-existing diseases. After the waiting period, they\'re covered. Always disclose PEDs accurately — non-disclosure leads to claim rejection.' },
+  { q: 'How much life insurance cover do I need?', a: 'A standard benchmark is 10–15x your annual income. Factor in home loan balances, children\'s education costs, and your spouse\'s income gap. Use Shriram\'s HLV calculator for a precise figure.' },
+  { q: 'What is the difference between a cashless and reimbursement health claim?', a: 'Cashless claims are settled directly between your insurer and a network hospital — you pay nothing upfront. Reimbursement claims require you to pay the bill first and apply for a refund; used for non-network hospitals.' },
+  { q: 'Does health insurance cover pre-existing diseases?', a: 'Most plans have a 2–4 year waiting period for pre-existing diseases. After the waiting period, they are covered. Always disclose PEDs accurately — non-disclosure leads to claim rejection.' },
   { q: 'Is it better to buy a term plan or an endowment plan?', a: 'Term plans deliver more cover per rupee. Endowment and ULIP returns often trail a term plan + mutual fund combination. Most advisors recommend "buy term, invest the rest" for optimal outcomes.' },
-  { q: 'What is the claim settlement ratio (CSR) and why does it matter?', a: 'CSR is the % of claims settled by an insurer in a year. IRDAI publishes CSR annually. Above 97% signals reliability — Shriram recommends only partners with strong CSR track records.' },
+  { q: 'What is the claim settlement ratio (CSR) and why does it matter?', a: 'CSR is the percentage of claims settled by an insurer in a year. IRDAI publishes it annually. Above 97% signals reliability — Shriram recommends only partners with strong CSR track records.' },
 ];
 ---
 
 <BaseLayout
-  title="Insurance Plans India — Term Life, Health &amp; ULIP | Shriram"
+  title="Insurance Plans India — Term Life, Health & ULIP | Shriram"
   description="Compare term life insurance, health insurance, motor, and ULIP plans in India from top IRDAI-regulated insurers. Expert advisory, fast digital application. Get covered today."
 >
 
-  <!-- ══ 1. HERO ═══════════════════════════════════════════════════ -->
-  <section class="relative overflow-hidden bg-[var(--color-dark-800)]">
-    <div class="pointer-events-none absolute -right-40 -top-40 h-[560px] w-[560px] rounded-full bg-[var(--color-brand)]/10 blur-3xl"></div>
-    <div class="pointer-events-none absolute -bottom-32 left-0 h-80 w-80 rounded-full bg-[var(--color-brand)]/5 blur-3xl"></div>
-    <div class="site-wrap relative py-[120px]">
-      <p class="equity-reveal text-[14px] font-medium tracking-[.04em] text-[var(--color-brand)]">Insurance</p>
-      <h1 class="equity-reveal mt-[22px] max-w-[880px] text-[clamp(32px,4vw,52px)] font-bold leading-[1.06] text-white" style="font-family:var(--font-display)">
-        Best <span class="text-[var(--color-brand)]">Insurance Plans in India</span> — Term, Health &amp; More
-      </h1>
-      <p class="equity-reveal mt-[26px] max-w-[600px] text-[18px] leading-relaxed text-white/70">
-        Compare term life, health, motor, and ULIP insurance plans from India's leading insurers. Expert advisory, easy digital application, and dedicated claims support from Shriram Financial Services.
-      </p>
-      <div class="equity-reveal mt-[38px] flex flex-wrap gap-[14px]">
-        <a href="/about/open-demat-account/" class="btn-primary">Explore Insurance Plans</a>
-        <a href="/about/support/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Talk to RM</a>
+  <!-- ══ 1. HERO ══════════════════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <h1>Best <span class="g">Insurance Plans in India</span> — Term, Health &amp; More</h1>
+      <p class="lead">Compare term life, health, motor and ULIP insurance plans from India's leading insurers — with expert advisory, easy digital application and dedicated claims support from Shriram.</p>
+      <div class="cta"><a class="btn-gold" href="/about/support/">Explore Insurance Plans</a></div>
+      <div class="hero-feats">
+        <div class="feats">
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;Multiple insurers</span></div>
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;IRDAI-regulated</span></div>
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;Tax benefits (80C, 80D)</span></div>
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;Claims assistance</span></div>
+        </div>
       </div>
-      <div class="equity-reveal mt-[54px] flex flex-wrap gap-x-9 gap-y-3 border-t border-white/15 pt-9">
-        {['✓ Multiple insurer comparison', '✓ IRDAI-regulated partners', '✓ Tax benefits (80C, 80D)', '✓ Claims assistance'].map(f => (
-          <span class="text-[15px] font-medium text-white/90">
-            <span class="mr-2 text-[var(--color-brand)]">{f.slice(0,1)}</span>{f.slice(1)}
-          </span>
+    </div>
+  </section>
+
+  <!-- ══ 2. INSURANCE PRODUCTS ════════════════════════════════════════ -->
+  <section class="section stack" id="sec-products" style="background:var(--sec-light);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <h2 class="sec-title">Insurance Products We Offer</h2>
+      <p class="sec-lead">We partner with India's leading IRDAI-regulated insurers to offer comprehensive coverage for every stage of life — from pure protection plans to wealth-building ULIPs, all in one place.</p>
+    </div>
+    <div class="stack" style="gap:32px">
+      <div class="row-2">
+        {insuranceTypes.slice(0, 2).map(t => (
+          <div class="card">
+            <h4 class="card-h">{t.label}</h4>
+            <p class="card-p">{t.desc}</p>
+            <p style="font-weight:500;font-size:14px;color:var(--gold);line-height:1.5;margin-top:auto">{t.highlight}</p>
+          </div>
+        ))}
+      </div>
+      <div class="row-2">
+        {insuranceTypes.slice(2).map(t => (
+          <div class="card">
+            <h4 class="card-h">{t.label}</h4>
+            <p class="card-p">{t.desc}</p>
+            <p style="font-weight:500;font-size:14px;color:var(--gold);line-height:1.5;margin-top:auto">{t.highlight}</p>
+          </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- ══ 2. INSURANCE PRODUCTS ══════════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto grid max-w-[1000px] items-start gap-[72px] lg:grid-cols-[5fr_7fr]">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Insurance Products <span class="text-[var(--color-brand)]">We Offer</span>
-        </h2>
-        <div class="space-y-5 text-[17px] leading-relaxed text-[var(--color-muted)]">
-          <p>We partner with India's leading IRDAI-regulated insurance companies to offer comprehensive coverage for every stage of life.</p>
-          <p>From pure protection plans to wealth-building ULIPs, our platform makes it easy to compare, apply, and manage all your insurance needs in one place.</p>
+  <!-- ══ 3. WHY YOU NEED INSURANCE ════════════════════════════════════ -->
+  <section class="section stack" id="sec-why" style="background:var(--sec-tint);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <h2 class="sec-title">Why You Need Insurance</h2>
+      <p class="sec-lead">Insurance is the foundation of any sound financial plan — before investments, before savings.</p>
+    </div>
+    <div class="risks">
+      {whyInsure.map(w => (
+        <div class="risk">
+          <h4>{w.label}</h4>
+          <p>{w.desc}</p>
         </div>
-      </div>
-      <div class="equity-reveal mx-auto mt-[76px] max-w-[1000px] border-t border-[var(--color-n400)] pt-[60px]">
-        <div class="grid gap-5 sm:grid-cols-2">
-          {insuranceTypes.map((t, i) => (
-            <div class="product-card-light flex flex-col gap-4 p-[34px]" style={`animation-delay:${i*60}ms`}>
-              <h3 class="text-[17px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{t.label}</h3>
-              <p class="text-[13px] leading-relaxed text-[var(--color-muted)]">{t.desc}</p>
-              <p class="mt-auto text-[12px] font-semibold text-[var(--color-brand-deep)]">{t.highlight}</p>
+      ))}
+    </div>
+  </section>
+
+  <!-- ══ 4. HOW TO BUY ════════════════════════════════════════════════ -->
+  <section class="section stack" id="sec-how" style="background:var(--sec-light);gap:56px;align-items:center;justify-content:center">
+    <div class="stack" style="gap:16px;width:100%">
+      <h2 class="sec-title">How to Choose &amp; Buy Insurance</h2>
+      <p class="sec-lead">Four steps from assessing your needs to receiving your policy document.</p>
+    </div>
+    <div class="steps">
+      {steps.map((s, i) => (
+        <>
+          {i > 0 && <div class="step-div"></div>}
+          <div class="step">
+            <div class="num">{s.n}</div>
+            <div class="st-body">
+              <h4>{s.title}</h4>
+              <p>{s.desc}</p>
+            </div>
+          </div>
+        </>
+      ))}
+    </div>
+    <a class="btn-gold" href="/about/support/" style="align-self:center">Talk to an Advisor</a>
+  </section>
+
+  <!-- ══ 5. GENERAL QUESTIONS (FAQ) ═══════════════════════════════════ -->
+  <section class="faq-wrap" id="sec-faq" style="background:var(--sec-tint)">
+    <div class="faq-cols">
+      <div class="faq-left">
+        <h2 class="faq-title">General Questions</h2>
+        <div class="faq-acc">
+          {faqs.map((item, i) => (
+            <div class={`faq-item${i === 0 ? ' open' : ''}`}>
+              <button class="faq-q" type="button">
+                <span class="qt">{item.q}</span>
+                <span class="faq-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <line class="v" x1="12" y1="5" x2="12" y2="19" stroke="#404040" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="5" y1="12" x2="19" y2="12" stroke="#404040" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </button>
+              <div class="qa-wrap">
+                <div class="qa"><p>{item.a}</p></div>
+              </div>
             </div>
           ))}
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- ══ 3. WHY YOU NEED INSURANCE ════════════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Why You Need <span class="text-[var(--color-brand)]">Insurance</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Insurance is the foundation of any sound financial plan — before investments, before savings.</p>
-      </div>
-      <div class="grid gap-5 sm:grid-cols-2">
-        {whyInsure.map((w, i) => (
-          <div class="equity-reveal flex items-start gap-4 rounded-[20px] border border-[var(--color-warm-border)] bg-white p-7" style={`animation-delay:${i*60}ms`}>
-            <span class="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[var(--color-dark-olive)] text-[11px] font-bold text-[var(--color-brand)]">{i+1}</span>
-            <div>
-              <h3 class="text-[16px] font-bold text-[var(--color-ink)]" style="font-family:var(--font-display)">{w.label}</h3>
-              <p class="mt-2 text-[13px] leading-relaxed text-[var(--color-muted)]">{w.desc}</p>
-            </div>
+      <div class="faq-side">
+        <div class="usr" aria-hidden="true">
+          <svg viewBox="0 0 128 144" fill="none" xmlns="http://www.w3.org/2000/svg" width="128" height="144">
+            <circle cx="64" cy="48" r="32" stroke="#2d3813" stroke-width="2"/>
+            <path d="M8 144c0-30.928 25.072-56 56-56s56 25.072 56 56" stroke="#2d3813" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="side-in">
+          <div class="side-tx">
+            <h3>Need A Clearer Direction?</h3>
+            <p>Let's get in touch on a 15-minute call where we can answer any questions you may have. Our advisor will help map your protection needs and recommend the right cover for your family.</p>
           </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ 4. HOW TO BUY ════════════════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          How to Choose &amp; <span class="text-[var(--color-brand)]">Buy Insurance</span>
-        </h2>
-        <p class="mt-[18px] text-[17px] leading-relaxed text-[var(--color-muted)]">Four steps from assessing your needs to receiving your policy document.</p>
-      </div>
-      <div class="equity-reveal steps-grid overflow-hidden rounded-[14px] border border-[var(--color-n400)]">
-        {steps.map(s => (
-          <div class="px-[30px] py-[34px]">
-            <div class="mb-[22px] font-display text-[34px] font-normal leading-none text-[var(--color-brand)]">{s.n}</div>
-            <h4 class="mb-[10px] text-[19px] font-medium leading-[1.25] text-[var(--color-ink)]" style="font-family:var(--font-display)">{s.title}</h4>
-            <p class="text-[14.5px] leading-relaxed text-[var(--color-muted)]">{s.desc}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ 5. FAQ ════════════════════════════════════════════════════ -->
-  <section class="bg-[#f8f6f1] py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal mx-auto mb-[56px] max-w-[760px] text-center">
-        <h2 class="text-[42px] font-bold leading-[1.12] text-[var(--color-ink)]" style="font-family:var(--font-display)">
-          Frequently Asked <span class="text-[var(--color-brand)]">Questions</span>
-        </h2>
-      </div>
-      <div class="equity-reveal mx-auto max-w-[840px] border-t border-[var(--color-n400)]">
-        {faqs.map(item => (
-          <details class="eq-faq group border-b border-[var(--color-n400)]">
-            <summary class="flex cursor-pointer list-none items-center justify-between gap-5 py-[26px] px-2">
-              <span class="text-[18px] font-semibold text-[var(--color-ink)]">{item.q}</span>
-              <span class="shrink-0 text-[22px] leading-none text-[var(--color-brand)] transition-transform duration-300 group-open:rotate-45">+</span>
-            </summary>
-            <div class="overflow-hidden px-2 pb-0 text-[16px] leading-relaxed text-[var(--color-muted)] transition-all duration-300 group-open:pb-[28px]">
-              <p class="max-w-[680px]">{item.a}</p>
-            </div>
-          </details>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ 6. FINAL CTA ══════════════════════════════════════════════ -->
-  <section class="bg-white py-[104px]">
-    <div class="site-wrap">
-      <div class="equity-reveal overflow-hidden rounded-[22px] bg-[var(--color-dark-800)] px-[60px] py-[64px] text-center">
-        <h3 class="mx-auto max-w-[560px] text-[38px] font-bold leading-[1.12] text-white" style="font-family:var(--font-display)">Protect Your Family's Future Today</h3>
-        <p class="mx-auto mt-[18px] max-w-[480px] text-[17px] leading-relaxed text-white/70">Compare India's best insurance plans and get expert guidance from Shriram Financial Services. Fast application, transparent pricing, dedicated claims support.</p>
-        <div class="mt-[34px] flex flex-wrap justify-center gap-[14px]">
-          <a href="/about/open-demat-account/" class="btn-primary">Get Covered</a>
-          <a href="/about/support/" class="inline-flex h-12 items-center justify-center rounded-[9px] border border-white/40 px-[26px] text-[15px] font-semibold text-white transition-colors hover:border-white">Talk to an RM</a>
+          <a class="btn-gold" href="/about/support/">Book A Discovery Call</a>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ══ 6. FINAL CTA ═════════════════════════════════════════════════ -->
+  <section class="cta-sec" id="sec-final-cta" style="background:var(--sec-light)">
+    <div class="cta-box">
+      <div class="ct-tt">
+        <h3>Protect Your Family's Future Today</h3>
+        <p class="ct-sub">Compare India's best insurance plans and get expert guidance — fast application, transparent pricing, dedicated claims support.</p>
+      </div>
+      <a class="btn-gold" href="/about/support/">Get Covered</a>
     </div>
   </section>
 
 </BaseLayout>
 
-<style>
-  .equity-reveal {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
-  }
-  .equity-reveal.in-view { opacity: 1; transform: none; }
-
-  .steps-grid { display: grid; grid-template-columns: repeat(2, 1fr); }
-  .steps-grid > * { border-right: 1px solid var(--color-n400); border-bottom: 1px solid var(--color-n400); }
-  .steps-grid > *:nth-child(2n) { border-right: 0; }
-  .steps-grid > *:nth-last-child(-n+2) { border-bottom: 0; }
-  @media (min-width: 1024px) {
-    .steps-grid { grid-template-columns: repeat(4, 1fr); }
-    .steps-grid > * { border-right: 1px solid var(--color-n400); border-bottom: 0; }
-    .steps-grid > *:last-child { border-right: 0; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .equity-reveal { opacity: 1; transform: none; transition: none; }
-  }
-</style>
-
 <script>
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        (e.target as HTMLElement).classList.add('in-view');
-        obs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.10 });
-  document.querySelectorAll('.equity-reveal').forEach(el => obs.observe(el));
-
-  document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(d => {
-    d.addEventListener('toggle', () => {
-      if (d.open) document.querySelectorAll<HTMLDetailsElement>('.eq-faq').forEach(o => { if (o !== d) o.removeAttribute('open'); });
+  /* FAQ button accordion — one open at a time */
+  document.querySelectorAll('.faq-acc').forEach(acc => {
+    acc.querySelectorAll('.faq-item').forEach(item => {
+      const btn = item.querySelector('.faq-q');
+      if (!btn) return;
+      btn.addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+        acc.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
     });
   });
 </script>

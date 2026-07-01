@@ -4,15 +4,14 @@ import { navigation } from '../../config/navigation';
 ---
 <BaseLayout title="Sitemap" description="Full site structure of Shriram Financial Services — all products, research, tools, and about pages.">
 
-  <section class="border-b border-[var(--color-n400)] bg-[var(--color-n100)]">
-    <div class="site-wrap py-16">
-      <p class="text-[11px] font-bold uppercase tracking-widest text-[var(--color-brand)]">Navigation</p>
-      <h1 class="mt-4 text-[32px] font-bold text-[var(--color-n900)]" style="font-family:var(--font-display)">Sitemap</h1>
-      <p class="mt-4 max-w-xl text-[15px] text-[var(--color-muted)]">Every page on the Shriram Financial Services website — products, research, tools, and information.</p>
+  <section class="hero">
+    <div class="hero-inner">
+      <h1>Sitemap</h1>
+      <p class="lead">Every page on the Shriram Financial Services website — products, research, tools, and information.</p>
     </div>
   </section>
 
-  <section class="site-wrap py-16">
+  <section class="section" style="background:var(--sec-light)">
     <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
       {navigation.map((section) => (
         <div>
