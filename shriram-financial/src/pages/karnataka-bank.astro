@@ -1,0 +1,293 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// ── Feature cards ("Everything you need to trade with confidence") ──
+const features = [
+  { icon: '⌗',  title: 'Swift, Safe & Convenient',                 body: 'Fast, secure and easy online trading from wherever you are.' },
+  { icon: '⚡', title: 'Trade Anytime Anywhere',                    body: 'Place orders without geographical limits, including after market hours.' },
+  { icon: '🔗', title: 'One solution for all markets',              body: 'Trade Equity, Derivatives and Currency from a single login.' },
+  { icon: '🛡️', title: 'Platforms for beginners & active investors', body: "The right platform whether you're just starting out or trading actively." },
+  { icon: '📞', title: 'Trained Relationship Manager',              body: 'Dedicated support and advice through your relationship manager.' },
+  { icon: '🧭', title: "Call 'n' Trade facility",                   body: "Place orders over the phone while you're on the move." },
+  { icon: '👤', title: 'Real-time limit enhancement',              body: 'Funds transferred reflect instantly so you can trade without delay.' },
+  { icon: '🔬', title: 'Quality Research and Advisory',            body: 'Backed by sound in-house research to support informed decisions.' },
+  { icon: '💬', title: 'Competitive brokerage',                    body: 'Among the most competitive rates, with no hidden charges.' },
+  { icon: '🗄️', title: 'Online access to accounts and depository', body: 'Manage your trading account and depository online, anytime.' },
+];
+
+// ── "Why Karnataka Bank customers choose us" ──
+const reasons = [
+  { title: 'Integrated 3-in-1 Account', body: 'The 3-in-1 account comprises your Karnataka Bank Savings Bank account, Karnataka Bank Demat account (both internet-enabled), and an online trading account with Shriram Financial Services. All three are integrated, and thus called a 3-in-1 account.' },
+  { title: 'Option to link existing Karnataka Bank Savings', body: 'If you are an existing client of Karnataka Bank with a Karnataka Bank savings account, you need to have it internet-enabled along with an online trading account from Shriram Financial Services.' },
+  { title: 'Single Screen Trading for Multiple Products', body: 'Equity, Derivatives, Commodities & Currency Futures. With your Karnataka Bank–Shriram online trading account, you can trade in different segments (subject to activation) simultaneously, giving you the opportunity to keep watch of different markets at the same time.' },
+  { title: 'Competitive Brokerage', body: 'Karnataka Bank presents its clients with one of the most competitive brokerage rates. You can rest assured that you are in safe hands and there are no hidden charges involved.' },
+];
+---
+
+<BaseLayout
+  title="Karnataka Bank 3-in-1 Trading Account — Online Trading with Shriram"
+  description="Trade online with your Karnataka Bank 3-in-1 account — link your Karnataka Bank savings and demat accounts to a Shriram trading account for seamless, research-backed investing across Equity, Derivatives and Currency."
+>
+
+  <!-- ══ 1. HERO ══════════════════════════════════════════════════════ -->
+  <section class="kb-hero">
+    <div class="kb-hero-in">
+      <!-- Left: copy -->
+      <div class="kb-hero-left">
+        <p class="kb-eyebrow">Welcome to Karnataka Bank Online Trading Services in alliance with Shriram Financial Services</p>
+        <h1 class="kb-h1">Trade online with your <span>Karnataka Bank</span> 3-in-1 account</h1>
+        <p class="kb-lead">A special online trading facility for Karnataka Bank customers — link your existing Bank and Demat accounts to a Shriram trading account and invest seamlessly, with research and support at hand.</p>
+
+        <div class="kb-logos">
+          <span class="kb-logo-box"><img src="/logo-shriram.svg" alt="Shriram Financial Services" /></span>
+          <span class="kb-logo-box"><img src="/karnataka-bank-logo.png" alt="Karnataka Bank" /></span>
+        </div>
+
+        <div class="kb-badges">
+          <span class="kb-badge"><span class="tk">✓</span> SEBI-registered</span>
+          <span class="kb-badge"><span class="tk">✓</span> Research-led</span>
+          <span class="kb-badge"><span class="tk">✓</span> Full-service</span>
+          <span class="kb-badge"><span class="tk">✓</span> Transparent</span>
+        </div>
+      </div>
+
+      <!-- Right: form card -->
+      <div class="kb-form">
+        <h3 class="kb-form-h">Open Your Demat Account</h3>
+        <div class="kb-field">
+          <label for="kb-name">Full Name</label>
+          <input id="kb-name" type="text" autocomplete="name" placeholder="e.g. Ritesh Kumar" />
+        </div>
+        <div class="kb-field">
+          <label for="kb-mobile">Mobile Number</label>
+          <input id="kb-mobile" type="tel" inputmode="numeric" autocomplete="tel" placeholder="+91 80981 22853" />
+        </div>
+        <div class="kb-field">
+          <label for="kb-city">City</label>
+          <input id="kb-city" type="text" autocomplete="address-level2" placeholder="e.g. Mumbai" />
+        </div>
+        <button id="kb-submit" type="button" class="kb-submit">Get Started <span aria-hidden="true">→</span></button>
+        <p class="kb-consent">By submitting, you authorise Shriram Financial Services to contact you regarding the Karnataka Bank trading facility, overriding any DND/NDNC registration.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 2. FEATURES ══════════════════════════════════════════════════ -->
+  <section class="kb-sec kb-features">
+    <div class="kb-wrap">
+      <div class="kb-head">
+        <h2>Everything you need to trade with confidence</h2>
+        <p>Swift, safe and convenient online trading designed for both first-time investors and active traders.</p>
+      </div>
+      <div class="kb-grid">
+        {features.map(f => (
+          <article class="kb-card">
+            <div class="kb-ic">{f.icon}</div>
+            <h4>{f.title}</h4>
+            <p>{f.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 3. WHY CHOOSE US ═════════════════════════════════════════════ -->
+  <section class="kb-sec kb-why">
+    <div class="kb-wrap">
+      <div class="kb-head">
+        <h2>Why Karnataka Bank customers choose us</h2>
+        <p>An integrated 3-in-1 experience that keeps your banking, demat and trading working together.</p>
+      </div>
+      <div class="kb-why-grid">
+        {reasons.map(r => (
+          <article class="kb-why-card">
+            <h4>{r.title}</h4>
+            <p>{r.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  /* ══ Karnataka Bank co-branded landing — page-scoped styles ══════════
+     Palette follows the Figma (neutral greys) with brand gold accents.
+     Reuses the site font (Outfit, from BaseLayout) for consistency.       */
+
+  .kb-hero {
+    position: relative;
+    padding: 0 var(--pad);
+    display: flex;
+    background:
+      radial-gradient(90% 130% at 100% -10%, rgba(231,164,26,0.16) 0%, rgba(116,82,13,0.08) 30%, rgba(0,0,0,0) 60%),
+      #3b3b38;
+  }
+  .kb-hero-in {
+    width: 100%;
+    display: flex;
+    gap: 56px;
+    align-items: center;
+    padding: 72px 0;
+  }
+  .kb-hero-left { flex: 1 1 0; min-width: 0; }
+
+  .kb-eyebrow {
+    font-weight: 700; font-size: 11.5px; letter-spacing: 1.8px; line-height: 1.6;
+    text-transform: uppercase; color: #eee; max-width: 760px;
+  }
+  .kb-h1 {
+    margin-top: 20px;
+    font-weight: 800; font-size: clamp(32px, 4.4vw, 54px); line-height: 1.12;
+    letter-spacing: -1px; color: #fff; max-width: 12ch;
+  }
+  .kb-h1 span { color: var(--gold-2); }
+  .kb-lead {
+    margin-top: 20px;
+    font-weight: 400; font-size: 17px; line-height: 1.6; color: #cdd3c3; max-width: 640px;
+  }
+
+  .kb-logos { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 16px; align-items: stretch; }
+  .kb-logo-box {
+    background: #fff; border-radius: 8px; height: 60px; padding: 6px 16px;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .kb-logo-box img { height: 100%; width: auto; object-fit: contain; display: block; }
+
+  .kb-badges { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 12px 28px; }
+  .kb-badge {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-weight: 500; font-size: 13px; color: #d4d4d4;
+  }
+  .kb-badge .tk { color: var(--gold-2); font-weight: 700; }
+
+  /* Form card */
+  .kb-form {
+    flex: none; width: 464px; align-self: center;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: 16px;
+    padding: 29px 29px 40px;
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .kb-form-h { font-weight: 600; font-size: 20px; line-height: 1.4; color: #fff; margin-bottom: 4px; }
+  .kb-field { display: flex; flex-direction: column; gap: 6px; }
+  .kb-field label { font-weight: 500; font-size: 12px; color: rgba(255,255,255,0.75); }
+  .kb-field input {
+    height: 46px; width: 100%; padding: 0 15px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 10px;
+    font-family: inherit; font-size: 14px; color: #fff;
+    outline: none; transition: border-color .15s ease, background .15s ease;
+  }
+  .kb-field input::placeholder { color: rgba(255,255,255,0.5); }
+  .kb-field input:focus { border-color: var(--gold-2); background: rgba(255,255,255,0.14); }
+
+  .kb-submit {
+    margin-top: 4px; height: 48px; width: 100%;
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    background: var(--gold-btn); color: var(--olive-ink);
+    border: 0; border-radius: 10px; cursor: pointer;
+    font-family: inherit; font-weight: 600; font-size: 14px;
+    transition: filter .15s ease, transform .15s ease;
+  }
+  .kb-submit:hover { filter: brightness(1.05); transform: translateY(-1px); }
+  .kb-consent { font-weight: 400; font-size: 11.5px; line-height: 1.5; color: #c5c5c5; text-align: center; }
+
+  /* ── Shared section shell (light) ── */
+  .kb-sec { padding: var(--section-y) var(--pad); }
+  .kb-wrap { max-width: 1160px; margin: 0 auto; width: 100%; }
+  .kb-head { max-width: 640px; display: flex; flex-direction: column; gap: 12px; }
+  .kb-head h2 { font-weight: 700; font-size: clamp(28px, 3.4vw, 37px); line-height: 1.2; letter-spacing: -0.7px; color: #3c3c3c; }
+  .kb-head p  { font-weight: 400; font-size: 16px; line-height: 1.6; color: #737373; }
+
+  /* Features grid */
+  .kb-features { background: #ffffff; }
+  .kb-grid {
+    margin-top: 40px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  }
+  .kb-card {
+    background: #f8f8f8; border: 1px solid #e2e2e2; border-radius: 14px;
+    padding: 25px; display: flex; flex-direction: column;
+    transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+  }
+  .kb-card:hover { border-color: var(--gold-2); box-shadow: 0 6px 20px rgba(0,0,0,.05); transform: translateY(-2px); }
+  .kb-ic {
+    width: 42px; height: 42px; border-radius: 10px; background: #ededed;
+    display: flex; align-items: center; justify-content: center; font-size: 21px; color: #5b5b5b;
+  }
+  .kb-card h4 { margin-top: 14px; font-weight: 600; font-size: 16.5px; line-height: 1.3; color: #3c3c3c; }
+  .kb-card p  { margin-top: 6px; font-weight: 400; font-size: 14.5px; line-height: 1.6; color: #949494; }
+
+  /* Why choose us */
+  .kb-why { background: #e6e6e3; }
+  .kb-why-grid {
+    margin-top: 40px;
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
+  }
+  .kb-why-card {
+    background: #fff; border: 1px solid #d9d9d6; border-left: 4px solid var(--gold-2);
+    border-radius: 14px; padding: 24px 26px;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .kb-why-card h4 { font-weight: 600; font-size: 17px; line-height: 1.4; color: #3c3c3c; }
+  .kb-why-card p  { font-weight: 400; font-size: 14.5px; line-height: 1.6; color: #7a7a7a; }
+
+  /* ── Responsive ── */
+  @media (max-width: 960px) {
+    .kb-hero-in { flex-direction: column; align-items: stretch; gap: 40px; }
+    .kb-form { width: 100%; align-self: stretch; }
+    .kb-grid { grid-template-columns: repeat(2, 1fr); }
+    .kb-why-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .kb-grid { grid-template-columns: 1fr; }
+    .kb-hero-in { padding: 56px 0; }
+  }
+</style>
+
+<script>
+  /* Form submit → AES-256-GCM enc_details (mobile_number, customer_name, city)
+     + utm_source, same scheme as the homepage hero (see index.astro). */
+  const $ = (id: string) => document.getElementById(id) as HTMLInputElement | null;
+  const btn  = document.getElementById('kb-submit');
+  const name = $('kb-name'), mob = $('kb-mobile'), city = $('kb-city');
+  if (btn && mob) {
+    const BASE_URL = 'https://signup.way2wealth.com/way2wealth/individual_new';
+    const AES_KEY  = 'ShriramSFS2026Way2WealthAESKey01'; // 32 bytes → AES-256 (shared with way2wealth)
+    const FALLBACK = BASE_URL;
+    const subtle = (window.crypto && window.crypto.subtle) || null;
+
+    const b64url = (bytes: ArrayBuffer): string =>
+      btoa(String.fromCharCode(...new Uint8Array(bytes)))
+        .replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+
+    const encryptPayload = async (payload: object): Promise<string> => {
+      const enc   = new TextEncoder();
+      const key   = await subtle!.importKey('raw', enc.encode(AES_KEY), 'AES-GCM', false, ['encrypt']);
+      const iv    = crypto.getRandomValues(new Uint8Array(12));
+      const ctTag = await subtle!.encrypt({ name: 'AES-GCM', iv, tagLength: 128 }, key, enc.encode(JSON.stringify(payload)));
+      const packed = new Uint8Array(iv.length + ctTag.byteLength);
+      packed.set(iv, 0);
+      packed.set(new Uint8Array(ctTag), iv.length);
+      return b64url(packed.buffer);
+    };
+
+    btn.addEventListener('click', async () => {
+      const digits = (mob.value || '').replace(/\D/g, '').slice(-10);
+      if (digits.length !== 10 || !subtle) { window.location.href = FALLBACK; return; }
+      const payload: Record<string, string> = { mobile_number: digits };
+      if (name && name.value.trim()) payload.customer_name = name.value.trim();
+      if (city && city.value.trim()) payload.city = city.value.trim();
+      try {
+        const token = await encryptPayload(payload);
+        window.location.href = BASE_URL + '?enc_details=' + token + '&utm_source=' + encodeURIComponent('karnataka-bank');
+      } catch {
+        window.location.href = FALLBACK;
+      }
+    });
+  }
+</script>
