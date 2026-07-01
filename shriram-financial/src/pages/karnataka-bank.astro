@@ -30,24 +30,24 @@ const reasons = [
 >
 
   <!-- ══ 1. HERO ══════════════════════════════════════════════════════ -->
-  <section class="kb-hero">
+  <section class="kb-hero" id="kb-hero">
     <div class="kb-hero-in">
       <!-- Left: copy -->
       <div class="kb-hero-left">
         <p class="kb-eyebrow">Welcome to Karnataka Bank Online Trading Services in alliance with Shriram Financial Services</p>
-        <h1 class="kb-h1">Trade online with your <span>Karnataka Bank</span> 3-in-1 account</h1>
-        <p class="kb-lead">A special online trading facility for Karnataka Bank customers — link your existing Bank and Demat accounts to a Shriram trading account and invest seamlessly, with research and support at hand.</p>
+        <h1>Trade online with your <span class="g">Karnataka Bank</span> 3-in-1 account</h1>
+        <p class="lead">A special online trading facility for Karnataka Bank customers — link your existing Bank and Demat accounts to a Shriram trading account and invest seamlessly, with research and support at hand.</p>
 
         <div class="kb-logos">
           <span class="kb-logo-box"><img src="/logo-shriram.svg" alt="Shriram Financial Services" /></span>
           <span class="kb-logo-box"><img src="/karnataka-bank-logo.png" alt="Karnataka Bank" /></span>
         </div>
 
-        <div class="kb-badges">
-          <span class="kb-badge"><span class="tk">✓</span> SEBI-registered</span>
-          <span class="kb-badge"><span class="tk">✓</span> Research-led</span>
-          <span class="kb-badge"><span class="tk">✓</span> Full-service</span>
-          <span class="kb-badge"><span class="tk">✓</span> Transparent</span>
+        <div class="feats">
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;SEBI-registered</span></div>
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;Research-led</span></div>
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;Full-service</span></div>
+          <div class="feat"><span class="tk">✓</span><span class="lb">&nbsp;Transparent</span></div>
         </div>
       </div>
 
@@ -66,63 +66,70 @@ const reasons = [
           <label for="kb-city">City</label>
           <input id="kb-city" type="text" autocomplete="address-level2" placeholder="e.g. Mumbai" />
         </div>
-        <button id="kb-submit" type="button" class="kb-submit">Get Started <span aria-hidden="true">→</span></button>
+        <button id="kb-submit" type="button" class="btn-gold kb-submit">Get Started&nbsp;→</button>
         <p class="kb-consent">By submitting, you authorise Shriram Financial Services to contact you regarding the Karnataka Bank trading facility, overriding any DND/NDNC registration.</p>
       </div>
     </div>
   </section>
 
   <!-- ══ 2. FEATURES ══════════════════════════════════════════════════ -->
-  <section class="kb-sec kb-features">
-    <div class="kb-wrap">
-      <div class="kb-head">
-        <h2>Everything you need to trade with confidence</h2>
-        <p>Swift, safe and convenient online trading designed for both first-time investors and active traders.</p>
-      </div>
-      <div class="kb-grid">
-        {features.map(f => (
-          <article class="kb-card">
-            <div class="kb-ic">{f.icon}</div>
-            <h4>{f.title}</h4>
-            <p>{f.body}</p>
-          </article>
-        ))}
-      </div>
+  <section class="section stack" id="kb-features" style="background:var(--sec-light);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <h2 class="sec-title">Everything You Need to Trade With Confidence</h2>
+      <p class="sec-lead">Swift, safe and convenient online trading designed for both first-time investors and active traders.</p>
+    </div>
+    <div class="kb-feat-grid">
+      {features.map(f => (
+        <article class="card">
+          <div class="kb-ic" aria-hidden="true">{f.icon}</div>
+          <h4 class="card-h">{f.title}</h4>
+          <p class="card-p">{f.body}</p>
+        </article>
+      ))}
     </div>
   </section>
 
   <!-- ══ 3. WHY CHOOSE US ═════════════════════════════════════════════ -->
-  <section class="kb-sec kb-why">
-    <div class="kb-wrap">
-      <div class="kb-head">
-        <h2>Why Karnataka Bank customers choose us</h2>
-        <p>An integrated 3-in-1 experience that keeps your banking, demat and trading working together.</p>
+  <section class="section stack" id="kb-why" style="background:var(--sec-tint);gap:56px;justify-content:center">
+    <div class="stack" style="gap:16px">
+      <h2 class="sec-title">Why Karnataka Bank Customers Choose Us</h2>
+      <p class="sec-lead">An integrated 3-in-1 experience that keeps your banking, demat and trading working together.</p>
+    </div>
+    <div class="kb-why-grid">
+      {reasons.map(r => (
+        <article class="card kb-why-card">
+          <h4 class="card-h">{r.title}</h4>
+          <p class="card-p">{r.body}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- ══ 4. FINAL CTA ═════════════════════════════════════════════════ -->
+  <section class="cta-sec" id="kb-cta" style="background:var(--sec-light)">
+    <div class="cta-box">
+      <div class="ct-tt">
+        <h3>Open Your Karnataka Bank 3-in-1 Account</h3>
+        <p class="ct-sub">Link your Karnataka Bank savings and demat accounts to a Shriram trading account — and start investing in minutes.</p>
       </div>
-      <div class="kb-why-grid">
-        {reasons.map(r => (
-          <article class="kb-why-card">
-            <h4>{r.title}</h4>
-            <p>{r.body}</p>
-          </article>
-        ))}
-      </div>
+      <a class="btn-gold" href="#kb-hero">Get Started</a>
     </div>
   </section>
 
 </BaseLayout>
 
 <style>
-  /* ══ Karnataka Bank co-branded landing — page-scoped styles ══════════
-     Palette follows the Figma (neutral greys) with brand gold accents.
-     Reuses the site font (Outfit, from BaseLayout) for consistency.       */
+  /* ══ Karnataka Bank co-brand page — equity design system ══════════════
+     Reuses the DS tokens/classes (.hero gradient, .card, .sec-title,
+     .btn-gold, .feats); page-scoped rules only for the 2-col hero, the
+     translucent form on the olive hero, icon chips and the card grids.    */
 
+  /* Hero — equity olive gradient, two columns */
   .kb-hero {
-    position: relative;
     padding: 0 var(--pad);
     display: flex;
-    background:
-      radial-gradient(90% 130% at 100% -10%, rgba(231,164,26,0.16) 0%, rgba(116,82,13,0.08) 30%, rgba(0,0,0,0) 60%),
-      #3b3b38;
+    overflow: hidden;
+    background: radial-gradient(125% 210% at 100% -8%, #4f583b 0%, #363a2c 50%, #1d1d1d 100%);
   }
   .kb-hero-in {
     width: 100%;
@@ -131,47 +138,42 @@ const reasons = [
     align-items: center;
     padding: 72px 0;
   }
-  .kb-hero-left { flex: 1 1 0; min-width: 0; }
+  .kb-hero-left { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; }
 
   .kb-eyebrow {
-    font-weight: 700; font-size: 11.5px; letter-spacing: 1.8px; line-height: 1.6;
-    text-transform: uppercase; color: #eee; max-width: 760px;
+    font-weight: 600; font-size: 12px; letter-spacing: 1.6px; line-height: 1.6;
+    text-transform: uppercase; color: var(--gold-2); max-width: 720px; margin-bottom: 20px;
   }
-  .kb-h1 {
-    margin-top: 20px;
-    font-weight: 800; font-size: clamp(32px, 4.4vw, 54px); line-height: 1.12;
-    letter-spacing: -1px; color: #fff; max-width: 12ch;
+  .kb-hero-left h1 {
+    font-weight: 500; font-size: clamp(30px, 4vw, 44px); line-height: 1.15;
+    letter-spacing: -0.5px; color: #fff; max-width: 13ch;
   }
-  .kb-h1 span { color: var(--gold-2); }
-  .kb-lead {
-    margin-top: 20px;
-    font-weight: 400; font-size: 17px; line-height: 1.6; color: #cdd3c3; max-width: 640px;
+  .kb-hero-left h1 .g { color: var(--gold-2); }
+  .kb-hero-left .lead {
+    margin-top: 16px; font-weight: 400; font-size: 18px; line-height: 1.5;
+    color: rgba(255,255,255,.74); max-width: 620px;
   }
 
-  .kb-logos { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 16px; align-items: stretch; }
+  .kb-logos { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 16px; }
   .kb-logo-box {
-    background: #fff; border-radius: 8px; height: 60px; padding: 6px 16px;
+    background: #fff; border-radius: 10px; height: 60px; padding: 8px 18px;
     display: inline-flex; align-items: center; justify-content: center;
   }
   .kb-logo-box img { height: 100%; width: auto; object-fit: contain; display: block; }
 
-  .kb-badges { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 12px 28px; }
-  .kb-badge {
-    display: inline-flex; align-items: center; gap: 7px;
-    font-weight: 500; font-size: 13px; color: #d4d4d4;
-  }
-  .kb-badge .tk { color: var(--gold-2); font-weight: 700; }
+  /* trust badges use the DS .feats/.feat rule (global); constrain width here */
+  .kb-hero-left .feats { margin-top: 32px; max-width: 620px; }
 
-  /* Form card */
+  /* Form card on the olive hero */
   .kb-form {
     flex: none; width: 464px; align-self: center;
     background: rgba(255,255,255,0.06);
     border: 1px solid rgba(255,255,255,0.16);
-    border-radius: 16px;
-    padding: 29px 29px 40px;
+    border-radius: 24px;
+    padding: 32px 32px 36px;
     display: flex; flex-direction: column; gap: 16px;
   }
-  .kb-form-h { font-weight: 600; font-size: 20px; line-height: 1.4; color: #fff; margin-bottom: 4px; }
+  .kb-form-h { font-weight: 500; font-size: 20px; line-height: 1.4; color: #fff; margin-bottom: 4px; }
   .kb-field { display: flex; flex-direction: column; gap: 6px; }
   .kb-field label { font-weight: 500; font-size: 12px; color: rgba(255,255,255,0.75); }
   .kb-field input {
@@ -185,68 +187,31 @@ const reasons = [
   .kb-field input::placeholder { color: rgba(255,255,255,0.5); }
   .kb-field input:focus { border-color: var(--gold-2); background: rgba(255,255,255,0.14); }
 
-  .kb-submit {
-    margin-top: 4px; height: 48px; width: 100%;
-    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-    background: var(--gold-btn); color: var(--olive-ink);
-    border: 0; border-radius: 10px; cursor: pointer;
-    font-family: inherit; font-weight: 600; font-size: 14px;
-    transition: filter .15s ease, transform .15s ease;
-  }
-  .kb-submit:hover { filter: brightness(1.05); transform: translateY(-1px); }
-  .kb-consent { font-weight: 400; font-size: 11.5px; line-height: 1.5; color: #c5c5c5; text-align: center; }
+  /* full-width gold CTA inside the form (overrides .btn-gold fixed width) */
+  .kb-submit { width: 100%; height: 46px; margin-top: 4px; border-radius: 10px; font-size: 14px; }
+  .kb-consent { font-weight: 400; font-size: 12px; line-height: 1.5; color: rgba(255,255,255,0.55); text-align: center; }
 
-  /* ── Shared section shell (light) ── */
-  .kb-sec { padding: var(--section-y) var(--pad); }
-  .kb-wrap { max-width: 1160px; margin: 0 auto; width: 100%; }
-  .kb-head { max-width: 640px; display: flex; flex-direction: column; gap: 12px; }
-  .kb-head h2 { font-weight: 700; font-size: clamp(28px, 3.4vw, 37px); line-height: 1.2; letter-spacing: -0.7px; color: #3c3c3c; }
-  .kb-head p  { font-weight: 400; font-size: 16px; line-height: 1.6; color: #737373; }
-
-  /* Features grid */
-  .kb-features { background: #ffffff; }
-  .kb-grid {
-    margin-top: 40px;
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
-  }
-  .kb-card {
-    background: #f8f8f8; border: 1px solid #e2e2e2; border-radius: 14px;
-    padding: 25px; display: flex; flex-direction: column;
-    transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
-  }
-  .kb-card:hover { border-color: var(--gold-2); box-shadow: 0 6px 20px rgba(0,0,0,.05); transform: translateY(-2px); }
+  /* Feature grid — DS .card children with a gold icon chip */
+  .kb-feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
   .kb-ic {
-    width: 42px; height: 42px; border-radius: 10px; background: #ededed;
-    display: flex; align-items: center; justify-content: center; font-size: 21px; color: #5b5b5b;
+    width: 48px; height: 48px; border-radius: 12px;
+    background: rgba(224,168,46,0.12); color: var(--gold);
+    display: flex; align-items: center; justify-content: center; font-size: 22px;
   }
-  .kb-card h4 { margin-top: 14px; font-weight: 600; font-size: 16.5px; line-height: 1.3; color: #3c3c3c; }
-  .kb-card p  { margin-top: 6px; font-weight: 400; font-size: 14.5px; line-height: 1.6; color: #949494; }
 
-  /* Why choose us */
-  .kb-why { background: #e6e6e3; }
-  .kb-why-grid {
-    margin-top: 40px;
-    display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
-  }
-  .kb-why-card {
-    background: #fff; border: 1px solid #d9d9d6; border-left: 4px solid var(--gold-2);
-    border-radius: 14px; padding: 24px 26px;
-    display: flex; flex-direction: column; gap: 6px;
-  }
-  .kb-why-card h4 { font-weight: 600; font-size: 17px; line-height: 1.4; color: #3c3c3c; }
-  .kb-why-card p  { font-weight: 400; font-size: 14.5px; line-height: 1.6; color: #7a7a7a; }
+  /* Why-choose grid — DS .card with a gold left accent */
+  .kb-why-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .kb-why-card { border-left: 4px solid var(--gold-2); gap: 12px; }
 
   /* ── Responsive ── */
-  @media (max-width: 960px) {
+  @media (max-width: 1024px) { .kb-feat-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 900px) {
     .kb-hero-in { flex-direction: column; align-items: stretch; gap: 40px; }
     .kb-form { width: 100%; align-self: stretch; }
-    .kb-grid { grid-template-columns: repeat(2, 1fr); }
     .kb-why-grid { grid-template-columns: 1fr; }
   }
-  @media (max-width: 600px) {
-    .kb-grid { grid-template-columns: 1fr; }
-    .kb-hero-in { padding: 56px 0; }
-  }
+  @media (max-width: 768px) { .kb-hero-in { padding: 56px 0; } }
+  @media (max-width: 600px) { .kb-feat-grid { grid-template-columns: 1fr; } }
 </style>
 
 <script>
