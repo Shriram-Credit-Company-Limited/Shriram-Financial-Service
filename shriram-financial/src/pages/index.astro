@@ -529,28 +529,48 @@ const faqs = [
 
 </BaseLayout>
 
+<!-- CryptoJS — AES-256 of the hero mobile payload (see hero handler below) -->
+<script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
+
 <script>
-  /* Hero "Get Started Now" → way2wealth signup. way2wealth's page decodes the prefill
-     param `enc_details` with atob() → JSON.parse (their standard payload: mobile_number,
-     customer_name, token, pan_number2, reference_code, dob1). So we send
-     enc_details = base64( JSON{ mobile_number } ) + utm_source (plaintext for analytics).
-     Falls back to the plain signup URL if <10 digits. */
+  /* Hero "Get Started Now" → way2wealth signup.
+     We AES-256-CBC encrypt a JSON payload of the form-fields (currently just
+     { mobile_number }) and pass it as `enc_details`. Format handed to way2wealth to
+     decrypt (shared key below):
+       token       = base64url( IV[16 bytes] + ciphertext )
+       cipher      = AES-256-CBC, PKCS7 padding
+       key         = 'ShriramSFS2026Way2WealthAESKey01' (32 bytes / 256-bit, UTF-8)
+       plaintext   = JSON.stringify({ mobile_number: "<10 digits>" })
+     They: base64url-decode → first 16 bytes = IV, rest = ciphertext → AES-256-CBC
+     decrypt with the key → JSON.parse. utm_source stays plaintext.
+     Falls back to plain signup on <10 digits / CryptoJS load failure. */
   const heroMobile = document.getElementById('hero-mobile') as HTMLInputElement | null;
   const heroGetStarted = document.getElementById('hero-get-started') as HTMLAnchorElement | null;
   if (heroMobile && heroGetStarted) {
     const BASE_URL = 'https://signup.way2wealth.com/way2wealth/individual_new';
+    const AES_KEY  = 'ShriramSFS2026Way2WealthAESKey01'; // 32 chars → AES-256 (share with way2wealth)
     const UTM      = 'sfs';
     const FALLBACK = BASE_URL;
+    const CJS: any = (window as any).CryptoJS;
+
+    const encryptPayload = (payload: object): string => {
+      const key    = CJS.enc.Utf8.parse(AES_KEY);
+      const iv     = CJS.lib.WordArray.random(16);           // fresh IV every click
+      const enc    = CJS.AES.encrypt(JSON.stringify(payload), key, {
+        iv, mode: CJS.mode.CBC, padding: CJS.pad.Pkcs7,
+      });
+      const packed = iv.concat(enc.ciphertext);              // IV(16 bytes) + ciphertext
+      // base64url so the token is URL-safe (no +, /, = → no percent-encoding needed)
+      return CJS.enc.Base64.stringify(packed)
+                .replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+    };
 
     heroGetStarted.addEventListener('click', (e) => {
       e.preventDefault();
       const digits = (heroMobile.value || '').replace(/\D/g, '').slice(-10);
-      if (digits.length !== 10) { window.location.href = FALLBACK; return; }
-      // base64-encoded JSON — matches way2wealth's atob() → JSON.parse decoder
-      const encDetails = btoa(JSON.stringify({ mobile_number: digits }));
-      const url = BASE_URL
-                + '?enc_details=' + encodeURIComponent(encDetails)
-                + '&utm_source='  + encodeURIComponent(UTM);
+      if (digits.length !== 10 || !CJS) { window.location.href = FALLBACK; return; }
+      const token = encryptPayload({ mobile_number: digits });
+      const url = BASE_URL + '?enc_details=' + token + '&utm_source=' + encodeURIComponent(UTM);
       window.location.href = url;
     });
   }
